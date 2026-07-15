@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>胡佩珊中醫師｜香港女性婦科中醫・身心同治</title>
+  <meta name="description" content="香港註冊中醫師胡佩珊 Kate Woo，香港浸會大學中醫藥學士（一級榮譽）及輔導學碩士，提倡身心同治，專注婦科、不孕症、美顏針及心理睡眠調理。從青春期到停經後，為每位女性制定個人化調理方案。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=rose-umber-1">
+  <script>
+    (function () {
+      try {
+        const cfgKey = 'drhu_config';
+        const contentKey = 'drhu_content_v1';
+        const page = 'index.html';
+
+        const cfg = JSON.parse(localStorage.getItem(cfgKey) || '{}');
+        cfg.colors = cfg.colors || {};
+        cfg.colors.plum = '#8B5040';
+        cfg.colors['plum-light'] = '#9C6A5D';
+        cfg.colors.sage = '#A38F7E';
+        cfg.colors['sage-light'] = '#DCD0C3';
+        cfg.colors.terracotta = '#B06B5C';
+        cfg.colors.blush = '#F2E2DD';
+        cfg.colors['dusty-rose'] = '#C98F82';
+        cfg.colors.stone = '#8C7B6E';
+        cfg.colors.border = '#E8D4CA';
+        localStorage.setItem(cfgKey, JSON.stringify(cfg));
+
+        const content = JSON.parse(localStorage.getItem(contentKey) || '{}');
+        content[page] = content[page] || {};
+        content[page]['hero-eyebrow'] = '香港註冊中醫師 · 婦科專科';
+        content[page]['hero-title'] = '以中醫智慧，陪伴女性<em>每個階段</em>';
+        content[page]['hero-desc'] = '融合中西醫知識，從青春期、備孕、產後到更年期，為每位女性提供更貼近身心需要的個人化調理方案。';
+        localStorage.setItem(contentKey, JSON.stringify(content));
+      } catch (_) {}
+    })();
+  </script>
+  <script src="config-loader.js"></script>
+  <style>
+
+    /* ══════════════════════════════════════
+       Floating WhatsApp contact button
+    ══════════════════════════════════════ */
+    /* Fixed to the viewport corner (not the nav) so it stays reachable
+       the whole way down a long page, independent of scroll position. */
+    .fab-whatsapp {
+      position: fixed;
+      right: clamp(1.25rem, 4vw, 2rem);
+      bottom: clamp(1.25rem, 4vw, 2rem);
+      z-index: 90;
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: #25D366;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4), 0 2px 8px rgba(0,0,0,0.12);
+      transition: transform 0.25s cubic-bezier(0.34, 1.4, 0.64, 1), box-shadow 0.25s ease;
+    }
+    .fab-whatsapp svg { width: 28px; height: 28px; }
+    .fab-whatsapp:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 10px 28px rgba(37, 211, 102, 0.48), 0 4px 10px rgba(0,0,0,0.14); }
+    .fab-whatsapp:focus-visible { outline: 2px solid var(--terracotta); outline-offset: 3px; }
+    @media (prefers-reduced-motion: reduce) { .fab-whatsapp { transition: none; } }
+    @media (max-width: 640px) {
+      .fab-whatsapp { width: 50px; height: 50px; }
+      .fab-whatsapp svg { width: 25px; height: 25px; }
+    }
+
+    /* ══════════════════════════════════════
+       Hero tertiary action
+    ══════════════════════════════════════ */
+    /* Third hero CTA is a lighter-weight option alongside the two pill
+       buttons, so the eye lands on booking first, quiz second. */
+    .hero-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.75rem 0.25rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--plum-light);
+      border-bottom: 1.5px solid transparent;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .hero-link:hover { color: var(--terracotta); border-color: var(--terracotta); }
+    .hero-link:focus-visible { outline: 2px solid var(--terracotta); outline-offset: 3px; border-radius: 4px; }
+
+    /* ══════════════════════════════════════
+       生命階段 Journey
+    ══════════════════════════════════════ */
+    /* Same card recipe as .svc-card below (border, radius, hover-reveal
+       accent stripe) so 服務項目 and 治療項目 read as one matched pair. */
+    /* Flex-wrap (not grid) so a trailing incomplete row centers itself
+       automatically, however many cards this section ends up with. */
+    .journey-track {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .sj-card {
+      flex: 0 1 calc((100% - 2rem) / 3);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      text-decoration: none;
+      display: block;
+      background: radial-gradient(140% 140% at 14% 0%, color-mix(in srgb, var(--dot-c) 7%, white) 0%, white 55%);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem 1.25rem 1.5rem;
+      box-shadow: var(--shadow);
+      transition: border-color 0.2s ease, transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1), box-shadow 0.3s ease;
+    }
+    .sj-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--dot-c);
+      transform: scaleX(0);
+      transition: transform 0.25s ease;
+    }
+    .sj-card:hover {
+      border-color: var(--dot-c);
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+    }
+    .sj-card:hover::before { transform: scaleX(1); }
+    .sj-card:focus-visible { outline: 2px solid var(--terracotta); outline-offset: 3px; }
+    .sj-icon-badge {
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      background: color-mix(in srgb, var(--dot-c) 14%, white);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1rem;
+      transition: transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1), background 0.3s ease;
+    }
+    .sj-card:hover .sj-icon-badge {
+      background: color-mix(in srgb, var(--dot-c) 24%, white);
+      transform: scale(1.08);
+    }
+    .sj-icon { font-size: 1.65rem; display: block; }
+    .sj-name {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.3rem;
+    }
+    .sj-age {
+      font-size: 0.74rem;
+      color: var(--text-light);
+      margin-bottom: 0.9rem;
+    }
+    .sj-conditions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      justify-content: center;
+    }
+    .sj-cond {
+      font-size: 0.63rem;
+      /* Some accent tones are too light for AA at this size; darken toward ink like .section-tag does. */
+      color: color-mix(in srgb, var(--dot-c) 72%, var(--text));
+      background: color-mix(in srgb, var(--dot-c) 12%, white);
+      padding: 2px 7px;
+      border-radius: 10px;
+    }
+    @media (max-width: 720px) { .sj-card { flex-basis: calc((100% - 1rem) / 2); } }
+    @media (max-width: 420px) {
+      .journey-track { gap: 0.75rem; }
+      .sj-card { flex-basis: calc((100% - 0.75rem) / 2); }
+    }
+
+    /* ══════════════════════════════════════
+       治療項目 Services
+    ══════════════════════════════════════ */
+    /* Flex-wrap (not grid) so a trailing incomplete row centers itself —
+       this tier has 5 cards, which would otherwise strand 2 on the left. */
+    .services-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .svc-card {
+      flex: 0 1 calc((100% - 2rem) / 3);
+      background: radial-gradient(140% 140% at 14% 0%, color-mix(in srgb, var(--svc-c) 7%, white) 0%, white 55%);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem 1.25rem 1.5rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: border-color 0.2s ease, transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1), box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .svc-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--svc-c);
+      transform: scaleX(0);
+      transition: transform 0.25s ease;
+    }
+    .svc-card:hover { border-color: var(--svc-c); transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+    .svc-card:hover::before { transform: scaleX(1); }
+    .svc-card:focus-visible { outline: 2px solid var(--terracotta); outline-offset: 3px; }
+    .svc-icon-badge {
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      background: color-mix(in srgb, var(--svc-c) 14%, white);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 0.85rem;
+      transition: transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1), background 0.3s ease;
+    }
+    .svc-card:hover .svc-icon-badge {
+      background: color-mix(in srgb, var(--svc-c) 24%, white);
+      transform: scale(1.08);
+    }
+    .svc-icon { font-size: 1.65rem; display: block; }
+    .svc-name { font-size: 0.92rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.5rem; }
+    .svc-desc { font-size: 0.74rem; color: var(--text-light); line-height: 1.65; margin-bottom: 0.75rem; }
+    .svc-tags { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; }
+    .svc-tag {
+      font-size: 0.63rem;
+      padding: 2px 7px;
+      border-radius: 10px;
+      background: color-mix(in srgb, var(--svc-c) 12%, white);
+      color: color-mix(in srgb, var(--svc-c) 72%, var(--text));
+    }
+    @media (max-width: 720px) { .svc-card { flex-basis: calc((100% - 1rem) / 2); } }
+    @media (max-width: 420px) {
+      .services-grid { gap: 0.75rem; }
+      .svc-card { flex-basis: calc((100% - 0.75rem) / 2); }
+    }
+
+    /* Popular treatments (higher patient inquiry volume) get their own
+       detail-card tier above the routine grid: left-aligned, English
+       subtitle, duration, and a direct booking CTA per card — the routine
+       tier stays a quiet browsing grid with no button. */
+    .svc-group + .svc-group { margin-top: 3rem; }
+    .svc-subhead {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: color-mix(in srgb, var(--terracotta) 75%, var(--text));
+      background: color-mix(in srgb, var(--terracotta) 10%, white);
+      border: 1px solid color-mix(in srgb, var(--terracotta) 28%, white);
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+    }
+    .svc-subhead--muted {
+      color: var(--text-light);
+      background: none;
+      border-color: var(--border);
+    }
+    /* Quiet echo of the hero's bloom/dot motif, so the popular-treatments
+       block reads as part of the same brand rather than a bolted-on
+       "featured" widget. Sits behind the grid, well clear of any text. */
+    .svc-popular-wrap { position: relative; padding-top: 2rem; }
+    .svc-popular-deco {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      width: 100%; height: 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .svc-grid-popular {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.1rem;
+    }
+    /* Light, harmonious gradient tier: each card's own accent stays but
+       stretched into a soft two-stop wash (same hue, just lighter/darker)
+       instead of a solid block — the four sit together as one warm family
+       rather than four unrelated colors. */
+    .svc-card--popular {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      padding: 1.5rem 1.25rem;
+      background: linear-gradient(165deg, color-mix(in srgb, var(--svc-c) 24%, white) 0%, color-mix(in srgb, var(--svc-c) 7%, white) 100%);
+    }
+    /* Pins the button to the same baseline across all four cards regardless
+       of how many lines the description/tags wrap to. */
+    .svc-card--popular .svc-cta { margin-top: auto; }
+    .svc-card--popular .svc-icon-badge {
+      width: 52px; height: 52px;
+      margin: 0 0 0.9rem;
+      background: white;
+      box-shadow: 0 2px 8px rgba(61, 36, 53, 0.08);
+    }
+    .svc-card--popular .svc-icon { font-size: 1.4rem; }
+    .svc-card--popular .svc-name { font-size: 0.98rem; }
+    .svc-card--popular .svc-desc { font-size: 0.78rem; margin-bottom: 0.65rem; }
+    .svc-card--popular .svc-tag {
+      background: color-mix(in srgb, white 75%, transparent);
+      color: color-mix(in srgb, var(--svc-c) 80%, var(--text));
+    }
+    .svc-eng {
+      font-size: 0.66rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: color-mix(in srgb, var(--svc-c) 65%, var(--text));
+      margin: -0.2rem 0 0.65rem;
+    }
+    .svc-fit-label { font-size: 0.74rem; color: var(--text-light); margin-right: 2px; }
+    .svc-meta {
+      font-size: 0.75rem;
+      color: color-mix(in srgb, var(--svc-c) 60%, var(--text));
+      margin: 0.75rem 0 1rem;
+    }
+    /* Quiet secondary link — only shown on cards that have a full detail
+       page to send patients to; the primary svc-cta stays the one bold
+       "book now" action. */
+    .svc-more {
+      display: inline-block;
+      width: fit-content;
+      font-size: 0.74rem;
+      color: color-mix(in srgb, var(--svc-c) 70%, var(--text));
+      text-decoration: none;
+      border-bottom: 1px solid color-mix(in srgb, var(--svc-c) 35%, transparent);
+      margin-bottom: 0.75rem;
+      transition: border-color 0.2s ease, color 0.2s ease;
+      position: relative;
+      z-index: 1;
+    }
+    .svc-more:hover { border-color: var(--svc-c); color: var(--svc-c); }
+    .svc-more:focus-visible { outline: 2px solid var(--terracotta); outline-offset: 2px; }
+    /* "Stretched link" pattern: the whole popular-tier card is clickable
+       through to its detail page, while svc-cta (booking) and svc-more
+       stay above it with their own distinct destinations. z-index must
+       match theirs (not just be positioned) — .svc-icon-badge gets a
+       hover transform that creates its own stacking context, which would
+       otherwise paint above an unraised z-index:0 stretched link and
+       silently swallow clicks right over the icon. */
+    .svc-card-link {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      border-radius: inherit;
+    }
+    .svc-card-link:focus-visible { outline: 2px solid var(--terracotta); outline-offset: 3px; }
+    /* Every primary call-to-action on the page — nav, hero, form, this one —
+       shares the same plum, so the eye learns one color means "go book."
+       Each card's own accent stays on the quiet elements (badge, stripe,
+       tags) where telling categories apart is the point. */
+    .svc-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 0.85rem;
+      border-radius: var(--radius);
+      background: var(--plum);
+      color: white;
+      font-weight: 600;
+      font-size: 0.92rem;
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      z-index: 1;
+    }
+    .svc-cta:hover { background: var(--plum-light); transform: translateY(-2px); box-shadow: var(--shadow); }
+    .svc-cta:focus-visible { outline: 2px solid var(--terracotta); outline-offset: 3px; }
+    /* Lighter, smaller CTA for the pastel tier — a solid plum block felt
+       heavy sitting on top of a light gradient card; one consistent light
+       tone across all four keeps them unified without the added weight. */
+    .svc-card--popular .svc-cta {
+      padding: 0.6rem;
+      font-size: 0.82rem;
+      background: var(--blush);
+      color: var(--plum);
+    }
+    .svc-card--popular .svc-cta:hover { background: var(--sage-light); box-shadow: none; }
+    @media (max-width: 980px) {
+      .svc-grid-popular { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 720px) {
+      .svc-grid-popular { grid-template-columns: 1fr; }
+      .svc-popular-deco { display: none; }
+    }
+
+    /* ══════════════════════════════════════
+       健康文章 Articles
+    ══════════════════════════════════════ */
+    .articles-section { background: #FAF8F5; }
+    .stage-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.75rem;
+    }
+    .stage-tab {
+      padding: 0.42rem 1rem;
+      border-radius: 20px;
+      border: 1.5px solid var(--border);
+      font-size: 0.78rem;
+      font-weight: 500;
+      cursor: pointer;
+      background: white;
+      color: var(--text-light);
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .stage-tab:hover { border-color: var(--plum); color: var(--plum); }
+    .stage-tab.active { border-color: var(--plum); background: var(--plum); color: white; }
+
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    .article-card {
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: box-shadow 0.2s, transform 0.2s;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+    }
+    .article-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.09); transform: translateY(-3px); }
+    .article-card.hidden { display: none; }
+    .art-strip { height: 5px; background: var(--art-c); }
+    .art-body { padding: 1.2rem; flex: 1; display: flex; flex-direction: column; }
+    .art-stage-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-bottom: 0.7rem;
+      background: color-mix(in srgb, var(--art-c) 12%, white);
+      color: color-mix(in srgb, var(--art-c) 72%, var(--text));
+      letter-spacing: 0.03em;
+    }
+    .art-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: var(--text-dark);
+      line-height: 1.5;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    .art-excerpt {
+      font-size: 0.77rem;
+      color: var(--text-light);
+      line-height: 1.7;
+      flex: 1;
+      margin-bottom: 1rem;
+    }
+    .art-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+      padding-top: 0.75rem;
+      font-size: 0.72rem;
+      color: var(--text-light);
+    }
+    .art-read { font-size: 0.75rem; font-weight: 600; color: color-mix(in srgb, var(--art-c) 72%, var(--text)); }
+    .articles-more {
+      text-align: center;
+      margin-top: 2rem;
+    }
+    @media (max-width: 768px) { .articles-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 500px) { .articles-grid { grid-template-columns: 1fr; } }
+
+    /* ══════════════════════════════════════
+       健康評估 Assessments
+    ══════════════════════════════════════ */
+    .assess-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .assess-card {
+      background: radial-gradient(140% 140% at 12% 0%, color-mix(in srgb, var(--acc-c) 6%, white) 0%, white 55%);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem 2rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: border-color 0.25s ease, box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
+    }
+    .assess-card:hover {
+      border-color: var(--acc-c);
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-6px);
+    }
+    .assess-accent {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--acc-c);
+    }
+    .assess-icon-badge {
+      width: 68px; height: 68px;
+      border-radius: 50%;
+      background: color-mix(in srgb, var(--acc-c) 13%, white);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem;
+      transition: transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
+    }
+    .assess-card:hover .assess-icon-badge { transform: scale(1.06); }
+    .assess-icon { font-size: 1.9rem; display: block; }
+    .assess-title { font-family: var(--font-display); font-size: 1.35rem; color: var(--text-dark); font-weight: 600; margin-bottom: 0.3rem; }
+    .assess-sub { font-size: 0.75rem; color: color-mix(in srgb, var(--acc-c) 72%, var(--text)); font-weight: 700; letter-spacing: 0.04em; margin-bottom: 0.75rem; }
+    .assess-desc { font-size: 0.84rem; color: var(--text-light); line-height: 1.75; margin-bottom: 1.1rem; }
+    .assess-features { list-style: none; padding: 0; margin: 0 0 1.5rem; display: flex; flex-direction: column; gap: 5px; }
+    .assess-features li { font-size: 0.76rem; color: var(--text-light); display: flex; align-items: center; gap: 6px; }
+    .assess-features li::before { content: "✓"; color: var(--acc-c); font-weight: 700; flex-shrink: 0; }
+    @media (max-width: 600px) { .assess-grid { grid-template-columns: 1fr; } }
+
+    /* ══════════════════════════════════════
+       關於醫師 Specialty list
+    ══════════════════════════════════════ */
+    .spec-label {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--text-light); margin-bottom: 1rem; padding-bottom: 0.45rem;
+      border-bottom: 1.5px solid var(--border);
+    }
+    .spec-list { display: flex; flex-direction: column; gap: 0.6rem; }
+    .spec-row {
+      display: flex; gap: 0.85rem; align-items: flex-start;
+      padding: 0.75rem 0.9rem; border-radius: var(--radius);
+      border: 1.5px solid var(--border); background: var(--white);
+      transition: border-color 0.2s;
+    }
+    .spec-row:hover { border-color: var(--plum-light); }
+    .spec-icon {
+      width: 36px; height: 36px; border-radius: 50%; background: var(--sage-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .spec-body { flex: 1; min-width: 0; }
+    .spec-name { font-size: 0.9rem; font-weight: 600; color: var(--plum); margin-bottom: 0.3rem; }
+    .spec-tags { font-size: 0.78rem; color: var(--text-light); line-height: 1.6; }
+    /* Not-yet-populated content rows (media mentions, testimonials): dashed + muted. */
+    .spec-row--pending { border-style: dashed; opacity: 0.72; }
+
+    /* ══════════════════════════════════════
+       患者見證 Testimonials
+    ══════════════════════════════════════ */
+    /* One honest empty-state beats six identical placeholder cards —
+       real quotes will replace this block once available. */
+    .testimonial-empty {
+      max-width: 420px;
+      margin: 2.5rem auto 0;
+      text-align: center;
+    }
+    .testimonial-empty-icon { font-size: 1.75rem; display: block; margin-bottom: 1rem; opacity: 0.7; }
+    .testimonial-empty-text { font-size: 0.92rem; color: var(--text-light); line-height: 1.8; margin-bottom: 1rem; }
+
+    /* ══════════════════════════════════════
+       Accessibility: contrast fixes
+    ══════════════════════════════════════ */
+    /* --text-light on the (now-restored) blush section background falls
+       below WCAG AA 4.5:1; use the darker ink token for this instance. */
+    .stages-sub-onblush { color: var(--text); }
+
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ──────────────────────────────────────────── -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <span data-edit="nav-name">胡佩珊</span><span><span data-edit="nav-title">中醫師 Kate Woo</span></span>
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="#stages">服務項目</a>
+    <a href="#services">治療項目</a>
+    <a href="#assessments">健康評估</a>
+    <a href="#articles">健康文章</a>
+    <a href="#about">關於醫師</a>
+    <a href="#contact" class="nav-cta">預約掛號 →</a>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="選單">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<a href="https://wa.me/85298152863" target="_blank" rel="noopener" class="fab-whatsapp" aria-label="WhatsApp 即時查詢">
+  <svg viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2Zm0 18.15h-.01c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.27-8.24 2.21 0 4.28.86 5.84 2.42a8.19 8.19 0 0 1 2.42 5.83c0 4.55-3.7 8.24-8.27 8.24Zm4.53-6.17c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.24-.64.81-.78.97-.15.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.24-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.24-.42.08-.16.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.16 0-.43.06-.66.31-.22.24-.87.85-.87 2.08s.89 2.41 1.02 2.58c.12.16 1.75 2.67 4.25 3.74.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.2-.58.2-1.07.14-1.18-.06-.1-.23-.16-.48-.29Z"/></svg>
+</a>
+
+<!-- ── Hero ────────────────────────────────────────────────── -->
+<section class="hero-wrap">
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-eyebrow" data-edit="hero-eyebrow" data-edit-label="上方小標">香港註冊中醫師 · 婦科專科</div>
+      <h1 class="hero-title" data-edit="hero-title" data-edit-label="主標題">
+        以中醫智慧，陪伴女性<em>每個階段</em>
+      </h1>
+      <p class="hero-desc" data-edit="hero-desc">
+        融合中西醫知識，從青春期、備孕、產後到更年期，為每位女性提供更貼近身心需要的個人化調理方案。
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">預約初診 →</a>
+        <a href="#assessments" class="btn btn-outline">先了解我的體質</a>
+        <a href="women-health-quiz.html" class="hero-link">女性健康評估 →</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <svg class="hero-bloom" viewBox="0 0 360 480" fill="none" aria-hidden="true" focusable="false">
+        <!-- Focal bloom -->
+        <g class="bloom-drift">
+          <circle cx="246" cy="150" r="34" fill="var(--terracotta)" opacity="0.88"/>
+          <circle cx="223" cy="190" r="34" fill="var(--terracotta)" opacity="0.88"/>
+          <circle cx="177" cy="190" r="34" fill="var(--terracotta)" opacity="0.88"/>
+          <circle cx="154" cy="150" r="34" fill="var(--terracotta)" opacity="0.88"/>
+          <circle cx="177" cy="110" r="34" fill="var(--terracotta)" opacity="0.88"/>
+          <circle cx="223" cy="110" r="34" fill="var(--terracotta)" opacity="0.88"/>
+          <circle cx="200" cy="150" r="20" fill="var(--plum)"/>
+        </g>
+        <!-- Medium bloom -->
+        <g class="bloom-drift-slow">
+          <circle cx="122" cy="320" r="24" fill="var(--sage)" opacity="0.85"/>
+          <circle cx="106" cy="348" r="24" fill="var(--sage)" opacity="0.85"/>
+          <circle cx="74" cy="348" r="24" fill="var(--sage)" opacity="0.85"/>
+          <circle cx="58" cy="320" r="24" fill="var(--sage)" opacity="0.85"/>
+          <circle cx="74" cy="292" r="24" fill="var(--sage)" opacity="0.85"/>
+          <circle cx="106" cy="292" r="24" fill="var(--sage)" opacity="0.85"/>
+          <circle cx="90" cy="320" r="14" fill="var(--dusty-rose)"/>
+        </g>
+        <!-- Small bloom -->
+        <g>
+          <circle cx="312" cy="380" r="16" fill="var(--dusty-rose)" opacity="0.85"/>
+          <circle cx="301" cy="399" r="16" fill="var(--dusty-rose)" opacity="0.85"/>
+          <circle cx="279" cy="399" r="16" fill="var(--dusty-rose)" opacity="0.85"/>
+          <circle cx="268" cy="380" r="16" fill="var(--dusty-rose)" opacity="0.85"/>
+          <circle cx="279" cy="361" r="16" fill="var(--dusty-rose)" opacity="0.85"/>
+          <circle cx="301" cy="361" r="16" fill="var(--dusty-rose)" opacity="0.85"/>
+          <circle cx="290" cy="380" r="9" fill="var(--terracotta)"/>
+        </g>
+        <!-- Tiny bud -->
+        <g class="bloom-drift">
+          <circle cx="74" cy="90" r="10" fill="var(--sage-light)" opacity="0.9"/>
+          <circle cx="67" cy="102" r="10" fill="var(--sage-light)" opacity="0.9"/>
+          <circle cx="53" cy="102" r="10" fill="var(--sage-light)" opacity="0.9"/>
+          <circle cx="46" cy="90" r="10" fill="var(--sage-light)" opacity="0.9"/>
+          <circle cx="53" cy="78" r="10" fill="var(--sage-light)" opacity="0.9"/>
+          <circle cx="67" cy="78" r="10" fill="var(--sage-light)" opacity="0.9"/>
+          <circle cx="60" cy="90" r="6" fill="var(--sage)"/>
+        </g>
+        <!-- Stems -->
+        <path d="M90 334 Q70 365 55 400" stroke="var(--sage)" stroke-width="2" opacity="0.4"/>
+        <path d="M290 396 Q300 420 285 450" stroke="var(--dusty-rose)" stroke-width="2" opacity="0.4"/>
+        <!-- Scattered dots -->
+        <circle cx="250" cy="60" r="5" fill="var(--terracotta)" opacity="0.5"/>
+        <circle cx="320" cy="140" r="4" fill="var(--sage)" opacity="0.4"/>
+        <circle cx="30" cy="200" r="6" fill="var(--dusty-rose)" opacity="0.45"/>
+        <circle cx="180" cy="250" r="3" fill="var(--plum)" opacity="0.35"/>
+        <circle cx="335" cy="300" r="5" fill="var(--sage)" opacity="0.5"/>
+        <circle cx="150" cy="425" r="4" fill="var(--terracotta)" opacity="0.4"/>
+        <circle cx="220" cy="445" r="3" fill="var(--dusty-rose)" opacity="0.5"/>
+        <circle cx="340" cy="435" r="4" fill="var(--sage-light)" opacity="0.7"/>
+        <circle cx="20" cy="355" r="3" fill="var(--plum)" opacity="0.3"/>
+        <circle cx="115" cy="55" r="4" fill="var(--dusty-rose)" opacity="0.4"/>
+        <circle cx="260" cy="205" r="3" fill="var(--sage)" opacity="0.35"/>
+        <circle cx="195" cy="75" r="3" fill="var(--terracotta)" opacity="0.3"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ── 關於醫師 ──────────────────────────────────────────────── -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <div class="about-photo" id="dr-photo-container" data-drag="dr-photo" style="position:relative;overflow:hidden;">
+          <img src="Profile pic.JPG" alt="胡佩珊中醫師 Kate Woo" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:inherit;">
+        </div>
+      </div>
+      <div>
+        <h2 class="section-title">胡佩珊中醫師<span style="font-size:1rem;font-weight:400;color:var(--text-light);margin-left:0.6rem;">Kate Woo</span></h2>
+        <p style="font-size:1.05rem;color:var(--text-light);line-height:1.9;margin-bottom:2rem;">
+          胡醫師專注於女性健康，提倡「身心同治」的治療理念，善於結合傳統中醫智慧、現代醫學知識及心理輔導學知識，注重聆聽病人的真實需求，致力於以溫和細膩的治療方法，為每位病人制定客製化的治療方案。
+        </p>
+        <div class="about-credentials">
+          <div class="credential-item">
+            <div class="credential-dot"></div>
+            <span>香港中醫藥管理委員會註冊中醫師（註冊編號：008823）</span>
+          </div>
+          <div class="credential-item">
+            <div class="credential-dot"></div>
+            <span>香港浸會大學中醫藥及生物醫學學士（一級榮譽）</span>
+          </div>
+          <div class="credential-item">
+            <div class="credential-dot"></div>
+            <span>香港浸會大學輔導學社會科學碩士</span>
+          </div>
+          <div class="credential-item">
+            <div class="credential-dot"></div>
+            <span>中醫學深造證書（臨床婦科學）</span>
+          </div>
+          <div class="credential-item">
+            <div class="credential-dot"></div>
+            <span>中醫專業實踐證書（西方醫學婦產科學）</span>
+          </div>
+        </div>
+
+        <div style="margin-top:2rem;">
+          <div class="spec-label">媒體採訪</div>
+          <div class="spec-list">
+            <div class="spec-row spec-row--pending">
+              <div class="spec-icon">📰</div>
+              <div class="spec-body">
+                <div class="spec-name">媒體報導準備中</div>
+                <div class="spec-tags">相關採訪報導即將更新，敬請期待。</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 服務項目 ──────────────────────────────────────────────── -->
+<section class="section stages" id="stages">
+  <div class="container">
+    <div class="text-center">
+      <span class="section-tag" data-edit="stages-tag">服務項目</span>
+      <h2 class="section-title" data-edit="stages-title">從您的困擾出發，找到對應的調理方向</h2>
+      <p class="section-sub stages-sub-onblush" data-edit="stages-sub">無論是月經、婦科、備孕產後、更年期、情緒困擾，或癌症輔助調理與內科亞健康問題，都有對應的中醫調理方案。點選以了解更多。</p>
+    </div>
+    <div class="journey-track">
+
+      <a href="women-health-quiz.html" class="sj-card" style="--dot-c:#DDA99A">
+        <div class="sj-icon-badge"><span class="sj-icon">🌸</span></div>
+        <div class="sj-name">月經調理</div>
+        <div class="sj-age">經期・週期問題</div>
+        <div class="sj-conditions">
+          <span class="sj-cond">月經不規律</span>
+          <span class="sj-cond">經前症候群</span>
+          <span class="sj-cond">痛經調理</span>
+        </div>
+      </a>
+
+      <a href="women-health-quiz.html" class="sj-card" style="--dot-c:#C98F82">
+        <div class="sj-icon-badge"><span class="sj-icon">🌿</span></div>
+        <div class="sj-name">婦科疾病</div>
+        <div class="sj-age">肌瘤・息肉・異位症</div>
+        <div class="sj-conditions">
+          <span class="sj-cond">子宮內膜異位症</span>
+          <span class="sj-cond">多囊卵巢症</span>
+          <span class="sj-cond">子宮肌瘤/息肉</span>
+        </div>
+      </a>
+
+      <a href="women-health-quiz.html" class="sj-card" style="--dot-c:#B06B5C">
+        <div class="sj-icon-badge"><span class="sj-icon">🌱</span></div>
+        <div class="sj-name">備孕・不孕</div>
+        <div class="sj-age">自然備孕・IVF/IUI</div>
+        <div class="sj-conditions">
+          <span class="sj-cond">卵巢調養</span>
+          <span class="sj-cond">子宮環境改善</span>
+          <span class="sj-cond">試管前後調理</span>
+        </div>
+      </a>
+
+      <a href="women-health-quiz.html" class="sj-card" style="--dot-c:#8F5240">
+        <div class="sj-icon-badge"><span class="sj-icon">🌼</span></div>
+        <div class="sj-name">產前安胎</div>
+        <div class="sj-age">孕期安全調理</div>
+        <div class="sj-conditions">
+          <span class="sj-cond">孕吐安胎</span>
+          <span class="sj-cond">先兆流產</span>
+          <span class="sj-cond">孕期情緒</span>
+        </div>
+      </a>
+
+      <a href="women-health-quiz.html" class="sj-card" style="--dot-c:#6E4A50">
+        <div class="sj-icon-badge"><span class="sj-icon">🌾</span></div>
+        <div class="sj-name">產後月子調理</div>
+        <div class="sj-age">坐月子・恢復期</div>
+        <div class="sj-conditions">
+          <span class="sj-cond">坐月子調補</span>
+          <span class="sj-cond">催乳通乳</span>
+          <span class="sj-cond">產後情緒</span>
+        </div>
+      </a>
+
+      <a href="women-health-quiz.html" class="sj-card" style="--dot-c:#8B5040">
+        <div class="sj-icon-badge"><span class="sj-icon">🌙</span></div>
+        <div class="sj-name">更年期調理</div>
+        <div class="sj-age">更年期・停經後</div>
+        <div class="sj-conditions">
+          <span class="sj-cond">潮熱盜汗</span>
+          <span class="sj-cond">失眠情緒</span>
+          <span class="sj-cond">骨質保健</span>
+        </div>
+      </a>
+
+      <a href="women-health-quiz.html" class="sj-card" style="--dot-c:#A38F7E">
+        <div class="sj-icon-badge"><span class="sj-icon">🌊</span></div>
+        <div class="sj-name">情緒健康</div>
+        <div class="sj-age">焦慮・抑鬱・驚恐・失眠</div>
+        <div class="sj-conditions">
+          <span class="sj-cond">焦慮症</span>
+          <span class="sj-cond">抑鬱・驚恐症</span>
+          <span class="sj-cond">失眠調理</span>
+        </div>
+      </a>
+
+      <a href="treatments/treatment-oncology.html" class="sj-card" style="--dot-c:#6B5565">
+        <div class="sj-icon-badge"><span class="sj-icon">🛡️</span></div>
+        <div class="sj-name">癌症治療</div>
+        <div class="sj-age">腫瘤輔助調理・康復支援</div>
+        <div class="sj-conditions">
+          <span class="sj-cond">化療副作用紓緩</span>
+          <span class="sj-cond">電療後調理</span>
+          <span class="sj-cond">體質扶正</span>
+        </div>
+      </a>
+
+      <a href="treatments/treatment-internal.html" class="sj-card" style="--dot-c:#5F6E46">
+        <div class="sj-icon-badge"><span class="sj-icon">🩺</span></div>
+        <div class="sj-name">內科調理</div>
+        <div class="sj-age">脾胃・肝腎調養</div>
+        <div class="sj-conditions">
+          <span class="sj-cond">慢性疲勞</span>
+          <span class="sj-cond">消化不良</span>
+          <span class="sj-cond">頭暈心悸</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── 治療項目 ──────────────────────────────────────────────── -->
+<section class="section" id="services" style="background:white;">
+  <div class="container">
+    <div class="text-center">
+      <span class="section-tag">中醫治療項目</span>
+      <h2 class="section-title">多元治療・全面調理</h2>
+      <p class="section-sub">結合不同中醫治療方式，針對您的體質與症狀制定個人化方案。</p>
+    </div>
+    <div class="svc-group">
+      <span class="svc-subhead">🔥 熱門療程</span>
+      <div class="svc-popular-wrap">
+        <svg class="svc-popular-deco" viewBox="0 0 800 40" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false">
+          <path d="M0 22 Q100 6 200 20 Q300 34 400 18 Q500 4 600 22 Q700 36 800 16" stroke="var(--dusty-rose)" stroke-width="1.5" stroke-dasharray="1 8" stroke-linecap="round" opacity="0.55" vector-effect="non-scaling-stroke"/>
+          <circle cx="90" cy="11" r="3.5" fill="var(--terracotta)" opacity="0.5"/>
+          <circle cx="310" cy="30" r="3" fill="var(--sage)" opacity="0.45"/>
+          <circle cx="530" cy="10" r="3.5" fill="var(--dusty-rose)" opacity="0.5"/>
+          <circle cx="748" cy="27" r="3" fill="var(--plum-light)" opacity="0.4"/>
+        </svg>
+      <div class="svc-grid-popular">
+
+        <div class="svc-card svc-card--popular" style="--svc-c:#B06478">
+          <a href="treatments/treatment-facial.html" class="svc-card-link" aria-label="了解更多：美顏針"></a>
+          <div class="svc-icon-badge"><span class="svc-icon">✨</span></div>
+          <div class="svc-name" data-edit="svc-facial-name">美顏針</div>
+          <div class="svc-eng">Cosmetic Acupuncture</div>
+          <div class="svc-desc" data-edit="svc-facial-desc">細針刺激面部穴位，促進膠原生成，提拉緊緻、淡化細紋。</div>
+          <div class="svc-tags" style="justify-content:flex-start;">
+            <span class="svc-fit-label">適合</span>
+            <span class="svc-tag">皮膚鬆弛</span>
+            <span class="svc-tag">細紋</span>
+            <span class="svc-tag">臉部提拉</span>
+          </div>
+          <div class="svc-meta">⏱ 60–90 分鐘</div>
+          <a href="treatments/treatment-facial.html" class="svc-more">了解更多 →</a>
+          <a href="#contact" class="svc-cta">預約美顏針</a>
+        </div>
+
+        <div class="svc-card svc-card--popular" style="--svc-c:#6E4A50">
+          <a href="treatments/treatment-weight.html" class="svc-card-link" aria-label="了解更多：體重管理"></a>
+          <div class="svc-icon-badge"><span class="svc-icon">⚖️</span></div>
+          <div class="svc-name" data-edit="svc-weight-name">體重管理</div>
+          <div class="svc-eng">TCM Weight Management</div>
+          <div class="svc-desc" data-edit="svc-weight-desc">中醫辨證調理代謝，結合針灸與中藥，健康持續管理體重。</div>
+          <div class="svc-tags" style="justify-content:flex-start;">
+            <span class="svc-fit-label">適合</span>
+            <span class="svc-tag">代謝偏低</span>
+            <span class="svc-tag">水腫肥胖</span>
+            <span class="svc-tag">產後減重</span>
+          </div>
+          <div class="svc-meta">⏱ 45–60 分鐘</div>
+          <a href="treatments/treatment-weight.html" class="svc-more">了解更多 →</a>
+          <a href="#contact" class="svc-cta">預約體重管理</a>
+        </div>
+
+        <div class="svc-card svc-card--popular" style="--svc-c:#9C6A5D">
+          <a href="treatments/treatment-hairloss.html" class="svc-card-link" aria-label="了解更多：脫髮調理"></a>
+          <div class="svc-icon-badge"><span class="svc-icon">💇</span></div>
+          <div class="svc-name" data-edit="svc-hairloss-name">脫髮調理</div>
+          <div class="svc-eng">Hair Loss Treatment</div>
+          <div class="svc-desc" data-edit="svc-hairloss-desc">補腎養血、疏通頭皮氣血，從根本改善脫髮問題。</div>
+          <div class="svc-tags" style="justify-content:flex-start;">
+            <span class="svc-fit-label">適合</span>
+            <span class="svc-tag">產後脫髮</span>
+            <span class="svc-tag">壓力掉髮</span>
+            <span class="svc-tag">髮量稀疏</span>
+          </div>
+          <div class="svc-meta">⏱ 45–60 分鐘</div>
+          <a href="treatments/treatment-hairloss.html" class="svc-more">了解更多 →</a>
+          <a href="#contact" class="svc-cta">預約脫髮調理</a>
+        </div>
+
+        <div class="svc-card svc-card--popular" style="--svc-c:#C98F82">
+          <a href="treatments/treatment-mammary.html" class="svc-card-link" aria-label="了解更多：乳腺針灸"></a>
+          <div class="svc-icon-badge"><span class="svc-icon">🎗️</span></div>
+          <div class="svc-name" data-edit="svc-mammary-name">乳腺針灸</div>
+          <div class="svc-eng">Mammary Acupuncture</div>
+          <div class="svc-desc" data-edit="svc-mammary-desc">疏肝理氣、活血通絡，改善乳腺增生與乳房脹痛。</div>
+          <div class="svc-tags" style="justify-content:flex-start;">
+            <span class="svc-fit-label">適合</span>
+            <span class="svc-tag">乳腺增生</span>
+            <span class="svc-tag">乳房脹痛</span>
+            <span class="svc-tag">產後通乳</span>
+          </div>
+          <div class="svc-meta">⏱ 30–45 分鐘</div>
+          <a href="treatments/treatment-mammary.html" class="svc-more">了解更多 →</a>
+          <a href="#contact" class="svc-cta">預約乳腺針灸</a>
+        </div>
+
+      </div>
+      </div>
+    </div>
+
+    <div class="svc-group">
+      <span class="svc-subhead svc-subhead--muted">其他治療方式</span>
+      <div class="services-grid">
+
+        <a href="treatments/treatment-herbs.html" class="svc-card" style="--svc-c:#8B5040;text-decoration:none;display:block;">
+          <div class="svc-icon-badge"><span class="svc-icon">🌿</span></div>
+          <div class="svc-name" data-edit="svc1-name">中藥調理</div>
+          <div class="svc-desc" data-edit="svc1-desc">根據望聞問切四診，為您配製個人化中藥方，從根本調補氣血、平衡陰陽。</div>
+          <div class="svc-tags">
+            <span class="svc-tag">調經補血</span>
+            <span class="svc-tag">安胎保胎</span>
+            <span class="svc-tag">產後調補</span>
+            <span class="svc-tag">體質調理</span>
+          </div>
+        </a>
+
+        <a href="treatments/treatment-acupuncture.html" class="svc-card" style="--svc-c:#A6482F;text-decoration:none;display:block;">
+          <div class="svc-icon-badge"><span class="svc-icon">🎯</span></div>
+          <div class="svc-name" data-edit="svc2-name">針灸治療</div>
+          <div class="svc-desc" data-edit="svc2-desc">疏通經絡、調節氣血運行，改善痛經、失眠、不孕等婦科問題，療效直接。</div>
+          <div class="svc-tags">
+            <span class="svc-tag">止痛經</span>
+            <span class="svc-tag">改善失眠</span>
+            <span class="svc-tag">促進排卵</span>
+            <span class="svc-tag">減輕更年期症狀</span>
+          </div>
+        </a>
+
+        <a href="treatments/treatment-auricular.html" class="svc-card" style="--svc-c:#A38F7E;text-decoration:none;display:block;">
+          <div class="svc-icon-badge"><span class="svc-icon">👂</span></div>
+          <div class="svc-name" data-edit="svc4-name">耳穴療法</div>
+          <div class="svc-desc" data-edit="svc4-desc">透過耳部反射區調節全身臟腑功能，特別適合調節內分泌、改善睡眠與食慾。</div>
+          <div class="svc-tags">
+            <span class="svc-tag">調節內分泌</span>
+            <span class="svc-tag">改善睡眠</span>
+            <span class="svc-tag">控制食慾</span>
+          </div>
+        </a>
+
+        <a href="treatments/treatment-cupping.html" class="svc-card" style="--svc-c:#96674A;text-decoration:none;display:block;">
+          <div class="svc-icon-badge"><span class="svc-icon">💆</span></div>
+          <div class="svc-name" data-edit="svc-cupping-name">拔罐・刮痧</div>
+          <div class="svc-desc" data-edit="svc-cupping-desc">排濕排毒、舒筋活絡，改善因氣滯血瘀引起的肩頸痠痛、月經不暢等問題。</div>
+          <div class="svc-tags">
+            <span class="svc-tag">排濕解毒</span>
+            <span class="svc-tag">舒緩痠痛</span>
+            <span class="svc-tag">活血化瘀</span>
+          </div>
+        </a>
+
+        <a href="treatments/treatment-moxa.html" class="svc-card" style="--svc-c:#BD7A4E;text-decoration:none;display:block;">
+          <div class="svc-icon-badge"><span class="svc-icon">🔥</span></div>
+          <div class="svc-name" data-edit="svc6-name">艾灸療法</div>
+          <div class="svc-desc" data-edit="svc6-desc">以艾草燃燒產生的溫熱刺激穴位，溫經散寒、補益陽氣，特別適合宮寒不孕、痛經及產後虛寒體質調理。</div>
+          <div class="svc-tags">
+            <span class="svc-tag">溫宮散寒</span>
+            <span class="svc-tag">補益陽氣</span>
+            <span class="svc-tag">緩解痛經</span>
+            <span class="svc-tag">促進血液循環</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 健康評估 ──────────────────────────────────────────────── -->
+<section class="section quiz-section" id="assessments">
+  <div class="container">
+    <div class="text-center">
+      <span class="section-tag">線上健康評估</span>
+      <h2 class="section-title">了解您的健康狀況</h2>
+      <p class="section-sub">助您更全面了解自身狀況，結果僅供參考，建議與中醫師進一步諮詢。</p>
+    </div>
+    <div class="assess-grid">
+
+      <div class="assess-card" style="--acc-c:#8B5040">
+        <div class="assess-accent"></div>
+        <div class="assess-icon-badge"><span class="assess-icon">☯️</span></div>
+        <div class="assess-title">中醫體質問卷</div>
+        <div class="assess-sub">王琦九種體質・中華中醫藥學會標準</div>
+        <div class="assess-desc">了解您屬於氣虛、陽虛、陰虛、痰濕、濕熱、血瘀、氣鬱、特稟還是平和體質，獲得對應的飲食、生活與調理建議。</div>
+        <ul class="assess-features">
+          <li>60 道問題，約 8–10 分鐘</li>
+          <li>即時顯示體質評分與排名</li>
+          <li>專屬食譜、茶飲與穴位建議</li>
+          <li>可連結至相關健康文章</li>
+        </ul>
+        <a href="constitution.html" class="btn btn-primary" style="width:100%;justify-content:center;display:flex;">開始體質測驗 →</a>
+      </div>
+
+      <div class="assess-card" style="--acc-c:#7A3B3A">
+        <div class="assess-accent"></div>
+        <div class="assess-icon-badge"><span class="assess-icon">🩺</span></div>
+        <div class="assess-title">女性全方位健康評估</div>
+        <div class="assess-sub">9 大問卷・涵蓋所有生命階段</div>
+        <div class="assess-desc">根據您目前的生命階段，選擇最適合的評估：月經健康、備孕力、多囊卵巢、孕期不適、孕期情緒、產後恢復、產後情緒（EPDS）及更年期症狀。</div>
+        <ul class="assess-features">
+          <li>月經・備孕・PCOS・孕期・產後・更年期</li>
+          <li>對應中醫辨證分型與體質分析</li>
+          <li>FIGO、Edinburgh、PUQE 等國際標準</li>
+          <li>即時結果＋個人化調理建議</li>
+        </ul>
+        <a href="women-health-quiz.html" class="btn btn-primary" style="width:100%;justify-content:center;display:flex;">進入女性評估中心 →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── 健康文章 ──────────────────────────────────────────────── -->
+<section class="section articles-section" id="articles">
+  <div class="container">
+    <div class="text-center">
+      <span class="section-tag">健康衛教文章</span>
+      <h2 class="section-title">中醫女性健康知識庫</h2>
+      <p class="section-sub">從中醫角度解析不同生命階段的常見困擾，讓您在就診前已有基礎認識。</p>
+    </div>
+
+    <div class="stage-tabs" id="articleTabs">
+      <button class="stage-tab active" onclick="filterArticles('all', this)">全部</button>
+      <button class="stage-tab" onclick="filterArticles('adolescent', this)">青春期</button>
+      <button class="stage-tab" onclick="filterArticles('reproductive', this)">育齡期</button>
+      <button class="stage-tab" onclick="filterArticles('fertility', this)">備孕</button>
+      <button class="stage-tab" onclick="filterArticles('pregnancy', this)">懷孕</button>
+      <button class="stage-tab" onclick="filterArticles('postpartum', this)">產後</button>
+      <button class="stage-tab" onclick="filterArticles('menopause', this)">更年期</button>
+      <button class="stage-tab" onclick="filterArticles('postmenopause', this)">停經後</button>
+    </div>
+
+    <div class="articles-grid" id="articlesGrid">
+
+      <!-- 青春期 -->
+      <a href="women-health-quiz.html" class="article-card" data-stage="adolescent" style="--art-c:#DDA99A">
+        <div class="art-strip"></div>
+        <div class="art-body">
+          <span class="art-stage-tag">青春期</span>
+          <div class="art-title">青春期月經不規律，中醫怎麼看？</div>
+          <div class="art-excerpt">初潮後一至兩年內月經不穩定屬正常現象，但若持續三年以上仍不規律，中醫通常從腎氣不足、衝任失調角度介入調理。了解何時需要積極治療。</div>
+          <div class="art-footer">
+            <span>⏱ 閱讀約 4 分鐘</span>
+            <span class="art-read">閱讀更多 →</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="women-health-quiz.html" class="article-card" data-stage="adolescent" style="--art-c:#DDA99A">
+        <div class="art-strip"></div>
+        <div class="art-body">
+          <span class="art-stage-tag">青春期</span>
+          <div class="art-title">反覆長痘，可能是內分泌失調的信號</div>
+          <div class="art-excerpt">青春痘不只是皮膚問題。中醫認為痘痘位置反映臟腑狀態：下巴長痘多與腎虛或荷爾蒙相關，面頰痘多屬肺胃熱盛。對症調理才能根治。</div>
+          <div class="art-footer">
+            <span>⏱ 閱讀約 5 分鐘</span>
+            <span class="art-read">閱讀更多 →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 育齡期 -->
+      <a href="women-health-quiz.html" class="article-card" data-stage="reproductive" style="--art-c:#C98F82">
+        <div class="art-strip"></div>
+        <div class="art-body">
+          <span class="art-stage-tag">育齡期</span>
+          <div class="art-title">月經量少、色暗？中醫教你讀懂月經密碼</div>
+          <div class="art-excerpt">月經的顏色、質地、量多少，是中醫診斷婦科問題的重要線索。量少色暗多屬血虛或血瘀，了解自己的月經類型，才能找對調理方向。</div>
+          <div class="art-footer">
+            <span>⏱ 閱讀約 6 分鐘</span>
+            <span class="art-read">閱讀更多 →</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="articles/pms-tcm.html" class="article-card" data-stage="reproductive" style="--art-c:#C98F82">
+        <div class="art-strip"></div>
+        <div class="art-body">
+          <span class="art-stage-tag">育齡期</span>
+          <div class="art-title">為什麼月經前特別情緒化？中醫解析 PMS</div>
+          <div class="art-excerpt">經前症候群不只是心理問題，中醫認為與肝鬱氣滯密切相關。情緒波動、乳脹、水腫一起出現？這篇文章教你如何透過食療與穴位緩解。</div>
+          <div class="art-footer">
+            <span>⏱ 閱讀約 5 分鐘</span>
+            <span class="art-read">閱讀更多 →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 備孕 -->
+      <a href="articles/tcm-fertility-guide.html" class="article-card" data-stage="fertility" style="--art-c:#B06B5C">
+        <div class="art-strip"></div>
+        <div class="art-body">
+          <span class="art-stage-tag">備孕</span>
+          <div class="art-title">備孕前，中醫師建議的三個月調理計畫</div>
+          <div class="art-excerpt">最理想的備孕準備在受孕前三個月開始。中醫從補腎填精、調理衝任著手，幫助建立優質的卵巢環境和子宮內膜，為懷孕打好基礎。</div>
+          <div class="art-footer">
+            <span>⏱ 閱讀約 7 分鐘</span>
+            <span class="art-read">閱讀更多 →</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="articles/pcos-tcm-fertility.html" class="article-card" data-stage="fertility" style="--art-c:#B06B5C">
+        <div class="art-strip"></div>
+        <div class="art-body">
+          <span class="art-stage-tag">備孕</span>
+          <div class="art-title">多囊卵巢症（PCOS）的中醫治療方向</div>
+          <div class="art-excerpt">PCOS 是最常見的女性荷爾蒙失調疾病之一。中醫以痰濕、腎虛、肝鬱為主要病機，透過調整週期、化痰利濕等方法，協助自然排卵。</div>
+          <div class="art-footer">
+            <span>⏱ 閱讀約 8 分鐘</span>
+            <span class="art-read">閱讀更多 →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 懷孕 -->
+      <a href="articles/孕期初期不適中醫調理.html" class="article-card" data-stage="pregnancy" style="--art-c:#8F5240">
+        <div class="art-strip"></div>
+        <div class="art-body">
+          <span class="art-stage-tag">懷孕</span>
+          <div class="art-title">孕期惡心嘔吐，安全有效的中醫舒緩方法</div>
+          <div class="art-excerpt">孕吐是早孕期最常見的不適，中醫以「妊娠惡阻」論治，透過生薑、陳皮等安全食療，以及特定穴位按壓，幫助緩解嘔吐，穩定情緒。</div>
+          <div class="art-footer">
+            <span>⏱ 閱讀約 5 分鐘</span>
+            <span class="art-read">閱讀更多 →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 產後 -->
+      <a href="articles/confinement-tcm-guide.html" class="article-card" data-stage="postpartum" style="--art-c:#6E4A50">
+        <div class="art-strip"></div>
+        <div class="art-body">
+          <span class="art-stage-tag">產後</span>
+          <div class="art-title">坐月子怎麼補？中醫師的產後分階段調理建議</div>
+          <div class="art-excerpt">產後調理不是一味進補，而是要循序漸進。第一週以生化湯促進子宮復原，第二週起補氣血，第三週才開始全面滋補，方向對了才補得進去。</div>
+          <div class="art-footer">
+            <span>⏱ 閱讀約 8 分鐘</span>
+            <span class="art-read">閱讀更多 →</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="women-health-quiz.html" class="article-card" data-stage="postpartum" style="--art-c:#6E4A50">
+        <div class="art-strip"></div>
+        <div class="art-body">
+          <span class="art-stage-tag">產後</span>
+          <div class="art-title">產後為什麼會大量掉髮？中醫解析與調理</div>
+          <div class="art-excerpt">許多媽媽在產後三到六個月出現明顯掉髮，中醫認為「髮為血之餘」，生產耗損大量精血是主因。針對性補血養腎，大多可在半年內改善。</div>
+          <div class="art-footer">
+            <span>⏱ 閱讀約 5 分鐘</span>
+            <span class="art-read">閱讀更多 →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 更年期 -->
+      <a href="articles/hot-flash-tcm.html" class="article-card" data-stage="menopause" style="--art-c:#8B5040">
+        <div class="art-strip"></div>
+        <div class="art-body">
+          <span class="art-stage-tag">更年期</span>
+          <div class="art-title">更年期潮熱盜汗，中醫如何調理？</div>
+          <div class="art-excerpt">潮熱、盜汗、心悸、失眠——更年期不適往往是腎陰虛或腎陰陽兩虛的表現。中醫滋腎陰、清虛熱，配合生活調整，可大幅改善生活品質。</div>
+          <div class="art-footer">
+            <span>⏱ 閱讀約 6 分鐘</span>
+            <span class="art-read">閱讀更多 →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 停經後 -->
+      <a href="women-health-quiz.html" class="article-card" data-stage="postmenopause" style="--art-c:#6B3A45">
+        <div class="art-strip"></div>
+        <div class="art-body">
+          <span class="art-stage-tag">停經後</span>
+          <div class="art-title">停經後的中醫養生：骨質保健與心血管防護</div>
+          <div class="art-excerpt">停經後雌激素下降，骨質流失與心血管風險都會增加。中醫以補腎壯骨、活血通絡為核心，配合食療與運動，幫助女性優雅迎接人生下半場。</div>
+          <div class="art-footer">
+            <span>⏱ 閱讀約 7 分鐘</span>
+            <span class="art-read">閱讀更多 →</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="articles-more">
+      <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:1rem;">更多主題文章持續更新中，歡迎前往知識庫瀏覽全部文章。</p>
+      <a href="articles.html" class="btn btn-outline">前往健康知識庫，瀏覽更多文章 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── 患者見證 ──────────────────────────────────────────────── -->
+<section class="section" id="testimonials" style="background:var(--blush);">
+  <div class="container">
+    <div class="text-center">
+      <span class="section-tag">患者見證</span>
+      <h2 class="section-title">她們的真實分享</h2>
+    </div>
+    <div class="testimonial-empty">
+      <span class="testimonial-empty-icon">🌸</span>
+      <p class="testimonial-empty-text">病人分享正在整理中，經同意後將陸續於此處刊出。</p>
+      <a href="https://www.instagram.com/woopuisan.ec" target="_blank" rel="noopener" class="hero-link" style="color:var(--plum-light);">同時歡迎追蹤 Instagram 查看更多 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── 預約掛號 ──────────────────────────────────────────────── -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <h2 class="section-title">與胡醫師預約門診</h2>
+        <p style="font-size:1rem;color:var(--text-light);line-height:1.85;margin-bottom:2.5rem;">
+          歡迎透過 WhatsApp 或填寫表單預約，建議先完成問卷評估，就診時攜帶結果，讓胡醫師更快了解您的健康狀況。
+        </p>
+
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-label">中環診所</div>
+            <div class="contact-value">香港中環皇后大道中33號<br>萬邦行907室</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-label">鑽石山診所</div>
+            <div class="contact-value">鑽石山彩虹道235號<br>啟鑽商場 B1樓 B04號舖</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">💬</div>
+          <div>
+            <div class="contact-label">WhatsApp 預約</div>
+            <div class="contact-value">
+              <a href="https://wa.me/85298152863" target="_blank" rel="noopener"
+                 style="color:var(--plum);text-decoration:none;font-weight:600;">+852 9815 2863</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">📸</div>
+          <div>
+            <div class="contact-label">Instagram</div>
+            <div class="contact-value">
+              <a href="https://www.instagram.com/woopuisan.ec" target="_blank" rel="noopener"
+                 style="color:var(--plum);text-decoration:none;font-weight:600;">@woopuisan.ec</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <div class="contact-label">電郵</div>
+            <div class="contact-value">
+              <a href="mailto:woopuisan.ec@gmail.com"
+                 style="color:var(--plum);text-decoration:none;font-weight:600;">woopuisan.ec@gmail.com</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-family:var(--font-display);font-size:1.2rem;color:var(--plum);margin-bottom:1.5rem;" data-edit="form-title">線上預約表單</h3>
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+          <div class="form-group">
+            <label for="name">姓名 *</label>
+            <input type="text" id="name" required placeholder="請輸入您的姓名">
+          </div>
+          <div class="form-group">
+            <label for="phone">聯絡電話 *</label>
+            <input type="tel" id="phone" required placeholder="9815 2863">
+          </div>
+          <div class="form-group">
+            <label for="stage">就診需求</label>
+            <select id="stage">
+              <option value="">請選擇</option>
+              <option>青春期調理</option>
+              <option>月經調理</option>
+              <option>備孕調養</option>
+              <option>孕期保健</option>
+              <option>產後復原</option>
+              <option>更年期調理</option>
+              <option>停經後養生</option>
+              <option>中醫美容（美顏針）</option>
+              <option>體質調養</option>
+              <option>其他</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">想告訴醫師的事</label>
+            <textarea id="message" placeholder="簡述主要困擾或想詢問的問題..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">送出預約申請</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ───────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="footer-logo" data-edit="footer-name">胡佩珊中醫師 Kate Woo</div>
+  <p data-edit="footer-disclaimer">本網站資訊僅供參考，不替代醫療診斷。如有身體不適，請務必諮詢專業醫師。</p>
+  <p data-edit="footer-copy">© 2026 胡佩珊中醫師</p>
+</footer>
+
+<script>
+  // ── Mobile nav ──
+  const toggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+  // ── Form submit ──
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('[type="submit"]');
+    btn.textContent = '✓ 已收到，我們將盡快與您聯繫';
+    btn.style.background = 'var(--jade)';
+    btn.disabled = true;
+  }
+
+  // ── Article filter ──
+  function filterArticles(stage, btn) {
+    document.querySelectorAll('.stage-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.article-card').forEach(card => {
+      card.classList.toggle('hidden', stage !== 'all' && card.dataset.stage !== stage);
+    });
+  }
+
+  // ── Entrance animations ──
+  const fadeInObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('[data-fade]').forEach((el, i) => {
+          setTimeout(() => {
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+          }, 80 * i);
+        });
+        fadeInObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  // Animate journey cards
+  document.querySelectorAll('.sj-card').forEach(el => {
+    el.setAttribute('data-fade', '');
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(16px)';
+    el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+  });
+  const journeySection = document.querySelector('#stages');
+  if (journeySection) fadeInObserver.observe(journeySection);
+
+  // Animate service cards
+  document.querySelectorAll('.svc-card').forEach(el => {
+    el.setAttribute('data-fade', '');
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(16px)';
+    el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+  });
+  const servicesSection = document.querySelector('#services');
+  if (servicesSection) fadeInObserver.observe(servicesSection);
+
+  // Animate article cards
+  document.querySelectorAll('.article-card').forEach(el => {
+    el.setAttribute('data-fade', '');
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(16px)';
+    el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+  });
+  const articlesSection = document.querySelector('#articles');
+  if (articlesSection) fadeInObserver.observe(articlesSection);
+</script>
+<script src="editor.js"></script>
+</body>
+</html>

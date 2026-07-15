@@ -1,0 +1,551 @@
+/* ═══════════════════════════════════════════════════════════════
+   胡佩珊中醫師 — 女性中醫健康資訊平台
+   風格：高級奶油風・治癒系（米白底 × 奶茶棕 × 淡金）
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* 色彩 */
+  --cream:       #FAF7F0;   /* 奶油底 */
+  --cream-deep:  #F3EDE2;   /* 深一階奶油 */
+  --ivory:       #FFFDF9;   /* 卡片象牙白 */
+  --cocoa:       #4A4038;   /* 深可可（主文字） */
+  --cocoa-soft:  #857A6E;   /* 淺可可（輔文字） */
+  --taupe:       #A98D72;   /* 奶茶棕（主點綴） */
+  --taupe-deep:  #8A6F55;
+  --taupe-mist:  #F0E8DB;
+  --gold:        #C9AC80;   /* 淡金 */
+  --gold-soft:   #EFE5D2;
+  --blush:       #E9DCD2;   /* 溫柔膚調 */
+  --line:        #E9E0D0;
+  --white:       #FFFFFF;
+
+  /* 字體 */
+  --font-display: 'Noto Serif TC', serif;
+  --font-body:    'Noto Sans TC', sans-serif;
+  --font-accent:  'LXGW WenKai TC', 'Noto Serif TC', serif;
+
+  /* 其他 */
+  --radius: 14px;
+  --radius-lg: 22px;
+  --shadow: 0 3px 16px rgba(105, 88, 66, 0.07);
+  --shadow-hover: 0 16px 40px rgba(105, 88, 66, 0.14);
+  --maxw: 1120px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.9;
+  color: var(--cocoa);
+  background: var(--cream);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+
+.container { max-width: var(--maxw); margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 2.5rem); }
+.section { padding: clamp(4rem, 8vw, 6.5rem) 0; }
+.text-center { text-align: center; }
+
+/* ── 簽名元素：金線 ───────────────────────────────── */
+.gold-thread {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin: 1rem 0 0;
+}
+.gold-thread::before {
+  content: ''; width: 46px; height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--taupe), var(--gold));
+}
+.gold-thread::after {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--gold);
+}
+
+/* ── 導覽列 ─────────────────────────────────────────── */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(250, 247, 240, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner {
+  max-width: var(--maxw); margin: 0 auto;
+  padding: 0.85rem clamp(1.25rem, 4vw, 2.5rem);
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  position: relative;
+}
+.nav-logo { text-decoration: none; line-height: 1.3; }
+.nav-logo .logo-name {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 1.15rem; color: var(--cocoa); display: block;
+}
+.nav-logo .logo-sub {
+  font-size: 0.7rem; letter-spacing: 0.16em; color: var(--cocoa-soft); display: block;
+}
+.nav-links { display: flex; align-items: center; gap: clamp(0.9rem, 2.2vw, 1.7rem); }
+.nav-links a {
+  text-decoration: none; font-size: 0.92rem; font-weight: 500;
+  color: var(--cocoa-soft); padding: 0.35rem 0;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.nav-links a:hover { color: var(--taupe-deep); border-color: var(--gold); }
+.nav-links a:focus-visible { outline: 2px solid var(--taupe); outline-offset: 3px; }
+.nav-cta {
+  background: var(--taupe); color: var(--white) !important;
+  padding: 0.55rem 1.25rem !important; border-radius: 999px;
+  border-bottom: none !important;
+  transition: background 0.2s, transform 0.2s;
+}
+.nav-cta:hover { background: var(--taupe-deep); transform: translateY(-1px); }
+.nav-toggle {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 6px;
+}
+.nav-toggle span { width: 22px; height: 2px; background: var(--cocoa); border-radius: 2px; }
+
+/* ── 按鈕 ─────────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  padding: 0.9rem 2rem; border-radius: 999px;
+  font-family: var(--font-body); font-size: 0.98rem; font-weight: 700;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+}
+.btn:focus-visible { outline: 2px solid var(--taupe); outline-offset: 3px; }
+.btn-primary {
+  background: linear-gradient(135deg, var(--taupe), var(--taupe-deep));
+  color: var(--white);
+  box-shadow: 0 6px 18px rgba(138, 111, 85, 0.3);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(138, 111, 85, 0.38); }
+.btn-outline {
+  background: var(--ivory); color: var(--taupe-deep);
+  border: 1.5px solid var(--gold); box-shadow: none;
+}
+.btn-outline:hover { background: var(--gold-soft); transform: translateY(-2px); }
+
+/* ── Hero ─────────────────────────────────────────── */
+.hero-wrap {
+  border-bottom: 1px solid var(--line);
+  background:
+    radial-gradient(55% 85% at 88% 8%, var(--gold-soft) 0%, transparent 58%),
+    radial-gradient(50% 75% at 5% 95%, var(--blush) 0%, transparent 50%),
+    var(--cream);
+  overflow: hidden;
+}
+.hero {
+  max-width: var(--maxw); margin: 0 auto;
+  padding: clamp(3.5rem, 7vw, 5.5rem) clamp(1.25rem, 4vw, 2.5rem);
+  display: grid; grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(2rem, 5vw, 4rem); align-items: center;
+}
+.hero-eyebrow {
+  font-family: var(--font-accent);
+  font-size: 1rem; letter-spacing: 0.24em;
+  color: var(--taupe-deep); margin-bottom: 1.1rem;
+}
+.hero-title {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(2rem, 4.5vw, 3.1rem);
+  line-height: 1.4; letter-spacing: 0.01em;
+  color: var(--cocoa);
+}
+.hero-title em {
+  font-style: normal; color: var(--taupe-deep);
+  background: linear-gradient(transparent 70%, var(--gold-soft) 70%);
+}
+.hero-desc {
+  font-size: 1.05rem; color: var(--cocoa-soft);
+  max-width: 32em; margin: 1.5rem 0 2.2rem;
+}
+.hero-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; align-items: center; }
+.hero-note { margin-top: 1.5rem; font-size: 0.85rem; color: var(--cocoa-soft); }
+
+/* ── Hero 右側：裝飾插畫（山茶與圓月） ─────────────── */
+.hero-art { max-width: 470px; margin: 0 auto; }
+.hero-art svg { display: block; width: 100%; height: auto; }
+.ha-bloom { transform-origin: 240px 250px; animation: haBreathe 9s ease-in-out infinite; }
+.ha-sway { transform-origin: 92px 476px; animation: haSway 11s ease-in-out infinite; }
+.ha-bud { animation: haDrift 8s ease-in-out infinite; }
+@keyframes haBreathe {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.035) rotate(2deg); }
+}
+@keyframes haSway {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(1.4deg); }
+}
+@keyframes haDrift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+
+/* ── 區塊標題 ─────────────────────────────────────── */
+.section-tag {
+  font-family: var(--font-accent);
+  display: inline-block; font-size: 0.95rem; letter-spacing: 0.22em;
+  color: var(--taupe); margin-bottom: 0.7rem;
+}
+.section-title {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(1.55rem, 3.2vw, 2.1rem);
+  line-height: 1.45; color: var(--cocoa);
+}
+.section-sub {
+  font-size: 1rem; color: var(--cocoa-soft);
+  max-width: 40em; margin: 1.1rem auto 0;
+}
+
+/* ── 服務項目（生命階段／困擾） ───────────────────── */
+.journey-track {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 1.1rem; margin-top: 2.8rem;
+}
+.sj-card {
+  flex: 0 1 calc((100% - 2.2rem) / 3);
+  min-width: 250px;
+  text-align: center; text-decoration: none; display: block;
+  background: var(--ivory);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 1.9rem 1.4rem 1.6rem;
+  box-shadow: var(--shadow);
+  position: relative; overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.34, 1.3, 0.64, 1), box-shadow 0.3s, border-color 0.2s;
+}
+.sj-card::after {
+  content: ''; position: absolute; left: 50%; bottom: 0;
+  transform: translateX(-50%) scaleX(0);
+  width: 56px; height: 3px; border-radius: 3px 3px 0 0;
+  background: linear-gradient(90deg, var(--taupe), var(--gold));
+  transition: transform 0.25s ease;
+}
+.sj-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); border-color: var(--gold); }
+.sj-card:hover::after { transform: translateX(-50%) scaleX(1); }
+.sj-card:focus-visible { outline: 2px solid var(--taupe); outline-offset: 3px; }
+.sj-icon-badge {
+  width: 62px; height: 62px; border-radius: 50%;
+  background: var(--acc, var(--taupe-mist));
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1rem;
+  transition: transform 0.3s cubic-bezier(0.34, 1.3, 0.64, 1);
+}
+.sj-card:hover .sj-icon-badge { transform: scale(1.08); }
+.sj-icon { font-size: 1.7rem; }
+.sj-name {
+  font-family: var(--font-display);
+  font-size: 1.08rem; font-weight: 700; color: var(--cocoa);
+  margin-bottom: 0.25rem;
+}
+.sj-age { font-size: 0.8rem; color: var(--taupe-deep); letter-spacing: 0.04em; margin-bottom: 0.9rem; }
+.sj-conditions { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem; }
+.sj-cond {
+  font-size: 0.76rem; color: var(--cocoa-soft);
+  background: var(--cream); border: 1px solid var(--line);
+  padding: 0.14rem 0.6rem; border-radius: 999px;
+}
+
+/* ── 治療項目 ─────────────────────────────────────── */
+.svc-section { background: var(--ivory); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.svc-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem; margin-top: 2.8rem;
+}
+.svc-card {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 1.7rem 1.5rem;
+  text-decoration: none; display: block;
+  position: relative; overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.34, 1.3, 0.64, 1), box-shadow 0.3s, background 0.3s;
+}
+.svc-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); background: var(--gold-soft); }
+.svc-card:focus-visible { outline: 2px solid var(--taupe); outline-offset: 3px; }
+.svc-head { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.7rem; }
+.svc-icon {
+  width: 46px; height: 46px; flex: 0 0 46px; border-radius: 13px;
+  background: var(--ivory); border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center; font-size: 1.3rem;
+}
+.svc-name { font-family: var(--font-display); font-size: 1.06rem; font-weight: 700; color: var(--cocoa); }
+.svc-desc { font-size: 0.88rem; color: var(--cocoa-soft); line-height: 1.8; }
+.svc-more {
+  display: inline-block; margin-top: 0.9rem;
+  font-size: 0.83rem; font-weight: 700; color: var(--taupe-deep);
+}
+
+/* ── 健康評估 ─────────────────────────────────────── */
+.assess-section {
+  background:
+    radial-gradient(60% 100% at 50% 0%, var(--gold-soft) 0%, transparent 60%),
+    var(--cream-deep);
+}
+.assess-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1.2rem, 3vw, 2rem); margin-top: 3rem;
+}
+.assess-card {
+  background: var(--ivory); border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+  padding: 2.2rem 2rem 2rem;
+  display: flex; flex-direction: column;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s cubic-bezier(0.34, 1.3, 0.64, 1), box-shadow 0.3s;
+}
+.assess-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+.assess-head { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.1rem; }
+.assess-icon {
+  width: 54px; height: 54px; border-radius: 16px; flex: 0 0 54px;
+  display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
+  background: var(--taupe-mist);
+}
+.assess-card--women .assess-icon { background: var(--blush); }
+.assess-title { font-family: var(--font-display); font-size: 1.28rem; font-weight: 700; color: var(--cocoa); }
+.assess-sub { font-size: 0.8rem; color: var(--cocoa-soft); letter-spacing: 0.04em; }
+.assess-desc { font-size: 0.93rem; color: var(--cocoa-soft); margin-bottom: 1.2rem; }
+.assess-features { list-style: none; margin-bottom: 1.7rem; flex: 1; }
+.assess-features li {
+  font-size: 0.9rem; color: var(--cocoa);
+  padding: 0.42rem 0 0.42rem 1.6rem; position: relative;
+  border-bottom: 1px dashed var(--line);
+}
+.assess-features li:last-child { border-bottom: none; }
+.assess-features li::before {
+  content: '❀'; position: absolute; left: 0.1rem;
+  color: var(--gold); font-size: 0.85rem;
+}
+.assess-note {
+  margin-top: 2.2rem; text-align: center;
+  font-size: 0.85rem; color: var(--cocoa-soft);
+}
+
+/* ── 健康文章 ─────────────────────────────────────── */
+.articles-section { background: var(--ivory); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.stage-tabs {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 0.55rem; margin: 2.4rem 0 2.2rem;
+}
+.stage-tab {
+  font-family: var(--font-body); font-size: 0.88rem; font-weight: 500;
+  padding: 0.48rem 1.2rem; border-radius: 999px;
+  background: var(--cream); color: var(--cocoa-soft);
+  border: 1px solid var(--line); cursor: pointer;
+  transition: all 0.2s;
+}
+.stage-tab:hover { border-color: var(--gold); color: var(--taupe-deep); }
+.stage-tab:focus-visible { outline: 2px solid var(--taupe); outline-offset: 2px; }
+.stage-tab.active { background: var(--taupe); border-color: var(--taupe); color: var(--white); }
+.articles-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1.3rem;
+}
+.article-card {
+  background: var(--cream); border: 1px solid var(--line);
+  border-radius: var(--radius-lg); padding: 1.6rem 1.5rem 1.25rem;
+  text-decoration: none; display: flex; flex-direction: column;
+  position: relative; overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.34, 1.3, 0.64, 1), box-shadow 0.3s, border-color 0.2s;
+}
+.article-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--taupe), var(--gold));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.article-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); border-color: var(--gold); }
+.article-card:hover::before { transform: scaleX(1); }
+.article-card:focus-visible { outline: 2px solid var(--taupe); outline-offset: 3px; }
+.art-stage-tag {
+  align-self: flex-start;
+  font-size: 0.74rem; font-weight: 700; letter-spacing: 0.06em;
+  padding: 0.2rem 0.7rem; border-radius: 999px;
+  background: var(--gold-soft); color: var(--taupe-deep);
+  margin-bottom: 0.85rem;
+}
+.art-title {
+  font-family: var(--font-display); font-size: 1.05rem; font-weight: 700;
+  color: var(--cocoa); line-height: 1.6; margin-bottom: 0.55rem;
+}
+.art-excerpt { font-size: 0.87rem; color: var(--cocoa-soft); line-height: 1.8; flex: 1; }
+.art-footer {
+  margin-top: 1.1rem; padding-top: 0.85rem;
+  border-top: 1px dashed var(--line);
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.8rem; color: var(--cocoa-soft);
+}
+.art-read { color: var(--taupe-deep); font-weight: 700; }
+
+/* ── 關於醫師 ─────────────────────────────────────── */
+.about-grid {
+  display: grid; grid-template-columns: 0.85fr 1.15fr;
+  gap: clamp(2rem, 5vw, 4rem); align-items: start;
+}
+.about-photo-frame { position: relative; }
+.about-photo-frame::after {
+  content: ''; position: absolute; inset: 16px -16px -16px 16px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--gold-soft), var(--blush));
+  z-index: -1;
+}
+.about-photo {
+  aspect-ratio: 4 / 5; border-radius: var(--radius-lg);
+  overflow: hidden; position: relative;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-hover);
+}
+.about-name-row { display: flex; align-items: baseline; gap: 0.7rem; flex-wrap: wrap; }
+.about-name-en { font-family: var(--font-accent); font-size: 1rem; color: var(--cocoa-soft); letter-spacing: 0.1em; }
+.about-lede { font-size: 1rem; color: var(--cocoa-soft); margin: 1.4rem 0 1.9rem; }
+.about-credentials { display: grid; gap: 0.65rem; }
+.credential-item {
+  display: flex; gap: 0.8rem; align-items: flex-start;
+  font-size: 0.93rem; color: var(--cocoa);
+}
+.credential-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--gold); flex: 0 0 8px; margin-top: 0.6rem;
+}
+.about-quote {
+  margin-top: 2rem; padding: 1.3rem 1.6rem;
+  border-left: 3px solid var(--gold);
+  background: var(--gold-soft); border-radius: 0 var(--radius) var(--radius) 0;
+  font-family: var(--font-accent); font-size: 1.02rem; color: var(--taupe-deep);
+}
+
+/* ── 預約掛號 ─────────────────────────────────────── */
+.contact-section { background: var(--ivory); border-top: 1px solid var(--line); }
+.contact-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+}
+.contact-lede { font-size: 0.98rem; color: var(--cocoa-soft); margin: 1.2rem 0 2.2rem; }
+.contact-item { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.4rem; }
+.contact-icon {
+  width: 44px; height: 44px; flex: 0 0 44px; border-radius: 50%;
+  background: var(--gold-soft);
+  display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+}
+.contact-label { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; color: var(--cocoa-soft); }
+.contact-value { font-size: 0.96rem; color: var(--cocoa); }
+.contact-value a { color: var(--taupe-deep); text-decoration: none; font-weight: 700; }
+.contact-value a:hover { text-decoration: underline; }
+
+.contact-form-card {
+  background: var(--cream); border: 1px solid var(--line);
+  border-radius: var(--radius-lg); padding: 2.1rem 1.9rem;
+  box-shadow: var(--shadow);
+}
+.contact-form-card h3 {
+  font-family: var(--font-display); font-size: 1.2rem;
+  color: var(--cocoa); margin-bottom: 1.4rem;
+}
+.form-group { margin-bottom: 1.15rem; }
+.form-group label {
+  display: block; font-size: 0.85rem; font-weight: 700;
+  color: var(--cocoa); margin-bottom: 0.4rem;
+}
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%; padding: 0.78rem 1rem;
+  border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--ivory); font-family: var(--font-body);
+  font-size: 0.95rem; color: var(--cocoa);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form-group textarea { min-height: 110px; resize: vertical; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  outline: none; border-color: var(--gold);
+  box-shadow: 0 0 0 3px var(--gold-soft);
+}
+.form-hint { font-size: 0.8rem; color: var(--cocoa-soft); margin-top: 0.9rem; }
+
+/* ── 頁尾 ─────────────────────────────────────────── */
+.footer {
+  background: var(--cocoa); color: rgba(255,253,249,0.72);
+  padding: 3rem 0 2rem; font-size: 0.88rem;
+}
+.footer-grid {
+  display: grid; grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 2rem; margin-bottom: 2rem;
+}
+.footer h4 {
+  font-family: var(--font-display); color: var(--white);
+  font-size: 1rem; margin-bottom: 0.9rem;
+}
+.footer a { color: rgba(255,253,249,0.72); text-decoration: none; }
+.footer a:hover { color: var(--white); text-decoration: underline; }
+.footer-links { list-style: none; display: grid; gap: 0.45rem; }
+.footer-disclaimer {
+  border-top: 1px solid rgba(255,253,249,0.15);
+  padding-top: 1.5rem; font-size: 0.78rem;
+  color: rgba(255,253,249,0.5); line-height: 1.8;
+}
+
+/* ── WhatsApp 浮動按鈕 ────────────────────────────── */
+.fab-whatsapp {
+  position: fixed; right: clamp(1.25rem, 4vw, 2rem); bottom: clamp(1.25rem, 4vw, 2rem);
+  z-index: 90; width: 56px; height: 56px; border-radius: 50%;
+  background: #25D366;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 20px rgba(37,211,102,0.4), 0 2px 8px rgba(0,0,0,0.12);
+  transition: transform 0.25s cubic-bezier(0.34,1.3,0.64,1), box-shadow 0.25s;
+}
+.fab-whatsapp svg { width: 28px; height: 28px; }
+.fab-whatsapp:hover { transform: translateY(-3px) scale(1.05); }
+.fab-whatsapp:focus-visible { outline: 2px solid var(--taupe); outline-offset: 3px; }
+
+/* ── 進場動畫 ─────────────────────────────────────── */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ── 響應式 ───────────────────────────────────────── */
+@media (max-width: 980px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-art { max-width: 320px; }
+  .sj-card { flex-basis: calc((100% - 1.1rem) / 2); }
+  .svc-grid { grid-template-columns: repeat(2, 1fr); }
+  .articles-grid { grid-template-columns: repeat(2, 1fr); }
+  .about-grid, .contact-grid { grid-template-columns: 1fr; }
+  .about-photo-frame { max-width: 380px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 760px) {
+  .hp-row-sub { display: none; }
+  .nav-links {
+    position: absolute; top: 100%; left: 0; right: 0;
+    background: var(--cream); border-bottom: 1px solid var(--line);
+    flex-direction: column; align-items: stretch; gap: 0;
+    padding: 0.6rem 1.25rem 1.2rem;
+    display: none;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links a { padding: 0.8rem 0.3rem; border-bottom: 1px solid var(--line); }
+  .nav-cta { margin-top: 0.8rem; text-align: center; border-radius: var(--radius) !important; }
+  .nav-toggle { display: flex; }
+  .sj-card { flex-basis: 100%; }
+  .svc-grid { grid-template-columns: 1fr; }
+  .assess-grid { grid-template-columns: 1fr; }
+  .articles-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .fab-whatsapp { width: 50px; height: 50px; }
+  .fab-whatsapp svg { width: 25px; height: 25px; }
+}
+
+/* ── 工具類（原內嵌樣式） ───────────────────────── */
+.btn-block { width: 100%; }
+.about-photo img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+}
+.contact-lede a { color: var(--taupe-deep); font-weight: 700; }
+
