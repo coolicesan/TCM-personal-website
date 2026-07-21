@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://coolicesan.github.io/TCM-personal-website/index.html</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://coolicesan.github.io/TCM-personal-website/constitution.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://coolicesan.github.io/TCM-personal-website/%E5%A5%B3%E6%80%A7%E5%81%A5%E5%BA%B7%E5%95%8F%E5%8D%B7.html</loc>
+    <priority>0.7</priority>
+  </url>
+
+  <url><loc>https://coolicesan.github.io/TCM-personal-website/treatments/treatment-acupuncture.html</loc><priority>0.6</priority></url>
+  <url><loc>https://coolicesan.github.io/TCM-personal-website/treatments/treatment-auricular.html</loc><priority>0.6</priority></url>
+  <url><loc>https://coolicesan.github.io/TCM-personal-website/treatments/treatment-cupping.html</loc><priority>0.6</priority></url>
+  <url><loc>https://coolicesan.github.io/TCM-personal-website/treatments/treatment-facial.html</loc><priority>0.6</priority></url>
+  <url><loc>https://coolicesan.github.io/TCM-personal-website/treatments/treatment-hairloss.html</loc><priority>0.6</priority></url>
+  <url><loc>https://coolicesan.github.io/TCM-personal-website/treatments/treatment-herbs.html</loc><priority>0.6</priority></url>
+  <url><loc>https://coolicesan.github.io/TCM-personal-website/treatments/treatment-internal.html</loc><priority>0.6</priority></url>
+  <url><loc>https://coolicesan.github.io/TCM-personal-website/treatments/treatment-mammary.html</loc><priority>0.6</priority></url>
+  <url><loc>https://coolicesan.github.io/TCM-personal-website/treatments/treatment-moxa.html</loc><priority>0.6</priority></url>
+  <url><loc>https://coolicesan.github.io/TCM-personal-website/treatments/treatment-oncology.html</loc><priority>0.6</priority></url>
+  <url><loc>https://coolicesan.github.io/TCM-personal-website/treatments/treatment-weight.html</loc><priority>0.6</priority></url>
+
+  <!-- ARTICLES_AUTO_START — 此區塊由「admin/文章管理後台.html」自動產生，請勿手動編輯 -->
+  <url><loc>https://coolicesan.github.io/TCM-personal-website/articles/demo-sample-article.html</loc><priority>0.6</priority></url>
+  <!-- ARTICLES_AUTO_END -->
+</urlset>

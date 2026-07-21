@@ -13,6 +13,10 @@ const CQ_OV = (() => {
 const cqOv    = (k, d) => k in CQ_OV ? CQ_OV[k] : d;
 const cqOvArr = (k, d) => (k in CQ_OV && CQ_OV[k]) ? CQ_OV[k].split('\n').filter(s => s.trim()) : d;
 
+function escHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, ch => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[ch]));
+}
+
 function applyConstitutionOv(c, ci) {
   return {
     ...c,
@@ -31,6 +35,7 @@ const constitutions = [
     id: 'balanced',
     name: '平和質',
     emoji: '⚖️',
+    img: 'constitution/balanced-type.PNG',
     color: '#7A9E7E',
     tagline: '陰陽調和，氣血充足',
     description: '恭喜您！平和質是最健康、最理想的體質。簡單來說，您的身體「運作順暢、內外平衡」——精神好、睡得香、吃得下、面色紅潤，情緒穩定，對環境變化的適應力也很強，平常不太容易生病。這種狀態需要靠良好的生活習慣持續維持。',
@@ -61,6 +66,7 @@ const constitutions = [
   },
   {
     id: 'qiDef',
+    img: 'constitution/qi-deficiency.PNG',
     name: '氣虛質',
     emoji: '🌬️',
     color: '#B8C4A8',
@@ -93,6 +99,7 @@ const constitutions = [
   },
   {
     id: 'yangDef',
+    img: 'constitution/yang-deficiency.PNG',
     name: '陽虛質',
     emoji: '🧊',
     color: '#A8C4D4',
@@ -124,6 +131,7 @@ const constitutions = [
   },
   {
     id: 'yinDef',
+    img: 'constitution/yin-deficiency.PNG',
     name: '陰虛質',
     emoji: '🔥',
     color: '#E8A898',
@@ -156,6 +164,7 @@ const constitutions = [
   },
   {
     id: 'phlegmDamp',
+    img: 'constitution/phlegm-dampness.PNG',
     name: '痰濕質',
     emoji: '💧',
     color: '#C4B8A8',
@@ -188,6 +197,7 @@ const constitutions = [
   },
   {
     id: 'dampHeat',
+    img: 'constitution/damp-heat.PNG',
     name: '濕熱質',
     emoji: '🌡️',
     color: '#D4A870',
@@ -218,6 +228,7 @@ const constitutions = [
   },
   {
     id: 'bloodStasis',
+    img: 'constitution/blood-stasis.PNG',
     name: '血瘀質',
     emoji: '🔴',
     color: '#8C6878',
@@ -249,6 +260,7 @@ const constitutions = [
   },
   {
     id: 'qiStag',
+    img: 'constitution/qi-stagnation.PNG',
     name: '氣鬱質',
     emoji: '💭',
     color: '#9888C4',
@@ -280,6 +292,7 @@ const constitutions = [
   },
   {
     id: 'special',
+    img: 'constitution/allergic-type.PNG',
     name: '特稟質',
     emoji: '🌿',
     color: '#C4D4A8',
@@ -327,6 +340,7 @@ const TOPICS = [
 ];
 
 let quizMode = 'simple'; // 'simple' (5 q/section) or 'complex' (all q)
+let userName = '';
 
 function getPageQuestions(ci) {
   const c = constitutions[ci];
@@ -663,7 +677,7 @@ function renderResults(primary, secondary, all, balancedLabel) {
   // Store state for report hand-off
   _resultState = { primary, secondary, all, balancedLabel, displayName };
 
-  const reportUrl = `constitution-report.html?const=${encodeURIComponent(primary.name)}&sec=${encodeURIComponent(secondary.map(s => s.name).join(','))}`;
+  const reportUrl = `constitution-report.html?const=${encodeURIComponent(primary.name)}&sec=${encodeURIComponent(secondary.map(s => s.name).join(','))}${userName ? `&name=${encodeURIComponent(userName)}` : ''}`;
 
   const balancedNote = balancedLabel === '基本平和質'
     ? '體質大致平衡，仍有少量偏頗傾向，宜留意保養。'
@@ -710,8 +724,10 @@ function renderResults(primary, secondary, all, balancedLabel) {
   container.innerHTML = `
     <!-- ── Hero ── -->
     <div class="cq-result-hero">
-      <div class="cq-result-emblem" style="background:${primary.color}1F;color:${primary.color};">${primary.emoji}</div>
-      <div class="cq-result-kicker">您的主要體質</div>
+      ${primary.img
+        ? `<div class="cq-result-portrait" style="border-color:${primary.color}55;"><img src="${primary.img}" alt="${displayName}"></div>`
+        : `<div class="cq-result-emblem" style="background:${primary.color}1F;color:${primary.color};">${primary.emoji}</div>`}
+      <div class="cq-result-kicker">${userName ? `${escHtml(userName)} 的主要體質` : '您的主要體質'}</div>
       <h2 class="cq-result-name">${displayName}</h2>
       <div class="cq-result-tag">${primary.tagline}</div>
       ${balancedNote ? `<p class="cq-result-note">${balancedNote}</p>` : ''}
@@ -750,7 +766,7 @@ function renderResults(primary, secondary, all, balancedLabel) {
 
     ${secDetailHtml}
 
-    <div class="result-warning cq-warning">⚠️ 本問卷依中醫體質分類判定標準設計，僅供健康參考，不作為醫療診斷依據。建議預約胡佩珊醫師門診，進行完整四診辨證，獲取個人化調理方案。</div>
+    <div class="result-warning cq-warning">⚠️ 本問卷依中醫體質分類判定標準設計，僅供健康參考，不作為醫療診斷依據。建議預約胡佩珊中醫師門診，進行完整四診辨證，獲取個人化調理方案。</div>
 
     <div class="cq-actions">
       <a href="${reportUrl}" class="btn btn-sage">查看完整體質報告</a>
@@ -764,6 +780,49 @@ function renderResults(primary, secondary, all, balancedLabel) {
 }
 
 // ─── Version Select Screen ────────────────────────────────────────────────
+function renderNameGate() {
+  document.getElementById('progressText').textContent = '開始評估';
+  document.getElementById('progressBar').style.width = '0%';
+  document.querySelector('.cq-progress-meta')?.classList.add('is-intro');
+  document.querySelector('.cq-hero-desc')?.style.removeProperty('display');
+  const container = document.getElementById('quizContainer');
+
+  container.innerHTML = `
+    <div style="text-align:center;margin-bottom:1.75rem;">
+      <div style="font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta);margin-bottom:.5rem;">開始評估</div>
+      <h2 style="font-family:var(--font-display);font-size:1.8rem;color:var(--plum);">請輸入您的姓名</h2>
+      <p style="font-size:.85rem;color:var(--text-light);margin-top:.5rem;">用於為您的評估結果與體質報告命名</p>
+    </div>
+    <div class="cq-name-gate">
+      <input type="text" id="cqNameInput" class="cq-name-input" placeholder="請輸入姓名" value="${escHtml(userName)}" maxlength="30">
+      <div id="cqNameError" class="cq-name-error" style="display:none;"></div>
+      <button class="btn btn-primary cq-name-btn" onclick="submitName()">開始評估 →</button>
+    </div>
+  `;
+
+  const input = document.getElementById('cqNameInput');
+  input.focus();
+  input.addEventListener('keydown', e => { if (e.key === 'Enter') submitName(); });
+  input.addEventListener('input', () => {
+    const err = document.getElementById('cqNameError');
+    if (err) err.style.display = 'none';
+  });
+}
+
+function submitName() {
+  const input = document.getElementById('cqNameInput');
+  const val = input.value.trim();
+  if (!val) {
+    const err = document.getElementById('cqNameError');
+    err.textContent = '請輸入姓名後繼續';
+    err.style.display = 'block';
+    input.focus();
+    return;
+  }
+  userName = val;
+  renderVersionSelect();
+}
+
 function renderVersionSelect() {
   document.getElementById('progressText').textContent = '選擇評估版本';
   document.getElementById('progressBar').style.width = '0%';
@@ -804,5 +863,5 @@ function startQuiz(mode) {
 
 document.addEventListener('DOMContentLoaded', () => {
   if (!document.getElementById('quizContainer')) return;
-  renderVersionSelect();
+  renderNameGate();
 });

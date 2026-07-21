@@ -4,6 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>中醫體質評估｜胡佩珊中醫師</title>
+  <meta name="description" content="免費九種體質自我評估問卷，依中華中醫藥學會標準設計，幾分鐘了解自己屬於哪種中醫體質，並獲得專屬飲食與調理建議。">
+  <link rel="canonical" href="https://coolicesan.github.io/TCM-personal-website/constitution.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="胡佩珊中醫師">
+  <meta property="og:title" content="中醫體質評估｜胡佩珊中醫師">
+  <meta property="og:description" content="免費九種體質自我評估問卷，幾分鐘了解自己屬於哪種中醫體質，並獲得專屬飲食與調理建議。">
+  <meta property="og:url" content="https://coolicesan.github.io/TCM-personal-website/constitution.html">
+  <meta property="og:image" content="https://coolicesan.github.io/TCM-personal-website/og-image.png">
+  <meta property="og:locale" content="zh_HK">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://coolicesan.github.io/TCM-personal-website/og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
@@ -210,6 +221,7 @@
     }
 
     /* ── Results card ── */
+    .results-container { scroll-margin-top: 112px; }
     .result-card { display: none; }
     .result-card.active { display: block; }
 
@@ -232,6 +244,28 @@
     .cq-logic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
     .cq-logic-label { font-size: .72rem; color: var(--text-light); margin-bottom: .15rem; font-weight: 500; }
     .cq-logic-val { font-size: .78rem; color: var(--text); line-height: 1.6; }
+
+    /* ── Name gate ── */
+    .cq-name-gate {
+      max-width: 360px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: .85rem;
+    }
+    .cq-name-input {
+      width: 100%; padding: .95rem 1.1rem;
+      border: 1.5px solid var(--border); border-radius: var(--radius);
+      background: #fff; font-family: var(--font-body);
+      font-size: 1rem; color: var(--text);
+      text-align: center;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .cq-name-input:focus {
+      outline: none; border-color: var(--plum-light);
+      box-shadow: 0 0 0 3px rgba(139,80,64,0.12);
+    }
+    .cq-name-error {
+      font-size: .82rem; color: var(--terracotta); text-align: center;
+    }
+    .cq-name-btn { width: 100%; }
 
     /* ── Version selector ── */
     .cq-version-grid {
@@ -397,19 +431,30 @@
       display: flex; align-items: center; justify-content: center;
       font-size: 2.4rem; border-radius: 50%;
     }
+    .cq-result-portrait {
+      width: 240px; height: 240px; margin: 0 auto 1.5rem;
+      border-radius: 50%; border: 5px solid var(--border);
+      overflow: hidden; box-shadow: 0 8px 32px rgba(61,36,53,0.16);
+    }
+    .cq-result-portrait img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
     .cq-result-kicker {
       font-size: .74rem; letter-spacing: .14em; text-transform: uppercase;
       color: var(--terracotta); margin-bottom: .5rem;
+      text-align: center;
     }
     .cq-result-name {
       font-family: var(--font-display);
-      font-size: 2.3rem; color: var(--plum); line-height: 1.2;
+      font-size: 3rem; color: var(--plum); line-height: 1.2;
       margin-bottom: .4rem;
+      text-align: center;
     }
-    .cq-result-tag { color: var(--text-light); font-size: .98rem; }
+    .cq-result-tag { color: var(--text-light); font-size: .98rem; text-align: center; }
     .cq-result-note {
       font-size: .84rem; color: var(--text-light);
       margin-top: .6rem; max-width: 420px; margin-left: auto; margin-right: auto;
+      text-align: center;
     }
 
     /* Summary strip */
@@ -494,7 +539,8 @@
     @media (max-width: 600px) {
       .cq-summary { grid-template-columns: 1fr; }
       .cq-diet-grid { grid-template-columns: 1fr; }
-      .cq-result-name { font-size: 1.9rem; }
+      .cq-result-name { font-size: 2.3rem; }
+      .cq-result-portrait { width: 180px; height: 180px; }
       .cq-block { padding: 1.25rem; }
     }
 
@@ -511,7 +557,7 @@
 
 <nav class="nav">
   <a href="index.html" class="nav-logo">
-    <span>胡佩珊</span><span><span>中醫師 Kate Woo</span></span>
+    <span>胡佩珊</span><span><span>中醫師</span></span>
   </a>
   <div class="nav-links" id="navLinks">
     <a href="index.html#stages">服務項目</a>

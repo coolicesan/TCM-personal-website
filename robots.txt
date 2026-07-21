@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /constitution-report.html
+Disallow: /admin/
+
+Sitemap: https://coolicesan.github.io/TCM-personal-website/sitemap.xml

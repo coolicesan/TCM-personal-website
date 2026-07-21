@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文章管理後台｜胡佩珊中醫師</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --plum:#3D2645; --plum-deep:#251830;
+    --rose:#B05870; --rose-light:#FAF0F3; --rose-mid:#E8C0CB;
+    --jade:#4A7C6B; --jade-light:#EAF3EF;
+    --gold:#B8860B; --gold-light:#FBF5E6;
+    --danger:#C0392B; --danger-light:#FDF0EE;
+    --ink:#1E2028; --ink-mid:#4A4E5A; --ink-soft:#787D8C;
+    --border:#E2E6E0; --bg:#FAFAF8; --white:#fff;
+    --serif:'Noto Serif TC',Georgia,serif; --sans:'Noto Sans TC',-apple-system,sans-serif;
+  }
+  html,body{height:100%}
+  body{font-family:var(--sans);font-size:14px;color:var(--ink);background:var(--bg);display:flex;flex-direction:column;overflow:hidden}
+
+  .topbar{height:54px;background:linear-gradient(135deg,var(--plum) 0%,var(--plum-deep) 100%);color:#fff;display:flex;align-items:center;gap:14px;padding:0 18px;flex-shrink:0}
+  .topbar-logo{font-family:var(--serif);font-weight:700;font-size:15px;letter-spacing:.04em;white-space:nowrap}
+  .topbar-logo span{color:#C4AED0;font-weight:400;font-size:12px;margin-left:8px}
+  .topbar-status{flex:1;font-size:12.5px;color:#C8BAD4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .dirty-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--gold);margin-left:8px;vertical-align:middle;visibility:hidden}
+  .dirty-dot.show{visibility:visible}
+  .btn{border:0;border-radius:20px;padding:8px 18px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--sans);transition:transform .12s,opacity .12s;white-space:nowrap}
+  .btn:hover{transform:translateY(-1px)}
+  .btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+  .btn-save{background:#fff;color:var(--plum)}
+  .btn-ghost{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.25)}
+  .btn-sm{padding:5px 12px;font-size:12px;border-radius:14px}
+
+  .main{flex:1;display:flex;min-height:0}
+
+  .sidebar{width:280px;flex-shrink:0;background:var(--white);border-right:1px solid var(--border);display:flex;flex-direction:column;min-height:0}
+  .side-head{padding:14px 14px 10px;border-bottom:1px solid var(--border)}
+  .side-title{font-family:var(--serif);font-size:12.5px;font-weight:700;color:var(--rose);letter-spacing:.08em;margin-bottom:8px}
+  .btn-add{width:100%;background:var(--rose);color:#fff;border-radius:8px;padding:9px}
+  .side-search{width:100%;margin-top:8px;padding:7px 10px;border:1px solid var(--border);border-radius:8px;font-size:12.5px;font-family:var(--sans);background:var(--bg)}
+  .side-search:focus{outline:none;border-color:var(--rose)}
+  .file-list{flex:1;overflow-y:auto;padding:8px}
+  .file-item{padding:9px 11px;border-radius:8px;cursor:pointer;margin-bottom:2px;border:1px solid transparent}
+  .file-item:hover{background:var(--rose-light)}
+  .file-item.active{background:var(--rose-light);border-color:var(--rose-mid)}
+  .file-item-title{font-size:12.5px;font-weight:600;color:var(--ink);line-height:1.4;display:flex;align-items:flex-start;gap:6px}
+  .file-item-title .fdot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:5px;visibility:hidden}
+  .file-item.dirty .fdot{visibility:visible}
+  .file-item-stage{display:inline-block;margin-top:4px;font-size:10.5px;color:var(--jade);background:var(--jade-light);padding:1px 7px;border-radius:8px}
+  .empty-hint{padding:24px 16px;font-size:12.5px;color:var(--ink-soft);line-height:1.9;text-align:center}
+  .empty-hint b{color:var(--rose)}
+
+  .editor{flex:1;display:flex;flex-direction:column;min-width:0;min-height:0}
+  .toolbar{height:44px;background:var(--white);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;padding:0 16px;flex-shrink:0}
+  .tabbtn{border:0;background:none;padding:8px 4px;font-size:13px;font-weight:600;color:var(--ink-soft);cursor:pointer;border-bottom:2px solid transparent}
+  .tabbtn.active{color:var(--rose);border-bottom-color:var(--rose)}
+  .toolbar-right{margin-left:auto;display:flex;gap:8px}
+  .btn-danger{background:var(--danger-light);color:var(--danger)}
+  .btn-outline{background:#fff;color:var(--ink-mid);border:1px solid var(--border)}
+
+  .panel-wrap{flex:1;overflow-y:auto;padding:22px 26px 60px;min-height:0}
+  .panel{display:none}
+  .panel.active{display:block;max-width:720px}
+
+  .field{margin-bottom:16px}
+  .field label{display:block;font-size:12px;font-weight:700;color:var(--ink-mid);margin-bottom:5px}
+  .field .hint{font-size:11px;color:var(--ink-soft);margin-top:4px}
+  .field input[type=text],.field input[type=number],.field input[type=date],.field textarea,.field select{
+    width:100%;border:1px solid var(--border);border-radius:8px;padding:8px 11px;font-size:13.5px;font-family:var(--sans);background:#fff;resize:vertical
+  }
+  .field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--rose)}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+  .empty-editor{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:var(--ink-soft);font-size:14px;text-align:center;padding:24px;height:100%}
+  .empty-editor .big{font-family:var(--serif);font-size:20px;color:var(--ink-mid);font-weight:700}
+
+  /* ===== Blocks ===== */
+  .block-card{background:#fff;border:1px solid var(--border);border-radius:10px;margin-bottom:12px;overflow:hidden}
+  .block-head{background:var(--bg);padding:8px 12px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border)}
+  .block-type-badge{font-size:11px;font-weight:700;color:var(--jade);background:var(--jade-light);padding:2px 9px;border-radius:10px}
+  .block-head-actions{margin-left:auto;display:flex;gap:4px}
+  .icon-btn{border:1px solid var(--border);background:#fff;border-radius:6px;padding:3px 8px;font-size:12px;cursor:pointer;color:var(--ink-mid)}
+  .icon-btn:hover{border-color:var(--rose);color:var(--rose)}
+  .icon-btn.danger:hover{border-color:var(--danger);color:var(--danger)}
+  .block-body{padding:12px}
+  .block-body .field{margin-bottom:10px}
+  .block-body .field:last-child{margin-bottom:0}
+
+  .add-block-row{display:flex;gap:8px;align-items:center;margin:18px 0 40px;flex-wrap:wrap}
+  .add-block-row select{border:1px solid var(--border);border-radius:8px;padding:8px 11px;font-size:13px;background:#fff}
+
+  .tag-chip-input{display:flex;flex-wrap:wrap;gap:6px;border:1px solid var(--border);border-radius:8px;padding:6px 8px;background:#fff}
+  .tag-chip-input input{border:0;flex:1;min-width:120px;font-size:13px;padding:4px}
+  .tag-chip-input input:focus{outline:none}
+  .chip{background:var(--jade-light);color:var(--jade);font-size:12px;padding:3px 8px;border-radius:12px;display:flex;align-items:center;gap:5px}
+  .chip button{border:0;background:none;cursor:pointer;color:var(--jade);font-size:13px;line-height:1}
+
+  /* ===== Preview modal ===== */
+  .preview-modal{position:fixed;inset:0;background:rgba(30,32,40,.55);display:none;align-items:center;justify-content:center;z-index:200;padding:30px}
+  .preview-modal.show{display:flex}
+  .preview-box{background:#fff;width:min(900px,100%);height:100%;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+  .preview-box-head{padding:10px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center}
+  .preview-box-head b{font-size:13px;color:var(--ink-mid)}
+  .preview-box iframe{flex:1;border:0;width:100%}
+
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(70px);background:var(--ink);color:#fff;padding:10px 22px;border-radius:24px;font-size:13px;transition:transform .25s;z-index:999;max-width:88vw}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+  .toast.ok{background:var(--jade)}
+  .toast.err{background:var(--danger)}
+
+  @media(max-width:820px){ .sidebar{width:220px} }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-logo">✎ 文章管理後台<span>胡佩珊中醫師</span></div>
+  <div class="topbar-status" id="status">尚未連接專案資料夾</div>
+  <span class="dirty-dot" id="dirtyDot" title="有未儲存的修改"></span>
+  <button class="btn btn-ghost" id="btnConnect">📂 連接專案資料夾</button>
+  <button class="btn btn-save" id="btnSave" disabled>儲存並同步到網頁</button>
+</header>
+
+<div class="main">
+
+  <aside class="sidebar">
+    <div class="side-head">
+      <div class="side-title">▸ 文章列表（<span id="countLabel">0</span>）</div>
+      <button class="btn btn-add" id="btnAdd">＋ 新增文章</button>
+      <input type="text" class="side-search" id="search" placeholder="搜尋標題／標籤…">
+    </div>
+    <div class="file-list" id="fileList"></div>
+  </aside>
+
+  <section class="editor" id="editorSection">
+    <div class="empty-editor" id="emptyEditor">
+      <div class="big">選一篇文章開始編輯</div>
+      <div>左邊點文章可以編輯，或按「＋ 新增文章」建立新的一篇。<br>改完記得按右上角「儲存並同步到網頁」。</div>
+    </div>
+
+    <div id="editorBody" style="display:none;flex:1;display:flex;flex-direction:column;min-height:0">
+      <div class="toolbar">
+        <button class="tabbtn active" data-tab="basic">基本資料</button>
+        <button class="tabbtn" data-tab="seo">SEO 設定</button>
+        <button class="tabbtn" data-tab="blocks">內文區塊</button>
+        <div class="toolbar-right">
+          <button class="btn btn-sm btn-outline" id="btnPreview">👁 預覽</button>
+          <button class="btn btn-sm btn-danger" id="btnDelete">刪除這篇</button>
+        </div>
+      </div>
+
+      <div class="panel-wrap">
+        <div class="panel active" data-panel="basic">
+          <div class="field">
+            <label>文章標題</label>
+            <input type="text" id="fTitle">
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label>網址代碼（slug）</label>
+              <input type="text" id="fSlug">
+              <div class="hint">只能用英文/數字/連字號，決定網址 articles/你的代碼.html</div>
+            </div>
+            <div class="field">
+              <label>生命階段分類</label>
+              <select id="fStage"></select>
+            </div>
+          </div>
+          <div class="field">
+            <label>其他標籤（方便搜尋，例如：皮膚、月經）</label>
+            <div class="tag-chip-input" id="tagsBox">
+              <input type="text" id="fTagInput" placeholder="輸入後按 Enter 新增">
+            </div>
+          </div>
+          <div class="field">
+            <label>摘要（首頁卡片與分享預覽用）</label>
+            <textarea id="fExcerpt" rows="3"></textarea>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label>閱讀時間（分鐘）</label>
+              <input type="number" id="fReadTime" min="1" max="60">
+            </div>
+            <div class="field">
+              <label>發布日期（選填）</label>
+              <input type="date" id="fPublishDate">
+            </div>
+          </div>
+          <div class="field">
+            <label>文章頁頂小標（例如：備孕期 · 多囊卵巢）</label>
+            <input type="text" id="fHeroEyebrow">
+          </div>
+          <div class="field">
+            <label>文章頁頂主題標籤（方便閱讀者掃視，例如 #PCOS備孕）</label>
+            <div class="tag-chip-input" id="heroTagsBox">
+              <input type="text" id="fHeroTagInput" placeholder="輸入後按 Enter 新增">
+            </div>
+          </div>
+        </div>
+
+        <div class="panel" data-panel="seo">
+          <div class="field">
+            <label>頁面標題 &lt;title&gt;（留空則自動用「文章標題｜胡佩珊中醫師」）</label>
+            <input type="text" id="fMetaTitle">
+          </div>
+          <div class="field">
+            <label>Meta Description（留空則自動使用摘要）</label>
+            <textarea id="fMetaDesc" rows="3"></textarea>
+          </div>
+          <div class="field">
+            <label>SEO 關鍵字</label>
+            <div class="tag-chip-input" id="keywordsBox">
+              <input type="text" id="fKeywordInput" placeholder="輸入後按 Enter 新增">
+            </div>
+          </div>
+        </div>
+
+        <div class="panel" data-panel="blocks">
+          <div id="blocksList"></div>
+          <div class="add-block-row">
+            <select id="addBlockType">
+              <option value="heading">大標題</option>
+              <option value="subheading">次標題</option>
+              <option value="paragraph">段落文字</option>
+              <option value="lead">開場摘要</option>
+              <option value="info">資訊框</option>
+              <option value="warning">提醒框</option>
+              <option value="alert">紅色警示框</option>
+              <option value="checklist">勾選清單</option>
+              <option value="quote">引用／典籍</option>
+              <option value="comparison">兩欄對照</option>
+              <option value="references">參考資料</option>
+              <option value="cta">預約掛號區塊</option>
+            </select>
+            <button class="btn btn-sm" style="background:var(--jade);color:#fff" id="btnAddBlock">＋ 新增區塊</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="preview-modal" id="previewModal">
+  <div class="preview-box">
+    <div class="preview-box-head"><b>即時預覽</b>
+      <button class="btn btn-sm btn-outline" style="margin-left:auto" id="btnClosePreview">關閉</button>
+    </div>
+    <iframe id="previewFrame"></iframe>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="article-render.js"></script>
+<script src="articles-data.js"></script>
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+
+  // ---------- state ----------
+  var state = {
+    data: window.ARTICLES_DATA || { stages: [], articles: [] },
+    knownSlugs: (window.ARTICLES_DATA ? window.ARTICLES_DATA.articles.map(function(a){ return a.slug; }) : []),
+    current: -1,
+    dirHandle: null,
+    dirty: false,
+    tab: 'basic'
+  };
+
+  var BLOCK_LABELS = {
+    heading:'大標題', subheading:'次標題', paragraph:'段落文字', lead:'開場摘要',
+    info:'資訊框', warning:'提醒框', alert:'紅色警示框', checklist:'勾選清單',
+    quote:'引用／典籍', comparison:'兩欄對照', references:'參考資料', cta:'預約掛號區塊'
+  };
+
+  function newBlock(type){
+    switch(type){
+      case 'heading': return { type:'heading', text:'' };
+      case 'subheading': return { type:'subheading', text:'' };
+      case 'paragraph': return { type:'paragraph', text:'' };
+      case 'lead': return { type:'lead', text:'' };
+      case 'info': return { type:'info', title:'', text:'' };
+      case 'warning': return { type:'warning', title:'', text:'' };
+      case 'alert': return { type:'alert', title:'出現以下情況請盡快就醫', items:[''] };
+      case 'checklist': return { type:'checklist', items:[''] };
+      case 'quote': return { type:'quote', text:'', cite:'' };
+      case 'comparison': return { type:'comparison', leftLabel:'中醫觀點', leftItems:[''], rightLabel:'西醫觀點', rightItems:[''] };
+      case 'references': return { type:'references', items:[''] };
+      case 'cta': return { type:'cta', title:'', text:'' };
+      default: return { type:'paragraph', text:'' };
+    }
+  }
+
+  function newArticle(){
+    return {
+      slug: 'article-' + Date.now().toString(36),
+      stage: (state.data.stages[0] || {}).key || '',
+      tags: [],
+      title: '未命名文章',
+      excerpt: '',
+      metaTitle: '', metaDescription: '', keywords: [],
+      readTime: 5,
+      heroEyebrow: '', heroTags: [],
+      publishDate: '',
+      blocks: [ newBlock('lead'), newBlock('heading'), newBlock('paragraph') ]
+    };
+  }
+
+  // ---------- toast ----------
+  var toastTimer;
+  function toast(msg, cls){
+    var t = $('toast');
+    t.textContent = msg;
+    t.className = 'toast show' + (cls ? ' ' + cls : '');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ t.className = 'toast'; }, 2800);
+  }
+
+  function markDirty(v){
+    state.dirty = (v === undefined) ? true : v;
+    $('dirtyDot').className = 'dirty-dot' + (state.dirty ? ' show' : '');
+  }
+
+  // ---------- sidebar ----------
+  function renderSidebar(){
+    var q = $('search').value.trim().toLowerCase();
+    var box = $('fileList');
+    box.innerHTML = '';
+    $('countLabel').textContent = state.data.articles.length;
+    if (!state.data.articles.length){
+      box.innerHTML = '<div class="empty-hint">還沒有任何文章，<br>按上方 <b>＋ 新增文章</b> 開始。</div>';
+      return;
+    }
+    var stageLabel = {};
+    state.data.stages.forEach(function(s){ stageLabel[s.key] = s.label; });
+
+    state.data.articles.forEach(function(a, i){
+      var hay = (a.title + ' ' + (a.tags||[]).join(' ')).toLowerCase();
+      if (q && hay.indexOf(q) === -1) return;
+      var d = document.createElement('div');
+      d.className = 'file-item' + (i === state.current ? ' active' : '');
+      d.innerHTML = '<div class="file-item-title"><span class="fdot"></span><span></span></div><span class="file-item-stage"></span>';
+      d.querySelector('.file-item-title span:last-child').textContent = a.title || '（未命名）';
+      d.querySelector('.file-item-stage').textContent = stageLabel[a.stage] || a.stage || '未分類';
+      d.addEventListener('click', function(){ selectArticle(i); });
+      box.appendChild(d);
+    });
+  }
+  $('search').addEventListener('input', renderSidebar);
+
+  // ---------- select / form render ----------
+  function selectArticle(i){
+    state.current = i;
+    $('emptyEditor').style.display = 'none';
+    $('editorBody').style.display = 'flex';
+    renderStageOptions();
+    renderForm();
+    renderSidebar();
+  }
+
+  function renderStageOptions(){
+    var sel = $('fStage');
+    sel.innerHTML = state.data.stages.map(function(s){
+      return '<option value="' + s.key + '">' + s.label + '</option>';
+    }).join('');
+  }
+
+  function curArticle(){ return state.data.articles[state.current]; }
+
+  function renderChips(containerId, arr, onChange){
+    var box = $(containerId);
+    var input = box.querySelector('input');
+    Array.prototype.slice.call(box.querySelectorAll('.chip')).forEach(function(c){ c.remove(); });
+    arr.forEach(function(val, i){
+      var chip = document.createElement('span');
+      chip.className = 'chip';
+      chip.innerHTML = '<span></span><button type="button">×</button>';
+      chip.querySelector('span').textContent = val;
+      chip.querySelector('button').addEventListener('click', function(){
+        arr.splice(i, 1); onChange(); renderChips(containerId, arr, onChange);
+      });
+      box.insertBefore(chip, input);
+    });
+  }
+
+  function wireChipInput(inputId, containerId, arr){
+    var input = $(inputId);
+    input.onkeydown = function(e){
+      if (e.key === 'Enter'){
+        e.preventDefault();
+        var v = input.value.trim();
+        if (v){ arr.push(v); input.value=''; renderChips(containerId, arr, function(){ markDirty(); renderSidebar(); }); markDirty(); renderSidebar(); }
+      }
+    };
+  }
+
+  function renderForm(){
+    var a = curArticle();
+    if (!a) return;
+    $('fTitle').value = a.title || '';
+    $('fSlug').value = a.slug || '';
+    $('fStage').value = a.stage || '';
+    $('fExcerpt').value = a.excerpt || '';
+    $('fReadTime').value = a.readTime || 5;
+    $('fPublishDate').value = a.publishDate || '';
+    $('fHeroEyebrow').value = a.heroEyebrow || '';
+    $('fMetaTitle').value = a.metaTitle || '';
+    $('fMetaDesc').value = a.metaDescription || '';
+
+    a.tags = a.tags || [];
+    a.heroTags = a.heroTags || [];
+    a.keywords = a.keywords || [];
+    renderChips('tagsBox', a.tags, function(){});
+    renderChips('heroTagsBox', a.heroTags, function(){});
+    renderChips('keywordsBox', a.keywords, function(){});
+    wireChipInput('fTagInput', 'tagsBox', a.tags);
+    wireChipInput('fHeroTagInput', 'heroTagsBox', a.heroTags);
+    wireChipInput('fKeywordInput', 'keywordsBox', a.keywords);
+
+    renderBlocks();
+  }
+
+  function bindField(id, prop, transform){
+    $(id).addEventListener('input', function(){
+      var a = curArticle(); if (!a) return;
+      a[prop] = transform ? transform($(id).value) : $(id).value;
+      markDirty();
+      if (id === 'fTitle' || id === 'fStage') renderSidebar();
+    });
+  }
+  bindField('fTitle', 'title');
+  bindField('fSlug', 'slug', function(v){ return v.replace(/[^a-zA-Z0-9\-_]/g,''); });
+  bindField('fStage', 'stage');
+  bindField('fExcerpt', 'excerpt');
+  bindField('fReadTime', 'readTime', function(v){ return parseInt(v,10) || 1; });
+  bindField('fPublishDate', 'publishDate');
+  bindField('fHeroEyebrow', 'heroEyebrow');
+  bindField('fMetaTitle', 'metaTitle');
+  bindField('fMetaDesc', 'metaDescription');
+
+  // ---------- blocks editor ----------
+  function itemsToText(arr){ return (arr||[]).join('\n'); }
+  function textToItems(t){ return t.split('\n').map(function(s){ return s.trim(); }).filter(function(s){ return s; }); }
+
+  function blockFieldsHTML(b, idx){
+    switch(b.type){
+      case 'heading':
+      case 'subheading':
+        return '<div class="field"><label>文字</label><input type="text" data-f="text" value="'+esc(b.text)+'"></div>';
+      case 'paragraph':
+      case 'lead':
+        return '<div class="field"><label>內容（可用 **粗體**、[文字](網址) 超連結）</label><textarea rows="3" data-f="text">'+esc(b.text)+'</textarea></div>';
+      case 'info':
+      case 'warning':
+        return '<div class="field"><label>標題（選填）</label><input type="text" data-f="title" value="'+esc(b.title)+'"></div>'+
+               '<div class="field"><label>內容</label><textarea rows="2" data-f="text">'+esc(b.text)+'</textarea></div>';
+      case 'alert':
+        return '<div class="field"><label>標題</label><input type="text" data-f="title" value="'+esc(b.title)+'"></div>'+
+               '<div class="field"><label>警示項目（每行一項）</label><textarea rows="3" data-f="items">'+esc(itemsToText(b.items))+'</textarea></div>';
+      case 'checklist':
+      case 'references':
+        return '<div class="field"><label>項目（每行一項）</label><textarea rows="4" data-f="items">'+esc(itemsToText(b.items))+'</textarea></div>';
+      case 'quote':
+        return '<div class="field"><label>引用文字</label><textarea rows="2" data-f="text">'+esc(b.text)+'</textarea></div>'+
+               '<div class="field"><label>出處（例如：——《黃帝內經》）</label><input type="text" data-f="cite" value="'+esc(b.cite)+'"></div>';
+      case 'comparison':
+        return '<div class="row2">'+
+               '<div class="field"><label>左欄標題</label><input type="text" data-f="leftLabel" value="'+esc(b.leftLabel)+'"></div>'+
+               '<div class="field"><label>右欄標題</label><input type="text" data-f="rightLabel" value="'+esc(b.rightLabel)+'"></div>'+
+               '</div><div class="row2">'+
+               '<div class="field"><label>左欄項目（每行一項）</label><textarea rows="3" data-f="leftItems">'+esc(itemsToText(b.leftItems))+'</textarea></div>'+
+               '<div class="field"><label>右欄項目（每行一項）</label><textarea rows="3" data-f="rightItems">'+esc(itemsToText(b.rightItems))+'</textarea></div>'+
+               '</div>';
+      case 'cta':
+        return '<div class="field"><label>標題（留空用預設）</label><input type="text" data-f="title" value="'+esc(b.title)+'"></div>'+
+               '<div class="field"><label>文字（留空用預設）</label><textarea rows="2" data-f="text">'+esc(b.text)+'</textarea></div>';
+      default: return '';
+    }
+  }
+  function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  function renderBlocks(){
+    var a = curArticle(); if (!a) return;
+    var list = $('blocksList');
+    list.innerHTML = '';
+    (a.blocks||[]).forEach(function(b, i){
+      var card = document.createElement('div');
+      card.className = 'block-card';
+      card.innerHTML =
+        '<div class="block-head">'+
+          '<span class="block-type-badge">'+(BLOCK_LABELS[b.type]||b.type)+'</span>'+
+          '<div class="block-head-actions">'+
+            '<button class="icon-btn" data-act="up" title="上移">↑</button>'+
+            '<button class="icon-btn" data-act="down" title="下移">↓</button>'+
+            '<button class="icon-btn danger" data-act="del" title="刪除">🗑</button>'+
+          '</div>'+
+        '</div>'+
+        '<div class="block-body">'+blockFieldsHTML(b, i)+'</div>';
+
+      card.querySelector('[data-act="up"]').addEventListener('click', function(){ moveBlock(i,-1); });
+      card.querySelector('[data-act="down"]').addEventListener('click', function(){ moveBlock(i,1); });
+      card.querySelector('[data-act="del"]').addEventListener('click', function(){ deleteBlock(i); });
+
+      Array.prototype.slice.call(card.querySelectorAll('[data-f]')).forEach(function(el){
+        el.addEventListener('input', function(){
+          var f = el.getAttribute('data-f');
+          if (f === 'items' || f === 'leftItems' || f === 'rightItems'){
+            b[f] = textToItems(el.value);
+          } else {
+            b[f] = el.value;
+          }
+          markDirty();
+        });
+      });
+      list.appendChild(card);
+    });
+  }
+
+  function moveBlock(i, dir){
+    var a = curArticle(); var arr = a.blocks;
+    var j = i + dir;
+    if (j < 0 || j >= arr.length) return;
+    var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+    markDirty(); renderBlocks();
+  }
+  function deleteBlock(i){
+    var a = curArticle();
+    a.blocks.splice(i,1);
+    markDirty(); renderBlocks();
+  }
+  $('btnAddBlock').addEventListener('click', function(){
+    var a = curArticle(); if (!a) return;
+    a.blocks = a.blocks || [];
+    a.blocks.push(newBlock($('addBlockType').value));
+    markDirty(); renderBlocks();
+  });
+
+  // ---------- tabs ----------
+  Array.prototype.slice.call(document.querySelectorAll('.tabbtn')).forEach(function(btn){
+    btn.addEventListener('click', function(){
+      Array.prototype.slice.call(document.querySelectorAll('.tabbtn')).forEach(function(b){ b.classList.remove('active'); });
+      Array.prototype.slice.call(document.querySelectorAll('.panel')).forEach(function(p){ p.classList.remove('active'); });
+      btn.classList.add('active');
+      document.querySelector('.panel[data-panel="'+btn.dataset.tab+'"]').classList.add('active');
+    });
+  });
+
+  // ---------- add / delete article ----------
+  $('btnAdd').addEventListener('click', function(){
+    state.data.articles.push(newArticle());
+    markDirty();
+    selectArticle(state.data.articles.length - 1);
+  });
+  $('btnDelete').addEventListener('click', function(){
+    var a = curArticle(); if (!a) return;
+    if (!confirm('確定要刪除「'+a.title+'」嗎？儲存後會一併從網站移除，此動作無法復原。')) return;
+    state.data.articles.splice(state.current, 1);
+    state.current = -1;
+    $('editorBody').style.display = 'none';
+    $('emptyEditor').style.display = 'flex';
+    markDirty();
+    renderSidebar();
+  });
+
+  // ---------- preview ----------
+  function stageLabelMap(){
+    var m = {}; state.data.stages.forEach(function(s){ m[s.key] = s.label; }); return m;
+  }
+  $('btnPreview').addEventListener('click', function(){
+    var a = curArticle(); if (!a) return;
+    var html = window.ArticleRender.renderArticleHTML(a, stageLabelMap()[a.stage]);
+    // 預覽時把相對路徑指回實際資料夾，讓字型與樣式讀得到
+    html = html.replace('href="article.css"', 'href="../articles/article.css"');
+    $('previewFrame').srcdoc = html;
+    $('previewModal').classList.add('show');
+  });
+  $('btnClosePreview').addEventListener('click', function(){ $('previewModal').classList.remove('show'); });
+
+  // ---------- connect folder ----------
+  $('btnConnect').addEventListener('click', async function(){
+    if (!window.showDirectoryPicker){
+      toast('此瀏覽器不支援資料夾直接讀寫，請改用 Chrome 或 Edge', 'err');
+      return;
+    }
+    try{
+      state.dirHandle = await window.showDirectoryPicker({ mode:'readwrite' });
+    }catch(e){ return; }
+    $('status').textContent = '已連接：' + state.dirHandle.name + '（記得選擇整個網站專案的根目錄）';
+    $('btnSave').disabled = false;
+    toast('已連接專案資料夾，現在可以「儲存並同步到網頁」', 'ok');
+  });
+
+  // ---------- save ----------
+  async function writeFile(dirHandle, name, contents){
+    var fh = await dirHandle.getFileHandle(name, { create: true });
+    var w = await fh.createWritable();
+    await w.write(contents);
+    await w.close();
+  }
+  async function deleteFileIfExists(dirHandle, name){
+    try{ await dirHandle.removeEntry(name); }catch(e){ /* 不存在就略過 */ }
+  }
+
+  function serializeDataFile(){
+    var clone = { stages: state.data.stages, articles: state.data.articles };
+    return '// ─── 文章資料庫 ──────────────────────────────────────────────\n' +
+      '// 由「文章管理後台.html」讀取與寫回，請透過後台編輯，不建議手動修改本檔案格式。\n' +
+      'window.ARTICLES_DATA = ' + JSON.stringify(clone, null, 2) + ';\n';
+  }
+
+  $('btnSave').addEventListener('click', async function(){
+    if (!state.dirHandle){ toast('請先連接專案資料夾', 'err'); return; }
+
+    var slugs = state.data.articles.map(function(a){ return a.slug; });
+    var seen = {};
+    for (var i=0;i<slugs.length;i++){
+      if (!slugs[i]){ toast('第 '+(i+1)+' 篇文章的網址代碼不能是空的', 'err'); return; }
+      if (seen[slugs[i]]){ toast('網址代碼「'+slugs[i]+'」重複了，請修改', 'err'); return; }
+      seen[slugs[i]] = true;
+    }
+
+    $('btnSave').disabled = true;
+    $('btnSave').textContent = '儲存中…';
+    try{
+      var adminDir = await state.dirHandle.getDirectoryHandle('admin', { create:true });
+      var articlesDir = await state.dirHandle.getDirectoryHandle('articles', { create:true });
+
+      // 1) 資料檔
+      await writeFile(adminDir, 'articles-data.js', serializeDataFile());
+
+      // 2) 刪除已移除文章的舊檔
+      var currentSlugSet = {};
+      slugs.forEach(function(s){ currentSlugSet[s] = true; });
+      for (var k=0;k<state.knownSlugs.length;k++){
+        var old = state.knownSlugs[k];
+        if (!currentSlugSet[old]) await deleteFileIfExists(articlesDir, old + '.html');
+      }
+
+      // 3) 產生每篇文章 HTML
+      var sMap = stageLabelMap();
+      for (var j=0;j<state.data.articles.length;j++){
+        var art = state.data.articles[j];
+        var html = window.ArticleRender.renderArticleHTML(art, sMap[art.stage]);
+        await writeFile(articlesDir, art.slug + '.html', html);
+      }
+
+      // 4) 更新首頁卡片區塊
+      var idxHandle = await state.dirHandle.getFileHandle('index.html', { create:false });
+      var idxFile = await idxHandle.getFile();
+      var idxText = await idxFile.text();
+      var cards = state.data.articles.map(function(a){ return window.ArticleRender.renderCardHTML(a, sMap[a.stage]); }).join('\n      ');
+      var startMark = '<!-- ARTICLES_AUTO_START — 此區塊由「admin/文章管理後台.html」自動產生，請勿手動編輯 -->';
+      var endMark = '<!-- ARTICLES_AUTO_END -->';
+      var si = idxText.indexOf(startMark), ei = idxText.indexOf(endMark);
+      if (si === -1 || ei === -1){
+        toast('找不到 index.html 的文章區塊標記，首頁卡片未更新，其餘已儲存', 'err');
+      } else {
+        var newIdx = idxText.slice(0, si + startMark.length) + '\n      ' + cards + '\n      ' + idxText.slice(ei);
+        var w = await idxHandle.createWritable();
+        await w.write(newIdx);
+        await w.close();
+      }
+
+      // 5) 更新 sitemap.xml
+      try{
+        var smHandle = await state.dirHandle.getFileHandle('sitemap.xml', { create:false });
+        var smFile = await smHandle.getFile();
+        var smText = await smFile.text();
+        var smUrls = state.data.articles.map(function(a){
+          return '  <url><loc>https://coolicesan.github.io/TCM-personal-website/articles/' + a.slug + '.html</loc><priority>0.6</priority></url>';
+        }).join('\n');
+        var smStart = '<!-- ARTICLES_AUTO_START — 此區塊由「admin/文章管理後台.html」自動產生，請勿手動編輯 -->';
+        var smEnd = '<!-- ARTICLES_AUTO_END -->';
+        var smSi = smText.indexOf(smStart), smEi = smText.indexOf(smEnd);
+        if (smSi !== -1 && smEi !== -1){
+          var newSm = smText.slice(0, smSi + smStart.length) + '\n' + smUrls + '\n  ' + smText.slice(smEi);
+          var w2 = await smHandle.createWritable();
+          await w2.write(newSm);
+          await w2.close();
+        }
+      }catch(e){ /* sitemap.xml 不存在就略過 */ }
+
+      state.knownSlugs = slugs.slice();
+      markDirty(false);
+      toast('✓ 已儲存並更新首頁卡片，共 ' + state.data.articles.length + ' 篇文章', 'ok');
+    }catch(e){
+      console.error(e);
+      toast('儲存失敗：' + e.message, 'err');
+    } finally {
+      $('btnSave').disabled = false;
+      $('btnSave').textContent = '儲存並同步到網頁';
+    }
+  });
+
+  // ---------- init ----------
+  renderSidebar();
+  window.addEventListener('beforeunload', function(e){
+    if (state.dirty){ e.preventDefault(); e.returnValue=''; }
+  });
+})();
+</script>
+</body>
+</html>
