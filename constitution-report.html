@@ -38,7 +38,7 @@ body{padding-top:72px}
 .rpt-header::after{content:"";position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#C4876A 0%,#DBA882 50%,#C4876A 100%)}
 .rpt-title{font-size:22px;font-weight:600;color:#fff;letter-spacing:3px;margin-bottom:6px;font-family:"Noto Serif TC",serif}
 .rpt-sub{font-size:11px;color:rgba(255,255,255,0.6);letter-spacing:2px;margin-bottom:18px}
-.rpt-meta{display:flex;gap:36px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.12)}
+.rpt-meta{display:flex;gap:28px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.12);flex-wrap:wrap}
 .rpt-meta-item label{font-size:10px;color:rgba(255,255,255,0.5);display:block;margin-bottom:3px;letter-spacing:1px}
 .rpt-meta-item span{font-size:13px;color:#E8D5F5;font-weight:500}
 .rpt-logo{position:absolute;top:24px;right:32px;font-size:40px;opacity:0.8}
@@ -220,6 +220,7 @@ body{padding-top:72px}
       <div class="rpt-meta-item"><label>顧客姓名</label><span id="dName">—</span></div>
       <div class="rpt-meta-item"><label>評估日期</label><span id="dDate">—</span></div>
       <div class="rpt-meta-item"><label>主要體質</label><span id="dConst">—</span></div>
+      <div class="rpt-meta-item"><label>評估版本</label><span id="dMode">—</span></div>
     </div>
     <div class="rpt-logo">☯️</div>
   </div>
@@ -359,6 +360,37 @@ const CONST_IMG={
 Object.keys(CONST_IMG).forEach(k=>{if(CD[k])CD[k].img=CONST_IMG[k];});
 
 
+let reportPayload=null;
+
+function readReportPayload(params){
+  let payload=null;
+  try{payload=JSON.parse(sessionStorage.getItem('drhu_cq_report')||'null');}catch(_){payload=null;}
+  const constParam=params.get('const');
+  if(payload&&payload.source==='constitution-quiz'&&payload.primary&&payload.primary.name===constParam){return payload;}
+  if(!constParam||!CD[constParam])return null;
+  const secName=(params.get('sec')||'').split(',').find(v=>CD[v])||'';
+  return {
+    source:'constitution-quiz-url',
+    mode:params.get('mode')||'',
+    userName:params.get('name')||'',
+    balancedLabel:params.get('label')||'',
+    primary:{
+      name:constParam,
+      displayName:params.get('label')||constParam
+    },
+    secondary:secName?{
+      name:secName
+    }:null,
+    all:null
+  };
+}
+
+function modeLabel(mode){
+  if(mode==='complex')return '完整版';
+  if(mode==='simple')return '快速版';
+  return '手動報告';
+}
+
 function sync(){document.getElementById('dName').textContent=document.getElementById('iName').value||'—';}
 function renderSec(){
   const v=document.getElementById('iSec').value;
@@ -388,8 +420,11 @@ function renderSec(){
 function render(){
   const name=document.getElementById('iConst').value;
   const d=CD[name];if(!d)return;
-  document.getElementById('dConst').textContent=name;
-  document.getElementById('dName2').textContent=name;
+  const primary=reportPayload&&reportPayload.primary&&reportPayload.primary.name===name?reportPayload.primary:null;
+  const displayName=primary&&primary.displayName?primary.displayName:name;
+  document.getElementById('dConst').textContent=displayName;
+  document.getElementById('dName2').textContent=displayName;
+  document.getElementById('dMode').textContent=modeLabel(reportPayload&&reportPayload.mode);
   document.getElementById('dEmoji').textContent=d.e;
   document.getElementById('dEmojiBox').style.background=d.bg;
   const mascot=document.getElementById('dMascot'),ebox=document.getElementById('dEmojiBox');
@@ -442,6 +477,7 @@ document.getElementById('dFooterDate').textContent='報告日期：'+today;
 
 // URL parameter pre-fill (from constitution quiz)
 const params=new URLSearchParams(window.location.search);
+reportPayload=readReportPayload(params);
 // Admin gate: selector bar shown for admins or when opened without ?const=
 const constParam=params.get('const');
 const secParam=params.get('sec');
@@ -452,9 +488,11 @@ if(params.get('admin')==='1' || !constParam){
   document.getElementById('printBar').classList.add('hidden');
 }
 if(constParam&&CD[constParam]){document.getElementById('iConst').value=constParam;}
-if(nameParam){document.getElementById('iName').value=nameParam;sync();}
+const displayNameParam=nameParam||(reportPayload&&reportPayload.userName)||'';
+if(displayNameParam){document.getElementById('iName').value=displayNameParam;sync();}
 render();
-if(secParam&&CD[secParam]){document.getElementById('iSec').value=secParam;renderSec();}
+const firstSec=(secParam||'').split(',').find(v=>CD[v]);
+if(firstSec&&CD[firstSec]){document.getElementById('iSec').value=firstSec;renderSec();}
 </script>
 
 <script>

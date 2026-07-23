@@ -80,3 +80,64 @@ if (document.readyState === 'loading') {
 } else {
   initPage();
 }
+
+// ── 健康知識庫頁：搜尋 + 生命階段 + 標籤 篩選（僅在 articles.html 有對應元素時執行）──
+function initKnowledgeBase() {
+  const grid = document.getElementById('kbGrid');
+  if (!grid) return;
+  const cards = Array.prototype.slice.call(grid.querySelectorAll('.article-card'));
+  const searchInput = document.getElementById('kbSearch');
+  const stageTabs = document.getElementById('kbStageTabs');
+  const tagBox = document.getElementById('kbTagChips');
+  const emptyEl = document.getElementById('kbEmpty');
+  const countEl = document.getElementById('kbCountNum');
+  const state = { stage: 'all', tags: new Set(), q: '' };
+
+  function apply() {
+    const q = state.q.trim().toLowerCase();
+    let visible = 0;
+    cards.forEach((card) => {
+      const stageOk = state.stage === 'all' || card.dataset.stage === state.stage;
+      const cardTags = (card.dataset.tags || '').split(',').filter(Boolean);
+      const tagOk = state.tags.size === 0 || cardTags.some((t) => state.tags.has(t));
+      const searchOk = !q || (card.dataset.search || '').indexOf(q) !== -1;
+      const show = stageOk && tagOk && searchOk;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    if (emptyEl) emptyEl.classList.toggle('show', visible === 0);
+    if (countEl) countEl.textContent = visible;
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', () => { state.q = searchInput.value; apply(); });
+  }
+  if (stageTabs) {
+    stageTabs.addEventListener('click', (e) => {
+      const btn = e.target.closest('.stage-tab');
+      if (!btn) return;
+      stageTabs.querySelectorAll('.stage-tab').forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      state.stage = btn.dataset.stage;
+      apply();
+    });
+  }
+  if (tagBox) {
+    tagBox.addEventListener('click', (e) => {
+      const chip = e.target.closest('.tag-chip');
+      if (!chip) return;
+      const tag = chip.dataset.tag;
+      if (state.tags.has(tag)) { state.tags.delete(tag); chip.classList.remove('active'); }
+      else { state.tags.add(tag); chip.classList.add('active'); }
+      apply();
+    });
+  }
+
+  apply();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initKnowledgeBase);
+} else {
+  initKnowledgeBase();
+}

@@ -5,6 +5,10 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://coolicesan.github.io/TCM-personal-website/articles.html</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://coolicesan.github.io/TCM-personal-website/constitution.html</loc>
     <priority>0.8</priority>
   </url>
@@ -26,6 +30,11 @@
   <url><loc>https://coolicesan.github.io/TCM-personal-website/treatments/treatment-weight.html</loc><priority>0.6</priority></url>
 
   <!-- ARTICLES_AUTO_START — 此區塊由「admin/文章管理後台.html」自動產生，請勿手動編輯 -->
-  <url><loc>https://coolicesan.github.io/TCM-personal-website/articles/demo-sample-article.html</loc><priority>0.6</priority></url>
+  <url><loc>https://coolicesan.github.io/TCM-personal-website/articles/postpartum-lochia.html</loc><priority>0.6</priority></url>
+  <url><loc>https://coolicesan.github.io/TCM-personal-website/articles/postpartum-hair-loss.html</loc><priority>0.6</priority></url>
+  <url><loc>https://coolicesan.github.io/TCM-personal-website/articles/blocked-duct-mastitis.html</loc><priority>0.6</priority></url>
+  <url><loc>https://coolicesan.github.io/TCM-personal-website/articles/breastfeeding-chinese-medicine.html</loc><priority>0.6</priority></url>
+  <url><loc>https://coolicesan.github.io/TCM-personal-website/articles/low-milk-supply.html</loc><priority>0.6</priority></url>
+  <url><loc>https://coolicesan.github.io/TCM-personal-website/articles/postpartum-care.html</loc><priority>0.6</priority></url>
   <!-- ARTICLES_AUTO_END -->
 </urlset>

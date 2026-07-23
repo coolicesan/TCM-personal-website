@@ -38,6 +38,7 @@
   .side-head{padding:14px 14px 10px;border-bottom:1px solid var(--border)}
   .side-title{font-family:var(--serif);font-size:12.5px;font-weight:700;color:var(--rose);letter-spacing:.08em;margin-bottom:8px}
   .btn-add{width:100%;background:var(--rose);color:#fff;border-radius:8px;padding:9px}
+  .btn-import{width:100%;background:var(--jade);color:#fff;border-radius:8px;padding:9px;margin-top:8px}
   .side-search{width:100%;margin-top:8px;padding:7px 10px;border:1px solid var(--border);border-radius:8px;font-size:12.5px;font-family:var(--sans);background:var(--bg)}
   .side-search:focus{outline:none;border-color:var(--rose)}
   .file-list{flex:1;overflow-y:auto;padding:8px}
@@ -128,6 +129,8 @@
     <div class="side-head">
       <div class="side-title">▸ 文章列表（<span id="countLabel">0</span>）</div>
       <button class="btn btn-add" id="btnAdd">＋ 新增文章</button>
+      <button class="btn btn-import" id="btnImport">📄 匯入 Markdown／Word 檔</button>
+      <input type="file" id="fileInput" accept=".md,.txt,.docx" style="display:none">
       <input type="text" class="side-search" id="search" placeholder="搜尋標題／標籤…">
     </div>
     <div class="file-list" id="fileList"></div>
@@ -188,6 +191,16 @@
             </div>
           </div>
           <div class="field">
+            <label>更新日期（選填，留空則視為未更新過）</label>
+            <input type="date" id="fModifiedDate">
+          </div>
+          <div class="field">
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+              <input type="checkbox" id="fHidden" style="width:15px;height:15px;accent-color:var(--danger);cursor:pointer">
+              <span>隱藏此文章（不在首頁顯示，資料保留在資料庫）</span>
+            </label>
+          </div>
+          <div class="field">
             <label>文章頁頂小標（例如：備孕期 · 多囊卵巢）</label>
             <input type="text" id="fHeroEyebrow">
           </div>
@@ -214,6 +227,10 @@
               <input type="text" id="fKeywordInput" placeholder="輸入後按 Enter 新增">
             </div>
           </div>
+          <div class="field">
+            <label>主題病症／症狀名稱（選填，用於結構化資料，例如：產後惡露）</label>
+            <input type="text" id="fConditionName">
+          </div>
         </div>
 
         <div class="panel" data-panel="blocks">
@@ -228,8 +245,11 @@
               <option value="warning">提醒框</option>
               <option value="alert">紅色警示框</option>
               <option value="checklist">勾選清單</option>
+              <option value="list">項目清單</option>
               <option value="quote">引用／典籍</option>
               <option value="comparison">兩欄對照</option>
+              <option value="table">表格</option>
+              <option value="faq">常見問答</option>
               <option value="references">參考資料</option>
               <option value="cta">預約掛號區塊</option>
             </select>
@@ -253,7 +273,10 @@
 
 <div class="toast" id="toast"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js"></script>
 <script src="article-render.js"></script>
+<script src="md-import.js"></script>
+<script src="docx-import.js"></script>
 <script src="articles-data.js"></script>
 <script>
 (function(){
@@ -272,8 +295,8 @@
 
   var BLOCK_LABELS = {
     heading:'大標題', subheading:'次標題', paragraph:'段落文字', lead:'開場摘要',
-    info:'資訊框', warning:'提醒框', alert:'紅色警示框', checklist:'勾選清單',
-    quote:'引用／典籍', comparison:'兩欄對照', references:'參考資料', cta:'預約掛號區塊'
+    info:'資訊框', warning:'提醒框', alert:'紅色警示框', checklist:'勾選清單', list:'項目清單',
+    quote:'引用／典籍', comparison:'兩欄對照', table:'表格', faq:'常見問答', references:'參考資料', cta:'預約掛號區塊'
   };
 
   function newBlock(type){
@@ -286,8 +309,11 @@
       case 'warning': return { type:'warning', title:'', text:'' };
       case 'alert': return { type:'alert', title:'出現以下情況請盡快就醫', items:[''] };
       case 'checklist': return { type:'checklist', items:[''] };
+      case 'list': return { type:'list', items:[''] };
       case 'quote': return { type:'quote', text:'', cite:'' };
       case 'comparison': return { type:'comparison', leftLabel:'中醫觀點', leftItems:[''], rightLabel:'西醫觀點', rightItems:[''] };
+      case 'table': return { type:'table', headers:['', ''], rows:[['', '']] };
+      case 'faq': return { type:'faq', items:[{ q:'', a:'' }] };
       case 'references': return { type:'references', items:[''] };
       case 'cta': return { type:'cta', title:'', text:'' };
       default: return { type:'paragraph', text:'' };
@@ -304,7 +330,7 @@
       metaTitle: '', metaDescription: '', keywords: [],
       readTime: 5,
       heroEyebrow: '', heroTags: [],
-      publishDate: '',
+      publishDate: '', modifiedDate: '', conditionName: '',
       blocks: [ newBlock('lead'), newBlock('heading'), newBlock('paragraph') ]
     };
   }
@@ -343,8 +369,8 @@
       var d = document.createElement('div');
       d.className = 'file-item' + (i === state.current ? ' active' : '');
       d.innerHTML = '<div class="file-item-title"><span class="fdot"></span><span></span></div><span class="file-item-stage"></span>';
-      d.querySelector('.file-item-title span:last-child').textContent = a.title || '（未命名）';
-      d.querySelector('.file-item-stage').textContent = stageLabel[a.stage] || a.stage || '未分類';
+      d.querySelector('.file-item-title span:last-child').textContent = (a.hidden ? '🙈 ' : '') + (a.title || '（未命名）');
+      d.querySelector('.file-item-stage').textContent = (a.hidden ? '已隱藏 · ' : '') + (stageLabel[a.stage] || a.stage || '未分類');
       d.addEventListener('click', function(){ selectArticle(i); });
       box.appendChild(d);
     });
@@ -406,9 +432,12 @@
     $('fExcerpt').value = a.excerpt || '';
     $('fReadTime').value = a.readTime || 5;
     $('fPublishDate').value = a.publishDate || '';
+    $('fModifiedDate').value = a.modifiedDate || '';
     $('fHeroEyebrow').value = a.heroEyebrow || '';
     $('fMetaTitle').value = a.metaTitle || '';
     $('fMetaDesc').value = a.metaDescription || '';
+    $('fConditionName').value = a.conditionName || '';
+    $('fHidden').checked = !!a.hidden;
 
     a.tags = a.tags || [];
     a.heroTags = a.heroTags || [];
@@ -437,13 +466,43 @@
   bindField('fExcerpt', 'excerpt');
   bindField('fReadTime', 'readTime', function(v){ return parseInt(v,10) || 1; });
   bindField('fPublishDate', 'publishDate');
+  bindField('fModifiedDate', 'modifiedDate');
   bindField('fHeroEyebrow', 'heroEyebrow');
   bindField('fMetaTitle', 'metaTitle');
   bindField('fMetaDesc', 'metaDescription');
+  bindField('fConditionName', 'conditionName');
+  $('fHidden').addEventListener('change', function(){
+    var a = curArticle(); if (!a) return;
+    a.hidden = $('fHidden').checked;
+    markDirty();
+    renderSidebar();
+  });
 
   // ---------- blocks editor ----------
   function itemsToText(arr){ return (arr||[]).join('\n'); }
   function textToItems(t){ return t.split('\n').map(function(s){ return s.trim(); }).filter(function(s){ return s; }); }
+
+  function tableToText(b){
+    var lines = [(b.headers||[]).join(' | ')];
+    (b.rows||[]).forEach(function(r){ lines.push(r.join(' | ')); });
+    return lines.join('\n');
+  }
+  function textToTable(t){
+    var lines = t.split('\n').map(function(s){ return s.trim(); }).filter(function(s){ return s; });
+    var headers = lines.length ? lines[0].split('|').map(function(s){ return s.trim(); }) : [];
+    var rows = lines.slice(1).map(function(l){ return l.split('|').map(function(s){ return s.trim(); }); });
+    return { headers: headers, rows: rows };
+  }
+  function faqToText(items){
+    return (items||[]).map(function(qa){ return 'Q: '+(qa.q||'')+'\nA: '+(qa.a||''); }).join('\n\n');
+  }
+  function textToFaq(t){
+    return t.split(/\n\s*\n/).map(function(group){
+      var qm = group.match(/Q:\s*(.+)/);
+      var am = group.match(/A:\s*([\s\S]+)/);
+      return { q: qm ? qm[1].trim() : '', a: am ? am[1].trim() : '' };
+    }).filter(function(qa){ return qa.q || qa.a; });
+  }
 
   function blockFieldsHTML(b, idx){
     switch(b.type){
@@ -462,6 +521,7 @@
                '<div class="field"><label>警示項目（每行一項）</label><textarea rows="3" data-f="items">'+esc(itemsToText(b.items))+'</textarea></div>';
       case 'checklist':
       case 'references':
+      case 'list':
         return '<div class="field"><label>項目（每行一項）</label><textarea rows="4" data-f="items">'+esc(itemsToText(b.items))+'</textarea></div>';
       case 'quote':
         return '<div class="field"><label>引用文字</label><textarea rows="2" data-f="text">'+esc(b.text)+'</textarea></div>'+
@@ -474,6 +534,12 @@
                '<div class="field"><label>左欄項目（每行一項）</label><textarea rows="3" data-f="leftItems">'+esc(itemsToText(b.leftItems))+'</textarea></div>'+
                '<div class="field"><label>右欄項目（每行一項）</label><textarea rows="3" data-f="rightItems">'+esc(itemsToText(b.rightItems))+'</textarea></div>'+
                '</div>';
+      case 'table':
+        return '<div class="field"><label>表格內容（第一行是欄位標題，之後每行一列，欄位用「|」分隔）</label>'+
+               '<textarea rows="6" data-f="tablegrid" placeholder="項目 | 惡露 | 月經&#10;出現時機 | 分娩後即開始 | 有週期性">'+esc(tableToText(b))+'</textarea></div>';
+      case 'faq':
+        return '<div class="field"><label>常見問答（每組 Q: 問題、A: 答案，組與組之間空一行）</label>'+
+               '<textarea rows="8" data-f="faqpairs" placeholder="Q: 問題...&#10;A: 答案...">'+esc(faqToText(b.items))+'</textarea></div>';
       case 'cta':
         return '<div class="field"><label>標題（留空用預設）</label><input type="text" data-f="title" value="'+esc(b.title)+'"></div>'+
                '<div class="field"><label>文字（留空用預設）</label><textarea rows="2" data-f="text">'+esc(b.text)+'</textarea></div>';
@@ -509,6 +575,11 @@
           var f = el.getAttribute('data-f');
           if (f === 'items' || f === 'leftItems' || f === 'rightItems'){
             b[f] = textToItems(el.value);
+          } else if (f === 'tablegrid'){
+            var t = textToTable(el.value);
+            b.headers = t.headers; b.rows = t.rows;
+          } else if (f === 'faqpairs'){
+            b.items = textToFaq(el.value);
           } else {
             b[f] = el.value;
           }
@@ -554,6 +625,39 @@
     markDirty();
     selectArticle(state.data.articles.length - 1);
   });
+
+  // ---------- import from .md / .txt / .docx ----------
+  $('btnImport').addEventListener('click', function(){ $('fileInput').click(); });
+  $('fileInput').addEventListener('change', async function(){
+    var file = this.files[0];
+    this.value = '';
+    if (!file) return;
+    var name = file.name.toLowerCase();
+    var defaultStage = (state.data.stages[0] || {}).key || '';
+    try{
+      var article;
+      if (name.endsWith('.docx')){
+        toast('正在解析 Word 檔…');
+        var buf = await file.arrayBuffer();
+        article = await window.DocxImport.parseDocxToArticle(buf, { stage: defaultStage });
+      } else {
+        var text = await file.text();
+        article = window.MDImport.parseMarkdownToArticle(text, { stage: defaultStage });
+      }
+      // slug 若跟現有文章重複，自動加上亂數尾碼避免覆蓋
+      var existing = {};
+      state.data.articles.forEach(function(a){ existing[a.slug] = true; });
+      if (existing[article.slug]) article.slug += '-' + Date.now().toString(36).slice(-4);
+
+      state.data.articles.push(article);
+      markDirty();
+      selectArticle(state.data.articles.length - 1);
+      toast('✓ 已匯入「' + article.title + '」，區塊數：' + article.blocks.length + '，請檢查內容後儲存', 'ok');
+    }catch(e){
+      console.error(e);
+      toast('匯入失敗：' + e.message, 'err');
+    }
+  });
   $('btnDelete').addEventListener('click', function(){
     var a = curArticle(); if (!a) return;
     if (!confirm('確定要刪除「'+a.title+'」嗎？儲存後會一併從網站移除，此動作無法復原。')) return;
@@ -571,7 +675,8 @@
   }
   $('btnPreview').addEventListener('click', function(){
     var a = curArticle(); if (!a) return;
-    var html = window.ArticleRender.renderArticleHTML(a, stageLabelMap()[a.stage]);
+    var sMap0 = stageLabelMap();
+    var html = window.ArticleRender.renderArticleHTML(a, sMap0[a.stage], state.data.articles, sMap0);
     // 預覽時把相對路徑指回實際資料夾，讓字型與樣式讀得到
     html = html.replace('href="article.css"', 'href="../articles/article.css"');
     $('previewFrame').srcdoc = html;
@@ -643,15 +748,17 @@
       var sMap = stageLabelMap();
       for (var j=0;j<state.data.articles.length;j++){
         var art = state.data.articles[j];
-        var html = window.ArticleRender.renderArticleHTML(art, sMap[art.stage]);
+        var html = window.ArticleRender.renderArticleHTML(art, sMap[art.stage], state.data.articles, sMap);
         await writeFile(articlesDir, art.slug + '.html', html);
       }
 
-      // 4) 更新首頁卡片區塊
+      // 4) 更新首頁卡片區塊（首頁只精選最新 6 篇，其餘靠「查看全部文章」連去知識庫頁）
+      var HOMEPAGE_CAP = 6;
+      var published = state.data.articles.filter(function(a){ return !a.hidden; });
       var idxHandle = await state.dirHandle.getFileHandle('index.html', { create:false });
       var idxFile = await idxHandle.getFile();
       var idxText = await idxFile.text();
-      var cards = state.data.articles.map(function(a){ return window.ArticleRender.renderCardHTML(a, sMap[a.stage]); }).join('\n      ');
+      var cards = published.slice(0, HOMEPAGE_CAP).map(function(a){ return window.ArticleRender.renderCardHTML(a, sMap[a.stage]); }).join('\n      ');
       var startMark = '<!-- ARTICLES_AUTO_START — 此區塊由「admin/文章管理後台.html」自動產生，請勿手動編輯 -->';
       var endMark = '<!-- ARTICLES_AUTO_END -->';
       var si = idxText.indexOf(startMark), ei = idxText.indexOf(endMark);
@@ -664,12 +771,79 @@
         await w.close();
       }
 
+      // 4b) 更新健康知識庫頁（articles.html）：標籤篩選、全部文章卡片、JSON-LD
+      try{
+        var kbHandle = await state.dirHandle.getFileHandle('articles.html', { create:false });
+        var kbFile = await kbHandle.getFile();
+        var kbText = await kbFile.text();
+        var SITE_BASE = window.ArticleRender.SITE_BASE;
+
+        var tagFreq = {}, tagOrder = [];
+        published.forEach(function(a){
+          (a.tags||[]).forEach(function(t){
+            if (!(t in tagFreq)){ tagFreq[t] = 0; tagOrder.push(t); }
+            tagFreq[t]++;
+          });
+        });
+        var tagList = tagOrder.slice().sort(function(a,b){
+          return tagFreq[b]-tagFreq[a] || tagOrder.indexOf(a)-tagOrder.indexOf(b);
+        });
+        var tagsHtml = tagList.map(function(t){ return window.ArticleRender.renderTagChipHTML(t); }).join('\n      ');
+
+        var kbCardsHtml = published.map(function(a){ return window.ArticleRender.renderCardHTML(a, sMap[a.stage]); }).join('\n      ');
+
+        var itemList = published.map(function(a, i){
+          return { '@type':'ListItem', position: i+1, url: SITE_BASE + 'articles/' + a.slug + '.html', name: a.title };
+        });
+        var kbJsonld = [
+          {
+            '@context':'https://schema.org', '@type':'CollectionPage',
+            name:'健康知識庫', url: SITE_BASE + 'articles.html',
+            description:'香港註冊中醫師胡佩珊整理的女性健康文章庫，涵蓋產後調理、哺乳、備孕等主題。',
+            isPartOf: { '@id': window.ArticleRender.ORG_ID },
+            about: { '@id': window.ArticleRender.PERSON_ID },
+            mainEntity: { '@type':'ItemList', itemListElement: itemList }
+          },
+          {
+            '@context':'https://schema.org', '@type':'BreadcrumbList',
+            itemListElement: [
+              { '@type':'ListItem', position:1, name:'首頁', item: SITE_BASE + 'index.html' },
+              { '@type':'ListItem', position:2, name:'健康知識庫' }
+            ]
+          }
+        ].map(function(o){ return '  <script type="application/ld+json">\n' + JSON.stringify(o, null, 2) + '\n  <' + '/script>'; }).join('\n');
+
+        function replaceMarked(text, mark1, mark2, inner){
+          var a = text.indexOf(mark1), b = text.indexOf(mark2);
+          if (a === -1 || b === -1) return null;
+          return text.slice(0, a + mark1.length) + '\n      ' + inner + '\n      ' + text.slice(b);
+        }
+
+        var tagsStart = '<!-- TAGS_AUTO_START — 此區塊由「admin/文章管理後台.html」自動產生，請勿手動編輯 -->';
+        var tagsEnd = '<!-- TAGS_AUTO_END -->';
+        var articlesStart = '<!-- ARTICLES_AUTO_START — 此區塊由「admin/文章管理後台.html」自動產生，請勿手動編輯 -->';
+        var articlesEnd = '<!-- ARTICLES_AUTO_END -->';
+        var jsonldStart = '<!-- JSONLD_AUTO_START — 此區塊由「admin/文章管理後台.html」自動產生，請勿手動編輯 -->';
+        var jsonldEnd = '<!-- JSONLD_AUTO_END -->';
+
+        var next = replaceMarked(kbText, tagsStart, tagsEnd, tagsHtml);
+        if (next !== null) kbText = next;
+        next = replaceMarked(kbText, articlesStart, articlesEnd, kbCardsHtml);
+        if (next !== null) kbText = next;
+        next = replaceMarked(kbText, jsonldStart, jsonldEnd, kbJsonld);
+        if (next !== null) kbText = next;
+
+        var kw = await kbHandle.createWritable();
+        await kw.write(kbText);
+        await kw.close();
+      }catch(e){ /* articles.html 不存在就略過 */ }
+
       // 5) 更新 sitemap.xml
       try{
         var smHandle = await state.dirHandle.getFileHandle('sitemap.xml', { create:false });
         var smFile = await smHandle.getFile();
         var smText = await smFile.text();
-        var smUrls = state.data.articles.map(function(a){
+        var smUrls = state.data.articles.filter(function(a){ return !a.hidden; }).map(function(a){
           return '  <url><loc>https://coolicesan.github.io/TCM-personal-website/articles/' + a.slug + '.html</loc><priority>0.6</priority></url>';
         }).join('\n');
         var smStart = '<!-- ARTICLES_AUTO_START — 此區塊由「admin/文章管理後台.html」自動產生，請勿手動編輯 -->';

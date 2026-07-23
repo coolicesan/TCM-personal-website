@@ -1,5 +1,6 @@
 // 中醫九種體質問卷 — 依據中華中醫藥學會《中醫體質分類與判定》ZYYXH/T157-2009
-// 完整版：依標準量表條目編排，共 66 題（平和8・氣虛8・陽虛7・陰虛8・痰濕8・濕熱6・血瘀7・氣鬱7・特稟7）
+// 完整版：依標準量表條目編排，60 題填答、66 項分量表計分
+// （平和8・氣虛8・陽虛7・陰虛8・痰濕8・濕熱6・血瘀7・氣鬱7・特稟7）
 // 精簡版：自標準量表節選核心條目（每體質 3 題，共 27 題），供快速初篩
 // 計分：轉化分 =［(原始分 − 條目數) / (條目數 × 4)］× 100
 //   平和質條目為反向計分（「精力充沛」「能適應外界變化」為正向；其餘為反向）
@@ -55,13 +56,13 @@ const constitutions = [
     ],
     questions: [
       { text: '您精力充沛嗎？', reverse: false },
-      { text: '您容易疲乏嗎？', reverse: true },
-      { text: '您說話聲音低弱無力嗎？', reverse: true },
-      { text: '您感到悶悶不樂、情緒低沉嗎？', reverse: true },
-      { text: '您比一般人耐受不了寒冷（冬天的寒冷，夏天的冷氣、風扇等）嗎？', reverse: true },
+      { text: '您容易疲乏嗎？', reverse: true, hideInComplex: true, answerFrom: '1_0' },
+      { text: '您說話聲音低弱無力嗎？', reverse: true, hideInComplex: true, answerFrom: '1_6' },
+      { text: '您感到悶悶不樂、情緒低沉嗎？', reverse: true, hideInComplex: true, answerFrom: '7_0' },
+      { text: '您比一般人耐受不了寒冷（冬天的寒冷，夏天的冷氣、風扇等）嗎？', reverse: true, hideInComplex: true, answerFrom: '2_3' },
       { text: '您能適應外界自然和社會環境的變化嗎？', reverse: false },
       { text: '您容易失眠嗎？', reverse: true },
-      { text: '您容易忘事（健忘）嗎？', reverse: true },
+      { text: '您容易忘事（健忘）嗎？', reverse: true, hideInComplex: true, answerFrom: '6_5' },
     ]
   },
   {
@@ -124,7 +125,7 @@ const constitutions = [
       { text: '您胃脘部、背部或腰膝部怕冷嗎？', reverse: false },
       { text: '您感到怕冷、衣服比別人穿得多嗎？', reverse: false },
       { text: '您比一般人耐受不了寒冷（冬天的寒冷，夏天的冷氣、風扇等）嗎？', reverse: false },
-      { text: '您比別人容易患感冒嗎？', reverse: false },
+      { text: '您比別人容易患感冒嗎？', reverse: false, hideInComplex: true, answerFrom: '1_4' },
       { text: '您吃（喝）涼的東西會感到不舒服或者怕吃（喝）涼的東西嗎？', reverse: false },
       { text: '您受涼或吃（喝）涼的東西後，容易腹瀉（拉肚子）嗎？', reverse: false },
     ]
@@ -339,12 +340,32 @@ const TOPICS = [
   { title: '過敏與免疫', desc: '關於您對外界刺激的敏感程度' },
 ];
 
-let quizMode = 'simple'; // 'simple' (5 q/section) or 'complex' (all q)
+let quizMode = 'simple'; // 'simple' (3 q/section) or 'complex' (66 scored items)
 let userName = '';
 
 function getPageQuestions(ci) {
   const c = constitutions[ci];
   return quizMode === 'simple' ? c.shortQuestions : c.questions;
+}
+
+function answerKey(ci, qi) {
+  return ci + '_' + qi;
+}
+
+function shouldHideQuestion(q) {
+  return quizMode === 'complex' && q.hideInComplex;
+}
+
+function getStoredAnswer(ci, qi, q) {
+  const direct = allAnswers[answerKey(ci, qi)];
+  if (direct) return direct;
+  return quizMode === 'complex' && q.answerFrom ? allAnswers[q.answerFrom] : undefined;
+}
+
+function getVisibleQuestionRefs(ci) {
+  return getPageQuestions(ci)
+    .map((q, qi) => ({ q, qi }))
+    .filter(({ q }) => !shouldHideQuestion(q));
 }
 
 // ─── Override text for question ───────────────────────────────────────────
@@ -364,12 +385,15 @@ let allAnswers = {}; // keyed "ci_qi" → integer 1-5
 
 // ─── Progress bar ─────────────────────────────────────────────────────────
 function updateProgress(pageIndex) {
-  const totalQ = constitutions.reduce((s, _, i) => s + getPageQuestions(i).length, 0);
-  const answeredQ = Object.keys(allAnswers).length;
+  const totalQ = constitutions.reduce((s, _, i) => s + getVisibleQuestionRefs(i).length, 0);
+  const answeredQ = constitutions.reduce((s, _, i) => (
+    s + getVisibleQuestionRefs(i).filter(({ q, qi }) => getStoredAnswer(i, qi, q)).length
+  ), 0);
   const pct = Math.min(95, (answeredQ / totalQ) * 100);
   document.getElementById('progressBar').style.width = pct + '%';
-  const pageTotal = getPageQuestions(pageIndex).length;
-  const pageAnswered = Object.keys(allAnswers).filter(k => k.startsWith(pageIndex + '_')).length;
+  const pageRefs = getVisibleQuestionRefs(pageIndex);
+  const pageTotal = pageRefs.length;
+  const pageAnswered = pageRefs.filter(({ q, qi }) => getStoredAnswer(pageIndex, qi, q)).length;
   document.getElementById('progressText').textContent =
     `第 ${pageIndex + 1} / ${constitutions.length} 部分　已填 ${pageAnswered} / ${pageTotal} 題`;
 }
@@ -377,16 +401,16 @@ function updateProgress(pageIndex) {
 // ─── Render one page ──────────────────────────────────────────────────────
 function renderPage(pageIndex) {
   const ci = pageIndex;
-  const qs = getPageQuestions(ci);
   const topic = TOPICS[ci];
   const isLast = pageIndex === constitutions.length - 1;
   const container = document.getElementById('quizContainer');
+  const qRefs = getVisibleQuestionRefs(ci);
   document.querySelector('.cq-progress-meta')?.classList.remove('is-intro');
   document.querySelector('.cq-hero-desc')?.style.setProperty('display', 'none');
 
 
-  const qHtml = qs.map((q, qi) => {
-    const saved = allAnswers[ci + '_' + qi];
+  const qHtml = qRefs.map(({ q, qi }, displayIndex) => {
+    const saved = getStoredAnswer(ci, qi, q);
     const scaleHtml = SCALE_LABELS.map((label, val) => {
       const id = 'q_' + ci + '_' + qi + '_' + val;
       const checked = saved === (val + 1) ? 'checked' : '';
@@ -394,7 +418,7 @@ function renderPage(pageIndex) {
              `<label for="${id}">${label}</label>`;
     }).join('');
     return `<div class="question-block">
-      <div class="question-text">${qi + 1}. ${getConstitutionText(ci, qi, q.text)}</div>
+      <div class="question-text">${displayIndex + 1}. ${escHtml(getConstitutionText(ci, qi, q.text))}</div>
       <div class="options-scale">${scaleHtml}</div>
     </div>`;
   }).join('');
@@ -433,7 +457,7 @@ function renderPage(pageIndex) {
 }
 
 function cqNext() {
-  const missing = getPageQuestions(cqPage).filter((_, qi) => !allAnswers[cqPage + '_' + qi]).length;
+  const missing = getVisibleQuestionRefs(cqPage).filter(({ q, qi }) => !getStoredAnswer(cqPage, qi, q)).length;
   if (missing > 0) {
     showCqError(`本頁還有 ${missing} 題未填，請完整作答後繼續。`);
     return;
@@ -448,7 +472,7 @@ function cqPrev() {
 }
 
 function cqSubmit() {
-  const missing = getPageQuestions(cqPage).filter((_, qi) => !allAnswers[cqPage + '_' + qi]).length;
+  const missing = getVisibleQuestionRefs(cqPage).filter(({ q, qi }) => !getStoredAnswer(cqPage, qi, q)).length;
   if (missing > 0) {
     showCqError(`本頁還有 ${missing} 題未填，請完整作答後繼續。`);
     return;
@@ -479,7 +503,7 @@ function calculateResults() {
   const results = constitutions.map((c, ci) => {
     const qs = getPageQuestions(ci);
     const scores = qs.map((q, qi) => {
-      let val = allAnswers[ci + '_' + qi];
+      let val = getStoredAnswer(ci, qi, q);
       if (!val) return null;
       if (q.reverse) val = 6 - val;
       return val;
@@ -511,12 +535,12 @@ function calculateResults() {
     primary = [...biased].sort((a, b) => b.score - a.score)[0];
   }
 
-  // 兼夾體質：排除主體質與平和質，快速版 ≥40 / 詳細版 ≥30，最多顯示 2 個
+  // 兼夾體質：排除主體質與平和質，快速版 ≥40 / 詳細版 ≥30，只顯示最高 1 個
   const secThreshold = quizMode === 'simple' ? 40 : 30;
   const secondary = results
     .filter(r => r.id !== primary.id && r.id !== 'balanced' && r.score >= secThreshold)
     .sort((a, b) => b.score - a.score)
-    .slice(0, 2);
+    .slice(0, 1);
 
   renderResults(primary, secondary, results, balancedLabel);
 }
@@ -594,13 +618,20 @@ function initRadarInteraction(all) {
 
   const n = all.length;
   const cx = 265, cy = 248, maxR = 138;
+  const markedBiasedIds = new Set(
+    all
+      .filter(c => c.id !== 'balanced' && c.score >= 40)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 2)
+      .map(c => c.id)
+  );
 
   function tendencyLabel(c) {
     if (c.id === 'balanced') {
       if (c.score >= 60) return c.score >= 70 ? '純平和質' : '基本平和質';
       return '非平和質';
     }
-    if (c.score >= 40) return '明顯偏頗';
+    if (c.score >= 40 && markedBiasedIds.has(c.id)) return '明顯偏頗';
     if (c.score >= 30) return '輕度傾向';
     return '無明顯傾向';
   }
@@ -637,7 +668,7 @@ function initRadarInteraction(all) {
       <circle cx="${vx}" cy="${vy}" r="5.5" fill="${c.color}" opacity="0.9"/>`;
 
     const tend = tendencyLabel(c);
-    const tendColor = c.score >= 40 ? 'var(--terracotta)' : c.score >= 30 ? '#B07820' : 'var(--text-light)';
+    const tendColor = tend === '明顯偏頗' ? 'var(--terracotta)' : tend === '輕度傾向' ? '#B07820' : 'var(--text-light)';
     tooltip.style.display = 'flex';
     tooltip.innerHTML = `<span style="font-size:1.1rem;">${c.emoji}</span><strong style="color:var(--plum);">${c.name}</strong><span style="color:${tendColor};font-size:.8rem;">${tend}</span>`;
   }
@@ -677,7 +708,29 @@ function renderResults(primary, secondary, all, balancedLabel) {
   // Store state for report hand-off
   _resultState = { primary, secondary, all, balancedLabel, displayName };
 
-  const reportUrl = `constitution-report.html?const=${encodeURIComponent(primary.name)}&sec=${encodeURIComponent(secondary.map(s => s.name).join(','))}${userName ? `&name=${encodeURIComponent(userName)}` : ''}`;
+  const reportState = {
+    source: 'constitution-quiz',
+    mode: quizMode,
+    userName,
+    balancedLabel,
+    primary: { name: primary.name, displayName },
+    secondary: sec ? { name: sec.name } : null,
+    createdAt: new Date().toISOString()
+  };
+  try {
+    sessionStorage.setItem('drhu_cq_report', JSON.stringify(reportState));
+  } catch (_) {}
+
+  const reportParams = new URLSearchParams({
+    const: primary.name,
+    mode: quizMode
+  });
+  if (sec) {
+    reportParams.set('sec', sec.name);
+  }
+  if (balancedLabel) reportParams.set('label', balancedLabel);
+  if (userName) reportParams.set('name', userName);
+  const reportUrl = `constitution-report.html?${reportParams.toString()}`;
 
   const balancedNote = balancedLabel === '基本平和質'
     ? '體質大致平衡，仍有少量偏頗傾向，宜留意保養。'
@@ -846,7 +899,7 @@ function renderVersionSelect() {
         <div class="cq-version-badge">推薦</div>
         <div class="cq-version-icon">🔍</div>
         <div class="cq-version-name">完整版</div>
-        <div class="cq-version-stat">66 題・約 15 分鐘</div>
+        <div class="cq-version-stat">66 項計分・60 題填答・約 15 分鐘</div>
         <div class="cq-version-btn">開始評估 →</div>
       </div>
     </div>
