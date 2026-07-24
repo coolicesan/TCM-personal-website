@@ -24,6 +24,64 @@
     return String(s == null ? '' : s).replace(/\*\*(.+?)\*\*/g, '$1').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
   }
 
+  // Bilingual article fields are intentionally backwards-compatible.
+  // Existing fields may remain plain strings; newer content may use either:
+  //   title: { zh: '...', en: '...' }
+  // or:
+  //   i18n: { en: { title: '...', blocks: [...] } }
+  function pickLocalized(value, lang) {
+    if (!value || typeof value !== 'object' || Array.isArray(value)) return value;
+    return value[lang] || value.zh || value.en || '';
+  }
+
+  function localizeBlock(block, lang) {
+    if (!block || typeof block !== 'object') return block;
+    var localized = Object.assign({}, block, (block.i18n && block.i18n[lang]) || {});
+    ['text', 'title', 'cite', 'leftLabel', 'rightLabel'].forEach(function (key) {
+      localized[key] = pickLocalized(localized[key], lang);
+    });
+    ['headers', 'leftItems', 'rightItems'].forEach(function (key) {
+      if (Array.isArray(localized[key])) localized[key] = localized[key].map(function (v) { return pickLocalized(v, lang); });
+    });
+    if (Array.isArray(localized.items) && localized.type !== 'faq') {
+      localized.items = localized.items.map(function (v) { return pickLocalized(v, lang); });
+    }
+    if (Array.isArray(localized.rows)) {
+      localized.rows = localized.rows.map(function (row) {
+        return row.map(function (cell) { return pickLocalized(cell, lang); });
+      });
+    }
+    if (Array.isArray(localized.items) && localized.type === 'faq') {
+      localized.items = localized.items.map(function (qa) {
+        var q = Object.assign({}, qa, (qa.i18n && qa.i18n[lang]) || {});
+        q.q = pickLocalized(q.q, lang);
+        q.a = pickLocalized(q.a, lang);
+        return q;
+      });
+    }
+    return localized;
+  }
+
+  function localizeArticle(article, lang) {
+    lang = lang || 'zh';
+    var localized = Object.assign({}, article, (article.i18n && article.i18n[lang]) || {});
+    [
+      'conditionName',
+      'title',
+      'excerpt',
+      'metaTitle',
+      'metaDescription',
+      'heroEyebrow'
+    ].forEach(function (key) {
+      localized[key] = pickLocalized(localized[key], lang);
+    });
+    ['tags', 'keywords', 'heroTags'].forEach(function (key) {
+      if (Array.isArray(localized[key])) localized[key] = localized[key].map(function (v) { return pickLocalized(v, lang); });
+    });
+    localized.blocks = (localized.blocks || []).map(function (block) { return localizeBlock(block, lang); });
+    return localized;
+  }
+
   // 允許內文段落使用簡單 **粗體** 與 [文字](網址) 語法，其餘照跳脫輸出
   // 外部連結（http/https）一律開新分頁、rel=noopener；內部錨點/相對連結維持原樣
   function linkAttrs(url) {
@@ -38,7 +96,7 @@
     out = out.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
     // 先處理 [文字](網址) 語法連結，用佔位符暫存避免被裸網址規則二次比對
     var placeholders = [];
-    out = out.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, function (_, text, url) {
+    out = out.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, function (_, text, url) {
       placeholders.push('<a ' + linkAttrs(url) + '>' + text + '</a>');
       return ' LINK' + (placeholders.length - 1) + ' ';
     });
@@ -48,6 +106,14 @@
     });
     out = out.replace(/ LINK(\d+) /g, function (_, idx) { return placeholders[idx]; });
     return out;
+  }
+
+  function renderArticleTitle(title) {
+    var text = String(title == null ? '' : title).trim();
+    var split = text.match(/^(.+?[：:])(.+)$/) || text.match(/^(.+?[？?])(.+)$/);
+    if (!split) return inline(text);
+    return '<span class="article-title-primary">' + inline(split[1].trim()) + '</span>' +
+      '<span class="article-title-secondary">' + inline(split[2].trim()) + '</span>';
   }
 
   function slugifyHeading(text, index) {
@@ -171,9 +237,12 @@
   }
 
   // ── 麵包屑導覽（可見 HTML，置於 hero 內）──────────────────────
-  function buildBreadcrumbNav(stageLabel) {
-    var crumbs = ['<a href="../index.html">首頁</a>'];
-    if (stageLabel) crumbs.push('<a href="../index.html#articles">' + esc(stageLabel) + '</a>');
+  function buildBreadcrumbNav(stageLabel, stageKey) {
+    var crumbs = ['<a href="../index.html">首頁</a>', '<a href="../articles.html">文章知識庫</a>'];
+    if (stageLabel) {
+      var stageHref = '../articles.html' + (stageKey ? '?stage=' + esc(stageKey) : '');
+      crumbs.push('<a href="' + stageHref + '">' + esc(stageLabel) + '</a>');
+    }
     return '<nav class="article-breadcrumbs" aria-label="麵包屑導覽">' + crumbs.join('<span class="sep">›</span>') + '</nav>';
   }
 
@@ -194,6 +263,7 @@
     }).slice(0, 3);
     if (!candidates.length) return '';
     var items = candidates.map(function (a) {
+      a = localizeArticle(a, 'zh');
       var tag = (stageLabelMap && stageLabelMap[a.stage]) || '';
       return '<a class="article-related-card" href="' + esc(a.slug) + '.html">' +
         (tag ? '<span class="article-related-tag">' + esc(tag) + '</span>' : '') +
@@ -251,7 +321,11 @@
     });
 
     var crumbItems = [{ '@type': 'ListItem', position: 1, name: '首頁', item: SITE_BASE + 'index.html' }];
-    if (stageLabel) crumbItems.push({ '@type': 'ListItem', position: 2, name: stageLabel, item: SITE_BASE + 'index.html#articles' });
+    crumbItems.push({ '@type': 'ListItem', position: 2, name: '文章知識庫', item: SITE_BASE + 'articles.html' });
+    if (stageLabel) {
+      var stageUrl = SITE_BASE + 'articles.html' + (article.stage ? '?stage=' + article.stage : '');
+      crumbItems.push({ '@type': 'ListItem', position: crumbItems.length + 1, name: stageLabel, item: stageUrl });
+    }
     crumbItems.push({ '@type': 'ListItem', position: crumbItems.length + 1, name: plain(article.title) });
     blocks.push({
       '@context': 'https://schema.org',
@@ -282,7 +356,9 @@
 
   // ── 完整文章頁面 ──────────────────────────────────────────
   // allArticles / stageLabelMap 為選填，提供時會產生「相關文章」區塊
-  function renderArticleHTML(article, stageLabel, allArticles, stageLabelMap) {
+  function renderArticleHTML(article, stageLabel, allArticles, stageLabelMap, lang) {
+    lang = lang || 'zh';
+    article = localizeArticle(article, lang);
     var title = esc(article.metaTitle || (article.title + '｜胡佩珊中醫師'));
     var desc = esc(article.metaDescription || article.excerpt || '');
     var keywords = esc((article.keywords || []).join(','));
@@ -301,7 +377,7 @@
     var modified = article.modifiedDate || article.publishDate || '';
     var publishedMeta = article.publishDate ? '<meta property="article:published_time" content="' + esc(article.publishDate) + '">\n' : '';
     var modifiedMeta = modified ? '<meta property="article:modified_time" content="' + esc(modified) + '">\n' : '';
-    var breadcrumbNav = buildBreadcrumbNav(stageLabel);
+    var breadcrumbNav = buildBreadcrumbNav(stageLabel, article.stage);
     var authorBox = buildAuthorBox();
     var related = buildRelated(article, allArticles, stageLabelMap);
 
@@ -343,7 +419,7 @@ jsonld + '\n' +
 '<header class="article-hero">\n' +
 breadcrumbNav + '\n' +
 '  <div class="article-hero-eyebrow">' + inline(article.heroEyebrow || stageLabel || '') + '</div>\n' +
-'  <h1>' + inline(article.title) + '</h1>\n' +
+'  <h1>' + renderArticleTitle(article.title) + '</h1>\n' +
 (article.excerpt ? '  <p class="article-hero-subtitle">' + inline(article.excerpt) + '</p>\n' : '') +
 (heroTags ? '  <div class="article-hero-tags">' + heroTags + '</div>\n' : '') +
 '  <div class="article-hero-meta">' + metaLine + '</div>\n' +
@@ -358,13 +434,15 @@ authorBox + '\n' +
 related + '\n' +
 '<p class="article-disclaimer">本文內容僅供健康教育參考，不構成醫療建議，亦不能取代註冊醫師或中醫師的診斷與治療。若您出現急性或嚴重症狀，請立即求醫。撰文：胡佩珊中醫師（香港中醫藥管理委員會註冊中醫師，註冊編號：008823）。</p>\n' +
 '</main>\n' +
+'<script src="../shared-nav.js"></script>\n' +
 '</body>\n' +
 '</html>\n';
   }
 
   // ── 文章卡片 HTML 片段（首頁精選區 與 健康知識庫頁 共用）─────────
   // data-tags／data-search 供知識庫頁的標籤篩選與關鍵字搜尋使用，首頁卡片會忽略這兩個屬性
-  function renderCardHTML(article, stageLabel) {
+  function renderCardHTML(article, stageLabel, lang) {
+    article = localizeArticle(article, lang || 'zh');
     var tagList = article.tags || [];
     var tags = tagList.join(',');
     var searchBlob = [article.title, article.excerpt, tagList.join(' '), (article.keywords || []).join(' ')]
@@ -390,6 +468,8 @@ tagPills +
     renderCardHTML: renderCardHTML,
     renderTagChipHTML: renderTagChipHTML,
     renderBlocks: renderBlocks,
+    localizeArticle: localizeArticle,
+    pickLocalized: pickLocalized,
     inline: inline,
     plain: plain,
     SITE_BASE: SITE_BASE,

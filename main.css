@@ -106,6 +106,32 @@ a { color: inherit; }
   transition: background 0.2s, transform 0.2s;
 }
 .nav-cta:hover { background: var(--taupe-deep); transform: translateY(-1px); }
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: 0.15rem;
+  padding: 0.2rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255,255,255,0.68);
+  color: var(--cocoa-soft);
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+.lang-switch button {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  padding: 0.22rem 0.42rem;
+  border-radius: 999px;
+  font-weight: 600;
+}
+.lang-switch button.active {
+  background: var(--taupe);
+  color: var(--white);
+}
 .nav-toggle {
   display: none; flex-direction: column; gap: 5px;
   background: none; border: none; cursor: pointer; padding: 6px;
@@ -638,6 +664,7 @@ a { color: inherit; }
   .nav-links.open { display: flex; }
   .nav-links a { padding: 0.8rem 0.3rem; border-bottom: 1px solid var(--line); }
   .nav-cta { margin-top: 0.8rem; text-align: center; border-radius: var(--radius) !important; }
+  .lang-switch { margin-left: auto; }
   .nav-toggle { display: flex; }
   .sj-card { flex-basis: 100%; }
   .svc-grid { grid-template-columns: 1fr; }
@@ -656,4 +683,68 @@ a { color: inherit; }
   object-fit: cover; object-position: center top;
 }
 .contact-lede a { color: var(--taupe-deep); font-weight: 700; }
+
+/* ═══════════════════════════════════════════════════════════════
+   English layout refinements (applied only when lang="en-*")
+   The wide CJK letter-spacing and tight leading are tuned for
+   Chinese characters, so Latin text needs gentler tracking,
+   looser word-wrapping and a touch more line-height.
+   ═══════════════════════════════════════════════════════════════ */
+html[lang^="en"] body {
+  line-height: 1.75;
+}
+
+/* Eyebrows, labels and small caps: heavy CJK tracking looks
+   over-spaced in English, so pull it back to a natural range. */
+html[lang^="en"] .hero-eyebrow {
+  letter-spacing: 0.12em;
+  font-size: 0.92rem;
+}
+html[lang^="en"] .assess-sub,
+html[lang^="en"] .sj-age,
+html[lang^="en"] .contact-label,
+html[lang^="en"] .kb-filter-label,
+html[lang^="en"] .art-tag-pill {
+  letter-spacing: 0.03em;
+}
+html[lang^="en"] .section-eyebrow,
+html[lang^="en"] .tx-label {
+  letter-spacing: 0.1em;
+}
+
+/* Hero title: English words are longer, so ease the tracking,
+   tighten the leading a little and prevent awkward breaks. */
+html[lang^="en"] .hero-title {
+  letter-spacing: 0;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+html[lang^="en"] .hero-desc {
+  text-wrap: pretty;
+}
+
+/* Headings and prose read better with normal English hyphenation
+   and balanced wrapping rather than mid-word CJK breaks. */
+html[lang^="en"] h2,
+html[lang^="en"] h3,
+html[lang^="en"] .assess-title {
+  text-wrap: balance;
+}
+html[lang^="en"] p,
+html[lang^="en"] .assess-desc,
+html[lang^="en"] .art-excerpt {
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+/* Buttons: allow English labels room and avoid clipping. */
+html[lang^="en"] .btn {
+  white-space: normal;
+  letter-spacing: 0.01em;
+}
+
+/* Language switcher: keep the EN label readable when active. */
+html[lang^="en"] .lang-switch button {
+  letter-spacing: 0.02em;
+}
 

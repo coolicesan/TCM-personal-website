@@ -13,9 +13,7 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 @page{size:A4;margin:18mm 20mm}
-/* push page content below the fixed site nav so it isn't covered */
-body{padding-top:72px}
-@media print{body{padding-top:0}}
+body{padding-top:0}
 
 /* ── Controls bar (screen only) ── */
 .ctrl{background:#3D2435;padding:16px 24px;display:none;align-items:center;gap:12px;flex-wrap:wrap}
@@ -504,5 +502,6 @@ if(firstSec&&CD[firstSec]){document.getElementById('iSec').value=firstSec;render
   });
 </script>
 <script src="editor.js"></script>
+<script src="shared-nav.js"></script>
 </body>
 </html>

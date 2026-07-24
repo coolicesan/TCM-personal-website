@@ -33,13 +33,22 @@ window.filterArticles = filterArticles;
 function handleSubmit(e) {
   e.preventDefault();
   const v = id => (document.getElementById(id)?.value || '').trim();
-  const lines = [
-    '您好，我想預約門診：',
-    '姓名：' + v('name'),
-    '電話：' + v('phone'),
-    v('stage') ? '就診需求：' + v('stage') : '',
-    v('message') ? '想詢問：' + v('message') : ''
-  ].filter(Boolean);
+  const lang = window.DrHuI18n?.getLang?.() || 'zh';
+  const lines = lang === 'en'
+    ? [
+        'Hello, I would like to book a consultation:',
+        'Name: ' + v('name'),
+        'Phone: ' + v('phone'),
+        v('stage') ? 'Reason for visit: ' + v('stage') : '',
+        v('message') ? 'Message: ' + v('message') : ''
+      ].filter(Boolean)
+    : [
+        '您好，我想預約門診：',
+        '姓名：' + v('name'),
+        '電話：' + v('phone'),
+        v('stage') ? '就診需求：' + v('stage') : '',
+        v('message') ? '想詢問：' + v('message') : ''
+      ].filter(Boolean);
   window.open('https://wa.me/85298152863?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
 }
 window.handleSubmit = handleSubmit;
@@ -92,6 +101,20 @@ function initKnowledgeBase() {
   const emptyEl = document.getElementById('kbEmpty');
   const countEl = document.getElementById('kbCountNum');
   const state = { stage: 'all', tags: new Set(), q: '' };
+
+  // 由文章頁麵包屑帶入 ?stage= 參數時，預先選取對應的生命階段分頁
+  if (stageTabs) {
+    const urlStage = new URLSearchParams(window.location.search).get('stage');
+    if (urlStage) {
+      let matched = false;
+      stageTabs.querySelectorAll('.stage-tab').forEach((b) => {
+        const isMatch = b.dataset.stage === urlStage;
+        b.classList.toggle('active', isMatch);
+        if (isMatch) matched = true;
+      });
+      if (matched) state.stage = urlStage;
+    }
+  }
 
   function apply() {
     const q = state.q.trim().toLowerCase();

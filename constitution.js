@@ -1,7 +1,7 @@
 // 中醫九種體質問卷 — 依據中華中醫藥學會《中醫體質分類與判定》ZYYXH/T157-2009
 // 完整版：依標準量表條目編排，60 題填答、66 項分量表計分
 // （平和8・氣虛8・陽虛7・陰虛8・痰濕8・濕熱6・血瘀7・氣鬱7・特稟7）
-// 精簡版：自標準量表節選核心條目（每體質 3 題，共 27 題），供快速初篩
+// 精簡版：自標準量表節選核心條目，25 題填答、27 項計分，供快速初篩
 // 計分：轉化分 =［(原始分 − 條目數) / (條目數 × 4)］× 100
 //   平和質條目為反向計分（「精力充沛」「能適應外界變化」為正向；其餘為反向）
 //   平和質：轉化分 ≥60 且其他八種 <30 → 純平和質；≥60 且其他 <40 → 基本平和質
@@ -51,8 +51,8 @@ const constitutions = [
     avoid: ['過度偏食（全素或全肉）', '長期熬夜破壞平衡', '過度勞累或壓力積累'],
     shortQuestions: [
       { text: '您精力充沛嗎？', reverse: false },
-      { text: '您容易疲乏嗎？', reverse: true },
-      { text: '您感到悶悶不樂、情緒低沉嗎？', reverse: true },
+      { text: '您容易疲乏嗎？', reverse: true, hideInSimple: true, answerFrom: '1_0' },
+      { text: '您感到悶悶不樂、情緒低沉嗎？', reverse: true, hideInSimple: true, answerFrom: '7_0' },
     ],
     questions: [
       { text: '您精力充沛嗎？', reverse: false },
@@ -353,13 +353,13 @@ function answerKey(ci, qi) {
 }
 
 function shouldHideQuestion(q) {
-  return quizMode === 'complex' && q.hideInComplex;
+  return (quizMode === 'complex' && q.hideInComplex) || (quizMode === 'simple' && q.hideInSimple);
 }
 
 function getStoredAnswer(ci, qi, q) {
   const direct = allAnswers[answerKey(ci, qi)];
   if (direct) return direct;
-  return quizMode === 'complex' && q.answerFrom ? allAnswers[q.answerFrom] : undefined;
+  return q.answerFrom ? allAnswers[q.answerFrom] : undefined;
 }
 
 function getVisibleQuestionRefs(ci) {
@@ -892,7 +892,7 @@ function renderVersionSelect() {
       <div class="cq-version-card" onclick="startQuiz('simple')">
         <div class="cq-version-icon">⚡</div>
         <div class="cq-version-name">快速版</div>
-        <div class="cq-version-stat">27 題・約 5 分鐘</div>
+        <div class="cq-version-stat">27 項計分・25 題填答・約 5 分鐘</div>
         <div class="cq-version-btn">開始評估 →</div>
       </div>
       <div class="cq-version-card cq-version-card-featured" onclick="startQuiz('complex')">
