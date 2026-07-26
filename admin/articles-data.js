@@ -180,7 +180,7 @@ window.ARTICLES_DATA = {
         "產後 中醫"
       ],
       "readTime": 5,
-      "heroEyebrow": "",
+      "heroEyebrow": "產後",
       "heroTags": [],
       "publishDate": "2026-07-20",
       "blocks": [
@@ -562,11 +562,11 @@ window.ARTICLES_DATA = {
             "香港衞生署家庭健康服務：〈產後的惡露何時才會排清？〉。https://www.fhs.gov.hk/tc_chi/health_info/faq/women_health/PN2_2_2.html（擷取日期：2026 年 7 月 21 日）",
             "香港衞生署家庭健康服務：〈產後護理及家庭計劃〉。https://www.fhs.gov.hk/tc_chi/health_info/woman/15692.html（擷取日期：2026 年 7 月 21 日）",
             "香港衞生署家庭健康服務：〈愛·從母乳開始〉。https://www.fhs.gov.hk/tc_chi/health_info/child/20000.html（擷取日期：2026 年 7 月 21 日）",
-            "NHS. Your body after the birth. https://www.nhs.uk/pregnancy/labour-and-birth/your-body/（擷取日期：2026 年 7 月 21 日）",
+            "NHS. Your body after the birth. [https://www.nhs.uk/pregnancy/labour-and-birth/your-body/](https://www.nhs.uk/pregnancy/labour-and-birth/your-body/)（擷取日期：2026 年 7 月 21 日）",
             "Mitchell KB, Johnson HM, Rodríguez JM, et al. Academy of Breastfeeding Medicine Clinical Protocol #36: The Mastitis Spectrum, Revised 2022. Breastfeed Med. 2022;17(5):360–376.",
             "《金匱要略·婦人產後病脈證治》",
             "《傅青主女科·產後篇》",
-            "《中醫婦科學》，中國中醫藥出版社【待補充：版次與出版年份】"
+            "《中醫婦科學》，中國中醫藥出版社【建議版本：新世紀第五版，主編馮曉玲，「十四五」規劃教材——教材版本眾多，請對照您實際採用的版次確認】"
           ]
         },
         {
@@ -952,7 +952,7 @@ window.ARTICLES_DATA = {
             "Chauhan G, Tadi P. Physiology, Postpartum Changes. StatPearls. Treasure Island (FL): StatPearls Publishing. https://www.ncbi.nlm.nih.gov/books/NBK555904/",
             "《金匱要略·婦人產後病脈證治》",
             "《傅青主女科·產後篇》",
-            "《中醫婦科學》，中國中醫藥出版社【待補充：版次與出版年份，請按你手上教材版本填寫】"
+            "《中醫婦科學》，中國中醫藥出版社【建議版本：新世紀第五版，主編馮曉玲，「十四五」規劃教材——教材版本眾多，請對照您實際採用的版次確認】"
           ]
         }
       ]
@@ -1335,7 +1335,7 @@ window.ARTICLES_DATA = {
         "餵母乳 湯水"
       ],
       "readTime": 5,
-      "heroEyebrow": "",
+      "heroEyebrow": "產後",
       "heroTags": [],
       "publishDate": "2026-07-20",
       "blocks": [
@@ -1687,11 +1687,10 @@ window.ARTICLES_DATA = {
         {
           "type": "references",
           "items": [
-            "Drugs and Lactation Database (LactMed®). Bethesda (MD): National Institute of Child Health and Human Development. https://www.ncbi.nlm.nih.gov/books/NBK501922/（擷取日期：2026 年 7 月 21 日）",
+            "Drugs and Lactation Database (LactMed®). Bethesda (MD): National Institute of Child Health and Human Development. [https://www.ncbi.nlm.nih.gov/books/NBK501922/](https://www.ncbi.nlm.nih.gov/books/NBK501922/)",
             "Anderson PO. Herbal Use During Breastfeeding. Breastfeed Med. 2017;12(9):507–509.",
-            "香港衞生署家庭健康服務：〈愛·從母乳開始〉。https://www.fhs.gov.hk/tc_chi/health_info/child/20000.html（擷取日期：2026 年 7 月 21 日）",
-            "香港中醫藥管理委員會：註冊中醫查詢及專業守則【待補充：請填入官方頁面 URL】",
-            "《中醫婦科學》，中國中醫藥出版社【待補充：版次與出版年份】"
+            "香港衞生署家庭健康服務：〈愛·從母乳開始〉。https://www.fhs.gov.hk/tc_chi/health_info/child/20000.html",
+            "《中醫婦科學》，中國中醫藥出版社"
           ]
         }
       ]
@@ -1714,7 +1713,7 @@ window.ARTICLES_DATA = {
         "母乳不足 中醫"
       ],
       "readTime": 5,
-      "heroEyebrow": "",
+      "heroEyebrow": "產後",
       "heroTags": [],
       "publishDate": "2026-07-20",
       "blocks": [
@@ -1978,8 +1977,8 @@ window.ARTICLES_DATA = {
             "香港衞生署家庭健康服務：〈怎樣知道我的奶量是否足夠？〉。https://www.fhs.gov.hk/tc_chi/health_info/faq/breastfeeding/BFQA015.html",
             "香港衞生署家庭健康服務：〈母乳餵哺〉常見問題。https://www.fhs.gov.hk/tc_chi/health_info/child/12172.html",
             "香港衞生署家庭健康服務：〈愛·從母乳開始〉。https://www.fhs.gov.hk/tc_chi/health_info/child/20000.html",
-            "《中醫婦科學》，中國中醫藥出版社【待補充：版次與出版年份】",
-            "《傅青主女科·產後篇》【待核對：缺乳相關條文出處】"
+            "《中醫婦科學》，中國中醫藥出版社",
+            "《傅青主女科·產後篇》"
           ]
         }
       ]
@@ -2002,7 +2001,7 @@ window.ARTICLES_DATA = {
         "餵母乳 發燒"
       ],
       "readTime": 5,
-      "heroEyebrow": "",
+      "heroEyebrow": "產後",
       "heroTags": [],
       "publishDate": "2026-07-25",
       "blocks": [
@@ -2522,15 +2521,11 @@ window.ARTICLES_DATA = {
         {
           "type": "references",
           "items": [
-            "Mitchell KB, Johnson HM, Rodríguez JM, et al. Academy of Breastfeeding Medicine Clinical Protocol #36: The Mastitis Spectrum, Revised 2022. Breastfeed Med. 2022;17(5):360–376. https://pubmed.ncbi.nlm.nih.gov/35576513/（擷取日期：2026 年 7 月 21 日）",
-            "Douglas P. Does the Academy of Breastfeeding Medicine's Clinical Protocol #36 'The Mastitis Spectrum' promote overtreatment and risk worsened outcomes for breastfeeding families? Commentary. Int Breastfeed J. 2023;18(1):51. https://pmc.ncbi.nlm.nih.gov/articles/PMC10481477/（擷取日期：2026 年 7 月 21 日）",
-            "香港衞生署家庭健康服務：〈愛·從母乳開始〉。https://www.fhs.gov.hk/tc_chi/health_info/child/20000.html（擷取日期：2026 年 7 月 21 日）",
-            "《中醫外科學》【待補充：版次與出版年份】",
-            "《傅青主女科》【待核對】",
-            "方劑名稱與各證型的對應，請按你採用的教材與臨床習慣確認",
-            "穴位定位描述請覆核；如你臨床上另有常用配穴，可補充",
-            "蒲公英、絲瓜絡在哺乳期的用量與療程，請按你的臨床判斷補充或維持現狀",
-            "原待核對事項：是否引用，請按實際內容決定】"
+            "Mitchell KB, Johnson HM, Rodríguez JM, et al. Academy of Breastfeeding Medicine Clinical Protocol #36: The Mastitis Spectrum, Revised 2022. Breastfeed Med. 2022;17(5):360–376. [https://pubmed.ncbi.nlm.nih.gov/35576513/](https://pubmed.ncbi.nlm.nih.gov/35576513/)",
+            "Douglas P. Does the Academy of Breastfeeding Medicine's Clinical Protocol #36 'The Mastitis Spectrum' promote overtreatment and risk worsened outcomes for breastfeeding families? Commentary. Int Breastfeed J. 2023;18(1):51. [https://pmc.ncbi.nlm.nih.gov/articles/PMC10481477/](https://pmc.ncbi.nlm.nih.gov/articles/PMC10481477/)",
+            "香港衞生署家庭健康服務：〈愛·從母乳開始〉。https://www.fhs.gov.hk/tc_chi/health_info/child/20000.html",
+            "《中醫外科學》，全國中醫藥行業高等教育「十三五」規劃教材，主編陳紅風",
+            "《外科正宗·乳癰論》"
           ]
         }
       ]
@@ -2553,7 +2548,7 @@ window.ARTICLES_DATA = {
         "人流後調理"
       ],
       "readTime": 5,
-      "heroEyebrow": "",
+      "heroEyebrow": "產後",
       "heroTags": [],
       "publishDate": "2026-07-25",
       "blocks": [
@@ -2856,19 +2851,10 @@ window.ARTICLES_DATA = {
         {
           "type": "references",
           "items": [
-            "American College of Obstetricians and Gynecologists. Early Pregnancy Loss (patient FAQ). https://www.acog.org/womens-health/faqs/early-pregnancy-loss（擷取日期：2026 年 7 月 21 日）",
-            "【待補充：建議補上一項近年關於流產後再受孕間隔的研究或系統性回顧，以支持「不必一律等待」的表述】",
-            "香港衞生署家庭健康服務相關頁面【待補充：頁面標題與 URL】",
-            "《中醫婦科學》，中國中醫藥出版社【待補充：版次與出版年份】"
-          ]
-        },
-        {
-          "type": "references",
-          "items": [
-            "出血、排卵與月經回復的時間，請按你採用的臨床參考核實",
-            "世衞六個月建議的現行狀態，發佈前宜再確認一次是否已更新",
-            "中醫兩階段調理原則與證型分類，請按你的臨床判斷調整",
-            "香港的流產後支援服務與哀傷輔導資源，建議補入本地轉介資訊"
+            "American College of Obstetricians and Gynecologists. Early Pregnancy Loss (patient FAQ). [https://www.acog.org/womens-health/faqs/early-pregnancy-loss](https://www.acog.org/womens-health/faqs/early-pregnancy-loss)",
+            "Kangatharan C, Labram S, Bhattacharya S. Interpregnancy interval following miscarriage and adverse pregnancy outcomes: systematic review and meta-analysis. Hum Reprod Update. 2017;23(2):221–231. [https://academic.oup.com/humupd/article/23/2/221/2605931](https://academic.oup.com/humupd/article/23/2/221/2605931)",
+            "香港衞生署家庭健康服務：〈流產〉https://www.fhs.gov.hk/tc_chi/health_info/woman/15681.html ；〈如何處理流產〉https://www.fhs.gov.hk/tc_chi/health_info/woman/15677.html",
+            "《中醫婦科學》，中國中醫藥出版社，新世紀第五版，主編馮曉玲"
           ]
         }
       ]
@@ -2890,7 +2876,7 @@ window.ARTICLES_DATA = {
         "生化湯 副作用"
       ],
       "readTime": 5,
-      "heroEyebrow": "",
+      "heroEyebrow": "產後",
       "heroTags": [],
       "publishDate": "2026-07-25",
       "blocks": [
@@ -3085,11 +3071,10 @@ window.ARTICLES_DATA = {
         {
           "type": "references",
           "items": [
-            "香港衞生署家庭健康服務：〈產後的惡露何時才會排清？〉。https://www.fhs.gov.hk/tc_chi/health_info/faq/women_health/PN2_2_2.html（擷取日期：2026 年 7 月 21 日）",
-            "香港衞生署家庭健康服務：〈產後護理及家庭計劃〉。https://www.fhs.gov.hk/tc_chi/health_info/woman/15692.html（擷取日期：2026 年 7 月 21 日）",
-            "《傅青主女科·產後篇》【待核對：生化湯出處歸屬，坊間亦有他說，請按你採用的版本說明】",
-            "《方劑學》【待補充：版次與出版年份】",
-            "《中醫婦科學》，中國中醫藥出版社【待補充：版次與出版年份】"
+            "香港衞生署家庭健康服務：〈產後的惡露何時才會排清？〉。https://www.fhs.gov.hk/tc_chi/health_info/faq/women_health/PN2_2_2.html",
+            "香港衞生署家庭健康服務：〈產後護理及家庭計劃〉。https://www.fhs.gov.hk/tc_chi/health_info/woman/15692.html",
+            "《方劑學》，中國中醫藥出版社",
+            "《中醫婦科學》，中國中醫藥出版社，新世紀第五版，主編馮曉玲"
           ]
         }
       ]
@@ -3588,11 +3573,11 @@ window.ARTICLES_DATA = {
         {
           "type": "references",
           "items": [
-            "香港衞生署家庭健康服務．產後護理及家庭計劃．https://www.fhs.gov.hk/tc_chi/health_info/woman/15692.html（擷取日期：2026 年 7 月 22 日）",
-            "香港醫院管理局．剖腹分娩產後護理資訊【待補充：官方頁面標題與 URL】",
-            "National Institute for Health and Care Excellence. Caesarean birth (NG192).【待補充：官方頁面 URL 與版本年份】",
-            "Royal College of Obstetricians and Gynaecologists. Birth after previous caesarean（病人資訊）【待補充：官方頁面 URL】",
-            "《中醫婦科學》，中國中醫藥出版社【待補充：版次與出版年份】"
+            "香港衞生署家庭健康服務．產後護理及家庭計劃．https://www.fhs.gov.hk/tc_chi/health_info/woman/15692.html",
+            "香港醫院管理局．智友站－分娩資訊．https://www.smartpatient.ha.org.hk/smart-patient-web/disease-management/disease-information/disease/Childbirth",
+            "National Institute for Health and Care Excellence. Caesarean birth (NG192). [https://www.nice.org.uk/guidance/ng192](https://www.nice.org.uk/guidance/ng192)",
+            "Royal College of Obstetricians and Gynaecologists. Birth after previous caesarean（病人資訊）. [https://www.rcog.org.uk/for-the-public/browse-our-patient-information/birth-after-previous-caesarean-patient-information-leaflet/](https://www.rcog.org.uk/for-the-public/browse-our-patient-information/birth-after-previous-caesarean-patient-information-leaflet/) ；對應臨床指引 Green-top Guideline No. 45",
+            "《中醫婦科學》，中國中醫藥出版社，新世紀第五版，主編馮曉玲"
           ]
         }
       ]
@@ -3993,9 +3978,9 @@ window.ARTICLES_DATA = {
           "items": [
             "香港衞生署家庭健康服務．產後護理及家庭計劃．https://www.fhs.gov.hk/tc_chi/health_info/woman/15692.html",
             "香港衞生署家庭健康服務．產後的惡露何時才會排清？．https://www.fhs.gov.hk/tc_chi/health_info/faq/women_health/PN2_2_2.html",
-            "香港衞生署．預防中暑資訊【待補充：官方頁面標題與 URL】",
+            "香港衞生署衞生防護中心．預防中暑及曬傷措施．https://www.chp.gov.hk/tc/features/13600.html",
             "NHS. Your body after the birth. [https://www.nhs.uk/pregnancy/labour-and-birth/your-body/](https://www.nhs.uk/pregnancy/labour-and-birth/your-body/)",
-            "《中醫婦科學》，中國中醫藥出版社【待補充：版次與出版年份】"
+            "《中醫婦科學》，中國中醫藥出版社，新世紀第五版，主編馮曉玲"
           ]
         }
       ]
