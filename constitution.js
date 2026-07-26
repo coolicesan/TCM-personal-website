@@ -842,14 +842,15 @@ function renderNameGate() {
 
   container.innerHTML = `
     <div style="text-align:center;margin-bottom:1.75rem;">
+      <div class="cq-emblem cq-name-badge" aria-hidden="true">👋</div>
       <div style="font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta);margin-bottom:.5rem;">開始評估</div>
-      <h2 style="font-family:var(--font-display);font-size:1.8rem;color:var(--plum);">請輸入您的姓名</h2>
-      <p style="font-size:.85rem;color:var(--text-light);margin-top:.5rem;">用於為您的評估結果與體質報告命名</p>
+      <h2 style="font-family:var(--font-display);font-size:1.8rem;color:var(--plum);text-align:center;">怎麼稱呼您呢？</h2>
+      <p style="font-size:.85rem;color:var(--text-light);margin-top:.5rem;text-align:center;">這樣就能用您的名字，為您專屬打造這份體質報告</p>
     </div>
     <div class="cq-name-gate">
-      <input type="text" id="cqNameInput" class="cq-name-input" placeholder="請輸入姓名" value="${escHtml(userName)}" maxlength="30">
+      <input type="text" id="cqNameInput" class="cq-name-input" placeholder="例如：美美、志明" value="${escHtml(userName)}" maxlength="30">
       <div id="cqNameError" class="cq-name-error" style="display:none;"></div>
-      <button class="btn btn-primary cq-name-btn" onclick="submitName()">開始評估 →</button>
+      <button class="btn btn-primary cq-name-btn" onclick="submitName()">好，開始吧 →</button>
     </div>
   `;
 
@@ -867,7 +868,7 @@ function submitName() {
   const val = input.value.trim();
   if (!val) {
     const err = document.getElementById('cqNameError');
-    err.textContent = '請輸入姓名後繼續';
+    err.textContent = '別忘了留下您的稱呼，才能繼續喔 🙂';
     err.style.display = 'block';
     input.focus();
     return;
@@ -892,14 +893,14 @@ function renderVersionSelect() {
       <div class="cq-version-card" onclick="startQuiz('simple')">
         <div class="cq-version-icon">⚡</div>
         <div class="cq-version-name">快速版</div>
-        <div class="cq-version-stat">27 項計分・25 題填答・約 5 分鐘</div>
+        <div class="cq-version-stat">25 題填答・約 5 分鐘</div>
         <div class="cq-version-btn">開始評估 →</div>
       </div>
       <div class="cq-version-card cq-version-card-featured" onclick="startQuiz('complex')">
         <div class="cq-version-badge">推薦</div>
         <div class="cq-version-icon">🔍</div>
         <div class="cq-version-name">完整版</div>
-        <div class="cq-version-stat">66 項計分・60 題填答・約 15 分鐘</div>
+        <div class="cq-version-stat">60 題填答・約 15 分鐘</div>
         <div class="cq-version-btn">開始評估 →</div>
       </div>
     </div>

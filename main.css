@@ -556,6 +556,274 @@ a { color: inherit; }
   font-family: var(--font-accent); font-size: 1.02rem; color: var(--taupe-deep);
 }
 
+/* ── 關於醫師獨立頁 ───────────────────────────────── */
+.copy-en { display: none !important; }
+html[lang="en-HK"] .copy-zh { display: none !important; }
+html[lang="en-HK"] .copy-en { display: revert !important; }
+
+.about-page { background: linear-gradient(180deg, var(--ivory) 0%, var(--cream) 520px); }
+.about-page .drhu-nav + main { margin-top: 0; }
+.about-hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(4.8rem, 8vw, 7.5rem) 0 clamp(3.4rem, 6vw, 5rem);
+  border-bottom: 1px solid var(--line);
+}
+.about-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 8px;
+  background: linear-gradient(90deg, #B87976 0%, var(--gold) 46%, #7D927C 100%);
+}
+.about-hero-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 2.5rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(320px, .88fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: center;
+}
+.about-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  margin-bottom: 1.2rem;
+  color: var(--cocoa-soft);
+  font-size: .82rem;
+}
+.about-breadcrumb a { color: var(--taupe-deep); text-decoration: none; }
+.about-breadcrumb a:hover { text-decoration: underline; }
+.about-hero h1 {
+  margin: .75rem 0 1.1rem;
+  color: var(--cocoa);
+  font-family: var(--font-display);
+  font-size: 3.55rem;
+  line-height: 1.12;
+  letter-spacing: 0;
+}
+.about-title-name,
+.about-title-en { display: block; }
+.about-title-en {
+  margin-top: .4rem;
+  color: var(--taupe-deep);
+  font-family: var(--font-accent);
+  font-size: .42em;
+  font-weight: 400;
+}
+.about-hero-credential {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin: 0 0 1rem;
+  color: var(--taupe-deep);
+  font-size: .84rem;
+  font-weight: 500;
+  letter-spacing: .01em;
+}
+.about-hero-credential::before {
+  content: '';
+  width: 7px; height: 7px; flex: none;
+  border-radius: 50%;
+  background: var(--gold);
+}
+.about-hero-lede {
+  max-width: 660px;
+  color: var(--cocoa-soft);
+  font-size: 1.08rem;
+  line-height: 1.9;
+  margin-bottom: 1.9rem;
+}
+.about-hero-actions,
+.about-final-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .85rem;
+  align-items: center;
+}
+.about-portrait-panel {
+  position: relative;
+  max-width: 420px;
+  justify-self: end;
+}
+.about-portrait {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--gold-soft);
+  box-shadow: var(--shadow-hover);
+}
+.about-portrait::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 38%;
+  background: linear-gradient(180deg, rgba(74,64,56,0), rgba(74,64,56,.2));
+}
+.about-portrait img { width: 100%; height: 100%; object-fit: cover; }
+.about-review-layout {
+  display: grid;
+  grid-template-columns: minmax(260px, .82fr) minmax(0, 1.18fr);
+  gap: clamp(2rem, 6vw, 4.8rem);
+  align-items: start;
+}
+.about-section-heading h2 {
+  margin-top: .9rem;
+  color: var(--cocoa);
+  font-family: var(--font-display);
+  font-size: 2.05rem;
+  line-height: 1.42;
+  letter-spacing: 0;
+}
+.about-section-heading-center {
+  max-width: 760px;
+  margin: 0 auto 2.2rem;
+  text-align: center;
+}
+.about-section-note {
+  max-width: 680px;
+  margin: 1rem auto 0;
+  color: var(--cocoa-soft);
+  font-size: .94rem;
+  line-height: 1.85;
+}
+.about-prose {
+  color: var(--cocoa-soft);
+  font-size: 1rem;
+  line-height: 1.95;
+}
+.about-prose p + p { margin-top: 1rem; }
+.about-prose-center {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+.about-media-section {
+  background: var(--ivory);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.about-media-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .9rem;
+  margin-top: 2rem;
+}
+.about-media-card,
+.about-review-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255,253,249,.72);
+  text-decoration: none;
+}
+.about-media-card h3 {
+  color: var(--cocoa);
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  line-height: 1.55;
+}
+.about-media-card {
+  padding: 1.35rem;
+  background: var(--cream);
+}
+.about-card-kicker,
+.about-card-meta {
+  display: block;
+  color: var(--taupe-deep);
+  font-size: .76rem;
+  font-weight: 700;
+}
+.about-media-card h3 { margin: .65rem 0 .55rem; }
+.about-media-card p {
+  color: var(--cocoa-soft);
+  font-size: .9rem;
+  line-height: 1.75;
+}
+.about-card-meta {
+  margin-top: 1rem;
+  color: var(--cocoa-soft);
+  font-weight: 500;
+}
+.about-review-list {
+  display: grid;
+  gap: .85rem;
+}
+.about-review-card {
+  padding: 1.25rem 1.35rem;
+  background: var(--ivory);
+}
+.about-review-card blockquote {
+  margin-top: .5rem;
+  color: var(--cocoa);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  line-height: 1.85;
+}
+.about-review-attrib {
+  display: block;
+  margin-top: .9rem;
+  color: var(--cocoa);
+  font-size: .84rem;
+  font-weight: 600;
+}
+.about-review-source {
+  display: block;
+  margin-top: .35rem;
+  color: var(--cocoa-soft);
+  font-size: .78rem;
+}
+.about-final-cta {
+  padding: clamp(3rem, 6vw, 4.5rem) 0;
+  background: linear-gradient(135deg, var(--taupe-mist), var(--gold-soft));
+}
+.about-final-cta-inner {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+}
+.about-final-cta h2 {
+  margin: .7rem 0 .45rem;
+  color: var(--cocoa);
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  line-height: 1.35;
+}
+.about-final-cta p {
+  color: var(--cocoa-soft);
+  font-size: .95rem;
+}
+
+@media (max-width: 900px) {
+  .about-hero-inner,
+  .about-review-layout {
+    grid-template-columns: 1fr;
+  }
+  .about-hero h1 { font-size: 2.55rem; }
+  .about-portrait-panel { justify-self: start; width: min(100%, 420px); }
+  .about-media-grid {
+    grid-template-columns: 1fr;
+  }
+  .about-final-cta-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  .about-hero { padding-top: 4rem; }
+  .about-hero h1 { font-size: 2.2rem; }
+  .about-title-en { font-size: .48em; }
+  .about-hero-lede { font-size: 1rem; }
+  .about-section-heading h2,
+  .about-final-cta h2 {
+    font-size: 1.55rem;
+  }
+}
+
 /* ── 預約掛號 ─────────────────────────────────────── */
 .contact-section { background: var(--ivory); border-top: 1px solid var(--line); }
 .contact-grid {
@@ -707,17 +975,28 @@ html[lang^="en"] .kb-filter-label,
 html[lang^="en"] .art-tag-pill {
   letter-spacing: 0.03em;
 }
-html[lang^="en"] .section-eyebrow,
+html[lang^="en"] .section-tag,
 html[lang^="en"] .tx-label {
   letter-spacing: 0.1em;
 }
 
-/* Hero title: English words are longer, so ease the tracking,
-   tighten the leading a little and prevent awkward breaks. */
+/* Hero title: swapped to Spectral, a quiet editorial serif chosen
+   for Latin type (Noto Serif TC's Latin glyphs are functional but
+   not designed for display use). Lighter weight, tighter leading
+   and a plain italic accent instead of the gold highlight block
+   give English a calmer, more upscale register than the bolder
+   Chinese treatment. */
 html[lang^="en"] .hero-title {
+  font-family: 'Spectral', var(--font-display), serif;
+  font-weight: 500;
   letter-spacing: 0;
-  line-height: 1.2;
+  line-height: 1.25;
   text-wrap: balance;
+}
+html[lang^="en"] .hero-title em {
+  font-style: italic;
+  background: none;
+  color: var(--taupe-deep);
 }
 html[lang^="en"] .hero-desc {
   text-wrap: pretty;
@@ -747,4 +1026,3 @@ html[lang^="en"] .btn {
 html[lang^="en"] .lang-switch button {
   letter-spacing: 0.02em;
 }
-

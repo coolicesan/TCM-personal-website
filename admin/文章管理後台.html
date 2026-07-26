@@ -41,14 +41,34 @@
   .btn-import{width:100%;background:var(--jade);color:#fff;border-radius:8px;padding:9px;margin-top:8px}
   .side-search{width:100%;margin-top:8px;padding:7px 10px;border:1px solid var(--border);border-radius:8px;font-size:12.5px;font-family:var(--sans);background:var(--bg)}
   .side-search:focus{outline:none;border-color:var(--rose)}
+  .side-filter-row{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+  .side-filter-select{width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:8px;font-size:11.5px;font-family:var(--sans);background:var(--bg);color:var(--ink-mid)}
+  .side-filter-select:focus{outline:none;border-color:var(--rose)}
+  .side-filter-check{display:flex;align-items:center;gap:6px;margin-top:8px;font-size:11.5px;color:var(--ink-mid);cursor:pointer}
+  .side-filter-check input{width:13px;height:13px;accent-color:var(--rose);cursor:pointer}
   .file-list{flex:1;overflow-y:auto;padding:8px}
+
+  .stage-group-head{display:flex;align-items:center;gap:6px;padding:9px 7px 6px;margin-top:8px;cursor:pointer;user-select:none;font-size:11.5px;font-weight:700;color:var(--rose);letter-spacing:.03em}
+  .stage-group-head:first-child{margin-top:0}
+  .stage-group-arrow{display:inline-block;transition:transform .15s;font-size:9px}
+  .stage-group-head.collapsed .stage-group-arrow{transform:rotate(-90deg)}
+  .stage-group-label{flex:1}
+  .stage-group-count{color:var(--rose);font-weight:700;background:var(--rose-light);padding:1px 8px;border-radius:10px;font-size:10.5px}
+
   .file-item{padding:9px 11px;border-radius:8px;cursor:pointer;margin-bottom:2px;border:1px solid transparent}
   .file-item:hover{background:var(--rose-light)}
   .file-item.active{background:var(--rose-light);border-color:var(--rose-mid)}
+  .file-item.has-warn{border-color:var(--gold-light)}
   .file-item-title{font-size:12.5px;font-weight:600;color:var(--ink);line-height:1.4;display:flex;align-items:flex-start;gap:6px}
   .file-item-title .fdot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:5px;visibility:hidden}
   .file-item.dirty .fdot{visibility:visible}
-  .file-item-stage{display:inline-block;margin-top:4px;font-size:10.5px;color:var(--jade);background:var(--jade-light);padding:1px 7px;border-radius:8px}
+  .file-item-name{flex:1}
+  .file-item-warn{margin-left:auto;color:var(--gold);font-size:12px;flex-shrink:0;cursor:help}
+  .file-item-meta{display:flex;align-items:center;gap:6px;margin-top:5px;font-size:10.5px;padding-left:12px}
+  .file-item-status{padding:1px 7px;border-radius:8px;font-weight:600;flex-shrink:0}
+  .file-item-status.is-published{color:var(--jade);background:var(--jade-light)}
+  .file-item-status.is-hidden{color:var(--ink-soft);background:var(--bg)}
+  .file-item-sub{color:var(--ink-soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
   .empty-hint{padding:24px 16px;font-size:12.5px;color:var(--ink-soft);line-height:1.9;text-align:center}
   .empty-hint b{color:var(--rose)}
 
@@ -63,6 +83,11 @@
   .panel-wrap{flex:1;overflow-y:auto;padding:22px 26px 60px;min-height:0}
   .panel{display:none}
   .panel.active{display:block;max-width:720px}
+  .panel.active[data-panel="wysiwyg"]{max-width:100%}
+
+  .wysiwyg-hint{font-size:12px;color:var(--ink-mid);background:var(--jade-light);border-radius:8px;padding:10px 14px;margin-bottom:14px;line-height:1.7}
+  .wysiwyg-hint b{color:var(--ink)}
+  .wysiwyg-frame{width:100%;border:1px solid var(--border);border-radius:10px;display:block;min-height:400px;background:#fff}
 
   .field{margin-bottom:16px}
   .field label{display:block;font-size:12px;font-weight:700;color:var(--ink-mid);margin-bottom:5px}
@@ -129,9 +154,23 @@
     <div class="side-head">
       <div class="side-title">▸ 文章列表（<span id="countLabel">0</span>）</div>
       <button class="btn btn-add" id="btnAdd">＋ 新增文章</button>
-      <button class="btn btn-import" id="btnImport">📄 匯入 Markdown／Word 檔</button>
-      <input type="file" id="fileInput" accept=".md,.txt,.docx" style="display:none">
+      <button class="btn btn-import" id="btnImport">📄 匯入 Markdown／Word／HTML 檔</button>
+      <input type="file" id="fileInput" accept=".md,.txt,.docx,.html,.htm" style="display:none">
       <input type="text" class="side-search" id="search" placeholder="搜尋標題／標籤…">
+      <div class="side-filter-row">
+        <select class="side-filter-select" id="filterStatus">
+          <option value="">全部狀態</option>
+          <option value="published">已發布</option>
+          <option value="hidden">已隱藏</option>
+        </select>
+        <select class="side-filter-select" id="filterTag">
+          <option value="">全部標籤</option>
+        </select>
+      </div>
+      <label class="side-filter-check">
+        <input type="checkbox" id="filterIncomplete">
+        <span>⚠ 只看待補完成</span>
+      </label>
     </div>
     <div class="file-list" id="fileList"></div>
   </aside>
@@ -147,6 +186,7 @@
         <button class="tabbtn active" data-tab="basic">基本資料</button>
         <button class="tabbtn" data-tab="seo">SEO 設定</button>
         <button class="tabbtn" data-tab="blocks">內文區塊</button>
+        <button class="tabbtn" data-tab="wysiwyg">HTML 預覽編輯</button>
         <div class="toolbar-right">
           <button class="btn btn-sm btn-outline" id="btnPreview">👁 預覽</button>
           <button class="btn btn-sm btn-danger" id="btnDelete">刪除這篇</button>
@@ -256,6 +296,14 @@
             <button class="btn btn-sm" style="background:var(--jade);color:#fff" id="btnAddBlock">＋ 新增區塊</button>
           </div>
         </div>
+
+        <div class="panel" data-panel="wysiwyg">
+          <div class="wysiwyg-hint">
+            直接點選下方文字修改即可，會自動同步回文章資料（標題、頁頂小標、摘要與內文段落都可以改）。<br>
+            <b>新增／刪除整個區塊（例如表格、FAQ、提醒框）請到「內文區塊」分頁操作</b>，這裡只適合修改文字內容。
+          </div>
+          <iframe id="wysiwygFrame" class="wysiwyg-frame" title="HTML 預覽編輯"></iframe>
+        </div>
       </div>
     </div>
   </section>
@@ -277,6 +325,7 @@
 <script src="article-render.js"></script>
 <script src="md-import.js"></script>
 <script src="docx-import.js"></script>
+<script src="html-import.js"></script>
 <script src="articles-data.js"></script>
 <script>
 (function(){
@@ -290,7 +339,8 @@
     current: -1,
     dirHandle: null,
     dirty: false,
-    tab: 'basic'
+    tab: 'basic',
+    collapsedStages: {}
   };
 
   var BLOCK_LABELS = {
@@ -351,8 +401,39 @@
   }
 
   // ---------- sidebar ----------
+  // ---------- content-completeness (QA) check ----------
+  function checkArticleIssues(a){
+    var issues = [];
+    if (!a.title || a.title === '未命名文章') issues.push('缺標題');
+    if (!a.excerpt || !a.excerpt.trim()) issues.push('缺摘要');
+    if (!a.keywords || !a.keywords.length) issues.push('缺 SEO 關鍵字');
+    if (!a.heroEyebrow || !a.heroEyebrow.trim()) issues.push('缺頁頂小標');
+    var hasContent = (a.blocks||[]).some(function(b){
+      return (b.type === 'paragraph' || b.type === 'lead') && b.text && b.text.trim().length > 10;
+    });
+    if (!hasContent) issues.push('內文尚無實質內容');
+    return issues;
+  }
+
+  function renderTagFilterOptions(){
+    var sel = $('filterTag');
+    var current = sel.value;
+    var tagSet = {};
+    state.data.articles.forEach(function(a){ (a.tags||[]).forEach(function(t){ tagSet[t] = true; }); });
+    var tags = Object.keys(tagSet).sort();
+    sel.innerHTML = '<option value="">全部標籤</option>' + tags.map(function(t){
+      return '<option value="'+esc(t)+'">'+esc(t)+'</option>';
+    }).join('');
+    if (tags.indexOf(current) !== -1) sel.value = current;
+  }
+
   function renderSidebar(){
     var q = $('search').value.trim().toLowerCase();
+    var statusFilter = $('filterStatus').value;
+    var onlyIncomplete = $('filterIncomplete').checked;
+    renderTagFilterOptions();
+    var tagFilter = $('filterTag').value;
+
     var box = $('fileList');
     box.innerHTML = '';
     $('countLabel').textContent = state.data.articles.length;
@@ -361,30 +442,100 @@
       return;
     }
     var stageLabel = {};
-    state.data.stages.forEach(function(s){ stageLabel[s.key] = s.label; });
+    var order = [];
+    state.data.stages.forEach(function(s){ stageLabel[s.key] = s.label; order.push(s.key); });
+    order.push('__none__');
+
+    var groups = {}; order.forEach(function(k){ groups[k] = []; });
 
     state.data.articles.forEach(function(a, i){
       var hay = (a.title + ' ' + (a.tags||[]).join(' ')).toLowerCase();
       if (q && hay.indexOf(q) === -1) return;
-      var d = document.createElement('div');
-      d.className = 'file-item' + (i === state.current ? ' active' : '');
-      d.innerHTML = '<div class="file-item-title"><span class="fdot"></span><span></span></div><span class="file-item-stage"></span>';
-      d.querySelector('.file-item-title span:last-child').textContent = (a.hidden ? '🙈 ' : '') + (a.title || '（未命名）');
-      d.querySelector('.file-item-stage').textContent = (a.hidden ? '已隱藏 · ' : '') + (stageLabel[a.stage] || a.stage || '未分類');
-      d.addEventListener('click', function(){ selectArticle(i); });
-      box.appendChild(d);
+      if (statusFilter === 'published' && a.hidden) return;
+      if (statusFilter === 'hidden' && !a.hidden) return;
+      if (tagFilter && (a.tags||[]).indexOf(tagFilter) === -1) return;
+      var issues = checkArticleIssues(a);
+      if (onlyIncomplete && !issues.length) return;
+      var key = groups[a.stage] ? a.stage : '__none__';
+      groups[key].push({ a: a, i: i, issues: issues });
     });
+
+    var shown = 0;
+    order.forEach(function(key){
+      var items = groups[key];
+      if (!items.length) return;
+      shown += items.length;
+
+      items.sort(function(x, y){
+        var dx = x.a.modifiedDate || x.a.publishDate || '';
+        var dy = y.a.modifiedDate || y.a.publishDate || '';
+        if (dx === dy) return 0;
+        if (!dx) return 1;
+        if (!dy) return -1;
+        return dy < dx ? -1 : 1;
+      });
+
+      var collapsed = !!state.collapsedStages[key];
+      var head = document.createElement('div');
+      head.className = 'stage-group-head' + (collapsed ? ' collapsed' : '');
+      head.innerHTML = '<span class="stage-group-arrow">▾</span><span class="stage-group-label"></span><span class="stage-group-count"></span>';
+      head.querySelector('.stage-group-label').textContent = stageLabel[key] || '未分類';
+      head.querySelector('.stage-group-count').textContent = items.length;
+      head.addEventListener('click', function(){
+        state.collapsedStages[key] = !state.collapsedStages[key];
+        renderSidebar();
+      });
+      box.appendChild(head);
+      if (collapsed) return;
+
+      items.forEach(function(item){
+        var a = item.a, i = item.i;
+        var d = document.createElement('div');
+        d.className = 'file-item' + (i === state.current ? ' active' : '') + (item.issues.length ? ' has-warn' : '');
+        var metaBits = [];
+        if (a.tags && a.tags.length) metaBits.push(a.tags.slice(0, 2).join('・'));
+        var dateStr = a.modifiedDate || a.publishDate;
+        if (dateStr) metaBits.push(dateStr);
+        d.innerHTML =
+          '<div class="file-item-title"><span class="fdot"></span><span class="file-item-name"></span>' +
+          (item.issues.length ? '<span class="file-item-warn" title="待補：'+esc(item.issues.join('、'))+'">⚠</span>' : '') +
+          '</div>' +
+          '<div class="file-item-meta"><span class="file-item-status"></span><span class="file-item-sub"></span></div>';
+        d.querySelector('.file-item-name').textContent = a.title || '（未命名）';
+        var statusEl = d.querySelector('.file-item-status');
+        statusEl.textContent = a.hidden ? '隱藏' : '發布';
+        statusEl.className = 'file-item-status' + (a.hidden ? ' is-hidden' : ' is-published');
+        d.querySelector('.file-item-sub').textContent = metaBits.join(' · ');
+        d.addEventListener('click', function(){ selectArticle(i); });
+        box.appendChild(d);
+      });
+    });
+
+    if (!shown){
+      box.innerHTML += '<div class="empty-hint">沒有符合篩選條件的文章。</div>';
+    }
   }
   $('search').addEventListener('input', renderSidebar);
+  $('filterStatus').addEventListener('change', renderSidebar);
+  $('filterTag').addEventListener('change', renderSidebar);
+  $('filterIncomplete').addEventListener('change', renderSidebar);
 
   // ---------- select / form render ----------
   function selectArticle(i){
+    // 切換文章前，若正在 WYSIWYG 分頁，先把還沒同步的編輯內容存回「原本那篇」，
+    // 避免延遲同步的計時器在切換之後才觸發、把舊內容誤寫進新文章。
+    var wysiwygActive = document.querySelector('.tabbtn[data-tab="wysiwyg"].active');
+    if (wysiwygActive && typeof syncWysiwygToArticle === 'function'){
+      clearTimeout(wysiwygSyncTimer);
+      syncWysiwygToArticle();
+    }
     state.current = i;
     $('emptyEditor').style.display = 'none';
     $('editorBody').style.display = 'flex';
     renderStageOptions();
     renderForm();
     renderSidebar();
+    if (wysiwygActive) renderWysiwyg();
   }
 
   function renderStageOptions(){
@@ -612,10 +763,20 @@
   // ---------- tabs ----------
   Array.prototype.slice.call(document.querySelectorAll('.tabbtn')).forEach(function(btn){
     btn.addEventListener('click', function(){
+      var prevActive = document.querySelector('.tabbtn.active');
+      var prevTab = prevActive ? prevActive.dataset.tab : '';
+      // 離開 WYSIWYG 分頁前，先把還沒同步的編輯內容存回文章資料，
+      // 避免切到「內文區塊」看到舊的內容。
+      if (prevTab === 'wysiwyg' && btn.dataset.tab !== 'wysiwyg'){
+        clearTimeout(wysiwygSyncTimer);
+        syncWysiwygToArticle();
+      }
       Array.prototype.slice.call(document.querySelectorAll('.tabbtn')).forEach(function(b){ b.classList.remove('active'); });
       Array.prototype.slice.call(document.querySelectorAll('.panel')).forEach(function(p){ p.classList.remove('active'); });
       btn.classList.add('active');
       document.querySelector('.panel[data-panel="'+btn.dataset.tab+'"]').classList.add('active');
+      if (btn.dataset.tab === 'wysiwyg') renderWysiwyg();
+      if (btn.dataset.tab === 'blocks') renderBlocks();
     });
   });
 
@@ -640,6 +801,10 @@
         toast('正在解析 Word 檔…');
         var buf = await file.arrayBuffer();
         article = await window.DocxImport.parseDocxToArticle(buf, { stage: defaultStage });
+      } else if (name.endsWith('.html') || name.endsWith('.htm')){
+        var htmlText = await file.text();
+        var slugFromName = file.name.replace(/\.[^.]+$/, '').replace(/[^a-zA-Z0-9\-_]/g, '-').toLowerCase();
+        article = window.HTMLImport.parseHtmlToArticle(htmlText, { stage: defaultStage, slug: slugFromName });
       } else {
         var text = await file.text();
         article = window.MDImport.parseMarkdownToArticle(text, { stage: defaultStage });
@@ -652,7 +817,10 @@
       state.data.articles.push(article);
       markDirty();
       selectArticle(state.data.articles.length - 1);
-      toast('✓ 已匯入「' + article.title + '」，區塊數：' + article.blocks.length + '，請檢查內容後儲存', 'ok');
+      var noteHtml = name.endsWith('.html') || name.endsWith('.htm')
+        ? '，標籤／SEO 標題等少數欄位無法從網頁還原，請補上後再儲存'
+        : '，請檢查內容後儲存';
+      toast('✓ 已匯入「' + article.title + '」，區塊數：' + article.blocks.length + noteHtml, 'ok');
     }catch(e){
       console.error(e);
       toast('匯入失敗：' + e.message, 'err');
@@ -683,6 +851,87 @@
     $('previewModal').classList.add('show');
   });
   $('btnClosePreview').addEventListener('click', function(){ $('previewModal').classList.remove('show'); });
+
+  // ---------- WYSIWYG (edit directly on the rendered article HTML) ----------
+  // 做法：用跟「預覽」一樣的 renderArticleHTML() 產生 iframe 內容，
+  // 只把 hero 標題／小標／摘要與內文區塊設成 contenteditable。
+  // 使用者輸入時，直接把整份 iframe 文件丟回 html-import.js 的
+  // parseHtmlToArticle() 重新解析——跟「匯入 HTML 檔」共用同一套邏輯，
+  // 這樣不用另外寫一套「DOM 編輯 → 資料模型」的同步規則。
+  var wysiwygSyncTimer = null;
+
+  function syncWysiwygToArticle(){
+    var frame = $('wysiwygFrame');
+    var a = curArticle();
+    if (!a || !frame.contentDocument || !frame.contentDocument.documentElement) return;
+    var html = frame.contentDocument.documentElement.outerHTML;
+    var parsed = window.HTMLImport.parseHtmlToArticle(html);
+    a.title = parsed.title || a.title;
+    a.heroEyebrow = parsed.heroEyebrow;
+    a.excerpt = parsed.excerpt;
+    a.blocks = parsed.blocks;
+    markDirty();
+    // 讓「基本資料」分頁跟側邊欄也反映剛剛在 WYSIWYG 改的標題／摘要
+    $('fTitle').value = a.title;
+    $('fHeroEyebrow').value = a.heroEyebrow;
+    $('fExcerpt').value = a.excerpt;
+    renderSidebar();
+  }
+
+  function scheduleWysiwygSync(){
+    clearTimeout(wysiwygSyncTimer);
+    wysiwygSyncTimer = setTimeout(syncWysiwygToArticle, 700);
+  }
+
+  function resizeWysiwygFrame(){
+    var frame = $('wysiwygFrame');
+    try{
+      var h = frame.contentDocument.documentElement.scrollHeight;
+      frame.style.height = (h + 40) + 'px';
+    }catch(e){ /* 尚未載入完成就忽略 */ }
+  }
+
+  // 「本文重點」(TOC) 是載入當下用區塊資料產生的靜態連結，不會隨 contenteditable
+  // 的輸入自動更新。這裡在每次輸入時，把 TOC 每個連結的文字改成對應大標題目前
+  // 的文字（按順序配對，因為 WYSIWYG 模式不支援新增/刪除整個大標題區塊，數量
+  // 在同一個編輯階段裡不會變動，用索引配對是安全的）。
+  function syncWysiwygToc(doc){
+    var tocNav = doc.querySelector('.article-toc');
+    if (!tocNav) return; // 少於 2 個大標題時原本就不會產生 TOC
+    var headings = doc.querySelectorAll('.article-section h2');
+    var links = tocNav.querySelectorAll('ol > li > a');
+    for (var i = 0; i < links.length && i < headings.length; i++){
+      links[i].textContent = headings[i].textContent;
+    }
+  }
+
+  function renderWysiwyg(){
+    var a = curArticle(); if (!a) return;
+    var sMap = stageLabelMap();
+    var html = window.ArticleRender.renderArticleHTML(a, sMap[a.stage], state.data.articles, sMap);
+    html = html.replace('href="article.css"', 'href="../articles/article.css"');
+    var frame = $('wysiwygFrame');
+    frame.onload = function(){
+      var doc = frame.contentDocument;
+      if (!doc) return;
+      ['.article-hero-eyebrow', '.article-hero h1', '.article-hero-subtitle', '.article-section'].forEach(function(sel){
+        var el = doc.querySelector(sel);
+        if (el) el.setAttribute('contenteditable', 'true');
+      });
+      doc.addEventListener('input', function(){
+        syncWysiwygToc(doc);
+        resizeWysiwygFrame();
+        scheduleWysiwygSync();
+      });
+      // 編輯區內的連結只用來定位游標，不要真的跳轉
+      doc.addEventListener('click', function(e){
+        var link = e.target.closest('a');
+        if (link) e.preventDefault();
+      });
+      resizeWysiwygFrame();
+    };
+    frame.srcdoc = html;
+  }
 
   // ---------- connect folder ----------
   $('btnConnect').addEventListener('click', async function(){

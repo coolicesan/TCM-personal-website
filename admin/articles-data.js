@@ -1975,9 +1975,9 @@ window.ARTICLES_DATA = {
         {
           "type": "references",
           "items": [
-            "香港衞生署家庭健康服務：〈怎樣知道我的奶量是否足夠？〉。https://www.fhs.gov.hk/tc_chi/health_info/faq/breastfeeding/BFQA015.html（擷取日期：2026 年 7 月 21 日）",
-            "香港衞生署家庭健康服務：〈母乳餵哺〉常見問題。https://www.fhs.gov.hk/tc_chi/health_info/child/12172.html（擷取日期：2026 年 7 月 21 日）",
-            "香港衞生署家庭健康服務：〈愛·從母乳開始〉。https://www.fhs.gov.hk/tc_chi/health_info/child/20000.html（擷取日期：2026 年 7 月 21 日）",
+            "香港衞生署家庭健康服務：〈怎樣知道我的奶量是否足夠？〉。https://www.fhs.gov.hk/tc_chi/health_info/faq/breastfeeding/BFQA015.html",
+            "香港衞生署家庭健康服務：〈母乳餵哺〉常見問題。https://www.fhs.gov.hk/tc_chi/health_info/child/12172.html",
+            "香港衞生署家庭健康服務：〈愛·從母乳開始〉。https://www.fhs.gov.hk/tc_chi/health_info/child/20000.html",
             "《中醫婦科學》，中國中醫藥出版社【待補充：版次與出版年份】",
             "《傅青主女科·產後篇》【待核對：缺乳相關條文出處】"
           ]
@@ -3113,7 +3113,7 @@ window.ARTICLES_DATA = {
         "VBAC"
       ],
       "readTime": 5,
-      "heroEyebrow": "",
+      "heroEyebrow": "產後",
       "heroTags": [],
       "publishDate": "2026-08-01",
       "blocks": [
@@ -3594,16 +3594,6 @@ window.ARTICLES_DATA = {
             "Royal College of Obstetricians and Gynaecologists. Birth after previous caesarean（病人資訊）【待補充：官方頁面 URL】",
             "《中醫婦科學》，中國中醫藥出版社【待補充：版次與出版年份】"
           ]
-        },
-        {
-          "type": "references",
-          "items": [
-            "各階段恢復時間與活動建議，請按香港產科實務核實",
-            "疤痕護理的具體方法與開始時機，建議按你合作的醫生意見補充",
-            "中醫分階段調理的時間切分，請按你的臨床判斷調整",
-            "VBAC 在香港各聯網的提供情況，建議按本地實務補充",
-            "建議補入香港產後抑鬱的求助熱線與服務資訊"
-          ]
         }
       ]
     },
@@ -3626,7 +3616,7 @@ window.ARTICLES_DATA = {
         "坐月注意事項"
       ],
       "readTime": 5,
-      "heroEyebrow": "",
+      "heroEyebrow": "產後",
       "heroTags": [],
       "publishDate": "2026-07-20",
       "blocks": [
@@ -4001,19 +3991,11 @@ window.ARTICLES_DATA = {
         {
           "type": "references",
           "items": [
-            "香港衞生署家庭健康服務．產後護理及家庭計劃．https://www.fhs.gov.hk/tc_chi/health_info/woman/15692.html（擷取日期：2026 年 7 月 22 日）",
-            "香港衞生署家庭健康服務．產後的惡露何時才會排清？．https://www.fhs.gov.hk/tc_chi/health_info/faq/women_health/PN2_2_2.html（擷取日期：2026 年 7 月 22 日）",
+            "香港衞生署家庭健康服務．產後護理及家庭計劃．https://www.fhs.gov.hk/tc_chi/health_info/woman/15692.html",
+            "香港衞生署家庭健康服務．產後的惡露何時才會排清？．https://www.fhs.gov.hk/tc_chi/health_info/faq/women_health/PN2_2_2.html",
             "香港衞生署．預防中暑資訊【待補充：官方頁面標題與 URL】",
-            "NHS. Your body after the birth. https://www.nhs.uk/pregnancy/labour-and-birth/your-body/（擷取日期：2026 年 7 月 22 日）",
+            "NHS. Your body after the birth. [https://www.nhs.uk/pregnancy/labour-and-birth/your-body/](https://www.nhs.uk/pregnancy/labour-and-birth/your-body/)",
             "《中醫婦科學》，中國中醫藥出版社【待補充：版次與出版年份】"
-          ]
-        },
-        {
-          "type": "references",
-          "items": [
-            "各項禁忌的中醫立場表述，請按你的臨床判斷調整——本文對傳統做法的態度較為開放，發佈前請按你診所的定位斟酌",
-            "米酒水與酒精攝取的建議，可按哺乳期指引補充得更具體",
-            "建議補入香港夏季中暑的官方預防資訊連結"
           ]
         }
       ]

@@ -246,26 +246,40 @@
     .cq-logic-val { font-size: .78rem; color: var(--text); line-height: 1.6; }
 
     /* ── Name gate ── */
+    .cq-name-badge {
+      animation: cqPopIn .55s cubic-bezier(.34,1.56,.64,1) both;
+      border-color: var(--dusty-rose);
+    }
+    @keyframes cqPopIn {
+      from { opacity: 0; transform: scale(.7) rotate(-12deg); }
+      to   { opacity: 1; transform: scale(1) rotate(0); }
+    }
     .cq-name-gate {
       max-width: 360px; margin: 0 auto;
       display: flex; flex-direction: column; gap: .85rem;
+      animation: cqFadeUp .5s cubic-bezier(.34,1.56,.64,1) .1s both;
+    }
+    @keyframes cqFadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
     .cq-name-input {
-      width: 100%; padding: .95rem 1.1rem;
-      border: 1.5px solid var(--border); border-radius: var(--radius);
+      width: 100%; padding: .95rem 1.4rem;
+      border: 1.5px solid var(--border); border-radius: 999px;
       background: #fff; font-family: var(--font-body);
       font-size: 1rem; color: var(--text);
       text-align: center;
       transition: border-color .2s, box-shadow .2s;
     }
+    .cq-name-input::placeholder { color: var(--text-light); opacity: .65; }
     .cq-name-input:focus {
-      outline: none; border-color: var(--plum-light);
-      box-shadow: 0 0 0 3px rgba(139,80,64,0.12);
+      outline: none; border-color: var(--dusty-rose);
+      box-shadow: 0 0 0 4px rgba(201,143,130,0.16);
     }
     .cq-name-error {
       font-size: .82rem; color: var(--terracotta); text-align: center;
     }
-    .cq-name-btn { width: 100%; }
+    .cq-name-btn { width: 100%; justify-content: center; }
 
     /* ── Version selector ── */
     .cq-version-grid {
@@ -564,7 +578,7 @@
     <a href="index.html#services">治療項目</a>
     <a href="index.html#assessments">健康評估</a>
     <a href="index.html#articles">健康文章</a>
-    <a href="index.html#about">關於醫師</a>
+    <a href="about.html">關於醫師</a>
     <a href="index.html#contact" class="nav-cta">預約掛號</a>
   </div>
   <button class="nav-toggle" id="navToggle" aria-label="選單">

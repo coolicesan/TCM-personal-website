@@ -59,9 +59,9 @@ body { font-family: var(--font-body); font-size: 16.5px; line-height: 1.9; color
 
 .article-hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0; color: var(--rose); background: rgba(255,255,255,.72); border: 1px solid rgba(184,121,118,.22); border-radius: 999px; padding: 5px 12px; margin-bottom: 18px; position: relative; }
 .article-hero-eyebrow::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--sage); }
-.article-hero h1 { font-family: var(--font-display); font-size: 42px; font-weight: 700; line-height: 1.32; letter-spacing: 0; text-wrap: pretty; word-break: normal; line-break: strict; overflow-wrap: break-word; color: var(--cocoa); margin-top: 0; margin-bottom: 20px; position: relative; }
+.article-hero h1 { font-family: var(--font-display); font-size: 42px; font-weight: 700; line-height: 1.22; letter-spacing: 0; text-wrap: pretty; word-break: normal; line-break: strict; overflow-wrap: break-word; color: var(--cocoa); margin-top: 0; margin-bottom: 20px; position: relative; }
 .article-title-primary { display: block; }
-.article-title-secondary { display: block; max-width: 680px; margin-top: 8px; color: #5F5148; font-size: .78em; font-weight: 600; line-height: 1.48; }
+.article-title-secondary { display: block; max-width: 640px; margin-top: 12px; color: var(--cocoa-soft); font-family: var(--font-body); font-size: .5em; font-weight: 500; line-height: 1.6; letter-spacing: .01em; }
 .article-hero h1::after { content: ''; display: block; width: 92px; height: 3px; margin-top: 22px; border-radius: 999px; background: linear-gradient(90deg, var(--rose), var(--gold), var(--sage)); }
 .article-hero-subtitle { font-family: var(--font-display); font-size: 18px; color: #6C5E52; max-width: 700px; margin-top: 0; margin-bottom: 28px; line-height: 1.9; position: relative; }
 .article-hero-tags { display: flex; flex-wrap: wrap; gap: 8px; position: relative; }
@@ -216,8 +216,8 @@ body { font-family: var(--font-body); font-size: 16.5px; line-height: 1.9; color
 @media (max-width: 640px) {
   body { font-size: 16px; line-height: 1.88; }
   .article-hero { padding: 48px 16px 42px; }
-  .article-hero h1 { font-size: 30px; line-height: 1.36; }
-  .article-title-secondary { margin-top: 7px; font-size: .82em; line-height: 1.52; }
+  .article-hero h1 { font-size: 30px; line-height: 1.28; }
+  .article-title-secondary { margin-top: 9px; font-size: .58em; line-height: 1.55; }
   .article-hero h1::after { width: 76px; margin-top: 18px; }
   .article-hero-subtitle { font-family: var(--font-body); font-size: 15.8px; line-height: 1.82; }
   .article-hero-tags { gap: 6px; }

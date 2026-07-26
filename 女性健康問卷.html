@@ -360,6 +360,49 @@
     padding:12px 14px; margin-bottom:22px;
   }
 
+  /* ============ PATH / ROUTE SELECTOR ============ */
+  .route-full-wrap{margin:22px 0 16px;}
+  .route-or{
+    display:flex; align-items:center; gap:12px;
+    font-size:12.5px; color:var(--ink-faint); text-align:center;
+    margin:0 0 14px;
+  }
+  .route-or::before, .route-or::after{ content:''; flex:1; height:1px; background:var(--line); }
+  .route-or .en{display:block; font-size:11px; margin-top:2px;}
+  .route-grid{display:grid; grid-template-columns:1fr; gap:10px; margin-bottom:6px;}
+  @media (min-width:600px){ .route-grid{grid-template-columns:1fr 1fr;} }
+  .route-card{
+    border-radius:var(--radius) !important;
+    padding:18px 20px 16px !important;
+    width:100%; gap:0 !important;
+  }
+  .route-card .route-title{
+    font-family:'Noto Serif TC',serif; font-weight:700; font-size:16.5px; color:var(--ink); display:block;
+  }
+  .route-card .route-title .en{
+    display:block; font-family:'Spectral',serif; font-style:italic; font-weight:400;
+    font-size:11px; color:var(--ink-faint); margin-top:2px;
+  }
+  .route-card.is-selected .route-title .en{color:rgba(242,241,230,.75);}
+  .route-card .route-desc{font-size:12.5px; color:var(--ink-soft); margin:8px 0 0; line-height:1.6;}
+  .route-card .route-desc .en{display:block; font-size:11px; color:var(--ink-faint); margin-top:4px;}
+  .route-card.is-selected .route-desc{color:rgba(242,241,230,.92);}
+  .route-card.is-selected .route-desc .en{color:rgba(242,241,230,.65);}
+  .route-card .route-time{
+    display:inline-block; font-size:11.5px; font-weight:600; color:var(--amber-deep);
+    margin-top:12px;
+  }
+  .route-card .route-time .en{font-weight:400; color:var(--ink-faint);}
+  .route-card.is-selected .route-time{color:var(--amber-soft);}
+  .route-card.is-selected .route-time .en{color:rgba(242,241,230,.65);}
+
+  .route-extra-block{
+    margin:20px 0 4px; padding:16px 18px;
+    background:var(--jade-mist); border-radius:var(--radius-sm);
+  }
+  .route-extra-label{font-size:13px; color:var(--ink-soft); margin:0 0 10px;}
+  .route-extra-label .en{display:block; font-size:11.5px; color:var(--ink-faint); margin-top:2px;}
+
   /* ============ NAV ============ */
   .nav-row{
     display:flex; justify-content:space-between; align-items:center;
@@ -455,6 +498,20 @@
   .domain-card.status-tcm{border-left-color:var(--pine);}
   .domain-card.status-clear{border-left-color:var(--jade-line); background:var(--paper);}
 
+  /* ---- per-domain health meter: fill = severity, track = same-hue tint
+     (no numeric score shown — icon+text status-label carries the meaning) ---- */
+  .card-meter{margin:2px 0 12px;}
+  .meter-track{height:7px; border-radius:999px; overflow:hidden; background:var(--jade-mist);}
+  .meter-fill{height:100%; border-radius:999px; background:var(--jade-line); transition:width .5s ease;}
+  .status-urgent .meter-track{background:var(--cinnabar-soft);}
+  .status-urgent .meter-fill{background:var(--cinnabar);}
+  .status-screen .meter-track{background:var(--amber-soft);}
+  .status-screen .meter-fill{background:var(--amber);}
+  .status-tcm .meter-track{background:var(--pine-tint);}
+  .status-tcm .meter-fill{background:var(--pine);}
+  .status-clear .meter-track{background:var(--jade-mist);}
+  .status-clear .meter-fill{background:var(--jade-line);}
+
   .card-header{
     display:flex; align-items:flex-start; justify-content:space-between;
     gap:8px; margin-bottom:10px;
@@ -495,13 +552,24 @@
     font-size:11.5px; font-weight:500; padding:3px 10px;
     border-radius:999px; border:1px solid transparent;
   }
-  .status-urgent .chip{color:var(--cinnabar-deep); border-color:rgba(156,59,46,.3); background:var(--cinnabar-soft);}
+  .status-urgent .chip, .flag-urgent .chip{color:var(--cinnabar-deep); border-color:rgba(156,59,46,.3); background:var(--cinnabar-soft);}
   .status-screen .chip{color:var(--amber-deep); border-color:rgba(185,134,63,.35); background:var(--amber-soft);}
   .status-tcm .chip{color:var(--pine); border-color:rgba(31,58,48,.25); background:var(--pine-tint);}
 
-  /* action sentence */
-  .card-action{font-size:12.5px; color:var(--ink-soft); margin:0 0 10px; line-height:1.55;}
-  .card-action strong{color:var(--ink);}
+  /* per-entry advice list (replaces one generic per-tier sentence with the
+     actual specific FLAG() text — used in domain cards and the top-urgent banner) */
+  .card-tier-label{font-size:11px; font-weight:700; letter-spacing:.04em; margin:10px 0 4px;}
+  .card-tier-label:first-child{margin-top:0;}
+  .card-tier-label.tier-urgent{color:var(--cinnabar-deep);}
+  .card-tier-label.tier-screen{color:var(--amber-deep);}
+  .card-tier-label.tier-tcm{color:var(--pine);}
+  .card-flags{margin:0 0 10px; padding-left:0; list-style:none;}
+  .card-flags li{padding:8px 0; border-top:1px dashed rgba(0,0,0,.08); font-size:12.5px; color:var(--ink-soft); line-height:1.55;}
+  .card-flags li:first-child{border-top:none;}
+  .card-flags .cf-tags{display:flex; flex-wrap:wrap; gap:5px; margin-bottom:4px;}
+  .card-flags .cf-en{display:block; font-size:11px; color:var(--ink-faint); margin-top:2px;}
+  .card-flags .cf-link{display:inline-block; margin-top:4px; font-size:11.5px; font-weight:600; color:var(--pine); text-decoration:none;}
+  .card-flags .cf-link:hover{color:var(--pine-deep);}
 
   /* clear state sentence */
   .card-clear-text{font-size:12.5px; color:var(--ink-faint); margin:0 0 10px; line-height:1.55;}
@@ -522,16 +590,7 @@
   }
   .article-link:hover{color:var(--pine-deep);}
 
-  /* ---- compact tier blocks (inside top-urgent banner) ---- */
-  .tier-block{margin-top:10px;}
-  .tier-tags{display:flex; flex-wrap:wrap; gap:7px; margin-bottom:8px;}
-  .tag-chip{
-    display:inline-block; font-size:12.5px; font-weight:500;
-    padding:4px 12px; border-radius:999px; border:1px solid transparent;
-  }
-  .tier-urgent .tag-chip{color:var(--cinnabar-deep); border-color:rgba(156,59,46,.35); background:var(--cinnabar-soft);}
-  .tier-screen .tag-chip{color:var(--amber-deep); border-color:rgba(185,134,63,.4); background:var(--amber-soft);}
-  .tier-tcm .tag-chip{color:var(--pine); border-color:rgba(31,58,48,.3); background:var(--pine-tint);}
+  /* ---- top-urgent banner closing action line ---- */
   .tier-action{font-size:13px; color:var(--ink-soft); margin:0;}
   .tier-action .en{font-size:11px; display:block; margin-top:2px;}
 
@@ -623,7 +682,7 @@
       <a href="index.html#services">治療項目</a>
       <a href="index.html#assessments">健康評估</a>
       <a href="index.html#articles">健康文章</a>
-      <a href="index.html#about">關於醫師</a>
+      <a href="about.html">關於醫師</a>
       <a href="index.html#contact" class="site-cta">預約掛號 →</a>
     </div>
     <button class="site-toggle" id="siteToggle" aria-label="開啟選單" aria-expanded="false" aria-controls="siteLinks">
@@ -661,7 +720,7 @@
    0. SMALL HELPERS
    ============================================================ */
 function opt(value, zh, en, flag){ return {value, zh, en, flag: flag||null}; }
-function FLAG(level, zh, en, domain){ return {level, zh, en, domain: domain||null}; }
+function FLAG(level, zh, en, domain, article){ return {level, zh, en, domain: domain||null, article: article||null}; }
 function escapeHtml(s){
   return String(s==null?'':s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
@@ -707,14 +766,6 @@ const SECTIONS = [
         opt('breastfeeding','哺乳中','Currently breastfeeding'),
         opt('menopause','已停經','Postmenopausal'),
         opt('never','從未有過月經','Never had a period', FLAG('screen','原發性無月經，建議安排婦科評估','No periods yet — recommend a gynecological evaluation', 'cycle')),
-      ]},
-    {id:'basic_modules', type:'multi', zh:'是否想額外了解以下專區?(可複選，選填)', en:'Would you like to include any of these focus areas? (multi-select, optional)',
-      hint_zh:'勾選後，問卷會新增對應的題目區塊。', hint_en:'Selecting an option adds a matching section to your questionnaire.',
-      options:[
-        opt('meno_module','更年期症狀評估','Menopause Symptom Assessment'),
-        opt('precon_module','備孕評估','Preconception Assessment'),
-        opt('preg_module','孕期與產後','Pregnancy & Postpartum'),
-        {...opt('none','不需要','Not needed'), exclusive:true},
       ]},
     {id:'basic_history', type:'multi', zh:'是否曾被診斷以下任一情形?(可複選)', en:'Have you been diagnosed with any of the following? (select all)',
       options:[
@@ -936,50 +987,7 @@ const SECTIONS = [
   ]
 },
 {
-  id:'meno', zh:'更年期症狀評估', en:'Menopause Symptom Assessment', optional:true, moduleKey:'meno_module',
-  intro_zh:'更年期常伴隨經期變化與多種身心症狀，以下協助記錄您目前的狀況。',
-  intro_en:"Perimenopause often brings cycle changes and a range of physical and emotional symptoms — let's note what you're experiencing.",
-  questions:[
-    {id:'meno_flush', type:'single', zh:'熱潮紅 / 盜汗頻率', en:'Hot flashes / night sweats frequency',
-      options:[
-        opt('none','無','None'),
-        opt('occasional','偶爾(每週數次)','Occasional (a few times a week)', FLAG('tcm','熱潮紅盜汗，中醫常見調理項目','Hot flashes/night sweats are a common TCM focus area')),
-        opt('frequent','頻繁(幾乎每天，影響睡眠或社交)','Frequent (almost daily, affecting sleep or social life)', FLAG('tcm','熱潮紅盜汗頻繁，建議與中醫師討論調理','Frequent hot flashes/night sweats — worth discussing management with a TCM practitioner')),
-      ]},
-    {id:'meno_sleep', type:'single', zh:'是否因熱潮紅、盜汗或其他原因而睡眠中斷', en:'Sleep interrupted by hot flashes, night sweats, or other causes',
-      options:[
-        opt('no','無','None'),
-        opt('occasional','偶爾','Occasionally'),
-        opt('frequent','經常','Frequently', FLAG('tcm','睡眠中斷頻繁，中醫常見調理項目','Frequent sleep disruption is a common TCM focus area')),
-      ]},
-    {id:'meno_mood', type:'single', zh:'情緒變化(煩躁、低落、焦慮感增加)', en:'Mood changes (irritability, low mood, increased anxiety)',
-      options:[
-        opt('none','無明顯變化','No noticeable change'),
-        opt('some','有些變化','Some change', FLAG('tcm','情緒有所變化，可與中醫師討論調理','Some mood change — worth discussing with a TCM practitioner')),
-        opt('marked','明顯影響生活','Markedly affecting daily life', FLAG('screen','情緒變化明顯，建議同時安排專業心理評估','Marked mood change — recommend also arranging a professional mental-health check-in')),
-      ]},
-    {id:'meno_dryness', type:'single', zh:'陰道乾澀或性交不適', en:'Vaginal dryness or discomfort during intercourse',
-      options:[
-        opt('no','無','None'),
-        opt('yes','有','Yes', FLAG('tcm','陰道乾澀不適，可與中醫師或婦科醫師討論調理','Vaginal dryness — worth discussing with a TCM practitioner or gynecologist')),
-      ]},
-    {id:'meno_joint', type:'single', zh:'關節痠痛或肌肉緊繃', en:'Joint aches or muscle tension',
-      options:[
-        opt('none','無','None'),
-        opt('occasional','偶爾','Occasionally'),
-        opt('frequent','經常','Frequently', FLAG('tcm','關節肌肉痠痛，中醫常見調理項目','Joint/muscle aches are a common TCM focus area')),
-      ]},
-    {id:'meno_cycle', type:'single', zh:'目前月經型態變化', en:'Current changes in your menstrual pattern',
-      showIf:a=>a.basic_status!=='pregnant' && a.basic_status!=='breastfeeding',
-      options:[
-        opt('regular','仍規律','Still regular'),
-        opt('irregular','開始變得不規律','Becoming irregular', FLAG('tcm','月經型態改變，中醫常見調理項目','Changing menstrual pattern is a common TCM focus area')),
-        opt('stopped','已超過 12 個月無月經','No period for over 12 months', FLAG('screen','建議與醫師討論停經後的骨密度與心血管相關篩檢','Recommend discussing postmenopausal bone-density and cardiovascular screening with your doctor')),
-      ]},
-  ]
-},
-{
-  id:'precon', zh:'備孕評估', en:'Preconception Assessment', optional:true, moduleKey:'precon_module',
+  id:'precon', zh:'備孕評估', en:'Preconception Assessment',
   intro_zh:'若您正在準備懷孕，以下協助掌握目前的準備狀況。',
   intro_en:"If you're preparing for pregnancy, these questions help capture your current readiness.",
   questions:[
@@ -1024,7 +1032,7 @@ const SECTIONS = [
   ]
 },
 {
-  id:'pregnant_postpartum', zh:'孕期與產後', en:'Pregnancy & Postpartum', optional:true, moduleKey:'preg_module',
+  id:'pregnant_postpartum', zh:'孕期與產後', en:'Pregnancy & Postpartum',
   intro_zh:'此區涵蓋孕期不適症狀、產後月子調理，以及哺乳常見問題，協助中醫師了解您目前的身體狀況與需求。',
   intro_en:'This section covers pregnancy discomforts, postpartum recovery (月子), and breastfeeding concerns — helping your TCM practitioner understand your current condition and care needs.',
   questions:[
@@ -1097,8 +1105,8 @@ const SECTIONS = [
       showIf:a=>['postpartum_early','postpartum_late'].includes(a.preg_status),
       options:[
         opt('normal','已正常結束或符合預期','Ended normally or as expected'),
-        opt('prolonged','持續時間較長或量較多','Prolonged or heavier than expected', FLAG('tcm','惡露持續或量多，中醫產後調理常見重點','Prolonged lochia — a key focus in TCM postpartum care')),
-        opt('concern','顏色或氣味異常','Unusual color or odor', FLAG('screen','惡露顏色或氣味異常，建議婦科評估排除感染','Unusual lochia — recommend a gynecological check to rule out infection')),
+        opt('prolonged','持續時間較長或量較多','Prolonged or heavier than expected', FLAG('tcm','惡露持續或量多，中醫產後調理常見重點','Prolonged lochia — a key focus in TCM postpartum care', null, 'postpartum-lochia')),
+        opt('concern','顏色或氣味異常','Unusual color or odor', FLAG('screen','惡露顏色或氣味異常，建議婦科評估排除感染','Unusual lochia — recommend a gynecological check to rule out infection', null, 'postpartum-lochia')),
       ]},
     {id:'preg_energy', type:'single', zh:'體力與精力恢復', en:'Energy and stamina recovery', group:'產後調理', groupEn:'Postpartum Recovery',
       showIf:a=>['postpartum_early','postpartum_late','breastfeeding_only'].includes(a.preg_status),
@@ -1132,8 +1140,8 @@ const SECTIONS = [
       showIf:a=>['postpartum_early','postpartum_late','breastfeeding_only'].includes(a.preg_status),
       options:[
         opt('none','無或輕微','None or minimal'),
-        opt('moderate','中等，有些擔心','Moderate, somewhat concerning', FLAG('tcm','產後掉髮，中醫調理常見項目','Postpartum hair loss — a common TCM focus area')),
-        opt('significant','明顯大量掉髮','Significant hair loss', FLAG('tcm','產後明顯掉髮，中醫調理常見項目，可同時留意甲狀腺功能','Significant postpartum hair loss — a common TCM focus; also worth checking thyroid function')),
+        opt('moderate','中等，有些擔心','Moderate, somewhat concerning', FLAG('tcm','產後掉髮，中醫調理常見項目','Postpartum hair loss — a common TCM focus area', null, 'postpartum-hair-loss')),
+        opt('significant','明顯大量掉髮','Significant hair loss', FLAG('tcm','產後明顯掉髮，中醫調理常見項目，可同時留意甲狀腺功能','Significant postpartum hair loss — a common TCM focus; also worth checking thyroid function', null, 'postpartum-hair-loss')),
       ]},
 
     {id:'preg_breastfeeding', type:'single', zh:'目前是否哺乳', en:'Currently breastfeeding?', group:'哺乳狀況', groupEn:'Breastfeeding',
@@ -1147,15 +1155,58 @@ const SECTIONS = [
       showIf:a=>a.preg_breastfeeding==='yes'||a.preg_breastfeeding==='mixed',
       options:[
         opt('good','充足','Adequate'),
-        opt('low','不足，需要催乳','Insufficient — need to boost supply', FLAG('tcm','乳汁不足，中醫催乳調理常見項目','Insufficient milk supply — a common focus in TCM lactation care')),
+        opt('low','不足，需要催乳','Insufficient — need to boost supply', FLAG('tcm','乳汁不足，中醫催乳調理常見項目','Insufficient milk supply — a common focus in TCM lactation care', null, 'low-milk-supply')),
         opt('oversupply','過多，容易脹奶','Oversupply, prone to engorgement'),
       ]},
     {id:'preg_engorgement', type:'single', zh:'乳房脹痛或乳管阻塞', en:'Breast engorgement or blocked ducts', group:'哺乳狀況', groupEn:'Breastfeeding',
       showIf:a=>a.preg_breastfeeding==='yes'||a.preg_breastfeeding==='mixed',
       options:[
         opt('none','無','None'),
-        opt('occasional','偶爾','Occasionally', FLAG('tcm','乳房脹痛或阻塞，中醫調理可協助疏通','Breast engorgement or blocked ducts — TCM care can help relieve this')),
-        opt('frequent','經常，影響哺乳','Frequently — affecting breastfeeding', FLAG('tcm','乳管阻塞頻繁，中醫調理可協助，嚴重時留意乳腺炎','Frequent blocked ducts — TCM can help; watch for mastitis if severe')),
+        opt('occasional','偶爾','Occasionally', FLAG('tcm','乳房脹痛或阻塞，中醫調理可協助疏通','Breast engorgement or blocked ducts — TCM care can help relieve this', null, 'blocked-duct-mastitis')),
+        opt('frequent','經常，影響哺乳','Frequently — affecting breastfeeding', FLAG('tcm','乳管阻塞頻繁，中醫調理可協助，嚴重時留意乳腺炎','Frequent blocked ducts — TCM can help; watch for mastitis if severe', null, 'blocked-duct-mastitis')),
+      ]},
+  ]
+},
+{
+  id:'meno', zh:'更年期症狀評估', en:'Menopause Symptom Assessment',
+  intro_zh:'更年期常伴隨經期變化與多種身心症狀，以下協助記錄您目前的狀況。',
+  intro_en:"Perimenopause often brings cycle changes and a range of physical and emotional symptoms — let's note what you're experiencing.",
+  questions:[
+    {id:'meno_flush', type:'single', zh:'熱潮紅 / 盜汗頻率', en:'Hot flashes / night sweats frequency',
+      options:[
+        opt('none','無','None'),
+        opt('occasional','偶爾(每週數次)','Occasional (a few times a week)', FLAG('tcm','熱潮紅盜汗，中醫常見調理項目','Hot flashes/night sweats are a common TCM focus area')),
+        opt('frequent','頻繁(幾乎每天，影響睡眠或社交)','Frequent (almost daily, affecting sleep or social life)', FLAG('tcm','熱潮紅盜汗頻繁，建議與中醫師討論調理','Frequent hot flashes/night sweats — worth discussing management with a TCM practitioner')),
+      ]},
+    {id:'meno_sleep', type:'single', zh:'是否因熱潮紅、盜汗或其他原因而睡眠中斷', en:'Sleep interrupted by hot flashes, night sweats, or other causes',
+      options:[
+        opt('no','無','None'),
+        opt('occasional','偶爾','Occasionally'),
+        opt('frequent','經常','Frequently', FLAG('tcm','睡眠中斷頻繁，中醫常見調理項目','Frequent sleep disruption is a common TCM focus area')),
+      ]},
+    {id:'meno_mood', type:'single', zh:'情緒變化(煩躁、低落、焦慮感增加)', en:'Mood changes (irritability, low mood, increased anxiety)',
+      options:[
+        opt('none','無明顯變化','No noticeable change'),
+        opt('some','有些變化','Some change', FLAG('tcm','情緒有所變化，可與中醫師討論調理','Some mood change — worth discussing with a TCM practitioner')),
+        opt('marked','明顯影響生活','Markedly affecting daily life', FLAG('screen','情緒變化明顯，建議同時安排專業心理評估','Marked mood change — recommend also arranging a professional mental-health check-in')),
+      ]},
+    {id:'meno_dryness', type:'single', zh:'陰道乾澀或性交不適', en:'Vaginal dryness or discomfort during intercourse',
+      options:[
+        opt('no','無','None'),
+        opt('yes','有','Yes', FLAG('tcm','陰道乾澀不適，可與中醫師或婦科醫師討論調理','Vaginal dryness — worth discussing with a TCM practitioner or gynecologist')),
+      ]},
+    {id:'meno_joint', type:'single', zh:'關節痠痛或肌肉緊繃', en:'Joint aches or muscle tension',
+      options:[
+        opt('none','無','None'),
+        opt('occasional','偶爾','Occasionally'),
+        opt('frequent','經常','Frequently', FLAG('tcm','關節肌肉痠痛，中醫常見調理項目','Joint/muscle aches are a common TCM focus area')),
+      ]},
+    {id:'meno_cycle', type:'single', zh:'目前月經型態變化', en:'Current changes in your menstrual pattern',
+      showIf:a=>a.basic_status!=='pregnant' && a.basic_status!=='breastfeeding',
+      options:[
+        opt('regular','仍規律','Still regular'),
+        opt('irregular','開始變得不規律','Becoming irregular', FLAG('tcm','月經型態改變，中醫常見調理項目','Changing menstrual pattern is a common TCM focus area')),
+        opt('stopped','已超過 12 個月無月經','No period for over 12 months', FLAG('screen','建議與醫師討論停經後的骨密度與心血管相關篩檢','Recommend discussing postmenopausal bone-density and cardiovascular screening with your doctor')),
       ]},
   ]
 },
@@ -1359,16 +1410,31 @@ const SECTIONS = [
 },
 ];
 
-const CN_NUM_FULL = ['一','二','三','四','五','六','七','八'];
+const CN_NUM_FULL = ['一','二','三','四','五','六','七','八','九'];
 
-/* Sections marked `optional:true` only appear if the matching basic_modules
-   choice was selected — this is how 更年期症狀評估 / 備孕評估 become opt-in. */
+/* ------------------------------------------------------------
+   PATH / ROUTE SELECTION — replaces the old basic_modules add-on
+   checkbox. The user picks one primary route on the new `path`
+   step (route_primary); routes other than 'full' can additionally
+   bundle in extra track sections (route_extra). 'full' always
+   includes every section, including the universal safety-net
+   sections (cancer / repro / wellness / lifestyle) that focused
+   single-track routes skip entirely.
+   ------------------------------------------------------------ */
+const TRACK_IDS = ['cycle','precon','pregnant_postpartum','meno'];
+function getActiveTrackIds(){
+  const route = state.answers.route_primary;
+  if(!route || route==='full') return null; // null = everything (full assessment)
+  const extra = (state.answers.route_extra || []).filter(id=>TRACK_IDS.includes(id));
+  return new Set([route, ...extra]);
+}
 function getActiveSections(){
-  const mods = state.answers.basic_modules || [];
-  return SECTIONS.filter(s => !s.optional || mods.includes(s.moduleKey));
+  const tracks = getActiveTrackIds();
+  if(tracks===null) return SECTIONS;
+  return SECTIONS.filter(s => s.id==='basic' || tracks.has(s.id));
 }
 function getSteps(){
-  return ['intro', ...getActiveSections().map(s=>s.id), 'summary'];
+  return ['intro', 'path', ...getActiveSections().map(s=>s.id), 'summary'];
 }
 
 /* ============================================================
@@ -1424,8 +1490,8 @@ function renderIntro(){
       <p class="intro-copy en">Grounded in guidance from the WHO, USPSTF, and FIGO — paired with a TCM care perspective — to give you clear, caring insight into your health.</p>
     </div>
     <div class="intro-meta">
-      <span>⏱ <b>約 5–8 分鐘</b> <span class="en">5–8 minutes</span></span>
-      <span>📋 <b>6 個核心區塊，可加開更年期／備孕專區</b> <span class="en">6 core sections + optional focus areas</span></span>
+      <span>⏱ <b>依路徑而定，約 4–20 分鐘</b> <span class="en">4–20 minutes, depending on your path</span></span>
+      <span>📋 <b>下一步先選路徑：完整評估／月經／備孕／孕產後／更年期</b> <span class="en">Next: choose full assessment, cycle, preconception, pregnancy &amp; postpartum, or menopause</span></span>
       <span>🔒 <b>資料僅留在您的裝置</b> <span class="en">Stays on your device</span></span>
     </div>
     <div class="disclaimer">
@@ -1435,6 +1501,83 @@ function renderIntro(){
     <div class="nav-row">
       <span class="step-tag">START</span>
       <button class="btn btn-primary btn-begin" data-nav="start">開始評估 Begin →</button>
+    </div>
+  `;
+}
+
+/* ============================================================
+   4b. RENDER — PATH / ROUTE SELECTION
+   ============================================================ */
+const ROUTES = [
+  {id:'full', zh:'完整評估', en:'Full Comprehensive Assessment',
+    desc_zh:'涵蓋月經週期、癌症篩查、代謝骨骼與身心健康、性健康等全部面向，完整記錄您目前的健康狀態。',
+    desc_en:'Every section — menstrual cycle, cancer screening, metabolic/bone/mood, sexual health, and more.',
+    time_zh:'約 15–20 分鐘', time_en:'15–20 min'},
+  {id:'cycle', zh:'月經週期評估', en:'Menstrual Cycle Assessment',
+    desc_zh:'週期規律性、經量經痛、白帶與異常出血，聚焦月經與婦科基礎狀況。',
+    desc_en:'Cycle regularity, flow, pain, discharge, and abnormal bleeding.',
+    time_zh:'約 5 分鐘', time_en:'~5 min'},
+  {id:'precon', zh:'備孕評估', en:'Preconception Assessment',
+    desc_zh:'備孕準備度、葉酸與孕前檢查、週期可預測性，協助掌握懷孕前的準備狀況。',
+    desc_en:'Readiness to conceive, folic acid, preconception checks, cycle predictability.',
+    time_zh:'約 4 分鐘', time_en:'~4 min'},
+  {id:'pregnant_postpartum', zh:'孕期與產後', en:'Pregnancy & Postpartum',
+    desc_zh:'孕期不適、產後月子恢復與哺乳問題，涵蓋懷孕到坐月子的照護重點。',
+    desc_en:'Pregnancy discomforts, postpartum (月子) recovery, and breastfeeding concerns.',
+    time_zh:'約 5 分鐘', time_en:'~5 min'},
+  {id:'meno', zh:'更年期症狀評估', en:'Menopause Symptom Assessment',
+    desc_zh:'熱潮紅、睡眠、情緒與關節等更年期常見症狀評估。',
+    desc_en:'Hot flashes, sleep, mood, and joint symptoms common in perimenopause.',
+    time_zh:'約 3 分鐘', time_en:'~3 min'},
+];
+
+function renderRouteCard(r, selected){
+  return `<button type="button" class="opt route-card ${selected?'is-selected':''}"
+    data-qid="route_primary" data-value="${r.id}" data-qtype="single">
+    <span class="route-title">${r.zh}<span class="en">${r.en}</span></span>
+    <p class="route-desc">${r.desc_zh}<span class="en">${r.desc_en}</span></p>
+    <span class="route-time">⏱ ${r.time_zh}<span class="en"> · ${r.time_en}</span></span>
+  </button>`;
+}
+
+function renderPath(){
+  const primary = state.answers.route_primary;
+  const extra = state.answers.route_extra || [];
+  const fullRoute = ROUTES[0];
+  const tracks = ROUTES.slice(1);
+
+  let extraHtml = '';
+  if(primary && primary !== 'full'){
+    const remaining = tracks.filter(r=>r.id!==primary);
+    extraHtml = `<div class="route-extra-block">
+      <p class="route-extra-label">想順便加開其他專區嗎?(可複選，選填)<span class="en">Bundle in any other focus areas? (optional, multi-select)</span></p>
+      <div class="opt-grid">${remaining.map(r=>{
+        const sel = extra.includes(r.id);
+        return `<button type="button" class="opt ${sel?'is-selected':''}" data-qid="route_extra" data-value="${r.id}" data-qtype="multi">
+          <span class="zh">${r.zh}</span><span class="en">${r.en}</span>
+        </button>`;
+      }).join('')}</div>
+    </div>`;
+  }
+
+  return `
+    <div class="eyebrow">選擇問卷路徑 · Choose Your Path</div>
+    <h2>您想從哪裡開始?</h2>
+    <p class="section-en en">What would you like to focus on today?</p>
+    <p class="intro-copy">請選擇最符合您目前需求的一項。選好之後，仍可視需要加開其他專區；日後在題目中按「上一步」也能隨時回來重新選擇。</p>
+    <p class="intro-copy en" style="margin-top:-10px;">Pick whichever best matches what you need right now. You can bundle in more focus areas afterward, and you can always come back here via "Back" from the next screen.</p>
+
+    <div class="route-full-wrap">${renderRouteCard(fullRoute, primary==='full')}</div>
+    <p class="route-or">或者，只想聚焦其中一項<span class="en">Or focus on just one area</span></p>
+    <div class="route-grid">${tracks.map(r=>renderRouteCard(r, primary===r.id)).join('')}</div>
+    ${extraHtml}
+
+    <p class="q-hint" style="margin-top:18px;">以上時間估計未含開頭共用的「基本資料」題目(約再加 1–2 分鐘)。<span class="en" style="display:block;">Estimates above don't include the shared basic-info questions at the very start (add ~1–2 min).</span></p>
+
+    <div class="nav-row">
+      <button class="btn btn-ghost" data-nav="prev">← 上一步 Back</button>
+      <span class="step-tag">START</span>
+      <button class="btn btn-primary" data-nav="next" ${primary?'':'disabled'}>下一步 Next →</button>
     </div>
   `;
 }
@@ -1528,7 +1671,7 @@ function renderSection(section){
     ${branchNote(section)}
     ${questionsHtml}
     <div class="nav-row">
-      <button class="btn btn-ghost" data-nav="prev">${isFirst?'← 回到首頁 Intro':'← 上一步 Back'}</button>
+      <button class="btn btn-ghost" data-nav="prev">← 上一步 Back</button>
       <span class="step-tag">${idx+1} / ${active.length}</span>
       <button class="btn btn-primary" data-nav="next">${isLast?'查看結果摘要 View Summary →':'下一步 Next →'}</button>
     </div>
@@ -1549,17 +1692,18 @@ function renderSection(section){
 const REPORT_DOMAINS = [
   {id:'cycle',     zh:'月經週期評估',  en:'Menstrual Cycle Assessment'},
   {id:'discharge', zh:'白帶健康',      en:'Vaginal Discharge Health'},
-  {id:'meno',      zh:'更年期症狀評估', en:'Menopause Symptom Assessment', optional:true, moduleKey:'meno_module'},
-  {id:'precon',    zh:'備孕評估',      en:'Preconception Assessment', optional:true, moduleKey:'precon_module'},
-  {id:'pregnant_postpartum', zh:'孕期與產後', en:'Pregnancy & Postpartum', optional:true, moduleKey:'preg_module'},
+  {id:'precon',    zh:'備孕評估',      en:'Preconception Assessment'},
+  {id:'pregnant_postpartum', zh:'孕期與產後', en:'Pregnancy & Postpartum'},
+  {id:'meno',      zh:'更年期症狀評估', en:'Menopause Symptom Assessment'},
   {id:'cancer',    zh:'癌症定期篩查',  en:'Cancer Screening'},
   {id:'repro',     zh:'性與生殖健康',  en:'Sexual & Reproductive Health'},
   {id:'wellness',  zh:'代謝、骨骼與身心健康', en:'Metabolic, Bone & Mental Wellness'},
   {id:'lifestyle', zh:'生活習慣',      en:'Lifestyle Habits'},
 ];
 function getActiveReportDomains(){
-  const mods = state.answers.basic_modules || [];
-  return REPORT_DOMAINS.filter(d => !d.optional || mods.includes(d.moduleKey));
+  const tracks = getActiveTrackIds();
+  if(tracks===null) return REPORT_DOMAINS;
+  return REPORT_DOMAINS.filter(d => tracks.has(d.id) || (d.id==='discharge' && tracks.has('cycle')));
 }
 
 /* ------------------------------------------------------------
@@ -1572,7 +1716,7 @@ const ARTICLE_LINKS = {
   discharge: '',   // 白帶評估文章網址 Vaginal discharge article URL
   meno:      '',   // 更年期症狀評估文章網址 Menopause assessment article URL
   precon:              '',   // 備孕評估文章網址 Preconception assessment article URL
-  pregnant_postpartum: '',   // 孕期與產後文章網址 Pregnancy & postpartum article URL
+  pregnant_postpartum: 'articles/postpartum-care.html',   // 孕期與產後文章網址 Pregnancy & postpartum article URL
   cancer:              '',   // 癌症篩查文章網址(子宮頸/乳房/大腸) Cancer screening article URL
   repro:     '',   // 性與生殖健康文章網址 Sexual health article URL
   wellness:  '',   // 代謝骨骼身心文章網址 Metabolic/bone/mood article URL
@@ -1622,13 +1766,14 @@ const DOMAIN_META = {
 };
 
 /* Returns { [domainId]: {urgent:[], screen:[], tcm:[]} }, where each tier
-   holds entries of {level, zh, en, tags:[{zh,en}, ...]}. A flag's home
-   domain is its own wizard section by default, unless FLAG(...) overrides
-   it (used for 白帶/discharge and 乳房/breast). Multiple options that
-   share an identical flag (e.g. the gynecological-diagnosis list) collapse
-   into one entry, with each selected option's short label kept as a tag —
-   this is what lets the report show compact chips instead of repeating
-   the same sentence once per selection. */
+   holds entries of {level, zh, en, article, tags:[{zh,en}, ...]}. A flag's
+   home domain is its own wizard section by default, unless FLAG(...)
+   overrides it (used for 白帶/discharge and 乳房/breast). Multiple options
+   that share an identical flag (e.g. the gynecological-diagnosis list)
+   collapse into one entry, with each selected option's short label kept as
+   a tag — this is what lets the report show compact chips instead of
+   repeating the same sentence once per selection. `article` (optional) is
+   an articles/ slug for flags that map to an already-published article. */
 function computeDomainFlags(){
   const domains = {};
   const entryMap = new Map();
@@ -1639,7 +1784,7 @@ function computeDomainFlags(){
     const key = dId+'|'+flag.level+'|'+flag.zh;
     let entry = entryMap.get(key);
     if(!entry){
-      entry = {level:flag.level, zh:flag.zh, en:flag.en, tags:[]};
+      entry = {level:flag.level, zh:flag.zh, en:flag.en, article:flag.article||null, tags:[]};
       entryMap.set(key, entry);
       domains[dId][flag.level].push(entry);
     }
@@ -1666,8 +1811,8 @@ function domainStatus(buckets){
 }
 
 /* ============================================================
-   7. RENDER — SUMMARY (concise: tags + one action line per tier,
-      not a repeated sentence per selected item)
+   7. RENDER — SUMMARY (each triggered item shows its own specific
+      FLAG() sentence, not a generic per-tier line)
    ============================================================ */
 const STATUS_BADGE = {
   urgent:{zh:'需優先處理', en:'Needs prompt attention'},
@@ -1677,53 +1822,6 @@ const STATUS_BADGE = {
 };
 const TIER_ACTION = {
   urgent:{zh:'請優先處理以上項目，建議儘速就醫評估。', en:'Please address these first — prompt medical evaluation is recommended.'},
-  screen:{zh:'建議針對以上項目安排西醫／婦科相關檢查。', en:'Recommend scheduling relevant medical or gynecological screening for these.'},
-  tcm:{zh:'以上項目屬於中醫調理可協助的範疇，建議安排諮詢進一步評估體質。', en:'These fall within areas TCM care can help with — worth booking a consultation for a fuller assessment.'},
-};
-
-function tierTags(entries){
-  const tags = [];
-  entries.forEach(e=>(e.tags||[]).forEach(t=>{ if(!tags.some(x=>x.zh===t.zh)) tags.push(t); }));
-  return tags;
-}
-
-function renderTierCompact(level, entries){
-  if(!entries.length) return '';
-  const tags = tierTags(entries);
-  const action = TIER_ACTION[level];
-  return `<div class="tier-block tier-${level}">
-    <div class="tier-tags">${tags.map(t=>`<span class="tag-chip">${t.zh}</span>`).join('')}</div>
-    <p class="tier-action">${action.zh}<span class="en">${action.en}</span></p>
-  </div>`;
-}
-
-function renderTopUrgentBanner(domainFlags, activeDomains){
-  const groups = [];
-  activeDomains.forEach(d=>{
-    const b = domainFlags[d.id];
-    if(b && b.urgent.length) groups.push({d, tags:tierTags(b.urgent)});
-  });
-  if(!groups.length) return '';
-  return `<div class="flag-band flag-urgent top-urgent">
-    <h3><span class="dot"></span>請優先處理以下事項</h3>
-    <span class="en">Please address these first</span>
-    <div class="top-urgent-groups">
-      ${groups.map(g=>`<div class="tu-group"><b>${g.d.zh}</b><div class="tier-tags">${g.tags.map(t=>`<span class="tag-chip">${t.zh}</span>`).join('')}</div></div>`).join('')}
-    </div>
-    <p class="tier-action" style="margin-top:4px;">${TIER_ACTION.urgent.zh}<span class="en">${TIER_ACTION.urgent.en}</span></p>
-  </div>`;
-}
-
-/* Short action sentences per tier, card-scale (tighter than top-banner) */
-const CARD_ACTION = {
-  urgent: zh=>`<strong>請優先確認：</strong>${zh}`,
-  screen:  zh=>`<strong>建議安排：</strong>${zh}`,
-  tcm:     zh=>`<strong>可進一步調理：</strong>${zh}`,
-};
-const TIER_SENTENCE = {
-  urgent:'建議盡快就醫評估。',
-  screen:'建議安排相關檢查，這是正常的預防步驟。',
-  tcm:'有機會可以聊聊，看看調理方向是否適合您。',
 };
 const STATUS_LABEL_TEXT = {
   urgent:'⚑ 需優先處理',
@@ -1732,27 +1830,78 @@ const STATUS_LABEL_TEXT = {
   clear:'✓ 大致正常',
 };
 
+/* Internal-only 0–100 score, used purely to set the meter's fill width —
+   never shown as a digit. Worse tiers subtract more; floor keeps the bar
+   from disappearing entirely. */
+function computeDomainScore(buckets){
+  let score = 100;
+  score -= buckets.urgent.length * 35;
+  score -= buckets.screen.length * 15;
+  score -= buckets.tcm.length * 7;
+  return Math.max(6, Math.min(100, score));
+}
+
+function renderMeter(score){
+  return `<div class="card-meter" aria-hidden="true">
+    <div class="meter-track"><div class="meter-fill" style="width:${score}%"></div></div>
+  </div>`;
+}
+
+/* Shared list renderer — one <li> per triggered item, showing its actual
+   FLAG() sentence (not a generic per-tier line). Tags only render when a
+   flag was collapsed from >1 selected option (e.g. family cancer history),
+   since a single tag would just repeat the sentence. An article link shows
+   only when that specific flag maps to an already-published article. */
+function renderFlagList(entries){
+  return `<ul class="card-flags">${entries.map(e=>{
+    const tagsHtml = (e.tags && e.tags.length > 1)
+      ? `<div class="cf-tags">${e.tags.map(t=>`<span class="chip">${t.zh}</span>`).join('')}</div>`
+      : '';
+    const articleHtml = e.article
+      ? `<a class="cf-link" href="articles/${e.article}.html" target="_blank" rel="noopener">→ 閱讀相關文章 <span class="en">Read more</span></a>`
+      : '';
+    return `<li>${tagsHtml}<p style="margin:0;">${e.zh}<span class="en cf-en">${e.en}</span></p>${articleHtml}</li>`;
+  }).join('')}</ul>`;
+}
+
+function renderTopUrgentBanner(domainFlags, activeDomains){
+  const groups = [];
+  activeDomains.forEach(d=>{
+    const b = domainFlags[d.id];
+    if(b && b.urgent.length) groups.push({d, entries:b.urgent});
+  });
+  if(!groups.length) return '';
+  return `<div class="flag-band flag-urgent top-urgent">
+    <h3><span class="dot"></span>請優先處理以下事項</h3>
+    <span class="en">Please address these first</span>
+    <div class="top-urgent-groups">
+      ${groups.map(g=>`<div class="tu-group"><b>${g.d.zh}</b>${renderFlagList(g.entries)}</div>`).join('')}
+    </div>
+    <p class="tier-action" style="margin-top:4px;">${TIER_ACTION.urgent.zh}<span class="en">${TIER_ACTION.urgent.en}</span></p>
+  </div>`;
+}
+
 function renderDomainCard(d, buckets){
   const status = domainStatus(buckets);
+  const score = computeDomainScore(buckets);
   const meta = DOMAIN_META[d.id] || {};
   const caveat = meta.caveat ? meta.caveat(state.answers) : null;
   const link = ARTICLE_LINKS[d.id];
 
-  /* Build tier content blocks — one per triggered tier */
+  /* Build tier content blocks — one per triggered tier, each item showing
+     its own specific advice sentence. Tier headings only appear when a card
+     has 2+ tiers active — with just one, the status-label above already says it. */
   let content = '';
   if(status === 'clear'){
     content = `<p class="card-clear-text">${meta.clear_zh||'—'}</p>`;
   } else {
-    ['urgent','screen','tcm'].forEach(level=>{
-      const entries = buckets[level];
-      if(!entries.length) return;
-      const tags = [];
-      entries.forEach(e=>(e.tags||[]).forEach(t=>{ if(!tags.some(x=>x.zh===t.zh)) tags.push(t); }));
-      const chipsHtml = tags.length
-        ? `<div class="card-chips">${tags.map(t=>`<span class="chip">${t.zh}</span>`).join('')}</div>`
+    const activeTiers = ['urgent','screen','tcm'].filter(level=>buckets[level].length);
+    content = activeTiers.map(level=>{
+      const heading = activeTiers.length > 1
+        ? `<p class="card-tier-label tier-${level}">${STATUS_LABEL_TEXT[level]}</p>`
         : '';
-      content += `${chipsHtml}<p class="card-action">${CARD_ACTION[level](TIER_SENTENCE[level])}</p>`;
-    });
+      return heading + renderFlagList(buckets[level]);
+    }).join('');
   }
 
   return `<div class="domain-card status-${status}">
@@ -1760,11 +1909,12 @@ function renderDomainCard(d, buckets){
       <h3 class="card-title">${d.zh}<span class="en">${d.en}</span></h3>
       <span class="status-dot"></span>
     </div>
+    ${renderMeter(score)}
     <div class="card-divider"></div>
     <p class="status-label">${STATUS_LABEL_TEXT[status]}</p>
     ${content}
     ${caveat ? `<p class="domain-caveat">⚑ ${caveat.zh}</p>` : ''}
-    <a class="article-link" href="${link||'#'}" target="_blank" rel="noopener">閱讀完整文章 →</a>
+    ${link ? `<a class="article-link" href="${link}" target="_blank" rel="noopener">閱讀完整文章 →</a>` : ''}
   </div>`;
 }
 
@@ -1918,6 +2068,7 @@ function renderCurrentStep(){
   const steps = getSteps();
   const id = steps[state.step];
   if(id==='intro') panel.innerHTML = renderIntro();
+  else if(id==='path') panel.innerHTML = renderPath();
   else if(id==='summary') panel.innerHTML = renderSummary();
   else panel.innerHTML = renderSection(SECTIONS.find(s=>s.id===id));
 }
@@ -1932,10 +2083,10 @@ panel.addEventListener('click', e=>{
     if(qtype==='single'){
       state.answers[qid] = val;
     } else {
-      const q = findQuestion(qid);
+      const q = findQuestion(qid); // null for pseudo-questions like route_extra, which have no exclusive options
       let arr = state.answers[qid] ? [...state.answers[qid]] : [];
       const isExclusive = optBtn.dataset.exclusive==='1';
-      const exclusiveVals = q.options.filter(o=>o.exclusive).map(o=>o.value);
+      const exclusiveVals = q ? q.options.filter(o=>o.exclusive).map(o=>o.value) : [];
       if(isExclusive){
         arr = arr.includes(val) ? [] : [val];
       } else {

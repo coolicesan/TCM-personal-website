@@ -69,7 +69,7 @@
           '</div>' +
           '<a href="' + link(prefix, 'index.html#assessments') + '" data-nav-key="assessments">健康評估</a>' +
           '<a href="' + link(prefix, 'articles.html') + '" data-nav-key="library">健康知識庫</a>' +
-          '<a href="' + link(prefix, 'index.html#about') + '" data-nav-key="about">關於醫師</a>' +
+          '<a href="' + link(prefix, 'about.html') + '" data-nav-key="about">關於醫師</a>' +
           '<a href="' + link(prefix, 'index.html#contact') + '" class="drhu-nav-cta" data-nav-key="booking">預約掛號 →</a>' +
         '</div>' +
         '<div class="lang-switch drhu-lang-switch" id="langSwitch" aria-label="Language switcher">' +
@@ -153,23 +153,23 @@
       txMoxa: '艾灸療法'
     },
     en: {
-      logo: 'Dr. Kate Woo',
+      logo: 'CMP Kate Woo',
       home: 'Home',
-      stages: 'Care Focus',
+      stages: 'Areas of Care',
       services: 'Treatments',
       assessments: 'Assessments',
       library: 'Health Library',
       about: 'About',
       booking: 'Book →',
-      stagePeriods: 'Period Care',
-      stageGyne: 'Gynecology',
+      stagePeriods: 'Period and Cycle Care',
+      stageGyne: 'Gynaecology',
       stageFertility: 'Fertility Support',
       stagePregnancy: 'Pregnancy Support',
       stagePostpartum: 'Postpartum Recovery',
       stageMenopause: 'Menopause Care',
       stageMood: 'Emotional Wellbeing',
-      stageOncology: 'Cancer Support',
-      stageInternal: 'Internal Medicine',
+      stageOncology: 'Supportive Cancer Care',
+      stageInternal: 'General Internal Care',
       txHerbs: 'Herbal Medicine',
       txAcupuncture: 'Acupuncture',
       txFacial: 'Cosmetic Acupuncture',
@@ -201,6 +201,7 @@
 
   function currentNavKey() {
     var path = decodeURIComponent(location.pathname);
+    if (/\/about\.html$/.test(path)) return 'about';
     if (/\/articles\.html$/.test(path) || /\/articles\/[^/]+\.html$/.test(path) || /\/admin\/[^/]+\.html$/.test(path)) return 'library';
     if (/\/treatments\/[^/]+\.html$/.test(path)) return 'services';
     if (/\/constitution(?:-report)?\.html$/.test(path) || /\/女性健康問卷\.html$/.test(path)) return 'assessments';

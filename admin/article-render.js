@@ -251,7 +251,7 @@
     return '<div class="article-authorbox">' +
       '<img src="../Profile pic.JPG" alt="胡佩珊中醫師" loading="lazy">' +
       '<div><h4>關於作者</h4>' +
-      '<p><a href="../index.html#about">胡佩珊中醫師</a>，香港註冊中醫師（註冊編號：008823），專注女性健康及產前產後調理，善於結合中醫辨證與現代醫學知識，為病人制定個人化治療方案。</p>' +
+      '<p><a href="../about.html">胡佩珊中醫師</a>，香港註冊中醫師（註冊編號：008823），專注女性健康及產前產後調理，善於結合中醫辨證與現代醫學知識，為病人制定個人化治療方案。</p>' +
       '</div></div>';
   }
 
@@ -304,7 +304,7 @@
       '@id': PERSON_ID,
       name: '胡佩珊中醫師',
       alternateName: ['胡佩珊', '胡佩珊醫師', 'Kate Woo'],
-      url: SITE_BASE + 'index.html#about',
+      url: SITE_BASE + 'about.html',
       image: SITE_BASE + 'Profile%20pic.JPG',
       jobTitle: '註冊中醫師',
       identifier: { '@type': 'PropertyValue', name: 'CMCHK 註冊編號', value: '008823' },
