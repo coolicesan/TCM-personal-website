@@ -31,26 +31,25 @@
   function buildNav() {
     var prefix = depthPrefix();
     var stageItems = [
-      { key: 'stagePeriods', zh: '月經調理', href: '女性健康問卷.html' },
-      { key: 'stageGyne', zh: '婦科疾病', href: '女性健康問卷.html' },
-      { key: 'stageFertility', zh: '備孕・不孕', href: '女性健康問卷.html' },
-      { key: 'stagePregnancy', zh: '產前安胎', href: '女性健康問卷.html' },
-      { key: 'stagePostpartum', zh: '產後月子調理', href: '女性健康問卷.html' },
-      { key: 'stageMenopause', zh: '更年期調理', href: '女性健康問卷.html' },
+      { key: 'stageMenstrual', zh: '月經及婦科問題', href: '女性健康問卷.html' },
+      { key: 'stageFertility', zh: '備孕及不孕', href: '女性健康問卷.html' },
+      { key: 'stagePregnancy', zh: '孕期及產後', href: '女性健康問卷.html' },
+      { key: 'stageMenopause', zh: '更年期與停經後健康', href: '女性健康問卷.html' },
+      { key: 'stageSkin', zh: '皮膚問題', href: 'index.html#contact' },
+      { key: 'stageBreast', zh: '乳房', href: 'treatments/treatment-mammary.html' },
+      { key: 'stageHairloss', zh: '脫髮', href: 'treatments/treatment-hairloss.html' },
+      { key: 'stageWeight', zh: '體重管理', href: 'treatments/treatment-weight.html' },
       { key: 'stageMood', zh: '情緒健康', href: '女性健康問卷.html' },
       { key: 'stageOncology', zh: '癌症治療', href: 'treatments/treatment-oncology.html' },
       { key: 'stageInternal', zh: '內科調理', href: 'treatments/treatment-internal.html' }
     ];
     var treatmentItems = [
-      { key: 'txHerbs', zh: '中藥調理', href: 'treatments/treatment-herbs.html' },
       { key: 'txAcupuncture', zh: '針灸治療', href: 'treatments/treatment-acupuncture.html' },
+      { key: 'txHerbs', zh: '中藥調理', href: 'treatments/treatment-herbs.html' },
       { key: 'txAuricular', zh: '耳穴療法', href: 'treatments/treatment-auricular.html' },
-      { key: 'txCupping', zh: '拔罐・刮痧', href: 'treatments/treatment-cupping.html' },
-      { key: 'txMoxa', zh: '艾灸療法', href: 'treatments/treatment-moxa.html' },
-      { key: 'txFacial', zh: '美顏針', href: 'treatments/treatment-facial.html', side: 'right' },
-      { key: 'txWeight', zh: '體重管理', href: 'treatments/treatment-weight.html', side: 'right' },
-      { key: 'txHairloss', zh: '脫髮治療', href: 'treatments/treatment-hairloss.html', side: 'right' },
-      { key: 'txMammary', zh: '乳腺針灸', href: 'treatments/treatment-mammary.html', side: 'right' }
+      { key: 'txMoxa', zh: '艾灸療法', href: 'treatments/treatment-moxa.html', side: 'right' },
+      { key: 'txCupping', zh: '拔罐・刮痧', href: 'treatments/treatment-cupping.html', side: 'right' },
+      { key: 'txFacial', zh: '美顏針', href: 'treatments/treatment-facial.html', side: 'right' }
     ];
     return '<nav class="drhu-nav" aria-label="主要導覽">' +
       '<div class="drhu-nav-inner">' +
@@ -133,24 +132,23 @@
       library: '健康知識庫',
       about: '關於醫師',
       booking: '預約掛號 →',
-      stagePeriods: '月經調理',
-      stageGyne: '婦科疾病',
-      stageFertility: '備孕・不孕',
-      stagePregnancy: '產前安胎',
-      stagePostpartum: '產後月子調理',
-      stageMenopause: '更年期調理',
+      stageMenstrual: '月經及婦科問題',
+      stageFertility: '備孕及不孕',
+      stagePregnancy: '孕期及產後',
+      stageMenopause: '更年期與停經後健康',
+      stageSkin: '皮膚問題',
+      stageBreast: '乳房',
+      stageHairloss: '脫髮',
+      stageWeight: '體重管理',
       stageMood: '情緒健康',
       stageOncology: '癌症治療',
       stageInternal: '內科調理',
-      txHerbs: '中藥調理',
       txAcupuncture: '針灸治療',
-      txFacial: '美顏針',
-      txWeight: '體重管理',
-      txHairloss: '脫髮治療',
-      txMammary: '乳腺針灸',
+      txHerbs: '中藥調理',
       txAuricular: '耳穴療法',
+      txMoxa: '艾灸療法',
       txCupping: '拔罐・刮痧',
-      txMoxa: '艾灸療法'
+      txFacial: '美顏針'
     },
     en: {
       logo: 'CMP Kate Woo',
@@ -161,24 +159,23 @@
       library: 'Health Library',
       about: 'About',
       booking: 'Book →',
-      stagePeriods: 'Period and Cycle Care',
-      stageGyne: 'Gynaecology',
+      stageMenstrual: 'Menstrual & Gynaecological Care',
       stageFertility: 'Fertility Support',
-      stagePregnancy: 'Pregnancy Support',
-      stagePostpartum: 'Postpartum Recovery',
-      stageMenopause: 'Menopause Care',
+      stagePregnancy: 'Pregnancy & Postpartum',
+      stageMenopause: 'Menopause & Postmenopausal Health',
+      stageSkin: 'Skin Concerns',
+      stageBreast: 'Breast Health',
+      stageHairloss: 'Hair Loss',
+      stageWeight: 'Weight Management',
       stageMood: 'Emotional Wellbeing',
       stageOncology: 'Supportive Cancer Care',
       stageInternal: 'General Internal Care',
-      txHerbs: 'Herbal Medicine',
       txAcupuncture: 'Acupuncture',
-      txFacial: 'Cosmetic Acupuncture',
-      txWeight: 'Weight Management',
-      txHairloss: 'Hair Loss Treatment',
-      txMammary: 'Breast Acupuncture',
+      txHerbs: 'Herbal Medicine',
       txAuricular: 'Auricular Therapy',
+      txMoxa: 'Moxibustion',
       txCupping: 'Cupping and Gua Sha',
-      txMoxa: 'Moxibustion'
+      txFacial: 'Cosmetic Acupuncture'
     }
   };
 
