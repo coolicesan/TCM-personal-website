@@ -19,7 +19,7 @@
   <meta name="twitter:image" content="https://coolicesan.github.io/TCM-personal-website/og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="treatments.css">
   <script src="../config-loader.js"></script>
@@ -49,8 +49,19 @@
   }
   </script>
   <style>
-    :root { --tx-c: #3C6E54; }
-    .tx-hero { background: linear-gradient(150deg, #F0F6F2 0%, white 60%); }
+    /* 對齊 articles/article.css 與首頁共用的暖色調系統，取代 styles.css 原本
+       的 plum 色調＋Cormorant Garamond，讓治療項目頁跟文章頁視覺一致。
+       這裡只用變數別名覆蓋，不動 styles.css／treatments.css 本身，
+       所以不影響其他 8 篇治療頁面或 constitution.html。 */
+    :root {
+      --tx-c: #7D927C;        /* 中藥調理＝草木，沿用 article.css 的 --sage（原本是較冷的 #3C6E54） */
+      --text-dark: #4A4038;   /* = article.css --cocoa */
+      --text-light: #857A6E;  /* = article.css --cocoa-soft */
+      --border: #E9E0D0;      /* = article.css --line */
+      --terracotta: #B87976;  /* = article.css --rose，給 WhatsApp 按鈕的 focus 樣式用 */
+      --font-accent: var(--font-display); /* 不再用 Cormorant Garamond，步驟數字改用襯線體 */
+    }
+    .tx-hero { background: linear-gradient(150deg, #F7F2E6 0%, #FFFDF9 60%); }
   </style>
 </head>
 <body>
@@ -93,7 +104,7 @@
       <div class="tx-hero-icon">🌿</div>
       <div class="tx-hero-tag">中醫治療</div>
       <h1>中藥調理</h1>
-      <p class="tx-hero-sub">以草木之力，調和您的氣血陰陽。根據個人體質與症狀，為您量身配製專屬藥方，從根本調補，標本兼治。</p>
+      <p class="tx-hero-sub">根據您的體質與症狀，配製專屬藥方，從根本調理氣血陰陽，標本兼治。</p>
     </div>
   </div>
 </section>
@@ -115,9 +126,9 @@
       <div class="tx-section" id="what">
         <div class="tx-label">什麼是中藥調理</div>
         <h2>個人化中藥，從根本調整體質</h2>
-        <p class="tx-prose">中藥調理是中醫最核心的治療方式之一。胡佩珊中醫師透過「望、聞、問、切」四診合參，全面評估您的體質、臟腑功能及當下症狀，再依據辨證結果配製個人化藥方。</p>
-        <p class="tx-prose">不同於西藥的症狀對症，中藥著重「調整體質根源」，以多味藥材相互配伍，達到氣血陰陽的平衡。無論是急性症狀的舒緩，還是慢性體質的長期調理，中藥都可因人而異地發揮作用。</p>
-        <p class="tx-prose">劑型方面，診所提供傳統煎劑（水煎藥）及科學中藥顆粒兩種選擇，醫師會根據您的生活習慣與病情建議最適合的服用方式。</p>
+        <p class="tx-prose">中藥調理是中醫最核心的治療方式。胡佩珊中醫師透過「望、聞、問、切」四診，評估您的體質、臟腑功能與當下症狀，再依辨證結果配製個人化藥方。</p>
+        <p class="tx-prose">中藥著重調整體質根源，以多味藥材相互配伍，調和氣血陰陽——不論是急性症狀的舒緩，還是慢性體質的長期調理，都能因人而異地發揮作用，這跟西藥針對單一症狀對症下藥的思路不太一樣。</p>
+        <p class="tx-prose">劑型方面，診所提供傳統煎劑（水煎藥）與科學中藥顆粒兩種選擇，醫師會根據您的生活習慣與病情，建議最適合的服用方式。</p>
       </div>
 
       <div class="tx-section" id="compare">
@@ -153,7 +164,7 @@
               深入了解：藥理研究與方法論差異
               <span class="tx-disclosure-chevron">▼</span>
             </button>
-            <div class="tx-disclosure-a">部分常用婦科中藥材（如當歸、白芍、川芎等）已有藥理研究探討其活血、調節子宮平滑肌收縮及類雌激素樣作用的可能機制，但中藥複方講求多味藥材協同作用，現代單一成分研究難以完整反映整體療效，這也是中西醫在研究方法論上的根本差異之一。</div>
+            <div class="tx-disclosure-a">部分常用婦科中藥材已有藥理研究：當歸有助擴張血管、促進血液循環；川芎能抑制血小板聚集，並對子宮收縮有調節作用；白芍所含的芍藥苷則對平滑肌有解痙效果，這也是它能緩解經期不適的可能機制之一。不過中藥複方講求多味藥材協同作用，現代以單一成分為主的研究方法，難以完整反映整體療效，這也是中西醫在研究方法論上的根本差異之一。</div>
           </div>
         </div>
       </div>
