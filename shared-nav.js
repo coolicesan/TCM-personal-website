@@ -31,15 +31,15 @@
   function buildNav() {
     var prefix = depthPrefix();
     var stageItems = [
-      { key: 'stageMenstrual', zh: '月經及婦科問題', href: '女性健康問卷.html' },
-      { key: 'stageFertility', zh: '備孕及不孕', href: '女性健康問卷.html' },
-      { key: 'stagePregnancy', zh: '孕期及產後', href: '女性健康問卷.html' },
-      { key: 'stageMenopause', zh: '更年期與停經後健康', href: '女性健康問卷.html' },
+      { key: 'stageMenstrual', zh: '月經及婦科問題', href: 'women-health-questionnaire.html' },
+      { key: 'stageFertility', zh: '備孕及不孕', href: 'women-health-questionnaire.html' },
+      { key: 'stagePregnancy', zh: '孕期及產後', href: 'women-health-questionnaire.html' },
+      { key: 'stageMenopause', zh: '更年期與停經後健康', href: 'women-health-questionnaire.html' },
       { key: 'stageSkin', zh: '皮膚問題', href: 'index.html#contact' },
       { key: 'stageBreast', zh: '乳房', href: 'treatments/treatment-mammary.html' },
       { key: 'stageHairloss', zh: '脫髮', href: 'treatments/treatment-hairloss.html' },
       { key: 'stageWeight', zh: '體重管理', href: 'treatments/treatment-weight.html' },
-      { key: 'stageMood', zh: '情緒健康', href: '女性健康問卷.html' },
+      { key: 'stageMood', zh: '情緒健康', href: 'women-health-questionnaire.html' },
       { key: 'stageOncology', zh: '癌症治療', href: 'treatments/treatment-oncology.html' },
       { key: 'stageInternal', zh: '內科調理', href: 'treatments/treatment-internal.html' }
     ];

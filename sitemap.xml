@@ -1,48 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://coolicesan.github.io/TCM-personal-website/index.html</loc>
+    <loc>https://katewoo.com/</loc>
+    <lastmod>2026-07-27</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://coolicesan.github.io/TCM-personal-website/about.html</loc>
+    <loc>https://katewoo.com/about.html</loc>
+    <lastmod>2026-07-27</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://coolicesan.github.io/TCM-personal-website/articles.html</loc>
+    <loc>https://katewoo.com/articles.html</loc>
+    <lastmod>2026-07-27</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://coolicesan.github.io/TCM-personal-website/constitution.html</loc>
+    <loc>https://katewoo.com/constitution.html</loc>
+    <lastmod>2026-07-27</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://coolicesan.github.io/TCM-personal-website/%E5%A5%B3%E6%80%A7%E5%81%A5%E5%BA%B7%E5%95%8F%E5%8D%B7.html</loc>
+    <loc>https://katewoo.com/services/service-gynecology.html</loc>
+    <lastmod>2026-07-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://katewoo.com/women-health-questionnaire.html</loc>
+    <lastmod>2026-07-27</lastmod>
     <priority>0.7</priority>
   </url>
 
-  <url><loc>https://coolicesan.github.io/TCM-personal-website/treatments/treatment-acupuncture.html</loc><priority>0.6</priority></url>
-  <url><loc>https://coolicesan.github.io/TCM-personal-website/treatments/treatment-auricular.html</loc><priority>0.6</priority></url>
-  <url><loc>https://coolicesan.github.io/TCM-personal-website/treatments/treatment-cupping.html</loc><priority>0.6</priority></url>
-  <url><loc>https://coolicesan.github.io/TCM-personal-website/treatments/treatment-facial.html</loc><priority>0.6</priority></url>
-  <url><loc>https://coolicesan.github.io/TCM-personal-website/treatments/treatment-hairloss.html</loc><priority>0.6</priority></url>
-  <url><loc>https://coolicesan.github.io/TCM-personal-website/treatments/treatment-herbs.html</loc><priority>0.6</priority></url>
-  <url><loc>https://coolicesan.github.io/TCM-personal-website/treatments/treatment-internal.html</loc><priority>0.6</priority></url>
-  <url><loc>https://coolicesan.github.io/TCM-personal-website/treatments/treatment-mammary.html</loc><priority>0.6</priority></url>
-  <url><loc>https://coolicesan.github.io/TCM-personal-website/treatments/treatment-moxa.html</loc><priority>0.6</priority></url>
-  <url><loc>https://coolicesan.github.io/TCM-personal-website/treatments/treatment-oncology.html</loc><priority>0.6</priority></url>
-  <url><loc>https://coolicesan.github.io/TCM-personal-website/treatments/treatment-weight.html</loc><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/treatments/treatment-acupuncture.html</loc><lastmod>2026-07-27</lastmod><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/treatments/treatment-auricular.html</loc><lastmod>2026-07-27</lastmod><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/treatments/treatment-cupping.html</loc><lastmod>2026-07-27</lastmod><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/treatments/treatment-facial.html</loc><lastmod>2026-07-27</lastmod><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/treatments/treatment-hairloss.html</loc><lastmod>2026-07-27</lastmod><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/treatments/treatment-herbs.html</loc><lastmod>2026-07-27</lastmod><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/treatments/treatment-internal.html</loc><lastmod>2026-07-27</lastmod><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/treatments/treatment-mammary.html</loc><lastmod>2026-07-27</lastmod><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/treatments/treatment-moxa.html</loc><lastmod>2026-07-27</lastmod><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/treatments/treatment-oncology.html</loc><lastmod>2026-07-27</lastmod><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/treatments/treatment-weight.html</loc><lastmod>2026-07-27</lastmod><priority>0.6</priority></url>
 
   <!-- ARTICLES_AUTO_START — 此區塊由「admin/文章管理後台.html」自動產生，請勿手動編輯 -->
-  <url><loc>https://coolicesan.github.io/TCM-personal-website/articles/postpartum-care.html</loc><priority>0.6</priority></url>
-  <url><loc>https://coolicesan.github.io/TCM-personal-website/articles/postpartum-lochia.html</loc><priority>0.6</priority></url>
-  <url><loc>https://coolicesan.github.io/TCM-personal-website/articles/postpartum-hair-loss.html</loc><priority>0.6</priority></url>
-  <url><loc>https://coolicesan.github.io/TCM-personal-website/articles/breastfeeding-chinese-medicine.html</loc><priority>0.6</priority></url>
-  <url><loc>https://coolicesan.github.io/TCM-personal-website/articles/low-milk-supply.html</loc><priority>0.6</priority></url>
-  <url><loc>https://coolicesan.github.io/TCM-personal-website/articles/blocked-duct-mastitis.html</loc><priority>0.6</priority></url>
-  <url><loc>https://coolicesan.github.io/TCM-personal-website/articles/miscarriage-recovery.html</loc><priority>0.6</priority></url>
-  <url><loc>https://coolicesan.github.io/TCM-personal-website/articles/shenghua-decoction.html</loc><priority>0.6</priority></url>
-  <url><loc>https://coolicesan.github.io/TCM-personal-website/articles/caesarean-recovery.html</loc><priority>0.6</priority></url>
-  <url><loc>https://coolicesan.github.io/TCM-personal-website/articles/confinement-taboos.html</loc><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/postpartum-care.html</loc><lastmod>2026-07-27</lastmod><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/postpartum-lochia.html</loc><lastmod>2026-07-27</lastmod><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/postpartum-hair-loss.html</loc><lastmod>2026-07-27</lastmod><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/breastfeeding-chinese-medicine.html</loc><lastmod>2026-07-27</lastmod><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/low-milk-supply.html</loc><lastmod>2026-07-27</lastmod><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/blocked-duct-mastitis.html</loc><lastmod>2026-07-27</lastmod><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/miscarriage-recovery.html</loc><lastmod>2026-07-27</lastmod><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/shenghua-decoction.html</loc><lastmod>2026-07-27</lastmod><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/caesarean-recovery.html</loc><lastmod>2026-07-27</lastmod><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/confinement-taboos.html</loc><lastmod>2026-07-27</lastmod><priority>0.6</priority></url>
   <!-- ARTICLES_AUTO_END -->
 </urlset>

@@ -1093,7 +1093,7 @@
         var smFile = await smHandle.getFile();
         var smText = await smFile.text();
         var smUrls = state.data.articles.filter(function(a){ return !a.hidden; }).map(function(a){
-          return '  <url><loc>https://coolicesan.github.io/TCM-personal-website/articles/' + a.slug + '.html</loc><priority>0.6</priority></url>';
+          return '  <url><loc>https://katewoo.com/articles/' + a.slug + '.html</loc><priority>0.6</priority></url>';
         }).join('\n');
         var smStart = '<!-- ARTICLES_AUTO_START — 此區塊由「admin/文章管理後台.html」自動產生，請勿手動編輯 -->';
         var smEnd = '<!-- ARTICLES_AUTO_END -->';
