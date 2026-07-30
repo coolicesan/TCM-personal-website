@@ -10,3 +10,8 @@
 *.log
 .vercel
 .env*
+
+# Design source files — kept locally, not published.
+# The Pages workflow uploads the whole repo (path: .), so anything committed
+# here becomes publicly downloadable from the site.
+katewoo-2d-plush-icon-pack/
