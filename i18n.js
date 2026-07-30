@@ -161,7 +161,8 @@
     '⏱ 約 5 分鐘': 'About 5 min read',
 
     '胡佩珊中醫師 Kate Woo': 'Kate Woo',
-    '胡佩珊醫師專注於女性健康，提倡「身心同治」的治療理念，善於結合傳統中醫智慧、現代醫學知識及心理輔導學專業，注重聆聽病人的真實需求，致力於以溫和細膩的治療方法，為每位病人制定客製化的治療方案。': 'Kate Woo is a Chinese Medicine Practitioner and acupuncturist in Hong Kong, focusing on women’s health and holistic care. Her consultations combine Chinese medicine training, biomedical knowledge and counselling, providing personalised, evidence-based treatment plans.',
+    '胡醫師為香港註冊中醫師，專注於女性健康，提倡「身心同治」的治療理念，善於結合傳統中醫智慧、現代醫學知識及心理輔導學專業，注重聆聽病人的真實需求，致力於以溫和細膩的治療方法，為每位病人制定客製化的治療方案。': 'Dr. Kate Woo is a Registered Chinese Medicine Practitioner in Hong Kong specializing in women\'s health. She focuses on women\'s wellness through a mind-body healing philosophy. She brings together the ancient wisdom of traditional Chinese medicine, modern clinical insights, and professional counseling to provide truly comprehensive care. She prioritizes listening to her patients, providing gentle and refined treatments tailored to each individual\'s unique needs.',
+    '胡佩珊醫師專注於女性健康，提倡「身心同治」的治療理念，善於結合傳統中醫智慧、現代醫學知識及心理輔導學專業，注重聆聽病人的真實需求，致力於以溫和細膩的治療方法，為每位病人制定客製化的治療方案。': 'Dr. Kate Woo is a Registered Chinese Medicine Practitioner in Hong Kong specializing in women\'s health. She focuses on women\'s wellness through a mind-body healing philosophy. She brings together the ancient wisdom of traditional Chinese medicine, modern clinical insights, and professional counseling to provide truly comprehensive care. She prioritizes listening to her patients, providing gentle and refined treatments tailored to each individual\'s unique needs.',
     '香港中醫藥管理委員會註冊中醫師（註冊編號：008823）': 'Registered Chinese Medicine Practitioner, Chinese Medicine Council of Hong Kong (No. 008823)',
     '香港浸會大學中醫藥及生物醫學學士（一級榮譽）': 'BSc in Chinese Medicine and Biomedical Science, Hong Kong Baptist University (First Class Honours)',
     '香港浸會大學輔導學社會科學碩士': 'MSocSc in Counselling, Hong Kong Baptist University',

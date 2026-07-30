@@ -59,6 +59,12 @@ a { color: inherit; text-decoration: none; }
   font-size: 1.1rem;
   color: var(--plum);
   letter-spacing: 0.05em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.logo-mark {
+  width: 52px; height: 52px; object-fit: contain; flex: 0 0 auto;
 }
 .nav-logo span { color: var(--terracotta); }
 .nav-links { display: flex; gap: 2rem; align-items: center; }
@@ -431,16 +437,36 @@ a { color: inherit; text-decoration: none; }
 
 /* ── Footer ── */
 .footer {
-  background: var(--plum);
-  color: rgba(255,255,255,0.6);
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(34rem 18rem at 10% 0%, rgba(240, 232, 219, 0.86), transparent 68%),
+    radial-gradient(30rem 20rem at 88% 20%, rgba(233, 220, 210, 0.62), transparent 70%),
+    linear-gradient(180deg, #FFFDF9 0%, #F7F0E6 100%);
+  color: #776B60;
   padding: 3rem clamp(1.5rem, 5vw, 4rem);
   text-align: center;
   font-size: 0.85rem;
+  border-top: 1px solid #E5D8C7;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.78);
+}
+.footer::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: linear-gradient(90deg, #E9DCD2, #C9AC80, #F0E8DB);
+}
+.footer p,
+.footer a {
+  position: relative;
+  color: #776B60;
 }
 .footer-logo {
+  position: relative;
   font-family: var(--font-display);
   font-size: 1.2rem;
-  color: var(--white);
+  color: #5A5148;
   margin-bottom: 0.75rem;
 }
 
@@ -626,6 +652,7 @@ a { color: inherit; text-decoration: none; }
   .quiz-cards { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .nav-links { display: none; }
+  .logo-mark { width: 46px; height: 46px; }
   .lang-switch { margin-left: auto; }
   .nav-toggle { display: block; }
   .nav-links.open {
