@@ -1,307 +1,574 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-HK">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>中藥調理｜香港中醫個人化藥方 - 胡佩珊中醫師</title>
-  <meta name="description" content="胡佩珊中醫師提供個人化中藥調理，針對月經不調、備孕不孕、安胎保胎、產後調補、更年期等女性健康問題，以望聞問切四診為您配製專屬藥方。香港註冊中醫師主理。">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="胡佩珊中醫師">
-  <meta property="og:title" content="中藥調理｜香港中醫個人化藥方 - 胡佩珊中醫師">
-  <meta property="og:description" content="針對月經不調、備孕不孕、安胎保胎、產後調補、更年期等女性健康問題，以望聞問切四診配製專屬藥方。">
-  <meta property="og:locale" content="zh_HK">
-  <meta name="twitter:title" content="中藥調理｜香港中醫個人化藥方 - 胡佩珊中醫師">
-  <meta name="twitter:description" content="針對月經不調、備孕不孕、安胎保胎、產後調補、更年期等女性健康問題，以望聞問切四診配製專屬藥方。">
-  <link rel="canonical" href="https://katewoo.com/treatments/treatment-herbs.html">
-  <meta property="og:url" content="https://katewoo.com/treatments/treatment-herbs.html">
-  <meta property="og:image" content="https://katewoo.com/og-image.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://katewoo.com/og-image.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css">
-  <link rel="stylesheet" href="treatments.css">
-  <script src="../config-loader.js"></script>
-  <script src="../i18n.js"></script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {"@type":"ListItem","position":1,"name":"首頁","item":"../index.html"},
-      {"@type":"ListItem","position":2,"name":"中醫治療項目","item":"../index.html#services"},
-      {"@type":"ListItem","position":3,"name":"中藥調理"}
-    ]
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {"@type":"Question","name":"煎劑和科學顆粒有什麼分別？哪種比較好？","acceptedAnswer":{"@type":"Answer","text":"煎劑是傳統水煎藥，藥效較為完整，適合病情較複雜或體質虛弱者；科學顆粒是藥廠萃取濃縮的沖泡顆粒，攜帶方便、無需自行煎煮，適合工作繁忙或外出頻繁的患者。兩者各有優點，胡醫師會根據您的病情及生活方式建議最適合的選擇。"}},
-      {"@type":"Question","name":"懷孕期間可以服用中藥嗎？","acceptedAnswer":{"@type":"Answer","text":"孕期可以在中醫師指導下使用特定中藥，例如安胎、止嘔、緩解孕期不適。但有部分中藥在妊娠期禁用或慎用，因此務必告知醫師您已懷孕，並在專業中醫師監督下服藥，切勿自行購買服用。"}},
-      {"@type":"Question","name":"服用中藥需要多久才有效？","acceptedAnswer":{"@type":"Answer","text":"因症狀類型和個人體質而異。急性症狀（如感冒、急性痛經）通常3–7天可見改善；慢性婦科調理（如月經不調、不孕備孕）一般建議持續2–3個月經週期，才能達到穩定效果。胡醫師會在初診時給您明確的預期說明。"}},
-      {"@type":"Question","name":"中藥與西藥可以同時服用嗎？","acceptedAnswer":{"@type":"Answer","text":"大多數情況下可以，但須注意兩者之間的潛在交互作用。就診時請告知胡醫師您正在服用的所有西藥（包括保健品），醫師會為您評估是否需要錯開服藥時間或調整劑量。"}},
-      {"@type":"Question","name":"服藥期間有飲食禁忌嗎？","acceptedAnswer":{"@type":"Answer","text":"一般建議服藥期間避免辛辣、生冷、油膩及酒精。具體禁忌會因藥方不同而有所調整，醫師在開方時會詳細說明，也可以隨時向胡醫師詢問。"}}
-    ]
-  }
-  </script>
-  <style>
-    /* 對齊 articles/article.css 與首頁共用的暖色調系統，取代 styles.css 原本
-       的 plum 色調＋Cormorant Garamond，讓治療項目頁跟文章頁視覺一致。
-       這裡只用變數別名覆蓋，不動 styles.css／treatments.css 本身，
-       所以不影響其他 8 篇治療頁面或 constitution.html。 */
-    :root {
-      --tx-c: #7D927C;        /* 中藥調理＝草木，沿用 article.css 的 --sage（原本是較冷的 #3C6E54） */
-      --text-dark: #4A4038;   /* = article.css --cocoa */
-      --text-light: #857A6E;  /* = article.css --cocoa-soft */
-      --border: #E9E0D0;      /* = article.css --line */
-      --terracotta: #B87976;  /* = article.css --rose，給 WhatsApp 按鈕的 focus 樣式用 */
-      --font-accent: var(--font-display); /* 不再用 Cormorant Garamond，步驟數字改用襯線體 */
-    }
-    .tx-hero { background: linear-gradient(150deg, #F7F2E6 0%, #FFFDF9 60%); }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中藥調理｜個人化處方・中環中醫｜胡佩珊中醫師</title>
+<meta name="description" content="沖劑好還是煎藥好？中藥會傷肝腎嗎？可以與西藥同服嗎？香港註冊中醫師胡佩珊於中環提供個人化中藥處方，說明四診辨證流程、劑型分別、服藥時間與安全須知。">
+<link rel="canonical" href="https://katewoo.com/treatments/treatment-herbs.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_HK">
+<meta property="og:site_name" content="胡佩珊中醫師">
+<meta property="og:url" content="https://katewoo.com/treatments/treatment-herbs.html">
+<meta property="og:title" content="中藥調理｜個人化處方・中環中醫｜胡佩珊中醫師">
+<meta property="og:description" content="四診辨證處方、劑型分別、服藥時間與安全須知，以及中藥與西藥同服的注意事項。">
+<meta property="og:image" content="https://katewoo.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="中藥調理｜個人化處方・中環中醫｜胡佩珊中醫師">
+<meta name="twitter:description" content="四診辨證處方、劑型分別、服藥時間與安全須知。">
+<meta name="twitter:image" content="https://katewoo.com/og-image.png">
+
+<!-- 備用樣式：與其餘頁面相同，接回共用 CSS 時整段刪除 -->
+<style>
+:root{
+  /* 對齊網站主色系（奶油 × 奶茶棕 × 淡金），沿用原本的變數名稱，
+     因此下方版面規則完全不用改動。 */
+  --ink:#4A4038; --ink-soft:#857A6E; --rose:#A98D72; --rose-deep:#8A6F55;
+  --blush:#F0E8DB; --sand:#FFFDF9; --line:#E9E0D0; --sage:#7D927C; --sage-bg:#EDF1EC;
+  --amber-bg:#FBF3E3; --amber-line:#C9AC80;
+  --cream:#FAF7F0; --card:#FFFDF9;   /* 底層奶油 / 上層象牙白，與網站一致 */
+  --serif:"Noto Serif TC","Songti TC","PMingLiU",serif;
+  --sans:"Noto Sans TC","PingFang HK","Microsoft JhengHei",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--cream);line-height:1.85;font-size:16.5px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto;padding:0 22px}
+a{color:var(--rose-deep)}
+h1,h2,h3,h4{font-family:var(--serif);line-height:1.4;letter-spacing:.02em}
+.crumb{font-size:.85rem;color:var(--ink-soft);padding:22px 0 20px}
+.crumb a{color:var(--ink-soft);text-decoration:none}
+
+.hero{background:linear-gradient(180deg,var(--blush) 0%,var(--cream) 100%);padding:0 0 34px}
+.hero .eyebrow{font-size:.8rem;letter-spacing:.28em;color:var(--rose);margin:0 0 10px}
+.hero h1{font-size:2.1rem;margin:0 0 14px}
+.hero p{margin:0 0 22px;color:var(--ink-soft)}
+.anchors{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:0}
+.anchors a{font-size:.87rem;text-decoration:none;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 14px;color:var(--ink-soft)}
+.anchors a:hover{border-color:var(--rose);color:var(--rose-deep)}
+.btn{display:inline-block;background:var(--rose);color:#fff;text-decoration:none;padding:12px 26px;border-radius:999px;font-size:.95rem}
+.btn:hover{background:var(--rose-deep)}
+.btn-ghost{background:var(--card);color:var(--rose-deep);border:1px solid var(--rose)}
+
+section{padding:44px 0;border-bottom:1px solid var(--line)}
+.label{font-size:.78rem;letter-spacing:.24em;color:var(--rose);margin:0 0 8px}
+section h2{font-size:1.5rem;margin:0 0 18px}
+section h3{font-size:1.08rem;margin:26px 0 6px;color:var(--rose-deep)}
+p{margin:0 0 14px}
+ul,ol{margin:0 0 16px;padding-left:1.25em}
+li{margin-bottom:7px}
+
+.define{border-left:3px solid var(--rose);background:var(--blush);margin:0 0 18px;padding:14px 18px;border-radius:0 8px 8px 0}
+.define strong{font-family:var(--serif)}
+table{width:100%;border-collapse:collapse;margin:0 0 16px;font-size:.93rem}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--sand);font-weight:600;font-family:var(--serif)}
+.note{font-size:.9rem;color:var(--ink-soft)}
+
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
+.col{background:var(--sand);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.col h4{margin:0 0 10px;font-size:1rem}
+.col ul{padding-left:1.1em;margin:0}
+.col li{font-size:.93rem}
+details{border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin-bottom:10px;background:var(--card)}
+details summary{cursor:pointer;font-weight:600;font-family:var(--serif)}
+details p{margin:12px 0 0;font-size:.95rem;color:var(--ink-soft)}
+
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.tags span{background:var(--blush);color:var(--rose-deep);border-radius:999px;padding:5px 14px;font-size:.88rem}
+
+.steps{list-style:none;padding:0;counter-reset:s}
+.steps li{counter-increment:s;position:relative;padding-left:48px;margin-bottom:20px}
+.steps li::before{content:counter(s);position:absolute;left:0;top:2px;width:32px;height:32px;border-radius:50%;background:var(--rose);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.9rem}
+.steps h4{margin:0 0 4px;font-size:1rem}
+.steps p{margin:0;font-size:.95rem;color:var(--ink-soft)}
+
+.alert{background:var(--amber-bg);border:1px solid var(--amber-line);border-radius:12px;padding:18px 22px}
+.alert h4{margin:0 0 10px;font-family:var(--serif);font-size:1rem}
+.calm{background:var(--sage-bg);border-left:3px solid var(--sage);padding:14px 18px;border-radius:0 8px 8px 0;font-size:.95rem;margin-bottom:0}
+
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:22px}
+.card{border:1px solid var(--line);border-radius:12px;padding:20px;background:var(--card)}
+.card h4{margin:0 0 6px;font-size:1rem}
+.card p{font-size:.92rem;color:var(--ink-soft);margin:0 0 12px}
+.card a{font-size:.92rem;text-decoration:none;font-weight:600}
+.cta{text-align:center;background:var(--blush);border-radius:14px;padding:34px 24px;margin-top:26px}
+.cta h3{margin:0 0 10px;font-size:1.25rem}
+.cta p{color:var(--ink-soft);margin-bottom:20px}
+
+@media(max-width:640px){
+  .cols,.cards{grid-template-columns:1fr}
+  .hero h1{font-size:1.65rem}
+  table{font-size:.88rem}
+  th,td{padding:8px}
+}
+.byline{border-top:1px solid var(--line);margin-top:34px;padding-top:18px;font-size:.9rem;color:var(--ink-soft)}
+.byline p{margin:0 0 4px}
+.reads{display:grid;gap:10px;margin-bottom:8px}
+.reads a{display:block;border:1px solid var(--line);border-radius:10px;padding:12px 16px;text-decoration:none;color:var(--ink);font-size:.95rem;background:var(--card)}
+.reads a:hover{border-color:var(--rose);background:var(--sand)}
+.reads em{display:block;font-style:normal;font-size:.85rem;color:var(--ink-soft);margin-top:2px}
+
+/* ── 站台統一頁腳（樣式取自 main.css，內嵌以避免與本頁 .hero/.btn 衝突） ── */
+.site-footer{position:relative;overflow:hidden;margin-top:0;
+  background:radial-gradient(34rem 18rem at 10% 0%,rgba(240,232,219,.86),transparent 68%),
+             radial-gradient(30rem 20rem at 88% 20%,rgba(233,220,210,.62),transparent 70%),
+             linear-gradient(180deg,#FFFDF9 0%,#F7F0E6 100%);
+  color:#776B60;padding:3rem 0 2rem;font-size:.88rem;border-top:1px solid #E5D8C7;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.78)}
+.site-footer::before{content:"";position:absolute;inset:0 0 auto;height:4px;
+  background:linear-gradient(90deg,#E9DCD2,#C9AC80,#F0E8DB)}
+.site-footer .wrap{position:relative;max-width:1120px}
+.footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:2rem;margin-bottom:2rem}
+.site-footer h4{font-family:var(--serif);color:#5A5148;font-size:1rem;margin:0 0 .9rem}
+.site-footer p{color:#776B60}
+.site-footer a{color:#8A6F55;text-decoration:none}
+.site-footer a:hover{color:#6F5944;text-decoration:underline}
+.footer-links{list-style:none;display:grid;gap:.45rem;padding:0;margin:0}
+.footer-links a{text-underline-offset:3px}
+.footer-disclaimer{border-top:1px solid rgba(201,172,128,.36);padding-top:1.5rem;
+  font-size:.78rem;color:#8B7C70;line-height:1.8}
+@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.footer-grid{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 
-<nav class="nav">
-  <a href="../index.html" class="nav-logo">
-    <span>胡佩珊</span><span><span>中醫師</span></span>
-  </a>
-  <div class="nav-links" id="navLinks">
-    <a href="../index.html#stages">服務項目</a>
-    <a href="../index.html#services">治療項目</a>
-    <a href="../index.html#assessments">健康評估</a>
-    <a href="../index.html#articles">健康文章</a>
-    <a href="../about.html">關於醫師</a>
-    <a href="../index.html#contact" class="nav-cta">預約掛號</a>
+<nav class="nav"></nav>
+
+<header class="hero">
+  <div class="wrap">
+    <nav class="crumb">
+    <a href="../index.html">首頁</a> ›
+    <a href="../index.html#services">中醫治療項目</a> ›
+    中藥調理
+    </nav>
   </div>
-  <button class="nav-toggle" id="navToggle" aria-label="選單">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
+  <div class="wrap">
+    <p class="eyebrow">中醫治療項目</p>
+    <h1>中藥調理</h1>
+    <p>依望、聞、問、切四診辨證，為每位病人配製個人化處方，並隨體質與症狀變化調整。常用於調經、備孕、產後、更年期、睡眠情緒與腸胃問題。中環診所應診。</p>
+    <nav class="anchors">
+      <a href="#scope">可以處理什麼</a>
+      <a href="#how">處方怎樣來</a>
+      <a href="#forms">劑型怎麼揀</a>
+      <a href="#taking">怎樣服藥</a>
+      <a href="#taste">難飲嗎</a>
+      <a href="#safety">安全事項</a>
+      <a href="#faq">常見問題</a>
+    </nav>
+  </div>
+</header>
 
-<a href="https://wa.me/85298152863" target="_blank" rel="noopener" class="fab-whatsapp" aria-label="WhatsApp 即時查詢">
-  <svg viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2Zm0 18.15h-.01c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.27-8.24 2.21 0 4.28.86 5.84 2.42a8.19 8.19 0 0 1 2.42 5.83c0 4.55-3.7 8.24-8.27 8.24Zm4.53-6.17c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.24-.64.81-.78.97-.15.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.24-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.24-.42.08-.16.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.16 0-.43.06-.66.31-.22.24-.87.85-.87 2.08s.89 2.41 1.02 2.58c.12.16 1.75 2.67 4.25 3.74.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.2-.58.2-1.07.14-1.18-.06-.1-.23-.16-.48-.29Z"/></svg>
-</a>
+<main>
 
-<section class="tx-hero">
-  <svg class="tx-hero-deco" viewBox="0 0 800 90" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false">
-    <path d="M0 50 Q100 20 200 46 Q300 72 400 42 Q500 12 600 48 Q700 78 800 38" stroke="var(--tx-c)" stroke-width="1.5" stroke-dasharray="1 8" stroke-linecap="round" opacity="0.4" vector-effect="non-scaling-stroke"/>
-    <circle cx="120" cy="28" r="4" fill="var(--tx-c)" opacity="0.35"/>
-    <circle cx="420" cy="60" r="3.5" fill="var(--tx-c)" opacity="0.3"/>
-    <circle cx="680" cy="30" r="4" fill="var(--tx-c)" opacity="0.3"/>
-  </svg>
-  <div class="container">
-    <div class="tx-body">
-      <div class="tx-breadcrumb">
-        <a href="../index.html">首頁</a><span>›</span>
-        <a href="../index.html#services">中醫治療項目</a><span>›</span>
-        中藥調理
-      </div>
-      <div class="tx-hero-icon">🌿</div>
-      <div class="tx-hero-tag">中醫治療</div>
-      <h1>中藥調理</h1>
-      <p class="tx-hero-sub">根據您的體質與症狀，配製專屬藥方，從根本調理氣血陰陽，標本兼治。</p>
+<section id="scope">
+  <div class="wrap">
+    <p class="label">適用範圍</p>
+    <h2>中藥可以處理什麼</h2>
+
+    <p>中藥是中醫治療的主軸，處理範圍比外治法闊，特別適合需要從體質層面長期調整的問題。</p>
+
+    <h3>月經及女性健康</h3>
+    <p>經痛、經量異常、週期紊亂、經前不適、更年期潮熱與失眠。處方通常隨月經週期分期調整，經前與經後的方向並不相同。<a href="../services/menstrual.html">月經及婦科問題 →</a>　<a href="../services/menopause.html">更年期與停經後健康 →</a></p>
+
+    <h3>備孕、孕期與產後</h3>
+    <p>備孕期的週期調理、孕期不適、產後惡露與體力恢復、餵哺期的乳汁問題。孕期與哺乳期的用藥有明確的禁忌與慎用範圍，見下文安全事項。<a href="../services/fertility.html">備孕及不孕 →</a>　<a href="../services/pregnancy.html">孕期及產後 →</a></p>
+
+    <h3>腸胃及內科不適</h3>
+    <p>胃脹、胃痛、胃酸倒流、腸胃隨情緒起伏、便秘或大便不成形、慢性疲勞、易感冒。這一組是中藥處理起來最直接的範疇。<a href="../services/internal.html">內科調理 →</a></p>
+
+    <h3>睡眠與情緒相關不適</h3>
+    <p>入睡困難、多夢易醒、心悸、胸悶、喉嚨異物感。屬並行的支援角色，正在接受精神科治療者請主動告知用藥。<a href="../services/emotional.html">情緒健康 →</a></p>
+
+    <h3>皮膚問題</h3>
+    <p>濕疹、暗瘡、風癩、皮膚乾燥敏感。急性期與慢性期的處方方向不同，需要較密的覆診調整。<a href="../services/skin.html">皮膚問題 →</a></p>
+
+    <h3>體質調養與治療期間支援</h3>
+    <p>怕冷、易累、濕重身困等體質偏頗，以及癌症治療期間的體力與消化支援。後者用藥須與腫瘤科協調。<a href="treatment-oncology.html">腫瘤輔助調理 →</a></p>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <p class="label">處方流程</p>
+    <h2>一條處方是怎樣來的</h2>
+
+    <p>中藥處方不是按病名查表得來的。同一個「經痛」，氣血虛弱與血瘀的用藥可以完全不同；同一個人在不同階段，處方也會改。</p>
+
+    <ol class="steps">
+      <li>
+        <h4>四診收集資料</h4>
+        <p>望（面色、舌象）、聞（聲音、氣味）、問（主訴、病史、睡眠、飲食、月經、二便）、切（脈診、必要時腹診）。這一步花的時間最長，也決定了後面所有判斷。</p>
+      </li>
+      <li>
+        <h4>辨證：判斷屬於哪一種失衡</h4>
+        <p>確定證型與兼夾情況，例如脾虛兼肝鬱、腎虛兼血瘀。多數人不會只屬單一證型。</p>
+      </li>
+      <li>
+        <h4>立法：決定治療方向與次序</h4>
+        <p>先補還是先通、先調睡眠還是先理腸胃。症狀多的時候，次序往往比藥方本身更關鍵。</p>
+      </li>
+      <li>
+        <h4>遣方用藥：配出屬於您的處方</h4>
+        <p>以經典方為基礎，按您的體質、症狀輕重、其他用藥與過敏史加減藥味與劑量。</p>
+      </li>
+      <li>
+        <h4>覆診調整</h4>
+        <p>一般兩至四星期覆診一次。體質與症狀會變，處方跟著調整——這是需要覆診的原因，不是為了多開幾次藥。</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="forms">
+  <div class="wrap">
+    <p class="label">劑型選擇</p>
+    <h2>沖劑、煎藥還是藥丸？</h2>
+
+    <p>同一條處方可以做成不同劑型。選哪一種，主要看您的生活節奏與能否配合，藥效差異未必是最關鍵的考量——因為飲得完、飲得足才有意義。</p>
+
+    <table>
+      <thead>
+        <tr><th>劑型</th><th>特點</th><th>適合</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>濃縮中藥沖劑</td><td>溫水沖開即飲，無需煎煮，方便攜帶，劑量標準化</td><td>上班族、外出多、需要長期服藥</td></tr>
+        <tr><td>傳統飲片自煎</td><td>需自行煲煮約一小時，氣味較大，加減調整較靈活</td><td>時間許可、家中方便煎煮者</td></tr>
+        <tr><td>藥丸與散劑</td><td>服用方便，作用較和緩，適合較長期的調養</td><td>穩定期的體質保養</td></tr>
+        <tr><td>外用藥浴、外洗</td><td>不經消化道，適合皮膚問題或局部處理</td><td>濕疹、皮膚痕癢等</td></tr>
+      </tbody>
+    </table>
+
+    <p class="note">臨床上多數人選濃縮沖劑，原因很現實：要連續服用數星期至數個月，能否堅持才是決定成效的關鍵。如果您試過煎藥但最後放棄了，直接說出來就好，換劑型比勉強重要。</p>
+  </div>
+</section>
+
+<section id="taking">
+  <div class="wrap">
+    <p class="label">服藥方法</p>
+    <h2>怎樣服藥才對</h2>
+
+    <ul>
+      <li><strong>服藥時間</strong>：一般建議飯後一小時左右服用。部分處方會指定飯前或睡前，請按當次醫囑。</li>
+      <li><strong>水溫</strong>：沖劑以溫水沖開，不要用滾水直接沖泡後即飲，也不建議用茶、奶或咖啡送服。</li>
+      <li><strong>與西藥相隔</strong>：一般建議相隔約一至兩小時。若您正在服用多種藥物，請於初診時列出，會按實際情況安排時間。</li>
+      <li><strong>忘記服藥</strong>：想起時可補服，但如已接近下一次服藥時間，跳過即可，不要一次服雙倍。</li>
+      <li><strong>經期</strong>：多數處方經期可繼續服用，但部分方劑會另作調整。請於覆診時說明月經日期。</li>
+      <li><strong>存放</strong>：沖劑放陰涼乾爽處避免受潮；煎好的藥液冷藏並依指示時限內服完。</li>
+    </ul>
+
+    <p class="calm">服藥期間出現腹瀉、胃部不適、皮疹或任何新症狀，請先停藥並聯絡醫師。這通常只需要調整處方，但需要知道才調整得了。</p>
+  </div>
+</section>
+
+<section id="taste">
+  <div class="wrap">
+    <p class="label">大家最想問的</p>
+    <h2>中藥難飲嗎？</h2>
+
+    <p>視乎處方。補氣養血類多數偏甘，接受度較高；清熱、疏肝類會苦一些；有些方帶明顯的酸或澀。<strong>苦不等於有效</strong>——味道由藥材性質決定，跟療效沒有必然關係。</p>
+
+    <ul>
+      <li>沖劑用溫水完全化開，一口氣飲完，比小口慢慢啜舒服得多。</li>
+      <li>飲後可以立即喝一口溫水，或含一片薑、一顆話梅（請先告知，部分情況不宜）。</li>
+      <li>覺得難以入口可以直接說。同一個治療方向，多數有幾種配伍選擇，可以換成較易接受的組合。</li>
+      <li>如果因為味道而漏服，比起硬撐，更值得提出來調整。</li>
+    </ul>
+  </div>
+</section>
+
+<section id="evidence">
+  <div class="wrap">
+    <p class="label">研究情況</p>
+    <h2>研究怎麼說</h2>
+
+    <p>以下是中藥複方研究中較常被引用的幾項，點開可看詳細內容。</p>
+
+    <details>
+      <summary>腸易激綜合症：個人化處方在隨機對照試驗中表現較佳</summary>
+      <p>一項發表於《JAMA》的隨機對照試驗，將腸易激綜合症患者分為三組：接受個人化中藥處方、接受標準化中藥配方，以及安慰劑組。結果顯示兩個中藥組的症狀改善都優於安慰劑組；而在治療結束後的追蹤期，只有接受個人化處方的一組仍維持改善。這項研究常被引用，因為它的設計正好對應中醫「辨證論治」與「一方通用」的分別。</p>
+    </details>
+
+    <details>
+      <summary>異位性皮膚炎：中藥複方的對照試驗</summary>
+      <p>1990 年代於英國進行的隨機對照試驗，讓兒童及成人異位性皮膚炎患者分別接受中藥複方與安慰劑，並以交叉設計比較。結果顯示接受中藥期間，紅斑與表面損傷的評分改善較明顯。這是較早期把中藥複方放入嚴謹對照設計的研究之一，也帶動了後續對中藥治療皮膚問題的研究興趣。</p>
+    </details>
+
+    <details>
+      <summary>更年期與月經相關症狀：研究持續累積中</summary>
+      <p>近年不少研究探討中藥在更年期潮熱、經前不適與月經週期相關症狀上的應用，方向包括與荷爾蒙治療的配合使用，以及對睡眠與情緒的影響。這一範疇的研究數量正在增加，臨床上中藥多與針灸、生活調整一併使用，而非單獨處理。</p>
+    </details>
+
+    <details>
+      <summary>現代研究的另一條線：成分分析與品質控制</summary>
+      <p>除了臨床療效，現代研究亦大量投入在藥材的成分分析、有效成分鑑定與品質標準建立上。香港衞生署設有中藥材標準計劃，為常用藥材訂立鑑別與含量測定的參考標準，這類工作是中藥能夠安全、穩定使用的基礎。</p>
+    </details>
+
+    <p class="note">不同範疇的研究進展並不一樣，以上按較常被引用的文獻整理。實際是否適合、預期怎樣，仍以個人體質與病情評估為準。</p>
+  </div>
+</section>
+
+<section id="safety">
+  <div class="wrap">
+    <p class="label">安全事項</p>
+    <h2>中藥安全嗎？</h2>
+
+    <p>由註冊中醫師處方、使用來源正規的藥材、按證型配伍並定期覆診調整，中藥的風險是可控的。真正需要留意的，是繞過這幾項前提的情況。</p>
+
+    <h3>以下情況請預先告知醫師</h3>
+    <ul>
+      <li>已懷孕、可能懷孕、正在餵哺，或正在接受生殖療程。</li>
+      <li>有肝臟或腎臟方面的病史，或相關指標曾經異常。</li>
+      <li>正在服用的所有西藥，特別是抗凝血藥、降糖藥、降血壓藥、免疫抑制劑與精神科藥物。</li>
+      <li>正在接受癌症治療。</li>
+      <li>正在服用的保健品、成藥與涼茶——這些同樣要計算在內。</li>
+      <li>藥物或食物過敏史。</li>
+      <li>近期接受手術，或即將進行手術。</li>
+    </ul>
+
+    <h3>關於「中藥會不會傷肝腎」</h3>
+    <p>這個擔心有其道理，但要分清楚來源。臨床上出現問題的情況，多數不是來自醫師處方的辨證用藥，而是以下幾種：</p>
+    <ul>
+      <li>自行長期服用來歷不明的成藥或偏方。</li>
+      <li>同時服用多種來源的補品，成分互相重疊而不自知。</li>
+      <li>本身已有肝腎功能問題但未告知，用藥時無從避開。</li>
+      <li>把別人的處方拿來服用，或一條方連續服用很長時間而不覆診。</li>
+    </ul>
+    <p>如果您本身有肝腎病史，或需要長期服藥，可與醫師討論在療程期間安排相關檢查監察。這不是麻煩，是正常做法。</p>
+
+    <h3>藥材來源與品質</h3>
+    <p>香港對中成藥設有註冊制度，中藥材亦有相關的檢驗與監管安排。診所使用的藥材與濃縮沖劑均來自具備相關資格的供應商。網購、代購或親友從外地帶回的藥材，來源與成分難以確認，不建議自行服用。</p>
+
+    <h3>孕期與哺乳期</h3>
+    <p>孕期有明確的禁用與慎用藥材類別，破血逐瘀、峻下、逐水與毒性較強者屬傳統禁忌；哺乳期則需留意部分具回乳作用的藥材。這兩個階段的用藥必須由醫師知悉狀況後處方，坊間的安胎方與坐月補方不建議自行服用。詳見<a href="../services/pregnancy.html">孕期及產後</a>。</p>
+
+    <p class="calm">最後一句：中藥不能取代必要的診斷。新出現或性質改變的症狀，應先由西醫檢查排除；已在接受西醫治療者，不應為了服中藥而自行停藥。</p>
+  </div>
+</section>
+
+<section id="course">
+  <div class="wrap">
+    <p class="label">療程預期</p>
+    <h2>要服多久？</h2>
+
+    <p>取決於問題屬急性還是體質性，以及症狀存在了多久。持續數月與持續十年的問題，恢復節奏不會一樣。</p>
+
+    <ul>
+      <li><strong>急性不適</strong>（感冒、急性腸胃不適）：一般數天至一至兩星期。</li>
+      <li><strong>睡眠與腸胃問題</strong>：多數在一至兩星期內感覺到變化，一至三個月為一個評估階段。</li>
+      <li><strong>月經相關</strong>：以週期計算，一般觀察兩至三個月經週期。</li>
+      <li><strong>體質性問題與慢性疲勞</strong>：通常需要三個月以上，節奏較慢。</li>
+      <li><strong>皮膚問題</strong>：急性期變化較快，慢性反覆者屬長期管理。</li>
+    </ul>
+
+    <p class="note">不建議長期服用同一條方。證型會隨狀態改變，長期不變的處方可能愈來愈不對症——這是需要定期覆診的實際原因。</p>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <p class="label">常見問題</p>
+    <h2>香港中藥調理常見問題</h2>
+
+    <details>
+      <summary>中藥難飲嗎？</summary>
+      <p>視乎處方。補氣養血類多數偏甘，清熱疏肝類會苦一些。苦不等於有效，味道由藥材性質決定，跟療效沒有必然關係。沖劑用溫水完全化開、一口氣飲完會比慢慢啜舒服。覺得難以入口可以直接說，同一個治療方向多數有幾種配伍選擇。</p>
+    </details>
+
+    <details>
+      <summary>沖劑和煎藥有什麼分別？哪個比較好？</summary>
+      <p>濃縮沖劑方便攜帶、劑量標準化、無需煎煮；傳統飲片自煎則在加減調整上較靈活，但需時約一小時且氣味較大。臨床上多數人選沖劑，原因很實際：需要連續服用數星期至數個月，能否堅持才是決定成效的關鍵。如果煎藥試過但放棄了，換劑型比勉強重要。</p>
+    </details>
+
+    <details>
+      <summary>中藥會不會傷肝腎？</summary>
+      <p>由註冊中醫師處方、使用來源正規的藥材、按證型配伍並定期覆診調整，風險是可控的。臨床上出問題的多數是另外幾種情況：自行長期服用來歷不明的成藥或偏方、同時服用多種來源的補品、本身有肝腎問題但未告知，或把別人的處方拿來服用。有肝腎病史請於初診說明，必要時可安排檢查監察。</p>
+    </details>
+
+    <details>
+      <summary>中藥和西藥可以一起服用嗎？要相隔多久？</summary>
+      <p>多數情況可以，一般建議相隔約一至兩小時。前提是醫師知道您在服什麼藥——特別是抗凝血藥、降糖藥、降血壓藥、免疫抑制劑與精神科藥物。請把所有藥物與保健品的名稱、劑量一併說明，這不會限制治療空間，反而是安全用藥的基礎。不要為了服中藥而自行停用西藥。</p>
+    </details>
+
+    <details>
+      <summary>要服多久才見效？</summary>
+      <p>急性不適多為數天至兩星期；睡眠與腸胃問題一般一至兩星期內感覺到變化；月經相關的問題以週期計算，通常觀察兩至三個週期；體質性問題與慢性疲勞則需三個月以上。若服用兩至三星期完全沒有任何變化，會重新檢視辨證方向而非繼續同一條方。</p>
+    </details>
+
+    <details>
+      <summary>經期可以繼續服中藥嗎？</summary>
+      <p>多數處方可以，但部分方劑會按經期另作調整，行經期與經後期的用藥方向本來就不同。請於覆診時說明月經的實際日期與經量情況，處方會據此安排。</p>
+    </details>
+
+    <details>
+      <summary>懷孕或餵哺期間可以服中藥嗎？</summary>
+      <p>可以，但必須由註冊中醫師處方，並在求診時說明懷孕週數或授乳情況。孕期有明確的禁用與慎用藥材類別；哺乳期則需留意部分具回乳作用的藥材。坊間的安胎方與坐月補方成分不明，不建議自行服用。</p>
+    </details>
+
+    <details>
+      <summary>服中藥要戒口嗎？</summary>
+      <p>會有，但應該具體、有期限、可解釋，而不是一張長長的清單。常見的建議包括服藥期間減少生冷與過度寒涼的飲品，以及避免同時大量飲用性質相反的湯水或涼茶。若您收到的忌口建議廣泛到影響日常飲食，值得問清楚原因與時限。</p>
+    </details>
+
+    <details>
+      <summary>服藥後不舒服怎麼辦？</summary>
+      <p>先停藥，然後聯絡醫師。腹瀉、胃部不適、皮疹或任何新出現的症狀都應該說明——這通常只需要調整處方，但需要知道才調整得了。如出現呼吸困難、面部或喉嚨腫脹等疑似過敏反應，請即時求醫。</p>
+    </details>
+
+    <details>
+      <summary>可以服朋友的處方嗎？同一條方一直服下去可以嗎？</summary>
+      <p>兩者都不建議。處方是按個人體質、症狀與其他用藥配出來的，同樣的病名在不同人身上用藥可以相反。至於長期服用同一條方，問題在於證型會隨狀態改變，原本合適的處方可能愈來愈不對症，這正是需要定期覆診的原因。</p>
+    </details>
+  </div>
+</section>
+
+<section id="related">
+  <div class="wrap">
+    <p class="label">相關治療</p>
+    <h2>常與中藥配合的療法</h2>
+    <div class="reads">
+      <a href="treatment-acupuncture.html">針灸治療<em>疏通經絡、調節氣血，與中藥並用是最常見的組合</em></a>
+      <a href="treatment-moxa.html">艾灸療法<em>以艾草溫熱刺激穴位，適合虛寒體質與經期不適</em></a>
+      <a href="treatment-auricular.html">耳穴療法<em>可帶回家自行按壓，協助調節睡眠、食慾與情緒</em></a>
+      <a href="../constitution.html">中醫體質問卷<em>60 題，約 8 至 10 分鐘，可作為初診時的參考資料</em></a>
     </div>
   </div>
 </section>
 
-<div class="tx-toc-wrap">
-  <nav class="tx-toc">
-    <a href="#what">什麼是中藥調理</a>
-    <a href="#compare">中西醫怎麼看</a>
-    <a href="#who">適合哪些人</a>
-    <a href="#how">治療流程</a>
-    <a href="#faq">常見問題</a>
-  </nav>
-</div>
+<section id="clinic" style="border-bottom:none">
+  <div class="wrap">
+    <p class="label">預約</p>
+    <h2>預約中環中醫門診</h2>
 
-<section class="section" style="padding-top:0;">
-  <div class="container">
-    <div class="tx-body">
-
-      <div class="tx-section" id="what">
-        <div class="tx-label">什麼是中藥調理</div>
-        <h2>個人化中藥，從根本調整體質</h2>
-        <p class="tx-prose">中藥調理是中醫最核心的治療方式。胡佩珊中醫師透過「望、聞、問、切」四診，評估您的體質、臟腑功能與當下症狀，再依辨證結果配製個人化藥方。</p>
-        <p class="tx-prose">中藥著重調整體質根源，以多味藥材相互配伍，調和氣血陰陽——不論是急性症狀的舒緩，還是慢性體質的長期調理，都能因人而異地發揮作用，這跟西藥針對單一症狀對症下藥的思路不太一樣。</p>
-        <p class="tx-prose">劑型方面，診所提供傳統煎劑（水煎藥）與科學中藥顆粒兩種選擇，醫師會根據您的生活習慣與病情，建議最適合的服用方式。</p>
+    <div class="cards">
+      <div class="card">
+        <h4>中環診所</h4>
+        <p>香港中環德輔道中 19 號<br>環球大廈 1103 室<br>港鐵中環站步行可達</p>
+        <a href="../index.html#contact">預約門診 →</a>
       </div>
-
-      <div class="tx-section" id="compare">
-        <div class="tx-label">中西醫怎麼看</div>
-        <h2>單一成分，還是整體配伍</h2>
-        <div class="tx-compare">
-          <div class="tx-compare-card tx-compare-card--west">
-            <div class="tx-compare-badge">🔬</div>
-            <h4>西醫角度</h4>
-            <ul>
-              <li>藥物成分需經純化、標準化及臨床試驗驗證</li>
-              <li>著重單一活性成分的劑量與作用機制</li>
-              <li>藥物交互作用有明確資料庫可查</li>
-              <li>副作用及禁忌症有系統性記錄</li>
-              <li>多採一致劑量，較少因應體質調整</li>
-            </ul>
-          </div>
-          <div class="tx-compare-card tx-compare-card--tcm">
-            <div class="tx-compare-badge">🌿</div>
-            <h4>中醫角度</h4>
-            <ul>
-              <li>複方配伍，多味藥材協同增效、互相制約副作用</li>
-              <li>因應體質、症狀動態調整藥方（辨證論治）</li>
-              <li>著重整體氣血陰陽平衡，而非單一指標</li>
-              <li>累積數千年臨床經驗及方劑理論</li>
-              <li>個人化程度高，同病可能異治</li>
-            </ul>
-          </div>
-        </div>
-        <div class="tx-more">
-          <div class="tx-disclosure-item">
-            <button class="tx-disclosure-q">
-              深入了解：藥理研究與方法論差異
-              <span class="tx-disclosure-chevron">▼</span>
-            </button>
-            <div class="tx-disclosure-a">部分常用婦科中藥材已有藥理研究：當歸有助擴張血管、促進血液循環；川芎能抑制血小板聚集，並對子宮收縮有調節作用；白芍所含的芍藥苷則對平滑肌有解痙效果，這也是它能緩解經期不適的可能機制之一。不過中藥複方講求多味藥材協同作用，現代以單一成分為主的研究方法，難以完整反映整體療效，這也是中西醫在研究方法論上的根本差異之一。</div>
-          </div>
-        </div>
+      <div class="card">
+        <h4>初診請帶備</h4>
+        <p>正在服用的藥物與保健品清單、已有的檢查報告，以及最近三次月經的日期（如適用）。</p>
+        <a href="https://wa.me/85298152863">WhatsApp 預約 →</a>
       </div>
+    </div>
 
-      <div class="tx-section" id="who">
-        <div class="tx-label">適合哪些人</div>
-        <h2>這些症狀，中藥都能幫助您</h2>
-        <p class="tx-prose">中藥調理適用範圍廣泛，尤其在婦科領域有深厚積累。以下是常見的就診需求：</p>
-        <div class="tx-tags">
-          <span class="tx-tag">月經不調・痛經</span>
-          <span class="tx-tag">經前症候群 PMS</span>
-          <span class="tx-tag">備孕調養</span>
-          <span class="tx-tag">多囊卵巢 PCOS</span>
-          <span class="tx-tag">不孕症輔助</span>
-          <span class="tx-tag">IVF / IUI 前後調理</span>
-          <span class="tx-tag">孕期安胎</span>
-          <span class="tx-tag">孕吐緩解</span>
-          <span class="tx-tag">產後調補</span>
-          <span class="tx-tag">更年期不適</span>
-          <span class="tx-tag">失眠・焦慮</span>
-          <span class="tx-tag">氣血虛弱</span>
-          <span class="tx-tag">免疫力低下</span>
-          <span class="tx-tag">體質調整</span>
-        </div>
-      </div>
+    <div class="cta">
+      <h3>開始您的中藥調理</h3>
+      <p>初診會以四診詳細評估您的體質與症狀，<br>並確認用藥安全因素，再配製個人化處方。</p>
+      <a class="btn" href="../index.html#contact">立即預約門診 →</a>
+      <a class="btn btn-ghost" href="https://wa.me/85298152863">WhatsApp 查詢</a>
+    </div>
 
-      <div class="tx-section" id="how">
-        <div class="tx-label">中醫怎麼治療</div>
-        <h2>療程如何進行</h2>
-        <div class="tx-steps">
-          <div class="tx-step">
-            <div class="tx-step-num">1</div>
-            <div>
-              <div class="tx-step-title">四診合參</div>
-              <div class="tx-step-desc">透過望、聞、問、切全面了解體質、臟腑功能及當下症狀。</div>
-            </div>
-          </div>
-          <div class="tx-step">
-            <div class="tx-step-num">2</div>
-            <div>
-              <div class="tx-step-title">辨證論治</div>
-              <div class="tx-step-desc">判斷證型（如氣血虛弱、肝鬱、腎虛等），確立治療方向。</div>
-            </div>
-          </div>
-          <div class="tx-step">
-            <div class="tx-step-num">3</div>
-            <div>
-              <div class="tx-step-title">配伍處方</div>
-              <div class="tx-step-desc">根據辨證結果選取君臣佐使藥材，配製個人化藥方。</div>
-            </div>
-          </div>
-          <div class="tx-step">
-            <div class="tx-step-num">4</div>
-            <div>
-              <div class="tx-step-title">劑型選擇</div>
-              <div class="tx-step-desc">因應生活習慣建議傳統煎劑或科學中藥顆粒。</div>
-            </div>
-          </div>
-          <div class="tx-step">
-            <div class="tx-step-num">5</div>
-            <div>
-              <div class="tx-step-title">覆診調整</div>
-              <div class="tx-step-desc">根據服藥反應及症狀變化，適時調整藥方。</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="tx-section" id="faq">
-        <div class="tx-label">常見問題</div>
-        <h2>您可能想問的問題</h2>
-        <div class="tx-faq">
-          <div class="tx-disclosure-item">
-            <button class="tx-disclosure-q">
-              煎劑和科學顆粒有什麼分別？哪種比較好？
-              <span class="tx-disclosure-chevron">▼</span>
-            </button>
-            <div class="tx-disclosure-a">煎劑是傳統水煎藥，藥效較為完整，適合病情較複雜或體質虛弱者；科學顆粒是藥廠萃取濃縮的沖泡顆粒，攜帶方便、無需自行煎煮，適合工作繁忙或外出頻繁的患者。兩者各有優點，胡醫師會根據您的病情及生活方式建議最適合的選擇。</div>
-          </div>
-          <div class="tx-disclosure-item">
-            <button class="tx-disclosure-q">
-              懷孕期間可以服用中藥嗎？
-              <span class="tx-disclosure-chevron">▼</span>
-            </button>
-            <div class="tx-disclosure-a">孕期可以在中醫師指導下使用特定中藥，例如安胎、止嘔、緩解孕期不適。但有部分中藥在妊娠期禁用或慎用，因此務必告知醫師您已懷孕，並在專業中醫師監督下服藥，切勿自行購買服用。</div>
-          </div>
-          <div class="tx-disclosure-item">
-            <button class="tx-disclosure-q">
-              服用中藥需要多久才有效？
-              <span class="tx-disclosure-chevron">▼</span>
-            </button>
-            <div class="tx-disclosure-a">因症狀類型和個人體質而異。急性症狀（如感冒、急性痛經）通常3–7天可見改善；慢性婦科調理（如月經不調、不孕備孕）一般建議持續2–3個月經週期，才能達到穩定效果。胡醫師會在初診時給您明確的預期說明。</div>
-          </div>
-          <div class="tx-disclosure-item">
-            <button class="tx-disclosure-q">
-              中藥與西藥可以同時服用嗎？
-              <span class="tx-disclosure-chevron">▼</span>
-            </button>
-            <div class="tx-disclosure-a">大多數情況下可以，但須注意兩者之間的潛在交互作用。就診時請告知胡醫師您正在服用的所有西藥（包括保健品），醫師會為您評估是否需要錯開服藥時間或調整劑量。</div>
-          </div>
-          <div class="tx-disclosure-item">
-            <button class="tx-disclosure-q">
-              服藥期間有飲食禁忌嗎？
-              <span class="tx-disclosure-chevron">▼</span>
-            </button>
-            <div class="tx-disclosure-a">一般建議服藥期間避免辛辣、生冷、油膩及酒精。具體禁忌會因藥方不同而有所調整，醫師在開方時會詳細說明，也可以隨時向胡醫師詢問。</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="tx-section" style="border-bottom:none; padding-bottom:0;">
-        <div class="tx-label">相關療程</div>
-        <h2>您可能也感興趣</h2>
-        <div class="tx-related">
-          <a href="treatment-acupuncture.html">針灸治療</a>
-          <a href="treatment-moxa.html">艾灸療法</a>
-          <a href="treatment-internal.html">內科調理</a>
-        </div>
-      </div>
-
-      <div class="tx-cta">
-        <h3>準備好開始您的中藥調理？</h3>
-        <p>歡迎先完成線上體質問卷，就診時攜帶結果，<br>讓胡醫師更快掌握您的體質狀況，為您配製最適合的藥方。</p>
-        <a href="../index.html#contact" class="btn-white">立即預約門診 →</a>
-      </div>
-
+    <div class="byline">
+      <p><strong>撰文及審閱：</strong>胡佩珊　香港註冊中醫師（註冊編號：008823）</p>
+      <p><strong>最後更新：</strong>2026 年 7 月</p>
+      <p style="margin-top:10px"><strong>主要參考方向：</strong>中藥複方治療腸易激綜合症的隨機對照試驗（Bensoussan 等，<em>JAMA</em>, 1998）；中藥複方治療異位性皮膚炎的隨機對照試驗（Sheehan 與 Atherton 等，1990 年代）；香港衞生署中藥材標準計劃。研究會持續更新，建議以最新版本為準。</p>
     </div>
   </div>
 </section>
 
-<footer class="footer">
-  <div class="footer-logo">胡佩珊中醫師</div>
-  <p>本網站資訊僅供參考，不替代醫療診斷。如有身體不適，請務必諮詢專業醫師。</p>
-  <p>© 2024 胡佩珊中醫師</p>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>胡佩珊中醫師</h4>
+        <p>以中醫智慧與身心同治的理念，陪伴女性每個生命階段。</p>
+      </div>
+      <div>
+        <h4>快速前往</h4>
+        <ul class="footer-links">
+          <li><a href="../index.html#stages">服務項目</a></li>
+          <li><a href="../index.html#services">治療項目</a></li>
+          <li><a href="../constitution.html">中醫體質問卷</a></li>
+          <li><a href="../women-health-questionnaire.html">女性健康評估</a></li>
+          <li><a href="../articles.html">健康知識庫</a></li>
+          <li><a href="../about.html">關於醫師</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>聯絡方式</h4>
+        <ul class="footer-links">
+          <li><a href="https://wa.me/85298152863" target="_blank" rel="noopener">WhatsApp +852 9815 2863</a></li>
+          <li><a href="https://www.instagram.com/woopuisan.ec" target="_blank" rel="noopener">Instagram @woopuisan.ec</a></li>
+          <li><a href="mailto:woopuisan.ec@gmail.com">woopuisan.ec@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-disclaimer">
+      本網站所有內容與線上評估僅供健康教育參考，不構成醫療建議，亦不能取代註冊醫師或中醫師的診斷與治療。若您出現急性或嚴重症狀，請立即求醫。<br>
+      © 2026 胡佩珊中醫師 · 香港中醫藥管理委員會註冊中醫師（008823）
+    </div>
+  </div>
 </footer>
 
-<script src="treatments.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type":"ListItem","position":1,"name":"首頁","item":"https://katewoo.com/index.html"},
+        {"@type":"ListItem","position":2,"name":"中醫治療項目","item":"https://katewoo.com/index.html#services"},
+        {"@type":"ListItem","position":3,"name":"中藥調理","item":"https://katewoo.com/treatments/treatment-herbs.html"}
+      ]
+    },
+    {
+      "@type": "MedicalWebPage",
+      "@id": "https://katewoo.com/treatments/treatment-herbs.html",
+      "name": "中藥調理",
+      "inLanguage": "zh-HK",
+      "dateModified": "2026-07-28",
+      "about": {"@id": "https://katewoo.com/#herbs"},
+      "author": {"@id": "https://katewoo.com/#physician"},
+      "reviewedBy": {"@id": "https://katewoo.com/#physician"}
+    },
+    {
+      "@type": "MedicalTherapy",
+      "@id": "https://katewoo.com/#herbs",
+      "name": "中藥調理",
+      "alternateName": "Chinese Herbal Medicine",
+      "howPerformed": "以望聞問切四診辨證，按個人體質、症狀與現有用藥配製個人化處方，可選濃縮沖劑、傳統飲片、藥丸或外用劑型，並於覆診時按狀態變化調整。",
+      "adverseOutcome": "可能出現腸胃不適、腹瀉或皮疹等反應，應停藥並聯絡醫師。孕期、哺乳期及肝腎功能異常者用藥須經評估。",
+      "contraindication": "孕期禁用破血逐瘀、峻下、逐水及毒性較強藥材；哺乳期須留意具回乳作用的藥材；正在服用抗凝血藥、免疫抑制劑或接受癌症治療者須先告知醫師。"
+    },
+    {
+      "@type": "Physician",
+      "@id": "https://katewoo.com/#physician",
+      "name": "胡佩珊中醫師",
+      "alternateName": "Kate Woo",
+      "identifier": "香港中醫藥管理委員會註冊中醫師 008823",
+      "url": "https://katewoo.com/about.html",
+      "telephone": "+852-9815-2863",
+      "availableService": {"@id": "https://katewoo.com/#herbs"},
+      "address": [
+        {"@type":"PostalAddress","streetAddress":"德輔道中19號環球大廈1103室","addressLocality":"中環","addressRegion":"香港島","addressCountry":"HK"},
+        {"@type":"PostalAddress","streetAddress":"彩虹道235號啟鑽商場B1樓B04號舖","addressLocality":"鑽石山","addressRegion":"九龍","addressCountry":"HK"}
+      ],
+      "areaServed": ["中環","香港"]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"中藥難飲嗎？","acceptedAnswer":{"@type":"Answer","text":"視乎處方。補氣養血類多數偏甘，清熱疏肝類會苦一些。苦不等於有效，味道由藥材性質決定。沖劑用溫水完全化開、一口氣飲完會比慢慢啜舒服。覺得難以入口可以直接說，同一個治療方向多數有幾種配伍選擇。"}},
+        {"@type":"Question","name":"中藥沖劑和煎藥有什麼分別？","acceptedAnswer":{"@type":"Answer","text":"濃縮沖劑方便攜帶、劑量標準化、無需煎煮；傳統飲片自煎在加減調整上較靈活，但需時約一小時且氣味較大。臨床上多數人選沖劑，因為需要連續服用數星期至數個月，能否堅持才是決定成效的關鍵。"}},
+        {"@type":"Question","name":"中藥會不會傷肝腎？","acceptedAnswer":{"@type":"Answer","text":"由註冊中醫師處方、使用來源正規的藥材、按證型配伍並定期覆診調整，風險是可控的。臨床上出問題的多數是自行長期服用來歷不明的成藥或偏方、同時服用多種補品、本身有肝腎問題但未告知，或服用別人的處方。有肝腎病史請於初診說明。"}},
+        {"@type":"Question","name":"中藥和西藥可以一起服用嗎？要相隔多久？","acceptedAnswer":{"@type":"Answer","text":"多數情況可以，一般建議相隔約一至兩小時。前提是醫師知道您在服什麼藥，特別是抗凝血藥、降糖藥、降血壓藥、免疫抑制劑與精神科藥物。不要為了服中藥而自行停用西藥。"}},
+        {"@type":"Question","name":"中藥要服多久才見效？","acceptedAnswer":{"@type":"Answer","text":"急性不適多為數天至兩星期；睡眠與腸胃問題一般一至兩星期內感覺到變化；月經相關問題以週期計算，通常觀察兩至三個週期；體質性問題與慢性疲勞則需三個月以上。"}},
+        {"@type":"Question","name":"經期可以繼續服中藥嗎？","acceptedAnswer":{"@type":"Answer","text":"多數處方可以，但部分方劑會按經期另作調整，行經期與經後期的用藥方向本來就不同。請於覆診時說明月經的實際日期與經量情況。"}},
+        {"@type":"Question","name":"懷孕或餵哺期間可以服中藥嗎？","acceptedAnswer":{"@type":"Answer","text":"可以，但必須由註冊中醫師處方，並說明懷孕週數或授乳情況。孕期有明確的禁用與慎用藥材類別；哺乳期需留意部分具回乳作用的藥材。坊間的安胎方與坐月補方不建議自行服用。"}},
+        {"@type":"Question","name":"服中藥要戒口嗎？","acceptedAnswer":{"@type":"Answer","text":"會有，但應該具體、有期限、可解釋，而不是一張長長的清單。常見建議包括服藥期間減少生冷與過度寒涼的飲品，以及避免同時大量飲用性質相反的湯水或涼茶。"}},
+        {"@type":"Question","name":"服中藥後不舒服怎麼辦？","acceptedAnswer":{"@type":"Answer","text":"先停藥，然後聯絡醫師。腹瀉、胃部不適、皮疹或任何新出現的症狀都應說明，通常只需調整處方。如出現呼吸困難、面部或喉嚨腫脹等疑似過敏反應，請即時求醫。"}},
+        {"@type":"Question","name":"可以服朋友的中藥處方嗎？","acceptedAnswer":{"@type":"Answer","text":"不建議。處方是按個人體質、症狀與其他用藥配出來的，同樣的病名在不同人身上用藥可以相反。長期服用同一條方也不建議，因為證型會隨狀態改變，原本合適的處方可能愈來愈不對症。"}}
+      ]
+    }
+  ]
+}
+</script>
+
 <script src="../shared-nav.js"></script>
 </body>
 </html>

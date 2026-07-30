@@ -4,7 +4,7 @@
 
   function depthPrefix() {
     var path = location.pathname;
-    if (/\/articles\/[^/]+\.html$/.test(path) || /\/treatments\/[^/]+\.html$/.test(path) || /\/admin\/[^/]+\.html$/.test(path)) {
+    if (/\/(?:articles|treatments|services|admin)\/[^/]+\.html$/.test(path)) {
       return '../';
     }
     return '';
@@ -31,17 +31,17 @@
   function buildNav() {
     var prefix = depthPrefix();
     var stageItems = [
-      { key: 'stageMenstrual', zh: '月經及婦科問題', href: 'women-health-questionnaire.html' },
-      { key: 'stageFertility', zh: '備孕及不孕', href: 'women-health-questionnaire.html' },
-      { key: 'stagePregnancy', zh: '孕期及產後', href: 'women-health-questionnaire.html' },
-      { key: 'stageMenopause', zh: '更年期與停經後健康', href: 'women-health-questionnaire.html' },
-      { key: 'stageSkin', zh: '皮膚問題', href: 'index.html#contact' },
-      { key: 'stageBreast', zh: '乳房', href: 'treatments/treatment-mammary.html' },
-      { key: 'stageHairloss', zh: '脫髮', href: 'treatments/treatment-hairloss.html' },
-      { key: 'stageWeight', zh: '體重管理', href: 'treatments/treatment-weight.html' },
-      { key: 'stageMood', zh: '情緒健康', href: 'women-health-questionnaire.html' },
-      { key: 'stageOncology', zh: '癌症治療', href: 'treatments/treatment-oncology.html' },
-      { key: 'stageInternal', zh: '內科調理', href: 'treatments/treatment-internal.html' }
+      { key: 'stageMenstrual', zh: '月經及婦科問題', href: 'services/menstrual.html' },
+      { key: 'stageFertility', zh: '備孕及不孕', href: 'services/fertility.html' },
+      { key: 'stagePregnancy', zh: '孕期及產後', href: 'services/pregnancy.html' },
+      { key: 'stageMenopause', zh: '更年期與停經後健康', href: 'services/menopause.html' },
+      { key: 'stageSkin', zh: '皮膚問題', href: 'services/skin.html' },
+      { key: 'stageBreast', zh: '乳房健康', href: 'services/breast.html' },
+      { key: 'stageHairloss', zh: '脫髮治療', href: 'services/hairloss.html' },
+      { key: 'stageWeight', zh: '體重管理', href: 'services/weight.html' },
+      { key: 'stageMood', zh: '情緒健康', href: 'services/emotional.html' },
+      { key: 'stageOncology', zh: '腫瘤輔助調理', href: 'treatments/treatment-oncology.html' },
+      { key: 'stageInternal', zh: '內科調理', href: 'services/internal.html' }
     ];
     var treatmentItems = [
       { key: 'txAcupuncture', zh: '針灸治療', href: 'treatments/treatment-acupuncture.html' },
@@ -54,6 +54,7 @@
     return '<nav class="drhu-nav" aria-label="主要導覽">' +
       '<div class="drhu-nav-inner">' +
         '<a href="' + link(prefix, 'index.html#top') + '" class="drhu-nav-logo" data-nav="home-logo">' +
+          '<img src="' + link(prefix, 'assets/logo.png') + '" alt="" class="drhu-logo-mark" width="52" height="52">' +
           '<span class="drhu-logo-name" data-nav-key="logo">胡佩珊中醫師</span>' +
         '</a>' +
         '<div class="drhu-nav-links" id="navLinks">' +
@@ -88,7 +89,8 @@
     style.textContent = [
       '.drhu-nav{position:sticky;top:0;z-index:500;background:rgba(250,247,240,.94);backdrop-filter:blur(12px);border-bottom:1px solid #E9E0D0;font-family:"Noto Sans TC","Inter",system-ui,sans-serif;}',
       '.drhu-nav-inner{max-width:1180px;margin:0 auto;padding:.82rem clamp(1rem,3vw,2.5rem);display:flex;align-items:center;gap:1rem;position:relative;}',
-      '.drhu-nav-logo{margin-right:auto;text-decoration:none;line-height:1.25;white-space:nowrap;}',
+      '.drhu-nav-logo{margin-right:auto;text-decoration:none;line-height:1.25;white-space:nowrap;display:inline-flex;align-items:center;gap:.6rem;}',
+      '.drhu-logo-mark{width:52px;height:52px;object-fit:contain;flex:0 0 auto;}',
       '.drhu-logo-name{font-family:"Noto Serif TC",serif;font-weight:700;font-size:1.08rem;color:#4A4038;letter-spacing:.02em;}',
       '.drhu-nav-links{display:flex;align-items:center;gap:clamp(.75rem,1.8vw,1.35rem);}',
       '.drhu-nav-item{position:relative;}',
@@ -109,7 +111,7 @@
       '.drhu-lang-switch button.active{background:#A98D72;color:#fff;}',
       '.drhu-nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:6px;}',
       '.drhu-nav-toggle span{width:22px;height:2px;background:#4A4038;border-radius:2px;display:block;}',
-      '@media(max-width:900px){.drhu-nav-inner{padding:.76rem 1rem}.drhu-nav-links{position:absolute;top:100%;left:0;right:0;background:#FAF7F0;border-bottom:1px solid #E9E0D0;flex-direction:column;align-items:stretch;gap:0;padding:.6rem 1rem 1rem;display:none;max-height:calc(100svh - 64px);overflow:auto}.drhu-nav-links.open{display:flex}.drhu-nav-links a{padding:.78rem .25rem;border-bottom:1px solid #E9E0D0}.drhu-nav-item{position:static}.drhu-submenu,.drhu-submenu-wide{position:static;display:grid;grid-template-columns:1fr;min-width:0;transform:none;opacity:1;visibility:visible;pointer-events:auto;box-shadow:none;border:0;border-left:2px solid #E9E0D0;border-radius:0;background:transparent;padding:0 0 0 .85rem;margin:.1rem 0 .6rem}.drhu-submenu::before{display:none}.drhu-submenu a{font-size:.82rem;padding:.52rem .25rem!important;color:#74685D}.drhu-nav-cta{margin-top:.7rem;text-align:center;border-radius:8px!important}.drhu-lang-switch{margin-left:auto}.drhu-nav-toggle{display:flex}}'
+      '@media(max-width:900px){.drhu-nav-inner{padding:.66rem 1rem}.drhu-logo-mark{width:46px;height:46px}.drhu-logo-name{font-size:1rem}.drhu-nav-links{position:absolute;top:100%;left:0;right:0;background:#FAF7F0;border-bottom:1px solid #E9E0D0;flex-direction:column;align-items:stretch;gap:0;padding:.6rem 1rem 1rem;display:none;max-height:calc(100svh - 64px);overflow:auto}.drhu-nav-links.open{display:flex}.drhu-nav-links a{padding:.78rem .25rem;border-bottom:1px solid #E9E0D0}.drhu-nav-item{position:static}.drhu-submenu,.drhu-submenu-wide{position:static;display:grid;grid-template-columns:1fr;min-width:0;transform:none;opacity:1;visibility:visible;pointer-events:auto;box-shadow:none;border:0;border-left:2px solid #E9E0D0;border-radius:0;background:transparent;padding:0 0 0 .85rem;margin:.1rem 0 .6rem}.drhu-submenu::before{display:none}.drhu-submenu a{font-size:.82rem;padding:.52rem .25rem!important;color:#74685D}.drhu-nav-cta{margin-top:.7rem;text-align:center;border-radius:8px!important}.drhu-lang-switch{margin-left:auto}.drhu-nav-toggle{display:flex}}'
     ].join('');
     document.head.appendChild(style);
   }
@@ -137,11 +139,11 @@
       stagePregnancy: '孕期及產後',
       stageMenopause: '更年期與停經後健康',
       stageSkin: '皮膚問題',
-      stageBreast: '乳房',
-      stageHairloss: '脫髮',
+      stageBreast: '乳房健康',
+      stageHairloss: '脫髮治療',
       stageWeight: '體重管理',
       stageMood: '情緒健康',
-      stageOncology: '癌症治療',
+      stageOncology: '腫瘤輔助調理',
       stageInternal: '內科調理',
       txAcupuncture: '針灸治療',
       txHerbs: '中藥調理',
