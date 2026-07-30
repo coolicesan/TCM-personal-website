@@ -480,6 +480,10 @@
     margin-bottom:28px;
   }
   @media (max-width:640px){ .dashboard-grid{grid-template-columns:1fr;} }
+  /* Stage cards (cycle/pregnancy/postpartum/meno) carry a value table +
+     3-column action grid, which needs more room than half the panel width
+     (panel is capped at 760px) — so they span the full grid row. */
+  .domain-card.stagecard{ grid-column:1/-1; }
 
   /* ---- dashboard card ---- */
   .domain-card{
@@ -620,6 +624,12 @@
     font-size:13.5px; color:var(--ink-soft); margin:0 0 14px; line-height:1.7;
   }
   .overview-block .ov-body .en{display:block; font-size:12px; margin-top:4px; color:var(--ink-faint);}
+  .overview-block .ov-body b{ color:var(--ink); font-weight:700; }
+  .overview-block .ov-count{
+    margin:0 0 12px; padding:7px 11px;
+    background:var(--paper); border-radius:var(--radius-sm);
+    font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-soft);
+  }
   .overview-chips{display:flex; flex-wrap:wrap; gap:7px;}
   .ov-chip{
     font-size:12px; font-weight:500; padding:4px 12px;
@@ -666,6 +676,162 @@
     .app{display:block; max-width:100%; padding:0;}
     .panel{box-shadow:none; border:none; padding:0; max-width:100%;}
     .print-only{display:block;}
+  }
+
+  /* ============ CRISIS RESOURCES BANNER ============ */
+  .crisis-band{
+    border:1.5px solid rgba(156,59,46,.35);
+    border-left:4px solid var(--cinnabar);
+    border-radius:var(--radius);
+    background:var(--cinnabar-soft);
+    padding:20px 22px;
+    margin:0 0 18px;
+  }
+  .crisis-band h3{
+    margin:0 0 4px; font-size:17px; display:flex; align-items:center; gap:9px;
+    color:var(--cinnabar-deep);
+  }
+  .crisis-band h3 .dot{ background:var(--cinnabar); }
+  .crisis-band .en{ font-size:12px; display:block; margin-bottom:12px; }
+  .crisis-band .crisis-lead{ margin:0 0 14px; font-size:13.5px; line-height:1.7; color:var(--ink); }
+  .crisis-list{ list-style:none; margin:0; padding:0; }
+  .crisis-list li{
+    display:flex; justify-content:space-between; align-items:baseline; gap:12px;
+    padding:9px 0; border-top:1px dashed rgba(156,59,46,.22); font-size:13.5px;
+  }
+  .crisis-list li:first-child{ border-top:none; }
+  .crisis-list .cr-name{ color:var(--ink); }
+  .crisis-list .cr-name .li-en{ display:block; font-size:11.5px; color:var(--ink-faint); margin-top:2px; }
+  .crisis-list .cr-num{
+    font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:15px;
+    color:var(--cinnabar-deep); white-space:nowrap; text-decoration:none;
+  }
+  .crisis-list .cr-num:hover, .crisis-list .cr-num:focus-visible{ text-decoration:underline; }
+  .crisis-foot{ margin:14px 0 0; font-size:12.5px; line-height:1.65; color:var(--ink-soft); }
+
+  /* ============ ANSWER MIRROR TABLE ============ */
+  .answer-table{ margin:14px 0 4px; }
+  .at-head{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
+  .at-title{ margin:0; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint); }
+  .at-count{ font-size:11px; color:var(--ink-faint); font-family:'IBM Plex Mono',monospace; }
+  .at-rows{ list-style:none; margin:0; padding:0; }
+  .at-row{
+    display:grid; grid-template-columns:1fr auto; gap:2px 10px;
+    padding:9px 0; border-top:1px dashed rgba(0,0,0,.08);
+  }
+  .at-row:first-child{ border-top:none; }
+  .at-label{ font-size:12.5px; color:var(--ink-soft); }
+  .at-value{ font-size:13px; color:var(--ink); line-height:1.5; }
+  .at-ref{ grid-column:1/-1; font-size:11.5px; color:var(--ink-faint); margin-top:1px; }
+  .at-mark{
+    align-self:start; font-size:11px; font-weight:600; white-space:nowrap;
+    padding:2px 9px; border-radius:999px; letter-spacing:.01em;
+  }
+  .at-ok{ background:var(--jade-mist); color:var(--pine); }
+  .at-watch{ background:var(--amber-soft); color:var(--amber-deep); }
+  .at-na{ background:rgba(0,0,0,.05); color:var(--ink-faint); }
+  .at-note{ margin:10px 0 0; font-size:12px; line-height:1.65; color:var(--ink-faint); }
+  .at-explain{
+    grid-column:1/-1; margin:6px 0 0; padding:8px 10px;
+    background:var(--amber-soft); border-radius:var(--radius-sm);
+    font-size:12px; line-height:1.6; color:var(--amber-deep);
+  }
+  .at-threshold{
+    grid-column:1/-1; margin:5px 0 0; padding:8px 10px;
+    background:var(--cinnabar-soft); border-radius:var(--radius-sm);
+    font-size:12px; line-height:1.6; color:var(--cinnabar-deep);
+  }
+  .at-threshold b{ font-weight:700; }
+
+  /* ============ STAGE CARD SKELETON (cycle / pregnancy / postpartum / meno) ============ */
+  .stagecard-verdict{
+    margin:0 0 16px; font-family:'Noto Serif TC',serif; font-size:15px;
+    line-height:1.6; color:var(--ink);
+  }
+  .stagecard-actions{
+    display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px;
+    margin:18px 0 0;
+  }
+  @media (max-width:640px){ .stagecard-actions{ grid-template-columns:1fr; } }
+  .action-col{
+    padding:13px 14px; border-radius:var(--radius-sm);
+    background:var(--paper); border:1px solid var(--line);
+  }
+  .action-col-title{
+    margin:0 0 8px; font-size:11.5px; font-weight:700; letter-spacing:.04em;
+    color:var(--ink-soft);
+  }
+  .action-col ul{ margin:0; padding-left:16px; }
+  .action-col li{ font-size:12.5px; line-height:1.65; color:var(--ink); margin-bottom:6px; }
+  .action-col li:last-child{ margin-bottom:0; }
+  .action-empty{ margin:0; font-size:12px; color:var(--ink-faint); }
+
+  /* 建議就醫 — full-width, visually distinct: highest-stakes content on the card */
+  .seekcare-block{
+    margin:14px 0 0; padding:14px 16px;
+    border:1.5px solid rgba(156,59,46,.3); border-left:4px solid var(--cinnabar);
+    border-radius:var(--radius-sm); background:var(--cinnabar-soft);
+  }
+  .seekcare-title{
+    margin:0 0 8px; font-size:12.5px; font-weight:700; letter-spacing:.02em;
+    color:var(--cinnabar-deep);
+  }
+  .seekcare-title .en{ font-size:11px; font-weight:400; margin-left:6px; }
+  .seekcare-block ul{ margin:0; padding-left:17px; columns:2; column-gap:22px; }
+  @media (max-width:640px){ .seekcare-block ul{ columns:1; } }
+  .seekcare-block li{
+    font-size:12.5px; line-height:1.6; color:var(--ink);
+    margin-bottom:5px; break-inside:avoid;
+  }
+  .stage-articles-pending{
+    margin:14px 0 0; font-size:12px; font-style:italic; color:var(--ink-faint);
+  }
+  .stagecard-cta{
+    margin:16px 0 0; padding-top:12px; border-top:1px dashed var(--line);
+    font-size:12.5px; color:var(--ink-soft);
+  }
+
+  /* ============ PREGNANCY / POSTPARTUM STAGE PANEL ============ */
+  .stage-block{
+    margin:16px 0 4px; padding:16px 18px;
+    border-radius:var(--radius-sm); background:var(--paper);
+    border:1px solid var(--line);
+  }
+  .stage-label{ margin:0 0 12px; font-size:12.5px; font-weight:600; letter-spacing:.02em; color:var(--ink-soft); }
+  .sc-title{ margin:0 0 7px; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint); }
+  .stage-cols{ display:grid; gap:16px; }
+  @media (min-width:640px){ .stage-cols{ grid-template-columns:1fr 1fr; } }
+  .stage-col ul{ margin:0; padding-left:16px; }
+  .stage-col li{ font-size:13px; line-height:1.65; color:var(--ink); margin-bottom:5px; }
+  .tl-rows{ list-style:none; margin:0; padding:0; }
+  .tl-row{ display:grid; grid-template-columns:60px 1fr; gap:12px; padding:9px 0; border-top:1px solid var(--line); }
+  .tl-row:first-child{ border-top:none; }
+  .tl-k{ font-size:12px; font-weight:600; color:var(--ink-soft); padding-top:1px; }
+  .tl-v{ font-size:13px; line-height:1.65; color:var(--ink); }
+  .stage-watch{
+    margin:12px 0 0; padding:10px 12px; border-left:3px solid var(--amber);
+    background:var(--amber-soft); border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+    font-size:12.5px; line-height:1.65; color:var(--amber-deep);
+  }
+  .stage-redflags{
+    margin:14px 0 0; padding:13px 15px;
+    border:1px solid rgba(156,59,46,.3); border-radius:var(--radius-sm);
+    background:var(--cinnabar-soft);
+  }
+  .sr-title{ margin:0 0 7px; font-size:12.5px; font-weight:600; color:var(--cinnabar-deep); }
+  .stage-redflags ul{ margin:0; padding-left:17px; }
+  .stage-redflags li{ font-size:12.5px; line-height:1.6; color:var(--ink); margin-bottom:4px; }
+  .stage-articles{ margin:16px 0 4px; }
+  .sa-link{
+    display:block; padding:11px 13px; margin-bottom:7px;
+    border:1px solid var(--line); border-radius:var(--radius-sm); background:var(--paper-card);
+    font-size:13px; color:var(--ink); text-decoration:none;
+    transition:transform .18s ease, border-color .18s ease;
+  }
+  .sa-link:hover, .sa-link:focus-visible{ transform:translateX(2px); border-color:var(--jade-line); }
+
+  @media print{
+    .answer-table, .crisis-band, .stage-block, .stage-redflags, .stage-articles{ break-inside:avoid; }
   }
 </style>
 </head>
@@ -759,30 +925,33 @@ const SECTIONS = [
         opt('55-64','55–64 歲','55–64'),
         opt('65p','65 歲以上','65 and above'),
       ]},
+    /* Single source of truth for reproductive stage — drives which tracks are
+       offered on the path step, and every stage-specific showIf below.
+       (Previously this and the pregnancy section's own preg_status asked
+       overlapping versions of the same thing.) */
     {id:'basic_status', type:'single', zh:'目前生理狀態', en:'Current reproductive status',
       options:[
         opt('has_period','仍有月經(規律或不規律)','Currently menstruating'),
         opt('pregnant','懷孕中','Currently pregnant'),
-        opt('breastfeeding','哺乳中','Currently breastfeeding'),
+        opt('postpartum','產後一年內(含哺乳中)','Within 1 year postpartum (incl. breastfeeding)'),
         opt('menopause','已停經','Postmenopausal'),
         opt('never','從未有過月經','Never had a period', FLAG('screen','原發性無月經，建議安排婦科評估','No periods yet — recommend a gynecological evaluation', 'cycle')),
       ]},
+    /* Interpretation-modifying history: these change how later answers should be
+       read across every track (PCOS explains irregular cycles, thyroid explains
+       fatigue/hair loss, fibroids explain heavy flow), so they're asked once here
+       rather than repeated per section. */
     {id:'basic_history', type:'multi', zh:'是否曾被診斷以下任一情形?(可複選)', en:'Have you been diagnosed with any of the following? (select all)',
+      shortLabel:'既有婦科診斷',
       options:[
         opt('pcos','多囊性卵巢症候群(PCOS)','PCOS'),
         opt('thyroid','甲狀腺疾病','Thyroid disorder'),
         opt('coag','凝血/出血疾病','Bleeding or clotting disorder'),
-        opt('fibroid','子宮肌瘤','Uterine fibroids'),
-        opt('endo','子宮內膜異位症','Endometriosis'),
-        {...opt('none','無','None'), exclusive:true},
-      ]},
-    {id:'basic_famhx', type:'multi', zh:'一等親(父母、兄弟姊妹、子女)是否有以下癌症病史?', en:'Do any first-degree relatives (parent, sibling, child) have a history of:',
-      options:[
-        opt('breast','乳癌','Breast cancer', FLAG('screen','您有家族癌症病史，建議與醫師討論個人化篩檢計畫','Family cancer history — discuss a personalized screening plan with your doctor', 'cancer')),
-        opt('ovarian','卵巢癌','Ovarian cancer', FLAG('screen','您有家族癌症病史，建議與醫師討論個人化篩檢計畫','Family cancer history — discuss a personalized screening plan with your doctor', 'cancer')),
-        opt('colorectal','大腸直腸癌','Colorectal cancer', FLAG('screen','您有家族癌症病史，建議與醫師討論個人化篩檢計畫','Family cancer history — discuss a personalized screening plan with your doctor', 'cancer')),
-        opt('cervical','子宮頸癌','Cervical cancer', FLAG('screen','您有家族癌症病史，建議與醫師討論個人化篩檢計畫','Family cancer history — discuss a personalized screening plan with your doctor', 'cancer')),
-        opt('unknown','不清楚','Not sure'),
+        opt('fibroid','子宮肌瘤','Uterine fibroids', FLAG('tcm','已有相關婦科診斷，可納入中醫體質調理討論(仍建議定期婦科追蹤)','Existing gynecological diagnosis — worth including in TCM constitutional care (continue routine gynecological follow-up)')),
+        opt('endo','子宮內膜異位症','Endometriosis', FLAG('tcm','已有相關婦科診斷，可納入中醫體質調理討論(仍建議定期婦科追蹤)','Existing gynecological diagnosis — worth including in TCM constitutional care (continue routine gynecological follow-up)')),
+        opt('adeno','子宮腺肌症','Adenomyosis', FLAG('tcm','已有相關婦科診斷，可納入中醫體質調理討論(仍建議定期婦科追蹤)','Existing gynecological diagnosis — worth including in TCM constitutional care (continue routine gynecological follow-up)')),
+        opt('cyst','卵巢囊腫','Ovarian cyst', FLAG('tcm','已有相關婦科診斷，可納入中醫體質調理討論(仍建議定期婦科追蹤)','Existing gynecological diagnosis — worth including in TCM constitutional care (continue routine gynecological follow-up)')),
+        opt('polyp','子宮內膜息肉','Endometrial polyp', FLAG('tcm','已有相關婦科診斷，可納入中醫體質調理討論(仍建議定期婦科追蹤)','Existing gynecological diagnosis — worth including in TCM constitutional care (continue routine gynecological follow-up)')),
         {...opt('none','無','None'), exclusive:true},
       ]},
   ]
@@ -952,12 +1121,14 @@ const SECTIONS = [
       scaleLabel_zh:['無痛','中度','劇痛'], scaleLabel_en:['None','Moderate','Severe'],
       showIf:a=>a.basic_status==='has_period'},
     {id:'cycle_painimpact', type:'single', zh:'經痛是否影響日常生活或需要請假', en:'Does period pain disrupt daily activities or require time off?', group:'經痛與經前症狀', groupEn:'Pain & Premenstrual Symptoms',
+      shortLabel:'經痛影響生活',
       showIf:a=>a.basic_status==='has_period',
       options:[
         opt('no','否','No'),
         opt('yes','是','Yes', FLAG('tcm','經痛影響生活，為中醫常見且擅長調理的項目','Disruptive period pain is a common focus area for TCM care')),
       ]},
     {id:'cycle_pms', type:'multi', zh:'經前 / 經期是否有以下情形?(可複選)', en:'Any of the following before or during your period? (select all)', group:'經痛與經前症狀', groupEn:'Pain & Premenstrual Symptoms',
+      shortLabel:'經前症狀',
       showIf:a=>a.basic_status==='has_period',
       options:[
         opt('mood','明顯情緒低落或易怒','Noticeable low mood or irritability', FLAG('tcm','經前情緒症狀，中醫常見調理範疇','Premenstrual mood symptoms — a common TCM focus area')),
@@ -968,17 +1139,8 @@ const SECTIONS = [
         {...opt('none','無','None'), exclusive:true},
       ]},
 
-    {id:'cycle_dx', type:'multi', zh:'是否曾被診斷以下婦科狀況?', en:'Have you been diagnosed with any of the following gynecological conditions?', group:'婦科病史與生育', groupEn:'Gynecological History & Fertility',
-      showIf:a=>a.basic_status==='has_period'||a.basic_status==='menopause',
-      options:[
-        opt('fibroid','子宮肌瘤','Uterine fibroids', FLAG('tcm','已有相關婦科診斷，可納入中醫體質調理討論(仍建議定期婦科追蹤)','Existing gynecological diagnosis — worth including in TCM constitutional care (continue routine gynecological follow-up)')),
-        opt('endo','子宮內膜異位症','Endometriosis', FLAG('tcm','已有相關婦科診斷，可納入中醫體質調理討論(仍建議定期婦科追蹤)','Existing gynecological diagnosis — worth including in TCM constitutional care (continue routine gynecological follow-up)')),
-        opt('adeno','子宮腺肌症','Adenomyosis', FLAG('tcm','已有相關婦科診斷，可納入中醫體質調理討論(仍建議定期婦科追蹤)','Existing gynecological diagnosis — worth including in TCM constitutional care (continue routine gynecological follow-up)')),
-        opt('cyst','卵巢囊腫','Ovarian cyst', FLAG('tcm','已有相關婦科診斷，可納入中醫體質調理討論(仍建議定期婦科追蹤)','Existing gynecological diagnosis — worth including in TCM constitutional care (continue routine gynecological follow-up)')),
-        opt('polyp','子宮內膜息肉','Endometrial polyp', FLAG('tcm','已有相關婦科診斷，可納入中醫體質調理討論(仍建議定期婦科追蹤)','Existing gynecological diagnosis — worth including in TCM constitutional care (continue routine gynecological follow-up)')),
-        {...opt('none','無','None'), exclusive:true},
-      ]},
     {id:'cycle_fertility', type:'single', zh:'是否有受孕困難(嘗試 ≥12 個月，或 ≥35 歲嘗試 ≥6 個月未成功)', en:'Difficulty conceiving (≥12 months trying, or ≥6 months if age 35+)?', group:'婦科病史與生育', groupEn:'Gynecological History & Fertility',
+      shortLabel:'受孕困難',
       showIf:a=>a.basic_status==='has_period',
       options:[
         opt('no','否','No'),
@@ -992,6 +1154,7 @@ const SECTIONS = [
   intro_en:"If you're preparing for pregnancy, these questions help capture your current readiness.",
   questions:[
     {id:'precon_duration', type:'single', zh:'目前備孕嘗試時間', en:'How long have you been trying to conceive?',
+      showIf:a=>a.basic_status==='has_period',
       options:[
         opt('not_yet','尚未開始嘗試','Not yet started'),
         opt('u3','少於 3 個月','Less than 3 months'),
@@ -1000,30 +1163,37 @@ const SECTIONS = [
         opt('over12','超過 12 個月','Over 12 months', FLAG('screen','建議安排生殖醫學評估','Recommend a fertility-medicine evaluation')),
       ]},
     {id:'precon_folic', type:'single', zh:'是否已開始補充葉酸', en:'Have you started taking folic acid?',
+      showIf:a=>a.basic_status==='has_period',
       options:[
         opt('yes','是','Yes'),
         opt('no','否','No', FLAG('screen','孕前建議補充葉酸，建議與醫師討論','Folic acid is recommended before conception — discuss with your doctor')),
         opt('unsure','不確定','Not sure', FLAG('screen','建議與醫師確認是否需補充葉酸','Recommend confirming folic acid needs with your doctor')),
       ]},
     {id:'precon_checkup', type:'single', zh:'是否已完成孕前健康檢查(如德國麻疹抗體、甲狀腺功能等)', en:'Have you completed preconception health checks (e.g. rubella immunity, thyroid function)?',
+      showIf:a=>a.basic_status==='has_period',
       options:[
         opt('yes','是','Yes'),
         opt('no','否','No', FLAG('screen','建議安排孕前健康檢查','Recommend scheduling preconception health checks')),
         opt('unsure','不確定','Not sure', FLAG('screen','建議與醫師確認孕前檢查項目','Recommend confirming preconception checks with your doctor')),
       ]},
+    /* Only asked when the 月經週期 track didn't already cover this (cycle_reg),
+       so bundling cycle+precon doesn't ask the same thing twice. */
     {id:'precon_cycle', type:'single', zh:'月經週期是否規律可預測(利於排卵推算)', en:'Is your cycle regular and predictable (helps estimate ovulation)?',
+      showIf:a=>a.basic_status==='has_period' && a.cycle_reg==null,
       options:[
         opt('regular','規律','Regular'),
         opt('irregular','不規律','Irregular', FLAG('tcm','週期不規律，為備孕評估常見項目','Irregular cycles are a common focus area in preconception TCM care')),
         opt('unsure','不確定','Not sure'),
       ]},
     {id:'precon_stress', type:'single', zh:'自覺壓力與睡眠對備孕的影響', en:'How much do stress and sleep seem to be affecting your preconception readiness?',
+      showIf:a=>a.basic_status==='has_period',
       options:[
         opt('good','狀態良好','Doing well'),
         opt('fair','普通','Fair'),
         opt('high','壓力大或睡眠不足','High stress or poor sleep', FLAG('tcm','壓力與睡眠調整，中醫常見調理項目','Stress and sleep support are a common TCM focus area')),
       ]},
     {id:'precon_interest', type:'single', zh:'是否考慮搭配中醫調理備孕(如調經、改善體質)', en:'Interested in pairing TCM support with your preconception plan (e.g. cycle regulation, constitutional care)?',
+      showIf:a=>a.basic_status==='has_period',
       options:[
         opt('yes','是，有興趣','Yes, interested', FLAG('tcm','您對中醫備孕評估與調理有興趣，歡迎進一步諮詢','You are interested in TCM preconception support — happy to discuss further')),
         opt('maybe','還在考慮','Still considering', FLAG('tcm','歡迎進一步了解中醫備孕評估與調理的做法','Feel free to learn more about TCM preconception approaches')),
@@ -1037,64 +1207,65 @@ const SECTIONS = [
   intro_en:'This section covers pregnancy discomforts, postpartum recovery (月子), and breastfeeding concerns — helping your TCM practitioner understand your current condition and care needs.',
   questions:[
 
-    {id:'preg_status', type:'single', zh:'目前所處的階段', en:'Your current stage',
+    {id:'preg_trimester', type:'single', zh:'目前懷孕週數', en:'How many weeks pregnant?',
+      showIf:a=>a.basic_status==='pregnant',
       options:[
-        opt('pregnant','懷孕中','Currently pregnant'),
-        opt('postpartum_early','產後 0–3 個月(月子期/月子後)','0–3 months postpartum'),
-        opt('postpartum_late','產後 3–12 個月','3–12 months postpartum'),
-        opt('breastfeeding_only','月子已結束，仍在哺乳中','Confinement done, still breastfeeding'),
+        opt('t1','第 1–13 週(第一孕期)','Weeks 1–13 (first trimester)'),
+        opt('t2','第 14–27 週(第二孕期)','Weeks 14–27 (second trimester)'),
+        opt('t3','第 28 週以後(第三孕期)','Week 28 onward (third trimester)'),
+        opt('unsure','不確定','Not sure'),
       ]},
 
     {id:'preg_nausea', type:'single', zh:'孕吐 / 噁心程度', en:'Nausea / morning sickness level', group:'孕期症狀', groupEn:'Pregnancy Symptoms',
-      showIf:a=>a.preg_status==='pregnant',
+      showIf:a=>a.basic_status==='pregnant',
       options:[
         opt('none','無或輕微','None or mild'),
-        opt('moderate','中等(影響飲食)','Moderate — affects eating', FLAG('tcm','孕吐影響飲食，中醫安胎調理常見重點','Pregnancy nausea affecting diet — a common focus in TCM prenatal care')),
-        opt('severe','嚴重(幾乎無法進食)','Severe — barely able to eat', FLAG('tcm','嚴重孕吐，中醫安胎調理可協助，嚴重時仍建議配合婦科評估','Severe pregnancy vomiting — TCM can help; severe cases should also be seen by an obstetrician')),
+        opt('moderate','中等(影響飲食)','Moderate — affects eating', FLAG('tcm','孕吐影響飲食，中醫安胎調理常見重點','Pregnancy nausea affecting diet — a common focus in TCM prenatal care', 'pregnancy')),
+        opt('severe','嚴重(幾乎無法進食)','Severe — barely able to eat', FLAG('tcm','嚴重孕吐，中醫安胎調理可協助，嚴重時仍建議配合婦科評估','Severe pregnancy vomiting — TCM can help; severe cases should also be seen by an obstetrician', 'pregnancy')),
       ]},
     {id:'preg_edema', type:'single', zh:'水腫(手、腳、臉)', en:'Swelling / edema (hands, feet, face)', group:'孕期症狀', groupEn:'Pregnancy Symptoms',
-      showIf:a=>a.preg_status==='pregnant',
+      showIf:a=>a.basic_status==='pregnant',
       options:[
         opt('none','無','None'),
-        opt('mild','輕微','Mild', FLAG('tcm','孕期輕度水腫，中醫調理常見範疇','Mild pregnancy edema — a common TCM focus area')),
-        opt('significant','明顯','Significant', FLAG('tcm','孕期水腫明顯，中醫可協助，同時建議留意血壓','Significant pregnancy edema — TCM can help; also worth monitoring blood pressure')),
+        opt('mild','輕微','Mild', FLAG('tcm','孕期輕度水腫，中醫調理常見範疇','Mild pregnancy edema — a common TCM focus area', 'pregnancy')),
+        opt('significant','明顯','Significant', FLAG('tcm','孕期水腫明顯，中醫可協助，同時建議留意血壓','Significant pregnancy edema — TCM can help; also worth monitoring blood pressure', 'pregnancy')),
       ]},
     {id:'preg_back', type:'single', zh:'腰背痛或骨盆不適', en:'Back pain or pelvic discomfort', group:'孕期症狀', groupEn:'Pregnancy Symptoms',
-      showIf:a=>a.preg_status==='pregnant',
+      showIf:a=>a.basic_status==='pregnant',
       options:[
         opt('none','無','None'),
-        opt('mild','輕微','Mild', FLAG('tcm','孕期腰背不適，中醫安胎調理常見項目','Pregnancy back discomfort — a common focus in TCM prenatal care')),
-        opt('significant','明顯，影響行動','Significant — affecting movement', FLAG('tcm','孕期腰背痛明顯，中醫可協助緩解','Significant pregnancy back pain — TCM care can help')),
+        opt('mild','輕微','Mild', FLAG('tcm','孕期腰背不適，中醫安胎調理常見項目','Pregnancy back discomfort — a common focus in TCM prenatal care', 'pregnancy')),
+        opt('significant','明顯，影響行動','Significant — affecting movement', FLAG('tcm','孕期腰背痛明顯，中醫可協助緩解','Significant pregnancy back pain — TCM care can help', 'pregnancy')),
       ]},
     {id:'preg_sleep', type:'single', zh:'睡眠品質', en:'Sleep quality during pregnancy', group:'孕期症狀', groupEn:'Pregnancy Symptoms',
-      showIf:a=>a.preg_status==='pregnant',
+      showIf:a=>a.basic_status==='pregnant',
       options:[
         opt('good','良好','Good'),
         opt('fair','普通','Fair'),
-        opt('poor','差(難入睡、易醒、多夢)', 'Poor — hard to fall asleep, waking often, vivid dreams', FLAG('tcm','孕期睡眠欠佳，中醫安胎調理常見項目','Poor sleep during pregnancy — a common focus in TCM prenatal care')),
+        opt('poor','差(難入睡、易醒、多夢)', 'Poor — hard to fall asleep, waking often, vivid dreams', FLAG('tcm','孕期睡眠欠佳，中醫安胎調理常見項目','Poor sleep during pregnancy — a common focus in TCM prenatal care', 'pregnancy')),
       ]},
     {id:'preg_mood', type:'single', zh:'情緒狀態(焦慮、情緒低落)', en:'Emotional state (anxiety, low mood)', group:'孕期症狀', groupEn:'Pregnancy Symptoms',
-      showIf:a=>a.preg_status==='pregnant',
+      showIf:a=>a.basic_status==='pregnant',
       options:[
         opt('good','穩定良好','Stable and good'),
-        opt('some','偶爾焦慮或情緒低落','Occasional anxiety or low mood', FLAG('tcm','孕期情緒波動，中醫安胎調理可協助身心平衡','Mood fluctuations during pregnancy — TCM prenatal care can help support emotional balance')),
-        opt('significant','明顯焦慮或鬱悶，影響生活','Significant anxiety or low mood, affecting daily life', FLAG('screen','孕期情緒問題明顯，建議同時安排專業心理評估','Significant mood issues during pregnancy — recommend also arranging a professional mental-health assessment')),
+        opt('some','偶爾焦慮或情緒低落','Occasional anxiety or low mood', FLAG('tcm','孕期情緒波動，中醫安胎調理可協助身心平衡','Mood fluctuations during pregnancy — TCM prenatal care can help support emotional balance', 'pregnancy')),
+        opt('significant','明顯焦慮或鬱悶，影響生活','Significant anxiety or low mood, affecting daily life', FLAG('screen','孕期情緒問題明顯，建議同時安排專業心理評估','Significant mood issues during pregnancy — recommend also arranging a professional mental-health assessment', 'pregnancy')),
       ]},
     {id:'preg_fatigue', type:'single', zh:'疲勞程度', en:'Fatigue level', group:'孕期症狀', groupEn:'Pregnancy Symptoms',
-      showIf:a=>a.preg_status==='pregnant',
+      showIf:a=>a.basic_status==='pregnant',
       options:[
         opt('ok','尚可，正常範圍內','Manageable, within normal range'),
-        opt('tired','明顯疲勞，影響日常','Noticeably fatigued, affecting daily life', FLAG('tcm','孕期明顯疲勞，中醫安胎調理常見項目','Fatigue during pregnancy — a common focus in TCM prenatal care')),
+        opt('tired','明顯疲勞，影響日常','Noticeably fatigued, affecting daily life', FLAG('tcm','孕期明顯疲勞，中醫安胎調理常見項目','Fatigue during pregnancy — a common focus in TCM prenatal care', 'pregnancy')),
       ]},
     {id:'preg_digestion', type:'single', zh:'消化道不適(便秘、脹氣)', en:'Digestive discomfort (constipation, bloating)', group:'孕期症狀', groupEn:'Pregnancy Symptoms',
-      showIf:a=>a.preg_status==='pregnant',
+      showIf:a=>a.basic_status==='pregnant',
       options:[
         opt('none','無','None'),
-        opt('yes','有','Yes', FLAG('tcm','孕期消化不適，中醫調理常見範疇','Digestive discomfort during pregnancy — a common TCM focus area')),
+        opt('yes','有','Yes', FLAG('tcm','孕期消化不適，中醫調理常見範疇','Digestive discomfort during pregnancy — a common TCM focus area', 'pregnancy')),
       ]},
 
     {id:'preg_postpartum_timing', type:'single', zh:'產後時間', en:'Time since delivery', group:'產後調理', groupEn:'Postpartum Recovery',
-      showIf:a=>['postpartum_early','postpartum_late','breastfeeding_only'].includes(a.preg_status),
+      showIf:a=>a.basic_status==='postpartum',
       options:[
         opt('0to4w','4 週內(月子期間)','Within 4 weeks — confinement period'),
         opt('1to3m','1–3 個月','1–3 months'),
@@ -1102,50 +1273,50 @@ const SECTIONS = [
         opt('6to12m','6–12 個月','6–12 months'),
       ]},
     {id:'preg_lochia', type:'single', zh:'惡露狀況', en:'Lochia (postpartum discharge)', group:'產後調理', groupEn:'Postpartum Recovery',
-      showIf:a=>['postpartum_early','postpartum_late'].includes(a.preg_status),
+      showIf:a=>a.basic_status==='postpartum',
       options:[
         opt('normal','已正常結束或符合預期','Ended normally or as expected'),
-        opt('prolonged','持續時間較長或量較多','Prolonged or heavier than expected', FLAG('tcm','惡露持續或量多，中醫產後調理常見重點','Prolonged lochia — a key focus in TCM postpartum care', null, 'postpartum-lochia')),
-        opt('concern','顏色或氣味異常','Unusual color or odor', FLAG('screen','惡露顏色或氣味異常，建議婦科評估排除感染','Unusual lochia — recommend a gynecological check to rule out infection', null, 'postpartum-lochia')),
+        opt('prolonged','持續時間較長或量較多','Prolonged or heavier than expected', FLAG('tcm','惡露持續或量多，中醫產後調理常見重點','Prolonged lochia — a key focus in TCM postpartum care', 'postpartum', 'postpartum-lochia')),
+        opt('concern','顏色或氣味異常','Unusual color or odor', FLAG('screen','惡露顏色或氣味異常，建議婦科評估排除感染','Unusual lochia — recommend a gynecological check to rule out infection', 'postpartum', 'postpartum-lochia')),
       ]},
     {id:'preg_energy', type:'single', zh:'體力與精力恢復', en:'Energy and stamina recovery', group:'產後調理', groupEn:'Postpartum Recovery',
-      showIf:a=>['postpartum_early','postpartum_late','breastfeeding_only'].includes(a.preg_status),
+      showIf:a=>a.basic_status==='postpartum',
       options:[
         opt('good','恢復良好','Recovering well'),
         opt('fair','普通，偶爾疲憊','Fair, occasionally tired'),
-        opt('poor','體力明顯不足，長期疲勞','Significantly low energy, persistent fatigue', FLAG('tcm','產後體力不足，中醫月子調理重點','Low postpartum energy — a key focus in TCM postpartum (月子) care')),
+        opt('poor','體力明顯不足，長期疲勞','Significantly low energy, persistent fatigue', FLAG('tcm','產後體力不足，中醫月子調理重點','Low postpartum energy — a key focus in TCM postpartum (月子) care', 'postpartum')),
       ]},
     {id:'preg_postmood', type:'single', zh:'情緒與心理狀態', en:'Mood and emotional wellbeing', group:'產後調理', groupEn:'Postpartum Recovery',
-      showIf:a=>['postpartum_early','postpartum_late','breastfeeding_only'].includes(a.preg_status),
+      showIf:a=>a.basic_status==='postpartum',
       options:[
         opt('good','穩定，整體適應良好','Stable, adapting well'),
-        opt('some','偶爾情緒低落或焦慮','Occasional low mood or anxiety', FLAG('tcm','產後情緒波動，中醫調理可協助身心平衡','Postpartum mood fluctuations — TCM care can help support emotional balance')),
-        opt('significant','明顯憂鬱、焦慮或情緒失控','Significant depression, anxiety, or emotional dysregulation', FLAG('screen','產後情緒問題明顯，建議盡快安排產後憂鬱專業評估','Significant postpartum mood symptoms — recommend prompt professional postpartum depression assessment')),
+        opt('some','偶爾情緒低落或焦慮','Occasional low mood or anxiety', FLAG('tcm','產後情緒波動，中醫調理可協助身心平衡','Postpartum mood fluctuations — TCM care can help support emotional balance', 'postpartum')),
+        opt('significant','明顯憂鬱、焦慮或情緒失控','Significant depression, anxiety, or emotional dysregulation', FLAG('screen','產後情緒問題明顯，建議盡快安排產後憂鬱專業評估','Significant postpartum mood symptoms — recommend prompt professional postpartum depression assessment', 'postpartum')),
       ]},
     {id:'preg_sweating', type:'single', zh:'自汗或盜汗', en:'Spontaneous sweating or night sweats', group:'產後調理', groupEn:'Postpartum Recovery',
-      showIf:a=>['postpartum_early','postpartum_late','breastfeeding_only'].includes(a.preg_status),
+      showIf:a=>a.basic_status==='postpartum',
       options:[
         opt('none','無','None'),
         opt('mild','輕微','Mild'),
-        opt('significant','明顯，影響睡眠或生活','Significant — affecting sleep or daily life', FLAG('tcm','產後明顯自汗盜汗，中醫月子調理常見重點','Significant postpartum sweating — a key focus in TCM postpartum care')),
+        opt('significant','明顯，影響睡眠或生活','Significant — affecting sleep or daily life', FLAG('tcm','產後明顯自汗盜汗，中醫月子調理常見重點','Significant postpartum sweating — a key focus in TCM postpartum care', 'postpartum')),
       ]},
     {id:'preg_cold', type:'single', zh:'怕冷、手腳冰冷或關節痠痛', en:'Cold sensitivity, cold extremities, or joint aches', group:'產後調理', groupEn:'Postpartum Recovery',
-      showIf:a=>['postpartum_early','postpartum_late','breastfeeding_only'].includes(a.preg_status),
+      showIf:a=>a.basic_status==='postpartum',
       options:[
         opt('none','無','None'),
-        opt('mild','輕微','Mild', FLAG('tcm','產後怕冷或關節不適，中醫月子調理重點','Postpartum cold sensitivity or joint discomfort — a key TCM postpartum focus')),
-        opt('significant','明顯','Significant', FLAG('tcm','產後怕冷或關節不適明顯，中醫月子調理重點','Significant postpartum cold sensitivity or joint discomfort — a key TCM postpartum focus')),
+        opt('mild','輕微','Mild', FLAG('tcm','產後怕冷或關節不適，中醫月子調理重點','Postpartum cold sensitivity or joint discomfort — a key TCM postpartum focus', 'postpartum')),
+        opt('significant','明顯','Significant', FLAG('tcm','產後怕冷或關節不適明顯，中醫月子調理重點','Significant postpartum cold sensitivity or joint discomfort — a key TCM postpartum focus', 'postpartum')),
       ]},
     {id:'preg_hairloss', type:'single', zh:'掉髮狀況', en:'Hair loss', group:'產後調理', groupEn:'Postpartum Recovery',
-      showIf:a=>['postpartum_early','postpartum_late','breastfeeding_only'].includes(a.preg_status),
+      showIf:a=>a.basic_status==='postpartum',
       options:[
         opt('none','無或輕微','None or minimal'),
-        opt('moderate','中等，有些擔心','Moderate, somewhat concerning', FLAG('tcm','產後掉髮，中醫調理常見項目','Postpartum hair loss — a common TCM focus area', null, 'postpartum-hair-loss')),
-        opt('significant','明顯大量掉髮','Significant hair loss', FLAG('tcm','產後明顯掉髮，中醫調理常見項目，可同時留意甲狀腺功能','Significant postpartum hair loss — a common TCM focus; also worth checking thyroid function', null, 'postpartum-hair-loss')),
+        opt('moderate','中等，有些擔心','Moderate, somewhat concerning', FLAG('tcm','產後掉髮，中醫調理常見項目','Postpartum hair loss — a common TCM focus area', 'postpartum', 'postpartum-hair-loss')),
+        opt('significant','明顯大量掉髮','Significant hair loss', FLAG('tcm','產後明顯掉髮，中醫調理常見項目，可同時留意甲狀腺功能','Significant postpartum hair loss — a common TCM focus; also worth checking thyroid function', 'postpartum', 'postpartum-hair-loss')),
       ]},
 
     {id:'preg_breastfeeding', type:'single', zh:'目前是否哺乳', en:'Currently breastfeeding?', group:'哺乳狀況', groupEn:'Breastfeeding',
-      showIf:a=>['postpartum_early','postpartum_late','breastfeeding_only'].includes(a.preg_status),
+      showIf:a=>a.basic_status==='postpartum',
       options:[
         opt('yes','是，純母乳','Yes — exclusive breastfeeding'),
         opt('mixed','混合哺育(母乳+配方奶)','Mixed feeding'),
@@ -1155,15 +1326,15 @@ const SECTIONS = [
       showIf:a=>a.preg_breastfeeding==='yes'||a.preg_breastfeeding==='mixed',
       options:[
         opt('good','充足','Adequate'),
-        opt('low','不足，需要催乳','Insufficient — need to boost supply', FLAG('tcm','乳汁不足，中醫催乳調理常見項目','Insufficient milk supply — a common focus in TCM lactation care', null, 'low-milk-supply')),
+        opt('low','不足，需要催乳','Insufficient — need to boost supply', FLAG('tcm','乳汁不足，中醫催乳調理常見項目','Insufficient milk supply — a common focus in TCM lactation care', 'postpartum', 'low-milk-supply')),
         opt('oversupply','過多，容易脹奶','Oversupply, prone to engorgement'),
       ]},
     {id:'preg_engorgement', type:'single', zh:'乳房脹痛或乳管阻塞', en:'Breast engorgement or blocked ducts', group:'哺乳狀況', groupEn:'Breastfeeding',
       showIf:a=>a.preg_breastfeeding==='yes'||a.preg_breastfeeding==='mixed',
       options:[
         opt('none','無','None'),
-        opt('occasional','偶爾','Occasionally', FLAG('tcm','乳房脹痛或阻塞，中醫調理可協助疏通','Breast engorgement or blocked ducts — TCM care can help relieve this', null, 'blocked-duct-mastitis')),
-        opt('frequent','經常，影響哺乳','Frequently — affecting breastfeeding', FLAG('tcm','乳管阻塞頻繁，中醫調理可協助，嚴重時留意乳腺炎','Frequent blocked ducts — TCM can help; watch for mastitis if severe', null, 'blocked-duct-mastitis')),
+        opt('occasional','偶爾','Occasionally', FLAG('tcm','乳房脹痛或阻塞，中醫調理可協助疏通','Breast engorgement or blocked ducts — TCM care can help relieve this', 'postpartum', 'blocked-duct-mastitis')),
+        opt('frequent','經常，影響哺乳','Frequently — affecting breastfeeding', FLAG('tcm','乳管阻塞頻繁，中醫調理可協助，嚴重時留意乳腺炎','Frequent blocked ducts — TCM can help; watch for mastitis if severe', 'postpartum', 'blocked-duct-mastitis')),
       ]},
   ]
 },
@@ -1173,36 +1344,41 @@ const SECTIONS = [
   intro_en:"Perimenopause often brings cycle changes and a range of physical and emotional symptoms — let's note what you're experiencing.",
   questions:[
     {id:'meno_flush', type:'single', zh:'熱潮紅 / 盜汗頻率', en:'Hot flashes / night sweats frequency',
+      showIf:a=>a.basic_status==='has_period'||a.basic_status==='menopause',
       options:[
         opt('none','無','None'),
         opt('occasional','偶爾(每週數次)','Occasional (a few times a week)', FLAG('tcm','熱潮紅盜汗，中醫常見調理項目','Hot flashes/night sweats are a common TCM focus area')),
         opt('frequent','頻繁(幾乎每天，影響睡眠或社交)','Frequent (almost daily, affecting sleep or social life)', FLAG('tcm','熱潮紅盜汗頻繁，建議與中醫師討論調理','Frequent hot flashes/night sweats — worth discussing management with a TCM practitioner')),
       ]},
     {id:'meno_sleep', type:'single', zh:'是否因熱潮紅、盜汗或其他原因而睡眠中斷', en:'Sleep interrupted by hot flashes, night sweats, or other causes',
+      showIf:a=>a.basic_status==='has_period'||a.basic_status==='menopause',
       options:[
         opt('no','無','None'),
         opt('occasional','偶爾','Occasionally'),
         opt('frequent','經常','Frequently', FLAG('tcm','睡眠中斷頻繁，中醫常見調理項目','Frequent sleep disruption is a common TCM focus area')),
       ]},
     {id:'meno_mood', type:'single', zh:'情緒變化(煩躁、低落、焦慮感增加)', en:'Mood changes (irritability, low mood, increased anxiety)',
+      showIf:a=>a.basic_status==='has_period'||a.basic_status==='menopause',
       options:[
         opt('none','無明顯變化','No noticeable change'),
         opt('some','有些變化','Some change', FLAG('tcm','情緒有所變化，可與中醫師討論調理','Some mood change — worth discussing with a TCM practitioner')),
         opt('marked','明顯影響生活','Markedly affecting daily life', FLAG('screen','情緒變化明顯，建議同時安排專業心理評估','Marked mood change — recommend also arranging a professional mental-health check-in')),
       ]},
     {id:'meno_dryness', type:'single', zh:'陰道乾澀或性交不適', en:'Vaginal dryness or discomfort during intercourse',
+      showIf:a=>a.basic_status==='has_period'||a.basic_status==='menopause',
       options:[
         opt('no','無','None'),
         opt('yes','有','Yes', FLAG('tcm','陰道乾澀不適，可與中醫師或婦科醫師討論調理','Vaginal dryness — worth discussing with a TCM practitioner or gynecologist')),
       ]},
     {id:'meno_joint', type:'single', zh:'關節痠痛或肌肉緊繃', en:'Joint aches or muscle tension',
+      showIf:a=>a.basic_status==='has_period'||a.basic_status==='menopause',
       options:[
         opt('none','無','None'),
         opt('occasional','偶爾','Occasionally'),
         opt('frequent','經常','Frequently', FLAG('tcm','關節肌肉痠痛，中醫常見調理項目','Joint/muscle aches are a common TCM focus area')),
       ]},
     {id:'meno_cycle', type:'single', zh:'目前月經型態變化', en:'Current changes in your menstrual pattern',
-      showIf:a=>a.basic_status!=='pregnant' && a.basic_status!=='breastfeeding',
+      showIf:a=>a.basic_status!=='pregnant' && a.basic_status!=='postpartum',
       options:[
         opt('regular','仍規律','Still regular'),
         opt('irregular','開始變得不規律','Becoming irregular', FLAG('tcm','月經型態改變，中醫常見調理項目','Changing menstrual pattern is a common TCM focus area')),
@@ -1216,6 +1392,20 @@ const SECTIONS = [
   intro_en:'Based on the HK Health Bureau Life Course Preventive Care Plan (Jan 2026), USPSTF, and WHO — reviewing your cervical, breast, and colorectal cancer screening status.',
   questions:[
 
+    /* Moved here from 基本資料: family cancer history doesn't change how any other
+       answer is interpreted — it's a standalone screening input, so it belongs in
+       the screening section rather than the background section. */
+    {id:'basic_famhx', type:'multi', zh:'一等親(父母、兄弟姊妹、子女)是否有以下癌症病史?', en:'Do any first-degree relatives (parent, sibling, child) have a history of:', group:'家族病史', groupEn:'Family History',
+      shortLabel:'家族癌症病史',
+      options:[
+        opt('breast','乳癌','Breast cancer', FLAG('screen','您有家族癌症病史，建議與醫師討論個人化篩檢計畫','Family cancer history — discuss a personalized screening plan with your doctor', 'cancer')),
+        opt('ovarian','卵巢癌','Ovarian cancer', FLAG('screen','您有家族癌症病史，建議與醫師討論個人化篩檢計畫','Family cancer history — discuss a personalized screening plan with your doctor', 'cancer')),
+        opt('colorectal','大腸直腸癌','Colorectal cancer', FLAG('screen','您有家族癌症病史，建議與醫師討論個人化篩檢計畫','Family cancer history — discuss a personalized screening plan with your doctor', 'cancer')),
+        opt('cervical','子宮頸癌','Cervical cancer', FLAG('screen','您有家族癌症病史，建議與醫師討論個人化篩檢計畫','Family cancer history — discuss a personalized screening plan with your doctor', 'cancer')),
+        opt('unknown','不清楚','Not sure'),
+        {...opt('none','無','None'), exclusive:true},
+      ]},
+
     {id:'cancer_sexual_ever', type:'single', zh:'是否曾有過性行為?(子宮頸篩查指引的適用前提)', en:'Have you ever been sexually active? (a prerequisite for cervical screening guidelines)', group:'子宮頸癌', groupEn:'Cervical Cancer',
       options:[
         opt('yes','是','Yes'),
@@ -1224,6 +1414,7 @@ const SECTIONS = [
       ]},
 
     {id:'cancer_pap_last', type:'single', zh:'最近一次子宮頸篩查時間(抹片或 HPV 檢測)', en:'Most recent cervical screening (Pap smear or HPV test)', group:'子宮頸癌', groupEn:'Cervical Cancer',
+      shortLabel:'子宮頸篩查時程',
       showIf:a=>a.cancer_sexual_ever==='yes'||a.cancer_sexual_ever==='prefer_not',
       options:[
         opt('1y','1 年內','Within 1 year'),
@@ -1244,6 +1435,7 @@ const SECTIONS = [
       ]},
 
     {id:'cancer_pap_abn', type:'single', zh:'過去篩查結果是否曾異常?', en:'Has a past cervical screening result ever been abnormal?', group:'子宮頸癌', groupEn:'Cervical Cancer',
+      shortLabel:'過去篩查異常追蹤',
       showIf:a=>a.cancer_sexual_ever==='yes'||a.cancer_sexual_ever==='prefer_not',
       options:[
         opt('no','否，皆正常','No, always normal'),
@@ -1261,6 +1453,7 @@ const SECTIONS = [
       ]},
 
     {id:'cancer_breast_last', type:'single', zh:'最近一次乳房 X 光攝影或超音波檢查', en:'Most recent mammogram or breast ultrasound', group:'乳癌', groupEn:'Breast Cancer',
+      shortLabel:'乳房影像檢查時程',
       options:[
         opt('1y','1 年內','Within 1 year'),
         opt('1to2y','1–2 年內','1–2 years ago'),
@@ -1268,6 +1461,7 @@ const SECTIONS = [
       ]},
 
     {id:'cancer_breast_sym', type:'multi', zh:'目前是否有以下乳房狀況?(可複選)', en:'Any of the following breast symptoms currently? (select all)', group:'乳癌', groupEn:'Breast Cancer',
+      shortLabel:'乳房症狀',
       options:[
         opt('lump','摸到硬塊','A lump you can feel', FLAG('urgent','乳房異常徵象，建議儘速就醫評估','Possible breast abnormality — recommend prompt medical evaluation')),
         opt('axilla','腋下持續腫塊','Persistent lump under the arm', FLAG('urgent','乳房異常徵象，建議儘速就醫評估','Possible breast abnormality — recommend prompt medical evaluation')),
@@ -1279,6 +1473,7 @@ const SECTIONS = [
       ]},
 
     {id:'cancer_colo_last', type:'single', zh:'最近一次大腸癌篩查(糞便潛血/FIT/乙狀結腸鏡/大腸鏡)', en:'Most recent colorectal cancer screening (FOBT/FIT, sigmoidoscopy, or colonoscopy)', group:'大腸直腸癌', groupEn:'Colorectal Cancer',
+      shortLabel:'大腸癌篩查時程',
       options:[
         opt('annual_fit','1 年內 FIT/糞便潛血檢查','Within 1 year — FIT/FOBT (annual)'),
         opt('scope_ok','乙狀結腸鏡 5 年內，或大腸鏡 10 年內','Sigmoidoscopy within 5 yrs, or colonoscopy within 10 yrs'),
@@ -1288,6 +1483,7 @@ const SECTIONS = [
       ]},
 
     {id:'cancer_gi_sym', type:'multi', zh:'是否有以下腸胃警訊?(可複選)', en:'Any of the following GI warning symptoms? (select all)', group:'大腸直腸癌', groupEn:'Colorectal Cancer',
+      shortLabel:'腸胃警訊',
       options:[
         opt('blood','血便或黑便','Blood in stool or black stool', FLAG('urgent','腸胃警訊症狀，建議儘速就醫評估','GI warning symptom — recommend prompt medical evaluation')),
         opt('habit','持續排便習慣改變','Persistent change in bowel habits', FLAG('urgent','腸胃警訊症狀，建議儘速就醫評估','GI warning symptom — recommend prompt medical evaluation')),
@@ -1312,6 +1508,7 @@ const SECTIONS = [
         opt('need_not_using','有需求但目前未避孕','Need contraception but not currently using any', FLAG('screen','建議與醫師討論合適的避孕選項','Recommend discussing suitable contraception options with your doctor')),
       ]},
     {id:'repro_sym', type:'multi', zh:'目前是否有以下症狀?(可複選)', en:'Any of the following symptoms currently? (select all)',
+      shortLabel:'生殖道症狀',
       showIf:a=>a.repro_active==='yes',
       options:[
         opt('discharge','異常分泌物','Abnormal discharge', FLAG('screen','建議安排婦科評估排除感染','Recommend a gynecological check to rule out infection')),
@@ -1336,24 +1533,28 @@ const SECTIONS = [
   intro_en:'Covers blood pressure/glucose, bone density (shown by age), and a brief mood check-in.',
   questions:[
     {id:'wellness_bp', type:'single', zh:'血壓檢查結果(香港指引：至少每 2 年量一次)', en:'Blood pressure check result (HK guideline: at least every 2 years)',
+      shortLabel:'血壓',
       options:[
         opt('normal','曾測量，結果正常','Checked, normal'),
         opt('high','曾測量，結果偏高','Checked, elevated', FLAG('screen','血壓偏高，建議定期追蹤並與醫師討論','Elevated blood pressure — recommend regular monitoring and discussion with your doctor')),
         opt('never','從未測量','Never checked', FLAG('screen','建議安排基本血壓檢查(香港指引：至少每 2 年一次)','Recommend a blood pressure check — HK guideline: at least every 2 years')),
       ]},
     {id:'wellness_glucose', type:'single', zh:'血糖 / 糖化血色素檢查結果(香港指引：至少每 3 年一次，有風險因子者更頻繁)', en:'Blood glucose / HbA1c result (HK guideline: at least every 3 years, more often with risk factors)',
+      shortLabel:'血糖',
       options:[
         opt('normal','曾檢查，結果正常','Checked, normal'),
         opt('abnormal','曾檢查，結果異常或糖尿病前期','Checked, abnormal or prediabetic', FLAG('screen','血糖異常，建議與醫師討論追蹤計畫','Abnormal glucose — recommend discussing a monitoring/management plan with your doctor')),
         opt('never','從未檢查','Never checked', FLAG('screen','建議安排血糖篩查(香港指引：至少每 3 年一次)','Recommend a glucose check — HK guideline: at least every 3 years')),
       ]},
     {id:'wellness_lipid', type:'single', zh:'血脂(膽固醇)檢查結果(香港指引：至少每 3 年一次，有風險因子者更頻繁)', en:'Cholesterol / lipid result (HK guideline: at least every 3 years, more often with risk factors)',
+      shortLabel:'血脂',
       options:[
         opt('normal','曾檢查，結果正常','Checked, normal'),
         opt('abnormal','曾檢查，結果異常', 'Checked, abnormal', FLAG('screen','血脂異常，建議與醫師討論調整計畫','Abnormal lipids — recommend discussing a management plan with your doctor')),
         opt('never','從未檢查','Never checked', FLAG('screen','建議安排血脂篩查(香港指引：至少每 3 年一次)','Recommend a cholesterol check — HK guideline: at least every 3 years')),
       ]},
     {id:'wellness_bone', type:'single', zh:'骨質密度檢測(DXA)結果', en:'Bone density (DXA) result',
+      shortLabel:'骨質密度',
       showIf:a=>a.basic_status==='menopause' || a.basic_age==='55-64' || a.basic_age==='65p',
       options:[
         opt('normal','曾檢查，結果正常','Checked, normal'),
@@ -1392,11 +1593,13 @@ const SECTIONS = [
         opt('rare','很少運動','Rarely exercises', FLAG('tcm','建議搭配規律運動與中醫養生調理','Recommend pairing regular exercise with TCM lifestyle guidance')),
       ]},
     {id:'lifestyle_safety', type:'single', zh:'在親密關係中，是否曾感到害怕、被控制或受到傷害(身體、情緒或性方面)', en:'In close relationships, have you ever felt afraid, controlled, or harmed (physically, emotionally, or sexually)?',
+      shortLabel:'親密關係安全',
       options:[
         opt('no','否','No'),
         opt('yes','是','Yes', FLAG('urgent','您的安全很重要，建議尋求專業協助與相關資源','Your safety matters — recommend seeking professional support and relevant resources')),
       ]},
     {id:'lifestyle_concerns', type:'multi', zh:'其他在意的方面?(可複選，選填)', en:'Anything else you would like to flag? (multi-select, optional)',
+      shortLabel:'其他在意的狀況',
       options:[
         opt('fatigue','容易疲勞','Easily fatigued', FLAG('tcm','疲勞調理為中醫常見項目','Fatigue is a common TCM focus area')),
         opt('digestion','消化道不適(脹氣、便秘、腹瀉等)','Digestive discomfort (bloating, constipation, diarrhea, etc.)', FLAG('tcm','消化道調理為中醫常見項目','Digestive support is a common TCM focus area')),
@@ -1422,19 +1625,45 @@ const CN_NUM_FULL = ['一','二','三','四','五','六','七','八','九'];
    single-track routes skip entirely.
    ------------------------------------------------------------ */
 const TRACK_IDS = ['cycle','precon','pregnant_postpartum','meno'];
+
+/* Which tracks even make sense for this person's reproductive stage. Asking
+   基本資料 *before* the path step is what makes this possible — it stops us
+   offering 月經週期評估 to someone who's pregnant, or 孕期與產後 to someone
+   who's postmenopausal. Anything not listed here is hidden on the path step
+   and filtered out of route_extra. */
+const TRACKS_BY_STATUS = {
+  has_period: ['cycle','precon','meno'],
+  pregnant:   ['pregnant_postpartum'],
+  postpartum: ['pregnant_postpartum','cycle'],
+  menopause:  ['meno','cycle'],
+  never:      ['cycle'],
+};
+function getAllowedTrackIds(){
+  const status = state.answers.basic_status;
+  if(!status || !TRACKS_BY_STATUS[status]) return TRACK_IDS;
+  return TRACKS_BY_STATUS[status];
+}
 function getActiveTrackIds(){
   const route = state.answers.route_primary;
   if(!route || route==='full') return null; // null = everything (full assessment)
-  const extra = (state.answers.route_extra || []).filter(id=>TRACK_IDS.includes(id));
+  const allowed = getAllowedTrackIds();
+  const extra = (state.answers.route_extra || [])
+    .filter(id => TRACK_IDS.includes(id) && allowed.includes(id));
   return new Set([route, ...extra]);
 }
+/* basic is handled as its own step before the path step, so it's excluded here. */
 function getActiveSections(){
   const tracks = getActiveTrackIds();
-  if(tracks===null) return SECTIONS;
-  return SECTIONS.filter(s => s.id==='basic' || tracks.has(s.id));
+  const nonBasic = SECTIONS.filter(s => s.id!=='basic');
+  const chosen = tracks===null ? nonBasic : nonBasic.filter(s => tracks.has(s.id));
+  /* Safety net: never present a step with nothing on it. On the full route a
+     section can end up entirely hidden by its questions' showIf (e.g. 孕期與產後
+     for someone who isn't pregnant or postpartum). */
+  return chosen.filter(s =>
+    s.questions.some(q => !q.showIf || q.showIf(state.answers)));
 }
 function getSteps(){
-  return ['intro', 'path', ...getActiveSections().map(s=>s.id), 'summary'];
+  return ['intro', 'basic', 'path', ...getActiveSections().map(s=>s.id), 'summary'];
 }
 
 /* ============================================================
@@ -1453,24 +1682,32 @@ function findQuestion(qid){
 /* ============================================================
    3. RENDER — MERIDIAN STEPPER
    ============================================================ */
+/* Derives the stepper nodes from getSteps() itself rather than assuming a fixed
+   offset, so it stays correct now that 基本資料 sits before the path step. */
+function getSectionSteps(){
+  const meta = {};
+  SECTIONS.forEach(s=>{ meta[s.id] = s; });
+  return getSteps()
+    .map((id, stepIndex) => ({id, stepIndex}))
+    .filter(x => meta[x.id])
+    .map(x => ({...meta[x.id], stepIndex: x.stepIndex}));
+}
+
 function renderMeridian(){
-  const steps = getSteps();
-  const active = getActiveSections();
-  const curId = steps[state.step];
-  meridianEl.innerHTML = active.map((s,i)=>{
-    const stepIdx = i+1;
+  const nodes = getSectionSteps();
+  const curId = getSteps()[state.step];
+  meridianEl.innerHTML = nodes.map((s,i)=>{
     const isActive = curId===s.id;
-    const isDone = state.step > stepIdx;
+    const isDone = state.step > s.stepIndex;
     return `<div class="meridian-node ${isDone?'is-done':''} ${isActive?'is-active':''}">
       <div class="node-dot">${CN_NUM_FULL[i]}</div>
       <div class="node-label"><span class="zh">${s.zh}</span><span class="en">${s.en}</span></div>
     </div>`;
   }).join('');
 
-  meridianMobileEl.innerHTML = active.map((s,i)=>{
-    const stepIdx = i+1;
+  meridianMobileEl.innerHTML = nodes.map((s,i)=>{
     const isActive = curId===s.id;
-    const isDone = state.step > stepIdx;
+    const isDone = state.step > s.stepIndex;
     return `<div class="mm-dot ${isDone?'is-done':''} ${isActive?'is-active':''}" title="${s.zh} ${s.en}">${CN_NUM_FULL[i]}</div>`;
   }).join('');
 }
@@ -1491,7 +1728,7 @@ function renderIntro(){
     </div>
     <div class="intro-meta">
       <span>⏱ <b>依路徑而定，約 4–20 分鐘</b> <span class="en">4–20 minutes, depending on your path</span></span>
-      <span>📋 <b>下一步先選路徑：完整評估／月經／備孕／孕產後／更年期</b> <span class="en">Next: choose full assessment, cycle, preconception, pregnancy &amp; postpartum, or menopause</span></span>
+      <span>📋 <b>先填幾題基本資料，再選擇想評估的專區</b> <span class="en">A few background questions first, then choose your focus area</span></span>
       <span>🔒 <b>資料僅留在您的裝置</b> <span class="en">Stays on your device</span></span>
     </div>
     <div class="disclaimer">
@@ -1540,39 +1777,65 @@ function renderRouteCard(r, selected){
   </button>`;
 }
 
+const STATUS_LABELS = {
+  has_period:'仍有月經', pregnant:'懷孕中', postpartum:'產後一年內',
+  menopause:'已停經', never:'從未有過月經',
+};
+
 function renderPath(){
+  const allowed = getAllowedTrackIds();
+  /* If they went back and changed 生理狀態, a previously-picked route may no
+     longer apply — drop it rather than carrying a contradictory selection
+     (same pattern renderSection uses for stale hidden answers). */
+  if(state.answers.route_primary && state.answers.route_primary !== 'full'
+     && !allowed.includes(state.answers.route_primary)){
+    delete state.answers.route_primary;
+  }
+  if(Array.isArray(state.answers.route_extra)){
+    state.answers.route_extra = state.answers.route_extra.filter(id=>allowed.includes(id));
+  }
+
   const primary = state.answers.route_primary;
   const extra = state.answers.route_extra || [];
   const fullRoute = ROUTES[0];
-  const tracks = ROUTES.slice(1);
+  /* Only offer tracks that fit the reproductive stage answered on the previous
+     step — no 月經週期評估 for someone who's pregnant, etc. */
+  const tracks = ROUTES.slice(1).filter(r => allowed.includes(r.id));
+  const status = state.answers.basic_status;
+  const hiddenCount = ROUTES.slice(1).length - tracks.length;
+
+  const statusNote = (status && hiddenCount > 0)
+    ? `<p class="q-hint" style="margin-top:-6px;">已依您填寫的「${STATUS_LABELS[status]||''}」狀態，只顯示相關的專區選項。<span class="en" style="display:block;">Showing only the focus areas relevant to the status you selected.</span></p>`
+    : '';
 
   let extraHtml = '';
   if(primary && primary !== 'full'){
     const remaining = tracks.filter(r=>r.id!==primary);
-    extraHtml = `<div class="route-extra-block">
-      <p class="route-extra-label">想順便加開其他專區嗎?(可複選，選填)<span class="en">Bundle in any other focus areas? (optional, multi-select)</span></p>
-      <div class="opt-grid">${remaining.map(r=>{
-        const sel = extra.includes(r.id);
-        return `<button type="button" class="opt ${sel?'is-selected':''}" data-qid="route_extra" data-value="${r.id}" data-qtype="multi">
-          <span class="zh">${r.zh}</span><span class="en">${r.en}</span>
-        </button>`;
-      }).join('')}</div>
-    </div>`;
+    if(remaining.length){
+      extraHtml = `<div class="route-extra-block">
+        <p class="route-extra-label">想順便加開其他專區嗎?(可複選，選填)<span class="en">Bundle in any other focus areas? (optional, multi-select)</span></p>
+        <div class="opt-grid">${remaining.map(r=>{
+          const sel = extra.includes(r.id);
+          return `<button type="button" class="opt ${sel?'is-selected':''}" data-qid="route_extra" data-value="${r.id}" data-qtype="multi">
+            <span class="zh">${r.zh}</span><span class="en">${r.en}</span>
+          </button>`;
+        }).join('')}</div>
+      </div>`;
+    }
   }
 
   return `
     <div class="eyebrow">選擇問卷路徑 · Choose Your Path</div>
     <h2>您想從哪裡開始?</h2>
     <p class="section-en en">What would you like to focus on today?</p>
-    <p class="intro-copy">請選擇最符合您目前需求的一項。選好之後，仍可視需要加開其他專區；日後在題目中按「上一步」也能隨時回來重新選擇。</p>
-    <p class="intro-copy en" style="margin-top:-10px;">Pick whichever best matches what you need right now. You can bundle in more focus areas afterward, and you can always come back here via "Back" from the next screen.</p>
+    <p class="intro-copy">請選擇最符合您目前需求的一項。選好之後，仍可視需要加開其他專區；按「上一步」也能隨時回來重新選擇。</p>
+    <p class="intro-copy en" style="margin-top:-10px;">Pick whichever best matches what you need right now. You can bundle in more focus areas afterward, and you can always come back here via "Back".</p>
+    ${statusNote}
 
     <div class="route-full-wrap">${renderRouteCard(fullRoute, primary==='full')}</div>
-    <p class="route-or">或者，只想聚焦其中一項<span class="en">Or focus on just one area</span></p>
-    <div class="route-grid">${tracks.map(r=>renderRouteCard(r, primary===r.id)).join('')}</div>
+    ${tracks.length ? `<p class="route-or">或者，只想聚焦其中一項<span class="en">Or focus on just one area</span></p>
+    <div class="route-grid">${tracks.map(r=>renderRouteCard(r, primary===r.id)).join('')}</div>` : ''}
     ${extraHtml}
-
-    <p class="q-hint" style="margin-top:18px;">以上時間估計未含開頭共用的「基本資料」題目(約再加 1–2 分鐘)。<span class="en" style="display:block;">Estimates above don't include the shared basic-info questions at the very start (add ~1–2 min).</span></p>
 
     <div class="nav-row">
       <button class="btn btn-ghost" data-nav="prev">← 上一步 Back</button>
@@ -1589,8 +1852,8 @@ function renderPath(){
 function branchNote(section){
   if(section.id!=='cycle') return '';
   const st = state.answers.basic_status;
-  if(st==='pregnant') return `<div class="branch-note">您目前懷孕中，已為您簡化此區題目，僅顯示與婦科診斷史相關的問題。<br><span class="en">Since you're currently pregnant, this section has been simplified to relevant questions only.</span></div>`;
-  if(st==='breastfeeding') return `<div class="branch-note">您目前哺乳中，已為您簡化此區題目。<br><span class="en">Since you're currently breastfeeding, this section has been simplified.</span></div>`;
+  if(st==='pregnant') return `<div class="branch-note">您目前懷孕中，已為您簡化此區題目。<br><span class="en">Since you're currently pregnant, this section has been simplified to relevant questions only.</span></div>`;
+  if(st==='postpartum') return `<div class="branch-note">您目前在產後一年內，此區題目已為您簡化；產後與哺乳的詳細問題會在「孕期與產後」專區中詢問。<br><span class="en">As you're within a year postpartum, this section is simplified — detailed postpartum and breastfeeding questions appear in the Pregnancy &amp; Postpartum track.</span></div>`;
   if(st==='menopause') return `<div class="branch-note">您已停經，此區將聚焦於停經後出血與婦科病史。<br><span class="en">As you are postmenopausal, this section focuses on postmenopausal bleeding and gynecological history.</span></div>`;
   if(st==='never') return `<div class="branch-note">您尚未有過月經，此區多數題目暫不適用，建議於下一步癌症篩查前先諮詢醫師。<br><span class="en">As you have not yet had a period, most items here don't apply — consider consulting a doctor first.</span></div>`;
   return '';
@@ -1646,9 +1909,9 @@ function renderSection(section){
   section.questions.forEach(q=>{ if(q.showIf && !q.showIf(state.answers)) delete state.answers[q.id]; });
 
   const visible = section.questions.filter(q=>!q.showIf || q.showIf(state.answers));
-  const active = getActiveSections();
+  /* Section numbering counts 基本資料 as section 1, then the chosen tracks. */
+  const active = getSectionSteps();
   const idx = active.findIndex(s=>s.id===section.id);
-  const isFirst = idx===0;
   const isLast = idx===active.length-1;
 
   let lastGroup = null, qNum = 0;
@@ -1693,17 +1956,28 @@ const REPORT_DOMAINS = [
   {id:'cycle',     zh:'月經週期評估',  en:'Menstrual Cycle Assessment'},
   {id:'discharge', zh:'白帶健康',      en:'Vaginal Discharge Health'},
   {id:'precon',    zh:'備孕評估',      en:'Preconception Assessment'},
-  {id:'pregnant_postpartum', zh:'孕期與產後', en:'Pregnancy & Postpartum'},
+  {id:'pregnancy',  zh:'孕期照護',     en:'Pregnancy Care'},
+  {id:'postpartum', zh:'產後與哺乳',   en:'Postpartum & Breastfeeding'},
   {id:'meno',      zh:'更年期症狀評估', en:'Menopause Symptom Assessment'},
   {id:'cancer',    zh:'癌症定期篩查',  en:'Cancer Screening'},
   {id:'repro',     zh:'性與生殖健康',  en:'Sexual & Reproductive Health'},
   {id:'wellness',  zh:'代謝、骨骼與身心健康', en:'Metabolic, Bone & Mental Wellness'},
   {id:'lifestyle', zh:'生活習慣',      en:'Lifestyle Habits'},
 ];
+/* 'pregnancy' and 'postpartum' are two views onto the same wizard track
+   (pregnant_postpartum) — only the one matching the person's basic_status
+   is shown, so no one sees an empty postpartum card while pregnant, or a
+   pregnancy card when they're postpartum. */
 function getActiveReportDomains(){
   const tracks = getActiveTrackIds();
-  if(tracks===null) return REPORT_DOMAINS;
-  return REPORT_DOMAINS.filter(d => tracks.has(d.id) || (d.id==='discharge' && tracks.has('cycle')));
+  const inTrack = id => tracks===null || tracks.has(id);
+  const status = (state.answers||{}).basic_status;
+  return REPORT_DOMAINS.filter(d => {
+    if(d.id==='pregnancy')  return inTrack('pregnant_postpartum') && status==='pregnant';
+    if(d.id==='postpartum') return inTrack('pregnant_postpartum') && status==='postpartum';
+    if(d.id==='discharge')  return inTrack('cycle');
+    return inTrack(d.id);
+  });
 }
 
 /* ------------------------------------------------------------
@@ -1715,8 +1989,9 @@ const ARTICLE_LINKS = {
   cycle:     '',   // 月經健康文章網址 Menstrual health article URL
   discharge: '',   // 白帶評估文章網址 Vaginal discharge article URL
   meno:      '',   // 更年期症狀評估文章網址 Menopause assessment article URL
-  precon:              '',   // 備孕評估文章網址 Preconception assessment article URL
-  pregnant_postpartum: 'articles/postpartum-care.html',   // 孕期與產後文章網址 Pregnancy & postpartum article URL
+  precon:     '',   // 備孕評估文章網址 Preconception assessment article URL
+  pregnancy:  '',   // 孕期照護文章網址 Pregnancy care article URL
+  postpartum: 'articles/postpartum-care.html',   // 產後與哺乳文章網址 Postpartum & breastfeeding article URL
   cancer:              '',   // 癌症篩查文章網址(子宮頸/乳房/大腸) Cancer screening article URL
   repro:     '',   // 性與生殖健康文章網址 Sexual health article URL
   wellness:  '',   // 代謝骨骼身心文章網址 Metabolic/bone/mood article URL
@@ -1743,9 +2018,13 @@ const DOMAIN_META = {
     clear_zh:'您目前的備孕準備狀況良好，建議持續規律記錄週期並維持健康生活習慣。',
     clear_en:'Your preconception readiness looks good — keep tracking your cycle and maintaining healthy habits.',
   },
-  pregnant_postpartum:{
-    clear_zh:'您目前填答的孕期或產後症狀整體不明顯，身體狀況良好。如有任何新症狀出現，歡迎隨時與我們聯繫。',
-    clear_en:'The pregnancy or postpartum symptoms you reported are minimal overall — you seem to be doing well. Feel free to reach out if new symptoms arise.',
+  pregnancy:{
+    clear_zh:'您目前填答的孕期症狀整體不明顯，狀況良好。孕期身體變化本來就大，下方的階段筆記可以留意看看。',
+    clear_en:'The pregnancy symptoms you reported are minimal overall — you seem to be doing well. Pregnancy brings a lot of change either way, so the stage notes below are worth a look.',
+  },
+  postpartum:{
+    clear_zh:'您目前填答的產後與哺乳狀況整體良好。恢復是一段過程，下方的產後時間軸可以幫助您了解目前大致走到哪裡。',
+    clear_en:'Your postpartum and breastfeeding answers look good overall. Recovery is a process — the timeline below shows roughly where you are.',
   },
   cancer:{
     clear_zh:'您目前的子宮頸癌、乳癌與大腸癌篩查皆在建議時程內，且未出現相關警訊症狀。(依據香港衛生署《健康人生計劃》2026 年 1 月版：子宮頸 25–64 歲定期篩查、乳癌 44–69 歲使用風險評估工具、大腸癌 50–75 歲)',
@@ -1774,30 +2053,47 @@ const DOMAIN_META = {
    a tag — this is what lets the report show compact chips instead of
    repeating the same sentence once per selection. `article` (optional) is
    an articles/ slug for flags that map to an already-published article. */
+/* Turns a question's full wording into a short noun phrase usable in a summary
+   sentence — "經痛是否影響日常生活或需要請假" -> "經痛影響日常生活". */
+function conciseFinding(qZh){
+  let s = String(qZh||'')
+    .replace(/[（(][^）)]*[）)]/g, '')   // drop parentheticals
+    .replace(/^是否(曾|有)?/, '')
+    .replace(/是否曾?/g, '')
+    .replace(/[?？]/g, '')
+    .trim();
+  if(s.length > 14) s = s.slice(0, 13) + '…';
+  return s;
+}
+
 function computeDomainFlags(){
   const domains = {};
   const entryMap = new Map();
-  function add(defaultDomain, flag, tagZh, tagEn){
+  function add(defaultDomain, flag, tagZh, tagEn, qZh){
     if(!flag) return;
     const dId = flag.domain || defaultDomain;
     if(!domains[dId]) domains[dId] = {urgent:[], screen:[], tcm:[]};
     const key = dId+'|'+flag.level+'|'+flag.zh;
     let entry = entryMap.get(key);
     if(!entry){
-      entry = {level:flag.level, zh:flag.zh, en:flag.en, article:flag.article||null, tags:[]};
+      entry = {level:flag.level, zh:flag.zh, en:flag.en, article:flag.article||null, tags:[], findings:[]};
       entryMap.set(key, entry);
       domains[dId][flag.level].push(entry);
     }
     if(tagZh && !entry.tags.some(t=>t.zh===tagZh)) entry.tags.push({zh:tagZh, en:tagEn||''});
+    /* Which question raised this — lets the overview name concrete findings
+       ("經量、經痛程度") instead of just listing domain names. */
+    const f = conciseFinding(qZh);
+    if(f && !entry.findings.includes(f)) entry.findings.push(f);
   }
   SECTIONS.forEach(sec=>sec.questions.forEach(q=>{
     const val = state.answers[q.id];
     if(val==null) return;
     if(q.type==='single'){
       const o = q.options.find(o=>o.value===val);
-      if(o) add(sec.id, o.flag, o.zh, o.en);
+      if(o) add(sec.id, o.flag, o.zh, o.en, q.shortLabel || q.zh);
     } else if(q.type==='multi'){
-      (val||[]).forEach(v=>{ const o=q.options.find(o=>o.value===v); if(o) add(sec.id, o.flag, o.zh, o.en); });
+      (val||[]).forEach(v=>{ const o=q.options.find(o=>o.value===v); if(o) add(sec.id, o.flag, o.zh, o.en, q.shortLabel || q.zh); });
     }
   }));
   return domains;
@@ -1829,6 +2125,155 @@ const STATUS_LABEL_TEXT = {
   tcm:'· 可調理討論',
   clear:'✓ 大致正常',
 };
+
+/* ============================================================
+   CRISIS RESOURCES BANNER — shown above everything else on the
+   summary page whenever the mood/anxiety answers suggest the person
+   may be in real distress right now. This only covers the mental-
+   health screening items (PHQ-2/GAD-2-style + pregnancy/postpartum/
+   menopause mood questions); the separate personal-safety question
+   (lifestyle_safety) already surfaces as its own 'urgent' flag with
+   its own wording, since it calls for different resources.
+   Hong Kong 24-hour crisis lines (verify these stay current before
+   publishing):
+   ============================================================ */
+const CRISIS_RESOURCES = [
+  {zh:'24小時精神健康支援熱線', en:'24-hour Mental Health Support Hotline', tel:'18111', telDisplay:'18111'},
+  {zh:'撒瑪利亞防止自殺會（多語言，24小時）', en:'Suicide Prevention Services (multilingual, 24h)', tel:'28960000', telDisplay:'2896 0000'},
+  {zh:'openup 24小時情緒支援（電話／短訊／網上）', en:'openup 24-hour emotional support (call, text or online chat)', tel:'18288', telDisplay:'18288'},
+  {zh:'香港生命熱線', en:'The Samaritan Befrienders Hong Kong', tel:'23820000', telDisplay:'2382 0000'},
+];
+
+function needsCrisisBanner(){
+  const a = state.answers || {};
+  if(a.preg_postmood === 'significant') return true;
+  if(a.preg_mood === 'significant') return true;
+  if(a.meno_mood === 'marked') return true;
+  const phq = ['wellness_mood1','wellness_mood2','wellness_anx1','wellness_anx2'];
+  if(phq.some(id => a[id] === 'daily')) return true;
+  const moreCount = phq.filter(id => a[id] === 'more').length;
+  if(moreCount >= 2) return true;
+  return false;
+}
+
+function renderCrisisBanner(){
+  if(!needsCrisisBanner()) return '';
+  const items = CRISIS_RESOURCES.map(r => `
+    <li>
+      <span class="cr-name">${r.zh}<span class="li-en">${r.en}</span></span>
+      <a class="cr-num" href="tel:${r.tel}">${r.telDisplay}</a>
+    </li>`).join('');
+  return `<div class="crisis-band" role="note">
+    <h3><span class="dot" aria-hidden="true"></span>先照顧好自己</h3>
+    <span class="en">Support is available right now</span>
+    <p class="crisis-lead">您在情緒相關的題目中，填答了比較需要留意的狀況。這樣的感受並不少見，也不代表您很脆弱——現在的您，或許需要多一點支持。以下是可以立即聯絡、免費且保密的求助熱線：</p>
+    <ul class="crisis-list">${items}</ul>
+    <p class="crisis-foot">如果您有傷害自己的念頭，或人身安全出現危險，請立即致電 <b>999</b> 或前往就近急症室。中醫調理可以是身心照護的一部分，但無法取代精神科或心理治療的專業評估與治療。</p>
+  </div>`;
+}
+
+/* ============================================================
+   ANSWER MIRROR TABLE — reflects the user's own answers back with a
+   plain-language status mark. Status is derived directly from whether
+   the selected option carries a FLAG (the same flag data driving the
+   rest of the report), not a separately maintained "normal values"
+   list — so it can never drift out of sync with the real scoring
+   logic used elsewhere on this page.
+   ============================================================ */
+/* cycle/pregnancy/postpartum/meno moved to the dedicated stage-card system
+   below (STAGE_CARD_BUILDERS) — this generic table is now only used by
+   'discharge', which keeps the plain domain-card layout. */
+const ANSWER_TABLES = {
+  discharge: {
+    title:'白帶觀察小抄',
+    rows:[
+      {qid:'discharge_amount',  label:'量',         ref:'排卵期前後正常增多'},
+      {qid:'discharge_color',   label:'顏色',       ref:'正常為透明或乳白色'},
+      {qid:'discharge_texture', label:'質地與氣味', ref:'正常為無味或淡腥味'},
+      {qid:'discharge_itch',    label:'搔癢或灼熱感', ref:'正常情況下不應出現'},
+      {qid:'discharge_timing',  label:'與週期的關係', ref:'隨排卵期或經期前後增多屬正常生理性'},
+    ],
+    note:'白帶量、顏色與氣味隨週期有正常變化，若合併搔癢、異味或顏色改變，建議安排婦科檢查。',
+  },
+};
+
+function evalAnswerRow(row, answers){
+  const v = answers[row.qid];
+  if(row.evalFn) return row.evalFn(v);
+  if(v == null || v === '' || (Array.isArray(v) && !v.length)) return 'na';
+  const q = findQuestion(row.qid);
+  if(!q) return 'na';
+  if(q.type === 'multi'){
+    const selected = (v||[]).map(val => q.options.find(o=>o.value===val)).filter(Boolean);
+    if(!selected.length) return 'na';
+    return selected.some(o=>o.flag) ? 'watch' : 'ok';
+  }
+  const o = q.options.find(o=>o.value===v);
+  if(!o) return 'na';
+  return o.flag ? 'watch' : 'ok';
+}
+
+function answerDisplay(row, answers){
+  const v = answers[row.qid];
+  if(v == null || v === '' || (Array.isArray(v) && !v.length)) return '未填答';
+  if(row.fmt) return row.fmt(v);
+  const q = findQuestion(row.qid);
+  if(!q) return escapeHtml(String(v));
+  if(q.type === 'multi'){
+    return (v || []).map(val => {
+      const o = (q.options || []).find(o => o.value === val);
+      return o ? o.zh : val;
+    }).join('、');
+  }
+  const o = (q.options || []).find(o => o.value === v);
+  return o ? o.zh : escapeHtml(String(v));
+}
+
+const AT_MARK = {
+  ok:   {cls:'at-ok',    text:'✓ 在範圍內'},
+  watch:{cls:'at-watch', text:'⚠ 值得留意'},
+  na:   {cls:'at-na',    text:'· 未填答'},
+};
+
+function renderAnswerTable(domainId){
+  const cfg = ANSWER_TABLES[domainId];
+  if(!cfg) return '';
+  const answers = state.answers || {};
+
+  const rows = cfg.rows.filter(r => {
+    const q = findQuestion(r.qid);
+    if(!q) return false;
+    if(typeof q.showIf === 'function' && !q.showIf(answers)) return false;
+    return true;
+  });
+  if(!rows.length) return '';
+
+  let okCount = 0, scored = 0;
+  const html = rows.map(r => {
+    const st = evalAnswerRow(r, answers);
+    if(st !== 'na'){ scored++; if(st === 'ok') okCount++; }
+    const m = AT_MARK[st];
+    return `<li class="at-row">
+      <span class="at-label">${r.label}</span>
+      <span class="at-mark ${m.cls}">${m.text}</span>
+      <span class="at-value">${answerDisplay(r, answers)}</span>
+      <span class="at-ref">${r.ref}</span>
+    </li>`;
+  }).join('');
+
+  const counter = scored
+    ? `<span class="at-count">${okCount} / ${scored} 項在範圍內</span>`
+    : '';
+
+  return `<div class="answer-table">
+    <div class="at-head">
+      <p class="at-title">${cfg.title}</p>
+      ${counter}
+    </div>
+    <ul class="at-rows">${html}</ul>
+    ${cfg.note ? `<p class="at-note">${cfg.note}</p>` : ''}
+  </div>`;
+}
 
 /* Internal-only 0–100 score, used purely to set the meter's fill width —
    never shown as a digit. Worse tiers subtract more; floor keeps the bar
@@ -1881,7 +2326,764 @@ function renderTopUrgentBanner(domainFlags, activeDomains){
   </div>`;
 }
 
+/* SAFETY NET — a question in an always-shown section can raise a flag whose
+   home domain isn't among the rendered cards (e.g. 家族癌症病史 targets the
+   'cancer' domain, which only appears on the full route). Those findings used
+   to be computed and then silently dropped, so a real screening recommendation
+   could disappear. Anything orphaned like that is surfaced here instead. */
+function renderOrphanFlags(domainFlags, activeDomains){
+  const activeIds = new Set(activeDomains.map(d=>d.id));
+  const byDomain = {};
+  REPORT_DOMAINS.forEach(d=>{
+    if(activeIds.has(d.id)) return;
+    const b = domainFlags[d.id];
+    if(!b) return;
+    const entries = [...b.urgent, ...b.screen];
+    if(entries.length) byDomain[d.id] = {d, entries};
+  });
+  const groups = Object.values(byDomain);
+  if(!groups.length) return '';
+  return `<div class="flag-band flag-screen">
+    <h3><span class="dot"></span>另外幾項值得留意</h3>
+    <span class="en">A few other things worth noting</span>
+    <div class="top-urgent-groups">
+      ${groups.map(g=>`<div class="tu-group"><b>${g.d.zh}</b>${renderFlagList(g.entries)}</div>`).join('')}
+    </div>
+    <p class="tier-action" style="margin-top:4px;">這些是根據您填寫的背景資料提出的建議，雖然不屬於您本次選擇的評估專區，但仍建議留意。<span class="en">These come from the background details you provided — outside the focus area you chose, but still worth following up.</span></p>
+  </div>`;
+}
+
+/* ============================================================
+   PREGNANCY / POSTPARTUM STAGE NOTES — general educational content,
+   not personalised medical advice. Keyed off preg_trimester (pregnancy)
+   or preg_postpartum_timing (postpartum). Written to standard,
+   widely-taught obstetric/postpartum patient-education points; always
+   confirm specific test timing and thresholds with the person's own
+   obstetrician/midwife since local protocols vary.
+   ============================================================ */
+const PREGNANCY_STAGES = {
+  t1:{
+    label:'第一孕期 · 1–13 週',
+    common:[
+      '孕吐與噁心在 6–9 週最明顯，多數人 12–16 週後會緩解',
+      '明顯疲累是這個階段常見的主訴，身體正在建立胎盤',
+      '乳房脹痛、頻尿與嗅覺變得敏感都屬常見',
+      '情緒起伏較大，與賀爾蒙變化直接相關',
+    ],
+    diet:[
+      '少量多餐、起床前吃點乾糧，對孕吐可能有幫助',
+      '避免生食、未經巴士德消毒的乳製品、高汞魚類(如大型深海魚)',
+      '每天補充 400–800 微克葉酸，至少持續到滿 12 週',
+    ],
+    track:[
+      '確認第一次產檢與唐氏綜合症篩查的時程',
+      '若孕吐嚴重到無法進食，記錄嘔吐次數與體重變化',
+    ],
+  },
+  t2:{
+    label:'第二孕期 · 14–27 週',
+    common:[
+      '多數人在這個階段體力回升，是孕期中相對舒服的時期',
+      '18–22 週左右開始感覺到胎動',
+      '腰背痠痛、輕微水腫漸漸開始出現',
+      '牙齦容易出血，是正常的孕期變化',
+    ],
+    diet:[
+      '均衡攝取蛋白質與鐵質，維持體力',
+      '避免生食與酒精',
+    ],
+    track:[
+      '預約 20 週左右的高層次超音波',
+      '安排 24–28 週妊娠糖尿病篩查',
+      '開始留意胎動出現的規律時間',
+    ],
+  },
+  t3:{
+    label:'第三孕期 · 28 週以後',
+    common:[
+      '水腫、腰痠、睡不好、頻尿在這個階段幾乎人人都有',
+      '不規律、不痛或輕微的假性宮縮偶爾出現，屬正常',
+      '胃食道逆流、便秘常見，多為子宮壓迫所致',
+      '越接近預產期越感到緊張，不代表哪裡不對',
+    ],
+    diet:[
+      '少量多餐減輕胃食道逆流',
+      '維持足夠水分與纖維，預防便秘',
+    ],
+    track:[
+      '每天固定時段數胎動，建立自己的基準值',
+      '安排 35–37 週 B 型鏈球菌(GBS)篩查',
+      '準備待產包，確認到醫院的路線',
+      '與醫師或助產士討論生產計畫與止痛選項',
+    ],
+  },
+  unsure:{
+    label:'孕期照護重點',
+    common:[
+      '孕期的不適因人而異，也會隨週數而改變',
+      '疲累、噁心、腰痠、睡眠變差都屬常見範圍',
+    ],
+    diet:[
+      '開始補充葉酸，並與醫師確認其他營養需求',
+    ],
+    track:[
+      '確認自己的懷孕週數與預產期，依週數安排產檢項目',
+    ],
+  },
+};
+
+const PREGNANCY_RED_FLAGS = [
+  '陰道出血，或流出清澈液體(可能是破水)',
+  '胎動明顯減少或停止(28 週後尤其重要)',
+  '突然的劇烈頭痛，合併視力模糊、右上腹痛或明顯水腫',
+  '未足月出現規律宮縮或持續腹痛',
+  '發燒超過 38°C',
+  '嚴重嘔吐，超過 24 小時無法進食或喝水',
+];
+
+const POSTPARTUM_STAGES = {
+  '0to4w':{
+    label:'產後 0–4 週 · 坐月子期間',
+    timeline:[
+      {k:'惡露', v:'鮮紅色(約 3–4 天)→ 轉為褐紅色(約 2 週)→ 淡黃或白色，量逐漸減少。'},
+      {k:'子宮', v:'產後宮縮在餵奶或按壓時會有痛感，屬正常。子宮約 6 週後大致回到骨盆腔。'},
+      {k:'體力', v:'這是整段恢復期最耗體力的階段，睡眠碎片化的影響往往大於生產本身。'},
+      {k:'乳汁', v:'產後 2–5 天開始漲奶，是泌乳建立期。頻繁哺乳有助任何餵養方式的建立。'},
+      {k:'情緒', v:'產後 3–5 天是情緒低落(baby blues)的高峰，多數人都經歷過，通常兩週內緩解。'},
+    ],
+    watch:'如果情緒低落持續超過兩週、或已經影響日常生活，這已經不只是 baby blues，值得安排正式評估。',
+  },
+  '1to3m':{
+    label:'產後 1–3 個月',
+    timeline:[
+      {k:'惡露', v:'多數人在 4–6 週結束。若此時仍有出血，建議回診確認。'},
+      {k:'體力', v:'逐步回升，但偶爾仍覺得恢復速度不如預期，屬常見。'},
+      {k:'掉髮', v:'通常還沒開始，掉髮的高峰在後面幾個月。'},
+      {k:'乳汁', v:'供需趨於穩定，但塞奶與乳腺炎的風險在這個階段仍然存在。'},
+      {k:'月經', v:'未哺乳者可能 6–8 週後恢復；純哺乳者可能數月後才恢復，都屬正常。'},
+    ],
+    watch:'產後 6 週的檢查如果還沒做，請儘快安排，確認子宮、傷口與骨盆底的恢復狀況。',
+  },
+  '3to6m':{
+    label:'產後 3–6 個月',
+    timeline:[
+      {k:'掉髮', v:'這是產後掉髮的高峰期，通常產後 2–4 個月開始，4 個月左右最明顯。'},
+      {k:'體力', v:'多數人接近孕前水準；若仍明顯疲累，值得檢查甲狀腺功能與血色素。'},
+      {k:'乳汁', v:'寶寶開始添加副食品後，奶量自然會調整，不代表退奶。'},
+      {k:'情緒', v:'產後情緒問題可以在這個階段才浮現，不只發生在頭幾週。'},
+      {k:'骨盆底', v:'漏尿若成為困擾，不需要當作正常現象忍耐，建議安排骨盆底肌評估。'},
+    ],
+    watch:'產後甲狀腺炎好發於產後 3–6 個月，症狀(疲勞、情緒、心跳、體重變化)容易被當成單純疲累，若持續不改善，值得排一次甲狀腺功能檢查。',
+  },
+  '6to12m':{
+    label:'產後 6–12 個月',
+    timeline:[
+      {k:'掉髮', v:'多數人在寶寶一歲前後回復，髮量回復是漸進式，需要一點耐心。'},
+      {k:'月經', v:'多數人已恢復；仍有幾次週期不規律屬正常。'},
+      {k:'體力', v:'此時若仍感覺明顯疲累，不宜單純歸因於「還在恢復」。'},
+      {k:'骨盆底', v:'性交疼痛、漏尿、下墜感若仍然出現，都是可以治療的，不需要忍耐。'},
+      {k:'情緒', v:'產後一年內出現的情緒問題仍屬產後範圍，求助不嫌晚。'},
+    ],
+    watch:'這個階段「一直好不起來」值得認真看待：貧血、甲狀腺、維生素 D、長期睡眠不足，都是常見卻容易被忽略的原因。',
+  },
+};
+
+const POSTPARTUM_RED_FLAGS = [
+  '大量出血：一小時內浸透一片產褥墊，或排出大於雞蛋的血塊',
+  '發燒超過 38°C，合併惡露或傷口出現明顯異常',
+  '剖腹或會陰傷口出現紅腫、滲液、裂開或劇痛',
+  '突然的劇烈頭痛、視力改變或右上腹劇痛(產後子癲前症在產後數週內仍可能發生)',
+  '單側小腿紅腫脹痛、胸口痛或呼吸困難',
+  '乳房單側紅腫合併發燒(可能是乳腺炎)',
+  '有傷害自己或寶寶的念頭 —— 請立即致電 18111 或前往就近急症室',
+];
+
+/* Suggests up to 4 already-published articles based on which answers
+   were triggered — reuses the site's existing article slugs. */
+const POSTPARTUM_ARTICLE_RULES = [
+  {when:a=>['prolonged','concern'].includes(a.preg_lochia),
+    slug:'postpartum-lochia', title:'惡露流多久才算正常？'},
+  {when:a=>['moderate','significant'].includes(a.preg_hairloss),
+    slug:'postpartum-hair-loss', title:'產後掉髮：為什麼會這樣，怎麼辦？'},
+  {when:a=>['occasional','frequent'].includes(a.preg_engorgement),
+    slug:'blocked-duct-mastitis', title:'塞奶與乳腺炎的照護'},
+  {when:a=>a.preg_milk === 'low',
+    slug:'low-milk-supply', title:'奶量不足怎麼辦'},
+  {when:a=>['yes','mixed'].includes(a.preg_breastfeeding),
+    slug:'breastfeeding-chinese-medicine', title:'哺乳期的中醫照護'},
+  {when:a=>a.preg_postpartum_timing === '0to4w',
+    slug:'confinement-taboos', title:'坐月子禁忌：哪些要注意，哪些沒必要'},
+];
+
+/* ============================================================
+   STAGE CARDS — shared skeleton for the 4 life-stage report cards
+   (cycle / pregnancy / postpartum / meno): one-line verdict → value
+   table (explanation shown under any ⚠ row) → three action columns
+   (self-care / track / seek care) → matching articles → CTA.
+   This replaces the old generic urgent/screen/tcm bullet-list layout
+   for just these 4 domains; other domains (discharge, cancer, repro,
+   wellness, lifestyle, precon) keep the original renderDomainCard path.
+   ============================================================ */
+
+/* Builds one table row from a question's own FLAG() data, so the
+   ok/watch mark and its explanation can never drift from the same
+   flag data driving the rest of the report. Pass `opts.evalFn` /
+   `opts.fmt` / `opts.explainFn` for slider or multi-select questions
+   that don't map to a single flagged option. */
+function rowFor(a, qid, label, ref, opts){
+  opts = opts || {};
+  const question = findQuestion(qid);
+  if(!question) return null;
+  if(typeof question.showIf === 'function' && !question.showIf(a)) return null;
+  const v = a[qid];
+  let status, value, explain, threshold;
+  if(opts.evalFn){
+    status = opts.evalFn(v);
+    value = opts.fmt ? opts.fmt(v) : (v==null ? '未填答' : String(v));
+    explain = (status==='watch' && opts.explainFn) ? opts.explainFn(v) : null;
+  } else if(v==null || v==='' || (Array.isArray(v) && !v.length)){
+    status = 'na'; value = '未填答'; explain = null;
+  } else {
+    const o = question.options.find(o=>o.value===v);
+    status = (o && o.flag) ? 'watch' : (o ? 'ok' : 'na');
+    value = o ? o.zh : String(v);
+    const info = (o && o.flag) ? SYMPTOM_INFO[o.flag.zh] : null;
+    explain = (o && o.flag) ? (info?.insight || o.flag.zh) : null;
+    threshold = info?.watch || null;
+  }
+  return {label, ref, status, value, explain, threshold: threshold||null};
+}
+
+function renderValueTable(title, rows){
+  if(!rows.length) return '';
+  let okCount=0, scored=0;
+  const html = rows.map(r=>{
+    if(r.status!=='na'){ scored++; if(r.status==='ok') okCount++; }
+    const m = AT_MARK[r.status];
+    /* On a flagged row, show what it means (insight) and, separately, the point
+       at which it stops being "worth noting" and becomes "get this checked". */
+    const explain = (r.status==='watch' && r.explain)
+      ? `<p class="at-explain">${r.explain}</p>` : '';
+    const threshold = (r.status==='watch' && r.threshold)
+      ? `<p class="at-threshold"><b>什麼情況該就醫：</b>${r.threshold}</p>` : '';
+    return `<li class="at-row">
+      <span class="at-label">${r.label}</span>
+      <span class="at-mark ${m.cls}">${m.text}</span>
+      <span class="at-value">${r.value}</span>
+      <span class="at-ref">${r.ref}</span>
+      ${explain}
+      ${threshold}
+    </li>`;
+  }).join('');
+  const counter = scored ? `<span class="at-count">${okCount} / ${scored} 項在範圍內</span>` : '';
+  return `<div class="answer-table">
+    <div class="at-head"><p class="at-title">${title}</p>${counter}</div>
+    <ul class="at-rows">${html}</ul>
+  </div>`;
+}
+
+function renderActionCol(zh, en, items){
+  const body = (items && items.length)
+    ? `<ul>${items.map(t=>`<li>${t}</li>`).join('')}</ul>`
+    : `<p class="action-empty">目前沒有相關項目。</p>`;
+  return `<div class="action-col">
+    <p class="action-col-title">${zh}<span class="en">${en}</span></p>
+    ${body}
+  </div>`;
+}
+
+function renderArticleLinks(links, hasFindings){
+  if(!links || !links.length){
+    return hasFindings
+      ? `<p class="stage-articles-pending">針對以上項目的詳細文章正陸續補上。</p>`
+      : '';
+  }
+  return `<div class="stage-articles">
+    <p class="sc-title">為您推薦的文章</p>
+    ${links.map(h=>`<a class="sa-link" href="articles/${h.slug}.html" target="_blank" rel="noopener">${h.title} →</a>`).join('')}
+  </div>`;
+}
+
+/* ============================================================
+   SYMPTOM INFO — keyed by the exact FLAG() sentence used elsewhere in
+   the report, so this stays wired to the same underlying data. Two
+   problems this fixes:
+   1. The table row's explanation used to just be the raw FLAG text,
+      and a lot of that text shares one template ("中醫常見...調理
+      範疇/項目") — read down a list of several rows, it repeats.
+      `insight` replaces it with a plain, analytical "what this is /
+      why it happens" statement instead.
+   2. "自己可以做" used the same raw FLAG text for the same reason.
+      `tip` replaces it with a specific self-care action, without a
+      "discuss with a TCM practitioner" tail on every single line —
+      that invitation belongs once, in the card's closing CTA, not
+      repeated per symptom.
+   `article` links to an already-published article where one exists;
+   otherwise a "coming soon" placeholder shows instead of nothing, so
+   it's visible which symptoms still need an article written.
+   Falls back to the raw flag text for anything not covered here. */
+const SYMPTOM_INFO = {
+  // cycle
+  '週期偏短頻繁，常屬中醫氣血/腎氣相關調理範疇':
+    { insight:'週期短於 24 天，代表濾泡期或黃體期可能較短，中醫觀點常見於氣血偏虛或腎氣不足的體質。',
+      tip:'留意經期前後是否伴隨疲勞、腰痠等症狀，規律作息、避免過度勞累與熬夜，有助週期穩定。',
+      watch:'若同時經量偏多或經期延長，建議安排婦科評估。', },
+  '週期偏長稀發，建議與中醫師討論調理，並留意是否合併其他內分泌症狀':
+    { insight:'週期長於 38 天，可能代表排卵較不規律，中醫觀點常見於氣血循環較緩或痰濕體質。',
+      tip:'持續紀錄週期天數；均衡飲食與規律運動有助內分泌穩定，若合併多毛、體重明顯變化，建議一併告知醫師。',
+      watch:'若超過 3 個月完全沒有月經，或合併多毛、體重明顯上升、皮膚變化，建議做內分泌檢查。', },
+  '週期不規律，為中醫常見調理項目':
+    { insight:'最短與最長週期相差超過 9 天，代表排卵時間較不穩定。',
+      tip:'持續紀錄週期天數，規律作息與適度運動有助週期穩定。',
+      watch:'若一年來的次數少於 4 次，或突然從規律變成不規律，建議安排評估。', },
+  '經期延長，建議與中醫師討論調理方向':
+    { insight:'經期超過 8 天，可能與子宮內膜脫落較慢或氣血運行有關。',
+      tip:'經期較長的這幾天可以多休息、避免劇烈運動與提重物；建議持續記錄，觀察是否每次都偏長。',
+      watch:'若每次都超過 8 天、或同時經量很多需頻繁更換，建議檢查是否有肌瘤或息肉。', },
+  '經血色暗或夾血塊，中醫常見血瘀調理範疇':
+    { insight:'經血偏暗或帶血塊，中醫觀點多與氣血循環較慢（血瘀）有關，臨床上相當常見。',
+      tip:'經期可熱敷腹部、避免生冷飲食，適度活動有助氣血循環。',
+      watch:'若血塊大於約 2.5 公分（十元硬幣大小）或同時經量很多，建議婦科評估。', },
+  '經常有大血塊，中醫常見血瘀調理範疇':
+    { insight:'經常出現大血塊，同樣多與氣血循環較慢有關。',
+      tip:'經期可熱敷腹部、避免生冷飲食；血塊較多時避免劇烈運動與提重物。',
+      watch:'若血塊大於約 2.5 公分（十元硬幣大小）或同時經量很多，建議婦科評估。', },
+  '經血色淡，中醫常見氣血不足調理範疇':
+    { insight:'經血偏淡，中醫觀點多與氣血不足有關，也可能與經量本身較少有關。',
+      tip:'留意日常鐵質與蛋白質攝取，避免過度節食；規律作息有助氣血恢復。',
+      watch:'若同時有頭暈、心悸、容易累或臉色蒼白，建議驗血色素確認是否貧血。', },
+  '經血質地偏稀，中醫常見調理項目':
+    { insight:'經血質地偏稀薄，同樣多與氣血狀態有關。',
+      tip:'留意日常飲食均衡與規律作息，避免過度勞累。' },
+  '經期畏寒喜溫，中醫常見寒證調理範疇':
+    { insight:'經期特別怕冷、喜歡熱敷，中醫觀點多屬於偏寒體質的表現。',
+      tip:'經期注意腹部與足部保暖，避免生冷飲食，熱敷或泡腳都有幫助。' },
+  '經期頭痛，中醫常見調理項目':
+    { insight:'經期頭痛與賀爾蒙波動及氣血運行變化有關，是常見的經期伴隨症狀。',
+      tip:'經期留意休息與水分補充，避免熬夜與過度用眼。',
+      watch:'若頭痛突然變得異常劇烈，或伴隨視力模糊、單側無力、講話困難，請立即就醫。', },
+  '經期腸胃變化，中醫常見調理項目':
+    { insight:'經期腸胃不適與賀爾蒙變化影響腸道蠕動有關。',
+      tip:'經期飲食清淡、少量多餐，避免生冷與辛辣刺激。',
+      watch:'若伴隨排便時疼痛或血便，建議婦科與腸胃科一併評估。', },
+  '經痛影響生活，為中醫常見且擅長調理的項目':
+    { insight:'經痛程度較高且影響日常生活，多與子宮收縮強度及局部血液循環有關。',
+      tip:'經期可熱敷腹部、適度熱飲，避免生冷食物；規律運動有助整體經痛改善，經期間則以緩和活動為主。',
+      watch:'若止痛藥效果越來越差、疼痛一年比一年嚴重，或非經期也痛，建議安排婦科影像檢查。', },
+  '經前情緒症狀，中醫常見調理範疇':
+    { insight:'經前情緒起伏（經前症候群）與賀爾蒙波動影響神經傳導物質有關，相當常見。',
+      tip:'經前留意情緒起伏，保持規律運動與充足睡眠，必要時可透過紀錄了解自己的週期性規律。',
+      watch:'若情緒嚴重到影響工作或人際關係、每次經前都如此，可能是經前情緒障礙（PMDD），值得專業評估。', },
+  '經前身體不適，可諮詢中醫調理':
+    { insight:'經前腹脹、乳房脹痛等與體內水分及賀爾蒙變化有關。',
+      tip:'經前可留意咖啡因與鹽分攝取，適度伸展或熱敷有助緩解脹痛不適。' },
+  // screen/urgent-level findings shown in the stage-card tables. These have no
+  // `tip` (the action lives in the 建議就醫 column) — only an insight, so the row
+  // explains the finding instead of repeating the instruction.
+  '經量過多，建議先評估是否有結構性病因(如肌瘤、息肉)，再搭配中醫調理':
+    { insight:'經量過多在醫學上定義為影響生活品質的出血量，常見原因包含子宮肌瘤、內膜息肉、腺肌症或凝血功能問題，也可能造成缺鐵性貧血。' },
+  '慢性骨盆痛，建議婦科評估排除子宮內膜異位症等':
+    { insight:'非經期也持續的骨盆腔疼痛，是子宮內膜異位症的典型表現之一，平均確診時間長達數年，及早檢查有助縮短這段時間。' },
+  '性交疼痛，建議婦科評估':
+    { insight:'深部性交疼痛可能與子宮內膜異位症、骨盆腔發炎或子宮位置有關，屬於需要進一步釐清的症狀，不是「忍一忍就好」。' },
+  '排便/排尿疼痛，建議婦科評估排除子宮內膜異位症等':
+    { insight:'經期時排便或排尿疼痛，可能代表內膜異位病灶影響到腸道或膀胱周圍，是需要影像檢查釐清的徵象。' },
+  '情緒變化明顯，建議同時安排專業心理評估':
+    { insight:'更年期的情緒變化與雌激素影響神經傳導物質有關，但當它明顯影響生活時，已超出單純賀爾蒙波動可以解釋的範圍，值得獨立評估。' },
+  '建議與醫師討論停經後的骨密度與心血管相關篩檢':
+    { insight:'停經後雌激素長期偏低會加速骨質流失、並改變血脂與心血管風險，這兩項是停經後最需要主動追蹤的健康面向。' },
+  '孕期情緒問題明顯，建議同時安排專業心理評估':
+    { insight:'孕期焦慮與憂鬱的發生率不低於產後，且會影響睡眠、營養與產後恢復，是可以在孕期就開始處理的。' },
+  '惡露顏色或氣味異常，建議婦科評估排除感染':
+    { insight:'惡露出現異味或顏色轉變，通常提示子宮腔或產道感染，越早處理越單純。' },
+  '產後情緒問題明顯，建議盡快安排產後憂鬱專業評估':
+    { insight:'產後憂鬱與短暫的情緒低落（baby blues）不同：前者持續超過兩週、程度較重，且需要治療才會改善，並非意志力問題。' },
+  // pregnancy
+  '孕吐影響飲食，中醫安胎調理常見重點':
+    { insight:'孕吐好發於第一孕期，與 hCG 及賀爾蒙濃度上升有關，多數在 12–16 週後緩解。',
+      tip:'少量多餐、起床前先吃點乾糧或蘇打餅乾，避免空腹與油膩氣味；薑茶或薑片對部分人有幫助。',
+      watch:'若超過 24 小時無法進食喝水、體重下降超過孕前 5%，或尿量明顯減少，請就醫。', },
+  '嚴重孕吐，中醫安胎調理可協助，嚴重時仍建議配合婦科評估':
+    { insight:'嚴重孕吐（妊娠劇吐）可能影響水分與電解質平衡，需要較積極的醫療處理。',
+      tip:'少量多餐、避免空腹與油膩氣味，薑茶或薑片可能有幫助；嚴重時建議同時配合婦科評估，必要時考慮住院支持治療。',
+      watch:'若超過 24 小時無法進食喝水、體重下降超過孕前 5%，或尿量明顯減少，請就醫。', },
+  '孕期輕度水腫，中醫調理常見範疇':
+    { insight:'孕期水腫與血漿容積增加、靜脈回流受阻有關，屬常見生理變化。',
+      tip:'多留意雙腳抬高休息、避免久站久坐，並減少高鹽食物；穿著寬鬆襪子也有幫助。',
+      watch:'若突然加重、或只有單側小腿腫脹疼痛，請盡快就醫。', },
+  '孕期水腫明顯，中醫可協助，同時建議留意血壓':
+    { insight:'水腫明顯，尤其合併頭痛或血壓上升時，需要留意子癲前症的可能性。',
+      tip:'多留意雙腳抬高休息、減少高鹽食物，並同時留意血壓變化；建議產檢時主動告知醫師。',
+      watch:'若合併頭痛、視力改變、右上腹痛或血壓上升，請立即就醫（子癲前症徵象）。', },
+  '孕期腰背不適，中醫安胎調理常見項目':
+    { insight:'孕期腰背不適與重心前移、韌帶受賀爾蒙影響變鬆有關。',
+      tip:'側睡並在膝蓋間夾枕頭、避免久站，可嘗試溫和的孕婦伸展或瑜伽。',
+      watch:'若伴隨陰道出血、規律宮縮或發燒，請立即就醫。', },
+  '孕期腰背痛明顯，中醫可協助緩解':
+    { insight:'孕期腰背不適與重心前移、韌帶受賀爾蒙影響變鬆有關。',
+      tip:'側睡並在膝蓋間夾枕頭、避免久站久坐，溫和伸展或熱敷有助緩解。',
+      watch:'若伴隨陰道出血、規律宮縮或發燒，請立即就醫。', },
+  '孕期睡眠欠佳，中醫安胎調理常見項目':
+    { insight:'孕期睡眠品質下降常與頻尿、身體不適及賀爾蒙變化有關。',
+      tip:'睡前避免使用螢幕與咖啡因，側睡並用枕頭支撐腹部與背部會較舒適。' },
+  '孕期情緒波動，中醫安胎調理可協助身心平衡':
+    { insight:'孕期情緒起伏與賀爾蒙變化及生活型態轉變都有關聯，相當常見。',
+      tip:'情緒起伏時，找信任的人聊聊、保持適度活動與規律作息都有幫助。',
+      watch:'若低落或焦慮持續超過兩週、已影響日常，或有傷害自己的念頭，請盡快尋求專業協助。', },
+  '孕期明顯疲勞，中醫安胎調理常見項目':
+    { insight:'第一、三孕期的疲勞感與代謝負荷增加及睡眠品質下降有關。',
+      tip:'順應身體訊號多休息，不需勉強維持孕前的活動量；分段小睡有助恢復精力。',
+      watch:'若合併心悸、呼吸急促或臉色蒼白，建議驗血色素確認是否貧血。', },
+  '孕期消化不適，中醫調理常見範疇':
+    { insight:'孕期便秘脹氣主要與黃體素使腸道蠕動變慢，以及子宮壓迫腸道有關。',
+      tip:'少量多餐、避免產氣食物（如豆類、碳酸飲料），飯後散步有助消化。',
+      watch:'若嚴重便秘超過一週、或出現血便與劇烈腹痛，請就醫。', },
+  // postpartum
+  '產後體力不足，中醫月子調理重點':
+    { insight:'產後體力恢復速度因人而異，與睡眠碎片化、失血量及個人體質都有關。',
+      tip:'利用寶寶睡覺時同步休息，不需要求自己立刻恢復孕前體力；適度營養補充比硬撐更重要。',
+      watch:'若產後 6 個月仍明顯疲累，建議檢查甲狀腺功能與血色素，不宜只當作「還在恢復」。', },
+  '產後情緒波動，中醫調理可協助身心平衡':
+    { insight:'產後情緒起伏與賀爾蒙劇烈變化、睡眠不足及角色轉換壓力有關。',
+      tip:'找家人朋友分擔照顧、保持規律睡眠與適度戶外活動，都有助情緒穩定。',
+      watch:'若低落持續超過兩週、無法照顧自己或寶寶，或有傷害自己或寶寶的念頭，請立即求助。', },
+  '產後明顯自汗盜汗，中醫月子調理常見重點':
+    { insight:'產後排汗增加是身體排出孕期多餘水分的正常機制，通常數週內會緩解。',
+      tip:'選擇透氣衣物與寢具，適度補充水分即可。',
+      watch:'若合併發燒或惡露異常，請就醫排除感染。', },
+  '產後怕冷或關節不適，中醫月子調理重點':
+    { insight:'產後怕冷、關節痠痛與氣血尚未恢復、賀爾蒙變化影響關節穩定度有關。',
+      tip:'注意保暖，尤其是腰腹與足部；溫和熱敷與適度活動有助促進循環。',
+      watch:'若單一關節出現紅、腫、熱、痛，或伴隨發燒，請就醫。', },
+  '產後怕冷或關節不適明顯，中醫月子調理重點':
+    { insight:'產後怕冷、關節痠痛與氣血尚未恢復、賀爾蒙變化影響關節穩定度有關。',
+      tip:'注意保暖，尤其是腰腹與足部；溫和熱敷與適度活動有助促進循環。',
+      watch:'若單一關節出現紅、腫、熱、痛，或伴隨發燒，請就醫。', },
+  '產後掉髮，中醫調理常見項目':
+    { insight:'產後掉髮與雌激素驟降，讓原本延長的生長期毛囊同步進入休止期有關，屬正常生理現象。',
+      tip:'溫和洗護、避免過度拉扯或高溫造型，補充均衡營養有助頭髮回復。',
+      watch:'若產後一年後仍持續大量掉髮，或出現局部禿斑，建議就醫評估。', article:{slug:'postpartum-hair-loss', title:'產後掉髮：為什麼會這樣，怎麼辦？'} },
+  '產後明顯掉髮，中醫調理常見項目，可同時留意甲狀腺功能':
+    { insight:'產後掉髮與雌激素驟降有關，屬正常生理現象；但持續大量掉髮也可能與甲狀腺功能變化有關。',
+      tip:'溫和洗護、避免過度拉扯或高溫造型，補充均衡營養有助頭髮回復；持續明顯掉髮建議檢查甲狀腺功能。',
+      watch:'若產後一年後仍持續大量掉髮、或合併疲倦與體重變化，建議檢查甲狀腺功能。', article:{slug:'postpartum-hair-loss', title:'產後掉髮：為什麼會這樣，怎麼辦？'} },
+  '惡露持續或量多，中醫產後調理常見重點':
+    { insight:'惡露是子宮內膜修復過程中的正常分泌物，持續時間因人而異。',
+      tip:'多休息、避免提重物與劇烈運動；若持續超過 6 週建議回診確認。',
+      watch:'若超過 6 週仍未結束、突然變多、有異味或合併發燒，請就醫。', article:{slug:'postpartum-lochia', title:'惡露流多久才算正常？'} },
+  '乳汁不足，中醫催乳調理常見項目':
+    { insight:'泌乳量受哺乳頻率、含乳姿勢及母體水分營養狀況影響，多數可透過調整改善。',
+      tip:'增加親餵或擠奶頻率、確保含乳姿勢正確，充足水分與休息也有幫助。',
+      watch:'若寶寶體重增長不足、尿布濕的次數明顯減少，請盡快諮詢醫師或哺乳顧問。', article:{slug:'low-milk-supply', title:'奶量不足怎麼辦'} },
+  '乳房脹痛或阻塞，中醫調理可協助疏通':
+    { insight:'乳腺阻塞多與排空不完全、哺乳姿勢或哺乳間隔過長有關。',
+      tip:'哺乳前熱敷、哺乳後冷敷，並確保排空乳房；按摩時避免過度用力。',
+      watch:'若出現單側紅腫熱痛合併發燒，可能是乳腺炎，請盡快就醫。', article:{slug:'blocked-duct-mastitis', title:'塞奶與乳腺炎的照護'} },
+  '乳管阻塞頻繁，中醫調理可協助，嚴重時留意乳腺炎':
+    { insight:'乳腺阻塞多與排空不完全、哺乳姿勢或哺乳間隔過長有關；頻繁發生時感染風險較高。',
+      tip:'哺乳前熱敷、哺乳後冷敷，並確保排空乳房；如合併發燒或紅腫請儘速就醫，以排除乳腺炎。',
+      watch:'若出現單側紅腫熱痛合併發燒，可能是乳腺炎，請盡快就醫。', article:{slug:'blocked-duct-mastitis', title:'塞奶與乳腺炎的照護'} },
+  // meno
+  '熱潮紅盜汗，中醫常見調理項目':
+    { insight:'熱潮紅與雌激素波動影響體溫調節中樞有關，是更年期最常見的血管舒縮症狀。',
+      tip:'穿著易調節的分層衣物、避免辛辣與含咖啡因飲品，規律作息有助減少發作頻率。',
+      watch:'若嚴重影響睡眠與日常生活，值得與醫師討論包含賀爾蒙治療在內的選項。', },
+  '熱潮紅盜汗頻繁，建議與中醫師討論調理':
+    { insight:'熱潮紅與雌激素波動影響體溫調節中樞有關，是更年期最常見的血管舒縮症狀。',
+      tip:'穿著易調節的分層衣物、避免辛辣與含咖啡因飲品，規律作息與適度運動有助減少發作頻率。',
+      watch:'若嚴重影響睡眠與日常生活，值得與醫師討論包含賀爾蒙治療在內的選項。', },
+  '睡眠中斷頻繁，中醫常見調理項目':
+    { insight:'更年期睡眠中斷常與熱潮紅、盜汗及情緒變化交互影響有關。',
+      tip:'睡前避免螢幕與咖啡因，保持臥室涼爽通風；規律運動有助整體睡眠品質。',
+      watch:'若長期失眠已影響白天精神與工作表現，建議尋求睡眠或身心科評估。', },
+  '情緒有所變化，可與中醫師討論調理':
+    { insight:'更年期情緒波動與雌激素影響神經傳導物質濃度有關。',
+      tip:'保持適度運動與社交連結，情緒起伏較明顯時不妨透過紀錄了解觸發情境。',
+      watch:'若低落或焦慮持續超過兩週並影響生活，建議安排專業評估。', },
+  '陰道乾澀不適，可與中醫師或婦科醫師討論調理':
+    { insight:'雌激素下降會使陰道黏膜變薄、分泌減少，是常見的泌尿生殖道變化。',
+      tip:'可使用陰道保濕劑，避免刺激性清潔用品；性行為前增加潤滑會較舒適。',
+      watch:'若伴隨出血、明顯疼痛或反覆感染，請安排婦科檢查。', },
+  '關節肌肉痠痛，中醫常見調理項目':
+    { insight:'雌激素具有保護關節與結締組織的作用，濃度下降後較容易出現痠痛緊繃。',
+      tip:'規律的低衝擊運動（如游泳、瑜伽）與足夠鈣質、維生素 D 攝取，有助關節與骨骼健康。',
+      watch:'若單一關節紅腫熱痛、或晨間僵硬超過一小時，建議風濕免疫科評估。', },
+  '月經型態改變，中醫常見調理項目':
+    { insight:'月經週期開始改變，是進入更年期轉換期的常見徵象。',
+      tip:'持續紀錄月經型態的變化，有助掌握自己更年期進展的節奏。',
+      watch:'若出血量突然變多、週期短於 21 天，或已停經後又出現任何出血，請儘速婦科檢查。', },
+};
+
+/* Returns the tip text only. Article links are NOT inlined per tip — they're
+   collected and rendered once per card (see collectArticles/renderArticleLinks),
+   because a per-tip link plus a "coming soon" placeholder on every line was
+   visually noisy (one cycle card showed the placeholder four times). */
+function tipLine(cfg){
+  if(!cfg) return null;
+  return cfg.tip;
+}
+
+/* Dedupes by slug, preserving first-seen order. */
+function collectArticles(...lists){
+  const seen = new Set();
+  const out = [];
+  lists.flat().filter(Boolean).forEach(a=>{
+    if(!a.slug || seen.has(a.slug)) return;
+    seen.add(a.slug);
+    out.push(a);
+  });
+  return out;
+}
+
+/* Self-care text should read as specific advice, not the raw FLAG
+   sentence (several of which share the same "中醫常見調理" template
+   when read back-to-back). Falls back to the raw sentence for any
+   flag not yet covered in SYMPTOM_INFO above. Pass a `collected` array to
+   gather each tip's matching article, so the card can render them once in a
+   single block instead of inlining a link on every line. */
+function selfCareFromBuckets(buckets, collected){
+  return buckets.tcm.map(e => {
+    const cfg = SYMPTOM_INFO[e.zh];
+    if(cfg && cfg.article && Array.isArray(collected)) collected.push(cfg.article);
+    return tipLine(cfg) || e.zh;
+  });
+}
+
+function buildCycleStageCard(buckets){
+  const a = state.answers || {};
+  const status = domainStatus(buckets);
+
+  const rows = [
+    rowFor(a, 'cycle_freq', '週期天數', '正常範圍 24–38 天'),
+    rowFor(a, 'cycle_len',  '經期長度', '正常範圍 8 天以內'),
+    rowFor(a, 'cycle_flow', '經量', '正常：衛生用品約可維持 3–4 小時；量多：需 1–2 小時更換一次或有大血塊'),
+    rowFor(a, 'cycle_pain', '經痛程度', '0–10 分，一般 6 分以下、且不影響生活較不需擔心', {
+      evalFn: v => (v==null || v==='') ? 'na' : ((Number(v)>=7 || a.cycle_painimpact==='yes') ? 'watch' : 'ok'),
+      fmt: v => v==null ? '未填答' : `${v} / 10 分${a.cycle_painimpact==='yes' ? '，且已影響日常生活' : ''}`,
+      explainFn: () => '經痛程度較高、或已經影響日常生活時，較可能與子宮內膜異位症、子宮肌腺症等結構性原因有關，建議與醫師討論評估。',
+    }),
+    rowFor(a, 'cycle_pms', '經前症狀數', '3 項以下較常見；若合併骨盆腔疼痛、性交疼痛等特定症狀需留意', {
+      evalFn: v => {
+        if(v==null || !v.length) return 'na';
+        const q = findQuestion('cycle_pms');
+        const selected = v.map(val=>q.options.find(o=>o.value===val)).filter(Boolean);
+        if(selected.some(o=>o.flag)) return 'watch';
+        return v.filter(val=>val!=='none').length >= 3 ? 'watch' : 'ok';
+      },
+      fmt: v => { const n=(v||[]).filter(x=>x!=='none').length; return n===0 ? '無明顯經前症狀' : `${n} 項`; },
+      explainFn: v => {
+        const q = findQuestion('cycle_pms');
+        const flagged = (v||[]).map(val=>q.options.find(o=>o.value===val)).filter(o=>o && o.flag);
+        return flagged.length
+          ? flagged.map(o=>SYMPTOM_INFO[o.flag.zh]?.insight || o.flag.zh).join(' ')
+          : '經前症狀較多，多與賀爾蒙週期性波動有關。';
+      },
+    }),
+  ].filter(Boolean);
+
+  const watchLabels = rows.filter(r=>r.status==='watch').map(r=>r.label);
+  const verdict = watchLabels.length
+    ? `這次的經期在「${watchLabels.join('、')}」上超出一般範圍，值得留意，下面有詳細說明。`
+    : '這次的月經數值大致都落在正常範圍內。';
+
+  const cardArticles = [];
+  const selfCare = selfCareFromBuckets(buckets, cardArticles);
+  // cycle_pain is a slider question, so it never flows through computeDomainFlags —
+  // add its own comfort-measure tip directly when the row itself reads as "watch".
+  const painRow = rows.find(r=>r.label==='經痛程度');
+  if(painRow && painRow.status==='watch'){
+    const painTip = tipLine(SYMPTOM_INFO['經痛影響生活，為中醫常見且擅長調理的項目']);
+    // cycle_painimpact='yes' carries the same flag, so it may already be listed
+    if(painTip && !selfCare.includes(painTip)) selfCare.push(painTip);
+  }
+  if(!selfCare.length) selfCare.push('規律作息、避免生冷飲食，經期期間注意腹部保暖，是日常最基本的調理方式。');
+
+  const track = [
+    '這次月經開始與結束的日期',
+    '每天更換衛生用品的次數（估計經量）',
+    '經痛程度（0–10 分）與是否需要止痛藥或請假',
+    '經前是否有情緒、脹痛或其他不適',
+    '經血顏色與是否有血塊',
+  ];
+
+  const seekCare = [...buckets.urgent, ...buckets.screen].map(e=>e.zh);
+
+  const cta = (status==='urgent' || status==='screen')
+    ? '建議儘速安排婦科檢查；中醫調理可以同步進行，但無法取代西醫檢查與診斷。'
+    : '想更了解自己的體質、讓經期更穩定？歡迎預約諮詢。';
+
+  return {
+    status, verdict,
+    table: renderValueTable('你的月經對照卡', rows),
+    selfCare, track, seekCare,
+    articles: renderArticleLinks(collectArticles(cardArticles), watchLabels.length > 0),
+    cta,
+  };
+}
+
+function buildPregnancyStageCard(buckets){
+  const a = state.answers || {};
+  const status = domainStatus(buckets);
+  const stage = PREGNANCY_STAGES[a.preg_trimester] || PREGNANCY_STAGES.unsure;
+
+  const rows = [
+    rowFor(a, 'preg_nausea',    '孕吐程度',       '嚴重到無法進食或喝水建議就醫'),
+    rowFor(a, 'preg_edema',     '水腫',           '突然加重或合併頭痛、視力改變請立即就醫'),
+    rowFor(a, 'preg_back',      '腰背／骨盆不適', '孕期常見，影響行動可與中醫師討論'),
+    rowFor(a, 'preg_sleep',     '睡眠品質',       '孕期睡眠中斷常見'),
+    rowFor(a, 'preg_fatigue',   '疲勞程度',       '第一、三孕期較明顯'),
+    rowFor(a, 'preg_digestion', '便秘／脹氣',     '子宮壓迫所致，屬常見'),
+    rowFor(a, 'preg_mood',      '情緒狀態',       '明顯影響生活建議同時安排專業評估'),
+  ].filter(Boolean);
+
+  const verdict = `您目前是${stage.label}。以下是這個階段常見的狀況與需要留意的界線。`;
+  const cardArticles = [];
+
+  const selfCare = [
+    ...stage.common.map(t=>`這個階段常見，不用擔心：${t}`),
+    ...stage.diet.map(t=>`飲食：${t}`),
+    ...selfCareFromBuckets(buckets, cardArticles),
+  ];
+  const seekCare = [...PREGNANCY_RED_FLAGS];
+  [...buckets.urgent, ...buckets.screen].forEach(e=>{ if(!seekCare.includes(e.zh)) seekCare.push(e.zh); });
+
+  return {
+    status, verdict,
+    table: renderValueTable('孕期狀況小抄', rows),
+    selfCare, track: stage.track, seekCare,
+    articles: renderArticleLinks(collectArticles(cardArticles), rows.some(r=>r.status==='watch')),
+    cta: '想讓醫師更了解您孕期的狀況？歡迎預約產前中醫諮詢。',
+  };
+}
+
+function buildPostpartumStageCard(buckets){
+  const a = state.answers || {};
+  const status = domainStatus(buckets);
+  const stage = POSTPARTUM_STAGES[a.preg_postpartum_timing];
+
+  const rows = [
+    rowFor(a, 'preg_lochia',      '惡露',           '多數在 4–6 週結束，顏色或氣味改變請檢查'),
+    rowFor(a, 'preg_hairloss',    '掉髮',           '產後 2–4 個月開始屬常見，4 個月左右最明顯'),
+    rowFor(a, 'preg_engorgement', '乳房脹痛／阻塞', '合併發燒或紅腫需留意乳腺炎'),
+    rowFor(a, 'preg_postmood',    '情緒狀態',       '低落超過兩週或已影響生活，建議正式評估'),
+    rowFor(a, 'preg_energy',      '體力恢復',       '產後疲勞屬常見'),
+    rowFor(a, 'preg_sweating',    '自汗／盜汗',     '產後數週內常見'),
+    rowFor(a, 'preg_cold',        '怕冷／關節',     '產後常見主訴'),
+    rowFor(a, 'preg_milk',        '乳汁量',         '以寶寶體重與尿量判斷為主'),
+  ].filter(Boolean);
+
+  const verdict = stage
+    ? `您目前是${stage.label}。以下整理這個階段惡露、掉髮、乳房與情緒大概會是什麼狀態。`
+    : '請先填答產後時間，才能為您顯示對應的階段重點。';
+
+  const cardArticles = [];
+  const selfCare = [
+    ...(stage ? stage.timeline.map(t=>`【${t.k}】${t.v}`) : []),
+    ...selfCareFromBuckets(buckets, cardArticles),
+  ];
+  const track = ['惡露顏色與量的變化', '體溫是否正常', '情緒低落是否持續超過兩週', '乳房是否有局部紅腫熱痛'];
+  const seekCare = [...POSTPARTUM_RED_FLAGS];
+  if(stage && stage.watch) seekCare.unshift(stage.watch);
+  [...buckets.urgent, ...buckets.screen].forEach(e=>{ if(!seekCare.includes(e.zh)) seekCare.push(e.zh); });
+
+  /* Symptom-matched articles from the tips, plus stage-matched ones that aren't
+     tied to any flagged answer (breastfeeding care, confinement taboos).
+     collectArticles dedupes by slug. */
+  const ruleHits = POSTPARTUM_ARTICLE_RULES.filter(r=>{
+    try { return r.when(a); } catch(e){ return false; }
+  });
+
+  return {
+    status, verdict,
+    table: renderValueTable('產後狀況小抄', rows),
+    selfCare, track, seekCare,
+    articles: renderArticleLinks(collectArticles(cardArticles, ruleHits).slice(0, 5), rows.some(r=>r.status==='watch')),
+    cta: '想讓醫師依您目前的恢復狀況調整月子調理方案？歡迎預約諮詢。',
+  };
+}
+
+function buildMenoStageCard(buckets){
+  const a = state.answers || {};
+  const status = domainStatus(buckets);
+
+  const rows = [
+    rowFor(a, 'meno_flush',   '血管舒縮（熱潮紅／盜汗）', '偶爾且不影響生活較不需擔心'),
+    rowFor(a, 'meno_sleep',   '睡眠', '偶爾且不影響生活較不需擔心'),
+    rowFor(a, 'meno_mood',    '情緒', '明顯影響生活建議同時安排專業心理評估'),
+    rowFor(a, 'meno_dryness', '泌尿生殖（陰道乾澀）', '常見症狀，可與醫師討論處理方式'),
+    rowFor(a, 'meno_joint',   '骨骼／關節', '偶爾且不影響生活較不需擔心'),
+    rowFor(a, 'meno_cycle',   '月經型態變化', '停經逾 12 個月建議討論骨密度與心血管篩查'),
+  ].filter(Boolean);
+
+  const watchRegions = rows.filter(r=>r.status==='watch').map(r=>r.label);
+  const verdict = watchRegions.length
+    ? `您的更年期症狀主要集中在「${watchRegions.join('、')}」這幾個區域，下面有詳細說明。`
+    : '您目前填答的更年期相關症狀都不明顯，大致落在可接受範圍。';
+
+  const cardArticles = [];
+  const selfCare = selfCareFromBuckets(buckets, cardArticles);
+  if(!selfCare.length) selfCare.push('規律作息、適度運動與情緒紓解，是更年期日常保養的基礎。');
+
+  const track = [
+    '熱潮紅／盜汗每週發作的次數',
+    '睡眠中斷的次數與原因',
+    '情緒變化較明顯出現在什麼情境',
+    '是否出現任何陰道出血（無論多少）',
+  ];
+
+  const seekCare = [...buckets.urgent, ...buckets.screen].map(e=>e.zh);
+  seekCare.unshift('若您已停經超過 12 個月，此後出現任何陰道出血(無論多少)，都屬於停經後出血，請儘速安排婦科檢查，排除子宮內膜病變。');
+
+  return {
+    status, verdict,
+    table: renderValueTable('你的症狀圖譜卡', rows),
+    selfCare, track, seekCare,
+    articles: renderArticleLinks(collectArticles(cardArticles), watchRegions.length > 0),
+    cta: '想透過中醫調理改善熱潮紅、睡眠或情緒？歡迎預約諮詢。',
+  };
+}
+
+const STAGE_CARD_BUILDERS = {
+  cycle: buildCycleStageCard,
+  pregnancy: buildPregnancyStageCard,
+  postpartum: buildPostpartumStageCard,
+  meno: buildMenoStageCard,
+};
+
+/* 建議就醫 gets its own full-width block below the other two rather than being a
+   third equal column: it's the most safety-critical content, and its item count
+   varies a lot (the postpartum red-flag list alone is 7+), which left the old
+   three-column grid badly unbalanced. */
+function renderSeekCareBlock(items){
+  if(!items || !items.length) return '';
+  return `<div class="seekcare-block">
+    <p class="seekcare-title">⚑ 建議就醫<span class="en">Seek care</span></p>
+    <ul>${items.map(t=>`<li>${t}</li>`).join('')}</ul>
+  </div>`;
+}
+
+function renderStageCard(d, buckets){
+  const cfg = STAGE_CARD_BUILDERS[d.id](buckets);
+  return `<div class="domain-card stagecard status-${cfg.status}">
+    <div class="card-header">
+      <h3 class="card-title">${d.zh}<span class="en">${d.en}</span></h3>
+      <span class="status-dot"></span>
+    </div>
+    <p class="stagecard-verdict">${cfg.verdict}</p>
+    ${cfg.table}
+    <div class="stagecard-actions">
+      ${renderActionCol('自己可以做', 'Self-care', cfg.selfCare)}
+      ${renderActionCol('建議記錄', 'Track', cfg.track)}
+    </div>
+    ${renderSeekCareBlock(cfg.seekCare)}
+    ${cfg.articles}
+    <p class="stagecard-cta">${cfg.cta}</p>
+  </div>`;
+}
+
 function renderDomainCard(d, buckets){
+  if(STAGE_CARD_BUILDERS[d.id]) return renderStageCard(d, buckets);
+
   const status = domainStatus(buckets);
   const score = computeDomainScore(buckets);
   const meta = DOMAIN_META[d.id] || {};
@@ -1912,6 +3114,7 @@ function renderDomainCard(d, buckets){
     ${renderMeter(score)}
     <div class="card-divider"></div>
     <p class="status-label">${STATUS_LABEL_TEXT[status]}</p>
+    ${renderAnswerTable(d.id)}
     ${content}
     ${caveat ? `<p class="domain-caveat">⚑ ${caveat.zh}</p>` : ''}
     ${link ? `<a class="article-link" href="${link}" target="_blank" rel="noopener">閱讀完整文章 →</a>` : ''}
@@ -1953,35 +3156,54 @@ function buildOverview(domainFlags, activeDomains){
     else clearDomains.push(d);
   });
 
+  /* Name the actual findings rather than the domain they sit in — "經量、經痛程度"
+     tells her something; "月經週期評估" just repeats the card title below. */
+  const findingsFor = level => {
+    const out = [];
+    activeDomains.forEach(d=>{
+      const b = domainFlags[d.id];
+      if(!b) return;
+      b[level].forEach(e=>(e.findings||[]).forEach(f=>{ if(!out.includes(f)) out.push(f); }));
+    });
+    return out;
+  };
+  const listOf = (arr, max=4) => arr.length > max
+    ? arr.slice(0, max).join('、') + `等 ${arr.length} 項`
+    : arr.join('、');
+
+  const urgentFindings = findingsFor('urgent');
+  const screenFindings = findingsFor('screen');
+  const tcmFindings    = findingsFor('tcm');
+  const attentionCount = urgentFindings.length + screenFindings.length;
+
   // --- pick the opening headline & body based on overall picture ---
   let headline='', body='', bodyEn='';
 
   if(urgentDomains.length){
-    headline = '有幾項要請您優先留意';
-    const names = urgentDomains.map(d=>d.zh).join('、');
-    body = `整體來說，大部分面向的狀況是可以掌握的。不過在${names}這些部分，問卷發現了一些值得盡快確認的徵象。這不代表一定有問題，但及早了解會讓您更安心，也更好處理。下面各個面向都有詳細說明。`;
-    bodyEn = `Overall, most areas look manageable. However, there are a few things in ${urgentDomains.map(d=>d.en).join(', ')} that are worth checking on promptly. This doesn't necessarily mean something is wrong — but getting clarity early is always the better choice. Details are in each card below.`;
+    headline = `有 ${urgentFindings.length} 項要請您優先確認`;
+    body = `整體來說，大部分面向都是可以掌握的。其中<b>${listOf(urgentFindings)}</b>建議盡快向醫師確認——這不代表一定有問題，但及早釐清會讓您更安心。${screenFindings.length ? `另外${listOf(screenFindings)}也建議安排相關檢查。` : ''}下面每張卡片都有說明原因與該怎麼做。`;
+    bodyEn = `Overall, most areas look manageable. A few items are worth confirming with a doctor promptly — this doesn't mean something is wrong, but getting clarity early is the better choice. Each card below explains why and what to do.`;
   } else if(screenDomains.length && tcmDomains.length){
-    headline = '整體狀況不錯，有幾件事可以安排一下';
-    const sNames = screenDomains.map(d=>d.zh).join('、');
-    const tNames = tcmDomains.map(d=>d.zh).join('、');
-    body = `您目前的整體健康狀況是良好的。在${sNames}方面，建議安排相關的定期檢查，這是很正常的預防醫學步驟，不用擔心。${tNames}這些部分，有些地方適合進一步調理或評估，有興趣的話可以和我聊聊。`;
-    bodyEn = `Your overall health picture looks good. For ${screenDomains.map(d=>d.en).join(', ')}, scheduling some routine screening would be a sensible next step — totally normal preventive care, nothing to worry about. For ${tcmDomains.map(d=>d.en).join(', ')}, there are some areas that may benefit from further support if you're interested.`;
+    headline = `整體不錯，有 ${screenFindings.length} 項建議安排檢查`;
+    body = `您目前的整體狀況良好。<b>${listOf(screenFindings)}</b>建議安排相關檢查，這屬於正常的預防醫學步驟，不用擔心。另外${listOf(tcmFindings)}屬於可以透過日常調整改善的部分，下面有具體做法。`;
+    bodyEn = `Your overall picture looks good. Some items are worth scheduling routine checks for — normal preventive care, nothing alarming. Others can be improved through everyday adjustments; specifics are below.`;
   } else if(screenDomains.length){
-    headline = '整體狀況良好，有幾項篩查可以安排';
-    const names = screenDomains.map(d=>d.zh).join('、');
-    body = `您的整體狀況看起來不錯。在${names}方面，建議趁這個機會安排一下相關的定期檢查，這是女性健康維護很重要的一環，不需要因為這些才來才說明有問題。`;
-    bodyEn = `Your overall picture looks good. For ${screenDomains.map(d=>d.en).join(', ')}, it would be worth scheduling the relevant routine checks — this is an important part of women's preventive care, and these suggestions don't mean anything is wrong.`;
+    headline = `整體良好，有 ${screenFindings.length} 項建議安排檢查`;
+    body = `您的整體狀況看起來不錯。<b>${listOf(screenFindings)}</b>建議趁這個機會安排相關檢查——這是女性健康維護的一環，出現這些建議並不代表哪裡有問題。`;
+    bodyEn = `Your overall picture looks good. A few items are worth scheduling the relevant routine checks for — a normal part of women's preventive care, and not a sign that anything is wrong.`;
   } else if(tcmDomains.length){
-    headline = '整體狀況良好，有幾個地方可以好好調理';
-    const names = tcmDomains.map(d=>d.zh).join('、');
-    body = `整體來說，您的身體狀況是好的。在${names}這些面向，有一些地方可以透過適當的調理讓自己更舒適、狀態更穩定，有興趣的話很歡迎進一步聊聊。`;
-    bodyEn = `Overall, your health is in good shape. In the areas of ${tcmDomains.map(d=>d.en).join(', ')}, there are some things that could feel better with the right support — very welcome to discuss further if you're curious.`;
+    headline = '整體狀況良好，有幾個地方可以改善';
+    body = `整體來說，您的身體狀況是好的。<b>${listOf(tcmFindings)}</b>這些部分目前不需要特別檢查，但可以透過日常調整讓自己更舒適，下面列出了具體做法。`;
+    bodyEn = `Overall, your health is in good shape. A few things don't need investigation, but could feel better with everyday adjustments — specifics are listed below.`;
   } else {
-    headline = '您目前的整體狀況相當不錯';
-    body = `問卷填答的結果顯示，您在各個女性健康面向的狀況大致都在正常範圍內。繼續保持良好的生活習慣，定期做篩查，是最好的健康投資。下面還是列出了各個面向的詳細評估，可以對照確認一下。`;
-    bodyEn = `Based on your answers, things look largely normal across the women's health areas covered here. Keeping up good habits and routine screening is the best investment you can make. The detailed cards below confirm each area.`;
+    headline = '您目前的填答都在正常範圍內';
+    body = `問卷結果顯示，您在這次評估涵蓋的各個面向都沒有出現需要留意的徵象。繼續保持目前的生活習慣、按時程做定期篩查，就是最好的健康投資。下面仍列出各項數值供您對照。`;
+    bodyEn = `Your answers show no items needing attention across the areas covered. Keeping up your current habits and staying on schedule with routine screening is the best investment. The detailed values are still listed below for reference.`;
   }
+
+  const countLine = attentionCount
+    ? `<p class="ov-count">共 ${attentionCount} 項需要留意${tcmFindings.length ? `、${tcmFindings.length} 項可日常調整` : ''}，其餘在正常範圍內。</p>`
+    : '';
 
   // --- per-domain chip row ---
   const chips = activeDomains.map(d=>{
@@ -1994,6 +3216,7 @@ function buildOverview(domainFlags, activeDomains){
     <p class="ov-label">整體評估 Overall Assessment</p>
     <p class="ov-main">${headline}</p>
     <p class="ov-body">${body}<span class="en">${bodyEn}</span></p>
+    ${countLine}
     <div class="overview-chips">${chips}</div>
   </div>`;
 }
@@ -2014,7 +3237,9 @@ function renderSummary(){
     <p class="section-en en">Your Screening Summary</p>
 
     ${buildOverview(domainFlags, activeDomains)}
+    ${renderCrisisBanner()}
     ${renderTopUrgentBanner(domainFlags, activeDomains)}
+    ${renderOrphanFlags(domainFlags, activeDomains)}
     ${domainCardsHtml}
 
     <div class="cta-box" id="ctaBox">
@@ -2127,8 +3352,7 @@ panel.addEventListener('input', e=>{
   if(c){ state.contact[c.dataset.contact] = c.value; }
 });
 
-/* Replace this with the clinic's real inbox before publishing */
-const CLINIC_EMAIL = 'clinic@example.com';
+const CLINIC_EMAIL = 'woopuisan.ec@gmail.com';
 
 function showConfirm(zh, en){
   const box = document.getElementById('confirmMsg');
