@@ -630,6 +630,10 @@ html[lang="en-HK"] .copy-en { display: revert !important; }
   font-size: .42em;
   font-weight: 400;
 }
+/* The romanised name sits under the Chinese name in the zh layout. In English
+   the h1 itself already reads "CMP Kate Woo", so showing it again would repeat
+   the name twice. */
+html[lang="en-HK"] .about-title-en { display: none; }
 .about-hero-credential {
   display: flex;
   align-items: center;
@@ -702,31 +706,6 @@ html[lang="en-HK"] .copy-en { display: revert !important; }
   font-size: .94rem;
   line-height: 1.85;
 }
-.about-prose {
-  color: var(--cocoa-soft);
-  font-size: 1rem;
-  line-height: 1.95;
-}
-.about-prose p + p { margin-top: 1rem; }
-/* Left-aligned rather than centred: this block runs to 4–5 lines, and centred
-   long-form prose leaves both edges ragged so the eye has to hunt for the start
-   of each line. Width is capped near the comfortable measure, and the block sits
-   on the same left edge as the hero and the closing CTA so the page keeps one
-   consistent text margin instead of three. */
-.about-prose-center {
-  max-width: 680px;
-  margin: 0;
-  text-align: left;
-}
-.about-prose-center .gold-thread { margin: 0 0 1.4rem; }
-/* First paragraph carries a little more weight so the block has a lead-in
-   rather than reading as one undifferentiated slab. */
-.about-prose .about-lead {
-  font-size: 1.09rem;
-  line-height: 1.85;
-  color: var(--cocoa);
-}
-.about-prose .about-lead + p { margin-top: 1.15rem; }
 .about-media-section {
   background: var(--ivory);
   border-top: 1px solid var(--line);
