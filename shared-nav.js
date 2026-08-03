@@ -15,6 +15,24 @@
     return prefix + href;
   }
 
+  function ensureFavicon(prefix) {
+    var iconHref = link(prefix, 'assets/logo.png?v=20260731-brown');
+    [
+      { rel: 'icon', type: 'image/png' },
+      { rel: 'apple-touch-icon' }
+    ].forEach(function (item) {
+      var selector = 'link[rel="' + item.rel + '"]';
+      var el = document.querySelector(selector);
+      if (!el) {
+        el = document.createElement('link');
+        el.rel = item.rel;
+        document.head.appendChild(el);
+      }
+      if (item.type) el.type = item.type;
+      el.href = iconHref;
+    });
+  }
+
   function submenuItems(items, prefix) {
     return items.map(function (item) {
       return '<a href="' + link(prefix, item.href) + '" data-nav-key="' + item.key + '">' + item.zh + '</a>';
@@ -261,6 +279,7 @@
 
   function install() {
     ensureStyle();
+    ensureFavicon(depthPrefix());
     var existing = document.querySelector('body > nav.nav, body > nav.site-nav');
     var adminTopbar = document.querySelector('body > header.topbar');
     var wrapper = document.createElement('div');
