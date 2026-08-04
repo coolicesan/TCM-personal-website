@@ -3,20 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>胡佩珊中醫師｜香港女性婦科中醫・體質評估・身心同治</title>
-  <meta name="description" content="香港註冊中醫師胡佩珊（Kate Woo），專注女性婦科、備孕、產後與更年期調理，提倡身心同治。提供免費中醫體質問卷與女性健康評估，配合融合中醫與現代醫學知識的健康文章，陪伴女性每個生命階段。">
+  <title>香港婦科中醫｜胡佩珊中醫師 Kate Woo｜中環</title>
+  <meta name="description" content="香港註冊中醫師胡佩珊（Kate Woo），中環及鑽石山應診。專注月經失調、經痛、備孕、產後調理與更年期不適，以針灸、中藥配合身心同治。提供免費中醫體質問卷與女性健康評估。">
   <meta name="google-site-verification" content="qWvcKyfkuIXVTEyU37uapvfyQMMMzIjl456178D4SYs">
   <link rel="canonical" href="https://katewoo.com/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="胡佩珊中醫師">
-  <meta property="og:title" content="胡佩珊中醫師｜香港女性婦科中醫・體質評估・身心同治">
-  <meta property="og:description" content="香港註冊中醫師胡佩珊（Kate Woo），專注女性婦科、備孕、產後與更年期調理，提倡身心同治。提供免費中醫體質問卷與女性健康評估。">
+  <meta property="og:title" content="香港婦科中醫｜胡佩珊中醫師 Kate Woo｜中環">
+  <meta property="og:description" content="香港註冊中醫師胡佩珊（Kate Woo），中環及鑽石山應診。專注月經失調、經痛、備孕、產後調理與更年期不適，提供免費中醫體質問卷與女性健康評估。">
   <meta property="og:url" content="https://katewoo.com/">
   <meta property="og:image" content="https://katewoo.com/og-image.png">
+  <meta property="og:image:alt" content="胡佩珊中醫師 Kate Woo — 香港女性婦科中醫">
   <meta property="og:locale" content="zh_HK">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="胡佩珊中醫師｜香港女性婦科中醫・體質評估・身心同治">
-  <meta name="twitter:description" content="香港註冊中醫師胡佩珊（Kate Woo），專注女性婦科、備孕、產後與更年期調理，提倡身心同治。">
+  <meta name="twitter:title" content="香港婦科中醫｜胡佩珊中醫師 Kate Woo｜中環">
+  <meta name="twitter:description" content="香港註冊中醫師胡佩珊（Kate Woo），中環及鑽石山應診。專注月經失調、經痛、備孕、產後調理與更年期不適。">
   <meta name="twitter:image" content="https://katewoo.com/og-image.png">
   <link rel="icon" type="image/png" href="assets/logo.png?v=20260731-brown">
   <link rel="apple-touch-icon" href="assets/logo.png?v=20260731-brown">
@@ -24,40 +25,214 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&family=LXGW+WenKai+TC&family=Spectral:ital,wght@0,400;0,500;1,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="main.css">
-  <script src="i18n.js"></script>
-  <script src="main.js"></script>
+  <!-- Both guard on readyState/DOMContentLoaded, so deferring only removes the
+       render-blocking parse pause — nothing here needs to run before first paint. -->
+  <script src="i18n.js" defer></script>
+  <script src="main.js" defer></script>
 
+  <!--
+    Entity graph for the whole practice. Everything is cross-linked by @id so
+    Google resolves one doctor, one practice and two clinics rather than a
+    separate copy per page. Service and treatment pages point their author /
+    reviewedBy at #person, which is defined here.
+
+    Still missing, because the data does not exist yet — add when available:
+    each clinic's geo coordinates, openingHoursSpecification, and hasMap
+    pointing at its verified Google Business Profile.
+  -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Physician",
-    "@id": "https://katewoo.com/#person",
-    "name": "胡佩珊",
-    "alternateName": ["胡佩珊中醫師", "胡佩珊醫師", "Kate Woo", "Katewoo"],
-    "url": "https://katewoo.com/",
-    "image": "https://katewoo.com/profile-pic.jpg",
-    "medicalSpecialty": ["Gynecologic", "TraditionalChineseMedicine"],
-    "description": "香港註冊中醫師，專注中醫婦科、備孕與身心同治，提供女性健康資訊與線上體質評估。",
-    "identifier": {
-      "@type": "PropertyValue",
-      "propertyID": "CMCHK Registration Number",
-      "value": "008823"
-    },
-    "department": [
+    "@graph": [
       {
-        "@type": "MedicalClinic",
-        "name": "胡佩珊中醫師診所（中環）",
-        "address": { "@type": "PostalAddress", "streetAddress": "德輔道中19號環球大廈1103室", "addressLocality": "中環", "addressRegion": "香港島", "addressCountry": "HK" }
+        "@type": "WebSite",
+        "@id": "https://katewoo.com/#website",
+        "url": "https://katewoo.com/",
+        "name": "胡佩珊中醫師",
+        "alternateName": "CMP Kate Woo",
+        "inLanguage": "zh-Hant-HK",
+        "publisher": { "@id": "https://katewoo.com/#org" }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://katewoo.com/#webpage",
+        "url": "https://katewoo.com/",
+        "name": "香港婦科中醫｜胡佩珊中醫師 Kate Woo｜中環",
+        "description": "香港註冊中醫師胡佩珊（Kate Woo），中環及鑽石山應診，專注月經失調、經痛、備孕、產後調理與更年期不適。",
+        "isPartOf": { "@id": "https://katewoo.com/#website" },
+        "about": { "@id": "https://katewoo.com/#person" },
+        "primaryImageOfPage": { "@id": "https://katewoo.com/#logo" },
+        "inLanguage": "zh-Hant-HK"
+      },
+      {
+        "@type": "ImageObject",
+        "@id": "https://katewoo.com/#logo",
+        "url": "https://katewoo.com/assets/logo.png",
+        "contentUrl": "https://katewoo.com/assets/logo.png",
+        "caption": "胡佩珊中醫師 Kate Woo"
+      },
+      {
+        "@type": ["MedicalBusiness", "Organization"],
+        "@id": "https://katewoo.com/#org",
+        "name": "胡佩珊中醫師",
+        "alternateName": "CMP Kate Woo",
+        "url": "https://katewoo.com/",
+        "logo": { "@id": "https://katewoo.com/#logo" },
+        "image": "https://katewoo.com/og-image.png",
+        "description": "香港註冊中醫師胡佩珊主理，提供中醫婦科調理、針灸、中藥與身心同治，於中環及鑽石山應診。",
+        "telephone": "+85298152863",
+        "email": "woopuisan.ec@gmail.com",
+        "founder": { "@id": "https://katewoo.com/#person" },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "香港" },
+          { "@type": "AdministrativeArea", "name": "香港島" },
+          { "@type": "AdministrativeArea", "name": "九龍" }
+        ],
+        "knowsLanguage": ["zh-Hant", "yue", "en"],
+        "department": [
+          { "@id": "https://katewoo.com/#clinic-central" },
+          { "@id": "https://katewoo.com/#clinic-diamondhill" }
+        ],
+        "sameAs": ["https://www.instagram.com/woopuisan.ec"]
       },
       {
         "@type": "MedicalClinic",
+        "@id": "https://katewoo.com/#clinic-central",
+        "name": "胡佩珊中醫師診所（中環）",
+        "url": "https://katewoo.com/#contact",
+        "parentOrganization": { "@id": "https://katewoo.com/#org" },
+        "medicalSpecialty": ["Gynecologic", "TraditionalChineseMedicine"],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "德輔道中19號環球大廈1103室",
+          "addressLocality": "中環",
+          "addressRegion": "香港島",
+          "addressCountry": "HK"
+        },
+        "areaServed": { "@type": "AdministrativeArea", "name": "香港島" },
+        "telephone": "+85298152863",
+        "email": "woopuisan.ec@gmail.com",
+        "availableService": [
+          { "@id": "https://katewoo.com/#svc-acupuncture" },
+          { "@id": "https://katewoo.com/#svc-herbs" },
+          { "@id": "https://katewoo.com/#svc-moxa" }
+        ]
+      },
+      {
+        "@type": "MedicalClinic",
+        "@id": "https://katewoo.com/#clinic-diamondhill",
         "name": "胡佩珊中醫師診所（鑽石山）",
-        "address": { "@type": "PostalAddress", "streetAddress": "彩虹道235號啟鑽商場B1樓B04號舖", "addressLocality": "鑽石山", "addressRegion": "九龍", "addressCountry": "HK" }
+        "url": "https://katewoo.com/#contact",
+        "parentOrganization": { "@id": "https://katewoo.com/#org" },
+        "medicalSpecialty": ["Gynecologic", "TraditionalChineseMedicine"],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "彩虹道235號啟鑽商場B1樓B04號舖",
+          "addressLocality": "鑽石山",
+          "addressRegion": "九龍",
+          "addressCountry": "HK"
+        },
+        "areaServed": { "@type": "AdministrativeArea", "name": "九龍" },
+        "telephone": "+85298152863",
+        "email": "woopuisan.ec@gmail.com",
+        "availableService": [
+          { "@id": "https://katewoo.com/#svc-acupuncture" },
+          { "@id": "https://katewoo.com/#svc-herbs" },
+          { "@id": "https://katewoo.com/#svc-moxa" }
+        ]
+      },
+      {
+        "@type": "Physician",
+        "@id": "https://katewoo.com/#person",
+        "name": "胡佩珊",
+        "alternateName": ["胡佩珊中醫師", "胡佩珊醫師", "Kate Woo", "Katewoo", "CMP Kate Woo"],
+        "url": "https://katewoo.com/about.html",
+        "mainEntityOfPage": { "@id": "https://katewoo.com/#webpage" },
+        "image": "https://katewoo.com/profile-pic.jpg",
+        "jobTitle": "香港註冊中醫師",
+        "description": "香港註冊中醫師，專注中醫婦科、備孕與身心同治，提供女性健康資訊與線上體質評估。",
+        "medicalSpecialty": ["Gynecologic", "TraditionalChineseMedicine"],
+        "identifier": {
+          "@type": "PropertyValue",
+          "propertyID": "CMCHK Registration Number",
+          "value": "008823"
+        },
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "香港浸會大學" },
+        "worksFor": { "@id": "https://katewoo.com/#org" },
+        "workLocation": [
+          { "@id": "https://katewoo.com/#clinic-central" },
+          { "@id": "https://katewoo.com/#clinic-diamondhill" }
+        ],
+        "knowsLanguage": ["zh-Hant", "yue", "en"],
+        "knowsAbout": [
+          "月經失調", "經痛", "經前症候群", "多囊卵巢綜合症", "子宮內膜異位症",
+          "備孕調理", "不孕", "人工受孕與試管嬰兒中醫配合",
+          "安胎", "產後調理", "坐月調理", "產後脫髮", "乳汁不足", "塞奶與乳腺炎",
+          "更年期調理", "熱潮紅", "失眠", "情緒健康", "壓力調適",
+          "中醫體質辨識", "婦科針灸", "中藥調理"
+        ],
+        "availableService": [
+          { "@id": "https://katewoo.com/#svc-acupuncture" },
+          { "@id": "https://katewoo.com/#svc-herbs" },
+          { "@id": "https://katewoo.com/#svc-moxa" },
+          { "@id": "https://katewoo.com/#svc-cupping" },
+          { "@id": "https://katewoo.com/#svc-auricular" },
+          { "@id": "https://katewoo.com/#svc-facial" }
+        ],
+        "telephone": "+85298152863",
+        "email": "woopuisan.ec@gmail.com",
+        "sameAs": ["https://www.instagram.com/woopuisan.ec"]
+      },
+
+      {
+        "@type": "MedicalTherapy",
+        "@id": "https://katewoo.com/#svc-acupuncture",
+        "name": "針灸治療",
+        "alternateName": "Acupuncture",
+        "url": "https://katewoo.com/treatments/treatment-acupuncture.html",
+        "provider": { "@id": "https://katewoo.com/#org" }
+      },
+      {
+        "@type": "MedicalTherapy",
+        "@id": "https://katewoo.com/#svc-herbs",
+        "name": "中藥調理",
+        "alternateName": "Chinese Herbal Medicine",
+        "url": "https://katewoo.com/treatments/treatment-herbs.html",
+        "provider": { "@id": "https://katewoo.com/#org" }
+      },
+      {
+        "@type": "MedicalTherapy",
+        "@id": "https://katewoo.com/#svc-moxa",
+        "name": "艾灸療法",
+        "alternateName": "Moxibustion",
+        "url": "https://katewoo.com/treatments/treatment-moxa.html",
+        "provider": { "@id": "https://katewoo.com/#org" }
+      },
+      {
+        "@type": "MedicalTherapy",
+        "@id": "https://katewoo.com/#svc-cupping",
+        "name": "拔罐・刮痧",
+        "alternateName": "Cupping and Gua Sha",
+        "url": "https://katewoo.com/treatments/treatment-cupping.html",
+        "provider": { "@id": "https://katewoo.com/#org" }
+      },
+      {
+        "@type": "MedicalTherapy",
+        "@id": "https://katewoo.com/#svc-auricular",
+        "name": "耳穴療法",
+        "alternateName": "Auricular Therapy",
+        "url": "https://katewoo.com/treatments/treatment-auricular.html",
+        "provider": { "@id": "https://katewoo.com/#org" }
+      },
+      {
+        "@type": "MedicalTherapy",
+        "@id": "https://katewoo.com/#svc-facial",
+        "name": "美顏針",
+        "alternateName": "Cosmetic Facial Acupuncture",
+        "url": "https://katewoo.com/treatments/treatment-facial.html",
+        "provider": { "@id": "https://katewoo.com/#org" }
       }
-    ],
-    "telephone": "+85298152863",
-    "email": "woopuisan.ec@gmail.com",
-    "sameAs": ["https://www.instagram.com/woopuisan.ec"]
+    ]
   }
   </script>
 </head>
@@ -98,7 +273,7 @@
       </h1>
       <span class="gold-thread" aria-hidden="true"></span>
       <p class="hero-desc" data-edit="hero-desc">
-        從青春期、備孕、孕產到更年期，胡醫師以中醫調理為本、融合現代醫學知識與心理輔導專業，聆聽每位女性的真實需求，制定溫和細膩的個人化調理方案。
+        從青春期、月經失調、備孕、孕產到更年期，胡醫師以中醫調理為本、融合現代醫學知識與心理輔導專業，聆聽每位女性的真實需求，制定溫和細膩的個人化調理方案。
       </p>
       <div class="hero-actions">
         <a href="#contact" class="btn btn-primary">預約掛號 →</a>
@@ -308,7 +483,7 @@
   <div class="container">
     <div class="text-center">
       <span class="section-tag">中醫治療項目</span>
-      <h2 class="section-title">多元治療・全面調理</h2>
+      <h2 class="section-title">針灸・中藥・艾灸，多元中醫治療</h2>
       <span class="gold-thread" aria-hidden="true"></span>
     </div>
     <div class="svc-grid">

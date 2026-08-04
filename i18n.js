@@ -43,7 +43,7 @@
     '以中醫智慧，溫柔陪伴': 'Holistic care for women’s health',
     '每個階段': 'at every stage of life',
     '女性每個階段': 'at every stage of life',
-    '從青春期、備孕、孕產到更年期，胡醫師以中醫調理為本、融合現代醫學知識與心理輔導專業，聆聽每位女性的真實需求，制定溫和細膩的個人化調理方案。': 'CMP Kate Woo blends Chinese medicine with modern medical knowledge and counselling training to support women at every stage — from menstrual health and fertility to pregnancy, postpartum recovery, menopause, emotional wellbeing and long-term constitutional care. Every consultation is attentive, unhurried and shaped around you.',
+    '從青春期、月經失調、備孕、孕產到更年期，胡醫師以中醫調理為本、融合現代醫學知識與心理輔導專業，聆聽每位女性的真實需求，制定溫和細膩的個人化調理方案。': 'CMP Kate Woo blends Chinese medicine with modern medical knowledge and counselling training to support women at every stage — from menstrual health and fertility to pregnancy, postpartum recovery, menopause, emotional wellbeing and long-term constitutional care. Every consultation is attentive, unhurried and shaped around you.',
     '先了解我的體質': 'Start with a Health Assessment',
     '從您的困擾出發，找到對應的調理方向': 'Care pathways for your everyday concerns',
 
@@ -106,7 +106,7 @@
     '頭暈心悸': 'Dizziness and palpitations',
 
     '中醫治療項目': 'Chinese Medicine Services',
-    '多元治療・全面調理': 'Treatments tailored to your body and goals',
+    '針灸・中藥・艾灸，多元中醫治療': 'Acupuncture, herbal medicine, moxibustion and more',
     '中藥調理': 'Herbal Medicine',
     '根據望聞問切四診，為您配製個人化中藥方，從根本調補氣血、平衡陰陽。': 'Individual herbal prescriptions based on consultation, pulse and tongue assessment, adjusted as your body responds.',
     '針灸治療': 'Acupuncture',
