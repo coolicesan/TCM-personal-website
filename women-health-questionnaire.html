@@ -18,6 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700&family=Noto+Sans+TC:wght@400;500;700&family=Spectral:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<script src="questionnaire-content.js"></script>
 <style>
   /* ============ DESIGN TOKENS ============ */
   :root{
@@ -668,6 +669,12 @@
 
   .summary-actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:30px;}
 
+  /* ============ PREVIEW (admin only) ============ */
+  /* The site nav is sticky chrome, not part of the report — inside the admin's
+     narrow preview pane it just covers the copy being reviewed. */
+  html.is-preview .drhu-nav, html.is-preview .site-nav{ display:none !important; }
+  html.is-preview .app{ padding-top:18px; }
+
   /* ============ PRINT ============ */
   .print-only{display:none;}
   @media print{
@@ -717,9 +724,9 @@
   .at-rows{ list-style:none; margin:0; padding:0; }
   .at-row{
     display:grid; grid-template-columns:1fr auto; gap:2px 10px;
-    padding:9px 0; border-top:1px dashed rgba(0,0,0,.08);
+    padding:11px 0; border-top:1px solid var(--line);
   }
-  .at-row:first-child{ border-top:none; }
+  .at-row:first-child{ border-top:none; padding-top:2px; }
   .at-label{ font-size:12.5px; color:var(--ink-soft); }
   .at-value{ font-size:13px; color:var(--ink); line-height:1.5; }
   .at-ref{ grid-column:1/-1; font-size:11.5px; color:var(--ink-faint); margin-top:1px; }
@@ -731,17 +738,25 @@
   .at-watch{ background:var(--amber-soft); color:var(--amber-deep); }
   .at-na{ background:rgba(0,0,0,.05); color:var(--ink-faint); }
   .at-note{ margin:10px 0 0; font-size:12px; line-height:1.65; color:var(--ink-faint); }
+  /* A flagged row carries two annotations: what the finding means, and the
+     point where it stops being "worth noting" and becomes "get this checked".
+     Both used to be saturated fills (amber, then red), so a six-row card
+     stacked into twelve alternating bars and every row read as urgent. They
+     are now indented notes sharing one amber rail — the ⚠ pill marks the
+     status, the ⚑ and its red label mark the escalation point, and the only
+     filled red block on the card stays 建議就醫, where it means something. */
+  .at-notes{
+    grid-column:1/-1; margin:7px 0 1px; padding-left:11px;
+    border-left:2px solid rgba(185,134,63,.45);
+  }
   .at-explain{
-    grid-column:1/-1; margin:6px 0 0; padding:8px 10px;
-    background:var(--amber-soft); border-radius:var(--radius-sm);
-    font-size:12px; line-height:1.6; color:var(--amber-deep);
+    margin:0; font-size:12px; line-height:1.65; color:var(--ink-soft);
   }
   .at-threshold{
-    grid-column:1/-1; margin:5px 0 0; padding:8px 10px;
-    background:var(--cinnabar-soft); border-radius:var(--radius-sm);
-    font-size:12px; line-height:1.6; color:var(--cinnabar-deep);
+    margin:5px 0 0; font-size:12px; line-height:1.65; color:var(--ink-soft);
   }
-  .at-threshold b{ font-weight:700; }
+  .at-threshold::before{ content:'⚑ '; color:var(--cinnabar); }
+  .at-threshold b{ font-weight:700; color:var(--cinnabar-deep); }
 
   /* ============ STAGE CARD SKELETON (cycle / pregnancy / postpartum / meno) ============ */
   .stagecard-verdict{
@@ -798,6 +813,9 @@
     border:1px solid var(--line);
   }
   .stage-label{ margin:0 0 12px; font-size:12.5px; font-weight:600; letter-spacing:.02em; color:var(--ink-soft); }
+  .stage-plain{ margin:0; padding-left:16px; }
+  .stage-plain li{ font-size:13px; line-height:1.65; color:var(--ink); margin-bottom:5px; }
+  .stage-plain li:last-child{ margin-bottom:0; }
   .sc-title{ margin:0 0 7px; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint); }
   .stage-cols{ display:grid; gap:16px; }
   @media (min-width:640px){ .stage-cols{ grid-template-columns:1fr 1fr; } }
@@ -886,7 +904,13 @@
    0. SMALL HELPERS
    ============================================================ */
 function opt(value, zh, en, flag){ return {value, zh, en, flag: flag||null}; }
-function FLAG(level, zh, en, domain, article){ return {level, zh, en, domain: domain||null, article: article||null}; }
+/* `key` is the flag's identity: SYMPTOM_INFO is looked up by it, and the content
+   admin addresses overrides by it. It is frozen to the sentence as authored, so
+   editing `zh` in the admin retitles the flag without orphaning its 說明／調理／
+   就醫 text. Never derive a lookup from `zh` — that is now editable copy. */
+function FLAG(level, zh, en, domain, article){
+  return {level, zh, en, key: zh, domain: domain||null, article: article||null};
+}
 function escapeHtml(s){
   return String(s==null?'':s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
@@ -2073,10 +2097,10 @@ function computeDomainFlags(){
     if(!flag) return;
     const dId = flag.domain || defaultDomain;
     if(!domains[dId]) domains[dId] = {urgent:[], screen:[], tcm:[]};
-    const key = dId+'|'+flag.level+'|'+flag.zh;
+    const key = dId+'|'+flag.level+'|'+flag.key;
     let entry = entryMap.get(key);
     if(!entry){
-      entry = {level:flag.level, zh:flag.zh, en:flag.en, article:flag.article||null, tags:[], findings:[]};
+      entry = {level:flag.level, key:flag.key, zh:flag.zh, en:flag.en, article:flag.article||null, tags:[], findings:[]};
       entryMap.set(key, entry);
       domains[dId][flag.level].push(entry);
     }
@@ -2119,6 +2143,45 @@ const STATUS_BADGE = {
 const TIER_ACTION = {
   urgent:{zh:'請優先處理以上項目，建議儘速就醫評估。', en:'Please address these first — prompt medical evaluation is recommended.'},
 };
+/* Opening copy for the overall-assessment block, one branch per overall picture.
+   Placeholders available in every field: {urgentCount} {screenCount} {tcmCount}
+   {totalCount} {urgentList} {screenList} {tcmList}. `extra` is appended at the
+   {extra} marker in `body`, but only when the tier named by `extraIf` fired. */
+const OVERVIEW_COPY = {
+  urgent:{
+    headline:'有 {urgentCount} 項要請您優先確認',
+    body:'整體來說，大部分面向都是可以掌握的。其中<b>{urgentList}</b>建議盡快向醫師確認——這不代表一定有問題，但及早釐清會讓您更安心。{extra}下面每張卡片都有說明原因與該怎麼做。',
+    extraIf:'screenCount',
+    extra:'另外{screenList}也建議安排相關檢查。',
+    bodyEn:"Overall, most areas look manageable. A few items are worth confirming with a doctor promptly — this doesn't mean something is wrong, but getting clarity early is the better choice. Each card below explains why and what to do.",
+  },
+  screen_tcm:{
+    headline:'整體不錯，有 {screenCount} 項建議安排檢查',
+    body:'您目前的整體狀況良好。<b>{screenList}</b>建議安排相關檢查，這屬於正常的預防醫學步驟，不用擔心。另外{tcmList}屬於可以透過日常調整改善的部分，下面有具體做法。',
+    bodyEn:'Your overall picture looks good. Some items are worth scheduling routine checks for — normal preventive care, nothing alarming. Others can be improved through everyday adjustments; specifics are below.',
+  },
+  screen:{
+    headline:'整體良好，有 {screenCount} 項建議安排檢查',
+    body:'您的整體狀況看起來不錯。<b>{screenList}</b>建議趁這個機會安排相關檢查——這是女性健康維護的一環，出現這些建議並不代表哪裡有問題。',
+    bodyEn:"Your overall picture looks good. A few items are worth scheduling the relevant routine checks for — a normal part of women's preventive care, and not a sign that anything is wrong.",
+  },
+  tcm:{
+    headline:'整體狀況良好，有幾個地方可以改善',
+    body:'整體來說，您的身體狀況是好的。<b>{tcmList}</b>這些部分目前不需要特別檢查，但可以透過日常調整讓自己更舒適，下面列出了具體做法。',
+    bodyEn:"Overall, your health is in good shape. A few things don't need investigation, but could feel better with everyday adjustments — specifics are listed below.",
+  },
+  clear:{
+    headline:'您目前的填答都在正常範圍內',
+    body:'問卷結果顯示，您在這次評估涵蓋的各個面向都沒有出現需要留意的徵象。繼續保持目前的生活習慣、按時程做定期篩查，就是最好的健康投資。下面仍列出各項數值供您對照。',
+    bodyEn:'Your answers show no items needing attention across the areas covered. Keeping up your current habits and staying on schedule with routine screening is the best investment. The detailed values are still listed below for reference.',
+  },
+  countLine:{
+    lead:'共 {totalCount} 項需要留意',
+    tcmClause:'、{tcmCount} 項可日常調整',
+    tail:'，其餘在正常範圍內。',
+  },
+};
+
 const STATUS_LABEL_TEXT = {
   urgent:'⚑ 需優先處理',
   screen:'· 建議安排檢查',
@@ -2530,7 +2593,46 @@ const POSTPARTUM_ARTICLE_RULES = [
    flag data driving the rest of the report. Pass `opts.evalFn` /
    `opts.fmt` / `opts.explainFn` for slider or multi-select questions
    that don't map to a single flagged option. */
-function rowFor(a, qid, label, ref, opts){
+/* Row labels and their "what counts as normal" reference line. These used to be
+   positional arguments at each rowFor() call site, which made them unreachable
+   for the content admin — it can only edit strings it can address by a stable
+   id. Keyed by question id, which never changes. */
+const ROW_REFS = {
+  cycle_freq:{ label:'週期天數', ref:'正常範圍 24–38 天' },
+  cycle_len:{  label:'經期長度', ref:'正常範圍 8 天以內' },
+  cycle_flow:{ label:'經量', ref:'正常：衛生用品約可維持 3–4 小時；量多：需 1–2 小時更換一次或有大血塊' },
+  cycle_pain:{ label:'經痛程度', ref:'0–10 分，一般 6 分以下、且不影響生活較不需擔心' },
+  cycle_pms:{  label:'經前症狀數', ref:'3 項以下較常見；若合併骨盆腔疼痛、性交疼痛等特定症狀需留意' },
+
+  preg_nausea:{    label:'孕吐程度', ref:'嚴重到無法進食或喝水建議就醫' },
+  preg_edema:{     label:'水腫', ref:'突然加重或合併頭痛、視力改變請立即就醫' },
+  preg_back:{      label:'腰背／骨盆不適', ref:'孕期常見，影響行動可與中醫師討論' },
+  preg_sleep:{     label:'睡眠品質', ref:'孕期睡眠中斷常見' },
+  preg_fatigue:{   label:'疲勞程度', ref:'第一、三孕期較明顯' },
+  preg_digestion:{ label:'便秘／脹氣', ref:'子宮壓迫所致，屬常見' },
+  preg_mood:{      label:'情緒狀態', ref:'明顯影響生活建議同時安排專業評估' },
+
+  preg_lochia:{      label:'惡露', ref:'多數在 4–6 週結束，顏色或氣味改變請檢查' },
+  preg_hairloss:{    label:'掉髮', ref:'產後 2–4 個月開始屬常見，4 個月左右最明顯' },
+  preg_engorgement:{ label:'乳房脹痛／阻塞', ref:'合併發燒或紅腫需留意乳腺炎' },
+  preg_postmood:{    label:'情緒狀態', ref:'低落超過兩週或已影響生活，建議正式評估' },
+  preg_energy:{      label:'體力恢復', ref:'產後疲勞屬常見' },
+  preg_sweating:{    label:'自汗／盜汗', ref:'產後數週內常見' },
+  preg_cold:{        label:'怕冷／關節', ref:'產後常見主訴' },
+  preg_milk:{        label:'乳汁量', ref:'以寶寶體重與尿量判斷為主' },
+
+  meno_flush:{   label:'血管舒縮（熱潮紅／盜汗）', ref:'偶爾且不影響生活較不需擔心' },
+  meno_sleep:{   label:'睡眠', ref:'偶爾且不影響生活較不需擔心' },
+  meno_mood:{    label:'情緒', ref:'明顯影響生活建議同時安排專業心理評估' },
+  meno_dryness:{ label:'泌尿生殖（陰道乾澀）', ref:'常見症狀，可與醫師討論處理方式' },
+  meno_joint:{   label:'骨骼／關節', ref:'偶爾且不影響生活較不需擔心' },
+  meno_cycle:{   label:'月經型態變化', ref:'停經逾 12 個月建議討論骨密度與心血管篩查' },
+};
+
+function rowFor(a, qid, opts){
+  const meta = ROW_REFS[qid] || {};
+  const label = meta.label || qid;
+  const ref = meta.ref || '';
   opts = opts || {};
   const question = findQuestion(qid);
   if(!question) return null;
@@ -2547,7 +2649,7 @@ function rowFor(a, qid, label, ref, opts){
     const o = question.options.find(o=>o.value===v);
     status = (o && o.flag) ? 'watch' : (o ? 'ok' : 'na');
     value = o ? o.zh : String(v);
-    const info = (o && o.flag) ? SYMPTOM_INFO[o.flag.zh] : null;
+    const info = (o && o.flag) ? SYMPTOM_INFO[o.flag.key] : null;
     explain = (o && o.flag) ? (info?.insight || o.flag.zh) : null;
     threshold = info?.watch || null;
   }
@@ -2566,13 +2668,14 @@ function renderValueTable(title, rows){
       ? `<p class="at-explain">${r.explain}</p>` : '';
     const threshold = (r.status==='watch' && r.threshold)
       ? `<p class="at-threshold"><b>什麼情況該就醫：</b>${r.threshold}</p>` : '';
+    const notes = (explain || threshold)
+      ? `<div class="at-notes">${explain}${threshold}</div>` : '';
     return `<li class="at-row">
       <span class="at-label">${r.label}</span>
       <span class="at-mark ${m.cls}">${m.text}</span>
       <span class="at-value">${r.value}</span>
       <span class="at-ref">${r.ref}</span>
-      ${explain}
-      ${threshold}
+      ${notes}
     </li>`;
   }).join('');
   const counter = scored ? `<span class="at-count">${okCount} / ${scored} 項在範圍內</span>` : '';
@@ -2843,10 +2946,49 @@ function collectArticles(...lists){
    single block instead of inlining a link on every line. */
 function selfCareFromBuckets(buckets, collected){
   return buckets.tcm.map(e => {
-    const cfg = SYMPTOM_INFO[e.zh];
+    const cfg = SYMPTOM_INFO[e.key];
     if(cfg && cfg.article && Array.isArray(collected)) collected.push(cfg.article);
     return tipLine(cfg) || e.zh;
   });
+}
+
+/* Stage diet advice and flag-derived tips are authored in different places, so
+   the same suggestion can arrive twice on one card — 少量多餐 is the opening
+   advice for both 孕吐 and 脹氣. Key on the leading clause and keep the first
+   one; a tip that starts with the same instruction is the same instruction. */
+function dedupeTips(tips){
+  const seen = new Set();
+  return tips.filter(t => {
+    const key = String(t).split(/[，、；。：:]/)[0].trim();
+    if(key.length < 3) return true;
+    if(seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+/* 「這個階段常見什麼」是定位與安心用的說明，不是待辦事項。它原本被逐條加上
+   「這個階段常見，不用擔心：」前綴塞進「自己可以做」欄位，於是那一欄有一半
+   的內容其實無事可做，同一句標籤還重複四次。獨立成區塊後標籤只出現一次。 */
+function renderStageContext(title, items){
+  if(!items || !items.length) return '';
+  return `<div class="stage-block">
+    <p class="stage-label">${title}</p>
+    <ul class="stage-plain">${items.map(t=>`<li>${t}</li>`).join('')}</ul>
+  </div>`;
+}
+
+/* Same idea for the postpartum stage timeline, whose entries are keyed by body
+   system (惡露 / 乳汁 / 情緒). The key belongs in its own column, not inlined
+   as 【惡露】 at the head of a self-care bullet. */
+function renderStageTimeline(title, rows){
+  if(!rows || !rows.length) return '';
+  return `<div class="stage-block">
+    <p class="stage-label">${title}</p>
+    <ul class="tl-rows">${rows.map(r=>
+      `<li class="tl-row"><span class="tl-k">${r.k}</span><span class="tl-v">${r.v}</span></li>`
+    ).join('')}</ul>
+  </div>`;
 }
 
 function buildCycleStageCard(buckets){
@@ -2854,15 +2996,15 @@ function buildCycleStageCard(buckets){
   const status = domainStatus(buckets);
 
   const rows = [
-    rowFor(a, 'cycle_freq', '週期天數', '正常範圍 24–38 天'),
-    rowFor(a, 'cycle_len',  '經期長度', '正常範圍 8 天以內'),
-    rowFor(a, 'cycle_flow', '經量', '正常：衛生用品約可維持 3–4 小時；量多：需 1–2 小時更換一次或有大血塊'),
-    rowFor(a, 'cycle_pain', '經痛程度', '0–10 分，一般 6 分以下、且不影響生活較不需擔心', {
+    rowFor(a, 'cycle_freq'),
+    rowFor(a, 'cycle_len'),
+    rowFor(a, 'cycle_flow'),
+    rowFor(a, 'cycle_pain', {
       evalFn: v => (v==null || v==='') ? 'na' : ((Number(v)>=7 || a.cycle_painimpact==='yes') ? 'watch' : 'ok'),
       fmt: v => v==null ? '未填答' : `${v} / 10 分${a.cycle_painimpact==='yes' ? '，且已影響日常生活' : ''}`,
       explainFn: () => '經痛程度較高、或已經影響日常生活時，較可能與子宮內膜異位症、子宮肌腺症等結構性原因有關，建議與醫師討論評估。',
     }),
-    rowFor(a, 'cycle_pms', '經前症狀數', '3 項以下較常見；若合併骨盆腔疼痛、性交疼痛等特定症狀需留意', {
+    rowFor(a, 'cycle_pms', {
       evalFn: v => {
         if(v==null || !v.length) return 'na';
         const q = findQuestion('cycle_pms');
@@ -2875,7 +3017,7 @@ function buildCycleStageCard(buckets){
         const q = findQuestion('cycle_pms');
         const flagged = (v||[]).map(val=>q.options.find(o=>o.value===val)).filter(o=>o && o.flag);
         return flagged.length
-          ? flagged.map(o=>SYMPTOM_INFO[o.flag.zh]?.insight || o.flag.zh).join(' ')
+          ? flagged.map(o=>SYMPTOM_INFO[o.flag.key]?.insight || o.flag.zh).join(' ')
           : '經前症狀較多，多與賀爾蒙週期性波動有關。';
       },
     }),
@@ -2887,7 +3029,7 @@ function buildCycleStageCard(buckets){
     : '這次的月經數值大致都落在正常範圍內。';
 
   const cardArticles = [];
-  const selfCare = selfCareFromBuckets(buckets, cardArticles);
+  const selfCare = dedupeTips(selfCareFromBuckets(buckets, cardArticles));
   // cycle_pain is a slider question, so it never flows through computeDomainFlags —
   // add its own comfort-measure tip directly when the row itself reads as "watch".
   const painRow = rows.find(r=>r.label==='經痛程度');
@@ -2927,28 +3069,28 @@ function buildPregnancyStageCard(buckets){
   const stage = PREGNANCY_STAGES[a.preg_trimester] || PREGNANCY_STAGES.unsure;
 
   const rows = [
-    rowFor(a, 'preg_nausea',    '孕吐程度',       '嚴重到無法進食或喝水建議就醫'),
-    rowFor(a, 'preg_edema',     '水腫',           '突然加重或合併頭痛、視力改變請立即就醫'),
-    rowFor(a, 'preg_back',      '腰背／骨盆不適', '孕期常見，影響行動可與中醫師討論'),
-    rowFor(a, 'preg_sleep',     '睡眠品質',       '孕期睡眠中斷常見'),
-    rowFor(a, 'preg_fatigue',   '疲勞程度',       '第一、三孕期較明顯'),
-    rowFor(a, 'preg_digestion', '便秘／脹氣',     '子宮壓迫所致，屬常見'),
-    rowFor(a, 'preg_mood',      '情緒狀態',       '明顯影響生活建議同時安排專業評估'),
+    rowFor(a, 'preg_nausea'),
+    rowFor(a, 'preg_edema'),
+    rowFor(a, 'preg_back'),
+    rowFor(a, 'preg_sleep'),
+    rowFor(a, 'preg_fatigue'),
+    rowFor(a, 'preg_digestion'),
+    rowFor(a, 'preg_mood'),
   ].filter(Boolean);
 
   const verdict = `您目前是${stage.label}。以下是這個階段常見的狀況與需要留意的界線。`;
   const cardArticles = [];
 
-  const selfCare = [
-    ...stage.common.map(t=>`這個階段常見，不用擔心：${t}`),
-    ...stage.diet.map(t=>`飲食：${t}`),
+  const selfCare = dedupeTips([
+    ...stage.diet,
     ...selfCareFromBuckets(buckets, cardArticles),
-  ];
+  ]);
   const seekCare = [...PREGNANCY_RED_FLAGS];
   [...buckets.urgent, ...buckets.screen].forEach(e=>{ if(!seekCare.includes(e.zh)) seekCare.push(e.zh); });
 
   return {
     status, verdict,
+    context: renderStageContext('這個階段常見的變化，不用擔心', stage.common),
     table: renderValueTable('孕期狀況小抄', rows),
     selfCare, track: stage.track, seekCare,
     articles: renderArticleLinks(collectArticles(cardArticles), rows.some(r=>r.status==='watch')),
@@ -2962,14 +3104,14 @@ function buildPostpartumStageCard(buckets){
   const stage = POSTPARTUM_STAGES[a.preg_postpartum_timing];
 
   const rows = [
-    rowFor(a, 'preg_lochia',      '惡露',           '多數在 4–6 週結束，顏色或氣味改變請檢查'),
-    rowFor(a, 'preg_hairloss',    '掉髮',           '產後 2–4 個月開始屬常見，4 個月左右最明顯'),
-    rowFor(a, 'preg_engorgement', '乳房脹痛／阻塞', '合併發燒或紅腫需留意乳腺炎'),
-    rowFor(a, 'preg_postmood',    '情緒狀態',       '低落超過兩週或已影響生活，建議正式評估'),
-    rowFor(a, 'preg_energy',      '體力恢復',       '產後疲勞屬常見'),
-    rowFor(a, 'preg_sweating',    '自汗／盜汗',     '產後數週內常見'),
-    rowFor(a, 'preg_cold',        '怕冷／關節',     '產後常見主訴'),
-    rowFor(a, 'preg_milk',        '乳汁量',         '以寶寶體重與尿量判斷為主'),
+    rowFor(a, 'preg_lochia'),
+    rowFor(a, 'preg_hairloss'),
+    rowFor(a, 'preg_engorgement'),
+    rowFor(a, 'preg_postmood'),
+    rowFor(a, 'preg_energy'),
+    rowFor(a, 'preg_sweating'),
+    rowFor(a, 'preg_cold'),
+    rowFor(a, 'preg_milk'),
   ].filter(Boolean);
 
   const verdict = stage
@@ -2977,10 +3119,8 @@ function buildPostpartumStageCard(buckets){
     : '請先填答產後時間，才能為您顯示對應的階段重點。';
 
   const cardArticles = [];
-  const selfCare = [
-    ...(stage ? stage.timeline.map(t=>`【${t.k}】${t.v}`) : []),
-    ...selfCareFromBuckets(buckets, cardArticles),
-  ];
+  const selfCare = dedupeTips(selfCareFromBuckets(buckets, cardArticles));
+  if(!selfCare.length) selfCare.push('把握寶寶睡著時一起休息，補充足夠水分與蛋白質，是產後恢復最實際的做法。');
   const track = ['惡露顏色與量的變化', '體溫是否正常', '情緒低落是否持續超過兩週', '乳房是否有局部紅腫熱痛'];
   const seekCare = [...POSTPARTUM_RED_FLAGS];
   if(stage && stage.watch) seekCare.unshift(stage.watch);
@@ -2995,6 +3135,7 @@ function buildPostpartumStageCard(buckets){
 
   return {
     status, verdict,
+    context: stage ? renderStageTimeline('這個階段身體會發生什麼', stage.timeline) : '',
     table: renderValueTable('產後狀況小抄', rows),
     selfCare, track, seekCare,
     articles: renderArticleLinks(collectArticles(cardArticles, ruleHits).slice(0, 5), rows.some(r=>r.status==='watch')),
@@ -3007,12 +3148,12 @@ function buildMenoStageCard(buckets){
   const status = domainStatus(buckets);
 
   const rows = [
-    rowFor(a, 'meno_flush',   '血管舒縮（熱潮紅／盜汗）', '偶爾且不影響生活較不需擔心'),
-    rowFor(a, 'meno_sleep',   '睡眠', '偶爾且不影響生活較不需擔心'),
-    rowFor(a, 'meno_mood',    '情緒', '明顯影響生活建議同時安排專業心理評估'),
-    rowFor(a, 'meno_dryness', '泌尿生殖（陰道乾澀）', '常見症狀，可與醫師討論處理方式'),
-    rowFor(a, 'meno_joint',   '骨骼／關節', '偶爾且不影響生活較不需擔心'),
-    rowFor(a, 'meno_cycle',   '月經型態變化', '停經逾 12 個月建議討論骨密度與心血管篩查'),
+    rowFor(a, 'meno_flush'),
+    rowFor(a, 'meno_sleep'),
+    rowFor(a, 'meno_mood'),
+    rowFor(a, 'meno_dryness'),
+    rowFor(a, 'meno_joint'),
+    rowFor(a, 'meno_cycle'),
   ].filter(Boolean);
 
   const watchRegions = rows.filter(r=>r.status==='watch').map(r=>r.label);
@@ -3021,7 +3162,7 @@ function buildMenoStageCard(buckets){
     : '您目前填答的更年期相關症狀都不明顯，大致落在可接受範圍。';
 
   const cardArticles = [];
-  const selfCare = selfCareFromBuckets(buckets, cardArticles);
+  const selfCare = dedupeTips(selfCareFromBuckets(buckets, cardArticles));
   if(!selfCare.length) selfCare.push('規律作息、適度運動與情緒紓解，是更年期日常保養的基礎。');
 
   const track = [
@@ -3070,6 +3211,7 @@ function renderStageCard(d, buckets){
       <span class="status-dot"></span>
     </div>
     <p class="stagecard-verdict">${cfg.verdict}</p>
+    ${cfg.context || ''}
     ${cfg.table}
     <div class="stagecard-actions">
       ${renderActionCol('自己可以做', 'Self-care', cfg.selfCare)}
@@ -3091,15 +3233,16 @@ function renderDomainCard(d, buckets){
   const link = ARTICLE_LINKS[d.id];
 
   /* Build tier content blocks — one per triggered tier, each item showing
-     its own specific advice sentence. Tier headings only appear when a card
-     has 2+ tiers active — with just one, the status-label above already says it. */
+     its own specific advice sentence. The card's status is always its highest
+     active tier, so the status-label above is already that tier's heading —
+     only the tiers below it need one of their own. */
   let content = '';
   if(status === 'clear'){
     content = `<p class="card-clear-text">${meta.clear_zh||'—'}</p>`;
   } else {
     const activeTiers = ['urgent','screen','tcm'].filter(level=>buckets[level].length);
-    content = activeTiers.map(level=>{
-      const heading = activeTiers.length > 1
+    content = activeTiers.map((level, i)=>{
+      const heading = i > 0
         ? `<p class="card-tier-label tier-${level}">${STATUS_LABEL_TEXT[level]}</p>`
         : '';
       return heading + renderFlagList(buckets[level]);
@@ -3177,32 +3320,41 @@ function buildOverview(domainFlags, activeDomains){
   const attentionCount = urgentFindings.length + screenFindings.length;
 
   // --- pick the opening headline & body based on overall picture ---
-  let headline='', body='', bodyEn='';
+  const branch = urgentDomains.length ? 'urgent'
+    : (screenDomains.length && tcmDomains.length) ? 'screen_tcm'
+    : screenDomains.length ? 'screen'
+    : tcmDomains.length ? 'tcm'
+    : 'clear';
+  const copy = OVERVIEW_COPY[branch];
 
-  if(urgentDomains.length){
-    headline = `有 ${urgentFindings.length} 項要請您優先確認`;
-    body = `整體來說，大部分面向都是可以掌握的。其中<b>${listOf(urgentFindings)}</b>建議盡快向醫師確認——這不代表一定有問題，但及早釐清會讓您更安心。${screenFindings.length ? `另外${listOf(screenFindings)}也建議安排相關檢查。` : ''}下面每張卡片都有說明原因與該怎麼做。`;
-    bodyEn = `Overall, most areas look manageable. A few items are worth confirming with a doctor promptly — this doesn't mean something is wrong, but getting clarity early is the better choice. Each card below explains why and what to do.`;
-  } else if(screenDomains.length && tcmDomains.length){
-    headline = `整體不錯，有 ${screenFindings.length} 項建議安排檢查`;
-    body = `您目前的整體狀況良好。<b>${listOf(screenFindings)}</b>建議安排相關檢查，這屬於正常的預防醫學步驟，不用擔心。另外${listOf(tcmFindings)}屬於可以透過日常調整改善的部分，下面有具體做法。`;
-    bodyEn = `Your overall picture looks good. Some items are worth scheduling routine checks for — normal preventive care, nothing alarming. Others can be improved through everyday adjustments; specifics are below.`;
-  } else if(screenDomains.length){
-    headline = `整體良好，有 ${screenFindings.length} 項建議安排檢查`;
-    body = `您的整體狀況看起來不錯。<b>${listOf(screenFindings)}</b>建議趁這個機會安排相關檢查——這是女性健康維護的一環，出現這些建議並不代表哪裡有問題。`;
-    bodyEn = `Your overall picture looks good. A few items are worth scheduling the relevant routine checks for — a normal part of women's preventive care, and not a sign that anything is wrong.`;
-  } else if(tcmDomains.length){
-    headline = '整體狀況良好，有幾個地方可以改善';
-    body = `整體來說，您的身體狀況是好的。<b>${listOf(tcmFindings)}</b>這些部分目前不需要特別檢查，但可以透過日常調整讓自己更舒適，下面列出了具體做法。`;
-    bodyEn = `Overall, your health is in good shape. A few things don't need investigation, but could feel better with everyday adjustments — specifics are listed below.`;
-  } else {
-    headline = '您目前的填答都在正常範圍內';
-    body = `問卷結果顯示，您在這次評估涵蓋的各個面向都沒有出現需要留意的徵象。繼續保持目前的生活習慣、按時程做定期篩查，就是最好的健康投資。下面仍列出各項數值供您對照。`;
-    bodyEn = `Your answers show no items needing attention across the areas covered. Keeping up your current habits and staying on schedule with routine screening is the best investment. The detailed values are still listed below for reference.`;
-  }
+  /* Slots are filled from the answers so this copy stays editable in the content
+     admin without exposing template-literal syntax. An unknown placeholder
+     resolves to an empty string rather than printing itself back at the reader. */
+  const slots = {
+    urgentCount: String(urgentFindings.length),
+    screenCount: String(screenFindings.length),
+    tcmCount:    String(tcmFindings.length),
+    totalCount:  String(attentionCount),
+    urgentList:  listOf(urgentFindings),
+    screenList:  listOf(screenFindings),
+    tcmList:     listOf(tcmFindings),
+  };
+  /* {extra} is not a slot — it is the insertion point for the optional sentence
+     below, so it has to survive this pass and get substituted afterwards. */
+  const fill = str => String(str==null?'':str)
+    .replace(/\{(\w+)\}/g, (m,k)=> k==='extra' ? m : (slots[k]!=null ? slots[k] : ''));
 
+  /* `extra` is a whole sentence that only applies when its tier actually fired,
+     so it is authored separately instead of being buried in a conditional
+     inside the body string. */
+  const extra = (copy.extraIf && Number(slots[copy.extraIf]) > 0) ? fill(copy.extra) : '';
+  const headline = fill(copy.headline);
+  const body = fill(copy.body).replace('{extra}', extra);
+  const bodyEn = copy.bodyEn;
+
+  const cl = OVERVIEW_COPY.countLine;
   const countLine = attentionCount
-    ? `<p class="ov-count">共 ${attentionCount} 項需要留意${tcmFindings.length ? `、${tcmFindings.length} 項可日常調整` : ''}，其餘在正常範圍內。</p>`
+    ? `<p class="ov-count">${fill(cl.lead)}${tcmFindings.length ? fill(cl.tcmClause) : ''}${fill(cl.tail)}</p>`
     : '';
 
   // --- per-domain chip row ---
@@ -3401,6 +3553,77 @@ function submitContact(){
 /* ============================================================
    10. INIT
    ============================================================ */
+
+/* The editable-copy layer, if it loaded. Overrides are written onto the data
+   objects before the first render, so every downstream renderer sees the edited
+   text without knowing this layer exists. Storage is per-browser: visitors
+   always get the authored copy. */
+const CONTENT_SOURCES = {
+  SECTIONS, SYMPTOM_INFO, ROW_REFS, ANSWER_TABLES, DOMAIN_META, OVERVIEW_COPY,
+  PREGNANCY_STAGES, POSTPARTUM_STAGES, PREGNANCY_RED_FLAGS, POSTPARTUM_RED_FLAGS,
+};
+const IS_PREVIEW = new URLSearchParams(location.search).get('preview') === '1';
+
+/* The admin needs the text as authored, not as already-overridden, so the index
+   is taken while the data objects are still pristine. Preview mode only —
+   indexing ~600 strings is wasted work on a visitor's page load. */
+const PRISTINE_INDEX = (IS_PREVIEW && window.QContent)
+  ? window.QContent.index(CONTENT_SOURCES) : null;
+
+if(window.QContent) window.QContent.apply(CONTENT_SOURCES);
+
+/* Preview hook for admin/問卷內容後台.html. Only mounted with ?preview=1 so the
+   public page keeps its surface small. The admin drives it from an iframe. */
+if(IS_PREVIEW){
+  document.documentElement.classList.add('is-preview');
+  window.__qPreview = {
+    sources: CONTENT_SOURCES,
+    index: PRISTINE_INDEX,
+    /* Answer every visible question so the report has content to show. `mode`
+       picks which option wins where a question offers a flagged one:
+       'all' always, 'none' never, 'mixed' about half (seeded, so the same
+       scenario renders identically every time you come back to it). */
+    fill(seed, mode){
+      let s = 987654321;
+      const rnd = ()=> (s = (s*1664525 + 1013904223) >>> 0) / 4294967296;
+      state.answers = JSON.parse(JSON.stringify(seed || {}));
+      const pass = ()=> SECTIONS.forEach(sec=>sec.questions.forEach(q=>{
+        if(q.id in state.answers) return;
+        if(typeof q.showIf === 'function' && !q.showIf(state.answers)) return;
+        if(q.type === 'single'){
+          const flagged = q.options.filter(o=>o.flag);
+          const plain = q.options.filter(o=>!o.flag);
+          let pool = q.options;
+          if(mode === 'all' && flagged.length) pool = flagged;
+          else if(mode === 'none' && plain.length) pool = plain;
+          else if(flagged.length && plain.length) pool = rnd() < 0.45 ? flagged : plain;
+          state.answers[q.id] = pool[Math.floor(rnd()*pool.length)].value;
+        } else if(q.type === 'multi'){
+          const pickable = q.options.filter(o=>!o.exclusive);
+          const want = mode === 'all' ? o=>!!o.flag : mode === 'none' ? ()=>false : ()=>rnd() < 0.3;
+          state.answers[q.id] = pickable.filter(want).map(o=>o.value);
+        } else {
+          state.answers[q.id] = mode === 'all' ? '9' : mode === 'none' ? '2' : '5';
+        }
+      }));
+      pass(); pass(); // second pass catches questions unlocked by the first
+      state.step = getSteps().length - 1;
+      renderCurrentStep();
+      window.scrollTo(0, 0);
+    },
+    /* Re-apply overrides and re-render without a reload, so typing in the admin
+       shows up immediately. Restores the authored text first, otherwise a
+       cleared override would leave the last edit sitting in the data object. */
+    refresh(){
+      if(window.QContent){
+        window.QContent.writeAll(CONTENT_SOURCES, window.QContent.defaults(PRISTINE_INDEX));
+        window.QContent.apply(CONTENT_SOURCES);
+      }
+      renderCurrentStep();
+    },
+  };
+}
+
 renderCurrentStep();
 
 /* ============================================================

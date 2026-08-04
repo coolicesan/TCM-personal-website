@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>問卷內容後台｜胡佩珊中醫師</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  /* Palette matches 文章管理後台 so the two tools read as one back office. */
+  :root{
+    --plum:#3D2645; --plum-deep:#251830;
+    --rose:#B05870; --rose-light:#FAF0F3; --rose-mid:#E8C0CB;
+    --jade:#4A7C6B; --jade-light:#EAF3EF;
+    --gold:#B8860B; --gold-light:#FBF5E6;
+    --danger:#C0392B; --danger-light:#FDF0EE;
+    --ink:#1E2028; --ink-mid:#4A4E5A; --ink-soft:#787D8C;
+    --border:#E2E6E0; --bg:#FAFAF8; --white:#fff;
+    --serif:'Noto Serif TC',Georgia,serif; --sans:'Noto Sans TC',-apple-system,sans-serif;
+    --mono:'IBM Plex Mono',monospace;
+  }
+  html,body{height:100%}
+  body{font-family:var(--sans);font-size:14px;color:var(--ink);background:var(--bg);
+       display:flex;flex-direction:column;overflow:hidden}
+
+  /* ---------- topbar ---------- */
+  .topbar{height:54px;background:linear-gradient(135deg,var(--plum) 0%,var(--plum-deep) 100%);
+          color:#fff;display:flex;align-items:center;gap:14px;padding:0 18px;flex-shrink:0}
+  .topbar-logo{font-family:var(--serif);font-weight:700;font-size:15px;letter-spacing:.04em;white-space:nowrap}
+  .topbar-logo span{color:#C4AED0;font-weight:400;font-size:12px;margin-left:8px}
+  .topbar-status{flex:1;font-size:12.5px;color:#C8BAD4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .btn{border:0;border-radius:20px;padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer;
+       font-family:var(--sans);transition:transform .12s ease,opacity .12s ease;white-space:nowrap}
+  .btn:hover{transform:translateY(-1px)}
+  .btn:focus-visible{outline:2.5px solid var(--gold);outline-offset:2px}
+  .btn:active{transform:translateY(0)}
+  .btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+  .btn-ghost{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.25)}
+  .btn-sm{padding:5px 12px;font-size:12px;border-radius:14px}
+  .btn-danger{background:var(--danger-light);color:var(--danger)}
+
+  .main{flex:1;display:flex;min-height:0}
+
+  /* ---------- sidebar ---------- */
+  .sidebar{width:250px;flex-shrink:0;background:var(--white);border-right:1px solid var(--border);
+           display:flex;flex-direction:column;min-height:0}
+  .side-head{padding:14px;border-bottom:1px solid var(--border)}
+  .side-title{font-family:var(--serif);font-size:12.5px;font-weight:700;color:var(--rose);
+              letter-spacing:.08em;margin-bottom:10px}
+  .side-search{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:8px;
+               font-size:12.5px;font-family:var(--sans);background:var(--bg);color:var(--ink)}
+  .side-search:focus{outline:none;border-color:var(--rose)}
+  .side-check{display:flex;align-items:center;gap:7px;margin-top:10px;font-size:12px;
+              color:var(--ink-mid);cursor:pointer}
+  .side-check input{width:13px;height:13px;accent-color:var(--rose);cursor:pointer}
+  .group-list{flex:1;overflow-y:auto;padding:8px}
+  .group-item{display:flex;align-items:center;gap:8px;padding:10px 11px;border-radius:8px;
+              cursor:pointer;margin-bottom:3px;border:1px solid transparent;text-align:left;
+              width:100%;background:none;font-family:var(--sans);font-size:13px;color:var(--ink);
+              transition:background .12s ease}
+  .group-item:hover{background:var(--rose-light)}
+  .group-item.active{background:var(--rose-light);border-color:var(--rose-mid);font-weight:700}
+  .group-item:focus-visible{outline:2px solid var(--rose);outline-offset:-2px}
+  .group-name{flex:1}
+  .group-count{font-family:var(--mono);font-size:11px;color:var(--ink-soft)}
+  .group-item.active .group-count{color:var(--rose)}
+  .group-dirty{width:7px;height:7px;border-radius:50%;background:var(--gold);flex:none;visibility:hidden}
+  .group-dirty.show{visibility:visible}
+  .side-foot{padding:12px 14px;border-top:1px solid var(--border);font-size:11.5px;
+             line-height:1.6;color:var(--ink-soft)}
+
+  /* ---------- editor ---------- */
+  .editor{width:460px;flex-shrink:0;border-right:1px solid var(--border);
+          display:flex;flex-direction:column;min-height:0;background:var(--bg)}
+  .editor-head{padding:14px 16px;border-bottom:1px solid var(--border);background:var(--white)}
+  .editor-title{font-family:var(--serif);font-size:15px;font-weight:700;color:var(--ink)}
+  .editor-note{font-size:12px;color:var(--ink-soft);line-height:1.6;margin-top:4px}
+  .field-list{flex:1;overflow-y:auto;padding:12px 16px 40px}
+
+  .fgroup-head{font-size:11.5px;font-weight:700;letter-spacing:.06em;color:var(--rose);
+               margin:18px 0 8px;padding-bottom:5px;border-bottom:1px solid var(--rose-mid)}
+  .fgroup-head:first-child{margin-top:0}
+
+  .field{background:var(--white);border:1px solid var(--border);border-left:3px solid var(--border);
+         border-radius:8px;padding:11px 12px;margin-bottom:9px}
+  .field.edited{border-left-color:var(--gold);background:var(--gold-light)}
+  .field-top{display:flex;align-items:baseline;gap:8px;margin-bottom:6px}
+  .field-label{font-size:12px;font-weight:700;color:var(--ink-mid);flex:1}
+  .field-ctx{font-size:11.5px;color:var(--ink-soft);line-height:1.55;margin-bottom:7px;
+             word-break:break-word}
+  .field-tier{font-size:10px;font-weight:700;padding:1px 7px;border-radius:10px;flex:none}
+  .tier-urgent{background:var(--danger-light);color:var(--danger)}
+  .tier-screen{background:var(--gold-light);color:var(--gold)}
+  .tier-tcm{background:var(--jade-light);color:var(--jade)}
+  .field textarea,.field input[type=text]{
+    width:100%;border:1px solid var(--border);border-radius:6px;padding:8px 9px;
+    font-family:var(--sans);font-size:13px;line-height:1.65;color:var(--ink);
+    background:var(--white);resize:vertical}
+  .field textarea:focus,.field input[type=text]:focus{outline:none;border-color:var(--rose);
+    box-shadow:0 0 0 3px rgba(176,88,112,.12)}
+  .field-hint{font-size:11px;color:var(--ink-soft);margin-top:5px;font-family:var(--mono);
+              line-height:1.6;word-break:break-all}
+  .field-revert{background:none;border:0;font-size:11.5px;color:var(--rose);cursor:pointer;
+                font-family:var(--sans);padding:2px 4px;border-radius:4px;visibility:hidden}
+  .field.edited .field-revert{visibility:visible}
+  .field-revert:hover{background:var(--rose-light)}
+  .field-revert:focus-visible{outline:2px solid var(--rose);outline-offset:1px}
+
+  .empty{padding:40px 20px;text-align:center;color:var(--ink-soft);font-size:13px;line-height:1.7}
+  .more-btn{width:100%;padding:11px;border:1px dashed var(--border);border-radius:8px;
+            background:var(--white);color:var(--ink-mid);font-size:12.5px;cursor:pointer;
+            font-family:var(--sans)}
+  .more-btn:hover{border-color:var(--rose);color:var(--rose)}
+
+  /* ---------- preview ---------- */
+  .preview{flex:1;display:flex;flex-direction:column;min-height:0;min-width:0;background:var(--white)}
+  .preview-bar{display:flex;align-items:center;gap:10px;padding:10px 14px;
+               border-bottom:1px solid var(--border);flex-wrap:wrap;flex-shrink:0}
+  .pv-label{font-size:11.5px;font-weight:700;color:var(--ink-soft);letter-spacing:.04em}
+  .pv-select{padding:6px 9px;border:1px solid var(--border);border-radius:8px;font-size:12.5px;
+             font-family:var(--sans);background:var(--white);color:var(--ink);cursor:pointer}
+  .pv-select:focus{outline:none;border-color:var(--rose)}
+  .pv-spacer{flex:1}
+  .btn-jade{background:var(--jade);color:#fff}
+  .preview-frame{flex:1;border:0;width:100%;background:#F2F1E6}
+  .pv-warn{padding:14px 16px;background:var(--danger-light);color:var(--danger);
+           font-size:12.5px;line-height:1.7;border-bottom:1px solid var(--border);display:none}
+  .pv-warn.show{display:block}
+  .pv-warn code{font-family:var(--mono);background:rgba(0,0,0,.06);padding:1px 5px;border-radius:3px}
+
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(80px);
+         background:var(--plum);color:#fff;padding:11px 22px;border-radius:22px;font-size:13px;
+         box-shadow:0 10px 30px -8px rgba(37,24,48,.5);opacity:0;pointer-events:none;
+         transition:transform .28s cubic-bezier(.2,.9,.3,1.2),opacity .2s ease;z-index:50}
+  .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+  @media (prefers-reduced-motion:reduce){
+    *{transition-duration:.01ms !important}
+  }
+  @media (max-width:1180px){
+    .sidebar{width:200px}
+    .editor{width:380px}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">問卷內容後台<span>女性健康問卷</span></div>
+  <div class="topbar-status" id="status">載入中…</div>
+  <button class="btn btn-ghost btn-sm" id="btnExport">匯出備份</button>
+  <button class="btn btn-ghost btn-sm" id="btnImport">匯入備份</button>
+  <button class="btn btn-ghost btn-sm" id="btnResetAll">全部還原</button>
+  <input type="file" id="fileInput" accept="application/json" hidden>
+</div>
+
+<div class="main">
+  <aside class="sidebar">
+    <div class="side-head">
+      <div class="side-title">內容分類</div>
+      <input class="side-search" id="search" type="search" placeholder="搜尋文字或欄位…">
+      <label class="side-check"><input type="checkbox" id="onlyEdited">只顯示已修改</label>
+    </div>
+    <div class="group-list" id="groupList"></div>
+    <div class="side-foot">
+      修改只存在這台瀏覽器，訪客看到的仍是原本的文字。請定期<b>匯出備份</b>。
+    </div>
+  </aside>
+
+  <section class="editor">
+    <div class="editor-head">
+      <div class="editor-title" id="editorTitle">—</div>
+      <p class="editor-note" id="editorNote"></p>
+    </div>
+    <div class="field-list" id="fieldList"></div>
+  </section>
+
+  <section class="preview">
+    <div class="preview-bar">
+      <span class="pv-label">預覽身分</span>
+      <select class="pv-select" id="scenario"></select>
+      <span class="pv-label">填答狀況</span>
+      <select class="pv-select" id="mode">
+        <option value="mixed">混合（接近真實）</option>
+        <option value="all">全部觸發（看最多內容）</option>
+        <option value="none">全部正常（看沒問題時）</option>
+      </select>
+      <span class="pv-spacer"></span>
+      <button class="btn btn-jade btn-sm" id="btnReload">重新產生</button>
+    </div>
+    <div class="pv-warn" id="pvWarn"></div>
+    <iframe class="preview-frame" id="frame" title="結果頁預覽"></iframe>
+  </section>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="../questionnaire-content.js"></script>
+<script>
+(function(){
+  'use strict';
+
+  var $ = function(id){ return document.getElementById(id); };
+  var frame = $('frame');
+
+  /* Preview scenarios. Each one pins the answers that decide which cards appear;
+     everything else is auto-answered by the questionnaire's own preview hook. */
+  var SCENARIOS = [
+    {id:'full',   zh:'有月經 · 完整評估', seed:{basic_status:'has_period', route_primary:'full', route_extra:[]}},
+    {id:'cycle',  zh:'有月經 · 只做月經週期', seed:{basic_status:'has_period', route_primary:'cycle', route_extra:[]}},
+    {id:'precon', zh:'備孕', seed:{basic_status:'has_period', route_primary:'precon', route_extra:[]}},
+    {id:'t1',     zh:'懷孕 · 第一孕期', seed:{basic_status:'pregnant', route_primary:'pregnant_postpartum', route_extra:[], preg_trimester:'t1'}},
+    {id:'t2',     zh:'懷孕 · 第二孕期', seed:{basic_status:'pregnant', route_primary:'pregnant_postpartum', route_extra:[], preg_trimester:'t2'}},
+    {id:'t3',     zh:'懷孕 · 第三孕期', seed:{basic_status:'pregnant', route_primary:'pregnant_postpartum', route_extra:[], preg_trimester:'t3'}},
+    {id:'pp0',    zh:'產後 0–4 週', seed:{basic_status:'postpartum', route_primary:'pregnant_postpartum', route_extra:[], preg_postpartum_timing:'0to4w'}},
+    {id:'pp1',    zh:'產後 1–3 個月', seed:{basic_status:'postpartum', route_primary:'pregnant_postpartum', route_extra:[], preg_postpartum_timing:'1to3m'}},
+    {id:'pp3',    zh:'產後 3–6 個月', seed:{basic_status:'postpartum', route_primary:'pregnant_postpartum', route_extra:[], preg_postpartum_timing:'3to6m'}},
+    {id:'pp6',    zh:'產後 6–12 個月', seed:{basic_status:'postpartum', route_primary:'pregnant_postpartum', route_extra:[], preg_postpartum_timing:'6to12m'}},
+    {id:'meno',   zh:'更年期', seed:{basic_status:'menopause', route_primary:'meno', route_extra:[]}},
+  ];
+
+  var groups = [];          // pristine index from the questionnaire
+  var overrides = {};       // id -> edited text
+  var activeGroup = 'advice';
+  var pageSize = 60;
+  var shown = pageSize;
+  var saveTimer = null;
+
+  /* ---------- storage ---------- */
+  function persist(){
+    QContent.save(overrides);
+    updateStatus();
+    refreshPreview();
+  }
+  function scheduleSave(){
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(persist, 350);
+  }
+
+  function editedCount(){ return Object.keys(overrides).length; }
+
+  function updateStatus(){
+    var n = editedCount();
+    $('status').textContent = n
+      ? ('已修改 ' + n + ' 項，儲存在這台瀏覽器')
+      : '尚未修改任何文字';
+    renderGroups();
+  }
+
+  /* ---------- preview ---------- */
+  function frameWin(){
+    try { return frame.contentWindow; } catch(e){ return null; }
+  }
+  function api(){
+    var w = frameWin();
+    return (w && w.__qPreview) ? w.__qPreview : null;
+  }
+  function refreshPreview(){
+    var a = api();
+    if(a) try { a.refresh(); } catch(e){}
+  }
+  function regenerate(){
+    var a = api();
+    if(!a) return;
+    var sc = SCENARIOS.filter(function(s){ return s.id === $('scenario').value; })[0] || SCENARIOS[0];
+    try { a.fill(sc.seed, $('mode').value); } catch(e){}
+  }
+
+  /* ---------- rendering ---------- */
+  function renderGroups(){
+    var list = $('groupList');
+    list.innerHTML = '';
+    groups.forEach(function(g){
+      var dirty = g.items.some(function(it){ return overrides[it.id] != null; });
+      var b = document.createElement('button');
+      b.className = 'group-item' + (g.id === activeGroup ? ' active' : '');
+      b.type = 'button';
+      b.innerHTML = '<span class="group-dirty' + (dirty ? ' show' : '') + '"></span>' +
+                    '<span class="group-name"></span>' +
+                    '<span class="group-count">' + g.items.length + '</span>';
+      b.querySelector('.group-name').textContent = g.zh;
+      b.addEventListener('click', function(){
+        activeGroup = g.id; shown = pageSize; renderGroups(); renderFields();
+      });
+      list.appendChild(b);
+    });
+  }
+
+  function visibleItems(){
+    var g = groups.filter(function(x){ return x.id === activeGroup; })[0];
+    if(!g) return {group:null, items:[]};
+    var q = $('search').value.trim().toLowerCase();
+    var onlyEdited = $('onlyEdited').checked;
+    var items = g.items.filter(function(it){
+      if(onlyEdited && overrides[it.id] == null) return false;
+      if(!q) return true;
+      var hay = (it.value + ' ' + it.where + ' ' + it.context + ' ' + it.label + ' ' +
+                 (overrides[it.id] || '')).toLowerCase();
+      return hay.indexOf(q) !== -1;
+    });
+    return {group:g, items:items};
+  }
+
+  function renderFields(){
+    var v = visibleItems();
+    var box = $('fieldList');
+    box.innerHTML = '';
+    $('editorTitle').textContent = v.group ? v.group.zh : '—';
+    $('editorNote').textContent = v.group ? v.group.note : '';
+
+    if(!v.items.length){
+      box.innerHTML = '<p class="empty">' +
+        ($('onlyEdited').checked ? '這個分類還沒有修改過的文字。' : '沒有符合的項目。') + '</p>';
+      return;
+    }
+
+    var slice = v.items.slice(0, shown);
+    var lastWhere = null;
+    slice.forEach(function(it){
+      if(it.where !== lastWhere){
+        lastWhere = it.where;
+        var h = document.createElement('div');
+        h.className = 'fgroup-head';
+        h.textContent = it.where;
+        box.appendChild(h);
+      }
+      box.appendChild(fieldEl(it));
+    });
+
+    if(v.items.length > shown){
+      var more = document.createElement('button');
+      more.className = 'more-btn';
+      more.type = 'button';
+      more.textContent = '顯示更多（還有 ' + (v.items.length - shown) + ' 項）';
+      more.addEventListener('click', function(){ shown += pageSize; renderFields(); });
+      box.appendChild(more);
+    }
+  }
+
+  function fieldEl(it){
+    var wrap = document.createElement('div');
+    var isEdited = overrides[it.id] != null;
+    wrap.className = 'field' + (isEdited ? ' edited' : '');
+
+    var top = document.createElement('div');
+    top.className = 'field-top';
+    var lab = document.createElement('span');
+    lab.className = 'field-label';
+    lab.textContent = it.label;
+    top.appendChild(lab);
+    if(it.level){
+      var tier = document.createElement('span');
+      tier.className = 'field-tier tier-' + it.level;
+      tier.textContent = it.level === 'urgent' ? '需優先處理'
+        : it.level === 'screen' ? '建議檢查' : '可調理';
+      top.appendChild(tier);
+    }
+    var revert = document.createElement('button');
+    revert.className = 'field-revert';
+    revert.type = 'button';
+    revert.textContent = '還原';
+    revert.title = '改回原本的文字';
+    top.appendChild(revert);
+    wrap.appendChild(top);
+
+    if(it.context){
+      var ctx = document.createElement('p');
+      ctx.className = 'field-ctx';
+      ctx.textContent = it.context;
+      wrap.appendChild(ctx);
+    }
+
+    var input;
+    if(it.kind === 'line'){
+      input = document.createElement('input');
+      input.type = 'text';
+    } else {
+      input = document.createElement('textarea');
+      input.rows = Math.min(6, Math.max(2, Math.ceil((it.value || '').length / 34)));
+    }
+    input.value = isEdited ? overrides[it.id] : it.value;
+    input.addEventListener('input', function(){
+      if(input.value === it.value){ delete overrides[it.id]; }
+      else { overrides[it.id] = input.value; }
+      wrap.classList.toggle('edited', overrides[it.id] != null);
+      scheduleSave();
+    });
+    wrap.appendChild(input);
+
+    if(it.hint){
+      var hint = document.createElement('p');
+      hint.className = 'field-hint';
+      hint.textContent = it.hint;
+      wrap.appendChild(hint);
+    }
+
+    revert.addEventListener('click', function(){
+      delete overrides[it.id];
+      input.value = it.value;
+      wrap.classList.remove('edited');
+      persist();
+    });
+
+    return wrap;
+  }
+
+  /* ---------- toast ---------- */
+  var toastTimer = null;
+  function toast(msg){
+    var t = $('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 2400);
+  }
+
+  /* ---------- backup ---------- */
+  $('btnExport').addEventListener('click', function(){
+    var payload = {
+      _note: '女性健康問卷 內容修改備份',
+      _savedAt: new Date().toISOString(),
+      overrides: overrides,
+    };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'});
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = '問卷內容備份-' + new Date().toISOString().slice(0,10) + '.json';
+    a.click();
+    URL.revokeObjectURL(a.href);
+    toast('已匯出 ' + editedCount() + ' 項修改');
+  });
+
+  $('btnImport').addEventListener('click', function(){ $('fileInput').click(); });
+  $('fileInput').addEventListener('change', function(e){
+    var f = e.target.files[0];
+    if(!f) return;
+    var r = new FileReader();
+    r.onload = function(){
+      try{
+        var data = JSON.parse(r.result);
+        var incoming = data.overrides || data;
+        if(typeof incoming !== 'object') throw new Error('格式不符');
+        if(editedCount() && !confirm('匯入會覆蓋目前的 ' + editedCount() + ' 項修改，確定嗎？')) return;
+        overrides = {};
+        Object.keys(incoming).forEach(function(k){
+          if(typeof incoming[k] === 'string') overrides[k] = incoming[k];
+        });
+        persist();
+        renderFields();
+        toast('已匯入 ' + editedCount() + ' 項修改');
+      } catch(err){
+        toast('讀不到這個檔案：' + err.message);
+      }
+      e.target.value = '';
+    };
+    r.readAsText(f);
+  });
+
+  $('btnResetAll').addEventListener('click', function(){
+    var n = editedCount();
+    if(!n){ toast('目前沒有任何修改'); return; }
+    if(!confirm('把 ' + n + ' 項修改全部改回原本的文字？這個動作無法復原，建議先匯出備份。')) return;
+    overrides = {};
+    QContent.clear();
+    updateStatus();
+    refreshPreview();
+    renderFields();
+    toast('已全部還原');
+  });
+
+  /* ---------- controls ---------- */
+  $('search').addEventListener('input', function(){ shown = pageSize; renderFields(); });
+  $('onlyEdited').addEventListener('change', function(){ shown = pageSize; renderFields(); });
+  $('scenario').addEventListener('change', regenerate);
+  $('mode').addEventListener('change', regenerate);
+  $('btnReload').addEventListener('click', regenerate);
+
+  SCENARIOS.forEach(function(s){
+    var o = document.createElement('option');
+    o.value = s.id; o.textContent = s.zh;
+    $('scenario').appendChild(o);
+  });
+
+  /* ---------- boot ---------- */
+  function showWarn(html){
+    var w = $('pvWarn');
+    w.innerHTML = html;
+    w.classList.add('show');
+  }
+
+  frame.addEventListener('load', function(){
+    var a = api();
+    if(!a){
+      showWarn('讀不到預覽頁的內容。如果你是用 <code>file://</code> 直接打開這個檔案，' +
+               '瀏覽器會擋住跨頁存取——請改用本機伺服器（例如在專案資料夾執行 ' +
+               '<code>python3 -m http.server</code>，再開 ' +
+               '<code>http://localhost:8000/admin/問卷內容後台.html</code>），或直接在正式網站上使用。');
+      $('editorTitle').textContent = '無法載入';
+      $('editorNote').textContent = '請依右側說明改用本機伺服器或正式網站開啟。';
+      return;
+    }
+    groups = a.index || [];
+    overrides = QContent.load();
+    updateStatus();
+    renderFields();
+    regenerate();
+  });
+
+  frame.src = '../women-health-questionnaire.html?preview=1';
+})();
+</script>
+</body>
+</html>
