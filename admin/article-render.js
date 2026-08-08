@@ -370,7 +370,7 @@
     var body = renderBlocks(article.blocks, ctx);
     var hasCta = (article.blocks || []).some(function (b) { return b.type === 'cta'; });
     var pageUrl = SITE_BASE + 'articles/' + esc(article.slug) + '.html';
-    var ogImage = SITE_BASE + 'og-image.png';
+    var ogImage = SITE_BASE + 'og-image.png?v=20260809-light';
     var jsonld = buildJSONLD(article, pageUrl, ogImage, ctx.faqItems, stageLabel);
     var robots = article.hidden ? 'noindex,follow' : 'index,follow,max-snippet:-1,max-image-preview:large';
     var metaLine = '約 ' + (article.readTime || 5) + ' 分鐘閱讀';
