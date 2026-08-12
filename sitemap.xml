@@ -45,15 +45,28 @@
   <url><loc>https://katewoo.com/treatments/treatment-oncology.html</loc><lastmod>2026-07-30</lastmod><priority>0.6</priority></url>
 
   <!-- ARTICLES_AUTO_START — 此區塊由「admin/文章管理後台.html」自動產生，請勿手動編輯 -->
-  <url><loc>https://katewoo.com/articles/postpartum-care.html</loc><lastmod>2026-07-27</lastmod><priority>0.6</priority></url>
-  <url><loc>https://katewoo.com/articles/postpartum-lochia.html</loc><lastmod>2026-07-27</lastmod><priority>0.6</priority></url>
-  <url><loc>https://katewoo.com/articles/postpartum-hair-loss.html</loc><lastmod>2026-07-27</lastmod><priority>0.6</priority></url>
-  <url><loc>https://katewoo.com/articles/breastfeeding-chinese-medicine.html</loc><lastmod>2026-07-27</lastmod><priority>0.6</priority></url>
-  <url><loc>https://katewoo.com/articles/low-milk-supply.html</loc><lastmod>2026-07-27</lastmod><priority>0.6</priority></url>
-  <url><loc>https://katewoo.com/articles/blocked-duct-mastitis.html</loc><lastmod>2026-07-27</lastmod><priority>0.6</priority></url>
-  <url><loc>https://katewoo.com/articles/miscarriage-recovery.html</loc><lastmod>2026-07-27</lastmod><priority>0.6</priority></url>
-  <url><loc>https://katewoo.com/articles/shenghua-decoction.html</loc><lastmod>2026-07-27</lastmod><priority>0.6</priority></url>
-  <url><loc>https://katewoo.com/articles/caesarean-recovery.html</loc><lastmod>2026-07-27</lastmod><priority>0.6</priority></url>
-  <url><loc>https://katewoo.com/articles/confinement-taboos.html</loc><lastmod>2026-07-27</lastmod><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/postpartum-care.html</loc><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/postpartum-lochia.html</loc><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/postpartum-hair-loss.html</loc><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/breastfeeding-chinese-medicine.html</loc><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/low-milk-supply.html</loc><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/blocked-duct-mastitis.html</loc><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/miscarriage-recovery.html</loc><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/shenghua-decoction.html</loc><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/caesarean-recovery.html</loc><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/confinement-taboos.html</loc><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/amh-poi.html</loc><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/confirm-ovulation.html</loc><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/endometriosis.html</loc><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/infertility-causes-tests.html</loc><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/ivf-process.html</loc><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/ivf-tcm.html</loc><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/male-fertility.html</loc><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/menstrual-cycle.html</loc><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/ovulation-calculator.html</loc><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/pcos-pmos.html</loc><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/period-pain.html</loc><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/preconception-care.html</loc><priority>0.6</priority></url>
+  <url><loc>https://katewoo.com/articles/uterine-fibroids.html</loc><priority>0.6</priority></url>
   <!-- ARTICLES_AUTO_END -->
 </urlset>
