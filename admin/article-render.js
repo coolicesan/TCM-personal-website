@@ -112,12 +112,27 @@
     var text = String(title == null ? '' : title).trim();
     var split = text.match(/^(.+?[：:])(.+)$/) || text.match(/^(.+?[？?])(.+)$/);
     if (!split) return inline(text);
-    return '<span class="article-title-primary">' + inline(split[1].trim()) + '</span>' +
+    /* 主標與副標在版面上已由分隔線斷開，主標尾巴的冒號會變成孤立標點，
+       故只在主標保留問號（本身是語氣），冒號則去掉。 */
+    var primary = split[1].trim().replace(/[：:]\s*$/, '');
+    return '<span class="article-title-primary">' + inline(primary) + '</span>' +
       '<span class="article-title-secondary">' + inline(split[2].trim()) + '</span>';
   }
 
   function slugifyHeading(text, index) {
     return 'sec-' + (index + 1);
+  }
+
+  function articlePath(article) {
+    var folder = '';
+    if (article && article.stage === 'postpartum') folder = '產後/';
+    else if (article && article.stage === 'fertility') folder = '備孕/';
+    else if (article && article.stage === 'pregnancy') folder = '孕期/';
+    return 'articles/' + folder + esc(article && article.slug) + '.html';
+  }
+
+  function relativePrefix(article) {
+    return article && (article.stage === 'postpartum' || article.stage === 'fertility' || article.stage === 'pregnancy') ? '../../' : '../';
   }
 
   // ── 各區塊型別 → HTML ──────────────────────────────────────
@@ -192,10 +207,11 @@
       }).join('');
       return '<div class="a-faq">' + html + '</div>';
     },
-    cta: function (b) {
+    cta: function (b, ctx) {
+      var prefix = (ctx && ctx.prefix) || '../';
       return '<div class="a-cta"><h3>' + inline(b.title || '想進一步了解自己的身體狀況？') + '</h3>' +
         '<p>' + inline(b.text || '歡迎預約中醫師門診，由醫師為您詳細辨證，制定個人化治療方案。') + '</p>' +
-        '<a class="a-cta-btn" href="../index.html#contact">預約掛號 →</a></div>';
+        '<a class="a-cta-btn" href="' + prefix + 'index.html#contact">預約掛號 →</a></div>';
     }
   };
 
@@ -237,21 +253,23 @@
   }
 
   // ── 麵包屑導覽（可見 HTML，置於 hero 內）──────────────────────
-  function buildBreadcrumbNav(stageLabel, stageKey) {
-    var crumbs = ['<a href="../index.html">首頁</a>', '<a href="../articles.html">文章知識庫</a>'];
+  function buildBreadcrumbNav(stageLabel, stageKey, prefix) {
+    prefix = prefix || '../';
+    var crumbs = ['<a href="' + prefix + 'index.html">首頁</a>', '<a href="' + prefix + 'articles.html">文章知識庫</a>'];
     if (stageLabel) {
-      var stageHref = '../articles.html' + (stageKey ? '?stage=' + esc(stageKey) : '');
+      var stageHref = prefix + 'articles.html' + (stageKey ? '?stage=' + esc(stageKey) : '');
       crumbs.push('<a href="' + stageHref + '">' + esc(stageLabel) + '</a>');
     }
     return '<nav class="article-breadcrumbs" aria-label="麵包屑導覽">' + crumbs.join('<span class="sep">›</span>') + '</nav>';
   }
 
   // ── 文末作者簡介框 ────────────────────────────────────────
-  function buildAuthorBox() {
+  function buildAuthorBox(prefix) {
+    prefix = prefix || '../';
     return '<div class="article-authorbox">' +
-      '<img src="../profile-pic.jpg" alt="胡佩珊中醫師 Kate Woo" loading="lazy">' +
+      '<img src="' + prefix + 'profile-pic.jpg" alt="胡佩珊中醫師 Kate Woo" loading="lazy">' +
       '<div><h4>關於作者</h4>' +
-      '<p><a href="../about.html">胡佩珊中醫師</a>，香港註冊中醫師（註冊編號：008823），專注女性健康及產前產後調理，善於結合中醫辨證與現代醫學知識，為病人制定個人化治療方案。</p>' +
+      '<p><a href="' + prefix + 'about.html">胡佩珊中醫師</a>，香港註冊中醫師（註冊編號：008823），專注女性健康及產前產後調理，善於結合中醫辨證與現代醫學知識，為病人制定個人化治療方案。</p>' +
       '</div></div>';
   }
 
@@ -366,10 +384,11 @@
       return '<span class="article-hero-tag">' + inline(t) + '</span>';
     }).join('');
     var toc = buildTOC(article.blocks);
-    var ctx = {};
+    var prefix = relativePrefix(article);
+    var ctx = { prefix: prefix };
     var body = renderBlocks(article.blocks, ctx);
     var hasCta = (article.blocks || []).some(function (b) { return b.type === 'cta'; });
-    var pageUrl = SITE_BASE + 'articles/' + esc(article.slug) + '.html';
+    var pageUrl = SITE_BASE + articlePath(article);
     var ogImage = SITE_BASE + 'og-image.png?v=20260809-light';
     var jsonld = buildJSONLD(article, pageUrl, ogImage, ctx.faqItems, stageLabel);
     var robots = article.hidden ? 'noindex,follow' : 'index,follow,max-snippet:-1,max-image-preview:large';
@@ -377,9 +396,11 @@
     var modified = article.modifiedDate || article.publishDate || '';
     var publishedMeta = article.publishDate ? '<meta property="article:published_time" content="' + esc(article.publishDate) + '">\n' : '';
     var modifiedMeta = modified ? '<meta property="article:modified_time" content="' + esc(modified) + '">\n' : '';
-    var breadcrumbNav = buildBreadcrumbNav(stageLabel, article.stage);
-    var authorBox = buildAuthorBox();
+    var cssHref = (article.stage === 'postpartum' || article.stage === 'fertility' || article.stage === 'pregnancy') ? '../article.css' : 'article.css';
+    var breadcrumbNav = buildBreadcrumbNav(stageLabel, article.stage, prefix);
+    var authorBox = buildAuthorBox(prefix);
     var related = buildRelated(article, allArticles, stageLabelMap);
+    var stageClass = article.stage ? ' article-stage-' + String(article.stage).replace(/[^a-z0-9_-]/gi, '') : '';
 
     return '<!DOCTYPE html>\n' +
 '<html lang="zh-Hant-HK">\n' +
@@ -405,15 +426,25 @@ modifiedMeta +
 '<link rel="preconnect" href="https://fonts.googleapis.com">\n' +
 '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n' +
 '<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500;600&display=swap" rel="stylesheet">\n' +
-'<link rel="stylesheet" href="article.css">\n' +
+'<link rel="stylesheet" href="' + cssHref + '">\n' +
 jsonld + '\n' +
 '</head>\n' +
-'<body>\n' +
+'<body class="article-page' + stageClass + '">\n' +
 '<nav class="site-nav">\n' +
-'  <a href="../index.html" class="site-nav-logo">胡佩珊中醫師</a>\n' +
-'  <div class="site-nav-links">\n' +
-'    <a href="../index.html#articles" class="hide-mobile">← 健康知識庫</a>\n' +
-'    <a href="../index.html#contact" class="site-nav-cta">預約掛號</a>\n' +
+'  <div class="site-nav-inner">\n' +
+'    <a href="' + prefix + 'index.html#top" class="site-nav-logo" aria-label="返回胡佩珊中醫師首頁">\n' +
+'      <img src="' + prefix + 'assets/logo.png" alt="" class="site-nav-mark" width="52" height="52">\n' +
+'      <span class="site-nav-name">胡佩珊中醫師</span>\n' +
+'    </a>\n' +
+'    <div class="site-nav-links">\n' +
+'      <a href="' + prefix + 'index.html#top">首頁</a>\n' +
+'      <a href="' + prefix + 'index.html#stages">服務項目</a>\n' +
+'      <a href="' + prefix + 'index.html#services">治療項目</a>\n' +
+'      <a href="' + prefix + 'index.html#assessments">健康評估</a>\n' +
+'      <a href="' + prefix + 'articles.html" aria-current="page">健康知識庫</a>\n' +
+'      <a href="' + prefix + 'about.html">關於醫師</a>\n' +
+'      <a href="' + prefix + 'index.html#contact" class="site-nav-cta">預約掛號 →</a>\n' +
+'    </div>\n' +
 '  </div>\n' +
 '</nav>\n' +
 '<header class="article-hero">\n' +
@@ -429,12 +460,12 @@ toc + '\n' +
 '<div class="article-section">\n' +
 body + '\n' +
 '</div>\n' +
-(hasCta ? '' : '<div class="a-cta"><h3>想進一步了解自己的身體狀況？</h3><p>歡迎預約中醫師門診，由醫師為您詳細辨證，制定個人化治療方案。</p><a class="a-cta-btn" href="../index.html#contact">預約掛號 →</a></div>\n') +
+(hasCta ? '' : '<div class="a-cta"><h3>想進一步了解自己的身體狀況？</h3><p>歡迎預約中醫師門診，由醫師為您詳細辨證，制定個人化治療方案。</p><a class="a-cta-btn" href="' + prefix + 'index.html#contact">預約掛號 →</a></div>\n') +
 authorBox + '\n' +
 related + '\n' +
 '<p class="article-disclaimer">本文內容僅供健康教育參考，不構成醫療建議，亦不能取代註冊醫師或中醫師的診斷與治療。若您出現急性或嚴重症狀，請立即求醫。撰文：胡佩珊中醫師（香港中醫藥管理委員會註冊中醫師，註冊編號：008823）。</p>\n' +
 '</main>\n' +
-'<script src="../shared-nav.js"></script>\n' +
+'<script src="' + prefix + 'shared-nav.js"></script>\n' +
 '</body>\n' +
 '</html>\n';
   }
@@ -447,10 +478,15 @@ related + '\n' +
     var tags = tagList.join(',');
     var searchBlob = [article.title, article.excerpt, tagList.join(' '), (article.keywords || []).join(' ')]
       .join(' ').toLowerCase();
-    var tagPills = tagList.length
-      ? '        <div class="art-tags">' + tagList.map(function (t) { return '<span class="art-tag-pill">' + esc(t) + '</span>'; }).join('') + '</div>\n'
+    /* 每張卡片先標明所屬生命階段，再接主題標籤；階段色由 .article-card[data-stage] 提供 */
+    var stagePill = stageLabel
+      ? '<span class="art-stage">' + esc(stageLabel) + '</span>'
       : '';
-    return '<a href="articles/' + esc(article.slug) + '.html" class="article-card" data-stage="' + esc(article.stage) + '" data-tags="' + esc(tags) + '" data-search="' + esc(searchBlob) + '">\n' +
+    var topicPills = tagList.map(function (t) { return '<span class="art-tag-pill">' + esc(t) + '</span>'; }).join('');
+    var tagPills = (stagePill || topicPills)
+      ? '        <div class="art-tags">' + stagePill + topicPills + '</div>\n'
+      : '';
+    return '<a href="' + articlePath(article) + '" class="article-card" data-stage="' + esc(article.stage) + '" data-tags="' + esc(tags) + '" data-search="' + esc(searchBlob) + '">\n' +
 tagPills +
 '        <div class="art-title">' + esc(article.title) + '</div>\n' +
 '        <div class="art-excerpt">' + esc(article.excerpt || '') + '</div>\n' +
@@ -467,6 +503,7 @@ tagPills +
     renderArticleHTML: renderArticleHTML,
     renderCardHTML: renderCardHTML,
     renderTagChipHTML: renderTagChipHTML,
+    articlePath: articlePath,
     renderBlocks: renderBlocks,
     localizeArticle: localizeArticle,
     pickLocalized: pickLocalized,

@@ -30,7 +30,10 @@
   --shadow: 0 3px 16px rgba(105, 88, 66, 0.07);
   --shadow-hover: 0 16px 40px rgba(105, 88, 66, 0.14);
   --maxw: 1120px;
+  /* 導覽列高度（52px 標誌 + 上下 .82rem + 邊框），供 sticky 元素讓位 */
+  --nav-h: 79px;
 }
+@media (max-width: 900px) { :root { --nav-h: 68px; } }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 84px; }
@@ -380,20 +383,9 @@ a { color: inherit; }
 
 /* ── 健康文章 ─────────────────────────────────────── */
 .articles-section { background: var(--ivory); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.stage-tabs {
-  display: flex; flex-wrap: wrap; justify-content: center;
-  gap: 0.55rem; margin: 2.4rem 0 2.2rem;
-}
-.stage-tab {
-  font-family: var(--font-body); font-size: 0.88rem; font-weight: 500;
-  padding: 0.48rem 1.2rem; border-radius: 999px;
-  background: var(--cream); color: var(--cocoa-soft);
-  border: 1px solid var(--line); cursor: pointer;
-  transition: all 0.2s;
-}
-.stage-tab:hover { border-color: var(--gold); color: var(--taupe-deep); }
-.stage-tab:focus-visible { outline: 2px solid var(--taupe); outline-offset: 2px; }
-.stage-tab.active { background: var(--taupe); border-color: var(--taupe); color: var(--white); }
+/* 首頁的階段分頁置中並自帶上下留白；知識庫篩選列的那組靠左，
+   兩者共用 .stage-tab 外觀（定義在下方篩選列區塊）。 */
+#articleTabs { justify-content: center; gap: 0.55rem; margin: 2.4rem 0 2.2rem; }
 
 /* ── 健康知識庫：深色頁首（含搜尋框） ── */
 .kb-hero {
@@ -428,22 +420,26 @@ a { color: inherit; }
 .kb-search-wrap input::placeholder { color: rgba(255,255,255,.55); }
 .kb-search-wrap input:focus { outline: none; border-color: var(--gold); background: rgba(255,255,255,.16); }
 
-/* ── 健康知識庫：篩選列（sticky，分組顯示） ── */
+/* ── 健康知識庫：篩選列（sticky，分組顯示） ──
+   sticky 位置要讓開 shared-nav.js 注入的導覽列，否則會被蓋住。 */
 .kb-filter-bar {
-  position: sticky; top: 60px; z-index: 60;
+  position: sticky; top: var(--nav-h); z-index: 60;
   background: var(--ivory); border-bottom: 1px solid var(--line);
-  padding: 18px clamp(1.25rem, 4vw, 2.5rem);
+  padding: 16px clamp(1.25rem, 4vw, 2.5rem);
 }
 .kb-filter-inner { max-width: var(--maxw); margin: 0 auto; }
-.kb-filter-group { display: flex; align-items: center; flex-wrap: wrap; gap: .6rem; margin-bottom: .65rem; }
-.kb-filter-group:last-child { margin-bottom: 0; }
+.kb-filter-group { display: flex; align-items: flex-start; flex-wrap: wrap; column-gap: .9rem; row-gap: .5rem; }
+/* 兩組篩選之間用虛線分隔，避免兩排膠囊看起來像同一組標籤 */
+.kb-filter-group + .kb-filter-group {
+  margin-top: .7rem; padding-top: .7rem; border-top: 1px dashed var(--line);
+}
 .kb-filter-label {
   font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
-  color: var(--cocoa-soft); flex-shrink: 0; min-width: 62px;
+  color: var(--cocoa-soft); flex: 0 0 auto; min-width: 58px; padding-top: .48rem;
 }
-.kb-filter-count { margin-left: auto; font-size: .74rem; color: var(--cocoa-soft); white-space: nowrap; }
+.kb-filter-count { margin-left: auto; padding-top: .5rem; font-size: .74rem; color: var(--cocoa-soft); white-space: nowrap; }
 .kb-filter-count strong { color: var(--taupe-deep); }
-.stage-tabs, .tag-chips { display: flex; flex-wrap: wrap; gap: .5rem; }
+.stage-tabs, .tag-chips { display: flex; flex-wrap: wrap; gap: .45rem; flex: 1 1 auto; }
 .stage-tab {
   font-family: var(--font-body); font-size: 0.82rem; font-weight: 500;
   padding: 0.4rem 1rem; border-radius: 999px;
@@ -454,17 +450,30 @@ a { color: inherit; }
 .stage-tab:hover { border-color: var(--gold); color: var(--taupe-deep); }
 .stage-tab:focus-visible { outline: 2px solid var(--taupe); outline-offset: 2px; }
 .stage-tab.active { background: var(--taupe); border-color: var(--taupe); color: var(--white); }
+/* 主題標籤是次要維度：字級與留白都比生命階段小一階，並以 # 標明是標籤 */
 .tag-chip {
-  font-family: var(--font-body); font-size: 0.82rem; font-weight: 500;
-  padding: 0.4rem 1rem; border-radius: 999px;
-  background: var(--cream); color: var(--cocoa-soft);
+  font-family: var(--font-body); font-size: 0.76rem; font-weight: 500;
+  padding: 0.32rem 0.82rem; border-radius: 999px;
+  background: transparent; color: var(--cocoa-soft);
   border: 1px solid var(--line); cursor: pointer;
   transition: border-color 0.2s, background 0.2s, color 0.2s;
 }
+.tag-chip::before { content: '#'; margin-right: .1em; opacity: .5; }
 .tag-chip:hover { border-color: var(--gold); color: var(--taupe-deep); }
 .tag-chip:focus-visible { outline: 2px solid var(--taupe); outline-offset: 2px; }
 .tag-chip.active { background: var(--gold-soft); border-color: var(--gold); color: var(--taupe-deep); font-weight: 700; }
-@media (max-width: 640px) { .kb-filter-label { display: none; } }
+.tag-chip.active::before { opacity: .75; }
+/* 目前階段／搜尋條件下不會有結果的標籤，由 main.js 收起 */
+.tag-chip[hidden] { display: none; }
+@media (max-width: 640px) {
+  /* 兩排標籤本來就容易混淆，窄螢幕更需要保留分組標題：
+     標題與篇數各佔一行，膠囊另起一行排滿寬度。 */
+  .kb-filter-label { padding-top: 0; }
+  .kb-filter-count { padding-top: 0; }
+  /* 標題與篇數同一行，膠囊整排另起一行 */
+  .stage-tabs, .tag-chips { flex: 0 0 100%; order: 1; }
+  .stage-tab { font-size: 0.8rem; padding: 0.36rem 0.9rem; }
+}
 
 /* ── 健康知識庫：無結果狀態 ── */
 .kb-empty { display: none; text-align: center; padding: 3rem 1rem; color: var(--cocoa-soft); font-size: 0.98rem; }
@@ -514,12 +523,26 @@ a { color: inherit; }
 .article-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); border-color: var(--gold); }
 .article-card:hover::after { transform: scaleX(1); }
 .article-card:focus-visible { outline: 2px solid var(--taupe); outline-offset: 3px; }
-.art-tags { display: flex; flex-wrap: wrap; gap: .35rem; margin-bottom: .75rem; }
+.art-tags { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; margin-bottom: .75rem; }
+/* 生命階段標記：沿用主題標籤的配色，只以階段色圓點區分 */
+.art-stage {
+  display: inline-flex; align-items: center; gap: .34rem;
+  font-size: 0.68rem; font-weight: 700; letter-spacing: .02em;
+  padding: 0.16rem 0.6rem 0.16rem 0.5rem; border-radius: 999px;
+  background: var(--gold-soft); color: var(--taupe-deep);
+}
+.art-stage::before {
+  content: ''; width: 5px; height: 5px; border-radius: 50%;
+  background: var(--art-c); flex: 0 0 auto;
+}
+/* 主題標籤：以 # 與階段標記（圓點）區分，兩者一眼可辨 */
 .art-tag-pill {
   font-size: 0.68rem; font-weight: 600; letter-spacing: .02em;
   padding: 0.16rem 0.6rem; border-radius: 999px;
-  background: var(--gold-soft); color: var(--taupe-deep);
+  background: transparent; color: var(--cocoa-soft);
+  border: 1px solid var(--line);
 }
+.art-tag-pill::before { content: '#'; margin-right: .08em; opacity: .5; }
 .art-title {
   font-family: var(--font-display); font-size: 1.05rem; font-weight: 700;
   color: var(--cocoa); line-height: 1.6; margin-bottom: 0.55rem;
@@ -1188,9 +1211,11 @@ html[lang="en-HK"] .about-title-en { display: none; }
   }
   .assess-features li:nth-child(n+3) { display: none; }
 
-  .stage-tabs { display: none; }
   .articles-grid { grid-template-columns: 1fr; }
-  .articles-grid .article-card:nth-of-type(n+4) { display: none !important; }
+  /* 首頁只預覽 3 篇；知識庫頁（#kbGrid）要完整列出，否則手機版按階段
+     篩選時，排在第 4 篇之後的文章會全部被隱藏，篩選結果變成空白。 */
+  #articleTabs { display: none; }
+  #articlesGrid .article-card:nth-of-type(n+4) { display: none !important; }
 
   .about-grid {
     gap: 1.6rem;

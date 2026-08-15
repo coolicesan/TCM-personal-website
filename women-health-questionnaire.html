@@ -654,19 +654,6 @@
   .cta-box .btn-primary{background:var(--amber); color:var(--ink);}
   .cta-box .btn-primary:hover{background:var(--amber-deep); color:var(--paper);}
 
-  .contact-form{margin-top:30px;}
-  .contact-form h3{font-size:17px; margin:0 0 2px;}
-  .contact-form .en{font-size:12px; display:block; margin-bottom:16px;}
-  .form-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
-  @media (max-width:560px){.form-grid{grid-template-columns:1fr;}}
-  .form-field label{font-size:12.5px; color:var(--ink-soft); display:block; margin-bottom:5px;}
-  .form-note{font-size:12px; color:var(--ink-faint); margin-top:10px;}
-  .confirm-msg{
-    margin-top:14px; padding:12px 14px; border-radius:var(--radius-sm);
-    background:var(--pine-tint); color:var(--pine); font-size:13px; display:none;
-  }
-  .confirm-msg.show{display:block;}
-
   .summary-actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:30px;}
 
   /* ============ PREVIEW (admin only) ============ */
@@ -679,7 +666,7 @@
   .print-only{display:none;}
   @media print{
     body{background:#fff;}
-    .meridian, .meridian-mobile, .nav-row, .summary-actions, .contact-form, .cta-box, .brand{display:none !important;}
+    .meridian, .meridian-mobile, .nav-row, .summary-actions, .cta-box, .brand{display:none !important;}
     .app{display:block; max-width:100%; padding:0;}
     .panel{box-shadow:none; border:none; padding:0; max-width:100%;}
     .print-only{display:block;}
@@ -1693,7 +1680,7 @@ function getSteps(){
 /* ============================================================
    2. STATE
    ============================================================ */
-const state = { step:0, answers:{}, contact:{} };
+const state = { step:0, answers:{} };
 const panel = document.getElementById('panel');
 const meridianEl = document.getElementById('meridian');
 const meridianMobileEl = document.getElementById('meridianMobile');
@@ -1743,9 +1730,9 @@ function renderIntro(){
   return `
     <div class="intro-hero">
       <div class="eyebrow">女性健康自我評估 · Women's Health Check-in</div>
-      <h2 class="intro-title">花幾分鐘，<br>好好<em>聆聽身體的聲音</em></h2>
+      <h2 class="intro-title">女性健康評估問卷</h2>
       <span class="gold-thread" aria-hidden="true"></span>
-      <p class="intro-sub en">A few quiet minutes to understand what your body is telling you.</p>
+      <p class="intro-sub en">Women's Health Assessment Questionnaire</p>
       <p class="intro-copy">每位女性的身體，在不同階段都有各自的節奏與需求。這份問卷會陪您一步步檢視月經、婦科、癌症篩查與身心狀態，並溫和標示出值得留意的部分——讓您在走進診室前，就對自己的身體多一分理解。</p>
       <p class="intro-copy">問卷內容參考世界衛生組織（WHO）、美國預防服務工作小組（USPSTF）、國際婦產科聯盟（FIGO）等權威指引，並結合中醫調理視角，給您客觀又貼心的健康提醒。</p>
       <p class="intro-copy en">Grounded in guidance from the WHO, USPSTF, and FIGO — paired with a TCM care perspective — to give you clear, caring insight into your health.</p>
@@ -1756,8 +1743,8 @@ function renderIntro(){
       <span>🔒 <b>資料僅留在您的裝置</b> <span class="en">Stays on your device</span></span>
     </div>
     <div class="disclaimer">
-      <b>溫馨提醒 / Please note：</b>這份問卷是健康篩查與衛教的輔助工具，<b>不能取代醫師的診斷</b>。所有題目都可以略過；您的答案只會留在這個裝置上，唯有當您主動按下「送出聯絡資訊」時，才會透過您自己的郵件程式寄出，過程中不會自動上傳至任何伺服器。
-      <br><span class="en">This is a screening &amp; education aid, not a diagnosis. Every question is optional, and your answers stay on this device — nothing is sent anywhere unless you choose to submit your contact details via your own email app.</span>
+      <b>溫馨提醒 / Please note：</b>這份問卷是健康篩查與衛教的輔助工具，<b>不能取代醫師的診斷</b>。所有題目都可以略過；您的答案只會留在這個裝置上，不會上傳至任何伺服器，若想帶給醫師參考，請自行列印或匯出 PDF。
+      <br><span class="en">This is a screening &amp; education aid, not a diagnosis. Every question is optional, and your answers stay on this device — nothing is uploaded anywhere. Print or export the report if you'd like to bring it to your visit.</span>
     </div>
     <div class="nav-row">
       <span class="step-tag">START</span>
@@ -2014,8 +2001,8 @@ const ARTICLE_LINKS = {
   discharge: '',   // 白帶評估文章網址 Vaginal discharge article URL
   meno:      '',   // 更年期症狀評估文章網址 Menopause assessment article URL
   precon:     '',   // 備孕評估文章網址 Preconception assessment article URL
-  pregnancy:  '',   // 孕期照護文章網址 Pregnancy care article URL
-  postpartum: 'articles/postpartum-care.html',   // 產後與哺乳文章網址 Postpartum & breastfeeding article URL
+  pregnancy:  'articles/孕期/hong-kong-pregnancy-care-timeline.html',   // 孕期照護文章網址 Pregnancy care article URL
+  postpartum: 'articles/產後/postpartum-care.html',   // 產後與哺乳文章網址 Postpartum & breastfeeding article URL
   cancer:              '',   // 癌症篩查文章網址(子宮頸/乳房/大腸) Cancer screening article URL
   repro:     '',   // 性與生殖健康文章網址 Sexual health article URL
   wellness:  '',   // 代謝骨骼身心文章網址 Metabolic/bone/mood article URL
@@ -2355,6 +2342,48 @@ function renderMeter(score){
   </div>`;
 }
 
+function articleHref(slug){
+  const fertilitySlugs = [
+    'demo-sample-article',
+    'amh-poi',
+    'confirm-ovulation',
+    'endometriosis',
+    'infertility-causes-tests',
+    'ivf-process',
+    'ivf-tcm',
+    'male-fertility',
+    'menstrual-cycle',
+    'ovulation-calculator',
+    'pcos-pmos',
+    'period-pain',
+    'preconception-care',
+    'uterine-fibroids',
+  ];
+  const pregnancySlugs = [
+    'hong-kong-pregnancy-care-timeline',
+    'first-trimester-discomfort',
+    'threatened-miscarriage-tcm',
+    'second-trimester-discomfort',
+    'third-trimester-tcm',
+  ];
+  const postpartumSlugs = [
+    'postpartum-care',
+    'postpartum-lochia',
+    'postpartum-hair-loss',
+    'breastfeeding-chinese-medicine',
+    'low-milk-supply',
+    'blocked-duct-mastitis',
+    'miscarriage-recovery',
+    'shenghua-decoction',
+    'caesarean-recovery',
+    'confinement-taboos',
+  ];
+  if (postpartumSlugs.includes(slug)) return `articles/產後/${slug}.html`;
+  if (fertilitySlugs.includes(slug)) return `articles/備孕/${slug}.html`;
+  if (pregnancySlugs.includes(slug)) return `articles/孕期/${slug}.html`;
+  return `articles/${slug}.html`;
+}
+
 /* Shared list renderer — one <li> per triggered item, showing its actual
    FLAG() sentence (not a generic per-tier line). Tags only render when a
    flag was collapsed from >1 selected option (e.g. family cancer history),
@@ -2366,7 +2395,7 @@ function renderFlagList(entries){
       ? `<div class="cf-tags">${e.tags.map(t=>`<span class="chip">${t.zh}</span>`).join('')}</div>`
       : '';
     const articleHtml = e.article
-      ? `<a class="cf-link" href="articles/${e.article}.html" target="_blank" rel="noopener">→ 閱讀相關文章 <span class="en">Read more</span></a>`
+      ? `<a class="cf-link" href="${articleHref(e.article)}" target="_blank" rel="noopener">→ 閱讀相關文章 <span class="en">Read more</span></a>`
       : '';
     return `<li>${tagsHtml}<p style="margin:0;">${e.zh}<span class="en cf-en">${e.en}</span></p>${articleHtml}</li>`;
   }).join('')}</ul>`;
@@ -2703,7 +2732,7 @@ function renderArticleLinks(links, hasFindings){
   }
   return `<div class="stage-articles">
     <p class="sc-title">為您推薦的文章</p>
-    ${links.map(h=>`<a class="sa-link" href="articles/${h.slug}.html" target="_blank" rel="noopener">${h.title} →</a>`).join('')}
+    ${links.map(h=>`<a class="sa-link" href="${articleHref(h.slug)}" target="_blank" rel="noopener">${h.title} →</a>`).join('')}
   </div>`;
 }
 
@@ -3398,34 +3427,13 @@ function renderSummary(){
       <h3>${anyTcm ? '想進一步了解中醫如何幫助您？' : '歡迎預約一次完整諮詢'}</h3>
       <span class="en">${anyTcm ? 'Curious how TCM can help?' : 'Book a full consultation'}</span>
       <p>${anyTcm
-        ? '根據您的填答，有幾個面向很適合透過中醫進一步評估體質與調理方向。歡迎留下聯絡方式，我們會盡快與您聯繫。'
-        : '無論結果如何，定期的整體評估都有助於及早掌握身體狀態。歡迎留下聯絡方式，我們會盡快與您聯繫。'}</p>
-      <a href="#contactForm" class="btn btn-primary">留下聯絡方式 Leave Contact Info ↓</a>
-    </div>
-
-    <div class="contact-form" id="contactForm">
-      <h3>留下聯絡方式，安排諮詢</h3>
-      <span class="en">Leave your details to request a consultation</span>
-      <div class="form-grid">
-        <div class="form-field"><label>姓名 Name</label><input class="field-text" type="text" data-contact="name"></div>
-        <div class="form-field"><label>Email</label><input class="field-text" type="email" data-contact="email"></div>
-        <div class="form-field"><label>電話 Phone</label><input class="field-text" type="tel" data-contact="phone"></div>
-        <div class="form-field"><label>方便聯絡時段 Best time to reach you</label><input class="field-text" type="text" data-contact="time"></div>
-      </div>
-      <div class="form-field" style="margin-top:14px;">
-        <label>想和醫師說明的狀況(選填) Anything you'd like the practitioner to know (optional)</label>
-        <textarea class="field-text wide" data-contact="note"></textarea>
-      </div>
-      <div class="nav-row" style="border-top:none;margin-top:18px;padding-top:0;">
-        <button class="btn btn-primary" data-nav="submit-contact">送出並預約諮詢 Submit Request →</button>
-      </div>
-      <p class="form-note">送出後將開啟您的郵件程式，由您確認寄出；本頁不會自動上傳資料至伺服器。<br><span class="en">This opens your email app for you to confirm sending — nothing is uploaded automatically.</span></p>
-      <div class="confirm-msg" id="confirmMsg"></div>
+        ? '根據您的填答，有幾個面向很適合透過中醫進一步評估體質與調理方向。'
+        : '無論結果如何，定期的整體評估都有助於及早掌握身體狀態。'}</p>
+      <a href="index.html#contact" class="btn btn-primary" target="_blank" rel="noopener">預約掛號 Book an Appointment →</a>
     </div>
 
     <div class="summary-actions">
       <button class="btn btn-ghost" data-nav="prev">← 回到上一步修改答案 Edit answers</button>
-      <button class="btn btn-ghost" data-nav="print">🖨 列印 / 匯出 PDF Print / Export</button>
     </div>
 
     <div class="print-only">
@@ -3482,8 +3490,6 @@ panel.addEventListener('click', e=>{
     if(action==='start'){ state.step = 1; renderCurrentStep(); window.scrollTo({top:0,behavior:'smooth'}); return; }
     if(action==='next'){ state.step = Math.min(state.step+1, getSteps().length-1); renderCurrentStep(); window.scrollTo({top:0,behavior:'smooth'}); return; }
     if(action==='prev'){ state.step = Math.max(state.step-1, 0); renderCurrentStep(); window.scrollTo({top:0,behavior:'smooth'}); return; }
-    if(action==='print'){ window.print(); return; }
-    if(action==='submit-contact'){ submitContact(); return; }
   }
 });
 
@@ -3500,55 +3506,7 @@ panel.addEventListener('input', e=>{
     }
     return;
   }
-  const c = e.target.closest('[data-contact]');
-  if(c){ state.contact[c.dataset.contact] = c.value; }
 });
-
-const CLINIC_EMAIL = 'woopuisan.ec@gmail.com';
-
-function showConfirm(zh, en){
-  const box = document.getElementById('confirmMsg');
-  if(!box) return;
-  box.innerHTML = zh + '<br><span class="en">'+en+'</span>';
-  box.classList.add('show');
-}
-
-function submitContact(){
-  const c = state.contact || {};
-  if(!c.email && !c.phone){
-    showConfirm('請至少留下 Email 或電話，方便我們與您聯繫。','Please leave an email or phone number so we can reach you.');
-    return;
-  }
-  const domainFlags = computeDomainFlags();
-  const lines = [];
-  getActiveReportDomains().forEach(d=>{
-    const b = domainFlags[d.id];
-    if(!b) return;
-    ['urgent','screen','tcm'].forEach(lvl=>b[lvl].forEach(f=>{
-      const tagList = (f.tags||[]).map(t=>t.zh).join('、');
-      lines.push('· ['+d.zh+' / '+STATUS_BADGE[lvl].zh+'] '+(tagList||f.zh));
-    }));
-  });
-
-  const subject = '女性健康篩查問卷 - 預約諮詢需求';
-  const body = [
-    '姓名 Name：' + (c.name || '(未填寫)'),
-    'Email：' + (c.email || '(未填寫)'),
-    '電話 Phone：' + (c.phone || '(未填寫)'),
-    '方便聯絡時段：' + (c.time || '(未填寫)'),
-    '',
-    '想和醫師說明的狀況：',
-    c.note || '(無)',
-    '',
-    '問卷摘要重點：',
-    lines.length ? lines.join('\n') : '（未發現明顯警訊）',
-    '',
-    '※完整問卷內容請參考使用者列印 / 匯出之 PDF 報告。'
-  ].join('\n');
-
-  window.location.href = 'mailto:' + CLINIC_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-  showConfirm('已為您開啟郵件程式，請確認寄出；您也可以直接列印此頁帶至診所。','Your email app should now open — please confirm sending, or print this page to bring along.');
-}
 
 /* ============================================================
    10. INIT

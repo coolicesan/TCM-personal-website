@@ -130,6 +130,24 @@ function initKnowledgeBase() {
     });
     if (emptyEl) emptyEl.classList.toggle('show', visible === 0);
     if (countEl) countEl.textContent = visible;
+    syncTagChips(q);
+  }
+
+  // 只顯示在目前生命階段／搜尋條件下真的有文章的主題標籤，
+  // 避免出現按下去得到 0 篇的死路（例如在「備孕」看到「坐月」）。
+  function syncTagChips(q) {
+    if (!tagBox) return;
+    tagBox.querySelectorAll('.tag-chip').forEach((chip) => {
+      const tag = chip.dataset.tag;
+      const usable = cards.some((card) => {
+        const stageOk = state.stage === 'all' || card.dataset.stage === state.stage;
+        const searchOk = !q || (card.dataset.search || '').indexOf(q) !== -1;
+        const hasTag = (card.dataset.tags || '').split(',').indexOf(tag) !== -1;
+        return stageOk && searchOk && hasTag;
+      });
+      // 已選取的標籤一定要留著，否則使用者無法取消選取
+      chip.hidden = !usable && !state.tags.has(tag);
+    });
   }
 
   if (searchInput) {

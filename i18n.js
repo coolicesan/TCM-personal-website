@@ -122,6 +122,7 @@
     '以艾草溫熱刺激穴位，溫經散寒、補益陽氣，特別適合宮寒不孕、痛經及產後虛寒體質。': 'Warming moxa care for cold-type patterns, period pain, postpartum coldness and selected fertility concerns.',
 
     '線上健康評估': 'Online Health Assessments',
+    '健康評估問卷': 'Health Assessments',
     '花幾分鐘，更了解自己的身體': 'Begin with a health questionnaire',
     '中醫體質問卷': 'TCM Constitution Questionnaire',
     '王琦九種體質 · 中華中醫藥學會標準': 'Nine-constitution framework used in TCM',

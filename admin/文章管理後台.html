@@ -203,7 +203,7 @@
             <div class="field">
               <label>網址代碼（slug）</label>
               <input type="text" id="fSlug">
-              <div class="hint">只能用英文/數字/連字號，決定網址 articles/你的代碼.html</div>
+              <div class="hint">只能用英文/數字/連字號；備孕／孕期／產後文章會輸出到對應分類資料夾</div>
             </div>
             <div class="field">
               <label>生命階段分類</label>
@@ -841,12 +841,19 @@
   function stageLabelMap(){
     var m = {}; state.data.stages.forEach(function(s){ m[s.key] = s.label; }); return m;
   }
+  function adaptArticleHtmlForAdminPreview(html){
+    return html
+      .replace(/href="(?:\.\.\/)?article\.css"/g, 'href="../articles/article.css"')
+      .replace(/src="\.\.\/\.\.\/assets\/logo\.png"/g, 'src="../assets/logo.png"')
+      .replace(/src="\.\.\/\.\.\/profile-pic\.jpg"/g, 'src="../profile-pic.jpg"')
+      .replace(/href="\.\.\/\.\.\/(index|articles|about)\.html/g, 'href="../$1.html');
+  }
   $('btnPreview').addEventListener('click', function(){
     var a = curArticle(); if (!a) return;
     var sMap0 = stageLabelMap();
     var html = window.ArticleRender.renderArticleHTML(a, sMap0[a.stage], state.data.articles, sMap0);
     // 預覽時把相對路徑指回實際資料夾，讓字型與樣式讀得到
-    html = html.replace('href="article.css"', 'href="../articles/article.css"');
+    html = adaptArticleHtmlForAdminPreview(html);
     $('previewFrame').srcdoc = html;
     $('previewModal').classList.add('show');
   });
@@ -909,7 +916,7 @@
     var a = curArticle(); if (!a) return;
     var sMap = stageLabelMap();
     var html = window.ArticleRender.renderArticleHTML(a, sMap[a.stage], state.data.articles, sMap);
-    html = html.replace('href="article.css"', 'href="../articles/article.css"');
+    html = adaptArticleHtmlForAdminPreview(html);
     var frame = $('wysiwygFrame');
     frame.onload = function(){
       var doc = frame.contentDocument;
@@ -957,6 +964,18 @@
   async function deleteFileIfExists(dirHandle, name){
     try{ await dirHandle.removeEntry(name); }catch(e){ /* 不存在就略過 */ }
   }
+  async function articleDirectory(articlesDir, article){
+    if (article && article.stage === 'postpartum') {
+      return await articlesDir.getDirectoryHandle('產後', { create:true });
+    }
+    if (article && article.stage === 'fertility') {
+      return await articlesDir.getDirectoryHandle('備孕', { create:true });
+    }
+    if (article && article.stage === 'pregnancy') {
+      return await articlesDir.getDirectoryHandle('孕期', { create:true });
+    }
+    return articlesDir;
+  }
 
   function serializeDataFile(){
     var clone = { stages: state.data.stages, articles: state.data.articles };
@@ -981,6 +1000,9 @@
     try{
       var adminDir = await state.dirHandle.getDirectoryHandle('admin', { create:true });
       var articlesDir = await state.dirHandle.getDirectoryHandle('articles', { create:true });
+      var postpartumDir = await articlesDir.getDirectoryHandle('產後', { create:true });
+      var fertilityDir = await articlesDir.getDirectoryHandle('備孕', { create:true });
+      var pregnancyDir = await articlesDir.getDirectoryHandle('孕期', { create:true });
 
       // 1) 資料檔
       await writeFile(adminDir, 'articles-data.js', serializeDataFile());
@@ -990,7 +1012,12 @@
       slugs.forEach(function(s){ currentSlugSet[s] = true; });
       for (var k=0;k<state.knownSlugs.length;k++){
         var old = state.knownSlugs[k];
-        if (!currentSlugSet[old]) await deleteFileIfExists(articlesDir, old + '.html');
+        if (!currentSlugSet[old]) {
+          await deleteFileIfExists(articlesDir, old + '.html');
+          await deleteFileIfExists(postpartumDir, old + '.html');
+          await deleteFileIfExists(fertilityDir, old + '.html');
+          await deleteFileIfExists(pregnancyDir, old + '.html');
+        }
       }
 
       // 3) 產生每篇文章 HTML
@@ -998,7 +1025,28 @@
       for (var j=0;j<state.data.articles.length;j++){
         var art = state.data.articles[j];
         var html = window.ArticleRender.renderArticleHTML(art, sMap[art.stage], state.data.articles, sMap);
-        await writeFile(articlesDir, art.slug + '.html', html);
+        var targetDir = await articleDirectory(articlesDir, art);
+        if (art.stage === 'postpartum') {
+          await deleteFileIfExists(articlesDir, art.slug + '.html');
+          await deleteFileIfExists(fertilityDir, art.slug + '.html');
+          await deleteFileIfExists(pregnancyDir, art.slug + '.html');
+        }
+        else if (art.stage === 'fertility') {
+          await deleteFileIfExists(articlesDir, art.slug + '.html');
+          await deleteFileIfExists(postpartumDir, art.slug + '.html');
+          await deleteFileIfExists(pregnancyDir, art.slug + '.html');
+        }
+        else if (art.stage === 'pregnancy') {
+          await deleteFileIfExists(articlesDir, art.slug + '.html');
+          await deleteFileIfExists(fertilityDir, art.slug + '.html');
+          await deleteFileIfExists(postpartumDir, art.slug + '.html');
+        }
+        else {
+          await deleteFileIfExists(postpartumDir, art.slug + '.html');
+          await deleteFileIfExists(fertilityDir, art.slug + '.html');
+          await deleteFileIfExists(pregnancyDir, art.slug + '.html');
+        }
+        await writeFile(targetDir, art.slug + '.html', html);
       }
 
       // 4) 更新首頁卡片區塊（首頁只精選最新 6 篇，其餘靠「查看全部文章」連去知識庫頁）
@@ -1042,7 +1090,7 @@
         var kbCardsHtml = published.map(function(a){ return window.ArticleRender.renderCardHTML(a, sMap[a.stage]); }).join('\n      ');
 
         var itemList = published.map(function(a, i){
-          return { '@type':'ListItem', position: i+1, url: SITE_BASE + 'articles/' + a.slug + '.html', name: a.title };
+          return { '@type':'ListItem', position: i+1, url: SITE_BASE + window.ArticleRender.articlePath(a), name: a.title };
         });
         var kbJsonld = [
           {
@@ -1093,7 +1141,7 @@
         var smFile = await smHandle.getFile();
         var smText = await smFile.text();
         var smUrls = state.data.articles.filter(function(a){ return !a.hidden; }).map(function(a){
-          return '  <url><loc>https://katewoo.com/articles/' + a.slug + '.html</loc><priority>0.6</priority></url>';
+          return '  <url><loc>' + window.ArticleRender.SITE_BASE + window.ArticleRender.articlePath(a) + '</loc><priority>0.6</priority></url>';
         }).join('\n');
         var smStart = '<!-- ARTICLES_AUTO_START — 此區塊由「admin/文章管理後台.html」自動產生，請勿手動編輯 -->';
         var smEnd = '<!-- ARTICLES_AUTO_END -->';

@@ -2,11 +2,27 @@
 (function () {
   'use strict';
 
-  function depthPrefix() {
-    var path = location.pathname;
-    if (/\/(?:articles|treatments|services|admin)\/[^/]+\.html$/.test(path)) {
-      return '../';
+  /* 這個檔案永遠放在網站根目錄，所以用它自己的網址回推根目錄最可靠：
+     不論頁面在第幾層、用 file:// 直接開啟，還是放在子目錄底下都成立。 */
+  var SITE_ROOT = (function () {
+    var el = document.currentScript;
+    if (!el) {
+      var scripts = document.querySelectorAll('script[src]');
+      for (var i = scripts.length - 1; i >= 0; i--) {
+        if (/shared-nav\.js(?:[?#]|$)/.test(scripts[i].getAttribute('src') || '')) { el = scripts[i]; break; }
+      }
     }
+    var src = el && el.src ? el.src.replace(/[?#].*$/, '') : '';
+    var root = src.replace(/shared-nav\.js$/, '');
+    return root && root !== src ? root : null;
+  })();
+
+  /* 萬一找不到腳本本身（理論上不會），才退回按已知資料夾推算層數。 */
+  function depthPrefix() {
+    if (SITE_ROOT) return SITE_ROOT;
+    var path = location.pathname;
+    if (/\/articles\/[^/]+\/[^/]+\.html$/.test(path)) return '../../';
+    if (/\/(?:articles|treatments|services|admin)\/[^/]+\.html$/.test(path)) return '../';
     return '';
   }
 

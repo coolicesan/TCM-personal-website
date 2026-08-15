@@ -30,26 +30,44 @@
   --radius: 14px;
   --radius-lg: 22px;
   --shadow: 0 3px 16px rgba(105, 88, 66, 0.07);
+  /* 全文共用的文字欄寬：hero 與內文都以此對齊，左邊界完全一致 */
+  --measure: 712px;
+  --gutter: 24px;
 }
 
 html { scroll-behavior: smooth; }
 body { font-family: var(--font-body); font-size: 16.5px; line-height: 1.9; color: var(--cocoa); background: linear-gradient(180deg, var(--ivory) 0%, var(--cream) 360px); -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
 
-/* ── Nav ── */
-.site-nav { position: sticky; top: 0; z-index: 100; background: rgba(255,253,249,.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 56px; }
-.site-nav-logo { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--cocoa); text-decoration: none; }
-.site-nav-links { display: flex; gap: 20px; align-items: center; }
-.site-nav-links a { font-size: 13px; color: var(--cocoa-soft); text-decoration: none; transition: color .15s; }
-.site-nav-links a:hover { color: var(--taupe-deep); }
-.site-nav-cta { background: var(--taupe); color: #fff !important; padding: 6px 14px; border-radius: 20px; font-weight: 500; }
-.site-nav-cta:hover { background: var(--taupe-deep) !important; }
-@media (max-width: 540px) { .site-nav-links .hide-mobile { display: none; } }
+/* ── Nav ──
+   與首頁（main.css 的 .nav）及 shared-nav.js 注入的 .drhu-nav 完全一致：
+   同一個 52px 標誌、同一組字級與間距，載入前後不會出現跳動。 */
+.site-nav { position: sticky; top: 0; z-index: 100; background: rgba(250,247,240,.94); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+.site-nav-inner { max-width: 1180px; margin: 0 auto; padding: .82rem clamp(1rem, 3vw, 2.5rem); display: flex; align-items: center; gap: 1rem; }
+.site-nav-logo { margin-right: auto; display: inline-flex; align-items: center; gap: .6rem; color: var(--cocoa); text-decoration: none; line-height: 1.25; white-space: nowrap; }
+.site-nav-mark { width: 52px; height: 52px; object-fit: contain; flex: 0 0 auto; }
+.site-nav-name { font-family: var(--font-display); font-size: 1.08rem; font-weight: 700; color: var(--cocoa); letter-spacing: .02em; }
+.site-nav-links { display: flex; align-items: center; gap: clamp(.75rem, 1.8vw, 1.35rem); }
+.site-nav-links a { display: block; font-size: .9rem; font-weight: 500; color: var(--cocoa-soft); text-decoration: none; padding: .35rem 0; border-bottom: 2px solid transparent; transition: color .2s ease, border-color .2s ease, background .2s ease; }
+.site-nav-links a:hover { color: var(--taupe-deep); border-color: var(--gold); }
+.site-nav-links a[aria-current="page"] { color: var(--cocoa); border-color: var(--gold); }
+.site-nav-cta { background: var(--taupe); color: #fff !important; padding: .55rem 1.1rem !important; border-radius: 999px; border-bottom: 0 !important; }
+.site-nav-cta:hover { background: var(--taupe-deep) !important; border-color: transparent !important; }
+.site-nav-cta:active { background: #75593f !important; }
+@media (max-width: 900px) {
+  .site-nav-inner { padding: .66rem 1rem; }
+  .site-nav-mark { width: 46px; height: 46px; }
+  .site-nav-name { font-size: 1rem; }
+  /* 這排連結只在 shared-nav.js 接手前出現；窄螢幕沒有漢堡按鈕可用，
+     故收起次要連結，只留標誌與預約掛號，與注入後的導覽列收合狀態一致。 */
+  .site-nav-links a:not(.site-nav-cta) { display: none; }
+}
 
 /* ── Hero ── */
-.article-hero { background: linear-gradient(180deg, var(--ivory) 0%, #FBF3EF 100%); color: var(--cocoa); padding: 72px 24px 58px; text-align: left; position: relative; border-bottom: 1px solid var(--line); overflow: hidden; }
+.article-hero { background: linear-gradient(180deg, var(--ivory) 0%, #FBF3EF 100%); color: var(--cocoa); padding: 68px var(--gutter) 56px; text-align: left; position: relative; border-bottom: 1px solid var(--line); overflow: hidden; }
 .article-hero::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 7px; background: linear-gradient(90deg, var(--rose) 0%, var(--gold) 42%, var(--sage) 100%); opacity: .82; }
 .article-hero::after { content: ''; position: absolute; inset: auto 0 0; height: 1px; background: var(--white); opacity: .8; }
-.article-hero > * { max-width: 712px; margin-left: auto; margin-right: auto; }
+.article-hero > * { max-width: var(--measure); margin-left: auto; margin-right: auto; }
 
 /* ── Breadcrumbs（置於 hero 頂部，沿用 hero 的低調文字色） ── */
 .article-breadcrumbs { position: relative; font-size: 12.5px; letter-spacing: 0; color: var(--cocoa-soft); margin-bottom: 22px; }
@@ -57,19 +75,21 @@ body { font-family: var(--font-body); font-size: 16.5px; line-height: 1.9; color
 .article-breadcrumbs a:hover { color: var(--gold); text-decoration: underline; }
 .article-breadcrumbs .sep { margin: 0 8px; color: var(--taupe); }
 
-.article-hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0; color: var(--rose); background: rgba(255,255,255,.72); border: 1px solid rgba(184,121,118,.22); border-radius: 999px; padding: 5px 12px; margin-bottom: 18px; position: relative; }
+/* 標籤是縮至內容寬度的膠囊，auto margin 會令它置中，
+   因此改為以文字欄的左邊界對齊，與麵包屑及大標同一條直線。 */
+.article-hero-eyebrow { display: flex; width: fit-content; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0; color: var(--rose); background: rgba(255,255,255,.72); border: 1px solid rgba(184,121,118,.22); border-radius: 999px; padding: 5px 12px; margin: 0 auto 18px max(0px, (100% - var(--measure)) / 2); position: relative; }
 .article-hero-eyebrow::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--sage); }
-.article-hero h1 { font-family: var(--font-display); font-size: 42px; font-weight: 700; line-height: 1.22; letter-spacing: 0; text-wrap: pretty; word-break: normal; line-break: strict; overflow-wrap: break-word; color: var(--cocoa); margin-top: 0; margin-bottom: 20px; position: relative; }
-.article-title-primary { display: block; }
-.article-title-secondary { display: block; max-width: 640px; margin-top: 12px; color: var(--cocoa-soft); font-family: var(--font-body); font-size: .5em; font-weight: 500; line-height: 1.6; letter-spacing: .01em; }
-.article-hero h1::after { content: ''; display: block; width: 92px; height: 3px; margin-top: 22px; border-radius: 999px; background: linear-gradient(90deg, var(--rose), var(--gold), var(--sage)); }
-.article-hero-subtitle { font-family: var(--font-display); font-size: 18px; color: #6C5E52; max-width: 700px; margin-top: 0; margin-bottom: 28px; line-height: 1.9; position: relative; }
+.article-hero h1 { font-family: var(--font-display); font-size: 44px; font-weight: 700; line-height: 1.2; letter-spacing: 0; text-wrap: pretty; word-break: auto-phrase; line-break: loose; overflow-wrap: break-word; color: var(--cocoa); margin-top: 0; margin-bottom: 30px; position: relative; }
+.article-title-primary { display: block; max-width: var(--measure); }
+.article-title-secondary { display: grid; grid-template-columns: 44px minmax(0, 1fr); align-items: start; gap: 13px; max-width: 680px; margin-top: 15px; color: #6f6359; font-family: var(--font-body); font-size: 22px; font-weight: 500; line-height: 1.62; letter-spacing: 0; }
+.article-title-secondary::before { content: ''; width: 44px; height: 2px; margin-top: .83em; border-radius: 999px; background: linear-gradient(90deg, var(--rose), var(--gold)); }
+.article-hero-subtitle { font-family: var(--font-display); font-size: 18px; color: #6C5E52; max-width: var(--measure); margin-top: 0; margin-bottom: 28px; line-height: 1.9; text-wrap: pretty; position: relative; }
 .article-hero-tags { display: flex; flex-wrap: wrap; gap: 8px; position: relative; }
 .article-hero-tag { background: rgba(255,255,255,.68); border: 1px solid var(--line); color: var(--taupe-deep); font-size: 12.5px; padding: 4px 12px; border-radius: 999px; }
 .article-hero-meta { margin-top: 18px; font-size: 12.5px; color: var(--cocoa-soft); position: relative; }
 
 /* ── Layout ── */
-.article-container { max-width: 760px; margin: 0 auto; padding: 48px 24px 0; }
+.article-container { max-width: calc(var(--measure) + var(--gutter) * 2); margin: 0 auto; padding: 48px var(--gutter) 0; }
 
 /* ── TOC ── */
 .article-toc { background: var(--ivory); border: 1px solid var(--line); border-left: 4px solid var(--rose); border-radius: 8px; padding: 22px 26px; margin: 0 0 42px; box-shadow: var(--shadow); }
@@ -188,9 +208,10 @@ body { font-family: var(--font-body); font-size: 16.5px; line-height: 1.9; color
 /* ── CTA ── */
 .a-cta { background: linear-gradient(135deg, var(--cocoa) 0%, #34291F 100%); border-radius: 16px; padding: 40px 32px; text-align: center; margin: 48px 0 32px; color: #fff; }
 .a-cta h3 { font-family: var(--font-display); font-size: 22px; color: #fff; margin-bottom: 12px; }
-.a-cta p { color: var(--gold-soft); font-size: 15px; margin-bottom: 24px; white-space: nowrap; }
-.a-cta-btn { display: inline-block; background: #fff; color: var(--cocoa); font-weight: 600; font-size: 15px; padding: 12px 32px; border-radius: 30px; text-decoration: none; transition: transform .15s; }
-.a-cta-btn:hover { transform: translateY(-2px); }
+.a-cta p { color: var(--gold-soft); font-size: 15px; margin-bottom: 24px; text-wrap: balance; }
+.a-cta-btn { display: inline-block; background: #fff; color: var(--cocoa); font-weight: 600; font-size: 15px; padding: 12px 32px; border-radius: 30px; text-decoration: none; transition: transform .18s cubic-bezier(.2,.8,.3,1), box-shadow .18s ease; }
+.a-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(20, 14, 8, .28); }
+.a-cta-btn:active { transform: translateY(0); box-shadow: none; }
 
 /* ── Author box（文末作者簡介） ── */
 .article-authorbox { display: flex; gap: 16px; background: var(--ivory); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 26px; margin: 40px 0; }
@@ -204,8 +225,9 @@ body { font-family: var(--font-body); font-size: 16.5px; line-height: 1.9; color
 .article-related { margin: 8px 0 8px; }
 .article-related h4 { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--cocoa); margin-bottom: 16px; }
 .article-related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
-.article-related-card { display: block; background: var(--cream-deep); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; text-decoration: none; transition: transform .2s, border-color .2s; }
-.article-related-card:hover { transform: translateY(-3px); border-color: var(--gold); }
+.article-related-card { display: block; background: var(--cream-deep); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; text-decoration: none; transition: transform .2s cubic-bezier(.2,.8,.3,1), border-color .2s ease, box-shadow .2s ease; }
+.article-related-card:hover { transform: translateY(-3px); border-color: var(--gold); box-shadow: 0 6px 16px rgba(105, 88, 66, .12); }
+.article-related-card:active { transform: translateY(-1px); }
 .article-related-tag { display: inline-block; font-size: 11px; font-weight: 700; color: var(--taupe-deep); background: var(--gold-soft); padding: 2px 9px; border-radius: 999px; margin-bottom: 8px; }
 .article-related-title { font-family: var(--font-display); font-size: 14px; font-weight: 700; color: var(--cocoa); line-height: 1.5; margin-bottom: 6px; }
 .article-related-excerpt { font-size: 12.5px; color: var(--cocoa-soft); line-height: 1.7; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
@@ -213,12 +235,27 @@ body { font-family: var(--font-body); font-size: 16.5px; line-height: 1.9; color
 /* ── Disclaimer & footer ── */
 .article-disclaimer { font-size: 12px; color: var(--cocoa-soft); border-top: 1px solid var(--line); padding-top: 20px; margin: 20px 0 60px; line-height: 1.7; }
 
+/* ── 鍵盤焦點（全站文章統一樣式） ── */
+.site-nav-logo:focus-visible,
+.site-nav-links a:focus-visible,
+.article-breadcrumbs a:focus-visible,
+.article-toc a:focus-visible,
+.article-authorbox a:focus-visible,
+.article-related-card:focus-visible,
+.a-references summary:focus-visible,
+.a-cta-btn:focus-visible {
+  outline: 2px solid var(--rose);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+.a-cta-btn:focus-visible { outline-color: var(--gold); }
+
 @media (max-width: 640px) {
   body { font-size: 16px; line-height: 1.88; }
   .article-hero { padding: 48px 16px 42px; }
-  .article-hero h1 { font-size: 30px; line-height: 1.28; }
-  .article-title-secondary { margin-top: 9px; font-size: .58em; line-height: 1.55; }
-  .article-hero h1::after { width: 76px; margin-top: 18px; }
+  .article-hero h1 { font-size: 30px; line-height: 1.28; margin-bottom: 24px; }
+  .article-title-secondary { display: block; margin-top: 10px; font-size: 17px; line-height: 1.58; }
+  .article-title-secondary::before { display: none; }
   .article-hero-subtitle { font-family: var(--font-body); font-size: 15.8px; line-height: 1.82; }
   .article-hero-tags { gap: 6px; }
   .article-hero-tag { font-size: 12px; padding: 3px 10px; }
@@ -229,6 +266,37 @@ body { font-family: var(--font-body); font-size: 16.5px; line-height: 1.9; color
   .article-section h3 { font-size: 18.5px; }
   .a-lead { padding: 20px; font-size: 16px; }
   .a-cta { padding: 28px 20px; }
-  .a-cta p { white-space: normal; font-size: 13.5px; }
+  .a-cta p { font-size: 13.5px; }
   .article-authorbox { flex-direction: column; }
+}
+
+@media (max-width: 640px) {
+  :root { --gutter: 16px; }
+}
+
+/* ── 減少動態偏好 ── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+  .article-related-card:hover, .a-cta-btn:hover { transform: none; }
+}
+
+/* ── 列印（病人常會把文章列印帶去覆診） ── */
+@media print {
+  body { background: #fff; color: #000; font-size: 11.5pt; line-height: 1.7; }
+  .site-nav, .drhu-nav, .article-toc, .a-cta, .article-related, .lang-switch, .fab-whatsapp { display: none !important; }
+  .article-hero { padding: 0 0 18px; background: none; border-bottom: 1px solid #999; }
+  .article-hero::before, .article-hero::after { display: none; }
+  .article-hero > *, .article-hero-eyebrow { max-width: 100%; margin-left: 0; }
+  .article-container { max-width: 100%; padding: 0; }
+  .article-section h2, .article-section h3, .a-faq-q { break-after: avoid; page-break-after: avoid; }
+  .a-lead, .a-info, .a-warning, .a-alert, .a-table-wrap, .a-comparison, .a-faq-item, .article-authorbox { break-inside: avoid; page-break-inside: avoid; }
+  .article-section a { color: #000; border-bottom: none; }
+  .a-references { border: 1px solid #999; }
+  .a-references summary::after { display: none; }
+  .a-table-wrap { overflow: visible; }
 }
