@@ -25,6 +25,9 @@
   --white:       #FFFFFF;
   --danger:      #C0392B;
   --danger-light:#FDF0EE;
+  /* 求醫警號：比 --danger 沉一點，與品牌的 rose 同一家族 */
+  --alert:       #A8443A;
+  --alert-deep:  #8E3830;
   --font-display:'Noto Serif TC', serif;
   --font-body:   'Noto Sans TC', sans-serif;
   --radius: 14px;
@@ -138,12 +141,33 @@ img { max-width: 100%; display: block; }
 .a-warning-title { font-size: 13px; font-weight: 700; color: #7A5E14; margin-bottom: 6px; }
 .a-warning-text { font-size: 14px; color: #5C4500; line-height: 1.8; }
 
-/* ── Alert (紅色警示，語意色不隨品牌變) ── */
-.a-alert { background: var(--danger-light); border: 1.5px solid var(--danger); border-radius: 10px; padding: 20px 24px; margin: 24px 0; }
-.a-alert-title { font-size: 13px; font-weight: 700; color: var(--danger); letter-spacing: .04em; margin-bottom: 12px; }
+/* ── Alert（求醫警號）──
+   與 info／warning 同屬左邊框卡片家族，但用全站唯一的紅色調，
+   仍然是頁面上最醒目的一塊。警告符號由樣式提供，標題只寫文字。 */
+.a-alert {
+  background: linear-gradient(180deg, #FDF3F0 0%, #FAEAE5 100%);
+  border-left: 3px solid var(--alert);
+  border-radius: 0 8px 8px 0;
+  padding: 18px 22px 16px 24px; margin: 24px 0;
+  box-shadow: 0 2px 12px rgba(150, 62, 52, .07);
+}
+.a-alert-title {
+  display: flex; align-items: center; gap: 9px;
+  font-size: 13.5px; font-weight: 700; color: var(--alert-deep);
+  letter-spacing: .02em; margin-bottom: 10px;
+}
+.a-alert-title::before {
+  content: '!';
+  flex: 0 0 auto; width: 17px; height: 17px; border-radius: 50%;
+  background: var(--alert); color: #fff;
+  font-size: 12px; font-weight: 700; line-height: 17px; text-align: center;
+}
 .a-alert ul { list-style: none; }
-.a-alert li { padding: 6px 0 6px 24px; position: relative; color: #7A1A10; font-size: 14px; font-weight: 500; }
-.a-alert li::before { content: '⚠'; position: absolute; left: 0; font-size: 13px; }
+.a-alert li { padding: 5px 0 5px 17px; position: relative; color: #7C332B; font-size: 14px; font-weight: 500; line-height: 1.75; }
+.a-alert li::before {
+  content: ''; position: absolute; left: 2px; top: .82em;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--alert);
+}
 
 /* ── Checklist ── */
 .a-checklist { list-style: none; margin: 16px 0; }
@@ -161,6 +185,9 @@ img { max-width: 100%; display: block; }
 .a-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
 .a-table th, .a-table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--line); }
 .a-table th { background: var(--taupe-mist); color: var(--taupe-deep); font-weight: 700; white-space: nowrap; }
+/* 第一欄多為名稱／證型，作為標籤欄加重字重；桌面版不斷行 */
+.a-table td:first-child { font-weight: 600; color: var(--cocoa); }
+@media (min-width: 641px) { .a-table td:first-child { white-space: nowrap; } }
 .a-table tbody tr:last-child td { border-bottom: none; }
 .a-table tbody tr:nth-child(even) { background: var(--cream-deep); }
 
