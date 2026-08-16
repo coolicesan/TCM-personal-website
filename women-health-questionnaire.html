@@ -586,14 +586,24 @@
   }
 
   /* article link */
+  .article-links{
+    margin-top:auto; padding-top:10px;
+    border-top:1px dashed var(--line);
+    display:flex; flex-direction:column; align-items:flex-start; gap:5px;
+  }
+  .al-label{
+    font-size:10.5px; font-weight:700; letter-spacing:.08em;
+    color:var(--ink-faint); margin-bottom:1px;
+  }
   .article-link{
     display:inline-flex; align-items:center; gap:5px;
-    margin-top:auto; padding-top:8px;
-    font-size:12px; font-weight:600;
+    font-size:12px; font-weight:600; line-height:1.5;
     color:var(--pine); text-decoration:none;
-    border-top:1px dashed var(--line);
+    border-bottom:1px solid transparent;
+    transition:color .15s ease, border-color .15s ease;
   }
-  .article-link:hover{color:var(--pine-deep);}
+  .article-link:hover{color:var(--pine-deep); border-bottom-color:currentColor;}
+  .article-link:focus-visible{outline:2px solid var(--pine); outline-offset:3px; border-radius:3px;}
 
   /* ---- top-urgent banner closing action line ---- */
   .tier-action{font-size:13px; color:var(--ink-soft); margin:0;}
@@ -1050,14 +1060,14 @@ const SECTIONS = [
       ]},
 
     {id:'discharge_amount', type:'single', zh:'白帶量', en:'Vaginal discharge — amount', group:'白帶觀察', groupEn:'Vaginal Discharge Observation',
-      showIf:a=>a.basic_status!=='never',
+      showIf:a=>a.basic_status==='has_period'||a.basic_status==='menopause',
       options:[
         opt('normal','正常','Normal'),
         opt('heavy','量多','Heavy', FLAG('tcm','白帶量多，中醫常見脾虛濕盛調理範疇','Heavy discharge — a common TCM Spleen-deficiency / Damp pattern focus area', 'discharge')),
         opt('light','量少','Light'),
       ]},
     {id:'discharge_color', type:'single', zh:'白帶顏色', en:'Vaginal discharge — color', group:'白帶觀察', groupEn:'Vaginal Discharge Observation',
-      showIf:a=>a.basic_status!=='never',
+      showIf:a=>a.basic_status==='has_period'||a.basic_status==='menopause',
       options:[
         opt('normal','透明或乳白色(正常)','Clear or milky-white (normal)'),
         opt('yellow','黃色或黃綠色','Yellow or yellow-green', FLAG('screen','白帶顏色偏黃或黃綠，建議婦科評估排除感染','Yellow/green discharge — recommend a gynecological check to rule out infection', 'discharge')),
@@ -1065,7 +1075,7 @@ const SECTIONS = [
         opt('blood','夾血絲','Blood-streaked', FLAG('screen','白帶夾血絲，建議婦科評估','Blood-streaked discharge — recommend a gynecological evaluation', 'discharge')),
       ]},
     {id:'discharge_texture', type:'single', zh:'白帶質地與氣味', en:'Vaginal discharge — texture & odor', group:'白帶觀察', groupEn:'Vaginal Discharge Observation',
-      showIf:a=>a.basic_status!=='never',
+      showIf:a=>a.basic_status==='has_period'||a.basic_status==='menopause',
       options:[
         opt('normal','正常(無味或淡腥味)','Normal (odorless or mild)'),
         opt('curd','豆腐渣狀','Cottage-cheese-like', FLAG('screen','白帶呈豆腐渣狀，建議婦科評估排除感染','Cottage-cheese-like discharge — recommend a gynecological check to rule out infection', 'discharge')),
@@ -1073,13 +1083,13 @@ const SECTIONS = [
         opt('odor','有異味(腥臭或惡臭)','Strong/foul odor', FLAG('screen','白帶有異味，建議婦科評估排除感染','Discharge with an unusual odor — recommend a gynecological check to rule out infection', 'discharge')),
       ]},
     {id:'discharge_itch', type:'single', zh:'是否有外陰搔癢或灼熱感', en:'Vulvar itching or burning sensation', group:'白帶觀察', groupEn:'Vaginal Discharge Observation',
-      showIf:a=>a.basic_status!=='never',
+      showIf:a=>a.basic_status==='has_period'||a.basic_status==='menopause',
       options:[
         opt('no','無','None'),
         opt('yes','有','Yes', FLAG('screen','外陰搔癢或灼熱，建議婦科評估排除感染','Vulvar itching/burning — recommend a gynecological check to rule out infection', 'discharge')),
       ]},
     {id:'discharge_timing', type:'single', zh:'白帶是否隨週期變化', en:'Does discharge pattern relate to your cycle?', group:'白帶觀察', groupEn:'Vaginal Discharge Observation',
-      showIf:a=>a.basic_status!=='never',
+      showIf:a=>a.basic_status==='has_period'||a.basic_status==='menopause',
       options:[
         opt('cyclical','隨排卵期或經期前後增多(屬正常生理性)','Increases around ovulation/period (normal physiological pattern)'),
         opt('persistent','與週期無關、持續異常','Unrelated to cycle, persistently abnormal', FLAG('tcm','白帶與週期無關且持續，建議納入體質調理評估','Discharge unrelated to cycle and persistent — worth including in a constitutional assessment', 'discharge')),
@@ -1389,7 +1399,7 @@ const SECTIONS = [
         opt('frequent','經常','Frequently', FLAG('tcm','關節肌肉痠痛，中醫常見調理項目','Joint/muscle aches are a common TCM focus area')),
       ]},
     {id:'meno_cycle', type:'single', zh:'目前月經型態變化', en:'Current changes in your menstrual pattern',
-      showIf:a=>a.basic_status!=='pregnant' && a.basic_status!=='postpartum',
+      showIf:a=>a.basic_status==='has_period'||a.basic_status==='menopause',
       options:[
         opt('regular','仍規律','Still regular'),
         opt('irregular','開始變得不規律','Becoming irregular', FLAG('tcm','月經型態改變，中醫常見調理項目','Changing menstrual pattern is a common TCM focus area')),
@@ -1510,9 +1520,10 @@ const SECTIONS = [
   intro_en:'This section is optional and adapts based on whether you are currently sexually active.',
   questions:[
     {id:'repro_active', type:'single', zh:'目前是否有性行為', en:'Are you currently sexually active?',
+      showIf:a=>a.basic_status!=='pregnant' && a.basic_status!=='postpartum',
       options:[opt('yes','是','Yes'), opt('no','否','No')]},
     {id:'repro_contra', type:'single', zh:'避孕狀況', en:'Contraception status',
-      showIf:a=>a.repro_active==='yes',
+      showIf:a=>a.repro_active==='yes' && a.basic_status!=='pregnant' && a.basic_status!=='postpartum',
       options:[
         opt('none_needed','無避孕需求','No contraception needed'),
         opt('using','已使用避孕措施','Currently using contraception'),
@@ -1520,7 +1531,7 @@ const SECTIONS = [
       ]},
     {id:'repro_sym', type:'multi', zh:'目前是否有以下症狀?(可複選)', en:'Any of the following symptoms currently? (select all)',
       shortLabel:'生殖道症狀',
-      showIf:a=>a.repro_active==='yes',
+      showIf:a=>a.repro_active==='yes' && a.basic_status!=='pregnant' && a.basic_status!=='postpartum',
       options:[
         opt('discharge','異常分泌物','Abnormal discharge', FLAG('screen','建議安排婦科評估排除感染','Recommend a gynecological check to rule out infection')),
         opt('itch','外陰搔癢或疼痛','Vulvar itching or pain', FLAG('screen','建議安排婦科評估排除感染','Recommend a gynecological check to rule out infection')),
@@ -1530,7 +1541,7 @@ const SECTIONS = [
         {...opt('none','無','None'), exclusive:true},
       ]},
     {id:'repro_sti', type:'single', zh:'是否曾做過性傳染病(STI)/ HIV 篩檢', en:'Have you ever been screened for STIs / HIV?',
-      showIf:a=>a.repro_active==='yes',
+      showIf:a=>a.repro_active==='yes' && a.basic_status!=='pregnant' && a.basic_status!=='postpartum',
       options:[
         opt('yes','是','Yes'),
         opt('no','否','No', FLAG('screen','建議與醫師討論是否需要 STI/HIV 篩檢','Recommend discussing STI/HIV screening with your doctor')),
@@ -1642,13 +1653,25 @@ const TRACK_IDS = ['cycle','precon','pregnant_postpartum','meno'];
    offering 月經週期評估 to someone who's pregnant, or 孕期與產後 to someone
    who's postmenopausal. Anything not listed here is hidden on the path step
    and filtered out of route_extra. */
+/* 每個生理狀態可以選擇的單一專區。只列出「該狀態下真的有題目」的專區——
+   產後與從未有月經者的月經週期評估會整節被 showIf 隱藏，若仍然提供，
+   使用者選了之後會直接跳到結果頁，一題都看不到。 */
 const TRACKS_BY_STATUS = {
   has_period: ['cycle','precon','meno'],
   pregnant:   ['pregnant_postpartum'],
-  postpartum: ['pregnant_postpartum','cycle'],
+  postpartum: ['pregnant_postpartum'],
   menopause:  ['meno','cycle'],
-  never:      ['cycle'],
+  never:      [],
 };
+
+/* 某些狀態只適合填特定問卷，連「完整評估」也不應該超出這個範圍。
+   懷孕中只問孕期與產後，其餘篩查留待產後再做。 */
+const SECTIONS_BY_STATUS = {
+  pregnant: ['pregnant_postpartum'],
+};
+function getAllowedSectionIds(){
+  return SECTIONS_BY_STATUS[state.answers.basic_status] || null; // null = 不設限
+}
 function getAllowedTrackIds(){
   const status = state.answers.basic_status;
   if(!status || !TRACKS_BY_STATUS[status]) return TRACK_IDS;
@@ -1665,7 +1688,9 @@ function getActiveTrackIds(){
 /* basic is handled as its own step before the path step, so it's excluded here. */
 function getActiveSections(){
   const tracks = getActiveTrackIds();
-  const nonBasic = SECTIONS.filter(s => s.id!=='basic');
+  const limit = getAllowedSectionIds();
+  let nonBasic = SECTIONS.filter(s => s.id!=='basic');
+  if(limit) nonBasic = nonBasic.filter(s => limit.includes(s.id));
   const chosen = tracks===null ? nonBasic : nonBasic.filter(s => tracks.has(s.id));
   /* Safety net: never present a step with nothing on it. On the full route a
      section can end up entirely hidden by its questions' showIf (e.g. 孕期與產後
@@ -1673,8 +1698,19 @@ function getActiveSections(){
   return chosen.filter(s =>
     s.questions.some(q => !q.showIf || q.showIf(state.answers)));
 }
+/* 路徑頁只在真的有得選時才出現：若該生理狀態下只剩一份問卷，
+   「完整評估」與唯一的專區內容完全相同，再問一次只是多一步。 */
+function needsPathStep(){
+  if(!getAllowedTrackIds().length) return false; // 沒有可聚焦的專區，只剩完整評估
+  const limit = getAllowedSectionIds();
+  if(!limit) return true;
+  const usable = SECTIONS.filter(s => s.id!=='basic' && limit.includes(s.id))
+    .filter(s => s.questions.some(q => !q.showIf || q.showIf(state.answers)));
+  return usable.length > 1;
+}
 function getSteps(){
-  return ['intro', 'basic', 'path', ...getActiveSections().map(s=>s.id), 'summary'];
+  const mid = needsPathStep() ? ['path'] : [];
+  return ['intro', 'basic', ...mid, ...getActiveSections().map(s=>s.id), 'summary'];
 }
 
 /* ============================================================
@@ -1793,6 +1829,24 @@ const STATUS_LABELS = {
   menopause:'已停經', never:'從未有過月經',
 };
 
+/* 「完整評估」的說明與時間改為按目前生理狀態實際計算——孕期／產後不會出現
+   月經週期與性健康，卡片就不應該再承諾這些內容。 */
+function fullRouteCard(){
+  const secs = SECTIONS.filter(s => s.id!=='basic')
+    .filter(s => s.questions.some(q => !q.showIf || q.showIf(state.answers)));
+  const qCount = secs.reduce((n,s) =>
+    n + s.questions.filter(q => !q.showIf || q.showIf(state.answers)).length, 0);
+  const lo = Math.max(3, Math.round(qCount/5)), hi = Math.max(lo+2, Math.round(qCount/3));
+  const base = ROUTES[0];
+  if(!secs.length) return base;
+  return Object.assign({}, base, {
+    desc_zh: `涵蓋${secs.map(s=>s.zh).join('、')}，完整記錄您目前的健康狀態。`,
+    desc_en: `Covers ${secs.map(s=>s.en).join(', ')}.`,
+    time_zh: `約 ${lo}–${hi} 分鐘`,
+    time_en: `${lo}–${hi} min`,
+  });
+}
+
 function renderPath(){
   const allowed = getAllowedTrackIds();
   /* If they went back and changed 生理狀態, a previously-picked route may no
@@ -1808,7 +1862,7 @@ function renderPath(){
 
   const primary = state.answers.route_primary;
   const extra = state.answers.route_extra || [];
-  const fullRoute = ROUTES[0];
+  const fullRoute = fullRouteCard();
   /* Only offer tracks that fit the reproductive stage answered on the previous
      step — no 月經週期評估 for someone who's pregnant, etc. */
   const tracks = ROUTES.slice(1).filter(r => allowed.includes(r.id));
@@ -1979,11 +2033,35 @@ const REPORT_DOMAINS = [
    (pregnant_postpartum) — only the one matching the person's basic_status
    is shown, so no one sees an empty postpartum card while pregnant, or a
    pregnancy card when they're postpartum. */
+/* 一題屬於哪個報告分區：預設是它所在的區塊，但有旗標覆寫者以覆寫為準
+   （白帶題住在月經區塊、孕期／產後題住在同一個區塊、家族史算入癌症篩查）。 */
+function questionReportDomain(sec, q, status){
+  const override = (q.options || []).map(o => o.flag && o.flag.domain).find(Boolean);
+  let id = override || sec.id;
+  if(id==='pregnant_postpartum') id = (status==='pregnant') ? 'pregnancy' : 'postpartum';
+  return id;
+}
+/* 使用者實際作答過的分區。基本資料不計——它只是背景，不代表填了哪一份問卷。 */
+function getAnsweredDomains(){
+  const status = (state.answers||{}).basic_status;
+  const answered = new Set();
+  SECTIONS.forEach(sec => {
+    if(sec.id==='basic') return;
+    sec.questions.forEach(q => {
+      const v = state.answers[q.id];
+      if(v==null || v==='' || (Array.isArray(v) && !v.length)) return;
+      answered.add(questionReportDomain(sec, q, status));
+    });
+  });
+  return answered;
+}
 function getActiveReportDomains(){
   const tracks = getActiveTrackIds();
   const inTrack = id => tracks===null || tracks.has(id);
   const status = (state.answers||{}).basic_status;
-  return REPORT_DOMAINS.filter(d => {
+  /* 結果頁只列出真的有作答的分區——略過整節的人不應該看到一張空卡片。 */
+  const answered = getAnsweredDomains();
+  return REPORT_DOMAINS.filter(d => answered.has(d.id)).filter(d => {
     if(d.id==='pregnancy')  return inTrack('pregnant_postpartum') && status==='pregnant';
     if(d.id==='postpartum') return inTrack('pregnant_postpartum') && status==='postpartum';
     if(d.id==='discharge')  return inTrack('cycle');
@@ -1996,18 +2074,27 @@ function getActiveReportDomains(){
    Leave as '' to show a placeholder '#' link until you fill it in.
    Keys match the report domain ids above (not the wizard section ids).
    ------------------------------------------------------------ */
+/* 這裡只負責一般卡片。月經、孕期、產後、更年期是「階段卡」，
+   它們的文章由 SYMPTOM_INFO 的 article 逐個症狀掛上（見下方 STAGE_CARD_BUILDERS）。 */
 const ARTICLE_LINKS = {
-  cycle:     '',   // 月經健康文章網址 Menstrual health article URL
-  discharge: '',   // 白帶評估文章網址 Vaginal discharge article URL
-  meno:      '',   // 更年期症狀評估文章網址 Menopause assessment article URL
-  precon:     '',   // 備孕評估文章網址 Preconception assessment article URL
-  pregnancy:  'articles/孕期/hong-kong-pregnancy-care-timeline.html',   // 孕期照護文章網址 Pregnancy care article URL
-  postpartum: 'articles/產後/postpartum-care.html',   // 產後與哺乳文章網址 Postpartum & breastfeeding article URL
-  cancer:              '',   // 癌症篩查文章網址(子宮頸/乳房/大腸) Cancer screening article URL
-  repro:     '',   // 性與生殖健康文章網址 Sexual health article URL
-  wellness:  '',   // 代謝骨骼身心文章網址 Metabolic/bone/mood article URL
-  lifestyle: '',   // 生活習慣文章網址 Lifestyle habits article URL
+  precon: [
+    {href:'articles/備孕/preconception-care.html',        zh:'備孕全指南：由準備到檢查'},
+    {href:'articles/備孕/confirm-ovulation.html',         zh:'怎樣知道自己有沒有排卵？'},
+    {href:'articles/備孕/infertility-causes-tests.html',  zh:'為甚麼會不孕？常見原因與檢查'},
+  ],
+  discharge: [],   // 未有對應文章 No matching article yet
+  cancer:    [],   // 未有對應文章 No matching article yet
+  repro:     [],   // 未有對應文章 No matching article yet
+  wellness:  [],   // 未有對應文章 No matching article yet
+  lifestyle: [],   // 未有對應文章 No matching article yet
 };
+/* 值可以是一組連結，或依作答回傳連結的函式；兩者都轉成陣列使用。 */
+function articleLinksFor(domainId){
+  const v = ARTICLE_LINKS[domainId];
+  const list = (typeof v === 'function') ? v(state.answers || {}) : v;
+  if(!list) return [];
+  return (Array.isArray(list) ? list : [{href:list, zh:'閱讀完整文章'}]).filter(Boolean);
+}
 
 /* Per-domain "what normal looks like" text, shown when no flags were
    triggered, plus optional dynamic caveats (e.g. hormonal contraception). */
@@ -2594,17 +2681,17 @@ const POSTPARTUM_RED_FLAGS = [
    were triggered — reuses the site's existing article slugs. */
 const POSTPARTUM_ARTICLE_RULES = [
   {when:a=>['prolonged','concern'].includes(a.preg_lochia),
-    slug:'postpartum-lochia', title:'惡露流多久才算正常？'},
+    slug:'postpartum-lochia', title:'惡露多久才乾淨？'},
   {when:a=>['moderate','significant'].includes(a.preg_hairloss),
-    slug:'postpartum-hair-loss', title:'產後掉髮：為什麼會這樣，怎麼辦？'},
+    slug:'postpartum-hair-loss', title:'產後脫髮甚麼時候停？'},
   {when:a=>['occasional','frequent'].includes(a.preg_engorgement),
-    slug:'blocked-duct-mastitis', title:'塞奶與乳腺炎的照護'},
+    slug:'blocked-duct-mastitis', title:'塞奶、石頭胸、乳腺炎怎樣分辨？'},
   {when:a=>a.preg_milk === 'low',
-    slug:'low-milk-supply', title:'奶量不足怎麼辦'},
+    slug:'low-milk-supply', title:'奶量不足怎麼辦？'},
   {when:a=>['yes','mixed'].includes(a.preg_breastfeeding),
     slug:'breastfeeding-chinese-medicine', title:'哺乳期的中醫照護'},
   {when:a=>a.preg_postpartum_timing === '0to4w',
-    slug:'confinement-taboos', title:'坐月子禁忌：哪些要注意，哪些沒必要'},
+    slug:'confinement-taboos', title:'坐月可不可以洗頭、開冷氣？'},
 ];
 
 /* ============================================================
@@ -2759,27 +2846,33 @@ const SYMPTOM_INFO = {
   '週期偏短頻繁，常屬中醫氣血/腎氣相關調理範疇':
     { insight:'週期短於 24 天，代表濾泡期或黃體期可能較短，中醫觀點常見於氣血偏虛或腎氣不足的體質。',
       tip:'留意經期前後是否伴隨疲勞、腰痠等症狀，規律作息、避免過度勞累與熬夜，有助週期穩定。',
-      watch:'若同時經量偏多或經期延長，建議安排婦科評估。', },
+      watch:'若同時經量偏多或經期延長，建議安排婦科評估。',
+      article:{slug:'menstrual-cycle', title:'月經週期幾多日才正常？'} },
   '週期偏長稀發，建議與中醫師討論調理，並留意是否合併其他內分泌症狀':
     { insight:'週期長於 38 天，可能代表排卵較不規律，中醫觀點常見於氣血循環較緩或痰濕體質。',
       tip:'持續紀錄週期天數；均衡飲食與規律運動有助內分泌穩定，若合併多毛、體重明顯變化，建議一併告知醫師。',
-      watch:'若超過 3 個月完全沒有月經，或合併多毛、體重明顯上升、皮膚變化，建議做內分泌檢查。', },
+      watch:'若超過 3 個月完全沒有月經，或合併多毛、體重明顯上升、皮膚變化，建議做內分泌檢查。',
+      article:{slug:'pcos-pmos', title:'多囊卵巢（PCOS）改名 PMOS'} },
   '週期不規律，為中醫常見調理項目':
     { insight:'最短與最長週期相差超過 9 天，代表排卵時間較不穩定。',
       tip:'持續紀錄週期天數，規律作息與適度運動有助週期穩定。',
-      watch:'若一年來的次數少於 4 次，或突然從規律變成不規律，建議安排評估。', },
+      watch:'若一年來的次數少於 4 次，或突然從規律變成不規律，建議安排評估。',
+      article:{slug:'menstrual-cycle', title:'月經週期幾多日才正常？'} },
   '經期延長，建議與中醫師討論調理方向':
     { insight:'經期超過 8 天，可能與子宮內膜脫落較慢或氣血運行有關。',
       tip:'經期較長的這幾天可以多休息、避免劇烈運動與提重物；建議持續記錄，觀察是否每次都偏長。',
-      watch:'若每次都超過 8 天、或同時經量很多需頻繁更換，建議檢查是否有肌瘤或息肉。', },
+      watch:'若每次都超過 8 天、或同時經量很多需頻繁更換，建議檢查是否有肌瘤或息肉。',
+      article:{slug:'menstrual-cycle', title:'月經週期幾多日才正常？'} },
   '經血色暗或夾血塊，中醫常見血瘀調理範疇':
     { insight:'經血偏暗或帶血塊，中醫觀點多與氣血循環較慢（血瘀）有關，臨床上相當常見。',
       tip:'經期可熱敷腹部、避免生冷飲食，適度活動有助氣血循環。',
-      watch:'若血塊大於約 2.5 公分（十元硬幣大小）或同時經量很多，建議婦科評估。', },
+      watch:'若血塊大於約 2.5 公分（十元硬幣大小）或同時經量很多，建議婦科評估。',
+      article:{slug:'period-pain', title:'經痛痛到甚麼程度算不正常？'} },
   '經常有大血塊，中醫常見血瘀調理範疇':
     { insight:'經常出現大血塊，同樣多與氣血循環較慢有關。',
       tip:'經期可熱敷腹部、避免生冷飲食；血塊較多時避免劇烈運動與提重物。',
-      watch:'若血塊大於約 2.5 公分（十元硬幣大小）或同時經量很多，建議婦科評估。', },
+      watch:'若血塊大於約 2.5 公分（十元硬幣大小）或同時經量很多，建議婦科評估。',
+      article:{slug:'uterine-fibroids', title:'子宮肌瘤需不需要切除？'} },
   '經血色淡，中醫常見氣血不足調理範疇':
     { insight:'經血偏淡，中醫觀點多與氣血不足有關，也可能與經量本身較少有關。',
       tip:'留意日常鐵質與蛋白質攝取，避免過度節食；規律作息有助氣血恢復。',
@@ -2789,7 +2882,8 @@ const SYMPTOM_INFO = {
       tip:'留意日常飲食均衡與規律作息，避免過度勞累。' },
   '經期畏寒喜溫，中醫常見寒證調理範疇':
     { insight:'經期特別怕冷、喜歡熱敷，中醫觀點多屬於偏寒體質的表現。',
-      tip:'經期注意腹部與足部保暖，避免生冷飲食，熱敷或泡腳都有幫助。' },
+      tip:'經期注意腹部與足部保暖，避免生冷飲食，熱敷或泡腳都有幫助。',
+      article:{slug:'period-pain', title:'經痛痛到甚麼程度算不正常？'} },
   '經期頭痛，中醫常見調理項目':
     { insight:'經期頭痛與賀爾蒙波動及氣血運行變化有關，是常見的經期伴隨症狀。',
       tip:'經期留意休息與水分補充，避免熬夜與過度用眼。',
@@ -2801,7 +2895,8 @@ const SYMPTOM_INFO = {
   '經痛影響生活，為中醫常見且擅長調理的項目':
     { insight:'經痛程度較高且影響日常生活，多與子宮收縮強度及局部血液循環有關。',
       tip:'經期可熱敷腹部、適度熱飲，避免生冷食物；規律運動有助整體經痛改善，經期間則以緩和活動為主。',
-      watch:'若止痛藥效果越來越差、疼痛一年比一年嚴重，或非經期也痛，建議安排婦科影像檢查。', },
+      watch:'若止痛藥效果越來越差、疼痛一年比一年嚴重，或非經期也痛，建議安排婦科影像檢查。',
+      article:{slug:'period-pain', title:'經痛痛到甚麼程度算不正常？'} },
   '經前情緒症狀，中醫常見調理範疇':
     { insight:'經前情緒起伏（經前症候群）與賀爾蒙波動影響神經傳導物質有關，相當常見。',
       tip:'經前留意情緒起伏，保持規律運動與充足睡眠，必要時可透過紀錄了解自己的週期性規律。',
@@ -2813,13 +2908,17 @@ const SYMPTOM_INFO = {
   // `tip` (the action lives in the 建議就醫 column) — only an insight, so the row
   // explains the finding instead of repeating the instruction.
   '經量過多，建議先評估是否有結構性病因(如肌瘤、息肉)，再搭配中醫調理':
-    { insight:'經量過多在醫學上定義為影響生活品質的出血量，常見原因包含子宮肌瘤、內膜息肉、腺肌症或凝血功能問題，也可能造成缺鐵性貧血。' },
+    { insight:'經量過多在醫學上定義為影響生活品質的出血量，常見原因包含子宮肌瘤、內膜息肉、腺肌症或凝血功能問題，也可能造成缺鐵性貧血。',
+      article:{slug:'uterine-fibroids', title:'子宮肌瘤需不需要切除？'} },
   '慢性骨盆痛，建議婦科評估排除子宮內膜異位症等':
-    { insight:'非經期也持續的骨盆腔疼痛，是子宮內膜異位症的典型表現之一，平均確診時間長達數年，及早檢查有助縮短這段時間。' },
+    { insight:'非經期也持續的骨盆腔疼痛，是子宮內膜異位症的典型表現之一，平均確診時間長達數年，及早檢查有助縮短這段時間。',
+      article:{slug:'endometriosis', title:'朱古力瘤與子宮內膜異位症'} },
   '性交疼痛，建議婦科評估':
-    { insight:'深部性交疼痛可能與子宮內膜異位症、骨盆腔發炎或子宮位置有關，屬於需要進一步釐清的症狀，不是「忍一忍就好」。' },
+    { insight:'深部性交疼痛可能與子宮內膜異位症、骨盆腔發炎或子宮位置有關，屬於需要進一步釐清的症狀，不是「忍一忍就好」。',
+      article:{slug:'endometriosis', title:'朱古力瘤與子宮內膜異位症'} },
   '排便/排尿疼痛，建議婦科評估排除子宮內膜異位症等':
-    { insight:'經期時排便或排尿疼痛，可能代表內膜異位病灶影響到腸道或膀胱周圍，是需要影像檢查釐清的徵象。' },
+    { insight:'經期時排便或排尿疼痛，可能代表內膜異位病灶影響到腸道或膀胱周圍，是需要影像檢查釐清的徵象。',
+      article:{slug:'endometriosis', title:'朱古力瘤與子宮內膜異位症'} },
   '情緒變化明顯，建議同時安排專業心理評估':
     { insight:'更年期的情緒變化與雌激素影響神經傳導物質有關，但當它明顯影響生活時，已超出單純賀爾蒙波動可以解釋的範圍，值得獨立評估。' },
   '建議與醫師討論停經後的骨密度與心血管相關篩檢':
@@ -2827,37 +2926,45 @@ const SYMPTOM_INFO = {
   '孕期情緒問題明顯，建議同時安排專業心理評估':
     { insight:'孕期焦慮與憂鬱的發生率不低於產後，且會影響睡眠、營養與產後恢復，是可以在孕期就開始處理的。' },
   '惡露顏色或氣味異常，建議婦科評估排除感染':
-    { insight:'惡露出現異味或顏色轉變，通常提示子宮腔或產道感染，越早處理越單純。' },
+    { insight:'惡露出現異味或顏色轉變，通常提示子宮腔或產道感染，越早處理越單純。',
+      article:{slug:'postpartum-lochia', title:'惡露多久才乾淨？'} },
   '產後情緒問題明顯，建議盡快安排產後憂鬱專業評估':
     { insight:'產後憂鬱與短暫的情緒低落（baby blues）不同：前者持續超過兩週、程度較重，且需要治療才會改善，並非意志力問題。' },
   // pregnancy
   '孕吐影響飲食，中醫安胎調理常見重點':
     { insight:'孕吐好發於第一孕期，與 hCG 及賀爾蒙濃度上升有關，多數在 12–16 週後緩解。',
       tip:'少量多餐、起床前先吃點乾糧或蘇打餅乾，避免空腹與油膩氣味；薑茶或薑片對部分人有幫助。',
-      watch:'若超過 24 小時無法進食喝水、體重下降超過孕前 5%，或尿量明顯減少，請就醫。', },
+      watch:'若超過 24 小時無法進食喝水、體重下降超過孕前 5%，或尿量明顯減少，請就醫。',
+      article:{slug:'first-trimester-discomfort', title:'懷孕初期不適，中醫怎麼幫？'} },
   '嚴重孕吐，中醫安胎調理可協助，嚴重時仍建議配合婦科評估':
     { insight:'嚴重孕吐（妊娠劇吐）可能影響水分與電解質平衡，需要較積極的醫療處理。',
       tip:'少量多餐、避免空腹與油膩氣味，薑茶或薑片可能有幫助；嚴重時建議同時配合婦科評估，必要時考慮住院支持治療。',
-      watch:'若超過 24 小時無法進食喝水、體重下降超過孕前 5%，或尿量明顯減少，請就醫。', },
+      watch:'若超過 24 小時無法進食喝水、體重下降超過孕前 5%，或尿量明顯減少，請就醫。',
+      article:{slug:'first-trimester-discomfort', title:'懷孕初期不適，中醫怎麼幫？'} },
   '孕期輕度水腫，中醫調理常見範疇':
     { insight:'孕期水腫與血漿容積增加、靜脈回流受阻有關，屬常見生理變化。',
       tip:'多留意雙腳抬高休息、避免久站久坐，並減少高鹽食物；穿著寬鬆襪子也有幫助。',
-      watch:'若突然加重、或只有單側小腿腫脹疼痛，請盡快就醫。', },
+      watch:'若突然加重、或只有單側小腿腫脹疼痛，請盡快就醫。',
+      article:{slug:'third-trimester-tcm', title:'懷孕後期不適：中醫如何助你待產'} },
   '孕期水腫明顯，中醫可協助，同時建議留意血壓':
     { insight:'水腫明顯，尤其合併頭痛或血壓上升時，需要留意子癲前症的可能性。',
       tip:'多留意雙腳抬高休息、減少高鹽食物，並同時留意血壓變化；建議產檢時主動告知醫師。',
-      watch:'若合併頭痛、視力改變、右上腹痛或血壓上升，請立即就醫（子癲前症徵象）。', },
+      watch:'若合併頭痛、視力改變、右上腹痛或血壓上升，請立即就醫（子癲前症徵象）。',
+      article:{slug:'third-trimester-tcm', title:'懷孕後期不適：中醫如何助你待產'} },
   '孕期腰背不適，中醫安胎調理常見項目':
     { insight:'孕期腰背不適與重心前移、韌帶受賀爾蒙影響變鬆有關。',
       tip:'側睡並在膝蓋間夾枕頭、避免久站，可嘗試溫和的孕婦伸展或瑜伽。',
-      watch:'若伴隨陰道出血、規律宮縮或發燒，請立即就醫。', },
+      watch:'若伴隨陰道出血、規律宮縮或發燒，請立即就醫。',
+      article:{slug:'second-trimester-discomfort', title:'懷孕中期不適：腰痠、抽筋、便秘'} },
   '孕期腰背痛明顯，中醫可協助緩解':
     { insight:'孕期腰背不適與重心前移、韌帶受賀爾蒙影響變鬆有關。',
       tip:'側睡並在膝蓋間夾枕頭、避免久站久坐，溫和伸展或熱敷有助緩解。',
-      watch:'若伴隨陰道出血、規律宮縮或發燒，請立即就醫。', },
+      watch:'若伴隨陰道出血、規律宮縮或發燒，請立即就醫。',
+      article:{slug:'second-trimester-discomfort', title:'懷孕中期不適：腰痠、抽筋、便秘'} },
   '孕期睡眠欠佳，中醫安胎調理常見項目':
     { insight:'孕期睡眠品質下降常與頻尿、身體不適及賀爾蒙變化有關。',
-      tip:'睡前避免使用螢幕與咖啡因，側睡並用枕頭支撐腹部與背部會較舒適。' },
+      tip:'睡前避免使用螢幕與咖啡因，側睡並用枕頭支撐腹部與背部會較舒適。',
+      article:{slug:'third-trimester-tcm', title:'懷孕後期不適：中醫如何助你待產'} },
   '孕期情緒波動，中醫安胎調理可協助身心平衡':
     { insight:'孕期情緒起伏與賀爾蒙變化及生活型態轉變都有關聯，相當常見。',
       tip:'情緒起伏時，找信任的人聊聊、保持適度活動與規律作息都有幫助。',
@@ -2865,16 +2972,19 @@ const SYMPTOM_INFO = {
   '孕期明顯疲勞，中醫安胎調理常見項目':
     { insight:'第一、三孕期的疲勞感與代謝負荷增加及睡眠品質下降有關。',
       tip:'順應身體訊號多休息，不需勉強維持孕前的活動量；分段小睡有助恢復精力。',
-      watch:'若合併心悸、呼吸急促或臉色蒼白，建議驗血色素確認是否貧血。', },
+      watch:'若合併心悸、呼吸急促或臉色蒼白，建議驗血色素確認是否貧血。',
+      article:{slug:'first-trimester-discomfort', title:'懷孕初期不適，中醫怎麼幫？'} },
   '孕期消化不適，中醫調理常見範疇':
     { insight:'孕期便秘脹氣主要與黃體素使腸道蠕動變慢，以及子宮壓迫腸道有關。',
       tip:'少量多餐、避免產氣食物（如豆類、碳酸飲料），飯後散步有助消化。',
-      watch:'若嚴重便秘超過一週、或出現血便與劇烈腹痛，請就醫。', },
+      watch:'若嚴重便秘超過一週、或出現血便與劇烈腹痛，請就醫。',
+      article:{slug:'second-trimester-discomfort', title:'懷孕中期不適：腰痠、抽筋、便秘'} },
   // postpartum
   '產後體力不足，中醫月子調理重點':
     { insight:'產後體力恢復速度因人而異，與睡眠碎片化、失血量及個人體質都有關。',
       tip:'利用寶寶睡覺時同步休息，不需要求自己立刻恢復孕前體力；適度營養補充比硬撐更重要。',
-      watch:'若產後 6 個月仍明顯疲累，建議檢查甲狀腺功能與血色素，不宜只當作「還在恢復」。', },
+      watch:'若產後 6 個月仍明顯疲累，建議檢查甲狀腺功能與血色素，不宜只當作「還在恢復」。',
+      article:{slug:'postpartum-care', title:'產後調理全指南'} },
   '產後情緒波動，中醫調理可協助身心平衡':
     { insight:'產後情緒起伏與賀爾蒙劇烈變化、睡眠不足及角色轉換壓力有關。',
       tip:'找家人朋友分擔照顧、保持規律睡眠與適度戶外活動，都有助情緒穩定。',
@@ -2882,39 +2992,48 @@ const SYMPTOM_INFO = {
   '產後明顯自汗盜汗，中醫月子調理常見重點':
     { insight:'產後排汗增加是身體排出孕期多餘水分的正常機制，通常數週內會緩解。',
       tip:'選擇透氣衣物與寢具，適度補充水分即可。',
-      watch:'若合併發燒或惡露異常，請就醫排除感染。', },
+      watch:'若合併發燒或惡露異常，請就醫排除感染。',
+      article:{slug:'postpartum-care', title:'產後調理全指南'} },
   '產後怕冷或關節不適，中醫月子調理重點':
     { insight:'產後怕冷、關節痠痛與氣血尚未恢復、賀爾蒙變化影響關節穩定度有關。',
       tip:'注意保暖，尤其是腰腹與足部；溫和熱敷與適度活動有助促進循環。',
-      watch:'若單一關節出現紅、腫、熱、痛，或伴隨發燒，請就醫。', },
+      watch:'若單一關節出現紅、腫、熱、痛，或伴隨發燒，請就醫。',
+      article:{slug:'confinement-taboos', title:'坐月可不可以洗頭、開冷氣？'} },
   '產後怕冷或關節不適明顯，中醫月子調理重點':
     { insight:'產後怕冷、關節痠痛與氣血尚未恢復、賀爾蒙變化影響關節穩定度有關。',
       tip:'注意保暖，尤其是腰腹與足部；溫和熱敷與適度活動有助促進循環。',
-      watch:'若單一關節出現紅、腫、熱、痛，或伴隨發燒，請就醫。', },
+      watch:'若單一關節出現紅、腫、熱、痛，或伴隨發燒，請就醫。',
+      article:{slug:'confinement-taboos', title:'坐月可不可以洗頭、開冷氣？'} },
   '產後掉髮，中醫調理常見項目':
     { insight:'產後掉髮與雌激素驟降，讓原本延長的生長期毛囊同步進入休止期有關，屬正常生理現象。',
       tip:'溫和洗護、避免過度拉扯或高溫造型，補充均衡營養有助頭髮回復。',
-      watch:'若產後一年後仍持續大量掉髮，或出現局部禿斑，建議就醫評估。', article:{slug:'postpartum-hair-loss', title:'產後掉髮：為什麼會這樣，怎麼辦？'} },
+      watch:'若產後一年後仍持續大量掉髮，或出現局部禿斑，建議就醫評估。', article:{slug:'postpartum-hair-loss', title:'產後脫髮甚麼時候停？'},
+      article:{slug:'postpartum-hair-loss', title:'產後脫髮甚麼時候停？'} },
   '產後明顯掉髮，中醫調理常見項目，可同時留意甲狀腺功能':
     { insight:'產後掉髮與雌激素驟降有關，屬正常生理現象；但持續大量掉髮也可能與甲狀腺功能變化有關。',
       tip:'溫和洗護、避免過度拉扯或高溫造型，補充均衡營養有助頭髮回復；持續明顯掉髮建議檢查甲狀腺功能。',
-      watch:'若產後一年後仍持續大量掉髮、或合併疲倦與體重變化，建議檢查甲狀腺功能。', article:{slug:'postpartum-hair-loss', title:'產後掉髮：為什麼會這樣，怎麼辦？'} },
+      watch:'若產後一年後仍持續大量掉髮、或合併疲倦與體重變化，建議檢查甲狀腺功能。', article:{slug:'postpartum-hair-loss', title:'產後脫髮甚麼時候停？'},
+      article:{slug:'postpartum-hair-loss', title:'產後脫髮甚麼時候停？'} },
   '惡露持續或量多，中醫產後調理常見重點':
     { insight:'惡露是子宮內膜修復過程中的正常分泌物，持續時間因人而異。',
       tip:'多休息、避免提重物與劇烈運動；若持續超過 6 週建議回診確認。',
-      watch:'若超過 6 週仍未結束、突然變多、有異味或合併發燒，請就醫。', article:{slug:'postpartum-lochia', title:'惡露流多久才算正常？'} },
+      watch:'若超過 6 週仍未結束、突然變多、有異味或合併發燒，請就醫。', article:{slug:'postpartum-lochia', title:'惡露多久才乾淨？'},
+      article:{slug:'postpartum-lochia', title:'惡露多久才乾淨？'} },
   '乳汁不足，中醫催乳調理常見項目':
     { insight:'泌乳量受哺乳頻率、含乳姿勢及母體水分營養狀況影響，多數可透過調整改善。',
       tip:'增加親餵或擠奶頻率、確保含乳姿勢正確，充足水分與休息也有幫助。',
-      watch:'若寶寶體重增長不足、尿布濕的次數明顯減少，請盡快諮詢醫師或哺乳顧問。', article:{slug:'low-milk-supply', title:'奶量不足怎麼辦'} },
+      watch:'若寶寶體重增長不足、尿布濕的次數明顯減少，請盡快諮詢醫師或哺乳顧問。', article:{slug:'low-milk-supply', title:'奶量不足怎麼辦？'},
+      article:{slug:'low-milk-supply', title:'奶量不足怎麼辦？'} },
   '乳房脹痛或阻塞，中醫調理可協助疏通':
     { insight:'乳腺阻塞多與排空不完全、哺乳姿勢或哺乳間隔過長有關。',
       tip:'哺乳前熱敷、哺乳後冷敷，並確保排空乳房；按摩時避免過度用力。',
-      watch:'若出現單側紅腫熱痛合併發燒，可能是乳腺炎，請盡快就醫。', article:{slug:'blocked-duct-mastitis', title:'塞奶與乳腺炎的照護'} },
+      watch:'若出現單側紅腫熱痛合併發燒，可能是乳腺炎，請盡快就醫。', article:{slug:'blocked-duct-mastitis', title:'塞奶、石頭胸、乳腺炎怎樣分辨？'},
+      article:{slug:'blocked-duct-mastitis', title:'塞奶、石頭胸、乳腺炎怎樣分辨？'} },
   '乳管阻塞頻繁，中醫調理可協助，嚴重時留意乳腺炎':
     { insight:'乳腺阻塞多與排空不完全、哺乳姿勢或哺乳間隔過長有關；頻繁發生時感染風險較高。',
       tip:'哺乳前熱敷、哺乳後冷敷，並確保排空乳房；如合併發燒或紅腫請儘速就醫，以排除乳腺炎。',
-      watch:'若出現單側紅腫熱痛合併發燒，可能是乳腺炎，請盡快就醫。', article:{slug:'blocked-duct-mastitis', title:'塞奶與乳腺炎的照護'} },
+      watch:'若出現單側紅腫熱痛合併發燒，可能是乳腺炎，請盡快就醫。', article:{slug:'blocked-duct-mastitis', title:'塞奶、石頭胸、乳腺炎怎樣分辨？'},
+      article:{slug:'blocked-duct-mastitis', title:'塞奶、石頭胸、乳腺炎怎樣分辨？'} },
   // meno
   '熱潮紅盜汗，中醫常見調理項目':
     { insight:'熱潮紅與雌激素波動影響體溫調節中樞有關，是更年期最常見的血管舒縮症狀。',
@@ -2943,7 +3062,8 @@ const SYMPTOM_INFO = {
   '月經型態改變，中醫常見調理項目':
     { insight:'月經週期開始改變，是進入更年期轉換期的常見徵象。',
       tip:'持續紀錄月經型態的變化，有助掌握自己更年期進展的節奏。',
-      watch:'若出血量突然變多、週期短於 21 天，或已停經後又出現任何出血，請儘速婦科檢查。', },
+      watch:'若出血量突然變多、週期短於 21 天，或已停經後又出現任何出血，請儘速婦科檢查。',
+      article:{slug:'menstrual-cycle', title:'月經週期幾多日才正常？'} },
 };
 
 /* Returns the tip text only. Article links are NOT inlined per tip — they're
@@ -3057,7 +3177,9 @@ function buildCycleStageCard(buckets){
     ? `這次的經期在「${watchLabels.join('、')}」上超出一般範圍，值得留意，下面有詳細說明。`
     : '這次的月經數值大致都落在正常範圍內。';
 
-  const cardArticles = [];
+  const cardArticles = [
+    {slug:'menstrual-cycle', title:'月經週期幾多日才正常？'},
+  ];
   const selfCare = dedupeTips(selfCareFromBuckets(buckets, cardArticles));
   // cycle_pain is a slider question, so it never flows through computeDomainFlags —
   // add its own comfort-measure tip directly when the row itself reads as "watch".
@@ -3087,7 +3209,7 @@ function buildCycleStageCard(buckets){
     status, verdict,
     table: renderValueTable('你的月經對照卡', rows),
     selfCare, track, seekCare,
-    articles: renderArticleLinks(collectArticles(cardArticles), watchLabels.length > 0),
+    articles: renderArticleLinks(collectArticles(cardArticles).slice(0, 4), watchLabels.length > 0),
     cta,
   };
 }
@@ -3108,7 +3230,12 @@ function buildPregnancyStageCard(buckets){
   ].filter(Boolean);
 
   const verdict = `您目前是${stage.label}。以下是這個階段常見的狀況與需要留意的界線。`;
-  const cardArticles = [];
+  const cardArticles = [
+    {slug:'hong-kong-pregnancy-care-timeline', title:'香港完整孕期產檢流程'},
+    a.preg_trimester==='t3' ? {slug:'third-trimester-tcm',  title:'懷孕後期不適：中醫如何助你待產'}
+    : a.preg_trimester==='t2' ? {slug:'second-trimester-discomfort', title:'懷孕中期不適：腰痠、抽筋、便秘'}
+    : {slug:'first-trimester-discomfort', title:'懷孕初期不適，中醫怎麼幫？'},
+  ];
 
   const selfCare = dedupeTips([
     ...stage.diet,
@@ -3122,7 +3249,7 @@ function buildPregnancyStageCard(buckets){
     context: renderStageContext('這個階段常見的變化，不用擔心', stage.common),
     table: renderValueTable('孕期狀況小抄', rows),
     selfCare, track: stage.track, seekCare,
-    articles: renderArticleLinks(collectArticles(cardArticles), rows.some(r=>r.status==='watch')),
+    articles: renderArticleLinks(collectArticles(cardArticles).slice(0, 4), rows.some(r=>r.status==='watch')),
     cta: '想讓醫師更了解您孕期的狀況？歡迎預約產前中醫諮詢。',
   };
 }
@@ -3147,7 +3274,9 @@ function buildPostpartumStageCard(buckets){
     ? `您目前是${stage.label}。以下整理這個階段惡露、掉髮、乳房與情緒大概會是什麼狀態。`
     : '請先填答產後時間，才能為您顯示對應的階段重點。';
 
-  const cardArticles = [];
+  const cardArticles = [
+    {slug:'postpartum-care', title:'產後調理全指南'},
+  ];
   const selfCare = dedupeTips(selfCareFromBuckets(buckets, cardArticles));
   if(!selfCare.length) selfCare.push('把握寶寶睡著時一起休息，補充足夠水分與蛋白質，是產後恢復最實際的做法。');
   const track = ['惡露顏色與量的變化', '體溫是否正常', '情緒低落是否持續超過兩週', '乳房是否有局部紅腫熱痛'];
@@ -3167,7 +3296,7 @@ function buildPostpartumStageCard(buckets){
     context: stage ? renderStageTimeline('這個階段身體會發生什麼', stage.timeline) : '',
     table: renderValueTable('產後狀況小抄', rows),
     selfCare, track, seekCare,
-    articles: renderArticleLinks(collectArticles(cardArticles, ruleHits).slice(0, 5), rows.some(r=>r.status==='watch')),
+    articles: renderArticleLinks(collectArticles(cardArticles, ruleHits).slice(0, 4), rows.some(r=>r.status==='watch')),
     cta: '想讓醫師依您目前的恢復狀況調整月子調理方案？歡迎預約諮詢。',
   };
 }
@@ -3208,7 +3337,7 @@ function buildMenoStageCard(buckets){
     status, verdict,
     table: renderValueTable('你的症狀圖譜卡', rows),
     selfCare, track, seekCare,
-    articles: renderArticleLinks(collectArticles(cardArticles), watchRegions.length > 0),
+    articles: renderArticleLinks(collectArticles(cardArticles).slice(0, 4), watchRegions.length > 0),
     cta: '想透過中醫調理改善熱潮紅、睡眠或情緒？歡迎預約諮詢。',
   };
 }
@@ -3259,7 +3388,7 @@ function renderDomainCard(d, buckets){
   const score = computeDomainScore(buckets);
   const meta = DOMAIN_META[d.id] || {};
   const caveat = meta.caveat ? meta.caveat(state.answers) : null;
-  const link = ARTICLE_LINKS[d.id];
+  const links = articleLinksFor(d.id);
 
   /* Build tier content blocks — one per triggered tier, each item showing
      its own specific advice sentence. The card's status is always its highest
@@ -3289,7 +3418,10 @@ function renderDomainCard(d, buckets){
     ${renderAnswerTable(d.id)}
     ${content}
     ${caveat ? `<p class="domain-caveat">⚑ ${caveat.zh}</p>` : ''}
-    ${link ? `<a class="article-link" href="${link}" target="_blank" rel="noopener">閱讀完整文章 →</a>` : ''}
+    ${links.length ? `<div class="article-links">
+      <span class="al-label">延伸閱讀 Further reading</span>
+      ${links.map(l=>`<a class="article-link" href="${l.href}" target="_blank" rel="noopener">${l.zh} →</a>`).join('')}
+    </div>` : ''}
   </div>`;
 }
 
@@ -3318,6 +3450,15 @@ function buildPrintRecap(){
    Tone: like a caring, responsible friend who knows the facts.
    ------------------------------------------------------------------ */
 function buildOverview(domainFlags, activeDomains){
+  /* 一題都沒作答時，不能沿用「未發現需要特別留意的項目」那套說法——
+     那會把「沒有填」讀成「沒有問題」。 */
+  if(!activeDomains.length){
+    return `<div class="overview-block">
+      <p class="ov-label">整體評估 Overall Assessment</p>
+      <p class="ov-main">這次未填寫任何評估題目</p>
+      <p class="ov-body">所以這裡暫時沒有結果可以呈現。您可以按下方的「回到上一步」，選擇想了解的部分再填一次；題目全部可以略過，填多少就顯示多少。<span class="en">No questions were answered, so there is nothing to report yet. Use "Back" to fill in whichever sections you'd like — every question is optional, and the report reflects only what you answer.</span></p>
+    </div>`;
+  }
   let urgentDomains=[], screenDomains=[], tcmDomains=[], clearDomains=[];
   activeDomains.forEach(d=>{
     const b = domainFlags[d.id] || {urgent:[],screen:[],tcm:[]};
@@ -3448,7 +3589,17 @@ function renderSummary(){
 /* ============================================================
    8. RENDER DISPATCH
    ============================================================ */
+/* renderSection 只會清掉「當前區塊」中被隱藏的答案；若整個區塊因生理狀態改變
+   而被移除（例如答完白帶題後改選「懷孕中」），那些答案就再也沒有機會被清理，
+   會一直留在報告裡。這裡在每次切換步驟時全面清一次。 */
+function pruneHiddenAnswers(){
+  SECTIONS.forEach(s=>s.questions.forEach(q=>{
+    if(q.showIf && !q.showIf(state.answers)) delete state.answers[q.id];
+  }));
+}
+
 function renderCurrentStep(){
+  pruneHiddenAnswers();
   renderMeridian();
   const steps = getSteps();
   const id = steps[state.step];
