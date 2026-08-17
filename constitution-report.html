@@ -476,6 +476,16 @@ document.getElementById('dFooterDate').textContent='報告日期：'+today;
 
 // URL parameter pre-fill (from constitution quiz)
 const params=new URLSearchParams(window.location.search);
+// 電郵裡的連結用 ASCII slug（?c=qi-deficiency），避免中文字在郵件客戶端被改壞。
+// 有 ?c= 而沒有 ?const= 時，先把 slug 換回中文名，之後的流程完全不變。
+if(!params.get('const')&&params.get('c')){
+  const bySlug={};
+  Object.entries(CONST_IMG).forEach(([zh,p])=>{
+    bySlug[p.replace('constitution/','').replace(/\.PNG$/i,'')]=zh;
+  });
+  const zh=bySlug[params.get('c')];
+  if(zh)params.set('const',zh);
+}
 reportPayload=readReportPayload(params);
 // Admin gate: selector bar shown for admins or when opened without ?const=
 const constParam=params.get('const');
@@ -503,5 +513,8 @@ if(firstSec&&CD[firstSec]){document.getElementById('iSec').value=firstSec;render
   });
 </script>
 <script src="shared-nav.js"></script>
+<!-- 沒做過問卷 / 未留聯絡方式的人，先請他們回去做評估（君子閘，見 lead-capture.js） -->
+<script src="lead-capture.js"></script>
+<script>window.LeadCapture && window.LeadCapture.guard();</script>
 </body>
 </html>

@@ -819,17 +819,52 @@ function renderResults(primary, secondary, all, balancedLabel) {
 
     ${secDetailHtml}
 
-    <div class="result-warning cq-warning">⚠️ 本問卷依中醫體質分類判定標準設計，僅供健康參考，不作為醫療診斷依據。建議預約胡佩珊中醫師門診，進行完整四診辨證，獲取個人化調理方案。</div>
+    <div id="cqGate"></div>
+
+    <div class="result-warning cq-warning">⚠️ 本問卷依中醫體質分類判定標準設計，僅供健康參考，不作為醫療診斷依據。建議預約中醫師門診，進行完整四診辨證，獲取個人化調理方案。</div>
 
     <div class="cq-actions">
-      <a href="${reportUrl}" class="btn btn-sage">查看完整體質報告</a>
       <a href="index.html#contact" class="btn btn-primary">預約胡醫師門診</a>
       <button class="btn btn-outline" onclick="location.reload()">重新測驗</button>
     </div>
   `;
 
+  mountReportGate(reportUrl, displayName, userName);
   initRadarInteraction(all);
   container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* 完整報告的聯絡資料閘。摘要（上面所有內容）永遠免費，只有完整報告要留資料。
+   已經留過的人（localStorage）直接看到按鈕，不會被問第二次。
+   lead-capture.js 沒載入時整段跳過 — 報告按鈕照舊直接顯示，不會鎖死訪客。 */
+function mountReportGate(reportUrl, displayName, userName) {
+  const slot = document.getElementById('cqGate');
+  if (!slot) return;
+
+  const openReport = () => {
+    slot.innerHTML = `
+      <div class="cq-block" style="text-align:center;">
+        <div style="font-size:1.6rem;line-height:1;margin-bottom:.5rem;">📖</div>
+        <div style="font-family:var(--font-display);font-size:1.15rem;color:var(--plum);margin-bottom:.35rem;">完整體質報告已準備好</div>
+        <p class="cq-block-sub" style="margin-bottom:1.1rem;text-align:center;">
+          內含${escHtml(displayName)}的食療湯水、茶飲配方、穴位保健與外食指南。
+        </p>
+        <a href="${reportUrl}" class="btn btn-sage">查看完整體質報告 →</a>
+      </div>`;
+  };
+
+  if (!window.LeadCapture) { openReport(); return; }
+
+  if (window.LeadCapture.hasLead()) { openReport(); return; }
+
+  window.LeadCapture.renderGate(slot, {
+    constitution: displayName,
+    name: userName,
+    reportUrl
+  }, () => {
+    openReport();
+    slot.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
 }
 
 // ─── Version Select Screen ────────────────────────────────────────────────

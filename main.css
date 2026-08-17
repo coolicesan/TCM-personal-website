@@ -1380,3 +1380,13 @@ html[lang^="en"] .btn {
 html[lang^="en"] .lang-switch button {
   letter-spacing: 0.02em;
 }
+
+/* 頁尾私隱政策連結 — 繼承免責聲明的低調色調，只在 hover 時提亮。 */
+.footer-disclaimer a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s;
+}
+.footer-disclaimer a:hover,
+.footer-disclaimer a:focus-visible { color: var(--gold); }

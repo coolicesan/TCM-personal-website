@@ -15,3 +15,6 @@
 # The Pages workflow uploads the whole repo (path: .), so anything committed
 # here becomes publicly downloadable from the site.
 katewoo-2d-plush-icon-pack/
+
+# 本地截圖除錯用，不應發佈（Pages workflow 會上載整個 repo）
+temporary screenshots/
