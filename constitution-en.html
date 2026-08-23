@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en-HK">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>中醫體質評估｜胡佩珊中醫師</title>
-  <meta name="description" content="免費九種體質自我評估問卷，依中華中醫藥學會標準設計，幾分鐘了解自己屬於哪種中醫體質，並獲得專屬飲食與調理建議。">
-  <link rel="canonical" href="https://katewoo.com/constitution.html">
+  <title>TCM Body Constitution Assessment | CMP Kate Woo</title>
+  <meta name="description" content="A free self-assessment of the nine Chinese medicine body constitutions, built on the national TCM classification standard. Answer a few questions to find your constitution type, with dietary and lifestyle guidance shaped around the result.">
+  <link rel="canonical" href="https://katewoo.com/constitution-en.html">
   <link rel="alternate" hreflang="zh-Hant" href="https://katewoo.com/constitution.html">
   <link rel="alternate" hreflang="en" href="https://katewoo.com/constitution-en.html">
   <link rel="alternate" hreflang="x-default" href="https://katewoo.com/constitution.html">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="胡佩珊中醫師">
-  <meta property="og:title" content="中醫體質評估｜胡佩珊中醫師">
-  <meta property="og:description" content="免費九種體質自我評估問卷，幾分鐘了解自己屬於哪種中醫體質，並獲得專屬飲食與調理建議。">
-  <meta property="og:url" content="https://katewoo.com/constitution.html">
+  <meta property="og:site_name" content="CMP Kate Woo">
+  <meta property="og:title" content="TCM Body Constitution Assessment | CMP Kate Woo">
+  <meta property="og:description" content="A free self-assessment of the nine Chinese medicine body constitutions. Answer a few questions to find your type, with dietary and lifestyle guidance shaped around the result.">
+  <meta property="og:url" content="https://katewoo.com/constitution-en.html">
   <meta property="og:image" content="https://katewoo.com/og-image.png?v=20260809-light">
-  <meta property="og:locale" content="zh_HK">
-  <meta property="og:locale:alternate" content="en_HK">
+  <meta property="og:locale" content="en_HK">
+  <meta property="og:locale:alternate" content="zh_HK">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://katewoo.com/og-image.png?v=20260809-light">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -630,6 +630,60 @@
       .tongue-color-btn { min-width: 58px; padding: .5rem .6rem; }
       .cq-version-grid { grid-template-columns: 1fr; max-width: 320px; }
     }
+
+    /* ── English shell ──
+       Latin copy runs longer than the Chinese it replaces: the nav needs
+       tighter gaps before it collapses, the scale labels need to stay on one
+       line, and the large display type reads better slightly tightened. */
+    .nav-logo { letter-spacing: 0.02em; }
+    .options-scale label { letter-spacing: 0; hyphens: none; }
+
+    /* Headings: tightened, and balanced so a title never drops one word alone. */
+    .cq-hero-title,
+    .cq-result-name { letter-spacing: -0.02em; text-wrap: balance; }
+    .cq-page-title,
+    .cq-block-title,
+    .cq-sec-name,
+    .lc-gate-title { text-wrap: balance; }
+
+    /* Body copy: a comfortable measure, centred blocks kept off the full width,
+       and pretty wrapping so no line is left with a single orphan word. */
+    /* One centred block, balanced so no line ends with a stranded word. */
+    .cq-hero-desc {
+      max-width: 38rem;
+      text-align: center;
+      text-wrap: balance;
+    }
+    .cq-page-tagline,
+    .cq-page-hint,
+    .question-text,
+    .cq-block-text,
+    .cq-block-sub,
+    .cq-sec-desc,
+    .cq-sec-note,
+    .cq-warning,
+    .lc-gate-sub,
+    .lc-pics { text-wrap: pretty; }
+    .cq-block-text,
+    .cq-sec-desc { max-width: 64ch; }
+    .footer p { max-width: 46rem; margin-left: auto; margin-right: auto; text-wrap: pretty; }
+
+    @media (max-width: 1100px) {
+      .nav-links { gap: 1.35rem; }
+      .nav-links a { font-size: 0.86rem; }
+    }
+    @media (max-width: 600px) {
+      .options-scale label { font-size: .66rem; padding: .45rem .1rem; }
+      /* progress rail: 英文的部分數字比中文長，兩段擠在一行會貼到一起。
+         填答提示在題目卡片裡已經再講一次，這裡讓給進度本身。 */
+      .cq-progress-hint { display: none; }
+    }
+    @media (max-width: 430px) {
+      /* 「Sometimes」在五欄格線裡放不下：改成 3 + 2 兩排，順序不變，
+         點擊區也更大。 */
+      .options-scale { grid-template-columns: repeat(3, 1fr); }
+      .options-scale label { font-size: .72rem; padding: .5rem .2rem; }
+    }
   </style>
 </head>
 <body>
@@ -637,22 +691,22 @@
 <nav class="nav">
   <a href="index.html" class="nav-logo">
     <img src="assets/logo.png" alt="" class="logo-mark" width="52" height="52">
-    <span>胡佩珊</span><span><span>中醫師</span></span>
+    <span>Kate&nbsp;Woo</span><span><span>Chinese Medicine</span></span>
   </a>
   <div class="nav-links" id="navLinks">
-    <a href="index.html#stages">服務項目</a>
-    <a href="index.html#services">治療項目</a>
-    <a href="index.html#assessments">健康評估</a>
-    <a href="index.html#articles">健康文章</a>
-    <a href="about.html">關於醫師</a>
-    <a href="index.html#contact" class="nav-cta">預約掛號</a>
+    <a href="index.html#stages">Areas of Care</a>
+    <a href="index.html#services">Treatments</a>
+    <a href="index.html#assessments">Assessments</a>
+    <a href="index.html#articles">Health Articles</a>
+    <a href="about.html">About</a>
+    <a href="index.html#contact" class="nav-cta">Book a Consultation</a>
   </div>
   <div class="lang-switch" id="langSwitch" aria-label="Language">
-    <a href="constitution.html" class="active" aria-current="page" data-lang="zh">繁</a>
+    <a href="constitution.html" data-lang="zh">繁</a>
     <span aria-hidden="true">/</span>
-    <a href="constitution-en.html" data-lang="en">EN</a>
+    <a href="constitution-en.html" class="active" aria-current="page" data-lang="en">EN</a>
   </div>
-  <button class="nav-toggle" id="navToggle" aria-label="選單">
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
@@ -661,12 +715,13 @@
   <header class="cq-hero">
     <div class="cq-hero-inner">
       <div class="cq-emblem" aria-hidden="true">☯</div>
-      <span class="section-tag">中醫體質評估</span>
-      <h1 class="cq-hero-title">九種體質自我評估</h1>
+      <span class="section-tag">TCM Constitution Assessment</span>
+      <h1 class="cq-hero-title">The Nine Body Constitutions</h1>
       <div class="cq-hero-rule" aria-hidden="true"></div>
       <p class="cq-hero-desc">
-        花幾分鐘回答日常身體感受，即可了解自己屬於哪一種體質。<br>
-        測驗結束後，以雷達圖呈現九種體質分佈，並附上專屬的飲食與調理建議。
+        Answer a few questions about how your body has felt lately, and find out which of the nine
+        constitutions fits you. At the end you get a radar chart of your profile, with food and
+        lifestyle guidance to match.
       </p>
     </div>
   </header>
@@ -674,8 +729,8 @@
   <div class="cq-progress-shell">
     <div class="cq-progress-inner">
       <div class="cq-progress-meta">
-        <span class="cq-progress-step" id="progressText">第 1 / 9 部分</span>
-        <span class="cq-progress-hint">依最近一個月狀況填答</span>
+        <span class="cq-progress-step" id="progressText">Part 1 of 9</span>
+        <span class="cq-progress-hint">Based on the past month</span>
       </div>
       <div class="quiz-progress">
         <div class="quiz-progress-bar" id="progressBar" style="width:0%"></div>
@@ -694,13 +749,14 @@
 
 <footer class="footer">
   <div class="footer-note-rule" aria-hidden="true"></div>
-  <div class="footer-logo">胡佩珊中醫師</div>
-  <p>本問卷結果僅供健康參考，不替代醫療診斷。如有疑慮，請諮詢執業中醫師。</p>
-  <p class="footer-privacy"><a href="privacy.html">私隱政策</a></p>
+  <div class="footer-logo">CMP Kate Woo</div>
+  <p>This questionnaire is for general health reference and does not replace a medical diagnosis. If anything concerns you, please consult a registered Chinese medicine practitioner.</p>
+  <p class="footer-privacy"><a href="privacy.html">Privacy Policy</a></p>
 </footer>
 
 <script src="config-loader.js"></script>
 <script src="lead-capture.js"></script>
+<script src="constitution-en.js"></script>
 <script src="constitution.js"></script>
 <script>
 

@@ -17,12 +17,17 @@
   </url>
   <url>
     <loc>https://katewoo.com/constitution.html</loc>
-    <lastmod>2026-07-27</lastmod>
+    <lastmod>2026-08-23</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://katewoo.com/constitution-en.html</loc>
+    <lastmod>2026-08-23</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://katewoo.com/privacy.html</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-08-18</lastmod>
     <priority>0.3</priority>
   </url>
   <url><loc>https://katewoo.com/services/breast.html</loc><lastmod>2026-07-30</lastmod><priority>0.8</priority></url>

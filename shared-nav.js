@@ -219,6 +219,32 @@
     try { return localStorage.getItem('drhu_site_lang') || 'zh'; } catch (_) { return 'zh'; }
   }
 
+  /* 體質問卷的中英文是兩個網址（英文字串由 constitution-en.js 提供），不是就地
+     翻譯。所以這種頁面的語言由 <html lang> 決定，切換語言等於換頁。 */
+  var LANG_PAGES = {
+    'constitution.html':    { zh: 'constitution.html',    en: 'constitution-en.html' },
+    'constitution-en.html': { zh: 'constitution.html',    en: 'constitution-en.html' }
+  };
+
+  function currentFile() {
+    return decodeURIComponent(location.pathname).split('/').pop();
+  }
+
+  /* 頁面自己就是英文版時，導覽列不必等 localStorage 才知道要說英文。 */
+  function pageLang() {
+    var file = currentFile();
+    if (!LANG_PAGES[file]) return null;
+    return (document.documentElement.getAttribute('lang') || '')
+      .slice(0, 2).toLowerCase() === 'en' ? 'en' : 'zh';
+  }
+
+  function langPageHref(lang) {
+    var pair = LANG_PAGES[currentFile()];
+    if (!pair) return null;
+    var target = pair[lang === 'en' ? 'en' : 'zh'];
+    return target === currentFile() ? null : target + location.search;
+  }
+
   function setStoredLang(lang) {
     try { localStorage.setItem('drhu_site_lang', lang); } catch (_) {}
   }
@@ -283,10 +309,17 @@
         var btn = e.target.closest('button[data-lang]');
         if (!btn) return;
         setStoredLang(btn.dataset.lang);
+        var href = langPageHref(btn.dataset.lang);
+        if (href) { location.href = href; return; }
         applyNavLanguage(btn.dataset.lang);
         if (window.DrHuI18n && window.DrHuI18n.applyLanguage) window.DrHuI18n.applyLanguage(btn.dataset.lang);
       });
-      var current = window.DrHuI18n && window.DrHuI18n.getLang ? window.DrHuI18n.getLang() : storedLang();
+      var fixed = pageLang();
+      /* 只有走進英文網址才順手記住英文；反過來不要因為看了一次中文頁，
+         就把原本選英文的人整站改回中文。按鈕點下去的那次一定會記。 */
+      if (fixed === 'en') setStoredLang('en');
+      var current = fixed
+        || (window.DrHuI18n && window.DrHuI18n.getLang ? window.DrHuI18n.getLang() : storedLang());
       applyNavLanguage(current);
     }
     markCurrent();
@@ -307,7 +340,10 @@
     else document.body.insertBefore(nav, document.body.firstChild);
 
     wireNav();
-    if (window.DrHuI18n && window.DrHuI18n.applyLanguage) {
+    var fixed = pageLang();
+    if (fixed) {
+      applyNavLanguage(fixed);
+    } else if (window.DrHuI18n && window.DrHuI18n.applyLanguage) {
       window.DrHuI18n.applyLanguage(window.DrHuI18n.getLang ? window.DrHuI18n.getLang() : 'zh');
     } else {
       applyNavLanguage(storedLang());

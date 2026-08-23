@@ -40,6 +40,7 @@
       consent:      'marketing_opt_in', // 直接促銷同意（true / false）
       constitution: 'constitution',      // 體質類型（中文），用於稱呼與分眾
       constSlug:    'constitution_slug', // 體質 slug，automation 用來組報告連結
+      lang:         'lang',              // 訪客用的介面語言（zh / en），automation 用來挑語言
       source:       'source'             // 來源，方便日後分辨不同表單
     },
 
@@ -72,6 +73,127 @@
     /* 「基本平和質」之類的變體名：取包含關係做後備比對 */
     var hit = Object.keys(SLUGS).filter(function (k) { return zh.indexOf(k) !== -1; })[0];
     return hit ? SLUGS[hit] : '';
+  }
+
+  /* ── 介面語言 ─────────────────────────────────────────────────────
+     跟著頁面的 <html lang> 走：constitution-en.html 是 en-HK，其餘照舊中文。
+     寄給醫師的資料一律保留中文體質名，只有訪客看到的字換語言。 */
+  var LC_LANG = (document.documentElement.getAttribute('lang') || '')
+    .slice(0, 2).toLowerCase() === 'en' ? 'en' : 'zh';
+
+  var LC_TXT = {
+    zh: {
+      perks: [
+        '體質成因、典型表現與常見誤區',
+        '適宜與忌口食材完整清單',
+        '對症食療湯水食譜與做法',
+        '茶飲配方、穴位按摩與耳穴保健',
+        '外食族點餐指南與生活調養建議'
+      ],
+      gateTitleNamed: '解鎖「{name}」完整報告',
+      gateTitle:      '解鎖你的完整報告',
+      gateSub:        '留下聯絡方式，即可查看為你的體質整理的完整調理內容。',
+      sendForm:       '免費取得完整報告 →',
+      sendWa:         '透過 WhatsApp 索取報告 →',
+      picsForm:       '你的姓名及聯絡方式只用作寄送這份報告',
+      picsWa:         '你的姓名及聯絡方式會透過 WhatsApp 傳送給胡醫師，用作跟進你的報告查詢',
+      picsTail:       '（以及在你勾選同意後，寄送健康資訊）。問卷的逐題答案不會上載，只會記錄評估得出的體質類型，用以配對正確的報告內容。詳情見',
+      privacy:        '私隱政策',
+      labelName:      '姓名',
+      labelEmail:     'Email',
+      labelPhone:     '電話',
+      phoneOptional:  '（選填，方便 WhatsApp 跟進）',
+      phName:         '怎樣稱呼你',
+      phEmail:        'report@example.com',
+      phPhone:        '9xxx xxxx',
+      consent:        '我願意日後收到胡醫師的健康資訊、調理貼士與服務推廣。（選填，可隨時取消）',
+      errName:        '請填寫姓名。',
+      errEmailForm:   '請填寫有效的 Email，報告會寄到這個地址。',
+      errEmail:       '請填寫有效的 Email。',
+      errPhoneReq:    '請填寫電話。',
+      errPhoneBad:    '電話號碼格式不正確。',
+      sending:        '處理中…',
+      retry:          '再試一次',
+      failLead:       '送出時遇到問題。你可以再按一次，或',
+      failWa:         '直接用 WhatsApp 傳給醫師',
+      failTail:       '。',
+      waTitle:        'WhatsApp 已為你開啟',
+      waSub:          '訊息已經幫你打好，按傳送就可以了。',
+      waStep1:        '在 WhatsApp 視窗按<strong>傳送</strong>',
+      waStep2:        '回到這一頁，按下面的按鈕查看報告',
+      waDone:         '已傳送，查看報告 →',
+      waReopen:       'WhatsApp 沒有開啟？點這裡再試一次',
+      waMsgIntro:     '你好，我完成咗網上中醫體質評估。',
+      waMsgConst:     '體質類型：',
+      waMsgName:      '姓名：',
+      waMsgPhone:     '電話：',
+      waMsgEmail:     'Email：',
+      waMsgOutro:     '想索取完整體質報告，謝謝！',
+      veilTitle:      '完整體質報告',
+      veilSub:        '這份報告是按個人體質評估結果整理的。請先完成體質問卷，就能即時查看屬於你的完整內容。',
+      veilStart:      '開始體質評估 →',
+      veilHome:       '返回首頁',
+      quizHref:       'constitution.html'
+    },
+    en: {
+      perks: [
+        'What drives this constitution, how it shows up, and the usual pitfalls',
+        'Full lists of the foods that suit you and the ones to limit',
+        'Food-therapy soups and recipes, with the method step by step',
+        'Tea blends, acupressure points and ear-point self-care',
+        'An eating-out guide and everyday lifestyle adjustments'
+      ],
+      gateTitleNamed: 'Unlock your full {name} report',
+      gateTitle:      'Unlock your full report',
+      gateSub:        'Leave your contact details to read the complete care plan put together for your constitution.',
+      sendForm:       'Get my full report free →',
+      sendWa:         'Request my report on WhatsApp →',
+      picsForm:       'Your name and contact details are used only to send you this report',
+      picsWa:         'Your name and contact details are sent to CMP Kate Woo over WhatsApp, so she can follow up on your report request',
+      picsTail:       ' (and, if you tick the box above, to send you health information). Your individual answers are never uploaded — only the constitution type the assessment arrived at, so that the right report reaches you. Full details in our ',
+      privacy:        'Privacy Policy',
+      labelName:      'Name',
+      labelEmail:     'Email',
+      labelPhone:     'Phone',
+      phoneOptional:  ' (optional, for WhatsApp follow-up)',
+      phName:         'What should we call you',
+      phEmail:        'report@example.com',
+      phPhone:        '9xxx xxxx',
+      consent:        'I would like to receive health information, care tips and service updates from CMP Kate Woo. (Optional — you can unsubscribe at any time.)',
+      errName:        'Please enter your name.',
+      errEmailForm:   'Please enter a valid email address — your report will be sent there.',
+      errEmail:       'Please enter a valid email address.',
+      errPhoneReq:    'Please enter your phone number.',
+      errPhoneBad:    'That phone number does not look right.',
+      sending:        'Sending…',
+      retry:          'Try again',
+      failLead:       'Something went wrong while sending. Press the button again, or ',
+      failWa:         'send it to the practitioner on WhatsApp',
+      failTail:       '.',
+      waTitle:        'WhatsApp is open',
+      waSub:          'Your message is already written — just press send.',
+      waStep1:        'Press <strong>Send</strong> in the WhatsApp window',
+      waStep2:        'Come back to this page and open your report below',
+      waDone:         'Sent — open my report →',
+      waReopen:       'WhatsApp did not open? Try again here',
+      waMsgIntro:     'Hello, I have completed the online TCM constitution assessment.',
+      waMsgConst:     'Constitution: ',
+      waMsgName:      'Name: ',
+      waMsgPhone:     'Phone: ',
+      waMsgEmail:     'Email: ',
+      waMsgOutro:     'I would like to receive the full constitution report. Thank you!',
+      veilTitle:      'Your full constitution report',
+      veilSub:        'This report is put together from your own assessment result. Complete the questionnaire and your report opens straight away.',
+      veilStart:      'Start the assessment →',
+      veilHome:       'Back to home',
+      quizHref:       'constitution-en.html'
+    }
+  };
+  var L = LC_TXT[LC_LANG];
+  function lcFmt(str, vals) {
+    return String(str).replace(/\{(\w+)\}/g, function (m, k) {
+      return k in vals ? vals[k] : m;
+    });
   }
 
   /* ── 樣式（注入，讓問卷頁和報告頁共用）────────────────────────────── */
@@ -163,6 +285,12 @@
   }
   function hasLead() { return !!(getLead() && getLead().email); }
   function saveLead(lead) {
+    /* 三條成功路徑（endpoint / WhatsApp / 送出失敗後改用 WhatsApp）都會經過這裡，
+       所以事件埋在這一點就不會漏計，也不會重複。 */
+    window.track && window.track('lead_submit', {
+      constitution: lead && lead.constitution,
+      method: SETUP.endpoint ? 'form' : 'whatsapp'
+    });
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(lead)); } catch (_) {}
   }
 
@@ -178,12 +306,17 @@
 
   /* ── 送出 ────────────────────────────────────────────────────────── */
   function waLink(lead) {
-    var msg = '你好，我完成咗網上中醫體質評估。\n'
-      + '體質類型：' + (lead.constitution || '—') + '\n'
-      + '姓名：' + lead.name + '\n'
-      + (lead.phone ? '電話：' + lead.phone + '\n' : '')
-      + 'Email：' + lead.email + '\n'
-      + '想索取完整體質報告，謝謝！';
+    /* 體質名：畫面用的語言先行，中文名附在後面，醫師看名單時對得上。 */
+    var constLine = lead.constitution || '—';
+    if (lead.constitutionZh && lead.constitutionZh !== lead.constitution) {
+      constLine += '（' + lead.constitutionZh + '）';
+    }
+    var msg = L.waMsgIntro + '\n'
+      + L.waMsgConst + constLine + '\n'
+      + L.waMsgName + lead.name + '\n'
+      + (lead.phone ? L.waMsgPhone + lead.phone + '\n' : '')
+      + L.waMsgEmail + lead.email + '\n'
+      + L.waMsgOutro;
     return 'https://wa.me/' + SETUP.whatsapp + '?text=' + encodeURIComponent(msg);
   }
 
@@ -198,8 +331,9 @@
     if (lead.phone) body.append(f.phone, lead.phone);
     body.append(f.email, lead.email);
     body.append(f.consent, lead.consent ? 'true' : 'false');
-    body.append(f.constitution, lead.constitution || '');
-    body.append(f.constSlug, slugFor(lead.constitution));
+    body.append(f.constitution, lead.constitutionZh || lead.constitution || '');
+    body.append(f.constSlug, slugFor(lead.constitutionZh || lead.constitution));
+    body.append(f.lang, LC_LANG);
     body.append(f.source, lead.source || 'constitution-quiz');
 
     return fetch(SETUP.endpoint, {
@@ -217,56 +351,49 @@
 
   /* ── 表單畫面 ─────────────────────────────────────────────────────── */
   function gateHtml(ctx) {
-    var perks = ctx.perks || [
-      '體質成因、典型表現與常見誤區',
-      '適宜與忌口食材完整清單',
-      '對症食療湯水食譜與做法',
-      '茶飲配方、穴位按摩與耳穴保健',
-      '外食族點餐指南與生活調養建議'
-    ];
-    var sendLabel = SETUP.endpoint ? '免費取得完整報告 →' : '透過 WhatsApp 索取報告 →';
+    var perks = ctx.perks || L.perks;
+    var sendLabel = SETUP.endpoint ? L.sendForm : L.sendWa;
 
     /* 收集個人資料聲明要講實話：WhatsApp 模式下報告不是用電郵寄的，
        別寫成「用作寄送這份報告」。 */
-    var picsUse = SETUP.endpoint
-      ? '你的姓名及聯絡方式只用作寄送這份報告'
-      : '你的姓名及聯絡方式會透過 WhatsApp 傳送給胡醫師，用作跟進你的報告查詢';
+    var picsUse = SETUP.endpoint ? L.picsForm : L.picsWa;
+
+    var title = ctx.constitution
+      ? lcFmt(L.gateTitleNamed, { name: esc(ctx.constitution) })
+      : L.gateTitle;
 
     return ''
       + '<div class="lc-gate" id="lcGate">'
       +   '<div class="lc-gate-head">'
       +     '<div class="lc-gate-icon" aria-hidden="true">🔓</div>'
-      +     '<h3 class="lc-gate-title">解鎖'
-      +       (ctx.constitution ? '「' + esc(ctx.constitution) + '」' : '你的')
-      +       '完整報告</h3>'
-      +     '<p class="lc-gate-sub">留下聯絡方式，即可查看為你的體質整理的完整調理內容。</p>'
+      +     '<h3 class="lc-gate-title">' + title + '</h3>'
+      +     '<p class="lc-gate-sub">' + L.gateSub + '</p>'
       +   '</div>'
       +   '<ul class="lc-list">' + perks.map(function (p) { return '<li>' + esc(p) + '</li>'; }).join('') + '</ul>'
       +   '<form class="lc-form" id="lcForm" novalidate>'
       +     '<div class="lc-field">'
-      +       '<label class="lc-label" for="lcName">姓名</label>'
-      +       '<input class="lc-input" id="lcName" name="name" type="text" autocomplete="name" placeholder="怎樣稱呼你">'
+      +       '<label class="lc-label" for="lcName">' + L.labelName + '</label>'
+      +       '<input class="lc-input" id="lcName" name="name" type="text" autocomplete="name" placeholder="' + esc(L.phName) + '">'
       +     '</div>'
       +     '<div class="lc-field">'
-      +       '<label class="lc-label" for="lcEmail">Email</label>'
-      +       '<input class="lc-input" id="lcEmail" name="email" type="email" autocomplete="email" placeholder="report@example.com">'
+      +       '<label class="lc-label" for="lcEmail">' + L.labelEmail + '</label>'
+      +       '<input class="lc-input" id="lcEmail" name="email" type="email" autocomplete="email" placeholder="' + esc(L.phEmail) + '">'
       +     '</div>'
       +     '<div class="lc-field">'
-      +       '<label class="lc-label" for="lcPhone">電話'
-      +         (SETUP.phoneRequired ? '' : '<span class="lc-opt">（選填，方便 WhatsApp 跟進）</span>')
+      +       '<label class="lc-label" for="lcPhone">' + L.labelPhone
+      +         (SETUP.phoneRequired ? '' : '<span class="lc-opt">' + L.phoneOptional + '</span>')
       +       '</label>'
-      +       '<input class="lc-input" id="lcPhone" name="phone" type="tel" autocomplete="tel" placeholder="9xxx xxxx">'
+      +       '<input class="lc-input" id="lcPhone" name="phone" type="tel" autocomplete="tel" placeholder="' + esc(L.phPhone) + '">'
       +     '</div>'
       +     '<div class="lc-err" id="lcErr" role="alert" aria-live="polite"></div>'
       +     '<label class="lc-consent">'
       +       '<input type="checkbox" id="lcConsent">'
-      +       '<span>我願意日後收到胡醫師的健康資訊、調理貼士與服務推廣。（選填，可隨時取消）</span>'
+      +       '<span>' + L.consent + '</span>'
       +     '</label>'
       +     '<button type="submit" class="btn btn-primary lc-submit" id="lcSubmit">' + sendLabel + '</button>'
-      +     '<p class="lc-pics">' + picsUse
-      +       '（以及在你勾選同意後，寄送健康資訊）。問卷的逐題答案不會上載，'
-      +       '只會記錄評估得出的體質類型，用以配對正確的報告內容。'
-      +       '詳情見<a href="privacy.html" target="_blank" rel="noopener">私隱政策</a>。</p>'
+      +     '<p class="lc-pics">' + picsUse + L.picsTail
+      +       '<a href="privacy.html" target="_blank" rel="noopener">' + L.privacy + '</a>'
+      +       (LC_LANG === 'en' ? '.' : '。') + '</p>'
       +   '</form>'
       + '</div>';
   }
@@ -293,17 +420,17 @@
         + '<div class="lc-gate">'
         +   '<div class="lc-gate-head">'
         +     '<div class="lc-gate-icon" aria-hidden="true">💬</div>'
-        +     '<h3 class="lc-gate-title">WhatsApp 已為你開啟</h3>'
-        +     '<p class="lc-gate-sub">訊息已經幫你打好，按傳送就可以了。</p>'
+        +     '<h3 class="lc-gate-title">' + L.waTitle + '</h3>'
+        +     '<p class="lc-gate-sub">' + L.waSub + '</p>'
         +   '</div>'
         +   '<ol class="lc-steps">'
-        +     '<li>在 WhatsApp 視窗按<strong>傳送</strong></li>'
-        +     '<li>回到這一頁，按下面的按鈕查看報告</li>'
+        +     '<li>' + L.waStep1 + '</li>'
+        +     '<li>' + L.waStep2 + '</li>'
         +   '</ol>'
         +   '<div class="lc-form">'
-        +     '<button type="button" class="btn btn-primary lc-submit" id="lcDone">已傳送，查看報告 →</button>'
+        +     '<button type="button" class="btn btn-primary lc-submit" id="lcDone">' + L.waDone + '</button>'
         +     '<a class="lc-reopen" href="' + esc(waLink(lead)) + '" target="_blank" rel="noopener">'
-        +       'WhatsApp 沒有開啟？點這裡再試一次</a>'
+        +       L.waReopen + '</a>'
         +   '</div>'
         + '</div>';
       container.querySelector('#lcDone')
@@ -325,20 +452,22 @@
         phone: elPhone.value.trim(),
         consent: elCons.checked,
         constitution: ctx.constitution || '',
+        constitutionZh: ctx.constitutionZh || ctx.constitution || '',
+        lang: LC_LANG,
         source: 'constitution-quiz',
         at: new Date().toISOString()
       };
 
-      if (!lead.name)                        return fail('請填寫姓名。', elName);
+      if (!lead.name)                        return fail(L.errName, elName);
       if (!isEmail(lead.email))              return fail(SETUP.endpoint
-                                                ? '請填寫有效的 Email，報告會寄到這個地址。'
-                                                : '請填寫有效的 Email。', elEmail);
-      if (SETUP.phoneRequired && !lead.phone) return fail('請填寫電話。', elPhone);
-      if (lead.phone && !isPhone(lead.phone)) return fail('電話號碼格式不正確。', elPhone);
+                                                ? L.errEmailForm
+                                                : L.errEmail, elEmail);
+      if (SETUP.phoneRequired && !lead.phone) return fail(L.errPhoneReq, elPhone);
+      if (lead.phone && !isPhone(lead.phone)) return fail(L.errPhoneBad, elPhone);
 
       fail('');
       elBtn.disabled = true;
-      elBtn.textContent = '處理中…';
+      elBtn.textContent = L.sending;
 
       /* WhatsApp 模式：訊息只在對方真的按下傳送時才會到達醫師手上。
          如果這裡即刻解鎖，訪客拿到報告就會直接關掉 WhatsApp，醫師收不到任何
@@ -356,13 +485,13 @@
         onUnlock(lead);
       }).catch(function () {
         elBtn.disabled = false;
-        elBtn.textContent = '再試一次';
+        elBtn.textContent = L.retry;
         elErr.innerHTML = '';
         var box = document.createElement('div');
         box.className = 'lc-fail';
-        box.innerHTML = '送出時遇到問題。你可以再按一次，或'
+        box.innerHTML = L.failLead
           + '<a href="' + esc(waLink(lead)) + '" target="_blank" rel="noopener" id="lcWa">'
-          + '直接用 WhatsApp 傳給醫師</a>。';
+          + L.failWa + '</a>' + L.failTail;
         elErr.appendChild(box);
         var wa = box.querySelector('#lcWa');
         wa.addEventListener('click', function () { saveLead(lead); onUnlock(lead); });
@@ -387,12 +516,11 @@
     veil.innerHTML = ''
       + '<div class="lc-veil-card">'
       +   '<div class="lc-gate-icon" aria-hidden="true">☯</div>'
-      +   '<h2 class="lc-gate-title">完整體質報告</h2>'
-      +   '<p class="lc-gate-sub">這份報告是按個人體質評估結果整理的。'
-      +     '請先完成體質問卷，就能即時查看屬於你的完整內容。</p>'
+      +   '<h2 class="lc-gate-title">' + L.veilTitle + '</h2>'
+      +   '<p class="lc-gate-sub">' + L.veilSub + '</p>'
       +   '<div class="lc-veil-actions">'
-      +     '<a class="btn btn-primary" href="constitution.html">開始體質評估 →</a>'
-      +     '<a class="btn btn-outline" href="index.html">返回首頁</a>'
+      +     '<a class="btn btn-primary" href="' + L.quizHref + '">' + L.veilStart + '</a>'
+      +     '<a class="btn btn-outline" href="index.html">' + L.veilHome + '</a>'
       +   '</div>'
       + '</div>';
     document.body.appendChild(veil);

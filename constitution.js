@@ -19,6 +19,8 @@ function escHtml(s) {
 }
 
 function applyConstitutionOv(c, ci) {
+  /* 後台改的是中文文案，套到英文版會變成中英夾雜，所以英文版不吃覆寫。 */
+  if (CQ_LANG !== 'zh') return c;
   return {
     ...c,
     name:            cqOv(ci+'.name',             c.name),
@@ -325,10 +327,19 @@ const constitutions = [
   }
 ];
 
-const SCALE_LABELS = ['沒有', '很少', '有時', '經常', '總是'];
+/* ── Language layer ───────────────────────────────────────────────────────
+   A language pack (constitution-en.js) sets window.CQ_I18N before this file
+   loads. With no pack the Chinese strings below stand as they always have;
+   a pack only replaces the keys it actually supplies. Question texts are
+   swapped in place by position, so scoring, `answerFrom` links and the admin
+   override keys all keep working off the same indexes. */
+const CQ_PACK = (typeof window !== 'undefined' && window.CQ_I18N) || null;
+const CQ_LANG = CQ_PACK ? (CQ_PACK.lang || 'en') : 'zh';
+
+let SCALE_LABELS = ['沒有', '很少', '有時', '經常', '總是'];
 
 // Neutral topic names — no constitution labels shown to the user
-const TOPICS = [
+let TOPICS = [
   { title: '整體狀態',   desc: '關於您整體精力、睡眠與身體適應力' },
   { title: '精力與體能', desc: '關於您日常的能量狀態與體力表現' },
   { title: '寒熱偏性',   desc: '關於您對冷熱環境的感受與反應' },
@@ -340,7 +351,106 @@ const TOPICS = [
   { title: '過敏與免疫', desc: '關於您對外界刺激的敏感程度' },
 ];
 
+if (CQ_PACK) {
+  if (CQ_PACK.scale)  SCALE_LABELS = CQ_PACK.scale;
+  if (CQ_PACK.topics) TOPICS = CQ_PACK.topics;
+  constitutions.forEach(c => {
+    c.nameZh = c.name;   // report link, lead list and analytics stay in Chinese
+    const t = (CQ_PACK.types || {})[c.id];
+    if (!t) return;
+    ['name', 'shortName', 'tagline', 'description',
+     'recommendations', 'foods', 'avoid'].forEach(k => { if (t[k]) c[k] = t[k]; });
+    ['questions', 'shortQuestions'].forEach(k => {
+      if (!t[k]) return;
+      c[k].forEach((q, i) => { if (t[k][i]) q.text = t[k][i]; });
+    });
+  });
+}
+
+// ─── Interface copy ───────────────────────────────────────────────────────
+const CQ_TXT_ZH = {
+  progressStart:     '開始評估',
+  progressVersion:   '選擇評估版本',
+  progressDone:      '評估完成',
+  progressCount:     '第 {page} / {total} 部分　已填 {answered} / {pageTotal} 題',
+
+  nameKicker:        '開始評估',
+  nameTitle:         '怎麼稱呼您呢？',
+  nameSub:           '這樣就能用您的名字，為您專屬打造這份體質報告',
+  namePlaceholder:   '例如：美美、志明',
+  nameButton:        '好，開始吧 →',
+  nameError:         '別忘了留下您的稱呼，才能繼續喔 🙂',
+
+  versionKicker:     '開始評估',
+  versionTitle:      '選擇評估版本',
+  versionQuickName:  '快速版',
+  versionQuickStat:  '25 題填答・約 5 分鐘',
+  versionFullName:   '完整版',
+  versionFullStat:   '60 題填答・約 15 分鐘',
+  versionBadge:      '推薦',
+  versionStart:      '開始評估 →',
+  versionSub:        '',
+  versionStandard:   '依中華中醫藥學會《中醫體質分類與判定》標準（ZYYXH/T157-2009）',
+
+  pageStep:          '第 {page} 部分，共 {total} 部分',
+  pageHint:          '請依照<strong>最近一個月</strong>的狀況如實填答',
+  navPrev:           '← 上一部分',
+  navNext:           '下一部分 →',
+  navSubmit:         '查看評估結果 →',
+  errorOne:          '本頁還有 {n} 題未填，請完整作答後繼續。',
+  errorMany:         '本頁還有 {n} 題未填，請完整作答後繼續。',
+  errorIncomplete:   '部分題目未填寫，請返回補齊。',
+
+  resultKicker:      '您的主要體質',
+  resultKickerNamed: '{name} 的主要體質',
+  balancedPure:      '純平和質',
+  balancedBasic:     '基本平和質',
+  balancedNote:      '體質大致平衡，仍有少量偏頗傾向，宜留意保養。',
+  summaryPrimary:    '主要體質',
+  summarySecondary:  '兼夾體質',
+  summaryNone:       '無明顯兼夾',
+  summaryNoneHint:   '體質相對單純',
+  radarTitle:        '體質傾向分佈',
+  radarSub:          '移動滑鼠或觸控查看各體質傾向，圖形越向外突出代表傾向越明顯。',
+  radarAria:         '九種體質傾向雷達圖',
+  aboutTitle:        '體質簡介',
+  careTitle:         '個人化調理建議',
+  dietGood:          '✓ 適宜飲食',
+  dietAvoid:         '✕ 應注意避免',
+  secLabel:          '兼夾體質',
+  secFocus:          '調理方向',
+  secNote:           '兼夾體質建議一併告知醫師，由醫師綜合辨證調理。',
+  warning:           '⚠️ 本問卷依中醫體質分類判定標準設計，僅供健康參考，不作為醫療診斷依據。建議預約中醫師門診，進行完整四診辨證，獲取個人化調理方案。',
+  actionBook:        '預約胡醫師門診',
+  actionRestart:     '重新測驗',
+
+  tendPure:          '純平和質',
+  tendBasic:         '基本平和質',
+  tendNotBalanced:   '非平和質',
+  tendMarked:        '明顯偏頗',
+  tendMild:          '輕度傾向',
+  tendNone:          '無明顯傾向',
+
+  reportReadyTitle:  '完整體質報告已準備好',
+  reportReadySub:    '內含{name}的食療湯水、茶飲配方、穴位保健與外食指南。',
+  reportOpen:        '查看完整體質報告 →',
+  reportLangNote:    '',
+};
+const T = Object.assign({}, CQ_TXT_ZH, (CQ_PACK && CQ_PACK.ui) || {});
+function fmt(str, vals) {
+  return String(str).replace(/\{(\w+)\}/g, (m, k) => (k in vals ? vals[k] : m));
+}
+
+// 平和質的兩個判定名稱，報告連結與名單一律用中文，畫面才跟著介面語言走。
+const BALANCED_ZH = { pure: '純平和質', basic: '基本平和質' };
+
+// 雷達圖尺寸：英文標籤比中文長，畫布加寬才不會被切掉。
+const RADAR = CQ_LANG === 'en'
+  ? { w: 660, h: 496, cx: 330, cy: 248, maxR: 138, labelR: 176, fontSize: 11.5 }
+  : { w: 530, h: 496, cx: 265, cy: 248, maxR: 138, labelR: 192, fontSize: 12 };
+
 let quizMode = 'simple'; // 'simple' (3 q/section) or 'complex' (66 scored items)
+let cqStarted = false;   // true 之後的畫面切換才捲動，第一屏保持在頁首
 let userName = '';
 
 function getPageQuestions(ci) {
@@ -370,6 +480,7 @@ function getVisibleQuestionRefs(ci) {
 
 // ─── Override text for question ───────────────────────────────────────────
 function getConstitutionText(ci, qi, defaultText) {
+  if (CQ_LANG !== 'zh') return defaultText;   // 同上：覆寫只作用於中文版
   const newKey = ci + '.q.' + qi + '.text';
 
   if (newKey in CQ_OV) return CQ_OV[newKey];
@@ -394,8 +505,10 @@ function updateProgress(pageIndex) {
   const pageRefs = getVisibleQuestionRefs(pageIndex);
   const pageTotal = pageRefs.length;
   const pageAnswered = pageRefs.filter(({ q, qi }) => getStoredAnswer(pageIndex, qi, q)).length;
-  document.getElementById('progressText').textContent =
-    `第 ${pageIndex + 1} / ${constitutions.length} 部分　已填 ${pageAnswered} / ${pageTotal} 題`;
+  document.getElementById('progressText').textContent = fmt(T.progressCount, {
+    page: pageIndex + 1, total: constitutions.length,
+    answered: pageAnswered, pageTotal: pageTotal
+  });
 }
 
 // ─── Render one page ──────────────────────────────────────────────────────
@@ -425,10 +538,10 @@ function renderPage(pageIndex) {
 
   container.innerHTML = `
     <div class="cq-page-header">
-      <div class="cq-page-step">第 ${pageIndex + 1} 部分，共 ${constitutions.length} 部分</div>
+      <div class="cq-page-step">${fmt(T.pageStep, { page: pageIndex + 1, total: constitutions.length })}</div>
       <div class="cq-page-title">${topic.title}</div>
       <div class="cq-page-tagline">${topic.desc}</div>
-      <div class="cq-page-hint">請依照<strong>最近一個月</strong>的狀況如實填答</div>
+      <div class="cq-page-hint">${T.pageHint}</div>
     </div>
     <div class="cq-scale-legend">
       ${SCALE_LABELS.map((l, i) => `<span><strong>${i + 1}</strong> ${l}</span>`).join('')}
@@ -436,10 +549,10 @@ function renderPage(pageIndex) {
     ${qHtml}
     <div class="cq-nav">
       ${pageIndex > 0
-        ? `<button class="btn btn-outline" onclick="cqPrev()">← 上一部分</button>`
+        ? `<button class="btn btn-outline" onclick="cqPrev()">${T.navPrev}</button>`
         : `<div></div>`}
       <button class="btn btn-primary" id="cqNextBtn" onclick="${isLast ? 'cqSubmit()' : 'cqNext()'}">
-        ${isLast ? '查看評估結果 →' : '下一部分 →'}
+        ${isLast ? T.navSubmit : T.navNext}
       </button>
     </div>
   `;
@@ -459,7 +572,7 @@ function renderPage(pageIndex) {
 function cqNext() {
   const missing = getVisibleQuestionRefs(cqPage).filter(({ q, qi }) => !getStoredAnswer(cqPage, qi, q)).length;
   if (missing > 0) {
-    showCqError(`本頁還有 ${missing} 題未填，請完整作答後繼續。`);
+    showCqError(fmt(missing === 1 ? T.errorOne : T.errorMany, { n: missing }));
     return;
   }
   cqPage++;
@@ -474,7 +587,7 @@ function cqPrev() {
 function cqSubmit() {
   const missing = getVisibleQuestionRefs(cqPage).filter(({ q, qi }) => !getStoredAnswer(cqPage, qi, q)).length;
   if (missing > 0) {
-    showCqError(`本頁還有 ${missing} 題未填，請完整作答後繼續。`);
+    showCqError(fmt(missing === 1 ? T.errorOne : T.errorMany, { n: missing }));
     return;
   }
   calculateResults();
@@ -516,7 +629,7 @@ function calculateResults() {
   });
 
   if (results.includes(null)) {
-    showCqError('部分題目未填寫，請返回補齊。');
+    showCqError(T.errorIncomplete);
     return;
   }
 
@@ -525,11 +638,11 @@ function calculateResults() {
   const biasedMax = Math.max(...biased.map(r => r.score));
 
   let primary;
-  let balancedLabel = null;
+  let balancedKey = null;
   if (balanced.score >= 60 && biasedMax < 40) {
     // 平和質（純 or 基本）— 平和質當主體質
     primary = balanced;
-    balancedLabel = biasedMax < 30 ? '純平和質' : '基本平和質';
+    balancedKey = biasedMax < 30 ? 'pure' : 'basic';
   } else {
     // 偏頗質條件：從 8 種偏頗質中取最高分（平和質不參與此競爭）
     primary = [...biased].sort((a, b) => b.score - a.score)[0];
@@ -542,15 +655,15 @@ function calculateResults() {
     .sort((a, b) => b.score - a.score)
     .slice(0, 1);
 
-  renderResults(primary, secondary, results, balancedLabel);
+  renderResults(primary, secondary, results, balancedKey);
 }
 
 // ─── Radar Chart (interactive) ───────────────────────────────────────────
 function drawRadarChart(all, primaryColor) {
   const n = all.length;
-  const cx = 265, cy = 248;
-  const maxR = 138;
-  const labelR = 192;
+  const cx = RADAR.cx, cy = RADAR.cy;
+  const maxR = RADAR.maxR;
+  const labelR = RADAR.labelR;
 
   function toXY(i, pct) {
     const angle = (i * 2 * Math.PI / n) - Math.PI / 2;
@@ -587,8 +700,8 @@ function drawRadarChart(all, primaryColor) {
     const fw = high ? '700' : '400';
     const ly = (cy + labelR * Math.sin(angle)).toFixed(1);
     return `<text x="${lx}" y="${ly}" text-anchor="${anchor}" dominant-baseline="middle"
-      font-size="12" fill="${fill}" font-weight="${fw}"
-      font-family="Noto Sans TC,sans-serif">${r.emoji} ${r.name}</text>`;
+      font-size="${RADAR.fontSize}" fill="${fill}" font-weight="${fw}"
+      font-family="Noto Sans TC,sans-serif">${r.emoji} ${r.shortName || r.name}</text>`;
   }).join('');
 
   // Vertex dots for interaction
@@ -600,7 +713,7 @@ function drawRadarChart(all, primaryColor) {
 
   return `
     <div style="position:relative;">
-      <svg id="cqRadarSvg" viewBox="0 0 530 496" style="width:100%;max-width:480px;display:block;margin:0 auto;cursor:crosshair;" role="img" aria-label="九種體質傾向雷達圖">
+      <svg id="cqRadarSvg" viewBox="0 0 ${RADAR.w} ${RADAR.h}" style="width:100%;max-width:${RADAR.w > 560 ? 540 : 480}px;display:block;margin:0 auto;cursor:crosshair;" role="img" aria-label="${T.radarAria}">
         <g id="radarHighlight"></g>
         ${gridSVG}${axisSVG}
         <polygon points="${scorePts}" fill="${primaryColor}28" stroke="${primaryColor}" stroke-width="2.5" stroke-linejoin="round"/>
@@ -617,7 +730,7 @@ function initRadarInteraction(all) {
   if (!svg || !tooltip) return;
 
   const n = all.length;
-  const cx = 265, cy = 248, maxR = 138;
+  const cx = RADAR.cx, cy = RADAR.cy, maxR = RADAR.maxR;
   const markedBiasedIds = new Set(
     all
       .filter(c => c.id !== 'balanced' && c.score >= 40)
@@ -628,18 +741,18 @@ function initRadarInteraction(all) {
 
   function tendencyLabel(c) {
     if (c.id === 'balanced') {
-      if (c.score >= 60) return c.score >= 70 ? '純平和質' : '基本平和質';
-      return '非平和質';
+      if (c.score >= 60) return c.score >= 70 ? T.tendPure : T.tendBasic;
+      return T.tendNotBalanced;
     }
-    if (c.score >= 40 && markedBiasedIds.has(c.id)) return '明顯偏頗';
-    if (c.score >= 30) return '輕度傾向';
-    return '無明顯傾向';
+    if (c.score >= 40 && markedBiasedIds.has(c.id)) return T.tendMarked;
+    if (c.score >= 30) return T.tendMild;
+    return T.tendNone;
   }
 
   function nearestIdx(clientX, clientY) {
     const rect = svg.getBoundingClientRect();
-    const svgX = (clientX - rect.left) * (530 / rect.width);
-    const svgY = (clientY - rect.top)  * (496 / rect.height);
+    const svgX = (clientX - rect.left) * (RADAR.w / rect.width);
+    const svgY = (clientY - rect.top)  * (RADAR.h / rect.height);
     const dx = svgX - cx, dy = svgY - cy;
     const mouseAngle = Math.atan2(dy, dx);
     let minDiff = Infinity, best = 0;
@@ -668,9 +781,9 @@ function initRadarInteraction(all) {
       <circle cx="${vx}" cy="${vy}" r="5.5" fill="${c.color}" opacity="0.9"/>`;
 
     const tend = tendencyLabel(c);
-    const tendColor = tend === '明顯偏頗' ? 'var(--terracotta)' : tend === '輕度傾向' ? '#B07820' : 'var(--text-light)';
+    const tendColor = tend === T.tendMarked ? 'var(--terracotta)' : tend === T.tendMild ? '#B07820' : 'var(--text-light)';
     tooltip.style.display = 'flex';
-    tooltip.innerHTML = `<span style="font-size:1.1rem;">${c.emoji}</span><strong style="color:var(--plum);">${c.name}</strong><span style="color:${tendColor};font-size:.8rem;">${tend}</span>`;
+    tooltip.innerHTML = `<span style="font-size:1.1rem;">${c.emoji}</span><strong style="color:var(--plum);">${c.shortName || c.name}</strong><span style="color:${tendColor};font-size:.8rem;">${tend}</span>`;
   }
 
   function clear() {
@@ -688,7 +801,9 @@ function initRadarInteraction(all) {
 }
 
 // ─── Render Results ───────────────────────────────────────────────────────
-function renderResults(primary, secondary, all, balancedLabel) {
+function renderResults(primary, secondary, all, balancedKey) {
+  const balancedLabel   = balancedKey ? (balancedKey === 'pure' ? T.balancedPure : T.balancedBasic) : null;
+  const balancedLabelZh = balancedKey ? BALANCED_ZH[balancedKey] : null;
   const pi = constitutions.findIndex(c => c.id === primary.id);
   if (pi >= 0) primary = { ...applyConstitutionOv(primary, pi), score: primary.score };
   secondary = secondary.map(s => {
@@ -698,12 +813,21 @@ function renderResults(primary, secondary, all, balancedLabel) {
 
   document.getElementById('quizContainer').style.display = 'none';
   document.getElementById('progressBar').style.width = '100%';
-  document.getElementById('progressText').textContent = '評估完成';
+  document.getElementById('progressText').textContent = T.progressDone;
   const container = document.getElementById('results');
   container.className = 'results-container active';
 
   const displayName = balancedLabel || primary.name;
+  /* 摘要條、閘門標題這些窄位置改用短名（英文版的括號註解太長）。 */
+  const displayShort = balancedLabel || primary.shortName || primary.name;
+  /* 報告頁、名單與統計一律吃中文體質名，畫面才跟著介面語言走。 */
+  const primaryZh     = primary.nameZh || primary.name;
+  const displayNameZh = balancedLabelZh || primaryZh;
+  window.track && window.track('quiz_complete', {
+    constitution: displayNameZh, quiz_mode: quizMode, lang: CQ_LANG
+  });
   const sec = secondary[0] || null;
+  const secZh = sec ? (sec.nameZh || sec.name) : null;
 
   // Store state for report hand-off
   _resultState = { primary, secondary, all, balancedLabel, displayName };
@@ -711,10 +835,11 @@ function renderResults(primary, secondary, all, balancedLabel) {
   const reportState = {
     source: 'constitution-quiz',
     mode: quizMode,
+    lang: CQ_LANG,
     userName,
-    balancedLabel,
-    primary: { name: primary.name, displayName },
-    secondary: sec ? { name: sec.name } : null,
+    balancedLabel: balancedLabelZh,
+    primary: { name: primaryZh, displayName: displayNameZh },
+    secondary: secZh ? { name: secZh } : null,
     createdAt: new Date().toISOString()
   };
   try {
@@ -722,36 +847,35 @@ function renderResults(primary, secondary, all, balancedLabel) {
   } catch (_) {}
 
   const reportParams = new URLSearchParams({
-    const: primary.name,
+    const: primaryZh,
     mode: quizMode
   });
-  if (sec) {
-    reportParams.set('sec', sec.name);
+  if (secZh) {
+    reportParams.set('sec', secZh);
   }
-  if (balancedLabel) reportParams.set('label', balancedLabel);
+  if (balancedLabelZh) reportParams.set('label', balancedLabelZh);
+  if (CQ_LANG !== 'zh') reportParams.set('lang', CQ_LANG);
   if (userName) reportParams.set('name', userName);
   const reportUrl = `constitution-report.html?${reportParams.toString()}`;
 
-  const balancedNote = balancedLabel === '基本平和質'
-    ? '體質大致平衡，仍有少量偏頗傾向，宜留意保養。'
-    : '';
+  const balancedNote = balancedKey === 'basic' ? T.balancedNote : '';
 
   // ── Summary strip: primary + secondary side by side ──
   const summaryHtml = `
     <div class="cq-summary">
       <div class="cq-summary-item cq-summary-primary" style="--c:${primary.color};">
-        <div class="cq-summary-role">主要體質</div>
-        <div class="cq-summary-name">${primary.emoji} ${displayName}</div>
+        <div class="cq-summary-role">${T.summaryPrimary}</div>
+        <div class="cq-summary-name">${primary.emoji} ${displayShort}</div>
       </div>
       ${sec ? `
       <div class="cq-summary-item cq-summary-secondary" style="--c:${sec.color};">
-        <div class="cq-summary-role">兼夾體質</div>
-        <div class="cq-summary-name">${sec.emoji} ${sec.name}</div>
+        <div class="cq-summary-role">${T.summarySecondary}</div>
+        <div class="cq-summary-name">${sec.emoji} ${sec.shortName || sec.name}</div>
       </div>` : `
       <div class="cq-summary-item cq-summary-secondary cq-summary-none">
-        <div class="cq-summary-role">兼夾體質</div>
-        <div class="cq-summary-name" style="color:var(--text-light);">無明顯兼夾</div>
-        <div class="cq-summary-hint">體質相對單純</div>
+        <div class="cq-summary-role">${T.summarySecondary}</div>
+        <div class="cq-summary-name" style="color:var(--text-light);">${T.summaryNone}</div>
+        <div class="cq-summary-hint">${T.summaryNoneHint}</div>
       </div>`}
     </div>`;
 
@@ -761,17 +885,17 @@ function renderResults(primary, secondary, all, balancedLabel) {
       <div class="cq-sec-head">
         <span class="cq-sec-emoji">${sec.emoji}</span>
         <div>
-          <div class="cq-sec-label">兼夾體質</div>
+          <div class="cq-sec-label">${T.secLabel}</div>
           <div class="cq-sec-name">${sec.name}</div>
         </div>
       </div>
       <p class="cq-sec-desc">${sec.description || sec.tagline}</p>
       ${sec.recommendations && sec.recommendations.length ? `
       <div class="result-section" style="margin-top:1rem;">
-        <div class="result-section-title">調理方向</div>
+        <div class="result-section-title">${T.secFocus}</div>
         <div class="result-tags">${sec.recommendations.slice(0, 3).map(r => `<span class="result-tag">${r}</span>`).join('')}</div>
       </div>` : ''}
-      <p class="cq-sec-note">兼夾體質建議一併告知醫師，由醫師綜合辨證調理。</p>
+      <p class="cq-sec-note">${T.secNote}</p>
     </div>` : '';
 
   container.innerHTML = `
@@ -780,8 +904,8 @@ function renderResults(primary, secondary, all, balancedLabel) {
       ${primary.img
         ? `<div class="cq-result-portrait" style="border-color:${primary.color}55;"><img src="${primary.img}" alt="${displayName}"></div>`
         : `<div class="cq-result-emblem" style="background:${primary.color}1F;color:${primary.color};">${primary.emoji}</div>`}
-      <div class="cq-result-kicker">${userName ? `${escHtml(userName)} 的主要體質` : '您的主要體質'}</div>
-      <h2 class="cq-result-name">${displayName}</h2>
+      <div class="cq-result-kicker">${userName ? fmt(T.resultKickerNamed, { name: escHtml(userName) }) : T.resultKicker}</div>
+      <h2 class="cq-result-name">${displayShort}</h2>
       <div class="cq-result-tag">${primary.tagline}</div>
       ${balancedNote ? `<p class="cq-result-note">${balancedNote}</p>` : ''}
     </div>
@@ -790,28 +914,28 @@ function renderResults(primary, secondary, all, balancedLabel) {
 
     <!-- ── Radar ── -->
     <div class="result-card active cq-block">
-      <div class="cq-block-title">體質傾向分佈</div>
-      <p class="cq-block-sub">移動滑鼠或觸控查看各體質傾向，圖形越向外突出代表傾向越明顯。</p>
+      <div class="cq-block-title">${T.radarTitle}</div>
+      <p class="cq-block-sub">${T.radarSub}</p>
       ${drawRadarChart(all, primary.color)}
     </div>
 
     <!-- ── Primary detail ── -->
     <div class="result-card active cq-block">
-      <div class="cq-block-title">體質簡介</div>
+      <div class="cq-block-title">${T.aboutTitle}</div>
       <p class="cq-block-text">${primary.description}</p>
     </div>
 
     <!-- ── Recommendations ── -->
     <div class="result-card active cq-block">
-      <div class="cq-block-title">個人化調理建議</div>
+      <div class="cq-block-title">${T.careTitle}</div>
       <div class="result-tags" style="margin-bottom:1.25rem;">${primary.recommendations.map(r => `<span class="result-tag">${r}</span>`).join('')}</div>
       <div class="cq-diet-grid">
         <div>
-          <div class="cq-diet-head cq-diet-good">✓ 適宜飲食</div>
+          <div class="cq-diet-head cq-diet-good">${T.dietGood}</div>
           <div class="result-tags">${primary.foods.map(f => `<span class="result-tag" style="background:var(--sage-light);color:var(--plum);">${f}</span>`).join('')}</div>
         </div>
         <div>
-          <div class="cq-diet-head cq-diet-avoid">✕ 應注意避免</div>
+          <div class="cq-diet-head cq-diet-avoid">${T.dietAvoid}</div>
           <div class="result-tags">${primary.avoid.map(a => `<span class="result-tag" style="background:#FDF0E8;color:var(--terracotta);">${a}</span>`).join('')}</div>
         </div>
       </div>
@@ -821,15 +945,15 @@ function renderResults(primary, secondary, all, balancedLabel) {
 
     <div id="cqGate"></div>
 
-    <div class="result-warning cq-warning">⚠️ 本問卷依中醫體質分類判定標準設計，僅供健康參考，不作為醫療診斷依據。建議預約中醫師門診，進行完整四診辨證，獲取個人化調理方案。</div>
+    <div class="result-warning cq-warning">${T.warning}</div>
 
     <div class="cq-actions">
-      <a href="index.html#contact" class="btn btn-primary">預約胡醫師門診</a>
-      <button class="btn btn-outline" onclick="location.reload()">重新測驗</button>
+      <a href="${T.bookHref || 'index.html#contact'}" class="btn btn-primary">${T.actionBook}</a>
+      <button class="btn btn-outline" onclick="location.reload()">${T.actionRestart}</button>
     </div>
   `;
 
-  mountReportGate(reportUrl, displayName, userName);
+  mountReportGate(reportUrl, displayShort, userName, displayNameZh);
   initRadarInteraction(all);
   container.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
@@ -837,7 +961,7 @@ function renderResults(primary, secondary, all, balancedLabel) {
 /* 完整報告的聯絡資料閘。摘要（上面所有內容）永遠免費，只有完整報告要留資料。
    已經留過的人（localStorage）直接看到按鈕，不會被問第二次。
    lead-capture.js 沒載入時整段跳過 — 報告按鈕照舊直接顯示，不會鎖死訪客。 */
-function mountReportGate(reportUrl, displayName, userName) {
+function mountReportGate(reportUrl, displayName, userName, displayNameZh) {
   const slot = document.getElementById('cqGate');
   if (!slot) return;
 
@@ -845,11 +969,12 @@ function mountReportGate(reportUrl, displayName, userName) {
     slot.innerHTML = `
       <div class="cq-block" style="text-align:center;">
         <div style="font-size:1.6rem;line-height:1;margin-bottom:.5rem;">📖</div>
-        <div style="font-family:var(--font-display);font-size:1.15rem;color:var(--plum);margin-bottom:.35rem;">完整體質報告已準備好</div>
+        <div style="font-family:var(--font-display);font-size:1.15rem;color:var(--plum);margin-bottom:.35rem;">${T.reportReadyTitle}</div>
         <p class="cq-block-sub" style="margin-bottom:1.1rem;text-align:center;">
-          內含${escHtml(displayName)}的食療湯水、茶飲配方、穴位保健與外食指南。
+          ${fmt(T.reportReadySub, { name: escHtml(displayName) })}
         </p>
-        <a href="${reportUrl}" class="btn btn-sage">查看完整體質報告 →</a>
+        <a href="${reportUrl}" class="btn btn-sage">${T.reportOpen}</a>
+        ${T.reportLangNote ? `<p class="cq-block-sub" style="margin-top:.85rem;text-align:center;font-size:.78rem;opacity:.85;">${T.reportLangNote}</p>` : ''}
       </div>`;
   };
 
@@ -859,6 +984,7 @@ function mountReportGate(reportUrl, displayName, userName) {
 
   window.LeadCapture.renderGate(slot, {
     constitution: displayName,
+    constitutionZh: displayNameZh || displayName,
     name: userName,
     reportUrl
   }, () => {
@@ -869,23 +995,23 @@ function mountReportGate(reportUrl, displayName, userName) {
 
 // ─── Version Select Screen ────────────────────────────────────────────────
 function renderNameGate() {
-  document.getElementById('progressText').textContent = '開始評估';
+  document.getElementById('progressText').textContent = T.progressStart;
   document.getElementById('progressBar').style.width = '0%';
   document.querySelector('.cq-progress-meta')?.classList.add('is-intro');
   document.querySelector('.cq-hero-desc')?.style.removeProperty('display');
   const container = document.getElementById('quizContainer');
 
   container.innerHTML = `
-    <div style="text-align:center;margin-bottom:1.75rem;">
+    <div class="cq-intro-head">
       <div class="cq-emblem cq-name-badge" aria-hidden="true">👋</div>
-      <div style="font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta);margin-bottom:.5rem;">開始評估</div>
-      <h2 style="font-family:var(--font-display);font-size:1.8rem;color:var(--plum);text-align:center;">怎麼稱呼您呢？</h2>
-      <p style="font-size:.85rem;color:var(--text-light);margin-top:.5rem;text-align:center;">這樣就能用您的名字，為您專屬打造這份體質報告</p>
+      <div class="cq-intro-kicker">${T.nameKicker}</div>
+      <h2 class="cq-intro-title">${T.nameTitle}</h2>
+      ${T.nameSub ? `<p class="cq-intro-sub">${T.nameSub}</p>` : ''}
     </div>
     <div class="cq-name-gate">
-      <input type="text" id="cqNameInput" class="cq-name-input" placeholder="例如：美美、志明" value="${escHtml(userName)}" maxlength="30">
+      <input type="text" id="cqNameInput" class="cq-name-input" placeholder="${T.namePlaceholder}" value="${escHtml(userName)}" maxlength="30">
       <div id="cqNameError" class="cq-name-error" style="display:none;"></div>
-      <button class="btn btn-primary cq-name-btn" onclick="submitName()">好，開始吧 →</button>
+      <button class="btn btn-primary cq-name-btn" onclick="submitName()">${T.nameButton}</button>
     </div>
   `;
 
@@ -903,47 +1029,54 @@ function submitName() {
   const val = input.value.trim();
   if (!val) {
     const err = document.getElementById('cqNameError');
-    err.textContent = '別忘了留下您的稱呼，才能繼續喔 🙂';
+    err.textContent = T.nameError;
     err.style.display = 'block';
     input.focus();
     return;
   }
   userName = val;
+  cqStarted = true;
   renderVersionSelect();
 }
 
 function renderVersionSelect() {
-  document.getElementById('progressText').textContent = '選擇評估版本';
+  document.getElementById('progressText').textContent = T.progressVersion;
   document.getElementById('progressBar').style.width = '0%';
   document.querySelector('.cq-progress-meta')?.classList.add('is-intro');
   document.querySelector('.cq-hero-desc')?.style.removeProperty('display');
   const container = document.getElementById('quizContainer');
 
   container.innerHTML = `
-    <div style="text-align:center;margin-bottom:1.75rem;">
-      <div style="font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta);margin-bottom:.5rem;">開始評估</div>
-      <h2 style="font-family:var(--font-display);font-size:1.8rem;color:var(--plum);">選擇評估版本</h2>
+    <div class="cq-intro-head">
+      <div class="cq-intro-kicker">${T.versionKicker}</div>
+      <h2 class="cq-intro-title">${T.versionTitle}</h2>
+      ${T.versionSub ? `<p class="cq-intro-sub">${T.versionSub}</p>` : ''}
     </div>
     <div class="cq-version-grid">
       <div class="cq-version-card" onclick="startQuiz('simple')">
         <div class="cq-version-icon">⚡</div>
-        <div class="cq-version-name">快速版</div>
-        <div class="cq-version-stat">25 題填答・約 5 分鐘</div>
-        <div class="cq-version-btn">開始評估 →</div>
+        <div class="cq-version-name">${T.versionQuickName}</div>
+        <div class="cq-version-stat">${T.versionQuickStat}</div>
+        <div class="cq-version-btn">${T.versionStart}</div>
       </div>
       <div class="cq-version-card cq-version-card-featured" onclick="startQuiz('complex')">
-        <div class="cq-version-badge">推薦</div>
+        <div class="cq-version-badge">${T.versionBadge}</div>
         <div class="cq-version-icon">🔍</div>
-        <div class="cq-version-name">完整版</div>
-        <div class="cq-version-stat">60 題填答・約 15 分鐘</div>
-        <div class="cq-version-btn">開始評估 →</div>
+        <div class="cq-version-name">${T.versionFullName}</div>
+        <div class="cq-version-stat">${T.versionFullStat}</div>
+        <div class="cq-version-btn">${T.versionStart}</div>
       </div>
     </div>
-    <p style="text-align:center;font-size:.7rem;color:var(--text-light);opacity:.7;margin-top:1.75rem;line-height:1.6;">依中華中醫藥學會《中醫體質分類與判定》標準（ZYYXH/T157-2009）</p>
+    <p class="cq-version-standard">${T.versionStandard}</p>
   `;
+
+  /* 從「怎麼稱呼您」跳到這一步時，畫面還停在英雄區，選項會落在視窗下緣。
+     把整塊帶到視窗中央，選擇才是眼睛第一個看到的東西。 */
+  if (cqStarted) container.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function startQuiz(mode) {
+  window.track && window.track('quiz_start', { quiz_mode: mode, lang: CQ_LANG });
   quizMode = mode;
   allAnswers = {};
   cqPage = 0;

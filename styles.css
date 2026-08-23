@@ -110,6 +110,18 @@ a { color: inherit; text-decoration: none; }
   background: var(--plum);
   color: var(--white);
 }
+/* 問卷頁沒有載入 i18n.js，語言切換是兩個實在的連結（中英各有自己的網址）。 */
+.lang-switch a {
+  padding: 0.2rem 0.42rem;
+  border-radius: 999px;
+  font-weight: 600;
+  color: inherit;
+  transition: background var(--t), color var(--t);
+}
+.lang-switch a:hover { color: var(--plum); }
+.lang-switch a.active { background: var(--plum); color: var(--white); }
+.lang-switch a.active:hover { color: var(--white); }
+.lang-switch a:focus-visible { outline: 2px solid var(--plum); outline-offset: 2px; }
 .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
 .nav-toggle span {
   display: block; width: 22px; height: 2px;

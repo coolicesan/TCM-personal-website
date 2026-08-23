@@ -39,8 +39,8 @@
     '立即預約門診 →': 'Book a Consultation →',
     'WhatsApp 即時查詢': 'WhatsApp Enquiry',
 
-    '香港註冊中醫師 · 婦科專科 · 身心同治': 'Hong Kong Registered Chinese Medicine Practitioner · Women’s Health · Mind-Body Care',
-    '以中醫智慧，溫柔陪伴': 'Holistic care for women’s health',
+    '香港註冊中醫師 · 婦科專科 · 身心同治': 'Hong Kong Registered Chinese Medicine Practitioner · Women\'s Health · Mind-Body Care',
+    '以中醫智慧，溫柔陪伴': 'Holistic care for women\'s health',
     '每個階段': 'at every stage of life',
     '女性每個階段': 'at every stage of life',
     '從青春期、月經失調、備孕、孕產到更年期，胡醫師以中醫調理為本、融合現代醫學知識與心理輔導專業，聆聽每位女性的真實需求，制定溫和細膩的個人化調理方案。': 'CMP Kate Woo blends Chinese medicine with modern medical knowledge and counselling training to support women at every stage — from menstrual health and fertility to pregnancy, postpartum recovery, menopause, emotional wellbeing and long-term constitutional care. Every consultation is attentive, unhurried and shaped around you.',
@@ -110,7 +110,7 @@
     '中藥調理': 'Herbal Medicine',
     '根據望聞問切四診，為您配製個人化中藥方，從根本調補氣血、平衡陰陽。': 'Individual herbal prescriptions based on consultation, pulse and tongue assessment, adjusted as your body responds.',
     '針灸治療': 'Acupuncture',
-    '疏通經絡、調節氣血運行，改善痛經、失眠、不孕等婦科問題，療效直接。': 'Sterile, single-use needles selected to support pain, sleep, stress, fertility and women’s health concerns.',
+    '疏通經絡、調節氣血運行，改善痛經、失眠、不孕等婦科問題，療效直接。': 'Sterile, single-use needles selected to support pain, sleep, stress, fertility and women\'s health concerns.',
     '美顏針': 'Cosmetic Acupuncture',
     '細針刺激面部穴位，促進膠原生成，提拉緊緻、淡化細紋。': 'A natural approach to skin vitality, facial tension, circulation and complexion, with constitution considered alongside the face.',
     '體重管理': 'Weight Management',
@@ -132,14 +132,14 @@
     '專屬食療、茶飲與穴位建議': 'Tailored food, tea and acupoint suggestions',
     '連結對應體質的健康文章': 'Links to articles matched to your body type',
     '開始體質測驗 →': 'Take the Body Type Quiz →',
-    '女性全方位健康評估': 'Women’s Health Assessment',
+    '女性全方位健康評估': 'Women\'s Health Assessment',
     '9 大問卷 · 涵蓋所有生命階段': 'Nine modules for different life stages',
     '依您目前的生命階段選擇評估：月經健康、備孕力、多囊卵巢、孕期不適與情緒、產後恢復與情緒、更年期症狀，幫助您更全面認識目前的身體狀況。': 'Choose the assessment that matches where you are now, including periods, fertility, PCOS, pregnancy symptoms, postpartum recovery, mood and menopause.',
     '月經 · 備孕 · 孕期 · 產後 · 更年期': 'Periods · fertility · pregnancy · postpartum · menopause',
     '採用國際通用量表，結果客觀可靠': 'Includes recognised screening tools where relevant',
     '對應中醫辨證分型與體質分析': 'Connects results with TCM pattern insights',
     '即時結果＋個人化調理方向': 'Instant results with next-step care suggestions',
-    '進入女性評估中心 →': 'Open the Women’s Health Assessment →',
+    '進入女性評估中心 →': 'Open the Women\'s Health Assessment →',
     '完成評估後，可依結果閱讀對應的健康文章，慢慢認識自己的身體。': 'After completing an assessment, you can read related articles and bring your results to a consultation if you wish.',
 
     '健康衛教文章': 'Patient Education',
@@ -202,9 +202,9 @@
     '透過 WhatsApp 送出預約': 'Send via WhatsApp',
     '按下送出後會開啟 WhatsApp，內容已為您整理好，確認後傳送即可。': 'Submitting will open WhatsApp with your message prepared. Please review it before sending.',
     '快速前往': 'Quick Links',
-    '女性健康評估': 'Women’s Health Assessment',
+    '女性健康評估': 'Women\'s Health Assessment',
     '聯絡方式': 'Contact',
-    '以中醫智慧與身心同治的理念，陪伴女性每個生命階段。': 'Professional, gentle Chinese medicine care for women’s health in Hong Kong.',
+    '以中醫智慧與身心同治的理念，陪伴女性每個生命階段。': 'Professional, gentle Chinese medicine care for women\'s health in Hong Kong.',
     '本網站所有內容與線上評估僅供健康教育參考，不構成醫療建議，亦不能取代註冊醫師或中醫師的診斷與治療。若您出現急性或嚴重症狀，請立即求醫。': 'All content and online assessments on this site are for educational purposes only. They are not a substitute for professional medical advice, diagnosis or treatment. Please seek urgent care if you have acute or severe symptoms.',
 
     '什麼是針灸': 'What Is Acupuncture',
@@ -389,12 +389,12 @@
 
   var META = {
     index: {
-      title: 'CMP Kate Woo | Women’s Health Chinese Medicine in Hong Kong',
-      description: 'CMP Kate Woo is a Hong Kong registered Chinese medicine practitioner providing women’s health, fertility, pregnancy, postpartum, menopause, emotional wellbeing and constitutional care.'
+      title: 'CMP Kate Woo | Women\'s Health Chinese Medicine in Hong Kong',
+      description: 'CMP Kate Woo is a Hong Kong registered Chinese medicine practitioner providing women\'s health, fertility, pregnancy, postpartum, menopause, emotional wellbeing and constitutional care.'
     },
     about: {
       title: 'About CMP Kate Woo | Hong Kong Registered Chinese Medicine Practitioner',
-      description: 'Learn about CMP Kate Woo, a Hong Kong registered Chinese medicine practitioner focusing on women’s health, gynaecology, fertility, postpartum recovery and mind-body care.'
+      description: 'Learn about CMP Kate Woo, a Hong Kong registered Chinese medicine practitioner focusing on women\'s health, gynaecology, fertility, postpartum recovery and mind-body care.'
     }
   };
 
@@ -423,7 +423,7 @@
     'treatment-acupuncture.html': {
       title: 'Acupuncture',
       category: 'Chinese Medicine Treatment',
-      hero: 'Very fine sterile needles stimulate specific acupoints to regulate body function and relieve symptoms, from pain and digestion to sleep, mood, women’s health, fertility and postpartum recovery.',
+      hero: 'Very fine sterile needles stimulate specific acupoints to regulate body function and relieve symptoms, from pain and digestion to sleep, mood, women\'s health, fertility and postpartum recovery.',
       whatTitle: 'Fine-Needle Care for Body Regulation',
       what: ['Acupuncture uses very fine needles to stimulate selected points on the body. It is best known for pain relief, but its clinical use is broader than many people expect.', 'Depending on the person, acupuncture may be considered for pain, digestive symptoms, nausea, sleep and stress-related physical symptoms, menstrual concerns, fertility preparation, pregnancy-related discomfort, postpartum recovery and menopause support.', 'CMP Kate Woo chooses points after a full TCM assessment, considering your symptoms, constitution, medical history and safety factors. All needles are single-use and sterile.'],
       compareTitle: 'Traditional Meridian Theory and Modern Research',
@@ -530,7 +530,7 @@
       what: ['Cupping uses negative pressure to lift the skin and promote local circulation. Gua sha uses repeated scraping along channels to release surface stagnation.', 'They are often used for neck, shoulder and back tension, damp-heavy body sensations, early wind-cold symptoms and certain menstrual stagnation patterns.', 'Marks after treatment are common and usually fade naturally.'],
       compareTitle: 'Microcirculation or Releasing Pathogens',
       west: ['May increase local circulation and lymphatic flow', 'Sometimes viewed as fascia or soft-tissue release', 'Used in pain and sports recovery contexts', 'Marks are small bruising responses rather than literal toxins'],
-      tcm: ['Understands pain through qi stagnation, blood stasis, cold and dampness', 'Cupping draws deeper stagnation; gua sha releases surface stagnation', 'Emphasises “free flow means no pain”', 'Mark colour may guide follow-up treatment'],
+      tcm: ['Understands pain through qi stagnation, blood stasis, cold and dampness', 'Cupping draws deeper stagnation; gua sha releases surface stagnation', 'Emphasises "free flow means no pain"', 'Mark colour may guide follow-up treatment'],
       detail: 'Cupping and gua sha marks are normal microvascular responses and typically fade within days to two weeks.',
       tags: ['Neck, shoulder and back pain', 'Damp heaviness', 'Qi stagnation and blood stasis', 'Poor menstrual flow', 'Early wind-cold symptoms', 'Dull complexion', 'Fatigue', 'Digestive bloating', 'Muscle recovery'],
       steps: [['Consultation and assessment', 'Identify whether the pattern is cold-damp, qi stagnation or blood stasis.'], ['Choose area and method', 'Select cupping, gua sha or both.'], ['Treatment', 'Cups are retained briefly or gua sha is applied along channels.'], ['Observe marks', 'Mark colour and depth guide interpretation and aftercare.'], ['Aftercare advice', 'Keep warm, drink water and avoid wind or cold.']],
@@ -564,7 +564,7 @@
       what: ['Internal medicine in TCM looks at how digestion, energy, sleep, mood, circulation and organ functions interact.', 'It is suitable for people with chronic discomfort, fatigue or symptoms that remain even when routine checks are normal.', 'CMP Kate Woo uses herbs, acupuncture and lifestyle advice to rebuild regulation gradually.'],
       compareTitle: 'Individual Organs and Whole-System Coordination',
       west: ['Investigates organs, blood tests and imaging findings', 'Treats named diseases and abnormal results', 'Provides essential diagnosis and urgent care', 'May not fully explain sub-health symptoms'],
-      tcm: ['Looks at spleen-stomach, liver qi, kidney and qi-blood patterns', 'Treats the person’s overall regulatory state', 'Connects stress, sleep and digestion', 'Works gradually through constitutional care'],
+      tcm: ['Looks at spleen-stomach, liver qi, kidney and qi-blood patterns', 'Treats the person\'s overall regulatory state', 'Connects stress, sleep and digestion', 'Works gradually through constitutional care'],
       detail: 'TCM internal care is supportive and should be integrated with appropriate medical investigation when red flags or persistent symptoms are present.',
       tags: ['Chronic fatigue', 'Indigestion', 'Sensitive gut', 'Dizziness', 'Palpitations', 'Insomnia', 'Cold lower back', 'Stress-related gut symptoms', 'Normal tests but persistent discomfort'],
       steps: [['Detailed consultation', 'Review symptoms, lifestyle, tongue and pulse.'], ['Personalised herbs', 'Prescribe according to the core pattern.'], ['Acupuncture support', 'Use points to regulate digestion, sleep, circulation or mood.'], ['Diet and routine advice', 'Make practical changes suited to your constitution.'], ['Regular follow-up', 'Track symptom changes and adjust treatment.']],
@@ -729,11 +729,24 @@
     });
   }
 
+  /* 體質問卷有自己的英文版網址（頁面文字由 constitution-en.js 提供），
+     所以英文模式下站內指向問卷的連結要改指英文版，中文模式改回來。 */
+  function retargetQuizLinks(lang) {
+    document.querySelectorAll('a[href]').forEach(function (a) {
+      var href = a.getAttribute('href');
+      if (!/(^|\/)constitution(-en)?\.html(\?|#|$)/.test(href)) return;
+      a.setAttribute('href', lang === 'en'
+        ? href.replace('constitution.html', 'constitution-en.html')
+        : href.replace('constitution-en.html', 'constitution.html'));
+    });
+  }
+
   function applyLanguage(lang) {
     lang = lang === 'en' ? 'en' : 'zh';
     setLang(lang);
     document.documentElement.lang = lang === 'en' ? 'en-HK' : 'zh-Hant-HK';
     applyTreatmentPage(lang);
+    retargetQuizLinks(lang);
     translateTextNodes(document.body, lang);
     translateAttributes(lang);
     setMeta(lang);
