@@ -30,7 +30,7 @@
      ------------------------------------------------------------------- */
   var SETUP = {
     // 貼上 Apps Script 的 /exec 網址。留空 = 使用 WhatsApp 退回模式。
-    endpoint: '',
+    endpoint: 'https://script.google.com/macros/s/AKfycbw-QgKyJZnZ17lk2z7e4MnZ3-wFmNwS_bcWO4X3DcEpcPQCE9GZiODetvY2I1JfB07JZw/exec',
 
     // 表單欄位名稱對照（用 Apps Script 的話照原樣，不用改）
     fields: {
