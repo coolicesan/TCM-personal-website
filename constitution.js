@@ -590,7 +590,53 @@ function cqSubmit() {
     showCqError(fmt(missing === 1 ? T.errorOne : T.errorMany, { n: missing }));
     return;
   }
+  saveQuizSession();
   calculateResults();
+}
+
+/* 問卷的答案本來只活在記憶體裡，所以離開這一頁（去看報告、去預約）再按上一頁，
+   結果頁就不見了，要整份重做。交卷時把答案存進 sessionStorage，回到這一頁就
+   能原樣重畫。用 sessionStorage 而不是 localStorage：只在這個分頁有效，
+   關掉分頁就清掉，下次來是全新的問卷。 */
+const CQ_SESSION_KEY = 'drhu_cq_session';
+
+function saveQuizSession() {
+  try {
+    sessionStorage.setItem(CQ_SESSION_KEY, JSON.stringify({
+      quizMode: quizMode,
+      userName: userName,
+      answers: allAnswers,
+      lang: CQ_LANG,
+      at: Date.now()
+    }));
+  } catch (_) {}
+}
+
+function restoreQuizSession() {
+  let saved = null;
+  try { saved = JSON.parse(sessionStorage.getItem(CQ_SESSION_KEY) || 'null'); }
+  catch (_) { return false; }
+  /* 語言不同就不要還原：中英文問卷的題目對不上，硬還原會算錯。 */
+  if (!saved || !saved.answers || saved.lang !== CQ_LANG) return false;
+  quizMode = saved.quizMode || 'simple';
+  userName = saved.userName || '';
+  allAnswers = saved.answers;
+  cqStarted = true;
+  calculateResults();
+  /* calculateResults 遇到答案不齊會中途放棄，什麼都不畫。那樣還原就等於給人一版
+     空白頁，寧可清掉存檔，當作沒有還原過，讓對方從頭開始。 */
+  if (!document.querySelector('.cq-result-hero')) {
+    try { sessionStorage.removeItem(CQ_SESSION_KEY); } catch (_) {}
+    return false;
+  }
+  return true;
+}
+
+/* 「重新測驗」要真的重來一次，所以先把存起來的答案清掉再重載。 */
+function cqRestart() {
+  try { sessionStorage.removeItem(CQ_SESSION_KEY); } catch (_) {}
+  try { sessionStorage.removeItem('drhu_cq_report'); } catch (_) {}
+  location.reload();
 }
 
 function showCqError(msg) {
@@ -949,7 +995,7 @@ function renderResults(primary, secondary, all, balancedKey) {
 
     <div class="cq-actions">
       <a href="${T.bookHref || 'index.html#contact'}" class="btn btn-primary">${T.actionBook}</a>
-      <button class="btn btn-outline" onclick="location.reload()">${T.actionRestart}</button>
+      <button class="btn btn-outline" onclick="cqRestart()">${T.actionRestart}</button>
     </div>
   `;
 
@@ -1085,5 +1131,7 @@ function startQuiz(mode) {
 
 document.addEventListener('DOMContentLoaded', () => {
   if (!document.getElementById('quizContainer')) return;
+  /* 從報告頁或預約頁按上一頁回來 → 直接還原結果，不用重做問卷 */
+  if (restoreQuizSession()) return;
   renderNameGate();
 });
