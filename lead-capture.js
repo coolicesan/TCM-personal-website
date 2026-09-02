@@ -54,8 +54,8 @@
        同時要改 google-apps-script/lead-sheet.gs 裡的 PREVIEW_KEY。 */
     previewKey: 'ee9a93e3d2accfd5',
 
-    // 電話是否必填。改成 true 會提高流失率 — 建議維持 false。
-    phoneRequired: false
+    // 電話是否必填。true = 一定要填，流失率會高一點，但每個 lead 都有電話可以跟進。
+    phoneRequired: true
   };
 
   var STORAGE_KEY = 'drhu_lead_v1';
