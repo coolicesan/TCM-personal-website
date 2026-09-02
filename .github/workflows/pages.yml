@@ -28,6 +28,10 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v6
 
+      # 內部文件不要跟住上網：這個 workflow 是把整個 repo 原封上載的
+      - name: Strip internal-only files
+        run: rm -rf google-apps-script
+
       - name: Upload site
         uses: actions/upload-pages-artifact@v5
         with:

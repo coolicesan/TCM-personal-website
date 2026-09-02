@@ -10,6 +10,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <script src="config-loader.js"></script>
+<!-- 要喺下面畫報告之前就載入：沒留過聯絡方式的話，內容根本不會畫出來（君子閘，見 lead-capture.js） -->
+<script src="lead-capture.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 @page{size:A4;margin:18mm 20mm}
@@ -487,21 +489,29 @@ if(!params.get('const')&&params.get('c')){
   if(zh)params.set('const',zh);
 }
 reportPayload=readReportPayload(params);
-// Admin gate: selector bar shown for admins or when opened without ?const=
 const constParam=params.get('const');
 const secParam=params.get('sec');
 const nameParam=params.get('name');
-// No ?const= (opened directly) → show selector so all 9 constitutions are browsable
-if(params.get('admin')==='1' || !constParam){
-  document.getElementById('ctrlBar').classList.add('admin');
-  document.getElementById('printBar').classList.add('hidden');
+
+/* 沒留過聯絡方式（也沒有帶預覽密鑰）就到此為止：只蓋上「請先完成問卷」那一頁，
+   一個字的報告內容都不畫。之前是照畫完再蓋一塊遮罩，用開發者工具把遮罩刪掉
+   就看得見全份。 */
+if(window.LeadCapture && !window.LeadCapture.isUnlocked()){
+  window.LeadCapture.guard();
+}else{
+  // 沒有 ?const=（直接打開）或帶著預覽密鑰 → 顯示選擇列，九種體質都可以逐個看
+  const isPreview = !!window.LeadCapture && !window.LeadCapture.hasLead();
+  if(isPreview || !constParam){
+    document.getElementById('ctrlBar').classList.add('admin');
+    document.getElementById('printBar').classList.add('hidden');
+  }
+  if(constParam&&CD[constParam]){document.getElementById('iConst').value=constParam;}
+  const displayNameParam=nameParam||(reportPayload&&reportPayload.userName)||'';
+  if(displayNameParam){document.getElementById('iName').value=displayNameParam;sync();}
+  render();
+  const firstSec=(secParam||'').split(',').find(v=>CD[v]);
+  if(firstSec&&CD[firstSec]){document.getElementById('iSec').value=firstSec;renderSec();}
 }
-if(constParam&&CD[constParam]){document.getElementById('iConst').value=constParam;}
-const displayNameParam=nameParam||(reportPayload&&reportPayload.userName)||'';
-if(displayNameParam){document.getElementById('iName').value=displayNameParam;sync();}
-render();
-const firstSec=(secParam||'').split(',').find(v=>CD[v]);
-if(firstSec&&CD[firstSec]){document.getElementById('iSec').value=firstSec;renderSec();}
 </script>
 
 <script>
@@ -514,8 +524,5 @@ if(firstSec&&CD[firstSec]){document.getElementById('iSec').value=firstSec;render
 </script>
 <script src="shared-nav.js"></script>
 <script src="analytics.js" defer></script>
-<!-- 沒做過問卷 / 未留聯絡方式的人，先請他們回去做評估（君子閘，見 lead-capture.js） -->
-<script src="lead-capture.js"></script>
-<script>window.LeadCapture && window.LeadCapture.guard();</script>
 </body>
 </html>

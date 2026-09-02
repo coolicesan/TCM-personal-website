@@ -2,16 +2,18 @@
    lead-capture.js — 完整體質報告的聯絡資料收集閘
 
    體質問卷做完之後，摘要（體質類型、雷達圖、飲食方向）仍然免費即時顯示；
-   「完整體質報告」則要先留下聯絡方式才解鎖。
+   「完整體質報告」則要先留下聯絡方式才解鎖。留完即刻解鎖，不用等人手回覆。
 
    ⚠ 這是「君子閘」，不是保安措施。
    constitution-report.html 是公開的靜態檔案，懂得看原始碼或直接打 URL 的人
    一定繞得過。用來收 lead 沒問題（絕大多數訪客會照填），但千萬不要拿它來
    賣收費內容 — 收了錢而內容拿得到，是會出事的。
 
-   ── 設定：把 SETUP 裡的 endpoint 填好就會自動寄信 ──────────────────────
-   endpoint 為空的時候，表單會退回 WhatsApp 模式（資料經 WhatsApp 傳給醫師，
-   仍然收得到 lead），所以未設定之前網站一樣運作正常。
+   ── 設定：把 endpoint 填好，整條流程就會自動走完 ──────────────────────
+   endpoint 有值   → 訪客按下送出，資料直接寫入你的 Google 試算表，同一秒解鎖
+                     報告連結。醫師不用做任何事。
+   endpoint 為空   → 退回 WhatsApp 模式：訪客要自己在 WhatsApp 按傳送，你收到
+                     訊息後還要人手回覆報告。未設定之前網站一樣運作正常。
    ========================================================================= */
 (function () {
   'use strict';
@@ -19,21 +21,20 @@
   /* ─────────────────────────────────────────────────────────────────────────
      SETUP — 你只需要改這一段
      ───────────────────────────────────────────────────────────────────────
-     1. 開一個 MailerLite（或 Brevo）免費帳號，建立一個 form / list。
-     2. 把它的 form action URL 貼進 endpoint。
-        · MailerLite：Forms → Embedded form → 取 <form action="..."> 的網址
-        · Brevo：     Forms → Share → 取 https://sibforms.com/serve/... 的網址
-     3. 對照該表單的欄位名稱，改 fields 裡的值。
-     4. 在後台建立 automation：有人加入名單 → 自動寄出報告連結的 email。
-        報告連結格式：https://katewoo.com/constitution-report.html?const=氣虛質
-        （名單欄位會帶著體質類型，automation 可以用它組出對應連結）
+     收 lead 的做法：Google 試算表 + Apps Script 網頁應用程式。
+     完整步驟見 google-apps-script/README.md，做完會拿到一條
+     https://script.google.com/macros/s/.../exec 網址，貼進下面的 endpoint 就完成。
+
+     想改用 MailerLite / Brevo / Formspree 也可以：把它們的 form action 網址貼進
+     endpoint，再照該服務的欄位名稱改 fields 就行，其餘程式碼不用動。
      ------------------------------------------------------------------- */
   var SETUP = {
-    // 貼上表單 endpoint。留空 = 使用 WhatsApp 退回模式。
+    // 貼上 Apps Script 的 /exec 網址。留空 = 使用 WhatsApp 退回模式。
     endpoint: '',
 
-    // 表單欄位名稱對照（依你的 MailerLite / Brevo 欄位改）
+    // 表單欄位名稱對照（用 Apps Script 的話照原樣，不用改）
     fields: {
+      leadId:       'lead_id',       // 這一筆的識別碼，用來去重（見 postLead）
       name:         'name',          // 姓名
       phone:        'phone',         // 電話
       email:        'email',         // Email
@@ -41,11 +42,17 @@
       constitution: 'constitution',      // 體質類型（中文），用於稱呼與分眾
       constSlug:    'constitution_slug', // 體質 slug，automation 用來組報告連結
       lang:         'lang',              // 訪客用的介面語言（zh / en），automation 用來挑語言
+      reportPath:   'report_path',       // 訪客見到的那條報告連結，方便你自己打開同一份
       source:       'source'             // 來源，方便日後分辨不同表單
     },
 
     // WhatsApp 退回模式 / 送出失敗時使用的號碼
     whatsapp: '85298152863',
+
+    /* 你自己預覽報告用的密鑰。只有帶著 ?pv=<這串字> 的網址才會略過閘。
+       想換一條新的（例如舊網址流出去了），改成任何一串隨機字就可以，
+       同時要改 google-apps-script/lead-sheet.gs 裡的 PREVIEW_KEY。 */
+    previewKey: 'ee9a93e3d2accfd5',
 
     // 電話是否必填。改成 true 會提高流失率 — 建議維持 false。
     phoneRequired: false
@@ -54,7 +61,7 @@
   var STORAGE_KEY = 'drhu_lead_v1';
 
   /* 中文體質名 → ASCII slug。自動化電郵用 slug 組連結
-     （constitution-report.html?c=qi-deficiency&k=cq），
+     （constitution-report.html?c=qi-deficiency），
      免得中文字在郵件客戶端被改壞。與報告頁的圖片檔名一致。 */
   var SLUGS = {
     '平和質': 'balanced-type',
@@ -95,7 +102,7 @@
       gateSub:        '留下聯絡方式，即可查看為你的體質整理的完整調理內容。',
       sendForm:       '免費取得完整報告 →',
       sendWa:         '透過 WhatsApp 索取報告 →',
-      picsForm:       '你的姓名及聯絡方式只用作寄送這份報告',
+      picsForm:       '你的姓名及聯絡方式會記錄在胡醫師的名單內，用作跟進你的體質報告查詢',
       picsWa:         '你的姓名及聯絡方式會透過 WhatsApp 傳送給胡醫師，用作跟進你的報告查詢',
       picsTail:       '（以及在你勾選同意後，寄送健康資訊）。問卷的逐題答案不會上載，只會記錄評估得出的體質類型，用以配對正確的報告內容。詳情見',
       privacy:        '私隱政策',
@@ -108,7 +115,7 @@
       phPhone:        '9xxx xxxx',
       consent:        '我願意日後收到胡醫師的健康資訊、調理貼士與服務推廣。（選填，可隨時取消）',
       errName:        '請填寫姓名。',
-      errEmailForm:   '請填寫有效的 Email，報告會寄到這個地址。',
+      errEmailForm:   '請填寫有效的 Email，方便醫師日後聯絡你。',
       errEmail:       '請填寫有效的 Email。',
       errPhoneReq:    '請填寫電話。',
       errPhoneBad:    '電話號碼格式不正確。',
@@ -148,7 +155,7 @@
       gateSub:        'Leave your contact details to read the complete care plan put together for your constitution.',
       sendForm:       'Get my full report free →',
       sendWa:         'Request my report on WhatsApp →',
-      picsForm:       'Your name and contact details are used only to send you this report',
+      picsForm:       'Your name and contact details are recorded for CMP Kate Woo, so she can follow up on your report',
       picsWa:         'Your name and contact details are sent to CMP Kate Woo over WhatsApp, so she can follow up on your report request',
       picsTail:       ' (and, if you tick the box above, to send you health information). Your individual answers are never uploaded — only the constitution type the assessment arrived at, so that the right report reaches you. Full details in our ',
       privacy:        'Privacy Policy',
@@ -161,7 +168,7 @@
       phPhone:        '9xxx xxxx',
       consent:        'I would like to receive health information, care tips and service updates from CMP Kate Woo. (Optional — you can unsubscribe at any time.)',
       errName:        'Please enter your name.',
-      errEmailForm:   'Please enter a valid email address — your report will be sent there.',
+      errEmailForm:   'Please enter a valid email address so the practitioner can reach you.',
       errEmail:       'Please enter a valid email address.',
       errPhoneReq:    'Please enter your phone number.',
       errPhoneBad:    'That phone number does not look right.',
@@ -284,6 +291,19 @@
     catch (_) { return null; }
   }
   function hasLead() { return !!(getLead() && getLead().email); }
+
+  /* 可以看完整報告的兩種情況：
+       1. 這部裝置真的留過聯絡資料
+       2. 網址帶著你自己的預覽密鑰
+     以前還接受 ?k=cq 和 ?admin=1 —— 兩條都猜得到，等於冇閘，已經拿走。 */
+  function isUnlocked() {
+    if (hasLead()) return true;
+    var key = SETUP.previewKey;
+    if (!key) return false;
+    try {
+      return new URLSearchParams(location.search).get('pv') === key;
+    } catch (_) { return false; }
+  }
   function saveLead(lead) {
     /* 三條成功路徑（endpoint / WhatsApp / 送出失敗後改用 WhatsApp）都會經過這裡，
        所以事件埋在這一點就不會漏計，也不會重複。 */
@@ -292,6 +312,15 @@
       method: SETUP.endpoint ? 'form' : 'whatsapp'
     });
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(lead)); } catch (_) {}
+  }
+
+  /* 每次送出配一個識別碼。送出可能重試（CORS 被擋時會用 no-cors 再送一次），
+     帶著同一個 id，後端就分得出「同一筆重送」還是「兩個人各填一次」。 */
+  function newLeadId() {
+    try {
+      if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+    } catch (_) {}
+    return 'lc-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
   }
 
   /* ── 驗證 ────────────────────────────────────────────────────────── */
@@ -320,13 +349,19 @@
     return 'https://wa.me/' + SETUP.whatsapp + '?text=' + encodeURIComponent(msg);
   }
 
-  /* 各家表單服務的 CORS 政策不一：先照正常 CORS 送，被擋就改用 no-cors 重送。
-     no-cors 讀不到回應，但請求確實送達伺服器，所以視為成功。 */
+  /* 用 application/x-www-form-urlencoded 送（URLSearchParams 會自動帶上這個
+     Content-Type）：屬於「簡單請求」，不會觸發 preflight，Apps Script 的 doPost
+     也讀得到 e.parameter。換成 FormData 的話 preflight 會被 Apps Script 擋下。
+
+     各家表單服務的 CORS 政策不一：先照正常 CORS 送，被擋就改用 no-cors 重送。
+     no-cors 讀不到回應，但請求確實送達伺服器，所以視為成功。第一次其實已經寫入
+     的情況下，兩次會變成同一筆兩行 —— 所以每筆都帶 lead_id，由後端去重。 */
   function postLead(lead) {
     if (!SETUP.endpoint) return Promise.reject(new Error('no-endpoint'));
 
     var f = SETUP.fields;
-    var body = new FormData();
+    var body = new URLSearchParams();
+    if (f.leadId) body.append(f.leadId, lead.id || '');
     body.append(f.name, lead.name);
     if (lead.phone) body.append(f.phone, lead.phone);
     body.append(f.email, lead.email);
@@ -334,6 +369,7 @@
     body.append(f.constitution, lead.constitutionZh || lead.constitution || '');
     body.append(f.constSlug, slugFor(lead.constitutionZh || lead.constitution));
     body.append(f.lang, LC_LANG);
+    if (f.reportPath) body.append(f.reportPath, lead.reportPath || '');
     body.append(f.source, lead.source || 'constitution-quiz');
 
     return fetch(SETUP.endpoint, {
@@ -341,9 +377,15 @@
       body: body,
       headers: { Accept: 'application/json' }
     }).then(function (res) {
+      /* 讀得到回應而且伺服器說不行 —— 這是真的失敗，讓訪客走 WhatsApp 後備，
+         別用 no-cors 再送一次把錯誤蓋過去（no-cors 一定會「成功」，
+         結果就是名單收不到，而你完全不會知道）。 */
       if (!res.ok) throw new Error('http-' + res.status);
       return true;
-    }).catch(function () {
+    }, function () {
+      /* fetch 直接 reject = CORS 被擋或者網絡不通。回應讀不到，但請求有可能
+         其實已經送達，所以照送一次 no-cors。真的兩次都寫入的話，後端會按
+         lead_id 認出是同一筆。 */
       return fetch(SETUP.endpoint, { method: 'POST', body: body, mode: 'no-cors' })
         .then(function () { return true; });
     });
@@ -433,8 +475,11 @@
         +       L.waReopen + '</a>'
         +   '</div>'
         + '</div>';
+      /* 記低這一筆要等對方按「已傳送」。之前是一開 WhatsApp 就記低，
+         結果只要按過一次按鈕（就算立刻關掉 WhatsApp、什麼都沒傳），
+         這部裝置就永久當作已留資料，之後再做問卷都不會被問。 */
       container.querySelector('#lcDone')
-        .addEventListener('click', function () { onUnlock(lead); });
+        .addEventListener('click', function () { saveLead(lead); onUnlock(lead); });
     }
 
     function fail(msg, el) {
@@ -447,12 +492,14 @@
       e.preventDefault();
 
       var lead = {
+        id:    newLeadId(),
         name:  elName.value.trim(),
         email: elEmail.value.trim(),
         phone: elPhone.value.trim(),
         consent: elCons.checked,
         constitution: ctx.constitution || '',
         constitutionZh: ctx.constitutionZh || ctx.constitution || '',
+        reportPath: ctx.reportUrl || '',
         lang: LC_LANG,
         source: 'constitution-quiz',
         at: new Date().toISOString()
@@ -474,7 +521,6 @@
          資料。所以改成兩步：先開 WhatsApp，再由對方自己確認已傳送才顯示報告。
          繞得過（本來就是君子閘），但把「傳送」變成流程的一步而不是可略過的岔路。 */
       if (!SETUP.endpoint) {
-        saveLead(lead);
         window.open(waLink(lead), '_blank', 'noopener');
         showWaConfirm(lead);
         return;
@@ -500,15 +546,10 @@
   }
 
   /* ── 報告頁的遮罩：沒留過資料就請對方先做問卷 ──────────────────────
-     三種情況要放行：
-       1. 這部裝置填過表單（localStorage）
-       2. 連結帶 ?k=cq — 自動化電郵寄出的連結。收信人可能在另一部裝置開，
-          本機沒有紀錄，但他確實已經留過資料，不放行等於整個流程失效。
-       3. ?admin=1 — 醫師自己預覽九種報告的既有做法
-     ?k=cq 猜得到，但這本來就是君子閘，不是保安措施。 */
+     報告頁那邊會先問 isUnlocked()，不通過就連內容都不畫出來（見
+     constitution-report.html），這裡只負責把「請先做問卷」那一頁蓋上去。 */
   function guard() {
-    var p = new URLSearchParams(location.search);
-    if (hasLead() || p.get('k') === 'cq' || p.get('admin') === '1') return;
+    if (isUnlocked()) return;
     injectCss();
 
     var veil = document.createElement('div');
@@ -529,6 +570,7 @@
 
   window.LeadCapture = {
     hasLead: hasLead,
+    isUnlocked: isUnlocked,
     getLead: getLead,
     renderGate: renderGate,
     guard: guard,
