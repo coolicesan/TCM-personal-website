@@ -1,0 +1,7 @@
+# 內部文件，唔好派送去 katewoo.com。
+# 呢個站係由 Vercel 派送（GitHub Pages 嗰條 workflow 只出到 coolicesan.github.io），
+# 所以要喺呢度剔走，pages.yml 嗰步管唔到 Vercel。
+google-apps-script
+
+# 本機除錯用嘅截圖（已經 gitignore，寫喺呢度做雙保險）
+temporary screenshots
