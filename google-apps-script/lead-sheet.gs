@@ -82,6 +82,40 @@ function doPost(e) {
   }
 }
 
+/**
+ * 找不到資料時先跑這一個。
+ * 在 Apps Script 編輯器上方的函式選單揀 checkSetup，按「執行」，
+ * 下面的「執行紀錄」就會印出這個腳本到底把資料寫進了哪一張試算表、
+ * 有哪些分頁、以及 Leads 分頁現在有多少筆。
+ *
+ * 對不上你正在看的那張表，就是腳本綁了另一張 —— 把程式碼貼到正確那張表的
+ * 擴充功能 → Apps Script，重新部署一次，換一條新的 /exec 網址。
+ */
+function checkSetup() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  if (!ss) {
+    Logger.log('這個腳本沒有連著任何試算表（是獨立專案）。');
+    Logger.log('要從試算表的「擴充功能 → Apps Script」建立，資料才有地方可寫。');
+    return;
+  }
+  Logger.log('資料寫進這張試算表：' + ss.getName());
+  Logger.log('網址：' + ss.getUrl());
+  Logger.log('分頁：' + ss.getSheets().map(function (sh) { return sh.getName(); }).join('、'));
+
+  var sheet = ss.getSheetByName(SHEET_NAME);
+  if (!sheet) {
+    Logger.log('還沒有 ' + SHEET_NAME + ' 分頁 —— 代表一筆都還沒收到。');
+    return;
+  }
+  var rows = Math.max(sheet.getLastRow() - 1, 0);
+  Logger.log(SHEET_NAME + ' 分頁現在有 ' + rows + ' 筆資料（不算標題列）。');
+  if (rows > 0) {
+    var last = sheet.getRange(sheet.getLastRow(), 1, 1, 5).getValues()[0];
+    Logger.log('最後一筆：' + last.join(' | '));
+  }
+  Logger.log('通知信會寄到：' + (NOTIFY_EMAIL || '（沒有設定，不寄）'));
+}
+
 /** 在瀏覽器直接開 /exec 網址時看到的東西，用來確認部署成功。 */
 function doGet() {
   return json({ ok: true, service: 'katewoo-lead-sheet' });
