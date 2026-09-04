@@ -68,6 +68,14 @@
     color:var(--ink-faint);
     letter-spacing:.01em;
   }
+  /* 中英文本來是兩份疊住印，同一句話要讀兩次，報告長度也差不多翻倍。
+     改成跟網站的 繁/EN 走，一次只顯示一種。成對的地方用 .zh / .en 切換；
+     答案小抄的欄位名、正常範圍說明等只有中文的字串沒有配對，英文模式下
+     仍會是中文 —— 那些內容本來就沒有英文版本。 */
+  body[data-lang="zh"] .en,
+  body[data-lang="zh"] .q-en,
+  body[data-lang="zh"] .li-en{display:none !important;}
+  body[data-lang="en"] .zh{display:none !important;}
   .mono{font-family:'IBM Plex Mono',monospace; letter-spacing:.04em;}
   a{color:var(--pine);}
   button{font-family:inherit;}
@@ -282,6 +290,9 @@
     margin-right:6px;
   }
   .q-en{font-size:12.5px; margin:0 0 12px;}
+  .q-label .zh, .q-label .en{display:block;}
+  .q-label .en{font-size:13.5px; font-weight:400; margin-top:1px;}
+  .q-hint .zh, .q-hint .en{display:block;}
   .q-hint{font-size:12.5px; color:var(--ink-faint); margin:-8px 0 12px;}
 
   .opt-grid{display:flex; flex-wrap:wrap; gap:9px;}
@@ -550,6 +561,109 @@
   .status-screen .status-label{color:var(--amber-deep);}
   .status-tcm .status-label{color:var(--pine);}
   .status-clear .status-label{color:var(--ink-faint);}
+  .eyebrow .zh, .eyebrow .en{display:inline;}
+
+  /* ── 摺疊式範疇卡 ──────────────────────────────────────────
+     八張卡同時攤開，報告有十個螢幕高，讀的人掃不完也記不住。收起之後
+     摘要列本身就是一行結論；有需要留意的項目才預設展開。 */
+  .domain-card > summary{
+    list-style:none; cursor:pointer;
+    display:flex; align-items:flex-start; gap:9px;
+    margin:0; padding:2px 0;
+  }
+  .domain-card > summary::-webkit-details-marker{display:none;}
+  .domain-card[open] > summary{margin-bottom:10px;}
+  .domain-card > summary:focus-visible{
+    outline:2px solid var(--pine); outline-offset:4px; border-radius:4px;
+  }
+  .card-head-main{flex:1; min-width:0;}
+  .card-sum-badge{
+    display:inline-block; margin-top:4px;
+    font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+  }
+  .status-urgent .card-sum-badge{color:var(--cinnabar-deep);}
+  .status-screen .card-sum-badge{color:var(--amber-deep);}
+  .status-tcm .card-sum-badge{color:var(--pine);}
+  .status-clear .card-sum-badge{color:var(--ink-faint);}
+  .card-sum-count{
+    margin-left:7px; padding:1px 7px; border-radius:999px;
+    background:var(--paper); color:var(--ink-faint);
+    font-size:10.5px; font-weight:500; letter-spacing:.02em; text-transform:none;
+  }
+  .card-sum-line{
+    margin-top:5px; font-size:12.5px; line-height:1.55; color:var(--ink-faint);
+    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+  }
+  /* 展開之後同一句話就在下面，摘要列不用重覆一次 */
+  .domain-card[open] > summary .card-sum-line{display:none;}
+  .domain-card > summary .status-dot{margin-top:6px;}
+
+  .disc{
+    flex:none; width:7px; height:7px; margin:7px 3px 0 0;
+    border-right:1.5px solid var(--ink-faint); border-bottom:1.5px solid var(--ink-faint);
+    transform:rotate(45deg);
+    transition:transform .22s cubic-bezier(.22,1.2,.36,1);
+  }
+  details[open] > summary .disc{transform:rotate(-135deg);}
+
+  /* 逐項小抄：預設收起，想核對才打開 */
+  .answer-table > summary{
+    list-style:none; cursor:pointer;
+    display:flex; align-items:center; gap:8px;
+  }
+  .answer-table > summary::-webkit-details-marker{display:none;}
+  .answer-table > summary:focus-visible{
+    outline:2px solid var(--pine); outline-offset:3px; border-radius:4px;
+  }
+  .answer-table > summary .disc{margin-top:0;}
+  .answer-table > summary .at-title::after{
+    content:'（逐項核對）'; font-weight:400; color:var(--ink-faint); font-size:11px;
+  }
+
+  /* ── 行動清單 ──────────────────────────────────────────────
+     建議本來散在八張卡裡，收起卡片就更難一次看完。抽出來排在最前面，
+     這是唯一需要帶去診間的一頁。 */
+  .action-list{
+    background:var(--paper-card); border:1px solid var(--line);
+    border-left:5px solid var(--amber); border-radius:var(--radius-sm);
+    padding:15px 16px 13px; margin-bottom:14px;
+    box-shadow:0 1px 3px rgba(38,36,32,.04);
+  }
+  .al-head{display:flex; align-items:baseline; justify-content:space-between; gap:10px;}
+  .al-head h3{margin:0; font-family:'Noto Serif TC',serif; font-size:16px; color:var(--ink);}
+  .al-count{
+    flex:none; font-size:11px; letter-spacing:.04em; color:var(--ink-faint);
+    padding:2px 9px; border-radius:999px; background:var(--paper);
+  }
+  .al-lead{margin:5px 0 11px; font-size:12.5px; line-height:1.6; color:var(--ink-faint);}
+  .al-items{margin:0; padding:0; list-style:none; counter-reset:al;}
+  .al-item{
+    counter-increment:al;
+    position:relative; padding:9px 0 9px 27px;
+    border-top:1px solid var(--line);
+    font-size:13.5px; line-height:1.6;
+  }
+  .al-item::before{
+    content:counter(al); position:absolute; left:0; top:9px;
+    width:19px; height:19px; border-radius:50%;
+    font-size:11px; font-weight:600; line-height:19px; text-align:center;
+    background:var(--paper); color:var(--ink-faint);
+  }
+  .al-item.al-urgent::before{background:var(--cinnabar); color:#fff;}
+  .al-domain{
+    display:block; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--ink-faint); margin-bottom:1px;
+  }
+  .al-item .en{display:block; margin-top:2px;}
+
+  @media (prefers-reduced-motion: reduce){
+    .disc{transition:none;}
+  }
+  /* 列印時全部展開（見 beforeprint），箭頭就沒有意義了 */
+  @media print{
+    .disc{display:none;}
+    .action-list{break-inside:avoid;}
+  }
 
   /* tag chips (inside cards) */
   .card-chips{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px;}
@@ -882,7 +996,7 @@
       <circle cx="20" cy="20" r="18.5" fill="none" stroke="#1F3A30" stroke-width="1.2" opacity="0.5"/>
     </svg>
     <div class="brand-text">
-      <h1>女性健康自我篩查問卷</h1>
+      <h1><span class="zh">女性健康自我篩查問卷</span></h1>
       <span class="en">Women's Health Self-Screening Questionnaire</span>
     </div>
   </div>
@@ -1765,18 +1879,18 @@ function renderMeridian(){
 function renderIntro(){
   return `
     <div class="intro-hero">
-      <div class="eyebrow">女性健康自我評估 · Women's Health Check-in</div>
+      <div class="eyebrow"><span class="zh">女性健康自我評估</span><span class="en">Women's Health Check-in</span></div>
       <h2 class="intro-title">女性健康評估問卷</h2>
       <span class="gold-thread" aria-hidden="true"></span>
       <p class="intro-sub en">Women's Health Assessment Questionnaire</p>
-      <p class="intro-copy">每位女性的身體，在不同階段都有各自的節奏與需求。這份問卷會陪您一步步檢視月經、婦科、癌症篩查與身心狀態，並溫和標示出值得留意的部分——讓您在走進診室前，就對自己的身體多一分理解。</p>
-      <p class="intro-copy">問卷內容參考世界衛生組織（WHO）、美國預防服務工作小組（USPSTF）、國際婦產科聯盟（FIGO）等權威指引，並結合中醫調理視角，給您客觀又貼心的健康提醒。</p>
+      <p class="intro-copy zh">每位女性的身體，在不同階段都有各自的節奏與需求。這份問卷會陪您一步步檢視月經、婦科、癌症篩查與身心狀態，並溫和標示出值得留意的部分——讓您在走進診室前，就對自己的身體多一分理解。</p>
+      <p class="intro-copy zh">問卷內容參考世界衛生組織（WHO）、美國預防服務工作小組（USPSTF）、國際婦產科聯盟（FIGO）等權威指引，並結合中醫調理視角，給您客觀又貼心的健康提醒。</p>
       <p class="intro-copy en">Grounded in guidance from the WHO, USPSTF, and FIGO — paired with a TCM care perspective — to give you clear, caring insight into your health.</p>
     </div>
     <div class="intro-meta">
-      <span>⏱ <b>依路徑而定，約 4–20 分鐘</b> <span class="en">4–20 minutes, depending on your path</span></span>
-      <span>📋 <b>先填幾題基本資料，再選擇想評估的專區</b> <span class="en">A few background questions first, then choose your focus area</span></span>
-      <span>🔒 <b>資料僅留在您的裝置</b> <span class="en">Stays on your device</span></span>
+      <span>⏱ <b class="zh">依路徑而定，約 4–20 分鐘</b> <span class="en">4–20 minutes, depending on your path</span></span>
+      <span>📋 <b class="zh">先填幾題基本資料，再選擇想評估的專區</b> <span class="en">A few background questions first, then choose your focus area</span></span>
+      <span>🔒 <b class="zh">資料僅留在您的裝置</b> <span class="en">Stays on your device</span></span>
     </div>
     <div class="disclaimer">
       <b>溫馨提醒 / Please note：</b>這份問卷是健康篩查與衛教的輔助工具，<b>不能取代醫師的診斷</b>。所有題目都可以略過；您的答案只會留在這個裝置上，不會上傳至任何伺服器，若想帶給醫師參考，請自行列印或匯出 PDF。
@@ -1818,9 +1932,9 @@ const ROUTES = [
 function renderRouteCard(r, selected){
   return `<button type="button" class="opt route-card ${selected?'is-selected':''}"
     data-qid="route_primary" data-value="${r.id}" data-qtype="single">
-    <span class="route-title">${r.zh}<span class="en">${r.en}</span></span>
-    <p class="route-desc">${r.desc_zh}<span class="en">${r.desc_en}</span></p>
-    <span class="route-time">⏱ ${r.time_zh}<span class="en"> · ${r.time_en}</span></span>
+    <span class="route-title"><span class="zh">${r.zh}</span><span class="en">${r.en}</span></span>
+    <p class="route-desc"><span class="zh">${r.desc_zh}</span><span class="en">${r.desc_en}</span></p>
+    <span class="route-time">⏱ <span class="zh">${r.time_zh}</span><span class="en">${r.time_en}</span></span>
   </button>`;
 }
 
@@ -1878,7 +1992,7 @@ function renderPath(){
     const remaining = tracks.filter(r=>r.id!==primary);
     if(remaining.length){
       extraHtml = `<div class="route-extra-block">
-        <p class="route-extra-label">想順便加開其他專區嗎?(可複選，選填)<span class="en">Bundle in any other focus areas? (optional, multi-select)</span></p>
+        <p class="route-extra-label"><span class="zh">想順便加開其他專區嗎?(可複選，選填)</span><span class="en">Bundle in any other focus areas? (optional, multi-select)</span></p>
         <div class="opt-grid">${remaining.map(r=>{
           const sel = extra.includes(r.id);
           return `<button type="button" class="opt ${sel?'is-selected':''}" data-qid="route_extra" data-value="${r.id}" data-qtype="multi">
@@ -1890,15 +2004,15 @@ function renderPath(){
   }
 
   return `
-    <div class="eyebrow">選擇問卷路徑 · Choose Your Path</div>
+    <div class="eyebrow"><span class="zh">選擇問卷路徑</span><span class="en">Choose Your Path</span></div>
     <h2>您想從哪裡開始?</h2>
     <p class="section-en en">What would you like to focus on today?</p>
-    <p class="intro-copy">請選擇最符合您目前需求的一項。選好之後，仍可視需要加開其他專區；按「上一步」也能隨時回來重新選擇。</p>
+    <p class="intro-copy zh">請選擇最符合您目前需求的一項。選好之後，仍可視需要加開其他專區；按「上一步」也能隨時回來重新選擇。</p>
     <p class="intro-copy en" style="margin-top:-10px;">Pick whichever best matches what you need right now. You can bundle in more focus areas afterward, and you can always come back here via "Back".</p>
     ${statusNote}
 
     <div class="route-full-wrap">${renderRouteCard(fullRoute, primary==='full')}</div>
-    ${tracks.length ? `<p class="route-or">或者，只想聚焦其中一項<span class="en">Or focus on just one area</span></p>
+    ${tracks.length ? `<p class="route-or"><span class="zh">或者，只想聚焦其中一項</span><span class="en">Or focus on just one area</span></p>
     <div class="route-grid">${tracks.map(r=>renderRouteCard(r, primary===r.id)).join('')}</div>` : ''}
     ${extraHtml}
 
@@ -1960,10 +2074,9 @@ function renderQuestion(q, n){
     const v = state.answers[q.id]||'';
     body = `<input class="field-text" type="text" data-field="${q.id}" value="${escapeHtml(v)}">`;
   }
-  const hint = q.hint_zh ? `<p class="q-hint">${q.hint_zh}<br><span class="en">${q.hint_en||''}</span></p>` : '';
+  const hint = q.hint_zh ? `<p class="q-hint"><span class="zh">${q.hint_zh}</span><span class="en">${q.hint_en||''}</span></p>` : '';
   return `<div class="q-block">
-    <p class="q-label"><span class="num">${String(n).padStart(2,'0')}</span>${q.zh}</p>
-    <p class="q-en">${q.en}</p>
+    <p class="q-label"><span class="num">${String(n).padStart(2,'0')}</span><span class="zh">${q.zh}</span><span class="en">${q.en}</span></p>
     ${hint}
     ${body}
   </div>`;
@@ -1983,7 +2096,7 @@ function renderSection(section){
   const questionsHtml = visible.map(q=>{
     let divider = '';
     if(q.group && q.group!==lastGroup){
-      divider = `<div class="group-divider"><span class="gd-text">${q.group}<span class="en">${q.groupEn||''}</span></span></div>`;
+      divider = `<div class="group-divider"><span class="gd-text"><span class="zh">${q.group}</span><span class="en">${q.groupEn||''}</span></span></div>`;
       lastGroup = q.group;
     }
     qNum++;
@@ -1991,10 +2104,10 @@ function renderSection(section){
   }).join('');
 
   return `
-    <div class="eyebrow">問診記錄 · 第 ${CN_NUM_FULL[idx]} 節 / Section ${idx+1} of ${active.length}</div>
-    <h2>${section.zh}</h2>
+    <div class="eyebrow"><span class="zh">問診記錄 · 第 ${CN_NUM_FULL[idx]} 節</span><span class="en">Section ${idx+1} of ${active.length}</span></div>
+    <h2><span class="zh">${section.zh}</span></h2>
     <p class="section-en en">${section.en}</p>
-    <p class="intro-copy">${section.intro_zh}</p>
+    <p class="intro-copy zh">${section.intro_zh}</p>
     <p class="intro-copy en" style="margin-top:-10px;">${section.intro_en}</p>
     ${branchNote(section)}
     ${questionsHtml}
@@ -2214,9 +2327,6 @@ const STATUS_BADGE = {
   tcm:{zh:'適合調理討論', en:'Worth a care discussion'},
   clear:{zh:'大致正常', en:'Largely normal'},
 };
-const TIER_ACTION = {
-  urgent:{zh:'請優先處理以上項目，建議儘速就醫評估。', en:'Please address these first — prompt medical evaluation is recommended.'},
-};
 /* Opening copy for the overall-assessment block, one branch per overall picture.
    Placeholders available in every field: {urgentCount} {screenCount} {tcmCount}
    {totalCount} {urgentList} {screenList} {tcmList}. `extra` is appended at the
@@ -2297,12 +2407,11 @@ function renderCrisisBanner(){
   if(!needsCrisisBanner()) return '';
   const items = CRISIS_RESOURCES.map(r => `
     <li>
-      <span class="cr-name">${r.zh}<span class="li-en">${r.en}</span></span>
+      <span class="cr-name"><span class="zh">${r.zh}</span><span class="li-en">${r.en}</span></span>
       <a class="cr-num" href="tel:${r.tel}">${r.telDisplay}</a>
     </li>`).join('');
   return `<div class="crisis-band" role="note">
-    <h3><span class="dot" aria-hidden="true"></span>先照顧好自己</h3>
-    <span class="en">Support is available right now</span>
+    <h3><span class="dot" aria-hidden="true"></span><span class="zh">先照顧好自己</span><span class="en">Support is available right now</span></h3>
     <p class="crisis-lead">您在情緒相關的題目中，填答了比較需要留意的狀況。這樣的感受並不少見，也不代表您很脆弱——現在的您，或許需要多一點支持。以下是可以立即聯絡、免費且保密的求助熱線：</p>
     <ul class="crisis-list">${items}</ul>
     <p class="crisis-foot">如果您有傷害自己的念頭，或人身安全出現危險，請立即致電 <b>999</b> 或前往就近急症室。中醫調理可以是身心照護的一部分，但無法取代精神科或心理治療的專業評估與治療。</p>
@@ -2476,34 +2585,56 @@ function articleHref(slug){
    flag was collapsed from >1 selected option (e.g. family cancer history),
    since a single tag would just repeat the sentence. An article link shows
    only when that specific flag maps to an already-published article. */
+/* 摘要列只要那句話，不要 verdict 裡的 <b> 之類標記。 */
+function stripTags(html){
+  return String(html==null?'':html).replace(/<[^>]*>/g,'').replace(/\s+/g,' ').trim();
+}
+
 function renderFlagList(entries){
   return `<ul class="card-flags">${entries.map(e=>{
     const tagsHtml = (e.tags && e.tags.length > 1)
       ? `<div class="cf-tags">${e.tags.map(t=>`<span class="chip">${t.zh}</span>`).join('')}</div>`
       : '';
     const articleHtml = e.article
-      ? `<a class="cf-link" href="${articleHref(e.article)}" target="_blank" rel="noopener">→ 閱讀相關文章 <span class="en">Read more</span></a>`
+      ? `<a class="cf-link" href="${articleHref(e.article)}" target="_blank" rel="noopener"><span class="zh">→ 閱讀相關文章</span><span class="en">→ Read more</span></a>`
       : '';
-    return `<li>${tagsHtml}<p style="margin:0;">${e.zh}<span class="en cf-en">${e.en}</span></p>${articleHtml}</li>`;
+    return `<li>${tagsHtml}<p style="margin:0;"><span class="zh">${e.zh}</span><span class="en cf-en">${e.en}</span></p>${articleHtml}</li>`;
   }).join('')}</ul>`;
 }
 
-function renderTopUrgentBanner(domainFlags, activeDomains){
-  const groups = [];
+/* 建議散在八張卡裡，收起卡片之後就更難一眼看完。把「需優先處理」和
+   「建議安排檢查」抽出來排成一張清單，放在最前面 —— 這是整份報告唯一
+   需要帶去診間的東西，可以直接截圖或列印。 */
+function renderActionChecklist(domainFlags, activeDomains){
+  const items = [];
   activeDomains.forEach(d=>{
     const b = domainFlags[d.id];
-    if(b && b.urgent.length) groups.push({d, entries:b.urgent});
+    if(!b) return;
+    b.urgent.forEach(e=> items.push({tier:'urgent', d, e}));
+    b.screen.forEach(e=> items.push({tier:'screen', d, e}));
   });
-  if(!groups.length) return '';
-  return `<div class="flag-band flag-urgent top-urgent">
-    <h3><span class="dot"></span>請優先處理以下事項</h3>
-    <span class="en">Please address these first</span>
-    <div class="top-urgent-groups">
-      ${groups.map(g=>`<div class="tu-group"><b>${g.d.zh}</b>${renderFlagList(g.entries)}</div>`).join('')}
+  if(!items.length) return '';
+  const urgentCount = items.filter(i=>i.tier==='urgent').length;
+  const lead = urgentCount
+    ? `其中 ${urgentCount} 項建議盡快處理，已排在最前面。`
+    : '這些都不是急事，安排下次看診時一併討論就可以。';
+  return `<div class="action-list">
+    <div class="al-head">
+      <h3><span class="zh">接下來可以做的事</span><span class="en">What to do next</span></h3>
+      <span class="al-count">${items.length} 項</span>
     </div>
-    <p class="tier-action" style="margin-top:4px;">${TIER_ACTION.urgent.zh}<span class="en">${TIER_ACTION.urgent.en}</span></p>
+    <p class="al-lead"><span class="zh">${lead}</span><span class="en">${urgentCount
+      ? `${urgentCount} of these are worth doing soon — they are listed first.`
+      : 'None of these are urgent — bring them up at your next visit.'}</span></p>
+    <ol class="al-items">
+      ${items.map(i=>`<li class="al-item al-${i.tier}">
+        <span class="al-domain"><span class="zh">${i.d.zh}</span><span class="en">${i.d.en}</span></span>
+        <span class="zh">${i.e.zh}</span><span class="en">${i.e.en}</span>
+      </li>`).join('')}
+    </ol>
   </div>`;
 }
+
 
 /* SAFETY NET — a question in an always-shown section can raise a flag whose
    home domain isn't among the rendered cards (e.g. 家族癌症病史 targets the
@@ -2523,12 +2654,11 @@ function renderOrphanFlags(domainFlags, activeDomains){
   const groups = Object.values(byDomain);
   if(!groups.length) return '';
   return `<div class="flag-band flag-screen">
-    <h3><span class="dot"></span>另外幾項值得留意</h3>
-    <span class="en">A few other things worth noting</span>
+    <h3><span class="dot"></span><span class="zh">另外幾項值得留意</span><span class="en">A few other things worth noting</span></h3>
     <div class="top-urgent-groups">
       ${groups.map(g=>`<div class="tu-group"><b>${g.d.zh}</b>${renderFlagList(g.entries)}</div>`).join('')}
     </div>
-    <p class="tier-action" style="margin-top:4px;">這些是根據您填寫的背景資料提出的建議，雖然不屬於您本次選擇的評估專區，但仍建議留意。<span class="en">These come from the background details you provided — outside the focus area you chose, but still worth following up.</span></p>
+    <p class="tier-action" style="margin-top:4px;"><span class="zh">這些是根據您填寫的背景資料提出的建議，雖然不屬於您本次選擇的評估專區，但仍建議留意。</span><span class="en">These come from the background details you provided — outside the focus area you chose, but still worth following up.</span></p>
   </div>`;
 }
 
@@ -2795,10 +2925,12 @@ function renderValueTable(title, rows){
     </li>`;
   }).join('');
   const counter = scored ? `<span class="at-count">${okCount} / ${scored} 項在範圍內</span>` : '';
-  return `<div class="answer-table">
-    <div class="at-head"><p class="at-title">${title}</p>${counter}</div>
+  /* 這張逐項小抄是報告裡最長的東西（更年期那張佔了整張卡的一半），而且下面
+     的建議句已經把需要留意的項目重講一次。預設收起來，想核對才打開。 */
+  return `<details class="answer-table">
+    <summary class="at-head"><p class="at-title">${title}</p>${counter}<span class="disc" aria-hidden="true"></span></summary>
     <ul class="at-rows">${html}</ul>
-  </div>`;
+  </details>`;
 }
 
 function renderActionCol(zh, en, items){
@@ -2806,7 +2938,7 @@ function renderActionCol(zh, en, items){
     ? `<ul>${items.map(t=>`<li>${t}</li>`).join('')}</ul>`
     : `<p class="action-empty">目前沒有相關項目。</p>`;
   return `<div class="action-col">
-    <p class="action-col-title">${zh}<span class="en">${en}</span></p>
+    <p class="action-col-title"><span class="zh">${zh}</span><span class="en">${en}</span></p>
     ${body}
   </div>`;
 }
@@ -3356,18 +3488,36 @@ const STAGE_CARD_BUILDERS = {
 function renderSeekCareBlock(items){
   if(!items || !items.length) return '';
   return `<div class="seekcare-block">
-    <p class="seekcare-title">⚑ 建議就醫<span class="en">Seek care</span></p>
+    <p class="seekcare-title">⚑ <span class="zh">建議就醫</span><span class="en">Seek care</span></p>
     <ul>${items.map(t=>`<li>${t}</li>`).join('')}</ul>
   </div>`;
 }
 
+/* 卡片摘要列：收起來的時候，這一行就是這個範疇的全部內容，所以要說得完整——
+   狀態、幾項需要留意、以及最重要的那一句。 */
+function cardSummary(d, status, count, line){
+  const badge = STATUS_LABEL_TEXT[status];
+  const tally = count ? `<span class="card-sum-count">${count} 項</span>` : '';
+  return `<summary class="card-header">
+    <span class="card-head-main">
+      <h3 class="card-title"><span class="zh">${d.zh}</span><span class="en">${d.en}</span></h3>
+      <span class="card-sum-badge">${badge}${tally}</span>
+      ${line ? `<span class="card-sum-line">${line}</span>` : ''}
+    </span>
+    <span class="status-dot"></span>
+    <span class="disc" aria-hidden="true"></span>
+  </summary>`;
+}
+
+/* 只有「需優先處理」預設展開。其餘收起來——每一條建議在上面的行動清單
+   都已經列出來了，卡片是想深入了解才打開的地方。 */
+function cardOpen(status){ return status==='urgent' ? ' open' : ''; }
+
 function renderStageCard(d, buckets){
   const cfg = STAGE_CARD_BUILDERS[d.id](buckets);
-  return `<div class="domain-card stagecard status-${cfg.status}">
-    <div class="card-header">
-      <h3 class="card-title">${d.zh}<span class="en">${d.en}</span></h3>
-      <span class="status-dot"></span>
-    </div>
+  const count = (buckets.urgent.length + buckets.screen.length) || 0;
+  return `<details class="domain-card stagecard status-${cfg.status}"${cardOpen(cfg.status)}>
+    ${cardSummary(d, cfg.status, count, stripTags(cfg.verdict))}
     <p class="stagecard-verdict">${cfg.verdict}</p>
     ${cfg.context || ''}
     ${cfg.table}
@@ -3378,7 +3528,7 @@ function renderStageCard(d, buckets){
     ${renderSeekCareBlock(cfg.seekCare)}
     ${cfg.articles}
     <p class="stagecard-cta">${cfg.cta}</p>
-  </div>`;
+  </details>`;
 }
 
 function renderDomainCard(d, buckets){
@@ -3407,14 +3557,14 @@ function renderDomainCard(d, buckets){
     }).join('');
   }
 
-  return `<div class="domain-card status-${status}">
-    <div class="card-header">
-      <h3 class="card-title">${d.zh}<span class="en">${d.en}</span></h3>
-      <span class="status-dot"></span>
-    </div>
+  const firstFlag = (buckets.urgent[0] || buckets.screen[0] || buckets.tcm[0] || {}).zh || '';
+  const sumLine = status === 'clear' ? (meta.clear_zh || '') : firstFlag;
+  const count = buckets.urgent.length + buckets.screen.length;
+
+  return `<details class="domain-card status-${status}"${cardOpen(status)}>
+    ${cardSummary(d, status, count, sumLine)}
     ${renderMeter(score)}
     <div class="card-divider"></div>
-    <p class="status-label">${STATUS_LABEL_TEXT[status]}</p>
     ${renderAnswerTable(d.id)}
     ${content}
     ${caveat ? `<p class="domain-caveat">⚑ ${caveat.zh}</p>` : ''}
@@ -3422,7 +3572,7 @@ function renderDomainCard(d, buckets){
       <span class="al-label">延伸閱讀 Further reading</span>
       ${links.map(l=>`<a class="article-link" href="${l.href}" target="_blank" rel="noopener">${l.zh} →</a>`).join('')}
     </div>` : ''}
-  </div>`;
+  </details>`;
 }
 
 function buildPrintRecap(){
@@ -3454,8 +3604,8 @@ function buildOverview(domainFlags, activeDomains){
      那會把「沒有填」讀成「沒有問題」。 */
   if(!activeDomains.length){
     return `<div class="overview-block">
-      <p class="ov-label">整體評估 Overall Assessment</p>
-      <p class="ov-main">這次未填寫任何評估題目</p>
+      <p class="ov-label"><span class="zh">整體評估</span><span class="en">Overall Assessment</span></p>
+      <p class="ov-main"><span class="zh">這次未填寫任何評估題目</span><span class="en">No questions answered yet</span></p>
       <p class="ov-body">所以這裡暫時沒有結果可以呈現。您可以按下方的「回到上一步」，選擇想了解的部分再填一次；題目全部可以略過，填多少就顯示多少。<span class="en">No questions were answered, so there is nothing to report yet. Use "Back" to fill in whichever sections you'd like — every question is optional, and the report reflects only what you answer.</span></p>
     </div>`;
   }
@@ -3531,13 +3681,13 @@ function buildOverview(domainFlags, activeDomains){
   const chips = activeDomains.map(d=>{
     const s = domainStatus(domainFlags[d.id] || {urgent:[],screen:[],tcm:[]});
     const icon = s==='urgent'?'⚑ ':s==='screen'?'· ':s==='tcm'?'· ':'✓ ';
-    return `<span class="ov-chip ov-chip--${s}">${icon}${d.zh}</span>`;
+    return `<span class="ov-chip ov-chip--${s}">${icon}<span class="zh">${d.zh}</span><span class="en">${d.en}</span></span>`;
   }).join('');
 
   return `<div class="overview-block">
-    <p class="ov-label">整體評估 Overall Assessment</p>
+    <p class="ov-label"><span class="zh">整體評估</span><span class="en">Overall Assessment</span></p>
     <p class="ov-main">${headline}</p>
-    <p class="ov-body">${body}<span class="en">${bodyEn}</span></p>
+    <p class="ov-body"><span class="zh">${body}</span><span class="en">${bodyEn}</span></p>
     ${countLine}
     <div class="overview-chips">${chips}</div>
   </div>`;
@@ -3554,19 +3704,17 @@ function renderSummary(){
   const domainCardsHtml = `<div class="dashboard-grid">${activeDomains.map(d=>renderDomainCard(d, domainFlags[d.id] || {urgent:[],screen:[],tcm:[]})).join('')}</div>`;
 
   return `
-    <div class="eyebrow">篩查結果摘要 · Summary</div>
-    <h2>您的篩查結果</h2>
-    <p class="section-en en">Your Screening Summary</p>
+    <div class="eyebrow"><span class="zh">篩查結果摘要</span><span class="en">Summary</span></div>
+    <h2><span class="zh">您的篩查結果</span><span class="en">Your Screening Summary</span></h2>
 
     ${buildOverview(domainFlags, activeDomains)}
     ${renderCrisisBanner()}
-    ${renderTopUrgentBanner(domainFlags, activeDomains)}
+    ${renderActionChecklist(domainFlags, activeDomains)}
     ${renderOrphanFlags(domainFlags, activeDomains)}
     ${domainCardsHtml}
 
     <div class="cta-box" id="ctaBox">
-      <h3>${anyTcm ? '想進一步了解中醫如何幫助您？' : '歡迎預約一次完整諮詢'}</h3>
-      <span class="en">${anyTcm ? 'Curious how TCM can help?' : 'Book a full consultation'}</span>
+      <h3><span class="zh">${anyTcm ? '想進一步了解中醫如何幫助您？' : '歡迎預約一次完整諮詢'}</span><span class="en">${anyTcm ? 'Curious how TCM can help?' : 'Book a full consultation'}</span></h3>
       <p>${anyTcm
         ? '根據您的填答，有幾個面向很適合透過中醫進一步評估體質與調理方向。'
         : '無論結果如何，定期的整體評估都有助於及早掌握身體狀態。'}</p>
@@ -3734,6 +3882,54 @@ if(IS_PREVIEW){
 }
 
 renderCurrentStep();
+
+/* ============================================================
+   10a. PRINT — 列印時把摺疊的內容全部展開
+   ------------------------------------------------------------
+   報告的範疇卡和逐項小抄平常是收起來的；印出來給醫師看的時候，
+   收起來等於整段消失，所以列印前全部打開，印完還原。
+   ============================================================ */
+(function(){
+  var reopened = [];
+  window.addEventListener('beforeprint', function(){
+    reopened = [];
+    document.querySelectorAll('details:not([open])').forEach(function(d){
+      d.open = true; reopened.push(d);
+    });
+  });
+  window.addEventListener('afterprint', function(){
+    reopened.forEach(function(d){ d.open = false; });
+    reopened = [];
+  });
+})();
+
+/* ============================================================
+   10b. LANGUAGE — 一次只顯示一種語言
+   ------------------------------------------------------------
+   這一頁沒有載入 i18n.js，所以 window.DrHuI18n 不存在，
+   'drhu:languagechange' 事件也不會發出 —— 導覽列的 繁/EN 只會寫進
+   localStorage 然後換掉導覽列文字，頁面內容完全不受影響。
+   所以自己聽那顆按鈕，順便留一個事件掛勾給日後接上 i18n.js。
+   ============================================================ */
+(function(){
+  function stored(){
+    try { return localStorage.getItem('drhu_site_lang') === 'en' ? 'en' : 'zh'; }
+    catch(_) { return 'zh'; }
+  }
+  function apply(lang){
+    document.body.dataset.lang = lang === 'en' ? 'en' : 'zh';
+  }
+  apply(stored());
+  /* 導覽列是 shared-nav.js 事後插進來的，所以聽在 document 上，
+     不要在載入時去找那顆還不存在的按鈕。 */
+  document.addEventListener('click', function(e){
+    var btn = e.target.closest && e.target.closest('#langSwitch button[data-lang]');
+    if(btn) apply(btn.dataset.lang);
+  });
+  document.addEventListener('drhu:languagechange', function(e){
+    apply(e.detail && e.detail.lang);
+  });
+})();
 
 /* ============================================================
    11. SITE NAV — mobile toggle
