@@ -22,7 +22,7 @@
     if (SITE_ROOT) return SITE_ROOT;
     var path = location.pathname;
     if (/\/articles\/[^/]+\/[^/]+\.html$/.test(path)) return '../../';
-    if (/\/(?:articles|treatments|services|admin)\/[^/]+\.html$/.test(path)) return '../';
+    if (/\/(?:articles|treatments|services|admin|tools)\/[^/]+\.html$/.test(path)) return '../';
     return '';
   }
 
@@ -102,6 +102,7 @@
             '<div class="drhu-submenu drhu-submenu-wide" aria-label="治療項目子選單">' + treatmentSubmenuItems(treatmentItems, prefix) + '</div>' +
           '</div>' +
           '<a href="' + link(prefix, 'index.html#assessments') + '" data-nav-key="assessments">健康評估</a>' +
+          '<a href="' + link(prefix, 'tools/index.html') + '" data-nav-key="tools">小工具</a>' +
           '<a href="' + link(prefix, 'articles.html') + '" data-nav-key="library">健康知識庫</a>' +
           '<a href="' + link(prefix, 'about.html') + '" data-nav-key="about">關於醫師</a>' +
           '<a href="' + link(prefix, 'index.html#contact') + '" class="drhu-nav-cta" data-nav-key="booking">預約掛號 →</a>' +
@@ -165,6 +166,7 @@
       stages: '服務項目',
       services: '治療項目',
       assessments: '健康評估',
+      tools: '小工具',
       library: '健康知識庫',
       about: '關於醫師',
       booking: '預約掛號 →',
@@ -192,6 +194,7 @@
       stages: 'Areas of Care',
       services: 'Treatments',
       assessments: 'Assessments',
+      tools: 'Tools',
       library: 'Health Library',
       about: 'About',
       booking: 'Book →',
@@ -262,6 +265,7 @@
     var path = decodeURIComponent(location.pathname);
     if (/\/about\.html$/.test(path)) return 'about';
     if (/\/articles\.html$/.test(path) || /\/articles\/[^/]+\.html$/.test(path) || /\/admin\/[^/]+\.html$/.test(path)) return 'library';
+    if (/\/tools\/(?:[^/]+\.html)?$/.test(path)) return 'tools';
     if (/\/treatments\/[^/]+\.html$/.test(path)) return 'services';
     if (/\/constitution(?:-report)?\.html$/.test(path) || /\/女性健康問卷\.html$/.test(path)) return 'assessments';
     if (/\/(?:index\.html)?$/.test(path)) {

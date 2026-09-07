@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>排卵期計算器｜易孕期是哪幾日？香港中醫師教你正確推算</title>
+<meta name="description" content="免費排卵期與易孕期計算器：以下次月經倒推 14 天推算排卵日，給出一段易孕期而非單一天，並在週期不規律時說明計算法為何不可靠。香港註冊中醫師胡佩珊。">
+<link rel="canonical" href="https://katewoo.com/tools/ovulation.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_HK">
+<meta property="og:site_name" content="胡佩珊中醫師">
+<meta property="og:url" content="https://katewoo.com/tools/ovulation.html">
+<meta property="og:title" content="排卵期計算器｜易孕期是哪幾日？">
+<meta property="og:description" content="給你一段易孕期，而不是一個排卵日；週期不規律時會直接說明計算法不可靠。">
+<meta property="og:image" content="https://katewoo.com/og-image.png?v=20260809-light">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tools.css">
+<script src="../i18n.js"></script>
+</head>
+<body>
+
+<nav class="nav"></nav>
+
+<header class="tk-hero">
+  <div class="tk-wrap tk-wrap--narrow">
+    <nav class="tk-crumb" aria-label="麵包屑" style="padding-top:0;margin-bottom:var(--tk-4)">
+      <a href="../index.html">首頁</a> ／ <a href="index.html">實用小工具</a> ／ <span>排卵期計算器</span>
+    </nav>
+    <p class="tk-eyebrow">月經與備孕</p>
+    <h1>排卵期與易孕期</h1>
+    <p class="tk-lede">輸入月經第一天與週期長度，算出你的易孕期。週期不規律時，會說明結果為甚麼不可靠。</p>
+  </div>
+</header>
+
+<main class="tk-wrap tk-wrap--narrow">
+
+  <form class="tk-panel" id="ovuForm" style="margin-top:var(--tk-4)" novalidate>
+    <label class="tk-field">
+      <span class="tk-label">最近一次月經第一天</span>
+      <input class="tk-input" type="date" name="lmp">
+      <span class="tk-hint">是出血第一天，不是結束那天。</span>
+    </label>
+
+    <label class="tk-field">
+      <span class="tk-label">平均週期長度</span>
+      <input class="tk-input" type="number" name="cycle" value="28" min="20" max="45" step="1" inputmode="numeric">
+      <span class="tk-hint">由這次經期第一天，數到下次經期第一天的天數。</span>
+    </label>
+
+    <div class="tk-field">
+      <span class="tk-label">最近半年的週期長度範圍<span style="color:var(--tk-ink-faint);font-weight:400">（可留空）</span></span>
+      <div class="tk-row">
+        <label>
+          <input class="tk-input" type="number" name="shortest" min="15" max="60" step="1" placeholder="最短幾天" inputmode="numeric">
+        </label>
+        <label>
+          <input class="tk-input" type="number" name="longest" min="15" max="60" step="1" placeholder="最長幾天" inputmode="numeric">
+        </label>
+      </div>
+      <span class="tk-hint">填了才能判斷你的週期夠不夠穩定——這一步比算出日期更重要。</span>
+    </div>
+
+    <label class="tk-field">
+      <span class="tk-label">經期長度</span>
+      <input class="tk-input" type="number" name="period" value="5" min="1" max="10" step="1" inputmode="numeric">
+      <span class="tk-hint">行經一般 3 至 7 天。</span>
+    </label>
+
+    <div class="tk-actions">
+      <button class="tk-btn" type="submit">計算易孕期</button>
+      <button class="tk-btn tk-btn--ghost" type="reset">清除</button>
+    </div>
+    <p class="tk-error" id="ovuError" role="alert" hidden></p>
+  </form>
+
+  <section class="tk-result" id="ovuResult" hidden aria-live="polite">
+
+    <div class="tk-panel">
+      <div class="tk-headline">
+        <p class="tk-eyebrow">易孕期</p>
+        <p class="tk-date"><span id="ovuWindow">—</span><small id="ovuWindowNote"></small></p>
+        <p class="tk-now">今日 <b id="ovuToday">—</b> <span id="ovuTodayPhase"></span></p>
+      </div>
+
+      <div class="tk-ring">
+        <div class="tk-ring-col">
+        <div class="tk-ring-figure">
+          <svg id="ovuRing" viewBox="0 0 100 100" role="img" aria-labelledby="ovuRingTitle"></svg>
+          <p id="ovuRingTitle" hidden>一個週期的圓環圖，標出經期、易孕期與排卵日</p>
+          <div class="tk-ring-center">
+            <span class="tk-eyebrow">排卵日</span>
+            <b id="ovuDay">—</b>
+            <small id="ovuDayNote"></small>
+          </div>
+        </div>
+        <p class="tk-ring-note" id="ovuRingNote"></p>
+        </div>
+        <ul class="tk-key" id="ovuKey"></ul>
+      </div>
+
+      <div id="ovuFlag"></div>
+    </div>
+
+    <div class="tk-panel">
+      <h2>之後三個週期</h2>
+      <p class="tk-sub">按你填的平均週期推算。實際日子會隨每個月的狀況浮動。</p>
+      <div class="tk-cycles" id="ovuCycles"></div>
+    </div>
+
+    <div class="tk-panel">
+      <h2>想算得更準，可以做這些</h2>
+      <div class="tk-reads">
+        <a href="../articles/備孕/confirm-ovulation.html">怎樣確認自己真的有排卵？<em>排卵試紙、基礎體溫與超聲波的分別</em></a>
+        <a href="../articles/備孕/ovulation-calculator.html">排卵期怎樣計？易孕期是哪幾日<em>為甚麼計算機對週期不規律的人不準確</em></a>
+        <a href="../articles/備孕/menstrual-cycle.html">月經週期是怎麼運作的<em>從卵泡期到黃體期，身體在做甚麼</em></a>
+        <a href="../services/fertility.html">備孕及不孕中醫調理<em>甚麼情況下應該開始檢查</em></a>
+      </div>
+    </div>
+
+  </section>
+
+  <p class="tk-note">
+    <strong>這個工具不能用作避孕。</strong>日曆推算法的典型使用失敗率約為 24%，精子在體內可存活最多 5 天，排卵時間亦會隨壓力、疾病與作息改變。<br>
+    若你的週期長期短於 21 天或長於 35 天、每月相差超過 7 至 9 天，或曾停經三個月以上，計算法不適用，建議先安排檢查。本工具僅供健康教育參考，不構成醫療建議，亦不能取代註冊醫師或中醫師的診斷與治療。撰文及覆核：胡佩珊中醫師（香港中醫藥管理委員會註冊中醫師，註冊編號：008823）。
+  </p>
+
+</main>
+
+<footer class="site-footer">
+  <div class="tk-wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>胡佩珊中醫師</h4>
+        <p>以中醫智慧與身心同治的理念，陪伴女性每個生命階段。</p>
+      </div>
+      <div>
+        <h4>快速前往</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">實用小工具</a></li>
+          <li><a href="../services/fertility.html">備孕及不孕調理</a></li>
+          <li><a href="../constitution.html">中醫體質問卷</a></li>
+          <li><a href="../women-health-questionnaire.html">女性健康評估</a></li>
+          <li><a href="../articles.html">健康知識庫</a></li>
+          <li><a href="../about.html">關於醫師</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>聯絡方式</h4>
+        <ul class="footer-links">
+          <li><a href="https://wa.me/85298152863" target="_blank" rel="noopener">WhatsApp +852 9815 2863</a></li>
+          <li><a href="https://www.instagram.com/woopuisan.ec" target="_blank" rel="noopener">Instagram @woopuisan.ec</a></li>
+          <li><a href="mailto:woopuisan.ec@gmail.com">woopuisan.ec@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-disclaimer">
+      本網站所有內容與線上工具僅供健康教育參考，不構成醫療建議，亦不能取代註冊醫師或中醫師的診斷與治療。若您出現急性或嚴重症狀，請立即求醫。<br>
+      © 2026 胡佩珊中醫師 · 香港中醫藥管理委員會註冊中醫師（008823） · <a href="../privacy.html">私隱政策</a>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "WebApplication",
+        "MedicalWebPage"
+      ],
+      "@id": "https://katewoo.com/tools/ovulation.html",
+      "name": "排卵期與易孕期計算器",
+      "description": "以下次月經倒推 14 天推算排卵日，給出一段易孕期，並在週期不規律時說明計算法為何不可靠。",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "需要啟用 JavaScript",
+      "inLanguage": "zh-Hant-HK",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "HKD"
+      },
+      "author": {
+        "@id": "https://katewoo.com/#person"
+      },
+      "reviewedBy": {
+        "@id": "https://katewoo.com/#person"
+      },
+      "lastReviewed": "2026-09-06",
+      "audience": {
+        "@type": "Patient"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "首頁",
+          "item": "https://katewoo.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "實用小工具",
+          "item": "https://katewoo.com/tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "排卵期計算器",
+          "item": "https://katewoo.com/tools/ovulation.html"
+        }
+      ]
+    },
+    {
+      "@type": "Physician",
+      "@id": "https://katewoo.com/#person",
+      "name": "胡佩珊中醫師",
+      "alternateName": "Kate Woo",
+      "medicalSpecialty": "Obstetric",
+      "identifier": "香港中醫藥管理委員會註冊中醫師 008823",
+      "url": "https://katewoo.com/about.html"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "排卵期是月經後第 14 天嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不是。排卵約在下次月經前 14 天。28 天週期的人剛好等於經期後第 14 天，週期較長或較短的人用這個算法就會算錯。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "易孕期有幾天？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "約 6 天，即排卵前 5 天至排卵當日，因為精子在體內最多可存活約 5 天。其中排卵前兩天至排卵日的機會最高。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "週期不規律還可以用計算機嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不建議。若每月週期相差 8 天或以上，或長期短於 21 天、長於 35 天，日曆推算會失準，應改用排卵試紙或基礎體溫，並先找出週期不穩的原因。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "可以用排卵期計算來避孕嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不可以。日曆推算法的典型使用失敗率約為 24%，排卵時間會隨壓力、疾病與作息改變，不能作為避孕方法。"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<script src="../shared-nav.js"></script>
+<script src="tools.js"></script>
+<script src="ovulation.js"></script>
+<script src="../analytics.js" defer></script>
+</body>
+</html>

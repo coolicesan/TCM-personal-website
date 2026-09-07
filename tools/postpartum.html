@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>產後 100 天調理時間表｜坐月、惡露、產後檢查怎樣排｜胡佩珊中醫師</title>
+<meta name="description" content="免費產後調理時間表：輸入分娩日期、順產或剖腹、有否餵哺，排出惡露觀察、生化湯適用窗口、六週產後檢查、開始運動與骨盆底復健的時間。香港註冊中醫師胡佩珊。">
+<link rel="canonical" href="https://katewoo.com/tools/postpartum.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_HK">
+<meta property="og:site_name" content="胡佩珊中醫師">
+<meta property="og:url" content="https://katewoo.com/tools/postpartum.html">
+<meta property="og:title" content="產後 100 天調理時間表">
+<meta property="og:description" content="由分娩日期排出恢復時間表：惡露、坐月、產後檢查、運動與復健的時機。">
+<meta property="og:image" content="https://katewoo.com/og-image.png?v=20260809-light">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tools.css">
+<script src="../i18n.js"></script>
+</head>
+<body>
+
+<nav class="nav"></nav>
+
+<header class="tk-hero">
+  <div class="tk-wrap tk-wrap--narrow">
+    <nav class="tk-crumb" aria-label="麵包屑" style="padding-top:0;margin-bottom:var(--tk-4)">
+      <a href="../index.html">首頁</a> ／ <a href="index.html">實用小工具</a> ／ <span>產後 100 天調理時間表</span>
+    </nav>
+    <p class="tk-eyebrow">懷孕與產後</p>
+    <h1>產後 100 天調理時間表</h1>
+    <p class="tk-lede">輸入分娩日期與分娩方式，排出惡露、坐月、產後檢查與開始運動的日期。</p>
+  </div>
+</header>
+
+<main class="tk-wrap tk-wrap--narrow">
+
+  <form class="tk-panel" id="ppForm" style="margin-top:var(--tk-4)" novalidate>
+    <label class="tk-field">
+      <span class="tk-label">分娩日期</span>
+      <input class="tk-input" type="date" name="birth">
+      <span class="tk-hint">寶寶出生那天。</span>
+    </label>
+
+    <div class="tk-field">
+      <span class="tk-label" id="modeLabel">分娩方式</span>
+      <div class="tk-seg" id="modeSeg" role="radiogroup" aria-labelledby="modeLabel">
+        <button type="button" role="radio" data-method="vaginal" aria-checked="true">順產</button>
+        <button type="button" role="radio" data-method="caesarean" aria-checked="false">剖腹產</button>
+      </div>
+    </div>
+
+    <div class="tk-field">
+      <span class="tk-label" id="feedLabel">餵哺方式</span>
+      <div class="tk-seg" id="feedSeg" role="radiogroup" aria-labelledby="feedLabel">
+        <button type="button" role="radio" data-feed="breast" aria-checked="true">母乳為主</button>
+        <button type="button" role="radio" data-feed="mixed" aria-checked="false">混合餵哺</button>
+        <button type="button" role="radio" data-feed="formula" aria-checked="false">沒有餵哺</button>
+      </div>
+      <span class="tk-hint">影響乳房護理與退奶的安排。</span>
+    </div>
+
+    <div class="tk-actions">
+      <button class="tk-btn" type="submit">排出時間表</button>
+      <button class="tk-btn tk-btn--ghost" type="reset">清除</button>
+    </div>
+    <p class="tk-error" id="ppError" role="alert" hidden></p>
+  </form>
+
+  <section class="tk-result" id="ppResult" hidden aria-live="polite">
+
+    <div class="tk-panel">
+      <div class="tk-headline">
+        <p class="tk-eyebrow" id="ppEyebrow">產後</p>
+        <p class="tk-date"><span id="ppDay">—</span><small id="ppDayNote"></small></p>
+        <p class="tk-now"><span id="ppStage"></span></p>
+      </div>
+
+      <div class="tk-ruler" id="ppRuler">
+        <div class="tk-ruler-stage">
+          <div class="tk-ruler-track">
+            <div class="tk-ruler-band tk-ruler-band--t3" style="left:0;width:5.833%"></div>
+            <div class="tk-ruler-band tk-ruler-band--t2" style="left:5.833%;width:19.167%"></div>
+            <div class="tk-ruler-band tk-ruler-band--t1" style="left:25%;width:10%"></div>
+            <div class="tk-ruler-band tk-ruler-band--rest" style="left:35%;width:65%"></div>
+            <div class="tk-ruler-ticks tk-ruler-ticks--days"></div>
+          </div>
+          <div class="tk-ruler-edd" style="left:83.333%"></div>
+          <div class="tk-ruler-mark" style="left:0"></div>
+        </div>
+        <ul class="tk-stages">
+          <li data-phase="1"><i style="background:#DCC8AF"></i><span><b>頭 7 天</b>惡露最多</span></li>
+          <li data-phase="2"><i style="background:#E9DCC9"></i><span><b>坐月</b>第 8–30 天</span></li>
+          <li data-phase="3"><i style="background:#F4EDE1"></i><span><b>產褥期末</b>第 31–42 天</span></li>
+          <li data-phase="4"><i style="background:#FCF9F3"></i><span><b>恢復期</b>第 43 天起</span></li>
+        </ul>
+        <div class="tk-ruler-legend">
+          <span><i class="tk-swatch" style="background:#6B5540;border-color:#6B5540"></i>今日</span>
+          <span><i class="tk-swatch" style="background:transparent;border:0;border-left:2px dashed #A5713B;width:2px;border-radius:0"></i>產後 100 天</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tk-panel">
+      <h2>時間表</h2>
+      <p class="tk-sub">按你的分娩日期排出。每個人的恢復速度不同，日期是常見的參考範圍，不是硬性規定。</p>
+      <ul class="tk-sched" id="ppSchedule"></ul>
+    </div>
+
+    <div class="tk-panel">
+      <h2 id="ppTcmTitle">這個階段的中醫調理</h2>
+      <p class="tk-sub" id="ppTcmSub"></p>
+      <div class="tk-reads" id="ppTcmReads"></div>
+    </div>
+
+    <div class="tk-alert">
+      <h3>出現以下情況，不要等下次覆診</h3>
+      <ul>
+        <li>發燒 38°C 或以上，或畏寒發抖</li>
+        <li>惡露突然大量增加、出現大血塊，或一小時內濕透一片衛生巾</li>
+        <li>惡露有異味，或已轉淡後又變回鮮紅</li>
+        <li>傷口紅腫、劇痛、有分泌物或裂開</li>
+        <li>單側小腿腫痛發熱，或突然氣促、胸痛</li>
+        <li>持續劇烈頭痛、視力模糊，或血壓偏高</li>
+        <li>情緒持續低落、無法照顧自己或寶寶，或出現傷害自己或寶寶的念頭</li>
+      </ul>
+    </div>
+
+  </section>
+
+  <p class="tk-note">
+    香港的產後檢查一般安排在產後 6 週；剖腹產的傷口覆診會較早。母嬰健康院同期會安排寶寶的檢查與疫苗。<br>
+    生化湯與其他產後方劑必須由註冊中醫師按你的惡露、體質與傷口情況決定是否適用及服用時間，本工具只列出一般的時間範圍，不構成處方。本工具僅供健康教育參考，不構成醫療建議，亦不能取代註冊醫師或中醫師的診斷與治療。撰文及覆核：胡佩珊中醫師（香港中醫藥管理委員會註冊中醫師，註冊編號：008823）。
+  </p>
+
+</main>
+
+<footer class="site-footer">
+  <div class="tk-wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>胡佩珊中醫師</h4>
+        <p>以中醫智慧與身心同治的理念，陪伴女性每個生命階段。</p>
+      </div>
+      <div>
+        <h4>快速前往</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">實用小工具</a></li>
+          <li><a href="../services/pregnancy.html">孕期及產後調理</a></li>
+          <li><a href="../constitution.html">中醫體質問卷</a></li>
+          <li><a href="../women-health-questionnaire.html">女性健康評估</a></li>
+          <li><a href="../articles.html">健康知識庫</a></li>
+          <li><a href="../about.html">關於醫師</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>聯絡方式</h4>
+        <ul class="footer-links">
+          <li><a href="https://wa.me/85298152863" target="_blank" rel="noopener">WhatsApp +852 9815 2863</a></li>
+          <li><a href="https://www.instagram.com/woopuisan.ec" target="_blank" rel="noopener">Instagram @woopuisan.ec</a></li>
+          <li><a href="mailto:woopuisan.ec@gmail.com">woopuisan.ec@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-disclaimer">
+      本網站所有內容與線上工具僅供健康教育參考，不構成醫療建議，亦不能取代註冊醫師或中醫師的診斷與治療。若您出現急性或嚴重症狀，請立即求醫。<br>
+      © 2026 胡佩珊中醫師 · 香港中醫藥管理委員會註冊中醫師（008823） · <a href="../privacy.html">私隱政策</a>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "WebApplication",
+        "MedicalWebPage"
+      ],
+      "@id": "https://katewoo.com/tools/postpartum.html",
+      "name": "產後 100 天調理時間表",
+      "description": "由分娩日期、順產或剖腹、有否餵哺，排出惡露觀察、生化湯適用窗口、六週產後檢查、開始運動與骨盆底復健的時間。",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "需要啟用 JavaScript",
+      "inLanguage": "zh-Hant-HK",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "HKD"
+      },
+      "author": {
+        "@id": "https://katewoo.com/#person"
+      },
+      "reviewedBy": {
+        "@id": "https://katewoo.com/#person"
+      },
+      "lastReviewed": "2026-09-06",
+      "audience": {
+        "@type": "Patient"
+      },
+      "about": {
+        "@type": "MedicalCondition",
+        "name": "產褥期"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "首頁",
+          "item": "https://katewoo.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "實用小工具",
+          "item": "https://katewoo.com/tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "產後 100 天調理時間表",
+          "item": "https://katewoo.com/tools/postpartum.html"
+        }
+      ]
+    },
+    {
+      "@type": "Physician",
+      "@id": "https://katewoo.com/#person",
+      "name": "胡佩珊中醫師",
+      "alternateName": "Kate Woo",
+      "medicalSpecialty": "Obstetric",
+      "identifier": "香港中醫藥管理委員會註冊中醫師 008823",
+      "url": "https://katewoo.com/about.html"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "惡露多久才乾淨？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "一般在產後 4 至 6 週內乾淨。頭 3 天量最多、色鮮紅，第 5 至 10 天轉為粉紅或褐色，第 3 至 4 週轉白或停止。超過 6 週仍有惡露應求診。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "生化湯應該幾時開始飲、飲多久？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "順產一般在產後數天、惡露仍多時開始，服用數天。剖腹產、傷口感染或惡露異常者未必適合，必須由註冊中醫師按個別情況評估，不應自行購買服用。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "產後幾時可以開始運動？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "一般在產後六週檢查通過後，由散步與伸展開始。剖腹產的腹部訓練需要再延後。骨盆底練習則可以更早開始。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "產後出現甚麼情況要立即求醫？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "發燒 38°C 或以上、惡露突然大量增加或有異味、傷口紅腫裂開、單側小腿腫痛、突然氣促胸痛，或情緒持續低落甚至出現傷害自己或寶寶的念頭，都應立即求醫。"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<script src="../shared-nav.js"></script>
+<script src="tools.js"></script>
+<script src="postpartum.js"></script>
+<script src="../analytics.js" defer></script>
+</body>
+</html>

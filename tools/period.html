@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>經期預測與週期檢查｜月經是否規律？香港中醫師教你判斷</title>
+<meta name="description" content="免費經期預測工具：輸入最近幾次月經第一天，推算未來三次經期，並檢查週期長度與每月變化是否落在 21 至 35 天的正常範圍。香港註冊中醫師胡佩珊。">
+<link rel="canonical" href="https://katewoo.com/tools/period.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_HK">
+<meta property="og:site_name" content="胡佩珊中醫師">
+<meta property="og:url" content="https://katewoo.com/tools/period.html">
+<meta property="og:title" content="經期預測與週期檢查｜月經是否規律？">
+<meta property="og:description" content="用你自己的記錄推算下次經期，並判斷週期是否落在正常範圍。">
+<meta property="og:image" content="https://katewoo.com/og-image.png?v=20260809-light">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tools.css">
+<script src="../i18n.js"></script>
+</head>
+<body>
+
+<nav class="nav"></nav>
+
+<header class="tk-hero">
+  <div class="tk-wrap tk-wrap--narrow">
+    <nav class="tk-crumb" aria-label="麵包屑" style="padding-top:0;margin-bottom:var(--tk-4)">
+      <a href="../index.html">首頁</a> ／ <a href="index.html">實用小工具</a> ／ <span>經期預測與週期檢查</span>
+    </nav>
+    <p class="tk-eyebrow">月經與備孕</p>
+    <h1>經期預測與週期檢查</h1>
+    <p class="tk-lede">輸入最近幾次月經第一天，算出平均週期、預測未來三次經期，並檢查週期是否在正常範圍。</p>
+  </div>
+</header>
+
+<main class="tk-wrap tk-wrap--narrow">
+
+  <form class="tk-panel" id="cycForm" style="margin-top:var(--tk-4)" novalidate>
+    <div class="tk-field">
+      <span class="tk-label">最近幾次月經第一天</span>
+      <div class="tk-dates">
+        <label><span>最近一次</span><input class="tk-input" type="date" name="d1"></label>
+        <label><span>對上一次</span><input class="tk-input" type="date" name="d2"></label>
+        <label><span>再對上一次</span><input class="tk-input" type="date" name="d3"></label>
+        <label><span>更早一次</span><input class="tk-input" type="date" name="d4"></label>
+      </div>
+      <span class="tk-hint">只有最近一次是必填。填到三次以上，才看得出你的週期穩不穩定。</span>
+    </div>
+
+    <label class="tk-field">
+      <span class="tk-label">平均週期長度</span>
+      <input class="tk-input" type="number" name="cycle" value="28" min="20" max="60" step="1" inputmode="numeric">
+      <span class="tk-hint">只在你填少於兩次經期日子時才會用到；有實際記錄時會改用你自己的數字。</span>
+    </label>
+
+    <label class="tk-field">
+      <span class="tk-label">經期長度</span>
+      <input class="tk-input" type="number" name="period" value="5" min="1" max="14" step="1" inputmode="numeric">
+      <span class="tk-hint">行經一般 3 至 7 天。</span>
+    </label>
+
+    <div class="tk-actions">
+      <button class="tk-btn" type="submit">預測下次經期</button>
+      <button class="tk-btn tk-btn--ghost" type="reset">清除</button>
+    </div>
+    <p class="tk-error" id="cycError" role="alert" hidden></p>
+  </form>
+
+  <section class="tk-result" id="cycResult" hidden aria-live="polite">
+
+    <div class="tk-panel">
+      <div class="tk-headline">
+        <p class="tk-eyebrow">下次月經</p>
+        <p class="tk-date"><span id="cycNext">—</span><small id="cycCountdown"></small></p>
+        <p class="tk-now">今日 <b id="cycToday">—</b> <span id="cycPhase"></span></p>
+      </div>
+
+      <div class="tk-ring">
+        <div class="tk-ring-col">
+          <div class="tk-ring-figure">
+            <svg id="cycRing" viewBox="0 0 100 100" role="img" aria-labelledby="cycRingTitle"></svg>
+            <p id="cycRingTitle" hidden>一個週期的圓環圖，標出經期與今日的位置</p>
+            <div class="tk-ring-center">
+              <span class="tk-eyebrow">平均週期</span>
+              <b id="cycAvg">—</b>
+              <small id="cycAvgNote"></small>
+            </div>
+          </div>
+          <p class="tk-ring-note" id="cycRingNote"></p>
+        </div>
+        <ul class="tk-key" id="cycStats"></ul>
+      </div>
+
+      <div id="cycFlag"></div>
+    </div>
+
+    <div class="tk-panel">
+      <h2>未來三次月經</h2>
+      <p class="tk-sub">按你的平均週期推算。實際日子會隨作息、壓力與身體狀況浮動。</p>
+      <div class="tk-cycles" id="cycNextThree"></div>
+    </div>
+
+    <div class="tk-panel" id="cycTcmPanel">
+      <h2 id="cycTcmTitle">中醫怎麼看這種週期</h2>
+      <p class="tk-sub" id="cycTcmSub"></p>
+      <div class="tk-reads" id="cycTcmReads"></div>
+    </div>
+
+  </section>
+
+  <p class="tk-note">
+    週期長度指由這次月經第一天，數到下次月經第一天。一般 21 至 35 天都屬正常，每月相差 7 至 9 天以內亦屬常見；青春期與更年期前後的波動會較大。<br>
+    若連續三個月沒有月經、週期長期短於 21 天或長於 35 天、經量突然大幅改變，或出現非經期出血，請安排檢查。本工具僅供健康教育參考，不構成醫療建議，亦不能取代註冊醫師或中醫師的診斷與治療。撰文及覆核：胡佩珊中醫師（香港中醫藥管理委員會註冊中醫師，註冊編號：008823）。
+  </p>
+
+</main>
+
+<footer class="site-footer">
+  <div class="tk-wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>胡佩珊中醫師</h4>
+        <p>以中醫智慧與身心同治的理念，陪伴女性每個生命階段。</p>
+      </div>
+      <div>
+        <h4>快速前往</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">實用小工具</a></li>
+          <li><a href="../services/menstrual.html">月經及婦科問題</a></li>
+          <li><a href="../constitution.html">中醫體質問卷</a></li>
+          <li><a href="../women-health-questionnaire.html">女性健康評估</a></li>
+          <li><a href="../articles.html">健康知識庫</a></li>
+          <li><a href="../about.html">關於醫師</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>聯絡方式</h4>
+        <ul class="footer-links">
+          <li><a href="https://wa.me/85298152863" target="_blank" rel="noopener">WhatsApp +852 9815 2863</a></li>
+          <li><a href="https://www.instagram.com/woopuisan.ec" target="_blank" rel="noopener">Instagram @woopuisan.ec</a></li>
+          <li><a href="mailto:woopuisan.ec@gmail.com">woopuisan.ec@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-disclaimer">
+      本網站所有內容與線上工具僅供健康教育參考，不構成醫療建議，亦不能取代註冊醫師或中醫師的診斷與治療。若您出現急性或嚴重症狀，請立即求醫。<br>
+      © 2026 胡佩珊中醫師 · 香港中醫藥管理委員會註冊中醫師（008823） · <a href="../privacy.html">私隱政策</a>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "WebApplication",
+        "MedicalWebPage"
+      ],
+      "@id": "https://katewoo.com/tools/period.html",
+      "name": "經期預測與週期檢查",
+      "description": "輸入最近幾次月經第一天，推算未來三次經期，並檢查週期長度與每月變化是否落在 21 至 35 天的正常範圍。",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "需要啟用 JavaScript",
+      "inLanguage": "zh-Hant-HK",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "HKD"
+      },
+      "author": {
+        "@id": "https://katewoo.com/#person"
+      },
+      "reviewedBy": {
+        "@id": "https://katewoo.com/#person"
+      },
+      "lastReviewed": "2026-09-06",
+      "audience": {
+        "@type": "Patient"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "首頁",
+          "item": "https://katewoo.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "實用小工具",
+          "item": "https://katewoo.com/tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "經期預測與週期檢查",
+          "item": "https://katewoo.com/tools/period.html"
+        }
+      ]
+    },
+    {
+      "@type": "Physician",
+      "@id": "https://katewoo.com/#person",
+      "name": "胡佩珊中醫師",
+      "alternateName": "Kate Woo",
+      "medicalSpecialty": "Obstetric",
+      "identifier": "香港中醫藥管理委員會註冊中醫師 008823",
+      "url": "https://katewoo.com/about.html"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "月經週期多少天才算正常？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "由這次月經第一天數到下次月經第一天，21 至 35 天都屬正常範圍。每月相差 7 至 9 天以內亦屬常見，青春期與更年期前後的波動會較大。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "週期不規律要怎樣才算？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "若最長與最短的週期相差 8 天或以上，一般已當作不規律；此時任何預測日期都只能作粗略參考。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "多久沒有月經要求醫？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "連續三個月或以上沒有月經屬繼發性閉經，需要檢查原因，常見與體重、壓力、甲狀腺、泌乳素或多囊卵巢有關。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "週期長期超過 35 天代表甚麼？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "稱為月經後期或稀發月經，常見於多囊卵巢綜合症、甲狀腺問題或體重明顯變化。若同時難以受孕，應先安排檢查。"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<script src="../shared-nav.js"></script>
+<script src="tools.js"></script>
+<script src="period.js"></script>
+<script src="../analytics.js" defer></script>
+</body>
+</html>

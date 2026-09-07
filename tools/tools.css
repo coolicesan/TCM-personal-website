@@ -1,0 +1,375 @@
+/* ──────────────────────────────────────────────────────────────
+   小工具共用外殼（tools/*.html 全部共用這一份）
+   色彩與字體沿用網站主系統：奶油 × 可可 × 奶茶棕 × 淡金。
+   類別一律用 tk- 前綴，避免與各頁既有的 .hero / .btn / .card 打架。
+   ────────────────────────────────────────────────────────────── */
+:root{
+  --tk-cream:#FAF7F0; --tk-cream-deep:#F3EDE2; --tk-ivory:#FFFDF9;
+  --tk-ink:#4A4038; --tk-ink-soft:#857A6E; --tk-ink-faint:#A2988D;
+  --tk-taupe:#A98D72; --tk-taupe-deep:#8A6F55; --tk-taupe-mist:#F0E8DB;
+  --tk-gold:#C9AC80; --tk-gold-soft:#EFE5D2;
+  --tk-blush:#E9DCD2; --tk-sage:#7D927C; --tk-sage-bg:#EDF1EC;
+  --tk-line:#E9E0D0;
+  --tk-serif:"Noto Serif TC","Songti TC","PMingLiU",serif;
+  --tk-sans:"Noto Sans TC","PingFang HK","Microsoft JhengHei",sans-serif;
+  /* 間距刻度：只用這六個值，不要臨時湊數字 */
+  --tk-1:.5rem; --tk-2:.85rem; --tk-3:1.4rem; --tk-4:2.2rem; --tk-5:3.4rem; --tk-6:5rem;
+  --tk-radius:14px; --tk-radius-lg:22px;
+  --tk-shadow:0 2px 10px rgba(105,88,66,.05), 0 10px 30px rgba(105,88,66,.06);
+  --tk-shadow-lift:0 4px 14px rgba(105,88,66,.07), 0 18px 44px rgba(105,88,66,.11);
+  --tk-ease:cubic-bezier(.16,.84,.44,1);
+}
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+body{margin:0;background:var(--tk-cream);color:var(--tk-ink);
+  font-family:var(--tk-sans);font-size:16.5px;line-height:1.85;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--tk-serif);line-height:1.4;letter-spacing:.01em;margin:0}
+p{margin:0}
+.tk-wrap{max-width:1060px;margin:0 auto;padding:0 22px}
+.tk-wrap--narrow{max-width:760px}
+
+/* 內文連結：沒有這一條的話，提示與註腳裡的連結會變成瀏覽器預設的藍色 */
+.tk-hint a,.tk-note a,.tk-sub a,.tk-lede a,.tk-flag a,.tk-alert a{
+  color:var(--tk-taupe-deep);text-underline-offset:3px;
+  transition:color .25s var(--tk-ease)}
+.tk-hint a:hover,.tk-note a:hover,.tk-sub a:hover,.tk-lede a:hover,
+.tk-flag a:hover,.tk-alert a:hover{color:var(--tk-ink)}
+
+/* 焦點樣式：一次定義，之後每個可點元素都自動有 */
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
+  outline:2px solid var(--tk-taupe-deep);outline-offset:3px;border-radius:6px}
+
+/* ── 麵包屑 ── */
+.tk-crumb{font-size:.84rem;color:var(--tk-ink-soft);padding:var(--tk-3) 0 0}
+.tk-crumb a{color:var(--tk-ink-soft);text-decoration:none}
+.tk-crumb a:hover{color:var(--tk-taupe-deep);text-decoration:underline;text-underline-offset:3px}
+
+/* ── 頁首 ── */
+.tk-hero{background:
+    radial-gradient(38rem 20rem at 12% -10%,rgba(240,232,219,.9),transparent 66%),
+    radial-gradient(30rem 22rem at 92% 6%,rgba(233,220,210,.6),transparent 70%),
+    linear-gradient(180deg,#FFFDF9 0%,var(--tk-cream) 100%);
+  border-bottom:1px solid var(--tk-line);padding:var(--tk-4) 0 var(--tk-5)}
+.tk-eyebrow{font-size:.76rem;letter-spacing:.18em;color:var(--tk-taupe);
+  margin-bottom:var(--tk-2);text-transform:none}
+.tk-hero h1{font-size:clamp(1.9rem,4.4vw,2.7rem);letter-spacing:-.02em;margin-bottom:var(--tk-2)}
+.tk-hero .tk-lede{color:var(--tk-ink-soft);max-width:50ch;font-size:1.02rem}
+.tk-pill{display:inline-flex;align-items:center;gap:.5rem;margin-top:var(--tk-3);
+  border:1px solid var(--tk-line);background:rgba(255,253,249,.8);border-radius:999px;
+  padding:.42rem .95rem;font-size:.8rem;color:var(--tk-ink-soft)}
+.tk-pill svg{flex:none;color:var(--tk-sage)}
+
+/* ── 分區標題：循環 / 歷程 ── */
+.tk-band{padding:var(--tk-5) 0 0}
+.tk-band-head{display:flex;align-items:baseline;gap:var(--tk-2);
+  padding-bottom:var(--tk-3);border-bottom:1px solid var(--tk-line);margin-bottom:var(--tk-3)}
+.tk-band-head h2{font-size:1.32rem;letter-spacing:.02em}
+.tk-band-head span{font-size:.83rem;color:var(--tk-ink-faint)}
+
+/* ── 工具卡 ── */
+.tk-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--tk-3)}
+.tk-card{position:relative;display:flex;flex-direction:column;gap:var(--tk-2);
+  background:var(--tk-ivory);border:1px solid var(--tk-line);border-radius:var(--tk-radius-lg);
+  padding:var(--tk-3);text-decoration:none;color:inherit;box-shadow:var(--tk-shadow);
+  transition:transform .34s var(--tk-ease),box-shadow .34s var(--tk-ease),border-color .34s var(--tk-ease)}
+.tk-card:hover{transform:translateY(-3px);box-shadow:var(--tk-shadow-lift);border-color:var(--tk-gold)}
+.tk-card:active{transform:translateY(-1px)}
+.tk-card-glyph{color:var(--tk-taupe);margin-bottom:var(--tk-1)}
+.tk-card h3{font-size:1.16rem}
+.tk-card p{font-size:.92rem;color:var(--tk-ink-soft);line-height:1.8}
+.tk-card-meta{padding-top:var(--tk-1);display:flex;flex-wrap:wrap;gap:.4rem}
+.tk-tag{font-size:.75rem;color:var(--tk-taupe-deep);background:var(--tk-taupe-mist);
+  border-radius:999px;padding:.2rem .7rem}
+.tk-card-go{margin-top:auto;padding-top:var(--tk-2);font-size:.88rem;color:var(--tk-taupe-deep);
+  display:inline-flex;align-items:center;gap:.35rem}
+.tk-card-go i{font-style:normal;transition:transform .34s var(--tk-ease);display:inline-block}
+.tk-card:hover .tk-card-go i{transform:translateX(4px)}
+/* 未上線的工具：同一個版型，只是不可點。目前四個工具都已上線，
+   下一個工具進來之前這幾條規則會閒置。 */
+.tk-card--soon{background:transparent;box-shadow:none;border-style:dashed;color:var(--tk-ink-soft)}
+.tk-card--soon:hover{transform:none;box-shadow:none;border-color:var(--tk-line)}
+.tk-card--soon .tk-card-glyph{color:var(--tk-ink-faint);opacity:.55}
+
+/* ── 銜接問卷 ── */
+.tk-bridge{margin:var(--tk-5) 0 var(--tk-6);background:var(--tk-cream-deep);
+  border:1px solid var(--tk-line);border-radius:var(--tk-radius-lg);padding:var(--tk-4) var(--tk-3)}
+.tk-bridge h2{font-size:1.28rem;margin-bottom:var(--tk-1)}
+.tk-bridge p{color:var(--tk-ink-soft);font-size:.94rem;max-width:52ch;margin-bottom:var(--tk-3)}
+.tk-bridge-links{display:flex;flex-wrap:wrap;gap:var(--tk-2)}
+
+/* ── 按鈕 ── */
+.tk-btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;
+  font-family:var(--tk-sans);font-size:.95rem;border-radius:999px;padding:.78rem 1.7rem;
+  border:1px solid transparent;background:var(--tk-taupe);color:#fff;text-decoration:none;cursor:pointer;
+  transition:background-color .3s var(--tk-ease),transform .3s var(--tk-ease),box-shadow .3s var(--tk-ease)}
+.tk-btn:hover{background:var(--tk-taupe-deep);box-shadow:0 8px 22px rgba(138,111,85,.24)}
+.tk-btn:active{transform:translateY(1px)}
+.tk-btn--ghost{background:var(--tk-ivory);color:var(--tk-taupe-deep);border-color:var(--tk-gold)}
+.tk-btn--ghost:hover{background:var(--tk-gold-soft);box-shadow:none}
+
+/* ── 輸入卡 ── */
+.tk-panel{background:var(--tk-ivory);border:1px solid var(--tk-line);
+  border-radius:var(--tk-radius-lg);box-shadow:var(--tk-shadow);padding:var(--tk-3)}
+.tk-panel + .tk-panel{margin-top:var(--tk-3)}
+.tk-field{display:block;margin-bottom:var(--tk-3)}
+.tk-field:last-of-type{margin-bottom:0}
+.tk-label{display:block;font-size:.86rem;font-weight:500;margin-bottom:.45rem}
+.tk-hint{font-size:.8rem;color:var(--tk-ink-faint);margin-top:.4rem;line-height:1.7}
+.tk-input,.tk-select{width:100%;font-family:var(--tk-sans);font-size:1rem;color:var(--tk-ink);
+  background:#fff;border:1px solid var(--tk-line);border-radius:var(--tk-radius);
+  padding:.7rem .9rem;transition:border-color .25s var(--tk-ease),box-shadow .25s var(--tk-ease)}
+.tk-input:hover,.tk-select:hover{border-color:var(--tk-gold)}
+.tk-input:focus,.tk-select:focus{outline:none;border-color:var(--tk-taupe);
+  box-shadow:0 0 0 3px rgba(169,141,114,.16)}
+.tk-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--tk-2)}
+
+/* 分段切換：計算方式 */
+.tk-seg{display:flex;flex-wrap:wrap;gap:.35rem;background:var(--tk-cream-deep);
+  border:1px solid var(--tk-line);border-radius:999px;padding:.3rem}
+.tk-seg button{flex:1 1 auto;font-family:var(--tk-sans);font-size:.87rem;color:var(--tk-ink-soft);
+  background:transparent;border:0;border-radius:999px;padding:.5rem .7rem;cursor:pointer;white-space:nowrap;
+  transition:background-color .28s var(--tk-ease),color .28s var(--tk-ease)}
+.tk-seg button:hover{color:var(--tk-taupe-deep)}
+.tk-seg button[aria-checked="true"]{background:var(--tk-ivory);color:var(--tk-ink);
+  box-shadow:0 1px 4px rgba(105,88,66,.1)}
+.tk-actions{margin-top:var(--tk-3);display:flex;flex-wrap:wrap;align-items:center;gap:var(--tk-2)}
+.tk-error{color:#9C5B4B;font-size:.86rem;margin-top:var(--tk-2)}
+
+/* ── 結果 ── */
+.tk-result[hidden]{display:none}
+.tk-result{margin-top:var(--tk-3);animation:tk-rise .5s var(--tk-ease) both}
+@keyframes tk-rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.tk-headline{text-align:center;padding:var(--tk-2) 0 var(--tk-3);
+  border-bottom:1px solid var(--tk-line);margin-bottom:var(--tk-3)}
+.tk-headline .tk-eyebrow{margin-bottom:.6rem}
+.tk-date{font-family:var(--tk-serif);font-size:clamp(2rem,6vw,2.9rem);font-weight:700;
+  letter-spacing:-.03em;line-height:1.2;font-variant-numeric:tabular-nums}
+.tk-date small{display:block;font-size:.92rem;font-weight:400;letter-spacing:0;
+  color:var(--tk-ink-soft);margin-top:.5rem;font-family:var(--tk-sans);text-wrap:balance}
+/* 日期區間換行時，破折號要跟著後半段走，不能單獨留在行尾 */
+.tk-date-part{white-space:nowrap}
+.tk-now{display:inline-flex;align-items:baseline;gap:.5rem;margin-top:var(--tk-2);
+  background:var(--tk-sage-bg);color:#4F6350;border-radius:20px;padding:.4rem 1.1rem;
+  font-size:.88rem;max-width:100%;text-wrap:balance}
+.tk-now b{font-family:var(--tk-serif);font-size:1.05rem;font-variant-numeric:tabular-nums}
+
+/* 直尺：只向前走的歷程用直線，不用圓環 */
+.tk-ruler{margin:var(--tk-4) 0 var(--tk-3)}
+.tk-ruler-stage{position:relative;padding:9px 0}
+.tk-ruler-track{position:relative;height:44px;border-radius:8px;overflow:hidden;
+  background:var(--tk-cream-deep);border:1px solid var(--tk-line)}
+.tk-ruler-band{position:absolute;top:0;bottom:0}
+.tk-ruler-band--t1{background:#F4EDE1}
+.tk-ruler-band--t2{background:#E9DCC9}
+.tk-ruler-band--t3{background:#DCC8AF}
+.tk-ruler-band + .tk-ruler-band{border-left:1px solid rgba(138,111,85,.22)}
+.tk-ruler-ticks{position:absolute;inset:0;background-repeat:no-repeat;
+  background-size:100% 9px;background-position:0 100%;
+  background-image:repeating-linear-gradient(90deg,rgba(105,84,60,.34) 0 1px,transparent 1px 4.762%)}
+.tk-ruler-mark{position:absolute;top:2px;bottom:2px;width:3px;background:#6B5540;box-shadow:0 0 0 2px rgba(255,253,249,.9);
+  border-radius:2px;transition:left .7s var(--tk-ease)}
+.tk-ruler-mark::after{content:"";position:absolute;top:-5px;left:50%;width:9px;height:9px;
+  transform:translateX(-50%) rotate(45deg);background:var(--tk-taupe-deep);border-radius:2px}
+.tk-ruler-scale{display:flex;justify-content:space-between;margin-top:.5rem;
+  font-size:.74rem;color:var(--tk-ink-faint);font-variant-numeric:tabular-nums}
+.tk-ruler-legend{display:flex;flex-wrap:wrap;gap:var(--tk-2);margin-top:var(--tk-2);font-size:.8rem;color:var(--tk-ink-soft)}
+.tk-ruler-legend span{display:inline-flex;align-items:center;gap:.4rem}
+.tk-swatch{width:12px;height:12px;border-radius:3px;border:1px solid var(--tk-line)}
+
+/* 時間表 */
+.tk-sched{list-style:none;margin:0;padding:0}
+.tk-sched li{display:grid;grid-template-columns:5.6rem 1fr auto;gap:var(--tk-2);align-items:baseline;
+  padding:.85rem 0;border-bottom:1px solid var(--tk-line)}
+.tk-sched li:last-child{border-bottom:0}
+.tk-sched-week{font-family:var(--tk-serif);font-size:.9rem;color:var(--tk-taupe-deep);
+  font-variant-numeric:tabular-nums}
+.tk-sched-name{font-size:.94rem}
+.tk-sched-name em{display:block;font-style:normal;font-size:.82rem;color:var(--tk-ink-soft);margin-top:.15rem}
+.tk-sched-date{font-size:.88rem;color:var(--tk-ink-soft);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.tk-sched li[data-state="past"]{opacity:.5}
+.tk-sched li[data-state="now"]{background:linear-gradient(90deg,rgba(239,229,210,.85),rgba(239,229,210,.25));
+  box-shadow:inset 3px 0 0 var(--tk-gold);padding-left:.8rem;margin-left:-.8rem;
+  border-radius:0 8px 8px 0}
+.tk-sched li[data-state="now"] .tk-sched-week{font-weight:700}
+
+.tk-panel h2{font-size:1.16rem;margin-bottom:var(--tk-2)}
+.tk-panel h2 + .tk-sub{font-size:.86rem;color:var(--tk-ink-soft);margin-top:-.45rem;margin-bottom:var(--tk-2)}
+
+/* 延伸閱讀 */
+.tk-reads{display:grid;gap:.6rem}
+.tk-reads a{display:block;border:1px solid var(--tk-line);border-radius:var(--tk-radius);
+  padding:.8rem 1rem;text-decoration:none;color:var(--tk-ink);font-size:.94rem;background:var(--tk-cream);
+  transition:border-color .3s var(--tk-ease),background-color .3s var(--tk-ease),transform .3s var(--tk-ease)}
+.tk-reads a:hover{border-color:var(--tk-gold);background:var(--tk-ivory);transform:translateX(3px)}
+.tk-reads em{display:block;font-style:normal;font-size:.82rem;color:var(--tk-ink-soft);margin-top:.2rem}
+
+/* 免責 */
+.tk-note{margin:var(--tk-3) 0 var(--tk-6);font-size:.82rem;color:var(--tk-ink-soft);line-height:1.85;
+  border-left:3px solid var(--tk-gold);padding-left:var(--tk-2)}
+
+/* ── 站台統一頁腳（樣式取自 main.css，內嵌以免與各頁樣式衝突） ── */
+.site-footer{position:relative;overflow:hidden;
+  background:radial-gradient(34rem 18rem at 10% 0%,rgba(240,232,219,.86),transparent 68%),
+             radial-gradient(30rem 20rem at 88% 20%,rgba(233,220,210,.62),transparent 70%),
+             linear-gradient(180deg,#FFFDF9 0%,#F7F0E6 100%);
+  color:#776B60;padding:3rem 0 2rem;font-size:.88rem;border-top:1px solid #E5D8C7;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.78)}
+.site-footer::before{content:"";position:absolute;inset:0 0 auto;height:4px;
+  background:linear-gradient(90deg,#E9DCD2,#C9AC80,#F0E8DB)}
+.site-footer .tk-wrap{position:relative}
+.footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:2rem;margin-bottom:2rem}
+.site-footer h4{font-family:var(--tk-serif);color:#5A5148;font-size:1rem;margin:0 0 .9rem}
+.site-footer a{color:#8A6F55;text-decoration:none}
+.site-footer a:hover{color:#6F5944;text-decoration:underline}
+.footer-links{list-style:none;display:grid;gap:.45rem;padding:0;margin:0}
+.footer-disclaimer{border-top:1px solid rgba(201,172,128,.36);padding-top:1.5rem;
+  font-size:.78rem;color:#8B7C70;line-height:1.8}
+
+@media (max-width:820px){
+  .tk-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  .tk-row{grid-template-columns:1fr}
+  /* 窄螢幕上，四個選項排成 2×2、三個選項直排，都比自動換行整齊。
+     兩個選項的仍然用原本的橫排。 */
+  .tk-seg:has(button:nth-child(4)){display:grid;grid-template-columns:1fr 1fr;
+    border-radius:var(--tk-radius)}
+  .tk-seg:has(button:nth-child(3)):not(:has(button:nth-child(4))){display:grid;
+    grid-template-columns:1fr;border-radius:var(--tk-radius)}
+  .tk-seg button{padding:.6rem .5rem}
+  .tk-sched li{grid-template-columns:4.6rem 1fr;row-gap:.2rem}
+  .tk-sched-date{grid-column:2;text-align:left}
+  .footer-grid{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}
+}
+
+/* ── 直尺補充：孕期版把 42 週切成三等分，一格一週 ── */
+.tk-ruler-edd{position:absolute;top:5px;bottom:5px;width:0;border-left:2px dashed #A5713B}
+.tk-ruler-phases{display:grid;grid-template-columns:repeat(3,1fr);margin-top:.55rem;
+  font-size:.76rem;color:var(--tk-ink-faint);text-align:center}
+.tk-ruler-phases span{border-left:1px solid var(--tk-line);padding:0 .3rem}
+.tk-ruler-phases span:first-child{border-left:0}
+.tk-ruler-phases b{display:block;font-family:var(--tk-serif);font-weight:600;
+  font-size:.83rem;color:var(--tk-ink-soft)}
+.tk-ruler-phases span[data-current="true"] b{color:var(--tk-taupe-deep)}
+
+/* ── 圓環：會重複的週期用圓環 ──
+   一格 = 週期裡的一天，所以格數會跟著使用者填的週期長度改變。 */
+.tk-ring{display:grid;grid-template-columns:minmax(0,260px) 1fr;gap:var(--tk-4);
+  align-items:center;margin:var(--tk-4) 0 var(--tk-3)}
+.tk-ring-figure{position:relative;width:100%;max-width:260px;margin:0 auto;aspect-ratio:1}
+.tk-ring-figure svg{display:block;width:100%;height:100%;overflow:visible}
+.tk-ring-day{transition:opacity .3s var(--tk-ease)}
+.tk-ring-center{position:absolute;inset:22%;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;gap:.15rem}
+.tk-ring-center .tk-eyebrow{margin:0}
+.tk-ring-center b{font-family:var(--tk-serif);font-size:1.32rem;letter-spacing:-.02em;
+  line-height:1.25;font-variant-numeric:tabular-nums}
+.tk-ring-center small{font-size:.78rem;color:var(--tk-ink-soft)}
+.tk-ring-note{text-align:center;font-size:.8rem;color:var(--tk-ink-soft);
+  margin-top:var(--tk-2);display:flex;align-items:center;justify-content:center;gap:.4rem}
+.tk-ring-note i{width:8px;height:8px;border-radius:50%;background:var(--tk-ink);display:inline-block}
+.tk-key{list-style:none;margin:0;padding:0;display:grid;gap:.7rem}
+.tk-key li{display:grid;grid-template-columns:14px 1fr auto;gap:.7rem;align-items:baseline;
+  font-size:.9rem;padding-bottom:.7rem;border-bottom:1px solid var(--tk-line)}
+.tk-key li:last-child{border-bottom:0;padding-bottom:0}
+.tk-key i{width:14px;height:14px;border-radius:4px;transform:translateY(2px)}
+.tk-key b{font-weight:500}
+.tk-key em{display:block;font-style:normal;font-size:.8rem;color:var(--tk-ink-soft);margin-top:.1rem}
+.tk-key span{font-size:.88rem;color:var(--tk-ink-soft);text-align:right;
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* 提醒卡：計算法在這個人身上不可靠時要講清楚，不能只給日期 */
+.tk-flag{display:grid;grid-template-columns:auto 1fr;gap:var(--tk-2);align-items:start;
+  border-radius:var(--tk-radius);padding:var(--tk-2) var(--tk-3);margin-top:var(--tk-3);
+  background:var(--tk-sage-bg);border:1px solid #CFDBCE}
+.tk-flag--warn{background:#FBF3E3;border-color:var(--tk-gold)}
+.tk-flag-icon{font-family:var(--tk-serif);font-size:1.1rem;line-height:1.7;color:var(--tk-taupe-deep)}
+.tk-flag h3{font-size:.98rem;margin-bottom:.25rem}
+.tk-flag p{font-size:.88rem;color:var(--tk-ink-soft);line-height:1.8}
+.tk-flag a{color:var(--tk-taupe-deep);text-underline-offset:3px}
+
+/* 未來幾個週期 */
+.tk-cycles{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--tk-2)}
+.tk-cycles div{background:var(--tk-cream);border:1px solid var(--tk-line);
+  border-radius:var(--tk-radius);padding:var(--tk-2)}
+.tk-cycles p{font-size:.78rem;color:var(--tk-ink-faint);margin-bottom:.3rem}
+.tk-cycles b{display:block;font-family:var(--tk-serif);font-size:.98rem;font-variant-numeric:tabular-nums}
+.tk-cycles em{display:block;font-style:normal;font-size:.8rem;color:var(--tk-ink-soft);margin-top:.3rem}
+
+@media (max-width:820px){
+  .tk-ring{grid-template-columns:1fr;gap:var(--tk-3)}
+  .tk-cycles{grid-template-columns:1fr}
+}
+
+/* ── 多個日期欄位（經期記錄）── */
+.tk-dates{display:grid;grid-template-columns:1fr 1fr;gap:var(--tk-2)}
+.tk-dates label{display:block}
+.tk-dates span{display:block;font-size:.8rem;color:var(--tk-ink-soft);margin-bottom:.3rem}
+@media (max-width:560px){ .tk-dates{grid-template-columns:1fr} }
+
+/* ── 統計數字（週期檢查）── */
+.tk-key li.tk-stat{grid-template-columns:1fr auto}
+.tk-key li.tk-stat span:last-child{font-family:var(--tk-serif);font-size:1.02rem;color:var(--tk-ink)}
+.tk-key li.tk-stat[data-flag="warn"] span:last-child{color:#9C5B4B}
+
+/* ── 警號清單（產後）── */
+.tk-alert{background:#FBF3E3;border:1px solid var(--tk-gold);border-radius:var(--tk-radius);
+  padding:var(--tk-3);margin-top:var(--tk-3)}
+.tk-alert h3{font-size:1rem;margin-bottom:var(--tk-1);color:#8A5A2B}
+.tk-alert ul{margin:0;padding-left:1.15em;font-size:.88rem;color:var(--tk-ink-soft);line-height:1.85}
+.tk-alert li{margin-bottom:.3rem}
+.tk-alert li:last-child{margin-bottom:0}
+
+/* 產後時間表的直尺分四段，而且第一段很短，所以要另一套欄寬 */
+.tk-ruler-band--rest{background:#FCF9F3}
+.tk-ruler-ticks--days{background-image:repeating-linear-gradient(90deg,rgba(105,84,60,.34) 0 1px,transparent 1px 5.833%)}
+.tk-stages{list-style:none;margin:.7rem 0 0;padding:0;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem var(--tk-2)}
+.tk-stages li{display:grid;grid-template-columns:12px 1fr;gap:.5rem;align-items:baseline;
+  font-size:.78rem;color:var(--tk-ink-faint)}
+.tk-stages i{width:12px;height:12px;border-radius:3px;border:1px solid var(--tk-line);
+  transform:translateY(2px)}
+.tk-stages b{display:block;font-family:var(--tk-serif);font-weight:600;font-size:.84rem;
+  color:var(--tk-ink-soft)}
+.tk-stages li[data-current="true"] b{color:var(--tk-taupe-deep)}
+.tk-stages li[data-current="true"] i{box-shadow:0 0 0 2px rgba(169,141,114,.35)}
+@media (max-width:700px){ .tk-stages{grid-template-columns:1fr 1fr} }
+
+/* ── 圖表 ──
+   一個重點（她的位置）＋ 其餘全部退為背景，所以顏色只做兩件事：
+   淡金色的帶＝建議範圍，深墨色的點＝你。狀態由文字講，不靠顏色。 */
+.tk-chart{margin:var(--tk-4) 0 0}
+.tk-chart-title{font-family:var(--tk-serif);font-size:.95rem;color:var(--tk-ink-soft);
+  margin-bottom:var(--tk-2)}
+.tk-chart-plot{position:relative}
+.tk-chart-plot svg{display:block;width:100%;height:auto;touch-action:pan-y}
+.tk-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.tk-chart .tk-key{margin-top:var(--tk-3)}
+
+/* 游標提示 */
+.tk-tip{position:absolute;pointer-events:none;z-index:2;transform:translate(-50%,-100%);
+  background:var(--tk-ink);color:#FFFDF9;border-radius:8px;padding:.45rem .7rem;
+  font-size:.78rem;line-height:1.6;white-space:nowrap;
+  box-shadow:0 6px 18px rgba(74,64,56,.22)}
+.tk-tip b{font-weight:600;display:block;font-size:.82rem}
+.tk-tip[hidden]{display:none !important}
+
+/* 圖表裡的文字用文字色，不用資料色 */
+.tk-axis{fill:var(--tk-ink-faint);font-family:var(--tk-sans);font-size:11px}
+.tk-axis--unit{fill:var(--tk-ink-soft)}
+.tk-band-label{fill:var(--tk-taupe-deep);font-family:var(--tk-sans);font-size:11px}
+.tk-point-label{fill:var(--tk-ink);font-family:var(--tk-serif);font-size:13px;font-weight:600}
+
+/* SVG 文字跟著 viewBox 縮放，390px 螢幕上 11px 只剩約 6px，
+   所以窄螢幕要把圖表內的字級調大，換算回來才看得清。 */
+@media (max-width:560px){
+  .tk-axis{font-size:19px}
+  .tk-band-label{font-size:19px}
+  .tk-point-label{font-size:23px}
+}

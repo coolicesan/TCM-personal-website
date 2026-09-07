@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>孕期體重管理｜我增重是否過多？香港中醫師的參考範圍</title>
+<meta name="description" content="免費孕期體重計算器：由孕前 BMI 算出建議總增重範圍，看你現時孕週的合理區間，並顯示往後每週的建議增幅。支援單胎與雙胎。香港註冊中醫師胡佩珊。">
+<link rel="canonical" href="https://katewoo.com/tools/weight.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_HK">
+<meta property="og:site_name" content="胡佩珊中醫師">
+<meta property="og:url" content="https://katewoo.com/tools/weight.html">
+<meta property="og:title" content="孕期體重管理｜我增重是否過多？">
+<meta property="og:description" content="由孕前 BMI 算出建議增重範圍，看你現在落在哪裡。">
+<meta property="og:image" content="https://katewoo.com/og-image.png?v=20260809-light">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tools.css">
+<script src="../i18n.js"></script>
+</head>
+<body>
+
+<nav class="nav"></nav>
+
+<header class="tk-hero">
+  <div class="tk-wrap tk-wrap--narrow">
+    <nav class="tk-crumb" aria-label="麵包屑" style="padding-top:0;margin-bottom:var(--tk-4)">
+      <a href="../index.html">首頁</a> ／ <a href="index.html">實用小工具</a> ／ <span>孕期體重管理</span>
+    </nav>
+    <p class="tk-eyebrow">懷孕與產後</p>
+    <h1>孕期體重管理</h1>
+    <p class="tk-lede">輸入孕前身高體重與現時孕週，算出你的建議增重範圍，以及往後每週應該增多少。</p>
+  </div>
+</header>
+
+<main class="tk-wrap tk-wrap--narrow">
+
+  <form class="tk-panel" id="wtForm" style="margin-top:var(--tk-4)" novalidate>
+    <div class="tk-field">
+      <span class="tk-label">懷孕前的身高與體重</span>
+      <div class="tk-row">
+        <label>
+          <input class="tk-input" type="number" name="height" min="130" max="200" step="0.1"
+                 placeholder="身高 cm" inputmode="decimal">
+        </label>
+        <label>
+          <input class="tk-input" type="number" name="before" min="30" max="200" step="0.1"
+                 placeholder="孕前體重 kg" inputmode="decimal">
+        </label>
+      </div>
+      <span class="tk-hint">用懷孕前的體重，不是現在的。建議範圍完全由這個數字決定。</span>
+    </div>
+
+    <div class="tk-row">
+      <label class="tk-field">
+        <span class="tk-label">現時體重</span>
+        <input class="tk-input" type="number" name="now" min="30" max="200" step="0.1"
+               placeholder="kg" inputmode="decimal">
+      </label>
+      <label class="tk-field">
+        <span class="tk-label">現時孕週</span>
+        <input class="tk-input" type="number" name="week" min="4" max="42" step="1"
+               placeholder="週數" inputmode="numeric">
+        <span class="tk-hint">不確定的話，先用<a href="due-date.html">預產期計算器</a>。</span>
+      </label>
+    </div>
+
+    <div class="tk-field">
+      <span class="tk-label" id="babiesLabel">胎數</span>
+      <div class="tk-seg" id="babiesSeg" role="radiogroup" aria-labelledby="babiesLabel">
+        <button type="button" role="radio" data-method="1" aria-checked="true">單胎</button>
+        <button type="button" role="radio" data-method="2" aria-checked="false">雙胎</button>
+      </div>
+    </div>
+
+    <div class="tk-actions">
+      <button class="tk-btn" type="submit">看我的範圍</button>
+      <button class="tk-btn tk-btn--ghost" type="reset">清除</button>
+    </div>
+    <p class="tk-error" id="wtError" role="alert" hidden></p>
+  </form>
+
+  <section class="tk-result" id="wtResult" hidden aria-live="polite">
+
+    <div class="tk-panel">
+      <div class="tk-headline">
+        <p class="tk-eyebrow">到目前為止</p>
+        <p class="tk-date"><span id="wtGain">—</span><small id="wtVerdict"></small></p>
+        <p class="tk-now"><span id="wtTarget"></span></p>
+      </div>
+
+      <figure class="tk-chart" id="wtChart">
+        <figcaption class="tk-chart-title" id="wtChartTitle">建議增重範圍與你的位置｜縱軸為累積增重，橫軸為孕週</figcaption>
+        <div class="tk-chart-plot">
+          <svg id="wtSvg" viewBox="0 0 640 320" role="img" aria-labelledby="wtChartTitle wtChartDesc"></svg>
+          <p id="wtChartDesc" class="tk-sr">由孕前 BMI 推算的建議累積增重範圍，橫軸為孕週，縱軸為增重公斤數，並標出你目前的位置。詳細數字見下方列表。</p>
+          <div class="tk-tip" id="wtTip" hidden aria-hidden="true"></div>
+        </div>
+        <ul class="tk-key" id="wtKey"></ul>
+      </figure>
+
+      <div id="wtFlag"></div>
+    </div>
+
+    <div class="tk-panel">
+      <h2>往後的建議</h2>
+      <p class="tk-sub">第二、三孕期的增重是比較平均的，所以看每週的幅度比看總數實際。</p>
+      <div class="tk-cycles" id="wtAhead"></div>
+    </div>
+
+    <div class="tk-panel">
+      <h2 id="wtTcmTitle">這個階段的中醫調理</h2>
+      <p class="tk-sub" id="wtTcmSub"></p>
+      <div class="tk-reads" id="wtTcmReads"></div>
+    </div>
+
+    <div class="tk-alert">
+      <h3>體重變化出現以下情況，要立即求醫</h3>
+      <ul>
+        <li>一星期突然增加超過 1 公斤，同時有明顯水腫、劇烈頭痛或視力模糊——可能是子癇前症</li>
+        <li>孕吐嚴重到體重比孕前下跌超過 5%，或無法進食飲水</li>
+        <li>第二、三孕期持續沒有增重，甚至下跌</li>
+      </ul>
+    </div>
+
+  </section>
+
+  <p class="tk-note">
+    建議範圍採用美國國家醫學院（IOM，2009）按孕前 BMI 分組的指引，這也是香港產科普遍採用的參考。曲線的畫法是：第一孕期增 0.5 至 2 公斤，其後平均增至 40 週的總範圍上下限；實際體重每星期上落一公斤以內很常見，看趨勢比看單次磅數有意義。<br>
+    雙胎的範圍屬 IOM 的暫定建議，孕前過輕的雙胎孕婦則未有足夠數據。體重只是產檢其中一項指標，血壓、血糖、胎兒大小與水腫同樣重要，實際以你的產科醫生為準。本工具僅供健康教育參考，不構成醫療建議，亦不能取代註冊醫師或中醫師的診斷與治療。撰文及覆核：胡佩珊中醫師（香港中醫藥管理委員會註冊中醫師，註冊編號：008823）。
+  </p>
+
+</main>
+
+<footer class="site-footer">
+  <div class="tk-wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>胡佩珊中醫師</h4>
+        <p>以中醫智慧與身心同治的理念，陪伴女性每個生命階段。</p>
+      </div>
+      <div>
+        <h4>快速前往</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">實用小工具</a></li>
+          <li><a href="../services/pregnancy.html">孕期及產後調理</a></li>
+          <li><a href="../services/weight.html">體重管理</a></li>
+          <li><a href="../women-health-questionnaire.html">女性健康評估</a></li>
+          <li><a href="../articles.html">健康知識庫</a></li>
+          <li><a href="../about.html">關於醫師</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>聯絡方式</h4>
+        <ul class="footer-links">
+          <li><a href="https://wa.me/85298152863" target="_blank" rel="noopener">WhatsApp +852 9815 2863</a></li>
+          <li><a href="https://www.instagram.com/woopuisan.ec" target="_blank" rel="noopener">Instagram @woopuisan.ec</a></li>
+          <li><a href="mailto:woopuisan.ec@gmail.com">woopuisan.ec@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-disclaimer">
+      本網站所有內容與線上工具僅供健康教育參考，不構成醫療建議，亦不能取代註冊醫師或中醫師的診斷與治療。若您出現急性或嚴重症狀，請立即求醫。<br>
+      © 2026 胡佩珊中醫師 · 香港中醫藥管理委員會註冊中醫師（008823） · <a href="../privacy.html">私隱政策</a>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "WebApplication",
+        "MedicalWebPage"
+      ],
+      "@id": "https://katewoo.com/tools/weight.html",
+      "name": "孕期體重管理",
+      "description": "由孕前 BMI 算出建議總增重範圍，顯示現時孕週的合理區間與往後每週的建議增幅，支援單胎與雙胎。",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "需要啟用 JavaScript",
+      "inLanguage": "zh-Hant-HK",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "HKD"
+      },
+      "author": {
+        "@id": "https://katewoo.com/#person"
+      },
+      "reviewedBy": {
+        "@id": "https://katewoo.com/#person"
+      },
+      "lastReviewed": "2026-09-07",
+      "audience": {
+        "@type": "Patient"
+      },
+      "citation": "https://www.ncbi.nlm.nih.gov/books/NBK32813/"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "首頁",
+          "item": "https://katewoo.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "實用小工具",
+          "item": "https://katewoo.com/tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "孕期體重管理",
+          "item": "https://katewoo.com/tools/weight.html"
+        }
+      ]
+    },
+    {
+      "@type": "Physician",
+      "@id": "https://katewoo.com/#person",
+      "name": "胡佩珊中醫師",
+      "alternateName": "Kate Woo",
+      "medicalSpecialty": "Obstetric",
+      "identifier": "香港中醫藥管理委員會註冊中醫師 008823",
+      "url": "https://katewoo.com/about.html"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "懷孕應該增重多少？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "取決於孕前 BMI。按 IOM 2009 指引，單胎懷孕：孕前過輕（BMI 低於 18.5）建議增 12.5 至 18 公斤；正常（18.5 至 24.9）11.5 至 16 公斤；超重（25 至 29.9）7 至 11.5 公斤；肥胖（30 或以上）5 至 9 公斤。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "雙胞胎的增重建議一樣嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不一樣，而且屬暫定建議。孕前體重正常的雙胎建議增 17 至 25 公斤，超重 14 至 23 公斤，肥胖 11 至 19 公斤；孕前過輕的雙胎未有足夠數據訂出範圍。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "第一孕期沒有增重甚至下降正常嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "常見。第一孕期一般只增 0.5 至 2 公斤，因孕吐輕微下降亦不罕見。但若體重比孕前下跌超過 5%，或無法進食飲水，應該求醫。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "增重過多可以在孕期減重嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不建議。孕期減重並不安全，合理的目標是放慢增重速度：注意飲品的糖分、飯後散步，並確認妊娠糖尿測試已安排。"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<script src="../shared-nav.js"></script>
+<script src="tools.js"></script>
+<script src="weight.js"></script>
+<script src="../analytics.js" defer></script>
+</body>
+</html>

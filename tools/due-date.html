@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>預產期計算器｜末次經期、IVF 植入日、超聲波推算｜胡佩珊中醫師</title>
+<meta name="description" content="免費預產期計算器：可用末次月經、受孕日、IVF 胚胎植入日或超聲波報告推算預產期與現時孕週，並列出香港產檢時間表。香港註冊中醫師胡佩珊。">
+<link rel="canonical" href="https://katewoo.com/tools/due-date.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_HK">
+<meta property="og:site_name" content="胡佩珊中醫師">
+<meta property="og:url" content="https://katewoo.com/tools/due-date.html">
+<meta property="og:title" content="預產期計算器｜支援 IVF 植入日與超聲波推算">
+<meta property="og:description" content="輸入日期即算出預產期、現時孕週，並附香港產檢時間表。">
+<meta property="og:image" content="https://katewoo.com/og-image.png?v=20260809-light">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tools.css">
+<script src="../i18n.js"></script>
+</head>
+<body>
+
+<nav class="nav"></nav>
+
+<header class="tk-hero">
+  <div class="tk-wrap tk-wrap--narrow">
+    <nav class="tk-crumb" aria-label="麵包屑" style="padding-top:0;margin-bottom:var(--tk-4)">
+      <a href="../index.html">首頁</a> ／ <a href="index.html">實用小工具</a> ／ <span>預產期計算器</span>
+    </nav>
+    <p class="tk-eyebrow">懷孕與產後</p>
+    <h1>預產期計算器</h1>
+    <p class="tk-lede">輸入末次經期、受孕日、IVF 植入日或超聲波報告，算出預產期與現時孕週，並列出香港產檢每一項的日期。</p>
+  </div>
+</header>
+
+<main class="tk-wrap tk-wrap--narrow">
+
+  <form class="tk-panel" id="eddForm" style="margin-top:var(--tk-4)" novalidate>
+    <div class="tk-field">
+      <span class="tk-label" id="methodLabel">你手上有哪個日期？</span>
+      <div class="tk-seg" id="methodSeg" role="radiogroup" aria-labelledby="methodLabel">
+        <button type="button" role="radio" data-method="lmp" aria-checked="true">末次經期</button>
+        <button type="button" role="radio" data-method="conception" aria-checked="false">受孕日</button>
+        <button type="button" role="radio" data-method="ivf" aria-checked="false">IVF 植入</button>
+        <button type="button" role="radio" data-method="scan" aria-checked="false">超聲波</button>
+      </div>
+    </div>
+
+    <label class="tk-field" data-when="lmp">
+      <span class="tk-label">末次月經第一天</span>
+      <input class="tk-input" type="date" name="lmp">
+      <span class="tk-hint">是出血第一天，不是結束那天。</span>
+    </label>
+
+    <label class="tk-field" data-when="lmp">
+      <span class="tk-label">平均週期長度</span>
+      <input class="tk-input" type="number" name="cycle" value="28" min="20" max="45" step="1" inputmode="numeric">
+      <span class="tk-hint">由這次經期第一天，數到下次經期第一天的天數。不確定就留 28。</span>
+    </label>
+
+    <label class="tk-field" data-when="conception" hidden>
+      <span class="tk-label">受孕日或排卵日</span>
+      <input class="tk-input" type="date" name="conception" disabled>
+      <span class="tk-hint">排卵試紙轉強陽的翌日，或體溫升高那天。</span>
+    </label>
+
+    <label class="tk-field" data-when="ivf" hidden>
+      <span class="tk-label">胚胎植入日</span>
+      <input class="tk-input" type="date" name="transfer" disabled>
+    </label>
+
+    <label class="tk-field" data-when="ivf" hidden>
+      <span class="tk-label">植入時的胚胎日數</span>
+      <select class="tk-select" name="embryo" disabled>
+        <option value="5">第 5 天（囊胚 / Day 5）</option>
+        <option value="3">第 3 天（卵裂期 / Day 3）</option>
+        <option value="6">第 6 天（Day 6 囊胚）</option>
+      </select>
+      <span class="tk-hint">寫在你的植入報告上，不確定就問診所。</span>
+    </label>
+
+    <label class="tk-field" data-when="scan" hidden>
+      <span class="tk-label">超聲波檢查日期</span>
+      <input class="tk-input" type="date" name="scanDate" disabled>
+    </label>
+
+    <div class="tk-field" data-when="scan" hidden>
+      <span class="tk-label">報告上的孕週</span>
+      <div class="tk-row">
+        <label>
+          <input class="tk-input" type="number" name="scanWeeks" min="4" max="42" step="1" placeholder="週數" inputmode="numeric" disabled>
+        </label>
+        <label>
+          <input class="tk-input" type="number" name="scanDays" min="0" max="6" step="1" placeholder="天數" inputmode="numeric" disabled>
+        </label>
+      </div>
+      <span class="tk-hint">例如報告寫 GA 12w3d，就填 12 和 3。</span>
+    </div>
+
+    <div class="tk-actions">
+      <button class="tk-btn" type="submit">計算預產期</button>
+      <button class="tk-btn tk-btn--ghost" type="reset">清除</button>
+    </div>
+    <p class="tk-error" id="eddError" role="alert" hidden></p>
+  </form>
+
+  <section class="tk-result" id="eddResult" hidden aria-live="polite">
+
+    <div class="tk-panel">
+      <div class="tk-headline">
+        <p class="tk-eyebrow">預產期</p>
+        <p class="tk-date"><span id="eddDate">—</span><small id="eddWeekday"></small></p>
+        <p class="tk-now">今日 <b id="gaNow">—</b> <span id="gaPhase"></span></p>
+      </div>
+
+      <div class="tk-ruler" id="eddRuler">
+        <div class="tk-ruler-stage">
+          <div class="tk-ruler-track">
+            <div class="tk-ruler-band tk-ruler-band--t1" style="left:0;width:33.333%"></div>
+            <div class="tk-ruler-band tk-ruler-band--t2" style="left:33.333%;width:33.333%"></div>
+            <div class="tk-ruler-band tk-ruler-band--t3" style="left:66.666%;width:33.334%"></div>
+            <div class="tk-ruler-ticks"></div>
+          </div>
+          <div class="tk-ruler-edd" style="left:95.238%"></div>
+          <div class="tk-ruler-mark" style="left:0"></div>
+        </div>
+        <div class="tk-ruler-phases">
+          <span data-phase="1"><b>第一孕期</b>0–13 週</span>
+          <span data-phase="2"><b>第二孕期</b>14–27 週</span>
+          <span data-phase="3"><b>第三孕期</b>28 週起</span>
+        </div>
+        <div class="tk-ruler-legend">
+          <span><i class="tk-swatch" style="background:#6B5540;border-color:#6B5540"></i>今日</span>
+          <span><i class="tk-swatch" style="background:transparent;border:0;border-left:2px dashed #A5713B;width:2px;border-radius:0"></i>預產期（40 週）</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tk-panel">
+      <h2>香港產檢時間表</h2>
+      <p class="tk-sub">按你的預產期排出。公立與私家醫院安排略有差異，實際以你的產科診所為準。</p>
+      <ul class="tk-sched" id="eddSchedule"></ul>
+    </div>
+
+    <div class="tk-panel">
+      <h2 id="tcmTitle">這個階段的中醫調理</h2>
+      <p class="tk-sub" id="tcmSub"></p>
+      <div class="tk-reads" id="tcmReads"></div>
+    </div>
+
+  </section>
+
+  <p class="tk-note">
+    預產期是一個估算，只有約 4% 的寶寶在當天出生，37 至 42 週之間出生都屬正常範圍。若超聲波推算與經期推算相差超過 5 至 7 天，產科一般會以較早期的超聲波為準——請以你的產科醫生的判斷為準。<br>
+    本工具僅供健康教育參考，不構成醫療建議，亦不能取代註冊醫師或中醫師的診斷與治療。撰文及覆核：胡佩珊中醫師（香港中醫藥管理委員會註冊中醫師，註冊編號：008823）。
+  </p>
+
+</main>
+
+<footer class="site-footer">
+  <div class="tk-wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>胡佩珊中醫師</h4>
+        <p>以中醫智慧與身心同治的理念，陪伴女性每個生命階段。</p>
+      </div>
+      <div>
+        <h4>快速前往</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">實用小工具</a></li>
+          <li><a href="../services/pregnancy.html">孕期及產後調理</a></li>
+          <li><a href="../constitution.html">中醫體質問卷</a></li>
+          <li><a href="../women-health-questionnaire.html">女性健康評估</a></li>
+          <li><a href="../articles.html">健康知識庫</a></li>
+          <li><a href="../about.html">關於醫師</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>聯絡方式</h4>
+        <ul class="footer-links">
+          <li><a href="https://wa.me/85298152863" target="_blank" rel="noopener">WhatsApp +852 9815 2863</a></li>
+          <li><a href="https://www.instagram.com/woopuisan.ec" target="_blank" rel="noopener">Instagram @woopuisan.ec</a></li>
+          <li><a href="mailto:woopuisan.ec@gmail.com">woopuisan.ec@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-disclaimer">
+      本網站所有內容與線上工具僅供健康教育參考，不構成醫療建議，亦不能取代註冊醫師或中醫師的診斷與治療。若您出現急性或嚴重症狀，請立即求醫。<br>
+      © 2026 胡佩珊中醫師 · 香港中醫藥管理委員會註冊中醫師（008823） · <a href="../privacy.html">私隱政策</a>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "WebApplication",
+        "MedicalWebPage"
+      ],
+      "@id": "https://katewoo.com/tools/due-date.html",
+      "name": "預產期計算器",
+      "description": "以末次月經、受孕日、IVF 胚胎植入日或超聲波報告推算預產期與現時孕週，並列出香港產檢時間表。",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "需要啟用 JavaScript",
+      "inLanguage": "zh-Hant-HK",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "HKD"
+      },
+      "author": {
+        "@id": "https://katewoo.com/#person"
+      },
+      "reviewedBy": {
+        "@id": "https://katewoo.com/#person"
+      },
+      "lastReviewed": "2026-09-06",
+      "audience": {
+        "@type": "Patient"
+      },
+      "about": {
+        "@type": "MedicalCondition",
+        "name": "妊娠"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "首頁",
+          "item": "https://katewoo.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "實用小工具",
+          "item": "https://katewoo.com/tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "預產期計算器",
+          "item": "https://katewoo.com/tools/due-date.html"
+        }
+      ]
+    },
+    {
+      "@type": "Physician",
+      "@id": "https://katewoo.com/#person",
+      "name": "胡佩珊中醫師",
+      "alternateName": "Kate Woo",
+      "medicalSpecialty": "Obstetric",
+      "identifier": "香港中醫藥管理委員會註冊中醫師 008823",
+      "url": "https://katewoo.com/about.html"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "預產期是怎樣計出來的？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "由末次月經第一天起計 280 天（40 週）。若週期不是 28 天，會按週期長度調整；用受孕日計算則是加 266 天。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "IVF 植入日可以計預產期嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可以，而且比經期推算更準。第 5 天囊胚植入是植入日加 261 天，第 3 天胚胎是加 263 天。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "超聲波推算與經期推算不一樣，該信哪個？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "若相差超過 5 至 7 天，產科一般會以較早期的超聲波為準，因為早期胚胎大小的個體差異最小。實際以你的產科醫生判斷為準。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "一定會在預產期當天生嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不會。只有約 4% 的寶寶在預產期當天出生，37 至 42 週之間出生都屬正常範圍。"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<script src="../shared-nav.js"></script>
+<script src="tools.js"></script>
+<script src="due-date.js"></script>
+<script src="../analytics.js" defer></script>
+</body>
+</html>
