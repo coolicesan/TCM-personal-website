@@ -619,6 +619,7 @@
   .answer-table > summary .at-title::after{
     content:'（逐項核對）'; font-weight:400; color:var(--ink-faint); font-size:11px;
   }
+  body[data-lang="en"] .answer-table > summary .at-title::after{content:' (item by item)';}
 
   /* ── 行動清單 ──────────────────────────────────────────────
      建議本來散在八張卡裡，收起卡片就更難一次看完。抽出來排在最前面，
@@ -655,6 +656,8 @@
     color:var(--ink-faint); margin-bottom:1px;
   }
   .al-item .en{display:block; margin-top:2px;}
+  /* 文章本身只有中文版，英文模式要先講清楚，不要點開才發現 */
+  .al-zhnote{font-style:italic; font-weight:400; color:var(--ink-faint);}
 
   @media (prefers-reduced-motion: reduce){
     .disc{transition:none;}
@@ -2266,6 +2269,19 @@ const DOMAIN_META = {
    an articles/ slug for flags that map to an already-published article. */
 /* Turns a question's full wording into a short noun phrase usable in a summary
    sentence — "經痛是否影響日常生活或需要請假" -> "經痛影響日常生活". */
+/* 英文版的同一件事：題目文字太長就截短，讓總覽句子裡的清單讀得順。 */
+function conciseFindingEn(qEn){
+  let s = String(qEn||'')
+    .replace(/\([^)]*\)/g, '')
+    .replace(/^(Have you|Do you|Are you|Is your|Any)\s+/i, '')
+    .replace(/[?？]/g, '')
+    .trim();
+  if(!s) return '';
+  s = s.charAt(0).toLowerCase() + s.slice(1);
+  if(s.length > 34) s = s.slice(0, 33) + '…';
+  return s;
+}
+
 function conciseFinding(qZh){
   let s = String(qZh||'')
     .replace(/[（(][^）)]*[）)]/g, '')   // drop parentheticals
@@ -2280,14 +2296,14 @@ function conciseFinding(qZh){
 function computeDomainFlags(){
   const domains = {};
   const entryMap = new Map();
-  function add(defaultDomain, flag, tagZh, tagEn, qZh){
+  function add(defaultDomain, flag, tagZh, tagEn, qZh, qEn){
     if(!flag) return;
     const dId = flag.domain || defaultDomain;
     if(!domains[dId]) domains[dId] = {urgent:[], screen:[], tcm:[]};
     const key = dId+'|'+flag.level+'|'+flag.key;
     let entry = entryMap.get(key);
     if(!entry){
-      entry = {level:flag.level, key:flag.key, zh:flag.zh, en:flag.en, article:flag.article||null, tags:[], findings:[]};
+      entry = {level:flag.level, key:flag.key, zh:flag.zh, en:flag.en, article:flag.article||null, tags:[], findings:[], findingsEn:[]};
       entryMap.set(key, entry);
       domains[dId][flag.level].push(entry);
     }
@@ -2296,15 +2312,17 @@ function computeDomainFlags(){
        ("經量、經痛程度") instead of just listing domain names. */
     const f = conciseFinding(qZh);
     if(f && !entry.findings.includes(f)) entry.findings.push(f);
+    const fEn = conciseFindingEn(qEn);
+    if(fEn && !entry.findingsEn.includes(fEn)) entry.findingsEn.push(fEn);
   }
   SECTIONS.forEach(sec=>sec.questions.forEach(q=>{
     const val = state.answers[q.id];
     if(val==null) return;
     if(q.type==='single'){
       const o = q.options.find(o=>o.value===val);
-      if(o) add(sec.id, o.flag, o.zh, o.en, q.shortLabel || q.zh);
+      if(o) add(sec.id, o.flag, o.zh, o.en, q.shortLabel || q.zh, q.shortLabelEn || q.en);
     } else if(q.type==='multi'){
-      (val||[]).forEach(v=>{ const o=q.options.find(o=>o.value===v); if(o) add(sec.id, o.flag, o.zh, o.en, q.shortLabel || q.zh); });
+      (val||[]).forEach(v=>{ const o=q.options.find(o=>o.value===v); if(o) add(sec.id, o.flag, o.zh, o.en, q.shortLabel || q.zh, q.shortLabelEn || q.en); });
     }
   }));
   return domains;
@@ -2334,43 +2352,52 @@ const STATUS_BADGE = {
 const OVERVIEW_COPY = {
   urgent:{
     headline:'有 {urgentCount} 項要請您優先確認',
+    headlineEn:'{urgentCount} things to check on first',
     body:'整體來說，大部分面向都是可以掌握的。其中<b>{urgentList}</b>建議盡快向醫師確認——這不代表一定有問題，但及早釐清會讓您更安心。{extra}下面每張卡片都有說明原因與該怎麼做。',
     extraIf:'screenCount',
     extra:'另外{screenList}也建議安排相關檢查。',
-    bodyEn:"Overall, most areas look manageable. A few items are worth confirming with a doctor promptly — this doesn't mean something is wrong, but getting clarity early is the better choice. Each card below explains why and what to do.",
+    extraEn:'{screenList} are also worth booking the relevant checks for.',
+    bodyEn:"Most of the picture is manageable. <b>{urgentList}</b> are worth confirming with a doctor soon — it doesn't mean something is wrong, but knowing early is easier than wondering. {extra}Each card below explains why, and what to do.",
   },
   screen_tcm:{
     headline:'整體不錯，有 {screenCount} 項建議安排檢查',
+    headlineEn:'Looking good, with {screenCount} things worth checking',
     body:'您目前的整體狀況良好。<b>{screenList}</b>建議安排相關檢查，這屬於正常的預防醫學步驟，不用擔心。另外{tcmList}屬於可以透過日常調整改善的部分，下面有具體做法。',
-    bodyEn:'Your overall picture looks good. Some items are worth scheduling routine checks for — normal preventive care, nothing alarming. Others can be improved through everyday adjustments; specifics are below.',
+    bodyEn:'Your overall picture looks good. <b>{screenList}</b> are worth booking the relevant checks for — routine preventive care, nothing alarming. {tcmList} can improve with everyday adjustments; the specifics are below.',
   },
   screen:{
     headline:'整體良好，有 {screenCount} 項建議安排檢查',
+    headlineEn:'Looking good, with {screenCount} things worth checking',
     body:'您的整體狀況看起來不錯。<b>{screenList}</b>建議趁這個機會安排相關檢查——這是女性健康維護的一環，出現這些建議並不代表哪裡有問題。',
-    bodyEn:"Your overall picture looks good. A few items are worth scheduling the relevant routine checks for — a normal part of women's preventive care, and not a sign that anything is wrong.",
+    bodyEn:"Your overall picture looks good. <b>{screenList}</b> are worth booking the relevant checks for — a normal part of women's preventive care, not a sign that anything is wrong.",
   },
   tcm:{
     headline:'整體狀況良好，有幾個地方可以改善',
+    headlineEn:'In good shape, with a few things you could ease',
     body:'整體來說，您的身體狀況是好的。<b>{tcmList}</b>這些部分目前不需要特別檢查，但可以透過日常調整讓自己更舒適，下面列出了具體做法。',
-    bodyEn:"Overall, your health is in good shape. A few things don't need investigation, but could feel better with everyday adjustments — specifics are listed below.",
+    bodyEn:'Overall you are in good shape. <b>{tcmList}</b> need no investigation, but could feel better with everyday adjustments — the specifics are listed below.',
   },
   clear:{
     headline:'您目前的填答都在正常範圍內',
+    headlineEn:'Everything you answered is within the usual range',
     body:'問卷結果顯示，您在這次評估涵蓋的各個面向都沒有出現需要留意的徵象。繼續保持目前的生活習慣、按時程做定期篩查，就是最好的健康投資。下面仍列出各項數值供您對照。',
-    bodyEn:'Your answers show no items needing attention across the areas covered. Keeping up your current habits and staying on schedule with routine screening is the best investment. The detailed values are still listed below for reference.',
+    bodyEn:'Nothing in the areas covered needs attention. Keeping the habits you have and staying on schedule with routine screening is the best investment you can make. The details are still listed below for reference.',
   },
   countLine:{
     lead:'共 {totalCount} 項需要留意',
+    leadEn:'{totalCount} items to keep an eye on',
     tcmClause:'、{tcmCount} 項可日常調整',
+    tcmClauseEn:', {tcmCount} that everyday adjustments can help',
     tail:'，其餘在正常範圍內。',
+    tailEn:'. Everything else is within the usual range.',
   },
 };
 
 const STATUS_LABEL_TEXT = {
-  urgent:'⚑ 需優先處理',
-  screen:'· 建議安排檢查',
-  tcm:'· 可調理討論',
-  clear:'✓ 大致正常',
+  urgent:bi('⚑ 需優先處理','⚑ Needs prompt attention'),
+  screen:bi('· 建議安排檢查','· Worth getting checked'),
+  tcm:bi('· 可調理討論','· Can be discussed with a TCM practitioner'),
+  clear:bi('✓ 大致正常','✓ Looks fine'),
 };
 
 /* ============================================================
@@ -2412,9 +2439,15 @@ function renderCrisisBanner(){
     </li>`).join('');
   return `<div class="crisis-band" role="note">
     <h3><span class="dot" aria-hidden="true"></span><span class="zh">先照顧好自己</span><span class="en">Support is available right now</span></h3>
-    <p class="crisis-lead">您在情緒相關的題目中，填答了比較需要留意的狀況。這樣的感受並不少見，也不代表您很脆弱——現在的您，或許需要多一點支持。以下是可以立即聯絡、免費且保密的求助熱線：</p>
+    <p class="crisis-lead">${bi(
+      '您在情緒相關的題目中，填答了比較需要留意的狀況。這樣的感受並不少見，也不代表您很脆弱——現在的您，或許需要多一點支持。以下是可以立即聯絡、免費且保密的求助熱線：',
+      'Some of your answers about mood are ones worth taking seriously. Feeling this way is far more common than people think, and it is not a sign of weakness — it may simply mean you could use more support right now. These lines are free, confidential, and open to you today:'
+    )}</p>
     <ul class="crisis-list">${items}</ul>
-    <p class="crisis-foot">如果您有傷害自己的念頭，或人身安全出現危險，請立即致電 <b>999</b> 或前往就近急症室。中醫調理可以是身心照護的一部分，但無法取代精神科或心理治療的專業評估與治療。</p>
+    <p class="crisis-foot">${bi(
+      '如果您有傷害自己的念頭，或人身安全出現危險，請立即致電 <b>999</b> 或前往就近急症室。中醫調理可以是身心照護的一部分，但無法取代精神科或心理治療的專業評估與治療。',
+      'If you are having thoughts of harming yourself, or your safety is at risk, call <b>999</b> now or go to the nearest emergency department. TCM care can be part of looking after your mind and body, but it cannot replace psychiatric or psychological assessment and treatment.'
+    )}</p>
   </div>`;
 }
 
@@ -2431,15 +2464,16 @@ function renderCrisisBanner(){
    'discharge', which keeps the plain domain-card layout. */
 const ANSWER_TABLES = {
   discharge: {
-    title:'白帶觀察小抄',
+    title:L('白帶觀察小抄','Your discharge at a glance'),
     rows:[
-      {qid:'discharge_amount',  label:'量',         ref:'排卵期前後正常增多'},
-      {qid:'discharge_color',   label:'顏色',       ref:'正常為透明或乳白色'},
-      {qid:'discharge_texture', label:'質地與氣味', ref:'正常為無味或淡腥味'},
-      {qid:'discharge_itch',    label:'搔癢或灼熱感', ref:'正常情況下不應出現'},
-      {qid:'discharge_timing',  label:'與週期的關係', ref:'隨排卵期或經期前後增多屬正常生理性'},
+      {qid:'discharge_amount',  label:L('量','Amount'),                  ref:L('排卵期前後正常增多','Normally increases around ovulation')},
+      {qid:'discharge_color',   label:L('顏色','Colour'),                ref:L('正常為透明或乳白色','Normally clear or milky white')},
+      {qid:'discharge_texture', label:L('質地與氣味','Texture and odour'), ref:L('正常為無味或淡腥味','Normally odourless or very faint')},
+      {qid:'discharge_itch',    label:L('搔癢或灼熱感','Itching or burning'), ref:L('正常情況下不應出現','Should not happen normally')},
+      {qid:'discharge_timing',  label:L('與週期的關係','Relation to your cycle'), ref:L('隨排卵期或經期前後增多屬正常生理性','Increasing around ovulation or your period is normal')},
     ],
-    note:'白帶量、顏色與氣味隨週期有正常變化，若合併搔癢、異味或顏色改變，建議安排婦科檢查。',
+    note:L('白帶量、顏色與氣味隨週期有正常變化，若合併搔癢、異味或顏色改變，建議安排婦科檢查。',
+            'Amount, colour and odour all shift normally across the cycle. Alongside itching, an unusual smell or a change in colour, get a gynaecological check.'),
   },
 };
 
@@ -2461,24 +2495,24 @@ function evalAnswerRow(row, answers){
 
 function answerDisplay(row, answers){
   const v = answers[row.qid];
-  if(v == null || v === '' || (Array.isArray(v) && !v.length)) return '未填答';
+  if(v == null || v === '' || (Array.isArray(v) && !v.length)) return bi('未填答','Not answered');
   if(row.fmt) return row.fmt(v);
   const q = findQuestion(row.qid);
   if(!q) return escapeHtml(String(v));
   if(q.type === 'multi'){
     return (v || []).map(val => {
       const o = (q.options || []).find(o => o.value === val);
-      return o ? o.zh : val;
+      return o ? bi(o.zh, o.en) : val;
     }).join('、');
   }
   const o = (q.options || []).find(o => o.value === v);
-  return o ? o.zh : escapeHtml(String(v));
+  return o ? bi(o.zh, o.en) : escapeHtml(String(v));
 }
 
 const AT_MARK = {
-  ok:   {cls:'at-ok',    text:'✓ 在範圍內'},
-  watch:{cls:'at-watch', text:'⚠ 值得留意'},
-  na:   {cls:'at-na',    text:'· 未填答'},
+  ok:   {cls:'at-ok',    text:bi('✓ 在範圍內','✓ In range')},
+  watch:{cls:'at-watch', text:bi('⚠ 值得留意','⚠ Worth noting')},
+  na:   {cls:'at-na',    text:bi('· 未填答','· Not answered')},
 };
 
 function renderAnswerTable(domainId){
@@ -2500,25 +2534,27 @@ function renderAnswerTable(domainId){
     if(st !== 'na'){ scored++; if(st === 'ok') okCount++; }
     const m = AT_MARK[st];
     return `<li class="at-row">
-      <span class="at-label">${r.label}</span>
+      <span class="at-label">${bi(r.label)}</span>
       <span class="at-mark ${m.cls}">${m.text}</span>
       <span class="at-value">${answerDisplay(r, answers)}</span>
-      <span class="at-ref">${r.ref}</span>
+      <span class="at-ref">${bi(r.ref)}</span>
     </li>`;
   }).join('');
 
   const counter = scored
-    ? `<span class="at-count">${okCount} / ${scored} 項在範圍內</span>`
+    ? `<span class="at-count">${okCount} / ${scored}${bi(' 項在範圍內',' in range')}</span>`
     : '';
 
-  return `<div class="answer-table">
-    <div class="at-head">
-      <p class="at-title">${cfg.title}</p>
+  /* 跟 renderValueTable 一樣收起來：逐項核對是想對答案時才看的東西。 */
+  return `<details class="answer-table">
+    <summary class="at-head">
+      <p class="at-title">${bi(cfg.title)}</p>
       ${counter}
-    </div>
+      <span class="disc" aria-hidden="true"></span>
+    </summary>
     <ul class="at-rows">${html}</ul>
-    ${cfg.note ? `<p class="at-note">${cfg.note}</p>` : ''}
-  </div>`;
+    ${cfg.note ? `<p class="at-note">${bi(cfg.note)}</p>` : ''}
+  </details>`;
 }
 
 /* Internal-only 0–100 score, used purely to set the meter's fill width —
@@ -2585,9 +2621,24 @@ function articleHref(slug){
    flag was collapsed from >1 selected option (e.g. family cancer history),
    since a single tag would just repeat the sentence. An article link shows
    only when that specific flag maps to an already-published article. */
+/* 報告裡每一句話都要有中英兩版，靠 body[data-lang] 決定顯示哪一種。
+   資料裡的字串就直接寫成 bi('中文','English')，渲染那邊不用再管語言。 */
+function bi(zh, en){
+  if(zh && typeof zh === 'object') return bi(zh.zh, zh.en);
+  return `<span class="zh">${zh}</span><span class="en">${en||zh}</span>`;
+}
+
+/* 表格的欄位名要拿來比對（例如找出「經痛程度」那一列），所以資料裡存成
+   {zh,en} 物件，畫出來的時候才交給 bi()。 */
+function L(zh, en){ return {zh:zh, en:en||zh}; }
+
 /* 摘要列只要那句話，不要 verdict 裡的 <b> 之類標記。 */
 function stripTags(html){
-  return String(html==null?'':html).replace(/<[^>]*>/g,'').replace(/\s+/g,' ').trim();
+  /* 只拿掉排版用的標記（<b> 之類），保留 bi() 的語言 span —— 摘要列同樣
+     要能跟著語言切換。 */
+  return String(html==null?'':html)
+    .replace(/<(?!\/?span)[^>]*>/g,'')
+    .replace(/\s+/g,' ').trim();
 }
 
 function renderFlagList(entries){
@@ -2621,7 +2672,7 @@ function renderActionChecklist(domainFlags, activeDomains){
   return `<div class="action-list">
     <div class="al-head">
       <h3><span class="zh">接下來可以做的事</span><span class="en">What to do next</span></h3>
-      <span class="al-count">${items.length} 項</span>
+      <span class="al-count">${items.length}${bi(' 項',' items')}</span>
     </div>
     <p class="al-lead"><span class="zh">${lead}</span><span class="en">${urgentCount
       ? `${urgentCount} of these are worth doing soon — they are listed first.`
@@ -2672,139 +2723,139 @@ function renderOrphanFlags(domainFlags, activeDomains){
    ============================================================ */
 const PREGNANCY_STAGES = {
   t1:{
-    label:'第一孕期 · 1–13 週',
+    label:L('第一孕期 · 1–13 週','First trimester · weeks 1–13'),
     common:[
-      '孕吐與噁心在 6–9 週最明顯，多數人 12–16 週後會緩解',
-      '明顯疲累是這個階段常見的主訴，身體正在建立胎盤',
-      '乳房脹痛、頻尿與嗅覺變得敏感都屬常見',
-      '情緒起伏較大，與賀爾蒙變化直接相關',
+      bi('孕吐與噁心在 6–9 週最明顯，多數人 12–16 週後會緩解','Nausea peaks around weeks 6–9 and eases after 12–16 weeks for most people'),
+      bi('明顯疲累是這個階段常見的主訴，身體正在建立胎盤','Deep tiredness is the common complaint here — your body is building a placenta'),
+      bi('乳房脹痛、頻尿與嗅覺變得敏感都屬常見','Tender breasts, needing the toilet more, and a sharper sense of smell are all usual'),
+      bi('情緒起伏較大，與賀爾蒙變化直接相關','Bigger mood swings, tied directly to the hormonal shift'),
     ],
     diet:[
-      '少量多餐、起床前吃點乾糧，對孕吐可能有幫助',
-      '避免生食、未經巴士德消毒的乳製品、高汞魚類(如大型深海魚)',
-      '每天補充 400–800 微克葉酸，至少持續到滿 12 週',
+      bi('少量多餐、起床前吃點乾糧，對孕吐可能有幫助','Small frequent meals, and something dry before you get up, may take the edge off nausea'),
+      bi('避免生食、未經巴士德消毒的乳製品、高汞魚類(如大型深海魚)','Avoid raw food, unpasteurised dairy, and high-mercury fish (large deep-sea species)'),
+      bi('每天補充 400–800 微克葉酸，至少持續到滿 12 週','400–800 mcg of folic acid daily, at least through week 12'),
     ],
     track:[
-      '確認第一次產檢與唐氏綜合症篩查的時程',
-      '若孕吐嚴重到無法進食，記錄嘔吐次數與體重變化',
+      bi('確認第一次產檢與唐氏綜合症篩查的時程','Confirm when your first antenatal visit and Down syndrome screening fall'),
+      bi('若孕吐嚴重到無法進食，記錄嘔吐次數與體重變化','If nausea stops you eating, note how often you vomit and how your weight moves'),
     ],
   },
   t2:{
-    label:'第二孕期 · 14–27 週',
+    label:L('第二孕期 · 14–27 週','Second trimester · weeks 14–27'),
     common:[
-      '多數人在這個階段體力回升，是孕期中相對舒服的時期',
-      '18–22 週左右開始感覺到胎動',
-      '腰背痠痛、輕微水腫漸漸開始出現',
-      '牙齦容易出血，是正常的孕期變化',
+      bi('多數人在這個階段體力回升，是孕期中相對舒服的時期','Energy usually returns here — the most comfortable stretch of pregnancy for most'),
+      bi('18–22 週左右開始感覺到胎動','First movements are usually felt around weeks 18–22'),
+      bi('腰背痠痛、輕微水腫漸漸開始出現','Back ache and mild swelling start to appear'),
+      bi('牙齦容易出血，是正常的孕期變化','Gums bleed more easily — a normal change in pregnancy'),
     ],
     diet:[
-      '均衡攝取蛋白質與鐵質，維持體力',
-      '避免生食與酒精',
+      bi('均衡攝取蛋白質與鐵質，維持體力','Enough protein and iron to keep your energy up'),
+      bi('避免生食與酒精','No raw food, no alcohol'),
     ],
     track:[
-      '預約 20 週左右的高層次超音波',
-      '安排 24–28 週妊娠糖尿病篩查',
-      '開始留意胎動出現的規律時間',
+      bi('預約 20 週左右的高層次超音波','Book the anomaly scan around week 20'),
+      bi('安排 24–28 週妊娠糖尿病篩查','Arrange gestational diabetes screening at weeks 24–28'),
+      bi('開始留意胎動出現的規律時間','Start noticing when the baby tends to move'),
     ],
   },
   t3:{
-    label:'第三孕期 · 28 週以後',
+    label:L('第三孕期 · 28 週以後','Third trimester · week 28 onwards'),
     common:[
-      '水腫、腰痠、睡不好、頻尿在這個階段幾乎人人都有',
-      '不規律、不痛或輕微的假性宮縮偶爾出現，屬正常',
-      '胃食道逆流、便秘常見，多為子宮壓迫所致',
-      '越接近預產期越感到緊張，不代表哪裡不對',
+      bi('水腫、腰痠、睡不好、頻尿在這個階段幾乎人人都有','Swelling, back ache, broken sleep and frequent urination — almost everyone, at this stage'),
+      bi('不規律、不痛或輕微的假性宮縮偶爾出現，屬正常','Occasional irregular, painless Braxton Hicks contractions are normal'),
+      bi('胃食道逆流、便秘常見，多為子宮壓迫所致','Reflux and constipation are common, mostly from the uterus pressing upward'),
+      bi('越接近預產期越感到緊張，不代表哪裡不對','Feeling more anxious as the date nears does not mean anything is wrong'),
     ],
     diet:[
-      '少量多餐減輕胃食道逆流',
-      '維持足夠水分與纖維，預防便秘',
+      bi('少量多餐減輕胃食道逆流','Small frequent meals ease the reflux'),
+      bi('維持足夠水分與纖維，預防便秘','Enough fluid and fibre keeps constipation away'),
     ],
     track:[
-      '每天固定時段數胎動，建立自己的基準值',
-      '安排 35–37 週 B 型鏈球菌(GBS)篩查',
-      '準備待產包，確認到醫院的路線',
-      '與醫師或助產士討論生產計畫與止痛選項',
+      bi('每天固定時段數胎動，建立自己的基準值','Count movements at the same time each day so you know your own baseline'),
+      bi('安排 35–37 週 B 型鏈球菌(GBS)篩查','Arrange Group B Strep screening at weeks 35–37'),
+      bi('準備待產包，確認到醫院的路線','Pack your hospital bag and work out the route'),
+      bi('與醫師或助產士討論生產計畫與止痛選項','Talk through your birth plan and pain-relief options with your doctor or midwife'),
     ],
   },
   unsure:{
-    label:'孕期照護重點',
+    label:L('孕期照護重點','Pregnancy care essentials'),
     common:[
-      '孕期的不適因人而異，也會隨週數而改變',
-      '疲累、噁心、腰痠、睡眠變差都屬常見範圍',
+      bi('孕期的不適因人而異，也會隨週數而改變','What is uncomfortable differs from person to person, and shifts as the weeks pass'),
+      bi('疲累、噁心、腰痠、睡眠變差都屬常見範圍','Tiredness, nausea, back ache and poorer sleep are all within the usual range'),
     ],
     diet:[
-      '開始補充葉酸，並與醫師確認其他營養需求',
+      bi('開始補充葉酸，並與醫師確認其他營養需求','Start folic acid, and check your other nutritional needs with your doctor'),
     ],
     track:[
-      '確認自己的懷孕週數與預產期，依週數安排產檢項目',
+      bi('確認自己的懷孕週數與預產期，依週數安排產檢項目','Confirm how many weeks along you are and your due date, then plan the checks around that'),
     ],
   },
 };
 
 const PREGNANCY_RED_FLAGS = [
-  '陰道出血，或流出清澈液體(可能是破水)',
-  '胎動明顯減少或停止(28 週後尤其重要)',
-  '突然的劇烈頭痛，合併視力模糊、右上腹痛或明顯水腫',
-  '未足月出現規律宮縮或持續腹痛',
-  '發燒超過 38°C',
-  '嚴重嘔吐，超過 24 小時無法進食或喝水',
+  bi('陰道出血，或流出清澈液體(可能是破水)','Vaginal bleeding, or clear fluid leaking (waters may have broken)'),
+  bi('胎動明顯減少或停止(28 週後尤其重要)','Movements clearly reduced or stopped (especially after week 28)'),
+  bi('突然的劇烈頭痛，合併視力模糊、右上腹痛或明顯水腫','Sudden severe headache with blurred vision, upper-right abdominal pain, or marked swelling'),
+  bi('未足月出現規律宮縮或持續腹痛','Regular contractions or constant abdominal pain before term'),
+  bi('發燒超過 38°C','Fever above 38°C'),
+  bi('嚴重嘔吐，超過 24 小時無法進食或喝水','Severe vomiting — unable to eat or drink for over 24 hours'),
 ];
 
 const POSTPARTUM_STAGES = {
   '0to4w':{
-    label:'產後 0–4 週 · 坐月子期間',
+    label:L('產後 0–4 週 · 坐月子期間','0–4 weeks postpartum · the confinement month'),
     timeline:[
-      {k:'惡露', v:'鮮紅色(約 3–4 天)→ 轉為褐紅色(約 2 週)→ 淡黃或白色，量逐漸減少。'},
-      {k:'子宮', v:'產後宮縮在餵奶或按壓時會有痛感，屬正常。子宮約 6 週後大致回到骨盆腔。'},
-      {k:'體力', v:'這是整段恢復期最耗體力的階段，睡眠碎片化的影響往往大於生產本身。'},
-      {k:'乳汁', v:'產後 2–5 天開始漲奶，是泌乳建立期。頻繁哺乳有助任何餵養方式的建立。'},
-      {k:'情緒', v:'產後 3–5 天是情緒低落(baby blues)的高峰，多數人都經歷過，通常兩週內緩解。'},
+      {k:bi('惡露','Lochia'), v:bi('鮮紅色(約 3–4 天)→ 轉為褐紅色(約 2 週)→ 淡黃或白色，量逐漸減少。','Bright red for 3–4 days, browner by about 2 weeks, then pale yellow or white, tapering off.')},
+      {k:bi('子宮','Uterus'), v:bi('產後宮縮在餵奶或按壓時會有痛感，屬正常。子宮約 6 週後大致回到骨盆腔。','After-pains during feeding or when pressed are normal. The uterus is back in the pelvis by around 6 weeks.')},
+      {k:bi('體力','Energy'), v:bi('這是整段恢復期最耗體力的階段，睡眠碎片化的影響往往大於生產本身。','The most draining stretch of the whole recovery — broken sleep takes more out of you than the birth did.')},
+      {k:bi('乳汁','Milk'), v:bi('產後 2–5 天開始漲奶，是泌乳建立期。頻繁哺乳有助任何餵養方式的建立。','Milk comes in around days 2–5 as supply establishes. Frequent feeding helps, whichever way you feed.')},
+      {k:bi('情緒','Mood'), v:bi('產後 3–5 天是情緒低落(baby blues)的高峰，多數人都經歷過，通常兩週內緩解。','The baby blues peak around days 3–5. Most people go through it, and it usually lifts within two weeks.')},
     ],
-    watch:'如果情緒低落持續超過兩週、或已經影響日常生活，這已經不只是 baby blues，值得安排正式評估。',
+    watch:bi('如果情緒低落持續超過兩週、或已經影響日常生活，這已經不只是 baby blues，值得安排正式評估。','Low mood lasting beyond two weeks, or affecting daily life, is no longer the baby blues. It deserves a formal assessment.'),
   },
   '1to3m':{
-    label:'產後 1–3 個月',
+    label:L('產後 1–3 個月','1–3 months postpartum'),
     timeline:[
-      {k:'惡露', v:'多數人在 4–6 週結束。若此時仍有出血，建議回診確認。'},
-      {k:'體力', v:'逐步回升，但偶爾仍覺得恢復速度不如預期，屬常見。'},
-      {k:'掉髮', v:'通常還沒開始，掉髮的高峰在後面幾個月。'},
-      {k:'乳汁', v:'供需趨於穩定，但塞奶與乳腺炎的風險在這個階段仍然存在。'},
-      {k:'月經', v:'未哺乳者可能 6–8 週後恢復；純哺乳者可能數月後才恢復，都屬正常。'},
+      {k:bi('惡露','Lochia'), v:bi('多數人在 4–6 週結束。若此時仍有出血，建議回診確認。','Over by 4–6 weeks for most. Still bleeding now is worth a check.')},
+      {k:bi('體力','Energy'), v:bi('逐步回升，但偶爾仍覺得恢復速度不如預期，屬常見。','Coming back gradually — feeling it is slower than expected is common.')},
+      {k:bi('掉髮','Hair loss'), v:bi('通常還沒開始，掉髮的高峰在後面幾個月。','Usually has not started yet; the peak comes a few months later.')},
+      {k:bi('乳汁','Milk'), v:bi('供需趨於穩定，但塞奶與乳腺炎的風險在這個階段仍然存在。','Supply and demand are settling, but blocked ducts and mastitis are still possible.')},
+      {k:bi('月經','Periods'), v:bi('未哺乳者可能 6–8 週後恢復；純哺乳者可能數月後才恢復，都屬正常。','If not breastfeeding, often back by 6–8 weeks; exclusively breastfeeding, it can take months. Both are normal.')},
     ],
-    watch:'產後 6 週的檢查如果還沒做，請儘快安排，確認子宮、傷口與骨盆底的恢復狀況。',
+    watch:bi('產後 6 週的檢查如果還沒做，請儘快安排，確認子宮、傷口與骨盆底的恢復狀況。','If you have not had the 6-week check, book it — it covers the uterus, any wounds, and your pelvic floor.'),
   },
   '3to6m':{
-    label:'產後 3–6 個月',
+    label:L('產後 3–6 個月','3–6 months postpartum'),
     timeline:[
-      {k:'掉髮', v:'這是產後掉髮的高峰期，通常產後 2–4 個月開始，4 個月左右最明顯。'},
-      {k:'體力', v:'多數人接近孕前水準；若仍明顯疲累，值得檢查甲狀腺功能與血色素。'},
-      {k:'乳汁', v:'寶寶開始添加副食品後，奶量自然會調整，不代表退奶。'},
-      {k:'情緒', v:'產後情緒問題可以在這個階段才浮現，不只發生在頭幾週。'},
-      {k:'骨盆底', v:'漏尿若成為困擾，不需要當作正常現象忍耐，建議安排骨盆底肌評估。'},
+      {k:bi('掉髮','Hair loss'), v:bi('這是產後掉髮的高峰期，通常產後 2–4 個月開始，4 個月左右最明顯。','The peak of postpartum shedding — usually starting at 2–4 months and heaviest around month 4.')},
+      {k:bi('體力','Energy'), v:bi('多數人接近孕前水準；若仍明顯疲累，值得檢查甲狀腺功能與血色素。','Close to pre-pregnancy levels for most. Still clearly exhausted? Check thyroid function and haemoglobin.')},
+      {k:bi('乳汁','Milk'), v:bi('寶寶開始添加副食品後，奶量自然會調整，不代表退奶。','Supply adjusts once solids start. That is not your milk going.')},
+      {k:bi('情緒','Mood'), v:bi('產後情緒問題可以在這個階段才浮現，不只發生在頭幾週。','Postnatal mood problems can surface now, not only in the first few weeks.')},
+      {k:bi('骨盆底','Pelvic floor'), v:bi('漏尿若成為困擾，不需要當作正常現象忍耐，建議安排骨盆底肌評估。','Leaking is not something to accept as normal. Ask for a pelvic-floor assessment.')},
     ],
-    watch:'產後甲狀腺炎好發於產後 3–6 個月，症狀(疲勞、情緒、心跳、體重變化)容易被當成單純疲累，若持續不改善，值得排一次甲狀腺功能檢查。',
+    watch:bi('產後甲狀腺炎好發於產後 3–6 個月，症狀(疲勞、情緒、心跳、體重變化)容易被當成單純疲累，若持續不改善，值得排一次甲狀腺功能檢查。','Postpartum thyroiditis typically shows up at 3–6 months, and its signs — fatigue, mood, heart rate, weight — read as ordinary tiredness. If nothing improves, get thyroid function tested.'),
   },
   '6to12m':{
-    label:'產後 6–12 個月',
+    label:L('產後 6–12 個月','6–12 months postpartum'),
     timeline:[
-      {k:'掉髮', v:'多數人在寶寶一歲前後回復，髮量回復是漸進式，需要一點耐心。'},
-      {k:'月經', v:'多數人已恢復；仍有幾次週期不規律屬正常。'},
-      {k:'體力', v:'此時若仍感覺明顯疲累，不宜單純歸因於「還在恢復」。'},
-      {k:'骨盆底', v:'性交疼痛、漏尿、下墜感若仍然出現，都是可以治療的，不需要忍耐。'},
-      {k:'情緒', v:'產後一年內出現的情緒問題仍屬產後範圍，求助不嫌晚。'},
+      {k:bi('掉髮','Hair loss'), v:bi('多數人在寶寶一歲前後回復，髮量回復是漸進式，需要一點耐心。','Most see it back around the baby’s first birthday. Regrowth is gradual — it asks for patience.')},
+      {k:bi('月經','Periods'), v:bi('多數人已恢復；仍有幾次週期不規律屬正常。','Back for most people; a few irregular cycles along the way is normal.')},
+      {k:bi('體力','Energy'), v:bi('此時若仍感覺明顯疲累，不宜單純歸因於「還在恢復」。','Still clearly exhausted at this point should not be filed under "still recovering".')},
+      {k:bi('骨盆底','Pelvic floor'), v:bi('性交疼痛、漏尿、下墜感若仍然出現，都是可以治療的，不需要忍耐。','Pain during sex, leaking, or a dragging heaviness are all treatable. You do not have to live with them.')},
+      {k:bi('情緒','Mood'), v:bi('產後一年內出現的情緒問題仍屬產後範圍，求助不嫌晚。','Mood problems within the first year still count as postnatal. It is not too late to ask for help.')},
     ],
-    watch:'這個階段「一直好不起來」值得認真看待：貧血、甲狀腺、維生素 D、長期睡眠不足，都是常見卻容易被忽略的原因。',
+    watch:bi('這個階段「一直好不起來」值得認真看待：貧血、甲狀腺、維生素 D、長期睡眠不足，都是常見卻容易被忽略的原因。','"Never quite getting better" at this stage deserves to be taken seriously. Anaemia, thyroid, vitamin D and long-run sleep debt are common and easily missed.'),
   },
 };
 
 const POSTPARTUM_RED_FLAGS = [
-  '大量出血：一小時內浸透一片產褥墊，或排出大於雞蛋的血塊',
-  '發燒超過 38°C，合併惡露或傷口出現明顯異常',
-  '剖腹或會陰傷口出現紅腫、滲液、裂開或劇痛',
-  '突然的劇烈頭痛、視力改變或右上腹劇痛(產後子癲前症在產後數週內仍可能發生)',
-  '單側小腿紅腫脹痛、胸口痛或呼吸困難',
-  '乳房單側紅腫合併發燒(可能是乳腺炎)',
-  '有傷害自己或寶寶的念頭 —— 請立即致電 18111 或前往就近急症室',
+  bi('大量出血：一小時內浸透一片產褥墊，或排出大於雞蛋的血塊','Heavy bleeding: soaking a maternity pad within an hour, or clots bigger than an egg'),
+  bi('發燒超過 38°C，合併惡露或傷口出現明顯異常','Fever above 38°C with abnormal lochia or a wound that looks wrong'),
+  bi('剖腹或會陰傷口出現紅腫、滲液、裂開或劇痛','A caesarean or perineal wound that is red, oozing, opening, or severely painful'),
+  bi('突然的劇烈頭痛、視力改變或右上腹劇痛(產後子癲前症在產後數週內仍可能發生)','Sudden severe headache, vision changes or upper-right abdominal pain (postpartum pre-eclampsia can appear weeks after birth)'),
+  bi('單側小腿紅腫脹痛、胸口痛或呼吸困難','One calf red, swollen and painful, or chest pain or breathlessness'),
+  bi('乳房單側紅腫合併發燒(可能是乳腺炎)','One breast red and swollen with a fever (possible mastitis)'),
+  bi('有傷害自己或寶寶的念頭 —— 請立即致電 18111 或前往就近急症室','Thoughts of harming yourself or your baby — call 18111 now, or go to the nearest emergency department'),
 ];
 
 /* Suggests up to 4 already-published articles based on which answers
@@ -2844,41 +2895,40 @@ const POSTPARTUM_ARTICLE_RULES = [
    for the content admin — it can only edit strings it can address by a stable
    id. Keyed by question id, which never changes. */
 const ROW_REFS = {
-  cycle_freq:{ label:'週期天數', ref:'正常範圍 24–38 天' },
-  cycle_len:{  label:'經期長度', ref:'正常範圍 8 天以內' },
-  cycle_flow:{ label:'經量', ref:'正常：衛生用品約可維持 3–4 小時；量多：需 1–2 小時更換一次或有大血塊' },
-  cycle_pain:{ label:'經痛程度', ref:'0–10 分，一般 6 分以下、且不影響生活較不需擔心' },
-  cycle_pms:{  label:'經前症狀數', ref:'3 項以下較常見；若合併骨盆腔疼痛、性交疼痛等特定症狀需留意' },
+  cycle_freq:{ label:L('週期天數','Cycle length'), ref:L('正常範圍 24–38 天','Normal range 24–38 days') },
+  cycle_len:{  label:L('經期長度','Days of bleeding'), ref:L('正常範圍 8 天以內','Normally 8 days or fewer') },
+  cycle_flow:{ label:L('經量','Flow volume'), ref:L('正常：衛生用品約可維持 3–4 小時；量多：需 1–2 小時更換一次或有大血塊','Normal: a pad or tampon lasts 3–4 hours. Heavy: changing every 1–2 hours, or large clots') },
+  cycle_pain:{ label:L('經痛程度','Period pain'), ref:L('0–10 分，一般 6 分以下、且不影響生活較不需擔心','0–10 scale. Under 6, and not disrupting your day, is usually nothing to worry about') },
+  cycle_pms:{  label:L('經前症狀數','Number of PMS symptoms'), ref:L('3 項以下較常見；若合併骨盆腔疼痛、性交疼痛等特定症狀需留意','Up to 3 is common. Pelvic pain or pain during sex alongside them is worth noting') },
 
-  preg_nausea:{    label:'孕吐程度', ref:'嚴重到無法進食或喝水建議就醫' },
-  preg_edema:{     label:'水腫', ref:'突然加重或合併頭痛、視力改變請立即就醫' },
-  preg_back:{      label:'腰背／骨盆不適', ref:'孕期常見，影響行動可與中醫師討論' },
-  preg_sleep:{     label:'睡眠品質', ref:'孕期睡眠中斷常見' },
-  preg_fatigue:{   label:'疲勞程度', ref:'第一、三孕期較明顯' },
-  preg_digestion:{ label:'便秘／脹氣', ref:'子宮壓迫所致，屬常見' },
-  preg_mood:{      label:'情緒狀態', ref:'明顯影響生活建議同時安排專業評估' },
+  preg_nausea:{    label:L('孕吐程度','Nausea and vomiting'), ref:L('嚴重到無法進食或喝水建議就醫','See a doctor if you cannot keep food or fluids down') },
+  preg_edema:{     label:L('水腫','Swelling'), ref:L('突然加重或合併頭痛、視力改變請立即就醫','Sudden swelling, or swelling with headache or vision changes, needs same-day care') },
+  preg_back:{      label:L('腰背／骨盆不適','Back and pelvic discomfort'), ref:L('孕期常見，影響行動可與中醫師討論','Common in pregnancy; if it limits how you move, a TCM practitioner can help') },
+  preg_sleep:{     label:L('睡眠品質','Sleep quality'), ref:L('孕期睡眠中斷常見','Broken sleep is common in pregnancy') },
+  preg_fatigue:{   label:L('疲勞程度','Fatigue'), ref:L('第一、三孕期較明顯','Most noticeable in the first and third trimesters') },
+  preg_digestion:{ label:L('便秘／脹氣','Constipation and bloating'), ref:L('子宮壓迫所致，屬常見','Common — the growing uterus presses on the bowel') },
+  preg_mood:{      label:L('情緒狀態','Mood'), ref:L('明顯影響生活建議同時安排專業評估','If it is clearly affecting daily life, arrange a professional assessment too') },
 
-  preg_lochia:{      label:'惡露', ref:'多數在 4–6 週結束，顏色或氣味改變請檢查' },
-  preg_hairloss:{    label:'掉髮', ref:'產後 2–4 個月開始屬常見，4 個月左右最明顯' },
-  preg_engorgement:{ label:'乳房脹痛／阻塞', ref:'合併發燒或紅腫需留意乳腺炎' },
-  preg_postmood:{    label:'情緒狀態', ref:'低落超過兩週或已影響生活，建議正式評估' },
-  preg_energy:{      label:'體力恢復', ref:'產後疲勞屬常見' },
-  preg_sweating:{    label:'自汗／盜汗', ref:'產後數週內常見' },
-  preg_cold:{        label:'怕冷／關節', ref:'產後常見主訴' },
-  preg_milk:{        label:'乳汁量', ref:'以寶寶體重與尿量判斷為主' },
+  preg_lochia:{      label:L('惡露','Lochia'), ref:L('多數在 4–6 週結束，顏色或氣味改變請檢查','Usually settles by 4–6 weeks; get a change in colour or odour checked') },
+  preg_hairloss:{    label:L('掉髮','Hair loss'), ref:L('產後 2–4 個月開始屬常見，4 個月左右最明顯','Commonly starts 2–4 months postpartum and peaks around month 4') },
+  preg_engorgement:{ label:L('乳房脹痛／阻塞','Engorgement and blocked ducts'), ref:L('合併發燒或紅腫需留意乳腺炎','With fever or redness, think mastitis') },
+  preg_postmood:{    label:L('情緒狀態','Mood'), ref:L('低落超過兩週或已影響生活，建議正式評估','Low mood beyond two weeks, or affecting daily life, deserves a formal assessment') },
+  preg_energy:{      label:L('體力恢復','Energy recovery'), ref:L('產後疲勞屬常見','Postpartum fatigue is common') },
+  preg_sweating:{    label:L('自汗／盜汗','Sweating and night sweats'), ref:L('產後數週內常見','Common in the first few weeks after birth') },
+  preg_cold:{        label:L('怕冷／關節','Feeling cold, joint aches'), ref:L('產後常見主訴','A common postpartum complaint') },
+  preg_milk:{        label:L('乳汁量','Milk supply'), ref:L('以寶寶體重與尿量判斷為主','Judged mainly by your baby\'s weight gain and wet nappies') },
 
-  meno_flush:{   label:'血管舒縮（熱潮紅／盜汗）', ref:'偶爾且不影響生活較不需擔心' },
-  meno_sleep:{   label:'睡眠', ref:'偶爾且不影響生活較不需擔心' },
-  meno_mood:{    label:'情緒', ref:'明顯影響生活建議同時安排專業心理評估' },
-  meno_dryness:{ label:'泌尿生殖（陰道乾澀）', ref:'常見症狀，可與醫師討論處理方式' },
-  meno_joint:{   label:'骨骼／關節', ref:'偶爾且不影響生活較不需擔心' },
-  meno_cycle:{   label:'月經型態變化', ref:'停經逾 12 個月建議討論骨密度與心血管篩查' },
+  meno_flush:{   label:L('血管舒縮（熱潮紅／盜汗）','Hot flashes and night sweats'), ref:L('偶爾且不影響生活較不需擔心','Occasional, and not disrupting your life, is usually fine') },
+  meno_sleep:{   label:L('睡眠','Sleep'), ref:L('偶爾且不影響生活較不需擔心','Occasional, and not disrupting your life, is usually fine') },
+  meno_mood:{    label:L('情緒','Mood'), ref:L('明顯影響生活建議同時安排專業心理評估','If it clearly affects daily life, arrange a mental-health assessment too') },
+  meno_dryness:{ label:L('泌尿生殖（陰道乾澀）','Vaginal dryness'), ref:L('常見症狀，可與醫師討論處理方式','A common symptom — your doctor can talk through the options') },
+  meno_joint:{   label:L('骨骼／關節','Bones and joints'), ref:L('偶爾且不影響生活較不需擔心','Occasional, and not disrupting your life, is usually fine') },
+  meno_cycle:{   label:L('月經型態變化','Change in periods'), ref:L('停經逾 12 個月建議討論骨密度與心血管篩查','After 12 months without a period, discuss bone-density and heart screening') },
 };
-
 function rowFor(a, qid, opts){
   const meta = ROW_REFS[qid] || {};
-  const label = meta.label || qid;
-  const ref = meta.ref || '';
+  const label = meta.label || L(qid);
+  const ref = meta.ref || L('');
   opts = opts || {};
   const question = findQuestion(qid);
   if(!question) return null;
@@ -2887,17 +2937,19 @@ function rowFor(a, qid, opts){
   let status, value, explain, threshold;
   if(opts.evalFn){
     status = opts.evalFn(v);
-    value = opts.fmt ? opts.fmt(v) : (v==null ? '未填答' : String(v));
+    value = opts.fmt ? opts.fmt(v) : (v==null ? bi('未填答','Not answered') : String(v));
     explain = (status==='watch' && opts.explainFn) ? opts.explainFn(v) : null;
   } else if(v==null || v==='' || (Array.isArray(v) && !v.length)){
-    status = 'na'; value = '未填答'; explain = null;
+    status = 'na'; value = bi('未填答','Not answered'); explain = null;
   } else {
     const o = question.options.find(o=>o.value===v);
     status = (o && o.flag) ? 'watch' : (o ? 'ok' : 'na');
-    value = o ? o.zh : String(v);
+    value = o ? bi(o.zh, o.en) : String(v);
     const info = (o && o.flag) ? SYMPTOM_INFO[o.flag.key] : null;
-    explain = (o && o.flag) ? (info?.insight || o.flag.zh) : null;
-    threshold = info?.watch || null;
+    explain = (o && o.flag)
+      ? bi(info?.insight || o.flag.zh, info?.insightEn || o.flag.en)
+      : null;
+    threshold = info?.watch ? bi(info.watch, info.watchEn || info.watch) : null;
   }
   return {label, ref, status, value, explain, threshold: threshold||null};
 }
@@ -2913,22 +2965,22 @@ function renderValueTable(title, rows){
     const explain = (r.status==='watch' && r.explain)
       ? `<p class="at-explain">${r.explain}</p>` : '';
     const threshold = (r.status==='watch' && r.threshold)
-      ? `<p class="at-threshold"><b>什麼情況該就醫：</b>${r.threshold}</p>` : '';
+      ? `<p class="at-threshold"><b>${bi('什麼情況該就醫：','When to get it checked: ')}</b>${r.threshold}</p>` : '';
     const notes = (explain || threshold)
       ? `<div class="at-notes">${explain}${threshold}</div>` : '';
     return `<li class="at-row">
-      <span class="at-label">${r.label}</span>
+      <span class="at-label">${bi(r.label)}</span>
       <span class="at-mark ${m.cls}">${m.text}</span>
       <span class="at-value">${r.value}</span>
-      <span class="at-ref">${r.ref}</span>
+      <span class="at-ref">${bi(r.ref)}</span>
       ${notes}
     </li>`;
   }).join('');
-  const counter = scored ? `<span class="at-count">${okCount} / ${scored} 項在範圍內</span>` : '';
+  const counter = scored ? `<span class="at-count">${okCount} / ${scored}${bi(' 項在範圍內',' in range')}</span>` : '';
   /* 這張逐項小抄是報告裡最長的東西（更年期那張佔了整張卡的一半），而且下面
      的建議句已經把需要留意的項目重講一次。預設收起來，想核對才打開。 */
   return `<details class="answer-table">
-    <summary class="at-head"><p class="at-title">${title}</p>${counter}<span class="disc" aria-hidden="true"></span></summary>
+    <summary class="at-head"><p class="at-title">${bi(title)}</p>${counter}<span class="disc" aria-hidden="true"></span></summary>
     <ul class="at-rows">${html}</ul>
   </details>`;
 }
@@ -2946,12 +2998,12 @@ function renderActionCol(zh, en, items){
 function renderArticleLinks(links, hasFindings){
   if(!links || !links.length){
     return hasFindings
-      ? `<p class="stage-articles-pending">針對以上項目的詳細文章正陸續補上。</p>`
+      ? `<p class="stage-articles-pending">${bi('針對以上項目的詳細文章正陸續補上。','Detailed articles on these are on the way.')}</p>`
       : '';
   }
   return `<div class="stage-articles">
-    <p class="sc-title">為您推薦的文章</p>
-    ${links.map(h=>`<a class="sa-link" href="${articleHref(h.slug)}" target="_blank" rel="noopener">${h.title} →</a>`).join('')}
+    <p class="sc-title">${bi('為您推薦的文章','Suggested reading')}</p>
+    ${links.map(h=>`<a class="sa-link" href="${articleHref(h.slug)}" target="_blank" rel="noopener">${h.title} →${bi('','<span class="al-zhnote"> (in Chinese)</span>')}</a>`).join('')}
   </div>`;
 }
 
@@ -2976,225 +3028,225 @@ function renderArticleLinks(links, hasFindings){
 const SYMPTOM_INFO = {
   // cycle
   '週期偏短頻繁，常屬中醫氣血/腎氣相關調理範疇':
-    { insight:'週期短於 24 天，代表濾泡期或黃體期可能較短，中醫觀點常見於氣血偏虛或腎氣不足的體質。',
-      tip:'留意經期前後是否伴隨疲勞、腰痠等症狀，規律作息、避免過度勞累與熬夜，有助週期穩定。',
-      watch:'若同時經量偏多或經期延長，建議安排婦科評估。',
+    { insight:'週期短於 24 天，代表濾泡期或黃體期可能較短，中醫觀點常見於氣血偏虛或腎氣不足的體質。', insightEn:'A cycle shorter than 24 days can mean a short follicular or luteal phase. In TCM terms this often goes with depleted Qi and Blood, or weaker Kidney energy.',
+      tip:'留意經期前後是否伴隨疲勞、腰痠等症狀，規律作息、避免過度勞累與熬夜，有助週期穩定。', tipEn:'Notice whether fatigue or a sore lower back come with it. Regular hours, and not running yourself down, help the cycle settle.',
+      watch:'若同時經量偏多或經期延長，建議安排婦科評估。', watchEn:'With heavy bleeding or longer periods alongside it, arrange a gynaecological assessment.',
       article:{slug:'menstrual-cycle', title:'月經週期幾多日才正常？'} },
   '週期偏長稀發，建議與中醫師討論調理，並留意是否合併其他內分泌症狀':
-    { insight:'週期長於 38 天，可能代表排卵較不規律，中醫觀點常見於氣血循環較緩或痰濕體質。',
-      tip:'持續紀錄週期天數；均衡飲食與規律運動有助內分泌穩定，若合併多毛、體重明顯變化，建議一併告知醫師。',
-      watch:'若超過 3 個月完全沒有月經，或合併多毛、體重明顯上升、皮膚變化，建議做內分泌檢查。',
+    { insight:'週期長於 38 天，可能代表排卵較不規律，中醫觀點常見於氣血循環較緩或痰濕體質。', insightEn:'A cycle longer than 38 days often points to less regular ovulation. In TCM terms this commonly goes with slower Qi and Blood circulation, or a damp-phlegm constitution.',
+      tip:'持續紀錄週期天數；均衡飲食與規律運動有助內分泌穩定，若合併多毛、體重明顯變化，建議一併告知醫師。', tipEn:'Keep tracking your cycle length. Balanced meals and regular exercise steady the hormones — mention extra hair growth or clear weight changes to your doctor too.',
+      watch:'若超過 3 個月完全沒有月經，或合併多毛、體重明顯上升、皮膚變化，建議做內分泌檢查。', watchEn:'No period at all for 3 months, or extra hair growth, clear weight gain or skin changes alongside it — get hormone testing.',
       article:{slug:'pcos-pmos', title:'多囊卵巢（PCOS）改名 PMOS'} },
   '週期不規律，為中醫常見調理項目':
-    { insight:'最短與最長週期相差超過 9 天，代表排卵時間較不穩定。',
-      tip:'持續紀錄週期天數，規律作息與適度運動有助週期穩定。',
-      watch:'若一年來的次數少於 4 次，或突然從規律變成不規律，建議安排評估。',
+    { insight:'最短與最長週期相差超過 9 天，代表排卵時間較不穩定。', insightEn:'More than 9 days between your shortest and longest cycle suggests ovulation is not settling at a consistent point.',
+      tip:'持續紀錄週期天數，規律作息與適度運動有助週期穩定。', tipEn:'Keep tracking your cycle length. Regular hours and moderate exercise help it settle.',
+      watch:'若一年來的次數少於 4 次，或突然從規律變成不規律，建議安排評估。', watchEn:'Fewer than 4 periods in a year, or a sudden shift from regular to irregular, is worth assessing.',
       article:{slug:'menstrual-cycle', title:'月經週期幾多日才正常？'} },
   '經期延長，建議與中醫師討論調理方向':
-    { insight:'經期超過 8 天，可能與子宮內膜脫落較慢或氣血運行有關。',
-      tip:'經期較長的這幾天可以多休息、避免劇烈運動與提重物；建議持續記錄，觀察是否每次都偏長。',
-      watch:'若每次都超過 8 天、或同時經量很多需頻繁更換，建議檢查是否有肌瘤或息肉。',
+    { insight:'經期超過 8 天，可能與子宮內膜脫落較慢或氣血運行有關。', insightEn:'Bleeding beyond 8 days can mean the lining is shedding slowly, or in TCM terms that Qi and Blood are not moving well.',
+      tip:'經期較長的這幾天可以多休息、避免劇烈運動與提重物；建議持續記錄，觀察是否每次都偏長。', tipEn:'Rest more on the longer days and skip heavy lifting or intense exercise. Keep a record — is it long every time, or just this once?',
+      watch:'若每次都超過 8 天、或同時經量很多需頻繁更換，建議檢查是否有肌瘤或息肉。', watchEn:'Over 8 days every time, or heavy enough to change protection frequently — get checked for fibroids or polyps.',
       article:{slug:'menstrual-cycle', title:'月經週期幾多日才正常？'} },
   '經血色暗或夾血塊，中醫常見血瘀調理範疇':
-    { insight:'經血偏暗或帶血塊，中醫觀點多與氣血循環較慢（血瘀）有關，臨床上相當常見。',
-      tip:'經期可熱敷腹部、避免生冷飲食，適度活動有助氣血循環。',
-      watch:'若血塊大於約 2.5 公分（十元硬幣大小）或同時經量很多，建議婦科評估。',
+    { insight:'經血偏暗或帶血塊，中醫觀點多與氣血循環較慢（血瘀）有關，臨床上相當常見。', insightEn:'Darker blood or clots usually points to slower circulation — Blood stasis in TCM terms. It is a very common finding.',
+      tip:'經期可熱敷腹部、避免生冷飲食，適度活動有助氣血循環。', tipEn:'Heat on your abdomen, less cold food and drink, and gentle movement all help circulation.',
+      watch:'若血塊大於約 2.5 公分（十元硬幣大小）或同時經量很多，建議婦科評估。', watchEn:'Clots larger than about 2.5 cm (a ten-dollar coin), or very heavy flow with them, warrant a gynaecological assessment.',
       article:{slug:'period-pain', title:'經痛痛到甚麼程度算不正常？'} },
   '經常有大血塊，中醫常見血瘀調理範疇':
-    { insight:'經常出現大血塊，同樣多與氣血循環較慢有關。',
-      tip:'經期可熱敷腹部、避免生冷飲食；血塊較多時避免劇烈運動與提重物。',
-      watch:'若血塊大於約 2.5 公分（十元硬幣大小）或同時經量很多，建議婦科評估。',
+    { insight:'經常出現大血塊，同樣多與氣血循環較慢有關。', insightEn:'Frequent large clots point to the same thing: circulation that is not moving as freely as it could.',
+      tip:'經期可熱敷腹部、避免生冷飲食；血塊較多時避免劇烈運動與提重物。', tipEn:'Heat on your abdomen and less cold food and drink. On heavy-clot days, avoid intense exercise and heavy lifting.',
+      watch:'若血塊大於約 2.5 公分（十元硬幣大小）或同時經量很多，建議婦科評估。', watchEn:'Clots larger than about 2.5 cm (a ten-dollar coin), or very heavy flow with them, warrant a gynaecological assessment.',
       article:{slug:'uterine-fibroids', title:'子宮肌瘤需不需要切除？'} },
   '經血色淡，中醫常見氣血不足調理範疇':
-    { insight:'經血偏淡，中醫觀點多與氣血不足有關，也可能與經量本身較少有關。',
-      tip:'留意日常鐵質與蛋白質攝取，避免過度節食；規律作息有助氣血恢復。',
-      watch:'若同時有頭暈、心悸、容易累或臉色蒼白，建議驗血色素確認是否貧血。', },
+    { insight:'經血偏淡，中醫觀點多與氣血不足有關，也可能與經量本身較少有關。', insightEn:'Pale blood usually points to depleted Qi and Blood, and can simply reflect a lighter flow.',
+      tip:'留意日常鐵質與蛋白質攝取，避免過度節食；規律作息有助氣血恢復。', tipEn:'Watch your iron and protein intake and go easy on restrictive eating. Regular hours help you rebuild.',
+      watch:'若同時有頭暈、心悸、容易累或臉色蒼白，建議驗血色素確認是否貧血。', watchEn:'With dizziness, palpitations, tiredness or looking pale, have your haemoglobin checked for anaemia.', },
   '經血質地偏稀，中醫常見調理項目':
-    { insight:'經血質地偏稀薄，同樣多與氣血狀態有關。',
-      tip:'留意日常飲食均衡與規律作息，避免過度勞累。' },
+    { insight:'經血質地偏稀薄，同樣多與氣血狀態有關。', insightEn:'Thin, watery blood points to the same Qi and Blood picture.',
+      tip:'留意日常飲食均衡與規律作息，避免過度勞累。', tipEn:'Eat regularly and evenly, keep regular hours, and try not to run yourself down.' },
   '經期畏寒喜溫，中醫常見寒證調理範疇':
-    { insight:'經期特別怕冷、喜歡熱敷，中醫觀點多屬於偏寒體質的表現。',
-      tip:'經期注意腹部與足部保暖，避免生冷飲食，熱敷或泡腳都有幫助。',
+    { insight:'經期特別怕冷、喜歡熱敷，中醫觀點多屬於偏寒體質的表現。', insightEn:'Feeling the cold badly during your period, and wanting heat on your abdomen, is how a cold-type constitution tends to show up.',
+      tip:'經期注意腹部與足部保暖，避免生冷飲食，熱敷或泡腳都有幫助。', tipEn:'Keep your abdomen and feet warm, ease off cold food and drink, and try a heat pack or a warm foot soak.',
       article:{slug:'period-pain', title:'經痛痛到甚麼程度算不正常？'} },
   '經期頭痛，中醫常見調理項目':
-    { insight:'經期頭痛與賀爾蒙波動及氣血運行變化有關，是常見的經期伴隨症狀。',
-      tip:'經期留意休息與水分補充，避免熬夜與過度用眼。',
-      watch:'若頭痛突然變得異常劇烈，或伴隨視力模糊、單側無力、講話困難，請立即就醫。', },
+    { insight:'經期頭痛與賀爾蒙波動及氣血運行變化有關，是常見的經期伴隨症狀。', insightEn:'Period headaches track the hormonal swing and the shift in circulation around bleeding. They are a common companion symptom.',
+      tip:'經期留意休息與水分補充，避免熬夜與過度用眼。', tipEn:'Rest, drink enough, and go easy on late nights and screen time.',
+      watch:'若頭痛突然變得異常劇烈，或伴隨視力模糊、單側無力、講話困難，請立即就醫。', watchEn:'A sudden severe headache, or one with blurred vision, one-sided weakness or trouble speaking, needs emergency care.', },
   '經期腸胃變化，中醫常見調理項目':
-    { insight:'經期腸胃不適與賀爾蒙變化影響腸道蠕動有關。',
-      tip:'經期飲食清淡、少量多餐，避免生冷與辛辣刺激。',
-      watch:'若伴隨排便時疼痛或血便，建議婦科與腸胃科一併評估。', },
+    { insight:'經期腸胃不適與賀爾蒙變化影響腸道蠕動有關。', insightEn:'Hormonal changes speed up or slow down the gut, which is why digestion shifts around your period.',
+      tip:'經期飲食清淡、少量多餐，避免生冷與辛辣刺激。', tipEn:'Keep meals light and frequent, and go easy on cold and spicy food.',
+      watch:'若伴隨排便時疼痛或血便，建議婦科與腸胃科一併評估。', watchEn:'With painful bowel movements or blood in the stool, see both gynaecology and gastroenterology.', },
   '經痛影響生活，為中醫常見且擅長調理的項目':
-    { insight:'經痛程度較高且影響日常生活，多與子宮收縮強度及局部血液循環有關。',
-      tip:'經期可熱敷腹部、適度熱飲，避免生冷食物；規律運動有助整體經痛改善，經期間則以緩和活動為主。',
-      watch:'若止痛藥效果越來越差、疼痛一年比一年嚴重，或非經期也痛，建議安排婦科影像檢查。',
+    { insight:'經痛程度較高且影響日常生活，多與子宮收縮強度及局部血液循環有關。', insightEn:'Pain this strong, and disruptive, usually reflects how hard the uterus is contracting and how well blood is flowing locally.',
+      tip:'經期可熱敷腹部、適度熱飲，避免生冷食物；規律運動有助整體經痛改善，經期間則以緩和活動為主。', tipEn:'Heat on the abdomen and warm drinks help; cold food does not. Regular exercise reduces period pain overall — keep it gentle during bleeding.',
+      watch:'若止痛藥效果越來越差、疼痛一年比一年嚴重，或非經期也痛，建議安排婦科影像檢查。', watchEn:'Painkillers working less well, pain worsening year on year, or pain outside your period — arrange gynaecological imaging.',
       article:{slug:'period-pain', title:'經痛痛到甚麼程度算不正常？'} },
   '經前情緒症狀，中醫常見調理範疇':
-    { insight:'經前情緒起伏（經前症候群）與賀爾蒙波動影響神經傳導物質有關，相當常見。',
-      tip:'經前留意情緒起伏，保持規律運動與充足睡眠，必要時可透過紀錄了解自己的週期性規律。',
-      watch:'若情緒嚴重到影響工作或人際關係、每次經前都如此，可能是經前情緒障礙（PMDD），值得專業評估。', },
+    { insight:'經前情緒起伏（經前症候群）與賀爾蒙波動影響神經傳導物質有關，相當常見。', insightEn:'Premenstrual mood swings (PMS) come from hormones acting on neurotransmitters. Very common.',
+      tip:'經前留意情緒起伏，保持規律運動與充足睡眠，必要時可透過紀錄了解自己的週期性規律。', tipEn:'Notice the swings, keep exercise and sleep steady, and if it helps, track them to see your own pattern.',
+      watch:'若情緒嚴重到影響工作或人際關係、每次經前都如此，可能是經前情緒障礙（PMDD），值得專業評估。', watchEn:'If it damages work or relationships and happens every cycle, it may be PMDD, which deserves a professional assessment.', },
   '經前身體不適，可諮詢中醫調理':
-    { insight:'經前腹脹、乳房脹痛等與體內水分及賀爾蒙變化有關。',
-      tip:'經前可留意咖啡因與鹽分攝取，適度伸展或熱敷有助緩解脹痛不適。' },
+    { insight:'經前腹脹、乳房脹痛等與體內水分及賀爾蒙變化有關。', insightEn:'Premenstrual bloating and breast tenderness follow fluid shifts and hormonal changes.',
+      tip:'經前可留意咖啡因與鹽分攝取，適度伸展或熱敷有助緩解脹痛不適。', tipEn:'Ease off caffeine and salt beforehand; stretching or a heat pack helps the bloating and tenderness.' },
   // screen/urgent-level findings shown in the stage-card tables. These have no
   // `tip` (the action lives in the 建議就醫 column) — only an insight, so the row
   // explains the finding instead of repeating the instruction.
   '經量過多，建議先評估是否有結構性病因(如肌瘤、息肉)，再搭配中醫調理':
-    { insight:'經量過多在醫學上定義為影響生活品質的出血量，常見原因包含子宮肌瘤、內膜息肉、腺肌症或凝血功能問題，也可能造成缺鐵性貧血。',
+    { insight:'經量過多在醫學上定義為影響生活品質的出血量，常見原因包含子宮肌瘤、內膜息肉、腺肌症或凝血功能問題，也可能造成缺鐵性貧血。', insightEn:'Heavy bleeding is defined by its effect on your life, not by a number. Common causes include fibroids, polyps, adenomyosis and clotting problems, and it can leave you iron-deficient.',
       article:{slug:'uterine-fibroids', title:'子宮肌瘤需不需要切除？'} },
   '慢性骨盆痛，建議婦科評估排除子宮內膜異位症等':
-    { insight:'非經期也持續的骨盆腔疼痛，是子宮內膜異位症的典型表現之一，平均確診時間長達數年，及早檢查有助縮短這段時間。',
+    { insight:'非經期也持續的骨盆腔疼痛，是子宮內膜異位症的典型表現之一，平均確診時間長達數年，及早檢查有助縮短這段時間。', insightEn:'Pelvic pain that persists outside your period is one of the classic signs of endometriosis. Diagnosis takes years on average — getting checked early shortens that.',
       article:{slug:'endometriosis', title:'朱古力瘤與子宮內膜異位症'} },
   '性交疼痛，建議婦科評估':
-    { insight:'深部性交疼痛可能與子宮內膜異位症、骨盆腔發炎或子宮位置有關，屬於需要進一步釐清的症狀，不是「忍一忍就好」。',
+    { insight:'深部性交疼痛可能與子宮內膜異位症、骨盆腔發炎或子宮位置有關，屬於需要進一步釐清的症狀，不是「忍一忍就好」。', insightEn:'Deep pain during sex can come from endometriosis, pelvic inflammation, or the position of the uterus. It needs looking into — it is not something to put up with.',
       article:{slug:'endometriosis', title:'朱古力瘤與子宮內膜異位症'} },
   '排便/排尿疼痛，建議婦科評估排除子宮內膜異位症等':
-    { insight:'經期時排便或排尿疼痛，可能代表內膜異位病灶影響到腸道或膀胱周圍，是需要影像檢查釐清的徵象。',
+    { insight:'經期時排便或排尿疼痛，可能代表內膜異位病灶影響到腸道或膀胱周圍，是需要影像檢查釐清的徵象。', insightEn:'Pain passing stool or urine during your period can mean endometrial tissue is affecting the bowel or bladder. Imaging is the way to find out.',
       article:{slug:'endometriosis', title:'朱古力瘤與子宮內膜異位症'} },
   '情緒變化明顯，建議同時安排專業心理評估':
-    { insight:'更年期的情緒變化與雌激素影響神經傳導物質有關，但當它明顯影響生活時，已超出單純賀爾蒙波動可以解釋的範圍，值得獨立評估。' },
+    { insight:'更年期的情緒變化與雌激素影響神經傳導物質有關，但當它明顯影響生活時，已超出單純賀爾蒙波動可以解釋的範圍，值得獨立評估。', insightEn:'Mood changes in menopause follow oestrogen acting on neurotransmitters. Once they clearly affect your life, hormones alone no longer explain them, and it deserves its own assessment.' },
   '建議與醫師討論停經後的骨密度與心血管相關篩檢':
-    { insight:'停經後雌激素長期偏低會加速骨質流失、並改變血脂與心血管風險，這兩項是停經後最需要主動追蹤的健康面向。' },
+    { insight:'停經後雌激素長期偏低會加速骨質流失、並改變血脂與心血管風險，這兩項是停經後最需要主動追蹤的健康面向。', insightEn:'Years of low oestrogen after menopause speed up bone loss and shift your lipid and cardiovascular risk. These two are what postmenopausal care watches most closely.' },
   '孕期情緒問題明顯，建議同時安排專業心理評估':
-    { insight:'孕期焦慮與憂鬱的發生率不低於產後，且會影響睡眠、營養與產後恢復，是可以在孕期就開始處理的。' },
+    { insight:'孕期焦慮與憂鬱的發生率不低於產後，且會影響睡眠、營養與產後恢復，是可以在孕期就開始處理的。', insightEn:'Anxiety and depression are as common in pregnancy as after birth, and they affect sleep, nutrition and how you recover. Treatment can start now, not later.' },
   '惡露顏色或氣味異常，建議婦科評估排除感染':
-    { insight:'惡露出現異味或顏色轉變，通常提示子宮腔或產道感染，越早處理越單純。',
+    { insight:'惡露出現異味或顏色轉變，通常提示子宮腔或產道感染，越早處理越單純。', insightEn:'A change in the smell or colour of lochia usually means infection in the uterus or birth canal. The earlier it is treated, the simpler it is.',
       article:{slug:'postpartum-lochia', title:'惡露多久才乾淨？'} },
   '產後情緒問題明顯，建議盡快安排產後憂鬱專業評估':
-    { insight:'產後憂鬱與短暫的情緒低落（baby blues）不同：前者持續超過兩週、程度較重，且需要治療才會改善，並非意志力問題。' },
+    { insight:'產後憂鬱與短暫的情緒低落（baby blues）不同：前者持續超過兩週、程度較重，且需要治療才會改善，並非意志力問題。', insightEn:'Postnatal depression is not the baby blues. It lasts beyond two weeks, runs deeper, and needs treatment to lift. It is not a matter of willpower.' },
   // pregnancy
   '孕吐影響飲食，中醫安胎調理常見重點':
-    { insight:'孕吐好發於第一孕期，與 hCG 及賀爾蒙濃度上升有關，多數在 12–16 週後緩解。',
-      tip:'少量多餐、起床前先吃點乾糧或蘇打餅乾，避免空腹與油膩氣味；薑茶或薑片對部分人有幫助。',
-      watch:'若超過 24 小時無法進食喝水、體重下降超過孕前 5%，或尿量明顯減少，請就醫。',
+    { insight:'孕吐好發於第一孕期，與 hCG 及賀爾蒙濃度上升有關，多數在 12–16 週後緩解。', insightEn:'Morning sickness peaks in the first trimester as hCG and other hormones rise, and usually eases after 12–16 weeks.',
+      tip:'少量多餐、起床前先吃點乾糧或蘇打餅乾，避免空腹與油膩氣味；薑茶或薑片對部分人有幫助。', tipEn:'Small frequent meals, something dry like a cracker before you get up, and away from greasy smells. Ginger tea or slices help some people.',
+      watch:'若超過 24 小時無法進食喝水、體重下降超過孕前 5%，或尿量明顯減少，請就醫。', watchEn:'Unable to eat or drink for 24 hours, weight down more than 5% from pre-pregnancy, or passing much less urine — see a doctor.',
       article:{slug:'first-trimester-discomfort', title:'懷孕初期不適，中醫怎麼幫？'} },
   '嚴重孕吐，中醫安胎調理可協助，嚴重時仍建議配合婦科評估':
-    { insight:'嚴重孕吐（妊娠劇吐）可能影響水分與電解質平衡，需要較積極的醫療處理。',
-      tip:'少量多餐、避免空腹與油膩氣味，薑茶或薑片可能有幫助；嚴重時建議同時配合婦科評估，必要時考慮住院支持治療。',
-      watch:'若超過 24 小時無法進食喝水、體重下降超過孕前 5%，或尿量明顯減少，請就醫。',
+    { insight:'嚴重孕吐（妊娠劇吐）可能影響水分與電解質平衡，需要較積極的醫療處理。', insightEn:'Severe morning sickness (hyperemesis) can upset your fluid and electrolyte balance, and needs active medical treatment.',
+      tip:'少量多餐、避免空腹與油膩氣味，薑茶或薑片可能有幫助；嚴重時建議同時配合婦科評估，必要時考慮住院支持治療。', tipEn:'Small frequent meals, never an empty stomach, and away from greasy smells. Ginger tea or slices may help. If it is severe, get assessed — inpatient fluids are sometimes needed.',
+      watch:'若超過 24 小時無法進食喝水、體重下降超過孕前 5%，或尿量明顯減少，請就醫。', watchEn:'Unable to eat or drink for 24 hours, weight down more than 5% from pre-pregnancy, or passing much less urine — see a doctor.',
       article:{slug:'first-trimester-discomfort', title:'懷孕初期不適，中醫怎麼幫？'} },
   '孕期輕度水腫，中醫調理常見範疇':
-    { insight:'孕期水腫與血漿容積增加、靜脈回流受阻有關，屬常見生理變化。',
-      tip:'多留意雙腳抬高休息、避免久站久坐，並減少高鹽食物；穿著寬鬆襪子也有幫助。',
-      watch:'若突然加重、或只有單側小腿腫脹疼痛，請盡快就醫。',
+    { insight:'孕期水腫與血漿容積增加、靜脈回流受阻有關，屬常見生理變化。', insightEn:'Swelling in pregnancy comes from more blood volume and slower venous return. It is a normal change.',
+      tip:'多留意雙腳抬高休息、避免久站久坐，並減少高鹽食物；穿著寬鬆襪子也有幫助。', tipEn:'Put your feet up, break up long periods of standing or sitting, cut back on salt, and wear loose socks.',
+      watch:'若突然加重、或只有單側小腿腫脹疼痛，請盡快就醫。', watchEn:'Sudden worsening, or swelling and pain in one calf only, needs prompt care.',
       article:{slug:'third-trimester-tcm', title:'懷孕後期不適：中醫如何助你待產'} },
   '孕期水腫明顯，中醫可協助，同時建議留意血壓':
-    { insight:'水腫明顯，尤其合併頭痛或血壓上升時，需要留意子癲前症的可能性。',
-      tip:'多留意雙腳抬高休息、減少高鹽食物，並同時留意血壓變化；建議產檢時主動告知醫師。',
-      watch:'若合併頭痛、視力改變、右上腹痛或血壓上升，請立即就醫（子癲前症徵象）。',
+    { insight:'水腫明顯，尤其合併頭痛或血壓上升時，需要留意子癲前症的可能性。', insightEn:'Marked swelling — especially with headache or rising blood pressure — raises the question of pre-eclampsia.',
+      tip:'多留意雙腳抬高休息、減少高鹽食物，並同時留意血壓變化；建議產檢時主動告知醫師。', tipEn:'Put your feet up, cut back on salt, and keep an eye on your blood pressure. Raise it at your next antenatal visit.',
+      watch:'若合併頭痛、視力改變、右上腹痛或血壓上升，請立即就醫（子癲前症徵象）。', watchEn:'Headache, vision changes, upper-right abdominal pain or rising blood pressure alongside it — go now. These are pre-eclampsia signs.',
       article:{slug:'third-trimester-tcm', title:'懷孕後期不適：中醫如何助你待產'} },
   '孕期腰背不適，中醫安胎調理常見項目':
-    { insight:'孕期腰背不適與重心前移、韌帶受賀爾蒙影響變鬆有關。',
-      tip:'側睡並在膝蓋間夾枕頭、避免久站，可嘗試溫和的孕婦伸展或瑜伽。',
-      watch:'若伴隨陰道出血、規律宮縮或發燒，請立即就醫。',
+    { insight:'孕期腰背不適與重心前移、韌帶受賀爾蒙影響變鬆有關。', insightEn:'Back and pelvic ache in pregnancy comes from your centre of gravity shifting forward and hormones loosening the ligaments.',
+      tip:'側睡並在膝蓋間夾枕頭、避免久站，可嘗試溫和的孕婦伸展或瑜伽。', tipEn:'Sleep on your side with a pillow between your knees, avoid long spells standing, and try gentle prenatal stretching or yoga.',
+      watch:'若伴隨陰道出血、規律宮縮或發燒，請立即就醫。', watchEn:'With vaginal bleeding, regular contractions or fever, seek care immediately.',
       article:{slug:'second-trimester-discomfort', title:'懷孕中期不適：腰痠、抽筋、便秘'} },
   '孕期腰背痛明顯，中醫可協助緩解':
-    { insight:'孕期腰背不適與重心前移、韌帶受賀爾蒙影響變鬆有關。',
-      tip:'側睡並在膝蓋間夾枕頭、避免久站久坐，溫和伸展或熱敷有助緩解。',
-      watch:'若伴隨陰道出血、規律宮縮或發燒，請立即就醫。',
+    { insight:'孕期腰背不適與重心前移、韌帶受賀爾蒙影響變鬆有關。', insightEn:'Back and pelvic ache in pregnancy comes from your centre of gravity shifting forward and hormones loosening the ligaments.',
+      tip:'側睡並在膝蓋間夾枕頭、避免久站久坐，溫和伸展或熱敷有助緩解。', tipEn:'Sleep on your side with a pillow between your knees, break up long spells standing or sitting, and try gentle stretching or a heat pack.',
+      watch:'若伴隨陰道出血、規律宮縮或發燒，請立即就醫。', watchEn:'With vaginal bleeding, regular contractions or fever, seek care immediately.',
       article:{slug:'second-trimester-discomfort', title:'懷孕中期不適：腰痠、抽筋、便秘'} },
   '孕期睡眠欠佳，中醫安胎調理常見項目':
-    { insight:'孕期睡眠品質下降常與頻尿、身體不適及賀爾蒙變化有關。',
-      tip:'睡前避免使用螢幕與咖啡因，側睡並用枕頭支撐腹部與背部會較舒適。',
+    { insight:'孕期睡眠品質下降常與頻尿、身體不適及賀爾蒙變化有關。', insightEn:'Sleep gets lighter in pregnancy from night waking to urinate, physical discomfort and hormonal change.',
+      tip:'睡前避免使用螢幕與咖啡因，側睡並用枕頭支撐腹部與背部會較舒適。', tipEn:'No screens or caffeine before bed. Sleeping on your side with pillows supporting your belly and back is more comfortable.',
       article:{slug:'third-trimester-tcm', title:'懷孕後期不適：中醫如何助你待產'} },
   '孕期情緒波動，中醫安胎調理可協助身心平衡':
-    { insight:'孕期情緒起伏與賀爾蒙變化及生活型態轉變都有關聯，相當常見。',
-      tip:'情緒起伏時，找信任的人聊聊、保持適度活動與規律作息都有幫助。',
-      watch:'若低落或焦慮持續超過兩週、已影響日常，或有傷害自己的念頭，請盡快尋求專業協助。', },
+    { insight:'孕期情緒起伏與賀爾蒙變化及生活型態轉變都有關聯，相當常見。', insightEn:'Mood swings in pregnancy track both hormones and the sheer change in your life. Very common.',
+      tip:'情緒起伏時，找信任的人聊聊、保持適度活動與規律作息都有幫助。', tipEn:'Talk to someone you trust, keep moving a little each day, and hold on to regular hours.',
+      watch:'若低落或焦慮持續超過兩週、已影響日常，或有傷害自己的念頭，請盡快尋求專業協助。', watchEn:'Low mood or anxiety lasting beyond two weeks, affecting daily life, or thoughts of harming yourself — reach out for professional help now.', },
   '孕期明顯疲勞，中醫安胎調理常見項目':
-    { insight:'第一、三孕期的疲勞感與代謝負荷增加及睡眠品質下降有關。',
-      tip:'順應身體訊號多休息，不需勉強維持孕前的活動量；分段小睡有助恢復精力。',
-      watch:'若合併心悸、呼吸急促或臉色蒼白，建議驗血色素確認是否貧血。',
+    { insight:'第一、三孕期的疲勞感與代謝負荷增加及睡眠品質下降有關。', insightEn:'First and third trimester tiredness comes from the extra metabolic load plus poorer sleep.',
+      tip:'順應身體訊號多休息，不需勉強維持孕前的活動量；分段小睡有助恢復精力。', tipEn:'Rest when your body asks. You do not have to keep up your pre-pregnancy pace — short naps do real work.',
+      watch:'若合併心悸、呼吸急促或臉色蒼白，建議驗血色素確認是否貧血。', watchEn:'With palpitations, breathlessness or looking pale, have your haemoglobin checked for anaemia.',
       article:{slug:'first-trimester-discomfort', title:'懷孕初期不適，中醫怎麼幫？'} },
   '孕期消化不適，中醫調理常見範疇':
-    { insight:'孕期便秘脹氣主要與黃體素使腸道蠕動變慢，以及子宮壓迫腸道有關。',
-      tip:'少量多餐、避免產氣食物（如豆類、碳酸飲料），飯後散步有助消化。',
-      watch:'若嚴重便秘超過一週、或出現血便與劇烈腹痛，請就醫。',
+    { insight:'孕期便秘脹氣主要與黃體素使腸道蠕動變慢，以及子宮壓迫腸道有關。', insightEn:'Constipation and bloating come from progesterone slowing the bowel, plus the uterus pressing on it.',
+      tip:'少量多餐、避免產氣食物（如豆類、碳酸飲料），飯後散步有助消化。', tipEn:'Small frequent meals, less of the gassy foods (beans, fizzy drinks), and a walk after eating.',
+      watch:'若嚴重便秘超過一週、或出現血便與劇烈腹痛，請就醫。', watchEn:'Severe constipation beyond a week, or blood in the stool with bad abdominal pain — see a doctor.',
       article:{slug:'second-trimester-discomfort', title:'懷孕中期不適：腰痠、抽筋、便秘'} },
   // postpartum
   '產後體力不足，中醫月子調理重點':
-    { insight:'產後體力恢復速度因人而異，與睡眠碎片化、失血量及個人體質都有關。',
-      tip:'利用寶寶睡覺時同步休息，不需要求自己立刻恢復孕前體力；適度營養補充比硬撐更重要。',
-      watch:'若產後 6 個月仍明顯疲累，建議檢查甲狀腺功能與血色素，不宜只當作「還在恢復」。',
+    { insight:'產後體力恢復速度因人而異，與睡眠碎片化、失血量及個人體質都有關。', insightEn:'How fast strength returns varies — broken sleep, how much blood was lost, and your own constitution all play a part.',
+      tip:'利用寶寶睡覺時同步休息，不需要求自己立刻恢復孕前體力；適度營養補充比硬撐更重要。', tipEn:'Sleep when the baby sleeps. You do not owe anyone your pre-pregnancy energy — eating properly matters more than pushing through.',
+      watch:'若產後 6 個月仍明顯疲累，建議檢查甲狀腺功能與血色素，不宜只當作「還在恢復」。', watchEn:'Still clearly exhausted 6 months on is not just "still recovering" — check thyroid function and haemoglobin.',
       article:{slug:'postpartum-care', title:'產後調理全指南'} },
   '產後情緒波動，中醫調理可協助身心平衡':
-    { insight:'產後情緒起伏與賀爾蒙劇烈變化、睡眠不足及角色轉換壓力有關。',
-      tip:'找家人朋友分擔照顧、保持規律睡眠與適度戶外活動，都有助情緒穩定。',
-      watch:'若低落持續超過兩週、無法照顧自己或寶寶，或有傷害自己或寶寶的念頭，請立即求助。', },
+    { insight:'產後情緒起伏與賀爾蒙劇烈變化、睡眠不足及角色轉換壓力有關。', insightEn:'Postpartum mood swings follow a steep hormonal drop, lost sleep, and the weight of a new role.',
+      tip:'找家人朋友分擔照顧、保持規律睡眠與適度戶外活動，都有助情緒穩定。', tipEn:'Let family and friends take a share of the care, protect your sleep, and get outside a little each day.',
+      watch:'若低落持續超過兩週、無法照顧自己或寶寶，或有傷害自己或寶寶的念頭，請立即求助。', watchEn:'Low mood beyond two weeks, being unable to care for yourself or your baby, or thoughts of harming either of you — get help immediately.', },
   '產後明顯自汗盜汗，中醫月子調理常見重點':
-    { insight:'產後排汗增加是身體排出孕期多餘水分的正常機制，通常數週內會緩解。',
-      tip:'選擇透氣衣物與寢具，適度補充水分即可。',
-      watch:'若合併發燒或惡露異常，請就醫排除感染。',
+    { insight:'產後排汗增加是身體排出孕期多餘水分的正常機制，通常數週內會緩解。', insightEn:'Sweating more after birth is how your body clears the extra fluid of pregnancy. It usually settles within weeks.',
+      tip:'選擇透氣衣物與寢具，適度補充水分即可。', tipEn:'Breathable clothes and bedding, and drink enough. That is all it needs.',
+      watch:'若合併發燒或惡露異常，請就醫排除感染。', watchEn:'With fever or unusual lochia, see a doctor to rule out infection.',
       article:{slug:'postpartum-care', title:'產後調理全指南'} },
   '產後怕冷或關節不適，中醫月子調理重點':
-    { insight:'產後怕冷、關節痠痛與氣血尚未恢復、賀爾蒙變化影響關節穩定度有關。',
-      tip:'注意保暖，尤其是腰腹與足部；溫和熱敷與適度活動有助促進循環。',
-      watch:'若單一關節出現紅、腫、熱、痛，或伴隨發燒，請就醫。',
+    { insight:'產後怕冷、關節痠痛與氣血尚未恢復、賀爾蒙變化影響關節穩定度有關。', insightEn:'Feeling cold and achy after birth reflects Qi and Blood that have not recovered yet, plus hormones affecting joint stability.',
+      tip:'注意保暖，尤其是腰腹與足部；溫和熱敷與適度活動有助促進循環。', tipEn:'Stay warm, especially your lower back, belly and feet. Gentle heat and light movement help circulation.',
+      watch:'若單一關節出現紅、腫、熱、痛，或伴隨發燒，請就醫。', watchEn:'One joint red, swollen, hot and painful, or fever with it — see a doctor.',
       article:{slug:'confinement-taboos', title:'坐月可不可以洗頭、開冷氣？'} },
   '產後怕冷或關節不適明顯，中醫月子調理重點':
-    { insight:'產後怕冷、關節痠痛與氣血尚未恢復、賀爾蒙變化影響關節穩定度有關。',
-      tip:'注意保暖，尤其是腰腹與足部；溫和熱敷與適度活動有助促進循環。',
-      watch:'若單一關節出現紅、腫、熱、痛，或伴隨發燒，請就醫。',
+    { insight:'產後怕冷、關節痠痛與氣血尚未恢復、賀爾蒙變化影響關節穩定度有關。', insightEn:'Feeling cold and achy after birth reflects Qi and Blood that have not recovered yet, plus hormones affecting joint stability.',
+      tip:'注意保暖，尤其是腰腹與足部；溫和熱敷與適度活動有助促進循環。', tipEn:'Stay warm, especially your lower back, belly and feet. Gentle heat and light movement help circulation.',
+      watch:'若單一關節出現紅、腫、熱、痛，或伴隨發燒，請就醫。', watchEn:'One joint red, swollen, hot and painful, or fever with it — see a doctor.',
       article:{slug:'confinement-taboos', title:'坐月可不可以洗頭、開冷氣？'} },
   '產後掉髮，中醫調理常見項目':
-    { insight:'產後掉髮與雌激素驟降，讓原本延長的生長期毛囊同步進入休止期有關，屬正常生理現象。',
-      tip:'溫和洗護、避免過度拉扯或高溫造型，補充均衡營養有助頭髮回復。',
-      watch:'若產後一年後仍持續大量掉髮，或出現局部禿斑，建議就醫評估。', article:{slug:'postpartum-hair-loss', title:'產後脫髮甚麼時候停？'},
+    { insight:'產後掉髮與雌激素驟降，讓原本延長的生長期毛囊同步進入休止期有關，屬正常生理現象。', insightEn:'Postpartum hair loss happens when oestrogen drops and follicles held in the growth phase all shift to resting at once. It is normal.',
+      tip:'溫和洗護、避免過度拉扯或高溫造型，補充均衡營養有助頭髮回復。', tipEn:'Wash gently, skip tight styles and high heat, and eat well while it grows back.',
+      watch:'若產後一年後仍持續大量掉髮，或出現局部禿斑，建議就醫評估。', watchEn:'Heavy shedding still going a year on, or bald patches, deserves a proper assessment.', article:{slug:'postpartum-hair-loss', title:'產後脫髮甚麼時候停？'},
       article:{slug:'postpartum-hair-loss', title:'產後脫髮甚麼時候停？'} },
   '產後明顯掉髮，中醫調理常見項目，可同時留意甲狀腺功能':
-    { insight:'產後掉髮與雌激素驟降有關，屬正常生理現象；但持續大量掉髮也可能與甲狀腺功能變化有關。',
-      tip:'溫和洗護、避免過度拉扯或高溫造型，補充均衡營養有助頭髮回復；持續明顯掉髮建議檢查甲狀腺功能。',
-      watch:'若產後一年後仍持續大量掉髮、或合併疲倦與體重變化，建議檢查甲狀腺功能。', article:{slug:'postpartum-hair-loss', title:'產後脫髮甚麼時候停？'},
+    { insight:'產後掉髮與雌激素驟降有關，屬正常生理現象；但持續大量掉髮也可能與甲狀腺功能變化有關。', insightEn:'Postpartum shedding follows the drop in oestrogen and is normal — but heavy shedding that keeps going can also mean a thyroid change.',
+      tip:'溫和洗護、避免過度拉扯或高溫造型，補充均衡營養有助頭髮回復；持續明顯掉髮建議檢查甲狀腺功能。', tipEn:'Wash gently, skip tight styles and high heat, and eat well while it grows back. If heavy shedding continues, check thyroid function.',
+      watch:'若產後一年後仍持續大量掉髮、或合併疲倦與體重變化，建議檢查甲狀腺功能。', watchEn:'Heavy shedding still going a year on, or tiredness and weight changes with it — check thyroid function.', article:{slug:'postpartum-hair-loss', title:'產後脫髮甚麼時候停？'},
       article:{slug:'postpartum-hair-loss', title:'產後脫髮甚麼時候停？'} },
   '惡露持續或量多，中醫產後調理常見重點':
-    { insight:'惡露是子宮內膜修復過程中的正常分泌物，持續時間因人而異。',
-      tip:'多休息、避免提重物與劇烈運動；若持續超過 6 週建議回診確認。',
-      watch:'若超過 6 週仍未結束、突然變多、有異味或合併發燒，請就醫。', article:{slug:'postpartum-lochia', title:'惡露多久才乾淨？'},
+    { insight:'惡露是子宮內膜修復過程中的正常分泌物，持續時間因人而異。', insightEn:'Lochia is the normal discharge as the womb lining heals. How long it lasts varies from person to person.',
+      tip:'多休息、避免提重物與劇烈運動；若持續超過 6 週建議回診確認。', tipEn:'Rest, and skip heavy lifting and hard exercise. If it is still going past 6 weeks, get it checked.',
+      watch:'若超過 6 週仍未結束、突然變多、有異味或合併發燒，請就醫。', watchEn:'Still going past 6 weeks, suddenly heavier, foul-smelling, or with fever — see a doctor.', article:{slug:'postpartum-lochia', title:'惡露多久才乾淨？'},
       article:{slug:'postpartum-lochia', title:'惡露多久才乾淨？'} },
   '乳汁不足，中醫催乳調理常見項目':
-    { insight:'泌乳量受哺乳頻率、含乳姿勢及母體水分營養狀況影響，多數可透過調整改善。',
-      tip:'增加親餵或擠奶頻率、確保含乳姿勢正確，充足水分與休息也有幫助。',
-      watch:'若寶寶體重增長不足、尿布濕的次數明顯減少，請盡快諮詢醫師或哺乳顧問。', article:{slug:'low-milk-supply', title:'奶量不足怎麼辦？'},
+    { insight:'泌乳量受哺乳頻率、含乳姿勢及母體水分營養狀況影響，多數可透過調整改善。', insightEn:'Supply responds to how often you feed, how the baby latches, and your own fluids and nutrition — most of which can be adjusted.',
+      tip:'增加親餵或擠奶頻率、確保含乳姿勢正確，充足水分與休息也有幫助。', tipEn:'Feed or pump more often, get the latch right, and keep your own fluids and rest up.',
+      watch:'若寶寶體重增長不足、尿布濕的次數明顯減少，請盡快諮詢醫師或哺乳顧問。', watchEn:'If the baby is not gaining weight or there are far fewer wet nappies, speak to a doctor or lactation consultant soon.', article:{slug:'low-milk-supply', title:'奶量不足怎麼辦？'},
       article:{slug:'low-milk-supply', title:'奶量不足怎麼辦？'} },
   '乳房脹痛或阻塞，中醫調理可協助疏通':
-    { insight:'乳腺阻塞多與排空不完全、哺乳姿勢或哺乳間隔過長有關。',
-      tip:'哺乳前熱敷、哺乳後冷敷，並確保排空乳房；按摩時避免過度用力。',
-      watch:'若出現單側紅腫熱痛合併發燒，可能是乳腺炎，請盡快就醫。', article:{slug:'blocked-duct-mastitis', title:'塞奶、石頭胸、乳腺炎怎樣分辨？'},
+    { insight:'乳腺阻塞多與排空不完全、哺乳姿勢或哺乳間隔過長有關。', insightEn:'Blocked ducts usually come from incomplete drainage, the feeding position, or going too long between feeds.',
+      tip:'哺乳前熱敷、哺乳後冷敷，並確保排空乳房；按摩時避免過度用力。', tipEn:'Warm compress before a feed, cold after, and drain the breast fully. Massage gently — hard pressure makes it worse.',
+      watch:'若出現單側紅腫熱痛合併發燒，可能是乳腺炎，請盡快就醫。', watchEn:'One breast red, hot, swollen and painful with a fever may be mastitis — get seen promptly.', article:{slug:'blocked-duct-mastitis', title:'塞奶、石頭胸、乳腺炎怎樣分辨？'},
       article:{slug:'blocked-duct-mastitis', title:'塞奶、石頭胸、乳腺炎怎樣分辨？'} },
   '乳管阻塞頻繁，中醫調理可協助，嚴重時留意乳腺炎':
-    { insight:'乳腺阻塞多與排空不完全、哺乳姿勢或哺乳間隔過長有關；頻繁發生時感染風險較高。',
-      tip:'哺乳前熱敷、哺乳後冷敷，並確保排空乳房；如合併發燒或紅腫請儘速就醫，以排除乳腺炎。',
-      watch:'若出現單側紅腫熱痛合併發燒，可能是乳腺炎，請盡快就醫。', article:{slug:'blocked-duct-mastitis', title:'塞奶、石頭胸、乳腺炎怎樣分辨？'},
+    { insight:'乳腺阻塞多與排空不完全、哺乳姿勢或哺乳間隔過長有關；頻繁發生時感染風險較高。', insightEn:'Blocked ducts usually come from incomplete drainage, the feeding position, or long gaps between feeds. Frequent blockages raise the risk of infection.',
+      tip:'哺乳前熱敷、哺乳後冷敷，並確保排空乳房；如合併發燒或紅腫請儘速就醫，以排除乳腺炎。', tipEn:'Warm compress before a feed, cold after, and drain the breast fully. With fever or redness, get seen promptly to rule out mastitis.',
+      watch:'若出現單側紅腫熱痛合併發燒，可能是乳腺炎，請盡快就醫。', watchEn:'One breast red, hot, swollen and painful with a fever may be mastitis — get seen promptly.', article:{slug:'blocked-duct-mastitis', title:'塞奶、石頭胸、乳腺炎怎樣分辨？'},
       article:{slug:'blocked-duct-mastitis', title:'塞奶、石頭胸、乳腺炎怎樣分辨？'} },
   // meno
   '熱潮紅盜汗，中醫常見調理項目':
-    { insight:'熱潮紅與雌激素波動影響體溫調節中樞有關，是更年期最常見的血管舒縮症狀。',
-      tip:'穿著易調節的分層衣物、避免辛辣與含咖啡因飲品，規律作息有助減少發作頻率。',
-      watch:'若嚴重影響睡眠與日常生活，值得與醫師討論包含賀爾蒙治療在內的選項。', },
+    { insight:'熱潮紅與雌激素波動影響體溫調節中樞有關，是更年期最常見的血管舒縮症狀。', insightEn:'Hot flashes come from oestrogen swings acting on the brain’s temperature control. They are the most common vasomotor symptom of menopause.',
+      tip:'穿著易調節的分層衣物、避免辛辣與含咖啡因飲品，規律作息有助減少發作頻率。', tipEn:'Dress in layers you can shed, ease off spicy food and caffeine, and keep regular hours — it cuts how often flashes come.',
+      watch:'若嚴重影響睡眠與日常生活，值得與醫師討論包含賀爾蒙治療在內的選項。', watchEn:'When it seriously disrupts sleep and daily life, it is worth discussing the options — hormone therapy included — with your doctor.', },
   '熱潮紅盜汗頻繁，建議與中醫師討論調理':
-    { insight:'熱潮紅與雌激素波動影響體溫調節中樞有關，是更年期最常見的血管舒縮症狀。',
-      tip:'穿著易調節的分層衣物、避免辛辣與含咖啡因飲品，規律作息與適度運動有助減少發作頻率。',
-      watch:'若嚴重影響睡眠與日常生活，值得與醫師討論包含賀爾蒙治療在內的選項。', },
+    { insight:'熱潮紅與雌激素波動影響體溫調節中樞有關，是更年期最常見的血管舒縮症狀。', insightEn:'Hot flashes come from oestrogen swings acting on the brain’s temperature control. They are the most common vasomotor symptom of menopause.',
+      tip:'穿著易調節的分層衣物、避免辛辣與含咖啡因飲品，規律作息與適度運動有助減少發作頻率。', tipEn:'Dress in layers you can shed, ease off spicy food and caffeine, and keep regular hours with some exercise — it cuts how often flashes come.',
+      watch:'若嚴重影響睡眠與日常生活，值得與醫師討論包含賀爾蒙治療在內的選項。', watchEn:'When it seriously disrupts sleep and daily life, it is worth discussing the options — hormone therapy included — with your doctor.', },
   '睡眠中斷頻繁，中醫常見調理項目':
-    { insight:'更年期睡眠中斷常與熱潮紅、盜汗及情緒變化交互影響有關。',
-      tip:'睡前避免螢幕與咖啡因，保持臥室涼爽通風；規律運動有助整體睡眠品質。',
-      watch:'若長期失眠已影響白天精神與工作表現，建議尋求睡眠或身心科評估。', },
+    { insight:'更年期睡眠中斷常與熱潮紅、盜汗及情緒變化交互影響有關。', insightEn:'Broken sleep in menopause is usually hot flashes, night sweats and mood feeding into one another.',
+      tip:'睡前避免螢幕與咖啡因，保持臥室涼爽通風；規律運動有助整體睡眠品質。', tipEn:'No screens or caffeine before bed, keep the room cool and airy, and exercise regularly — it lifts sleep quality overall.',
+      watch:'若長期失眠已影響白天精神與工作表現，建議尋求睡眠或身心科評估。', watchEn:'Long-running insomnia that dulls your days and your work deserves a sleep or mental-health assessment.', },
   '情緒有所變化，可與中醫師討論調理':
-    { insight:'更年期情緒波動與雌激素影響神經傳導物質濃度有關。',
-      tip:'保持適度運動與社交連結，情緒起伏較明顯時不妨透過紀錄了解觸發情境。',
-      watch:'若低落或焦慮持續超過兩週並影響生活，建議安排專業評估。', },
+    { insight:'更年期情緒波動與雌激素影響神經傳導物質濃度有關。', insightEn:'Mood swings in menopause follow oestrogen acting on neurotransmitter levels.',
+      tip:'保持適度運動與社交連結，情緒起伏較明顯時不妨透過紀錄了解觸發情境。', tipEn:'Keep moving and stay connected to people. When the swings are sharp, noting what set them off shows you the pattern.',
+      watch:'若低落或焦慮持續超過兩週並影響生活，建議安排專業評估。', watchEn:'Low mood or anxiety lasting beyond two weeks and affecting your life deserves a professional assessment.', },
   '陰道乾澀不適，可與中醫師或婦科醫師討論調理':
-    { insight:'雌激素下降會使陰道黏膜變薄、分泌減少，是常見的泌尿生殖道變化。',
-      tip:'可使用陰道保濕劑，避免刺激性清潔用品；性行為前增加潤滑會較舒適。',
-      watch:'若伴隨出血、明顯疼痛或反覆感染，請安排婦科檢查。', },
+    { insight:'雌激素下降會使陰道黏膜變薄、分泌減少，是常見的泌尿生殖道變化。', insightEn:'Falling oestrogen thins the vaginal lining and reduces lubrication — a common genitourinary change.',
+      tip:'可使用陰道保濕劑，避免刺激性清潔用品；性行為前增加潤滑會較舒適。', tipEn:'A vaginal moisturiser helps; harsh washes do not. Extra lubricant before sex makes it more comfortable.',
+      watch:'若伴隨出血、明顯疼痛或反覆感染，請安排婦科檢查。', watchEn:'With bleeding, marked pain or repeated infections, arrange a gynaecological check.', },
   '關節肌肉痠痛，中醫常見調理項目':
-    { insight:'雌激素具有保護關節與結締組織的作用，濃度下降後較容易出現痠痛緊繃。',
-      tip:'規律的低衝擊運動（如游泳、瑜伽）與足夠鈣質、維生素 D 攝取，有助關節與骨骼健康。',
-      watch:'若單一關節紅腫熱痛、或晨間僵硬超過一小時，建議風濕免疫科評估。', },
+    { insight:'雌激素具有保護關節與結締組織的作用，濃度下降後較容易出現痠痛緊繃。', insightEn:'Oestrogen protects joints and connective tissue; as it falls, aches and stiffness come more easily.',
+      tip:'規律的低衝擊運動（如游泳、瑜伽）與足夠鈣質、維生素 D 攝取，有助關節與骨骼健康。', tipEn:'Regular low-impact exercise (swimming, yoga) with enough calcium and vitamin D looks after both joints and bone.',
+      watch:'若單一關節紅腫熱痛、或晨間僵硬超過一小時，建議風濕免疫科評估。', watchEn:'One joint red, swollen, hot and painful, or morning stiffness over an hour — see rheumatology.', },
   '月經型態改變，中醫常見調理項目':
-    { insight:'月經週期開始改變，是進入更年期轉換期的常見徵象。',
-      tip:'持續紀錄月經型態的變化，有助掌握自己更年期進展的節奏。',
-      watch:'若出血量突然變多、週期短於 21 天，或已停經後又出現任何出血，請儘速婦科檢查。',
+    { insight:'月經週期開始改變，是進入更年期轉換期的常見徵象。', insightEn:'A cycle that starts changing shape is one of the usual signs of the menopause transition.',
+      tip:'持續紀錄月經型態的變化，有助掌握自己更年期進展的節奏。', tipEn:'Keep noting how your periods are changing — it shows you where you are in the transition.',
+      watch:'若出血量突然變多、週期短於 21 天，或已停經後又出現任何出血，請儘速婦科檢查。', watchEn:'Suddenly much heavier bleeding, cycles under 21 days, or any bleeding after menopause — get a gynaecological check promptly.',
       article:{slug:'menstrual-cycle', title:'月經週期幾多日才正常？'} },
 };
 
@@ -3203,8 +3255,8 @@ const SYMPTOM_INFO = {
    because a per-tip link plus a "coming soon" placeholder on every line was
    visually noisy (one cycle card showed the placeholder four times). */
 function tipLine(cfg){
-  if(!cfg) return null;
-  return cfg.tip;
+  if(!cfg || !cfg.tip) return null;
+  return bi(cfg.tip, cfg.tipEn || cfg.tip);
 }
 
 /* Dedupes by slug, preserving first-seen order. */
@@ -3282,8 +3334,12 @@ function buildCycleStageCard(buckets){
     rowFor(a, 'cycle_flow'),
     rowFor(a, 'cycle_pain', {
       evalFn: v => (v==null || v==='') ? 'na' : ((Number(v)>=7 || a.cycle_painimpact==='yes') ? 'watch' : 'ok'),
-      fmt: v => v==null ? '未填答' : `${v} / 10 分${a.cycle_painimpact==='yes' ? '，且已影響日常生活' : ''}`,
-      explainFn: () => '經痛程度較高、或已經影響日常生活時，較可能與子宮內膜異位症、子宮肌腺症等結構性原因有關，建議與醫師討論評估。',
+      fmt: v => v==null ? bi('未填答','Not answered')
+        : bi(`${v} / 10 分${a.cycle_painimpact==='yes' ? '，且已影響日常生活' : ''}`,
+             `${v} / 10${a.cycle_painimpact==='yes' ? ', and it disrupts daily life' : ''}`),
+      explainFn: () => bi(
+        '經痛程度較高、或已經影響日常生活時，較可能與子宮內膜異位症、子宮肌腺症等結構性原因有關，建議與醫師討論評估。',
+        'Pain this high, or pain that disrupts your day, is more likely to have a structural cause such as endometriosis or adenomyosis. Worth discussing with a doctor.'),
     }),
     rowFor(a, 'cycle_pms', {
       evalFn: v => {
@@ -3293,21 +3349,25 @@ function buildCycleStageCard(buckets){
         if(selected.some(o=>o.flag)) return 'watch';
         return v.filter(val=>val!=='none').length >= 3 ? 'watch' : 'ok';
       },
-      fmt: v => { const n=(v||[]).filter(x=>x!=='none').length; return n===0 ? '無明顯經前症狀' : `${n} 項`; },
+      fmt: v => { const n=(v||[]).filter(x=>x!=='none').length;
+        return n===0 ? bi('無明顯經前症狀','No notable PMS') : bi(`${n} 項`, `${n} symptoms`); },
       explainFn: v => {
         const q = findQuestion('cycle_pms');
         const flagged = (v||[]).map(val=>q.options.find(o=>o.value===val)).filter(o=>o && o.flag);
         return flagged.length
-          ? flagged.map(o=>SYMPTOM_INFO[o.flag.key]?.insight || o.flag.zh).join(' ')
-          : '經前症狀較多，多與賀爾蒙週期性波動有關。';
+          ? bi(flagged.map(o=>SYMPTOM_INFO[o.flag.key]?.insight || o.flag.zh).join(' '),
+               flagged.map(o=>SYMPTOM_INFO[o.flag.key]?.insightEn || o.flag.en).join(' '))
+          : bi('經前症狀較多，多與賀爾蒙週期性波動有關。',
+               'Several premenstrual symptoms — usually tied to the normal hormonal swing across the cycle.');
       },
     }),
   ].filter(Boolean);
 
   const watchLabels = rows.filter(r=>r.status==='watch').map(r=>r.label);
   const verdict = watchLabels.length
-    ? `這次的經期在「${watchLabels.join('、')}」上超出一般範圍，值得留意，下面有詳細說明。`
-    : '這次的月經數值大致都落在正常範圍內。';
+    ? bi(`這次的經期在「${watchLabels.map(l=>l.zh).join('、')}」上超出一般範圍，值得留意，下面有詳細說明。`,
+         `Your ${watchLabels.map(l=>l.en).join(', ')} fall outside the usual range this cycle — worth a look, explained below.`)
+    : bi('這次的月經數值大致都落在正常範圍內。','Everything about this cycle sits within the usual range.');
 
   const cardArticles = [
     {slug:'menstrual-cycle', title:'月經週期幾多日才正常？'},
@@ -3315,31 +3375,35 @@ function buildCycleStageCard(buckets){
   const selfCare = dedupeTips(selfCareFromBuckets(buckets, cardArticles));
   // cycle_pain is a slider question, so it never flows through computeDomainFlags —
   // add its own comfort-measure tip directly when the row itself reads as "watch".
-  const painRow = rows.find(r=>r.label==='經痛程度');
+  const painRow = rows.find(r=>r.label && r.label.zh==='經痛程度');
   if(painRow && painRow.status==='watch'){
     const painTip = tipLine(SYMPTOM_INFO['經痛影響生活，為中醫常見且擅長調理的項目']);
     // cycle_painimpact='yes' carries the same flag, so it may already be listed
     if(painTip && !selfCare.includes(painTip)) selfCare.push(painTip);
   }
-  if(!selfCare.length) selfCare.push('規律作息、避免生冷飲食，經期期間注意腹部保暖，是日常最基本的調理方式。');
+  if(!selfCare.length) selfCare.push(bi(
+    '規律作息、避免生冷飲食，經期期間注意腹部保暖，是日常最基本的調理方式。',
+    'Regular hours, going easy on cold food and drink, and keeping your abdomen warm during your period are the basics.'));
 
   const track = [
-    '這次月經開始與結束的日期',
-    '每天更換衛生用品的次數（估計經量）',
-    '經痛程度（0–10 分）與是否需要止痛藥或請假',
-    '經前是否有情緒、脹痛或其他不適',
-    '經血顏色與是否有血塊',
+    bi('這次月經開始與結束的日期','The day this period started and ended'),
+    bi('每天更換衛生用品的次數（估計經量）','How many pads or tampons a day (a proxy for flow)'),
+    bi('經痛程度（0–10 分）與是否需要止痛藥或請假','Pain out of 10, and whether you needed painkillers or time off'),
+    bi('經前是否有情緒、脹痛或其他不適','Any mood changes, tenderness or other discomfort beforehand'),
+    bi('經血顏色與是否有血塊','The colour of the blood, and any clots'),
   ];
 
-  const seekCare = [...buckets.urgent, ...buckets.screen].map(e=>e.zh);
+  const seekCare = [...buckets.urgent, ...buckets.screen].map(e=>bi(e.zh, e.en));
 
   const cta = (status==='urgent' || status==='screen')
-    ? '建議儘速安排婦科檢查；中醫調理可以同步進行，但無法取代西醫檢查與診斷。'
-    : '想更了解自己的體質、讓經期更穩定？歡迎預約諮詢。';
+    ? bi('建議儘速安排婦科檢查；中醫調理可以同步進行，但無法取代西醫檢查與診斷。',
+         'Book a gynaecological check soon. TCM care can run alongside it, but it does not replace the examination and diagnosis.')
+    : bi('想更了解自己的體質、讓經期更穩定？歡迎預約諮詢。',
+         'Want to understand your constitution and steady your cycle? You are welcome to book a consultation.');
 
   return {
     status, verdict,
-    table: renderValueTable('你的月經對照卡', rows),
+    table: renderValueTable(L('你的月經對照卡','Your cycle at a glance'), rows),
     selfCare, track, seekCare,
     articles: renderArticleLinks(collectArticles(cardArticles).slice(0, 4), watchLabels.length > 0),
     cta,
@@ -3411,7 +3475,7 @@ function buildPostpartumStageCard(buckets){
   ];
   const selfCare = dedupeTips(selfCareFromBuckets(buckets, cardArticles));
   if(!selfCare.length) selfCare.push('把握寶寶睡著時一起休息，補充足夠水分與蛋白質，是產後恢復最實際的做法。');
-  const track = ['惡露顏色與量的變化', '體溫是否正常', '情緒低落是否持續超過兩週', '乳房是否有局部紅腫熱痛'];
+  const track = [bi('惡露顏色與量的變化','How the colour and amount of lochia change'), bi('體溫是否正常','Whether your temperature stays normal'), bi('情緒低落是否持續超過兩週','Whether low mood is lasting beyond two weeks'), bi('乳房是否有局部紅腫熱痛','Any red, hot, painful patch on a breast')];
   const seekCare = [...POSTPARTUM_RED_FLAGS];
   if(stage && stage.watch) seekCare.unshift(stage.watch);
   [...buckets.urgent, ...buckets.screen].forEach(e=>{ if(!seekCare.includes(e.zh)) seekCare.push(e.zh); });
@@ -3448,29 +3512,36 @@ function buildMenoStageCard(buckets){
 
   const watchRegions = rows.filter(r=>r.status==='watch').map(r=>r.label);
   const verdict = watchRegions.length
-    ? `您的更年期症狀主要集中在「${watchRegions.join('、')}」這幾個區域，下面有詳細說明。`
-    : '您目前填答的更年期相關症狀都不明顯，大致落在可接受範圍。';
+    ? bi(`您的更年期症狀主要集中在「${watchRegions.map(l=>l.zh).join('、')}」這幾個區域，下面有詳細說明。`,
+         `Your menopause symptoms cluster around ${watchRegions.map(l=>l.en).join(', ')}. Details below.`)
+    : bi('您目前填答的更年期相關症狀都不明顯，大致落在可接受範圍。',
+         'None of the menopause symptoms you reported stand out — all within a manageable range.');
 
   const cardArticles = [];
   const selfCare = dedupeTips(selfCareFromBuckets(buckets, cardArticles));
-  if(!selfCare.length) selfCare.push('規律作息、適度運動與情緒紓解，是更年期日常保養的基礎。');
+  if(!selfCare.length) selfCare.push(bi(
+    '規律作息、適度運動與情緒紓解，是更年期日常保養的基礎。',
+    'Regular hours, moderate exercise and somewhere to put the feelings — that is the groundwork.'));
 
   const track = [
-    '熱潮紅／盜汗每週發作的次數',
-    '睡眠中斷的次數與原因',
-    '情緒變化較明顯出現在什麼情境',
-    '是否出現任何陰道出血（無論多少）',
+    bi('熱潮紅／盜汗每週發作的次數','How many hot flashes or night sweats a week'),
+    bi('睡眠中斷的次數與原因','How often sleep breaks, and what wakes you'),
+    bi('情緒變化較明顯出現在什麼情境','Which situations bring the mood changes out'),
+    bi('是否出現任何陰道出血（無論多少）','Any vaginal bleeding at all, however little'),
   ];
 
-  const seekCare = [...buckets.urgent, ...buckets.screen].map(e=>e.zh);
-  seekCare.unshift('若您已停經超過 12 個月，此後出現任何陰道出血(無論多少)，都屬於停經後出血，請儘速安排婦科檢查，排除子宮內膜病變。');
+  const seekCare = [...buckets.urgent, ...buckets.screen].map(e=>bi(e.zh, e.en));
+  seekCare.unshift(bi(
+    '若您已停經超過 12 個月，此後出現任何陰道出血(無論多少)，都屬於停經後出血，請儘速安排婦科檢查，排除子宮內膜病變。',
+    'Once you are 12 months past your last period, any bleeding at all counts as postmenopausal bleeding. Arrange a gynaecological check promptly to rule out endometrial disease.'));
 
   return {
     status, verdict,
-    table: renderValueTable('你的症狀圖譜卡', rows),
+    table: renderValueTable(L('你的症狀圖譜卡','Your symptoms at a glance'), rows),
     selfCare, track, seekCare,
     articles: renderArticleLinks(collectArticles(cardArticles).slice(0, 4), watchRegions.length > 0),
-    cta: '想透過中醫調理改善熱潮紅、睡眠或情緒？歡迎預約諮詢。',
+    cta: bi('想透過中醫調理改善熱潮紅、睡眠或情緒？歡迎預約諮詢。',
+            'Want TCM support for hot flashes, sleep or mood? You are welcome to book a consultation.'),
   };
 }
 
@@ -3497,7 +3568,7 @@ function renderSeekCareBlock(items){
    狀態、幾項需要留意、以及最重要的那一句。 */
 function cardSummary(d, status, count, line){
   const badge = STATUS_LABEL_TEXT[status];
-  const tally = count ? `<span class="card-sum-count">${count} 項</span>` : '';
+  const tally = count ? `<span class="card-sum-count">${count}${bi(' 項',' items')}</span>` : '';
   return `<summary class="card-header">
     <span class="card-head-main">
       <h3 class="card-title"><span class="zh">${d.zh}</span><span class="en">${d.en}</span></h3>
@@ -3546,7 +3617,7 @@ function renderDomainCard(d, buckets){
      only the tiers below it need one of their own. */
   let content = '';
   if(status === 'clear'){
-    content = `<p class="card-clear-text">${meta.clear_zh||'—'}</p>`;
+    content = `<p class="card-clear-text">${bi(meta.clear_zh||'—', meta.clear_en||meta.clear_zh||'—')}</p>`;
   } else {
     const activeTiers = ['urgent','screen','tcm'].filter(level=>buckets[level].length);
     content = activeTiers.map((level, i)=>{
@@ -3558,7 +3629,9 @@ function renderDomainCard(d, buckets){
   }
 
   const firstFlag = (buckets.urgent[0] || buckets.screen[0] || buckets.tcm[0] || {}).zh || '';
-  const sumLine = status === 'clear' ? (meta.clear_zh || '') : firstFlag;
+  const sumLine = status === 'clear'
+    ? bi(meta.clear_zh || '', meta.clear_en || meta.clear_zh || '')
+    : bi(firstFlag, (buckets.urgent[0] || buckets.screen[0] || buckets.tcm[0] || {}).en || firstFlag);
   const count = buckets.urgent.length + buckets.screen.length;
 
   return `<details class="domain-card status-${status}"${cardOpen(status)}>
@@ -3567,10 +3640,10 @@ function renderDomainCard(d, buckets){
     <div class="card-divider"></div>
     ${renderAnswerTable(d.id)}
     ${content}
-    ${caveat ? `<p class="domain-caveat">⚑ ${caveat.zh}</p>` : ''}
+    ${caveat ? `<p class="domain-caveat">⚑ ${bi(caveat.zh, caveat.en)}</p>` : ''}
     ${links.length ? `<div class="article-links">
-      <span class="al-label">延伸閱讀 Further reading</span>
-      ${links.map(l=>`<a class="article-link" href="${l.href}" target="_blank" rel="noopener">${l.zh} →</a>`).join('')}
+      <span class="al-label">${bi('延伸閱讀','Further reading')}</span>
+      ${links.map(l=>`<a class="article-link" href="${l.href}" target="_blank" rel="noopener">${l.zh} →${bi('','<span class="al-zhnote"> (in Chinese)</span>')}</a>`).join('')}
     </div>` : ''}
   </details>`;
 }
@@ -3621,18 +3694,21 @@ function buildOverview(domainFlags, activeDomains){
 
   /* Name the actual findings rather than the domain they sit in — "經量、經痛程度"
      tells her something; "月經週期評估" just repeats the card title below. */
-  const findingsFor = level => {
+  const findingsFor = (level, key='findings') => {
     const out = [];
     activeDomains.forEach(d=>{
       const b = domainFlags[d.id];
       if(!b) return;
-      b[level].forEach(e=>(e.findings||[]).forEach(f=>{ if(!out.includes(f)) out.push(f); }));
+      b[level].forEach(e=>(e[key]||[]).forEach(f=>{ if(!out.includes(f)) out.push(f); }));
     });
     return out;
   };
   const listOf = (arr, max=4) => arr.length > max
     ? arr.slice(0, max).join('、') + `等 ${arr.length} 項`
     : arr.join('、');
+  const listOfEn = (arr, max=4) => arr.length > max
+    ? arr.slice(0, max).join(', ') + ` and ${arr.length - max} more`
+    : arr.length > 1 ? arr.slice(0, -1).join(', ') + ' and ' + arr[arr.length-1] : (arr[0] || '');
 
   const urgentFindings = findingsFor('urgent');
   const screenFindings = findingsFor('screen');
@@ -3659,23 +3735,35 @@ function buildOverview(domainFlags, activeDomains){
     screenList:  listOf(screenFindings),
     tcmList:     listOf(tcmFindings),
   };
+  /* 同一組句子的英文版：數字一樣，但清單要換成英文的重點，
+     否則英文句子中間會插著一串中文。 */
+  const slotsEn = Object.assign({}, slots, {
+    urgentList: listOfEn(findingsFor('urgent','findingsEn')),
+    screenList: listOfEn(findingsFor('screen','findingsEn')),
+    tcmList:    listOfEn(findingsFor('tcm','findingsEn')),
+  });
   /* {extra} is not a slot — it is the insertion point for the optional sentence
      below, so it has to survive this pass and get substituted afterwards. */
-  const fill = str => String(str==null?'':str)
-    .replace(/\{(\w+)\}/g, (m,k)=> k==='extra' ? m : (slots[k]!=null ? slots[k] : ''));
+  const fillWith = (dict) => (str) => String(str==null?'':str)
+    .replace(/\{(\w+)\}/g, (m,k)=> k==='extra' ? m : (dict[k]!=null ? dict[k] : ''));
+  const fill = fillWith(slots);
+  const fillEn = fillWith(slotsEn);
 
   /* `extra` is a whole sentence that only applies when its tier actually fired,
      so it is authored separately instead of being buried in a conditional
      inside the body string. */
-  const extra = (copy.extraIf && Number(slots[copy.extraIf]) > 0) ? fill(copy.extra) : '';
-  const headline = fill(copy.headline);
-  const body = fill(copy.body).replace('{extra}', extra);
-  const bodyEn = copy.bodyEn;
+  const hasExtra = copy.extraIf && Number(slots[copy.extraIf]) > 0;
+  const extra   = hasExtra ? fill(copy.extra) : '';
+  const extraEn = hasExtra ? fillEn(copy.extraEn || '') : '';
+  const headline   = fill(copy.headline);
+  const headlineEn = fillEn(copy.headlineEn || copy.headline);
+  const body   = fill(copy.body).replace('{extra}', extra);
+  const bodyEn = fillEn(copy.bodyEn).replace('{extra}', extraEn ? extraEn + ' ' : '');
 
   const cl = OVERVIEW_COPY.countLine;
-  const countLine = attentionCount
-    ? `<p class="ov-count">${fill(cl.lead)}${tcmFindings.length ? fill(cl.tcmClause) : ''}${fill(cl.tail)}</p>`
-    : '';
+  const countZh = fill(cl.lead) + (tcmFindings.length ? fill(cl.tcmClause) : '') + fill(cl.tail);
+  const countEn = fillEn(cl.leadEn) + (tcmFindings.length ? fillEn(cl.tcmClauseEn) : '') + fillEn(cl.tailEn);
+  const countLine = attentionCount ? `<p class="ov-count">${bi(countZh, countEn)}</p>` : '';
 
   // --- per-domain chip row ---
   const chips = activeDomains.map(d=>{
@@ -3686,7 +3774,7 @@ function buildOverview(domainFlags, activeDomains){
 
   return `<div class="overview-block">
     <p class="ov-label"><span class="zh">整體評估</span><span class="en">Overall Assessment</span></p>
-    <p class="ov-main">${headline}</p>
+    <p class="ov-main">${bi(headline, headlineEn)}</p>
     <p class="ov-body"><span class="zh">${body}</span><span class="en">${bodyEn}</span></p>
     ${countLine}
     <div class="overview-chips">${chips}</div>
@@ -3716,13 +3804,15 @@ function renderSummary(){
     <div class="cta-box" id="ctaBox">
       <h3><span class="zh">${anyTcm ? '想進一步了解中醫如何幫助您？' : '歡迎預約一次完整諮詢'}</span><span class="en">${anyTcm ? 'Curious how TCM can help?' : 'Book a full consultation'}</span></h3>
       <p>${anyTcm
-        ? '根據您的填答，有幾個面向很適合透過中醫進一步評估體質與調理方向。'
-        : '無論結果如何，定期的整體評估都有助於及早掌握身體狀態。'}</p>
-      <a href="index.html#contact" class="btn btn-primary" target="_blank" rel="noopener">預約掛號 Book an Appointment →</a>
+        ? bi('根據您的填答，有幾個面向很適合透過中醫進一步評估體質與調理方向。',
+             'Based on your answers, a few areas would suit a fuller TCM assessment of your constitution and care plan.')
+        : bi('無論結果如何，定期的整體評估都有助於及早掌握身體狀態。',
+             'Whatever the result, a regular check-in is the best way to stay ahead of your health.')}</p>
+      <a href="index.html#contact" class="btn btn-primary" target="_blank" rel="noopener">${bi('預約掛號 →','Book an Appointment →')}</a>
     </div>
 
     <div class="summary-actions">
-      <button class="btn btn-ghost" data-nav="prev">← 回到上一步修改答案 Edit answers</button>
+      <button class="btn btn-ghost" data-nav="prev">${bi('← 回到上一步修改答案','← Back to edit answers')}</button>
     </div>
 
     <div class="print-only">
