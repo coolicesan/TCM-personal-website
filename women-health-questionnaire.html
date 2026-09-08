@@ -1782,9 +1782,13 @@ const TRACKS_BY_STATUS = {
 };
 
 /* 某些狀態只適合填特定問卷，連「完整評估」也不應該超出這個範圍。
-   懷孕中只問孕期與產後，其餘篩查留待產後再做。 */
+   懷孕中與產後一年內都只問孕期與產後：這段時間要處理的是眼前的孕期不適、
+   惡露、哺乳與恢復，把月經週期、備孕與更年期一併問下去只會拖長問卷，
+   而且產後的月經還沒穩定下來，答案也不可靠。其餘篩查留待恢復後再做。
+   只剩一份問卷時 needsPathStep() 會回 false，路徑頁整頁跳過。 */
 const SECTIONS_BY_STATUS = {
-  pregnant: ['pregnant_postpartum'],
+  pregnant:   ['pregnant_postpartum'],
+  postpartum: ['pregnant_postpartum'],
 };
 function getAllowedSectionIds(){
   return SECTIONS_BY_STATUS[state.answers.basic_status] || null; // null = 不設限
@@ -3425,7 +3429,11 @@ function buildPregnancyStageCard(buckets){
     rowFor(a, 'preg_mood'),
   ].filter(Boolean);
 
-  const verdict = `您目前是${stage.label}。以下是這個階段常見的狀況與需要留意的界線。`;
+  /* stage.label 是 L() 物件，直接插進字串會變成 [object Object]，
+     要跟月經卡、更年期卡一樣兩種語言各自組句。 */
+  const verdict = bi(
+    `目前階段：${stage.label.zh}。以下是這個階段常見的狀況與需要留意的界線。`,
+    `Where you are now: ${stage.label.en}. Here is what is common at this stage, and where the limits are.`);
   const cardArticles = [
     {slug:'hong-kong-pregnancy-care-timeline', title:'香港完整孕期產檢流程'},
     a.preg_trimester==='t3' ? {slug:'third-trimester-tcm',  title:'懷孕後期不適：中醫如何助你待產'}
@@ -3467,8 +3475,10 @@ function buildPostpartumStageCard(buckets){
   ].filter(Boolean);
 
   const verdict = stage
-    ? `您目前是${stage.label}。以下整理這個階段惡露、掉髮、乳房與情緒大概會是什麼狀態。`
-    : '請先填答產後時間，才能為您顯示對應的階段重點。';
+    ? bi(`目前階段：${stage.label.zh}。以下整理這個階段惡露、掉髮、乳房與情緒大概會是什麼狀態。`,
+         `Where you are now: ${stage.label.en}. Here is what lochia, hair loss, breasts and mood usually look like at this stage.`)
+    : bi('請先填答產後時間，才能為您顯示對應的階段重點。',
+         'Answer how long it has been since delivery to see the notes for your stage.');
 
   const cardArticles = [
     {slug:'postpartum-care', title:'產後調理全指南'},
