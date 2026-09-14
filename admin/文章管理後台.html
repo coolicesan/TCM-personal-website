@@ -540,7 +540,9 @@
 
   function renderStageOptions(){
     var sel = $('fStage');
-    sel.innerHTML = state.data.stages.map(function(s){
+    /* 沒有生命階段的文章（例如舌診那篇）之前會落到沒有任何選項對應的空值，
+       下拉選單顯示一片空白，看起來像壞掉，跟旁邊已經填好的標籤格格不入。 */
+    sel.innerHTML = '<option value="">未分類</option>' + state.data.stages.map(function(s){
       return '<option value="' + s.key + '">' + s.label + '</option>';
     }).join('');
   }

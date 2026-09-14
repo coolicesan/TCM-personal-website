@@ -226,7 +226,9 @@
      翻譯。所以這種頁面的語言由 <html lang> 決定，切換語言等於換頁。 */
   var LANG_PAGES = {
     'constitution.html':    { zh: 'constitution.html',    en: 'constitution-en.html' },
-    'constitution-en.html': { zh: 'constitution.html',    en: 'constitution-en.html' }
+    'constitution-en.html': { zh: 'constitution.html',    en: 'constitution-en.html' },
+    'tongue-diagnosis-basics.html':    { zh: 'tongue-diagnosis-basics.html',    en: 'tongue-diagnosis-basics-en.html' },
+    'tongue-diagnosis-basics-en.html': { zh: 'tongue-diagnosis-basics.html',    en: 'tongue-diagnosis-basics-en.html' }
   };
 
   function currentFile() {

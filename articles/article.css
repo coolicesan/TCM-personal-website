@@ -191,6 +191,11 @@ img { max-width: 100%; display: block; }
 .a-table tbody tr:last-child td { border-bottom: none; }
 .a-table tbody tr:nth-child(even) { background: var(--cream-deep); }
 
+/* ── Figure (reference photo/infographic crop) ── */
+.a-figure { margin: 24px 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--ivory); }
+.a-figure img { display: block; width: 100%; height: auto; }
+.a-figure figcaption { padding: 10px 14px; font-size: 12.5px; color: var(--cocoa-soft); text-align: center; background: var(--cream-deep); }
+
 /* ── FAQ ── */
 .a-faq { margin: 8px 0; }
 .a-faq-item { border-bottom: 1px solid var(--line); padding: 18px 0; }

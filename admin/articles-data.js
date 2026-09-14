@@ -29,6 +29,10 @@ window.ARTICLES_DATA = {
     {
       "key": "postmenopause",
       "label": "停經後"
+    },
+    {
+      "key": "tcmBasics",
+      "label": "中醫科普"
     }
   ],
   "articles": [
@@ -11837,6 +11841,700 @@ window.ARTICLES_DATA = {
           ]
         }
       ]
+    },
+    {
+      "slug": "tongue-diagnosis-basics",
+      "stage": "tcmBasics",
+      "tags": [
+        "舌診",
+        "中醫體質"
+      ],
+      "title": "舌頭顏色代表什麼？中醫舌診入門：舌色、舌苔與舌形一次看懂",
+      "excerpt": "舌頭顏色、舌苔厚薄與舌頭形狀，都是中醫望診的重要依據。香港註冊中醫師拆解淡紅、淡白、紅、暗紫四種舌色，白膩苔與黃膩苔的分別，以及裂紋舌、齒痕舌代表的體質訊號，附日常自我觀察方法。",
+      "metaTitle": "舌頭顏色代表什麼？中醫舌診入門｜香港註冊中醫師解說",
+      "metaDescription": "舌頭顏色、舌苔厚薄與舌頭形狀，都是中醫望診的重要依據。香港註冊中醫師拆解淡紅、淡白、紅、暗紫四種舌色，白膩苔與黃膩苔的分別，以及裂紋舌、齒痕舌代表的體質訊號，附日常自我觀察方法。",
+      "keywords": [
+        "舌頭顏色",
+        "舌苔",
+        "舌診",
+        "裂紋舌",
+        "齒痕舌",
+        "中醫體質"
+      ],
+      "readTime": 6,
+      "heroEyebrow": "中醫科普 · 舌診",
+      "heroTags": [
+        "#舌診",
+        "#舌頭顏色",
+        "#舌苔",
+        "#中醫體質",
+        "#裂紋舌",
+        "#齒痕舌"
+      ],
+      "publishDate": "2026-09-14",
+      "blocks": [
+        {
+          "type": "lead",
+          "text": "健康舌象一般為淡紅舌色、薄白舌苔。若舌色偏淡、偏紅或偏暗紫，舌苔轉厚轉黃，或舌面出現裂紋、齒痕，都是中醫望診中值得留意的訊號，分別可能與氣血不足、體內有熱、痰濕或脾虛有關。但舌頭外觀只是其中一項參考，仍需配合睡眠、食慾、消化、二便與月經等整體狀況一併判斷。"
+        },
+        {
+          "type": "paragraph",
+          "text": "刷牙時看一眼舌頭，是不少人平日就有的習慣，但舌色偏白、舌苔變厚，甚至舌邊出現一排牙齒印，這些變化究竟代表什麼？中醫望、聞、問、切四診之中，望舌是最容易自己在家觀察的一環。以下從舌色、舌苔到舌頭形狀，逐一拆解常見的舌象訊號。"
+        },
+        {
+          "type": "heading",
+          "text": "什麼是舌診？中醫望診的重要一環"
+        },
+        {
+          "type": "info",
+          "title": "舌診",
+          "text": "中醫「望聞問切」四診之中，望診的其中一環，透過觀察舌頭的顏色、舌苔與形狀，推斷體內氣血、臟腑與陰陽的大致傾向。"
+        },
+        {
+          "type": "paragraph",
+          "text": "舌頭透過經絡與臟腑相連，健康的舌象一般為舌色淡紅、舌苔薄白且分布均勻。中醫透過觀察舌色與舌苔的形態，可以粗略估計身體的血液循環與體質強弱等傾向，但舌診從來不是單獨使用的診斷方法，臨床上會配合問診與脈診等一併判斷。"
+        },
+        {
+          "type": "paragraph",
+          "text": "舌頭的狀態也很容易受外在因素影響，例如剛睡醒、飲食染色，甚至天氣冷熱，都可能令舌象出現短暫變化。這也是為什麼下文會特別談到，日常觀察舌象時有哪些細節需要留意。"
+        },
+        {
+          "type": "heading",
+          "text": "舌頭顏色代表什麼？四種常見舌色解讀"
+        },
+        {
+          "type": "paragraph",
+          "text": "舌色是望舌時最先留意的部分，反映的是身體氣血與寒熱的大致傾向。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "舌色",
+            "可能反映",
+            "常見情況"
+          ],
+          "rows": [
+            [
+              "淡紅色（略帶光澤）",
+              "氣血調和",
+              "一般視為健康舌色"
+            ],
+            [
+              "淡白色",
+              "氣血不足或體質偏寒",
+              "較常見於容易疲倦、手腳冰冷者"
+            ],
+            [
+              "紅色（偏鮮紅）",
+              "體內熱氣偏盛",
+              "可能伴口乾、容易上火"
+            ],
+            [
+              "暗紫色（或帶瘀斑）",
+              "血行不暢、血瘀",
+              "可能伴刺痛或固定痛點"
+            ]
+          ]
+        },
+        {
+          "type": "subheading",
+          "text": "淡紅色：多屬健康舌色"
+        },
+        {
+          "type": "paragraph",
+          "text": "舌色淡紅、帶有自然光澤，是中醫認為氣血調和、臟腑功能運作正常的表現，屬於一般人最常見也最理想的舌色。"
+        },
+        {
+          "type": "paragraph",
+          "text": "**初步生活建議：**日常只需維持規律作息與均衡飲食，不必特別調整。"
+        },
+        {
+          "type": "subheading",
+          "text": "淡白色：氣血不足的訊號"
+        },
+        {
+          "type": "paragraph",
+          "text": "舌色偏淡甚至泛白，中醫多歸因於氣血不足，或身體感受寒氣，常見於容易疲倦、面色偏白、手腳容易冰冷的人。"
+        },
+        {
+          "type": "paragraph",
+          "text": "**初步生活建議：**飲食上可減少生冷食物，適量增加溫熱、易消化的食材，並留意睡眠是否充足。"
+        },
+        {
+          "type": "subheading",
+          "text": "紅色：體內熱氣偏盛"
+        },
+        {
+          "type": "paragraph",
+          "text": "舌色偏紅甚至呈鮮紅色，多反映體內熱氣較盛、臟腑功能偏亢進，這類人有時會同時感到口乾、容易煩躁或上火。"
+        },
+        {
+          "type": "paragraph",
+          "text": "**初步生活建議：**飲食宜清淡，減少辛辣、油炸及刺激性食物，並留意睡眠與情緒是否穩定。"
+        },
+        {
+          "type": "subheading",
+          "text": "暗紫色：血瘀的警示"
+        },
+        {
+          "type": "paragraph",
+          "text": "舌色深紅甚至偏暗紫，並帶有瘀斑，中醫多視為體內有瘀血的表現。若同時伴隨心口悶痛或其他部位持續不適，應盡快求醫檢查，不宜單純視為體質問題處理。"
+        },
+        {
+          "type": "paragraph",
+          "text": "**初步生活建議：**日常可維持適度活動、避免久坐不動，並注意身體保暖；若有明顯不適，仍應以及早求醫為優先。"
+        },
+        {
+          "type": "heading",
+          "text": "舌苔看什麼？白膩苔與黃膩苔的分別"
+        },
+        {
+          "type": "info",
+          "title": "舌苔",
+          "text": "舌面附著的一層苔狀物，由脫落的舌黏膜上皮細胞、唾液、細菌及食物碎屑等組成，健康舌苔應薄白而潤，均勻分布於舌面。"
+        },
+        {
+          "type": "paragraph",
+          "text": "舌苔的顏色與厚薄，是中醫判斷體內濕氣與寒熱的重要依據。苔色越黃，一般代表熱象越明顯；苔質越厚越膩，則多與痰濕或消化狀況有關。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "舌苔",
+            "常見成因",
+            "可能伴隨表現"
+          ],
+          "rows": [
+            [
+              "白膩苔",
+              "多與體內濕氣偏重、痰濕內停有關",
+              "身體較沉重、容易疲倦、食慾欠佳"
+            ],
+            [
+              "黃膩苔",
+              "多與濕熱有關",
+              "頭昏、胸悶、口氣較重、大便黏膩"
+            ]
+          ]
+        },
+        {
+          "type": "subheading",
+          "text": "白膩苔：多與痰濕有關"
+        },
+        {
+          "type": "paragraph",
+          "text": "舌苔白厚、質地黏膩如漿糊狀，中醫多視為體內濕氣偏重、脾胃運化水濕的能力較弱，這類人常伴隨身體沉重、容易疲倦、食慾不振等表現。"
+        },
+        {
+          "type": "paragraph",
+          "text": "**初步生活建議：**飲食宜清淡，減少甜食、油膩與生冷食物，適量運動有助於改善痰濕體質。"
+        },
+        {
+          "type": "subheading",
+          "text": "黃膩苔：多與濕熱有關"
+        },
+        {
+          "type": "paragraph",
+          "text": "在白膩苔的基礎上，若舌苔轉為黃色，中醫多判斷為濕與熱同時存在，即「濕熱」。這類人除了舌苔厚膩，還常見頭昏、胸悶、沒胃口、大便黏膩等症狀。"
+        },
+        {
+          "type": "paragraph",
+          "text": "**初步生活建議：**建議減少燒烤、油炸與辛辣食物，多攝取新鮮蔬果，並保持充足水分。"
+        },
+        {
+          "type": "paragraph",
+          "text": "除了顏色與厚薄，舌苔太厚、太薄，甚至完全沒有舌苔，同樣有參考意義：舌苔過厚多代表病邪較盛或消化不良；舌面長期沒有舌苔，中醫則多視為陰虛較嚴重的表現，若同時伴隨深裂紋，代表情況可能較為明顯，值得留意。"
+        },
+        {
+          "type": "heading",
+          "text": "舌頭形狀藏著什麼訊息？裂紋舌與齒痕舌"
+        },
+        {
+          "type": "paragraph",
+          "text": "除了顏色與舌苔，舌頭的形狀與邊緣狀態，同樣是中醫望舌時的觀察重點。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "舌形",
+            "特徵",
+            "常見對應體質"
+          ],
+          "rows": [
+            [
+              "裂紋舌",
+              "舌面出現深淺不一的裂痕",
+              "多與陰虛或氣虛有關"
+            ],
+            [
+              "齒痕舌",
+              "舌頭邊緣出現鋸齒狀牙印",
+              "多與脾虛或氣虛有關"
+            ]
+          ]
+        },
+        {
+          "type": "subheading",
+          "text": "裂紋舌：多與陰虛或氣虛有關"
+        },
+        {
+          "type": "paragraph",
+          "text": "裂紋舌多見於陰虛熱盛的體質，若舌色偏紅絳而乾裂，多屬熱盛傷陰；若舌色偏淡白而裂，則較常與血虛或津液不足有關。判斷時還需留意舌苔的乾濕：舌苔乾燥而裂，多屬熱盛傷津；舌苔有津液但仍有裂紋，則較常見於氣虛體質。"
+        },
+        {
+          "type": "paragraph",
+          "text": "**初步生活建議：**日常可留意睡眠是否充足、水分攝取是否足夠，並避免長期熬夜或過度耗神。"
+        },
+        {
+          "type": "subheading",
+          "text": "齒痕舌：多與脾虛或氣虛有關"
+        },
+        {
+          "type": "paragraph",
+          "text": "舌頭邊緣出現一排因牙齒擠壓形成的鋸齒狀痕跡，稱為齒痕舌，中醫多歸因於脾虛或氣虛，運化水濕能力較弱。若舌體同時偏胖大並帶齒痕，多代表脾虛兼有濕氣偏重的情況，這類體質的人常見身形偏浮腫、活動量偏低、容易疲倦。"
+        },
+        {
+          "type": "paragraph",
+          "text": "**初步生活建議：**飲食建議定時定量，避免生冷與難消化食物，並可搭配適量運動改善脾虛體質。"
+        },
+        {
+          "type": "heading",
+          "text": "日常怎麼自我觀察舌象？"
+        },
+        {
+          "type": "paragraph",
+          "text": "想在家自我觀察舌象，掌握以下幾個細節，判斷會更準確："
+        },
+        {
+          "type": "checklist",
+          "items": [
+            "選在早上刷牙前、光線充足自然光下觀察，避免燈光偏黃影響判斷。",
+            "觀察前半小時避免飲用咖啡、濃茶或進食深色食物，以免暫時染色舌苔。",
+            "觀察順序建議先看舌色，再看舌苔，最後留意舌頭形狀與邊緣。",
+            "自然平放觀察即可，不必刻意用力伸長舌頭，以免舌色因用力而暫時改變。",
+            "與其只看單日狀態，連續觀察數天的變化趨勢更有參考價值，因為舌象容易受睡眠與飲食影響而短暫波動。"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "舌象只是參考，什麼情況要留意"
+        },
+        {
+          "type": "paragraph",
+          "text": "舌頭外觀只是其中一項參考，需要配合睡眠、食慾、消化、二便與月經等整體狀況一併判斷，不宜單憑舌象自行斷症或用藥。以下情況建議及早求醫："
+        },
+        {
+          "type": "alert",
+          "title": "出現以下情況，建議盡快求醫",
+          "items": [
+            "舌色持續暗紫，並伴隨心口悶痛或其他部位持續不適。",
+            "舌苔短時間內由薄轉厚、由白轉黃，並伴隨發燒、口苦等症狀。",
+            "舌面長期沒有舌苔、乾裂情況加深，或整體狀態持續轉差。",
+            "舌頭出現不明潰瘍，超過兩星期仍未癒合。",
+            "想根據體質作中藥或食療調理，但自行判斷後仍感疑惑不確定。"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "中醫辨證講求「四診合參」，即望、聞、問、切四種方法一併考慮，舌象只是其中一部分，實際體質判斷建議由註冊中醫師面診評估。"
+        },
+        {
+          "type": "heading",
+          "text": "常見問題"
+        },
+        {
+          "type": "faq",
+          "items": [
+            {
+              "q": "舌苔可以先刷掉，再給醫師看嗎？",
+              "a": "不建議。刷牙時順道刮走舌苔，或看診前特地清潔舌面，都會令醫師難以判斷真實舌象，建議看診前保持自然狀態即可。"
+            },
+            {
+              "q": "早上起床舌苔特別厚，是不是有病？",
+              "a": "不一定。剛睡醒時口水分泌較少、口腔活動量低，舌苔看起來容易偏厚，可以先漱口，再觀察是否持續偏厚。若長期偏厚且伴隨其他不適，才需要多加留意。"
+            },
+            {
+              "q": "舌頭顏色會被食物或飲品影響嗎？",
+              "a": "會。咖啡、濃茶、深色糖果等都可能暫時令舌苔染色，因此觀察舌象或求診前，建議避免進食有色食物或飲品，減少判斷上的誤差。"
+            },
+            {
+              "q": "舌診準確嗎？可以只靠看舌頭判斷體質嗎？",
+              "a": "舌診是中醫望診的一部分，能反映身體大致傾向，但中醫診斷講求「四診合參」，不會只憑舌象下判斷。建議由註冊中醫師結合整體問診與脈診評估，較為穩妥。"
+            },
+            {
+              "q": "齒痕舌一定代表脾虛嗎？",
+              "a": "多數情況下齒痕舌與脾虛或氣虛有關，但仍需配合舌苔厚薄與其他症狀綜合判斷，例如是否同時舌體胖大、容易疲倦、大便偏軟等，單憑齒痕未必能完全確定體質。"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "結語"
+        },
+        {
+          "type": "paragraph",
+          "text": "舌頭是中醫望診中最容易自己觀察的一環，從舌色、舌苔到舌頭形狀，都能反映身體氣血與寒熱的大致傾向。與其糾結單一天的舌象變化，不如養成定期觀察的習慣，留意整體趨勢是否穩定。"
+        },
+        {
+          "type": "paragraph",
+          "text": "如果想更有系統地了解自己的體質，可以先完成[中醫體質問卷](../constitution.html)，再視乎需要預約醫師詳細望聞問切，制定個人化的調理方向。"
+        },
+        {
+          "type": "references",
+          "items": [
+            "Jiang B, Liang X, Chen Y, et al. Integrating next-generation sequencing and traditional tongue diagnosis to determine tongue coating microbiome. Scientific Reports. 2012;2:936.（研究論文，白膩苔／黃膩苔分別對應中醫寒證、熱證的微生物組差異）https://doi.org/10.1038/srep00936",
+            "Wang ZC, Zhang SP, Yuen PC, et al. Intra-Rater and Inter-Rater Reliability of Tongue Coating Diagnosis in Traditional Chinese Medicine Using Smartphones: Quasi-Delphi Study. JMIR mHealth and uHealth. 2020;8(7):e16018.（研究論文，說明舌苔觀察容易受角度、光線等因素影響，需標準化評估）https://doi.org/10.2196/16018",
+            "台灣衛生福利部中醫藥司：〈望舌〉。https://dep.mohw.gov.tw/DOCMAP/cp-772-5723-108.html",
+            "馬建中：《中醫診斷學（新編版）》。台北：正中書局，2017。第二篇．舌部：舌質與舌苔辨證分型。ISBN 978-957-09-1955-4"
+          ]
+        }
+      ],
+      "i18n": {
+        "en": {
+          "title": "What Does Your Tongue Colour Mean? A Beginner's Guide to TCM Tongue Diagnosis: Colour, Coating and Shape",
+          "excerpt": "Tongue colour, coating thickness and tongue shape are all key signs in Chinese medicine's visual diagnosis. A Hong Kong registered Chinese medicine practitioner breaks down four tongue colours, white vs yellow greasy coating, and what cracked or tooth-marked tongues suggest, plus how to self-check at home.",
+          "metaTitle": "What Does Your Tongue Colour Mean? A Beginner's Guide to TCM Tongue Diagnosis",
+          "metaDescription": "Tongue colour, coating thickness and tongue shape are all key signs in Chinese medicine's visual diagnosis. A Hong Kong registered Chinese medicine practitioner breaks down four tongue colours, white vs yellow greasy coating, and what cracked or tooth-marked tongues suggest, plus how to self-check at home.",
+          "keywords": [
+            "tongue colour",
+            "tongue coating",
+            "TCM tongue diagnosis",
+            "cracked tongue",
+            "tooth-marked tongue",
+            "TCM constitution"
+          ],
+          "heroEyebrow": "TCM Basics · Tongue Diagnosis",
+          "tags": [
+            "Tongue Diagnosis",
+            "TCM Constitution"
+          ],
+          "heroTags": [
+            "#TongueDiagnosis",
+            "#TongueColour",
+            "#TongueCoating",
+            "#TCMConstitution",
+            "#CrackedTongue",
+            "#ToothMarkedTongue"
+          ],
+          "blocks": [
+            {
+              "type": "lead",
+              "text": "A healthy tongue is generally light pink with a thin white coating. A tongue that looks paler, redder or dark purple than usual, a coating that turns thick or yellow, or a tongue surface with cracks or tooth marks, are all signs worth noting in TCM visual diagnosis — possibly linked to insufficient qi and blood, internal heat, dampness or spleen deficiency. That said, tongue appearance is only one clue; it should always be considered alongside sleep, appetite, digestion, bowel and bladder habits, and menstrual cycle."
+            },
+            {
+              "type": "paragraph",
+              "text": "Glancing at your tongue while brushing your teeth is a habit many people already have — but what does it actually mean when your tongue looks paler than usual, your coating thickens, or you notice a row of tooth marks along the edge? Of the four diagnostic methods in Chinese medicine — observation, listening/smelling, inquiry and pulse-taking — tongue observation is the one you can easily do yourself at home. Here's a breakdown of what tongue colour, coating and shape can tell you."
+            },
+            {
+              "type": "heading",
+              "text": "What is tongue diagnosis? A key part of TCM visual examination"
+            },
+            {
+              "type": "info",
+              "title": "Tongue diagnosis",
+              "text": "One part of \"observation\" within the four diagnostic methods of Chinese medicine. By examining the tongue's colour, coating and shape, a practitioner infers a general tendency in the body's qi, blood, organ function and yin-yang balance."
+            },
+            {
+              "type": "paragraph",
+              "text": "The tongue is connected to the internal organs via the body's meridian system. A healthy tongue is generally light pink with a thin, evenly distributed white coating. By observing tongue colour and coating, TCM practitioners can roughly estimate tendencies such as blood circulation and overall constitution — but tongue diagnosis is never used on its own. In clinical practice, it's always combined with a patient interview and pulse-taking."
+            },
+            {
+              "type": "paragraph",
+              "text": "Tongue appearance is also easily affected by external factors — just waking up, having eaten or drunk something colourful, or even the weather, can all cause temporary changes. That's exactly why the self-check section below covers a few details worth keeping in mind."
+            },
+            {
+              "type": "heading",
+              "text": "What does tongue colour mean? Four common colours explained"
+            },
+            {
+              "type": "paragraph",
+              "text": "Tongue colour is usually the first thing you notice, and it broadly reflects the body's qi, blood and heat-cold tendencies."
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Tongue colour",
+                "May reflect",
+                "Commonly seen with"
+              ],
+              "rows": [
+                [
+                  "Light pink (with a natural sheen)",
+                  "Balanced qi and blood",
+                  "Generally considered a healthy tongue colour"
+                ],
+                [
+                  "Pale white",
+                  "Insufficient qi and blood, or a cold-leaning constitution",
+                  "Often seen in those who tire easily or have cold hands and feet"
+                ],
+                [
+                  "Red (bright red)",
+                  "Excess internal heat",
+                  "May come with a dry mouth or a tendency to feel easily heated"
+                ],
+                [
+                  "Dark purple (or with purplish spots)",
+                  "Poor blood circulation, blood stasis",
+                  "May come with stabbing pain or a fixed area of discomfort"
+                ]
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "Light pink: usually a healthy tongue colour"
+            },
+            {
+              "type": "paragraph",
+              "text": "A light pink tongue with a natural sheen is seen in TCM as a sign of balanced qi and blood and normally functioning organs — this is the most common, and most desirable, tongue colour in a healthy person."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Everyday suggestion:** no particular adjustment is needed — just keep a regular routine and a balanced diet."
+            },
+            {
+              "type": "subheading",
+              "text": "Pale white: a sign of insufficient qi and blood"
+            },
+            {
+              "type": "paragraph",
+              "text": "A tongue that looks paler than usual, even whitish, is generally attributed in TCM to insufficient qi and blood, or a body affected by cold. This is more common in people who tire easily, look pale, or have cold hands and feet."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Everyday suggestion:** cut back on raw and cold foods, add a bit more warm, easy-to-digest food, and pay attention to whether you're getting enough sleep."
+            },
+            {
+              "type": "subheading",
+              "text": "Red: excess internal heat"
+            },
+            {
+              "type": "paragraph",
+              "text": "A tongue that's redder than usual, even bright red, more often reflects excess internal heat and organs running in \"overdrive.\" This group sometimes also notices a dry mouth, irritability, or a tendency to feel easily heated."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Everyday suggestion:** keep meals light, cut back on spicy, fried and other stimulating foods, and pay attention to sleep quality and emotional balance."
+            },
+            {
+              "type": "subheading",
+              "text": "Dark purple: a warning sign of blood stasis"
+            },
+            {
+              "type": "paragraph",
+              "text": "A tongue that's deep red or even dark purple, especially with purplish spots, is generally seen in TCM as a sign of blood stasis. If this comes with persistent chest tightness or discomfort elsewhere in the body, see a doctor promptly — this shouldn't simply be treated as a constitutional issue."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Everyday suggestion:** stay moderately active and avoid prolonged sitting, and keep the body warm; if there's noticeable discomfort, seeing a doctor promptly should always come first."
+            },
+            {
+              "type": "heading",
+              "text": "What does tongue coating show? White greasy vs yellow greasy coating"
+            },
+            {
+              "type": "info",
+              "title": "Tongue coating",
+              "text": "A thin layer on the tongue's surface made up of shed epithelial cells from the tongue's mucosa, saliva, bacteria and food debris. A healthy coating should be thin, white, moist, and evenly spread across the tongue."
+            },
+            {
+              "type": "paragraph",
+              "text": "The colour and thickness of tongue coating is an important clue for assessing dampness and heat-cold in the body. Generally, the more yellow the coating, the more pronounced the heat sign; the thicker and greasier the coating, the more it's linked to dampness or digestive load."
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Coating",
+                "Common cause",
+                "Possible accompanying signs"
+              ],
+              "rows": [
+                [
+                  "White greasy coating",
+                  "Often linked to excess dampness or phlegm-damp accumulation",
+                  "Feeling heavy, tiring easily, poor appetite"
+                ],
+                [
+                  "Yellow greasy coating",
+                  "Often linked to damp-heat",
+                  "Light-headedness, chest tightness, bad breath, sticky stools"
+                ]
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "White greasy coating: often linked to dampness"
+            },
+            {
+              "type": "paragraph",
+              "text": "A coating that's thick, white and greasy — almost paste-like — is generally seen in TCM as a sign of excess dampness in the body, with the spleen and stomach's ability to metabolise fluids running weaker than usual. This group often also feels physically heavy, tires easily, and has a reduced appetite."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Everyday suggestion:** keep meals light, cut back on sweets, greasy food and raw/cold food, and moderate exercise can help improve a phlegm-damp constitution."
+            },
+            {
+              "type": "subheading",
+              "text": "Yellow greasy coating: often linked to damp-heat"
+            },
+            {
+              "type": "paragraph",
+              "text": "Building on a white greasy coating, if the coating turns yellow, TCM generally interprets this as dampness and heat occurring together — \"damp-heat.\" Besides the thick, greasy coating, this group often also experiences light-headedness, chest tightness, poor appetite and sticky stools."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Everyday suggestion:** cut back on barbecued, fried and spicy food, eat more fresh vegetables and fruit, and stay well hydrated."
+            },
+            {
+              "type": "paragraph",
+              "text": "Beyond colour and thickness, a coating that's unusually thick, unusually thin, or entirely absent also carries meaning: an overly thick coating tends to indicate a more pronounced pathogenic factor or poor digestion, while a tongue with no coating at all is generally seen as a sign of more significant yin deficiency — especially if deep cracks are present as well, which is worth paying closer attention to."
+            },
+            {
+              "type": "heading",
+              "text": "What tongue shape reveals: cracked tongue and tooth-marked tongue"
+            },
+            {
+              "type": "paragraph",
+              "text": "Beyond colour and coating, the shape and edges of the tongue are another key focus in TCM tongue observation."
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Tongue shape",
+                "Features",
+                "Commonly associated constitution"
+              ],
+              "rows": [
+                [
+                  "Cracked tongue",
+                  "Cracks of varying depth across the tongue's surface",
+                  "Often linked to yin deficiency or qi deficiency"
+                ],
+                [
+                  "Tooth-marked tongue",
+                  "Serrated indentations along the tongue's edge",
+                  "Often linked to spleen deficiency or qi deficiency"
+                ]
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "Cracked tongue: often linked to yin or qi deficiency"
+            },
+            {
+              "type": "paragraph",
+              "text": "A cracked tongue is often seen with a constitution of yin deficiency with excess heat. If the tongue is reddish-purple and dry with cracks, this generally points to heat injuring yin; if it's pale and cracked, this is more often linked to blood deficiency or insufficient body fluids. It's also worth checking whether the coating is moist or dry: a dry, cracked coating tends to indicate heat injuring the body's fluids, while a coating that's still moist despite the cracks is more often seen with a qi-deficient constitution."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Everyday suggestion:** pay attention to whether you're getting enough sleep and fluids, and avoid prolonged late nights or mentally exhausting yourself."
+            },
+            {
+              "type": "subheading",
+              "text": "Tooth-marked tongue: often linked to spleen or qi deficiency"
+            },
+            {
+              "type": "paragraph",
+              "text": "A row of serrated indentations along the tongue's edge, caused by pressure from the teeth, is known as a tooth-marked tongue. TCM generally attributes this to spleen deficiency or qi deficiency, with a weaker-than-usual ability to metabolise fluids. If the tongue body is also enlarged alongside the tooth marks, this usually points to spleen deficiency with excess dampness — a constitution often accompanied by a puffier build, lower activity levels, and tiring easily."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Everyday suggestion:** eat at regular times and in regular amounts, avoid raw, cold or hard-to-digest food, and pair this with moderate exercise to help improve a spleen-deficient constitution."
+            },
+            {
+              "type": "heading",
+              "text": "How to check your own tongue at home"
+            },
+            {
+              "type": "paragraph",
+              "text": "If you'd like to observe your own tongue at home, a few details will make your reading more accurate:"
+            },
+            {
+              "type": "checklist",
+              "items": [
+                "Check in the morning before brushing your teeth, under good natural light — avoid yellowish artificial lighting, which can distort colour.",
+                "Avoid coffee, strong tea or dark-coloured foods for at least half an hour beforehand, as these can temporarily stain the coating.",
+                "Look in this order: colour first, then coating, then the tongue's shape and edges.",
+                "Let the tongue rest naturally — there's no need to stick it out forcefully, as this can temporarily alter its colour.",
+                "A single day's reading isn't very meaningful on its own; tracking the trend over several days is far more useful, since tongue appearance is easily swayed by sleep and diet."
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Your tongue is only one clue — when to pay attention"
+            },
+            {
+              "type": "paragraph",
+              "text": "Tongue appearance is only one clue among many — it should always be weighed alongside sleep, appetite, digestion, bowel and bladder habits, and menstrual cycle, rather than used to self-diagnose or self-medicate. See a doctor promptly if you notice any of the following:"
+            },
+            {
+              "type": "alert",
+              "title": "See a doctor promptly if you notice any of the following",
+              "items": [
+                "A persistently dark purple tongue accompanied by chest tightness, chest pain, or ongoing discomfort elsewhere in the body.",
+                "A coating that thickens or turns from white to yellow over a short period, accompanied by fever or a bitter taste in the mouth.",
+                "A coating that's absent for a long time, cracking that keeps getting worse, or your overall condition steadily declining.",
+                "An unexplained ulcer on the tongue that hasn't healed after two weeks.",
+                "You want to adjust your diet or try herbal remedies based on your constitution, but you're still unsure after assessing it yourself."
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "Chinese medicine diagnosis relies on combining all four diagnostic methods — observation, listening/smelling, inquiry and pulse-taking. Tongue appearance is just one part of that picture; for an actual assessment of your constitution, it's best to see a registered Chinese medicine practitioner in person."
+            },
+            {
+              "type": "heading",
+              "text": "Frequently Asked Questions"
+            },
+            {
+              "type": "faq",
+              "items": [
+                {
+                  "q": "Should I brush off my tongue coating before showing it to my doctor?",
+                  "a": "No, this isn't recommended. Scraping the coating off while brushing your teeth, or deliberately cleaning your tongue before an appointment, makes it harder for the practitioner to judge your true tongue condition — it's best to keep things natural before a consultation."
+                },
+                {
+                  "q": "My tongue coating looks especially thick right after I wake up — does that mean something's wrong?",
+                  "a": "Not necessarily. Right after waking, saliva production is lower and there's been less oral activity overnight, so the coating can look thicker than it really is. Try rinsing your mouth first, then check again to see if it's still noticeably thick. It's only worth paying closer attention if it stays thick over time and comes with other discomfort."
+                },
+                {
+                  "q": "Can food or drink affect tongue colour?",
+                  "a": "Yes. Coffee, strong tea, dark-coloured sweets and similar items can all temporarily stain the tongue coating. It's best to avoid coloured food or drink for a while before checking your tongue or seeing a practitioner, to reduce the margin of error."
+                },
+                {
+                  "q": "Is tongue diagnosis accurate? Can my constitution be determined just by looking at my tongue?",
+                  "a": "Tongue diagnosis is one part of TCM's visual examination, and it does reflect a general tendency in the body — but Chinese medicine diagnosis is built on combining all four diagnostic methods together, not tongue appearance alone. It's best to have a registered Chinese medicine practitioner assess you through a full consultation, including pulse-taking."
+                },
+                {
+                  "q": "Does a tooth-marked tongue always mean spleen deficiency?",
+                  "a": "In most cases, yes, a tooth-marked tongue is linked to spleen deficiency or qi deficiency — but it still needs to be considered together with coating thickness and other symptoms, such as whether the tongue is also enlarged, whether you tire easily, or whether your stools tend to be loose. Tooth marks alone aren't enough to confirm a constitution."
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Conclusion"
+            },
+            {
+              "type": "paragraph",
+              "text": "The tongue is the easiest part of TCM visual diagnosis to check yourself — its colour, coating and shape can all reflect general tendencies in the body's qi, blood, heat and cold. Rather than fixating on a single day's reading, it's more useful to build a habit of regular observation and watch whether the overall trend stays stable."
+            },
+            {
+              "type": "paragraph",
+              "text": "If you'd like a more structured understanding of your own constitution, you can start with the [TCM constitution questionnaire](../constitution.html) (currently Chinese-language only), then book a consultation as needed for a full assessment and a personalised approach to care."
+            },
+            {
+              "type": "references",
+              "items": [
+                "Jiang B, Liang X, Chen Y, et al. Integrating next-generation sequencing and traditional tongue diagnosis to determine tongue coating microbiome. Scientific Reports. 2012;2:936. (Research study; white-greasy vs yellow-dense tongue coating corresponds to distinct microbiome profiles associated with TCM Cold and Hot Syndromes.) https://doi.org/10.1038/srep00936",
+                "Wang ZC, Zhang SP, Yuen PC, et al. Intra-Rater and Inter-Rater Reliability of Tongue Coating Diagnosis in Traditional Chinese Medicine Using Smartphones: Quasi-Delphi Study. JMIR mHealth and uHealth. 2020;8(7):e16018. (Research study; shows tongue coating assessment can be affected by factors such as angle and lighting, underscoring the need for standardised evaluation.) https://doi.org/10.2196/16018",
+                "Department of Chinese Medicine, Ministry of Health and Welfare, Taiwan: \"Tongue Observation\" (望舌). https://dep.mohw.gov.tw/DOCMAP/cp-772-5723-108.html",
+                "Ma, Chien-Chung (馬建中). Chinese Medicine Diagnostics (New Edition) (中醫診斷學（新編版）). Taipei: Cheng Chung Book Co., 2017. Part 2, Tongue Section: syndrome differentiation of tongue body and coating. ISBN 978-957-09-1955-4"
+              ]
+            }
+          ]
+        }
+      }
     }
   ]
 };
