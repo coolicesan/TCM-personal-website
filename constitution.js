@@ -370,18 +370,15 @@ if (CQ_PACK) {
 // ─── Interface copy ───────────────────────────────────────────────────────
 const CQ_TXT_ZH = {
   progressStart:     '開始評估',
-  progressVersion:   '選擇評估版本',
   progressDone:      '評估完成',
   progressCount:     '第 {page} / {total} 部分　已填 {answered} / {pageTotal} 題',
 
   nameKicker:        '開始評估',
   nameTitle:         '怎麼稱呼您呢？',
-  nameSub:           '這樣就能用您的名字，為您專屬打造這份體質報告',
+  nameSub:           '',
   namePlaceholder:   '例如：美美、志明',
-  nameButton:        '好，開始吧 →',
   nameError:         '別忘了留下您的稱呼，才能繼續喔 🙂',
 
-  versionKicker:     '開始評估',
   versionTitle:      '選擇評估版本',
   versionQuickName:  '快速版',
   versionQuickStat:  '25 題填答・約 5 分鐘',
@@ -406,10 +403,8 @@ const CQ_TXT_ZH = {
   balancedPure:      '純平和質',
   balancedBasic:     '基本平和質',
   balancedNote:      '體質大致平衡，仍有少量偏頗傾向，宜留意保養。',
-  summaryPrimary:    '主要體質',
   summarySecondary:  '兼夾體質',
-  summaryNone:       '無明顯兼夾',
-  summaryNoneHint:   '體質相對單純',
+  summaryNoneLine:   '無明顯兼夾體質，體質相對單純。',
   radarTitle:        '體質傾向分佈',
   radarSub:          '移動滑鼠或觸控查看各體質傾向，圖形越向外突出代表傾向越明顯。',
   radarAria:         '九種體質傾向雷達圖',
@@ -450,7 +445,6 @@ const RADAR = CQ_LANG === 'en'
   : { w: 530, h: 496, cx: 265, cy: 248, maxR: 138, labelR: 192, fontSize: 12 };
 
 let quizMode = 'simple'; // 'simple' (3 q/section) or 'complex' (66 scored items)
-let cqStarted = false;   // true 之後的畫面切換才捲動，第一屏保持在頁首
 let userName = '';
 
 function getPageQuestions(ci) {
@@ -621,7 +615,6 @@ function restoreQuizSession() {
   quizMode = saved.quizMode || 'simple';
   userName = saved.userName || '';
   allAnswers = saved.answers;
-  cqStarted = true;
   calculateResults();
   /* calculateResults 遇到答案不齊會中途放棄，什麼都不畫。那樣還原就等於給人一版
      空白頁，寧可清掉存檔，當作沒有還原過，讓對方從頭開始。 */
@@ -906,28 +899,25 @@ function renderResults(primary, secondary, all, balancedKey) {
 
   const balancedNote = balancedKey === 'basic' ? T.balancedNote : '';
 
-  // ── Summary strip: primary + secondary side by side ──
-  const summaryHtml = `
-    <div class="cq-summary">
-      <div class="cq-summary-item cq-summary-primary" style="--c:${primary.color};">
-        <div class="cq-summary-role">${T.summaryPrimary}</div>
-        <div class="cq-summary-name">${primary.emoji} ${displayShort}</div>
-      </div>
-      ${sec ? `
-      <div class="cq-summary-item cq-summary-secondary" style="--c:${sec.color};">
-        <div class="cq-summary-role">${T.summarySecondary}</div>
-        <div class="cq-summary-name">${sec.emoji} ${sec.shortName || sec.name}</div>
-      </div>` : `
-      <div class="cq-summary-item cq-summary-secondary cq-summary-none">
-        <div class="cq-summary-role">${T.summarySecondary}</div>
-        <div class="cq-summary-name" style="color:var(--text-light);">${T.summaryNone}</div>
-        <div class="cq-summary-hint">${T.summaryNoneHint}</div>
-      </div>`}
+  // ── Secondary indicator: the primary result is already the hero above,
+  //    so this is one quiet pointer rather than a second equal-weight card
+  //    repeating what the hero just said. ──
+  const summaryHtml = sec ? `
+    <div class="cq-secondary-wrap">
+      <div class="cq-secondary-eyebrow">${T.summarySecondary}</div>
+      <button type="button" class="cq-secondary-chip" style="--c:${sec.color};"
+        onclick="document.getElementById('cqSecondary').scrollIntoView({behavior:'smooth',block:'start'})">
+        <span class="cq-secondary-chip-name">${sec.emoji} ${sec.shortName || sec.name}</span>
+        <span class="cq-secondary-chip-arrow" aria-hidden="true">↓</span>
+      </button>
+    </div>` : `
+    <div class="cq-secondary-wrap">
+      <p class="cq-secondary-note">✓ ${T.summaryNoneLine}</p>
     </div>`;
 
   // ── Secondary block (compact) ──
   const secDetailHtml = sec ? `
-    <div class="result-card active cq-sec-card" style="--c:${sec.color};">
+    <div class="result-card active cq-sec-card" id="cqSecondary" style="--c:${sec.color};">
       <div class="cq-sec-head">
         <span class="cq-sec-emoji">${sec.emoji}</span>
         <div>
@@ -939,7 +929,7 @@ function renderResults(primary, secondary, all, balancedKey) {
       ${sec.recommendations && sec.recommendations.length ? `
       <div class="result-section" style="margin-top:1rem;">
         <div class="result-section-title">${T.secFocus}</div>
-        <div class="result-tags">${sec.recommendations.slice(0, 3).map(r => `<span class="result-tag">${r}</span>`).join('')}</div>
+        <ul class="cq-check-list">${sec.recommendations.slice(0, 3).map(r => `<li>${r}</li>`).join('')}</ul>
       </div>` : ''}
       <p class="cq-sec-note">${T.secNote}</p>
     </div>` : '';
@@ -972,17 +962,17 @@ function renderResults(primary, secondary, all, balancedKey) {
     </div>
 
     <!-- ── Recommendations ── -->
-    <div class="result-card active cq-block">
+    <div class="result-card active cq-block cq-block-elevated" style="--c:${primary.color};">
       <div class="cq-block-title">${T.careTitle}</div>
-      <div class="result-tags" style="margin-bottom:1.25rem;">${primary.recommendations.map(r => `<span class="result-tag">${r}</span>`).join('')}</div>
+      <ol class="cq-plan-list">${primary.recommendations.map(r => `<li>${r}</li>`).join('')}</ol>
       <div class="cq-diet-grid">
         <div>
           <div class="cq-diet-head cq-diet-good">${T.dietGood}</div>
-          <div class="result-tags">${primary.foods.map(f => `<span class="result-tag" style="background:var(--sage-light);color:var(--plum);">${f}</span>`).join('')}</div>
+          <ul class="cq-check-list">${primary.foods.map(f => `<li>${f}</li>`).join('')}</ul>
         </div>
         <div>
           <div class="cq-diet-head cq-diet-avoid">${T.dietAvoid}</div>
-          <div class="result-tags">${primary.avoid.map(a => `<span class="result-tag" style="background:#FDF0E8;color:var(--terracotta);">${a}</span>`).join('')}</div>
+          <ul class="cq-check-list is-avoid">${primary.avoid.map(a => `<li>${a}</li>`).join('')}</ul>
         </div>
       </div>
     </div>
@@ -1039,8 +1029,10 @@ function mountReportGate(reportUrl, displayName, userName, displayNameZh) {
   });
 }
 
-// ─── Version Select Screen ────────────────────────────────────────────────
-function renderNameGate() {
+// ─── Intro Screen (name + version, one screen) ─────────────────────────────
+/* 名字與版本選擇原本是兩畫面、兩次點擊，合併成一畫面後，連結可以直接分享給
+   別人，對方一次過填名字、選版本就開始，不用先按「開始」才看到版本選項。 */
+function renderIntroScreen() {
   document.getElementById('progressText').textContent = T.progressStart;
   document.getElementById('progressBar').style.width = '0%';
   document.querySelector('.cq-progress-meta')?.classList.add('is-intro');
@@ -1057,55 +1049,20 @@ function renderNameGate() {
     <div class="cq-name-gate">
       <input type="text" id="cqNameInput" class="cq-name-input" placeholder="${T.namePlaceholder}" value="${escHtml(userName)}" maxlength="30">
       <div id="cqNameError" class="cq-name-error" style="display:none;"></div>
-      <button class="btn btn-primary cq-name-btn" onclick="submitName()">${T.nameButton}</button>
     </div>
-  `;
 
-  const input = document.getElementById('cqNameInput');
-  input.focus();
-  input.addEventListener('keydown', e => { if (e.key === 'Enter') submitName(); });
-  input.addEventListener('input', () => {
-    const err = document.getElementById('cqNameError');
-    if (err) err.style.display = 'none';
-  });
-}
-
-function submitName() {
-  const input = document.getElementById('cqNameInput');
-  const val = input.value.trim();
-  if (!val) {
-    const err = document.getElementById('cqNameError');
-    err.textContent = T.nameError;
-    err.style.display = 'block';
-    input.focus();
-    return;
-  }
-  userName = val;
-  cqStarted = true;
-  renderVersionSelect();
-}
-
-function renderVersionSelect() {
-  document.getElementById('progressText').textContent = T.progressVersion;
-  document.getElementById('progressBar').style.width = '0%';
-  document.querySelector('.cq-progress-meta')?.classList.add('is-intro');
-  document.querySelector('.cq-hero-desc')?.style.removeProperty('display');
-  const container = document.getElementById('quizContainer');
-
-  container.innerHTML = `
-    <div class="cq-intro-head">
-      <div class="cq-intro-kicker">${T.versionKicker}</div>
-      <h2 class="cq-intro-title">${T.versionTitle}</h2>
+    <div class="cq-intro-head cq-intro-head-version">
+      <div class="cq-intro-kicker">${T.versionTitle}</div>
       ${T.versionSub ? `<p class="cq-intro-sub">${T.versionSub}</p>` : ''}
     </div>
     <div class="cq-version-grid">
-      <div class="cq-version-card" onclick="startQuiz('simple')">
+      <div class="cq-version-card" onclick="startQuizFromIntro('simple')">
         <div class="cq-version-icon">⚡</div>
         <div class="cq-version-name">${T.versionQuickName}</div>
         <div class="cq-version-stat">${T.versionQuickStat}</div>
         <div class="cq-version-btn">${T.versionStart}</div>
       </div>
-      <div class="cq-version-card cq-version-card-featured" onclick="startQuiz('complex')">
+      <div class="cq-version-card cq-version-card-featured" onclick="startQuizFromIntro('complex')">
         <div class="cq-version-badge">${T.versionBadge}</div>
         <div class="cq-version-icon">🔍</div>
         <div class="cq-version-name">${T.versionFullName}</div>
@@ -1116,9 +1073,37 @@ function renderVersionSelect() {
     <p class="cq-version-standard">${T.versionStandard}</p>
   `;
 
-  /* 從「怎麼稱呼您」跳到這一步時，畫面還停在英雄區，選項會落在視窗下緣。
-     把整塊帶到視窗中央，選擇才是眼睛第一個看到的東西。 */
-  if (cqStarted) container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const input = document.getElementById('cqNameInput');
+  input.focus();
+  input.addEventListener('input', () => {
+    const err = document.getElementById('cqNameError');
+    if (err) err.style.display = 'none';
+  });
+  /* Enter 鍵不能代替選版本（有兩個選項，猜哪個都不對），
+     所以只負責驗證名字，並把畫面帶到版本卡片讓使用者自己選。 */
+  input.addEventListener('keydown', e => {
+    if (e.key !== 'Enter') return;
+    e.preventDefault();
+    if (!input.value.trim()) { showNameError(); return; }
+    document.querySelector('.cq-version-grid')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+}
+
+function showNameError() {
+  const input = document.getElementById('cqNameInput');
+  const err = document.getElementById('cqNameError');
+  err.textContent = T.nameError;
+  err.style.display = 'block';
+  input.focus();
+  input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function startQuizFromIntro(mode) {
+  const input = document.getElementById('cqNameInput');
+  const val = input.value.trim();
+  if (!val) { showNameError(); return; }
+  userName = val;
+  startQuiz(mode);
 }
 
 function startQuiz(mode) {
@@ -1133,5 +1118,5 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!document.getElementById('quizContainer')) return;
   /* 從報告頁或預約頁按上一頁回來 → 直接還原結果，不用重做問卷 */
   if (restoreQuizSession()) return;
-  renderNameGate();
+  renderIntroScreen();
 });

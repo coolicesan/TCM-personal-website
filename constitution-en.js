@@ -36,7 +36,6 @@ window.CQ_I18N = {
   ui: {
     /* ── Progress rail ── */
     progressStart:      'Getting started',
-    progressVersion:    'Choose a version',
     progressDone:       'Assessment complete',
     progressCount:      'Part {page} of {total} · {answered} of {pageTotal} answered',
 
@@ -45,11 +44,9 @@ window.CQ_I18N = {
     nameTitle:          'Tell us your name',
     nameSub:            '',
     namePlaceholder:    'e.g. Sarah, Wai Man',
-    nameButton:         'Let\'s begin →',
     nameError:          'Please add your name so we can carry on 🙂',
 
     /* ── Version select ── */
-    versionKicker:      'Getting started',
     versionTitle:       'Choose a version',
     versionSub:         'Both give you a full result. The longer one simply reads your body in more detail.',
     versionQuickName:   'Quick version',
@@ -76,10 +73,8 @@ window.CQ_I18N = {
     balancedPure:       'Fully Balanced Type',
     balancedBasic:      'Largely Balanced Type',
     balancedNote:       'You\'re broadly in balance, with a few mild tendencies worth keeping an eye on.',
-    summaryPrimary:     'Main constitution',
     summarySecondary:   'Secondary constitution',
-    summaryNone:        'Nothing significant',
-    summaryNoneHint:    'A fairly clear-cut picture',
+    summaryNoneLine:    'Nothing else stands out — your profile reads fairly clear-cut.',
     radarTitle:         'Your constitution profile',
     radarSub:           'Hover or tap to read each type. The further the shape reaches out, the stronger that tendency.',
     radarAria:          'Radar chart of your tendencies across the nine constitutions',
@@ -274,7 +269,7 @@ window.CQ_I18N = {
         'Keep regular hours — late nights only stoke the heat',
         'Dandelion tea, or job\'s tears and mung bean soup, helps clear heat and damp',
         'Stay on top of personal hygiene and wear breathable cotton',
-        'A practitioner can prescribe along the lines of clearing liver and gallbladder damp-heat',
+        'A practitioner can prescribe a formula to clear damp-heat from the liver and gallbladder',
       ],
       foods: ['Mung bean, adzuki bean, winter melon, bitter melon, loofah', 'Cucumber, celery, water spinach, lotus root, duck', 'Smilax, capillaris, prunella, chrysanthemum'],
       avoid: ['Spicy grills, lamb, longan and durian', 'Deep-fried and fatty food', 'Alcohol, very sweet food, and late nights'],

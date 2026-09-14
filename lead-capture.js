@@ -150,9 +150,9 @@
         'Tea blends, acupressure points and ear-point self-care',
         'An eating-out guide and everyday lifestyle adjustments'
       ],
-      gateTitleNamed: 'Unlock your full {name} report',
-      gateTitle:      'Unlock your full report',
-      gateSub:        'Leave your contact details to read the complete care plan put together for your constitution.',
+      gateTitleNamed: 'Unlock your complete {name} report',
+      gateTitle:      'Unlock your complete report',
+      gateSub:        'Leave your contact details to read the full care plan put together for your constitution.',
       sendForm:       'Get my full report free →',
       sendWa:         'Request my report on WhatsApp →',
       picsForm:       'Your name and contact details are recorded for CMP Kate Woo, so she can follow up on your report',

@@ -286,7 +286,6 @@
     .cq-name-error {
       font-size: .82rem; color: var(--terracotta); text-align: center;
     }
-    .cq-name-btn { width: 100%; justify-content: center; }
 
     /* ── Version selector ── */
     .cq-version-grid {
@@ -342,14 +341,17 @@
     .cq-version-card:hover .cq-version-btn { text-decoration: underline; }
 
 
-    /* ── Intro screens (name gate, version select) ──
-       One centred column for both, so the two steps feel like one moment
-       rather than two differently-aligned pages. */
+    /* ── Intro screen (name + version, one screen) ──
+       One centred column for both halves, so asking the name and choosing a
+       version read as one screen instead of two differently-aligned pages. */
     .cq-intro-head {
       text-align: center;
       max-width: 34rem;
       margin: 0 auto 1.75rem;
     }
+    /* 名字欄位和版本卡片中間的第二個 cq-intro-head，需要自己的上邊距，
+       兩段之間才有呼吸空間，不會黏在輸入框下面。 */
+    .cq-intro-head-version { margin-top: 2rem; }
     .cq-intro-kicker {
       font-size: .78rem;
       letter-spacing: .12em;
@@ -535,32 +537,36 @@
       text-align: center;
     }
 
-    /* Summary strip */
-    .cq-summary {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
-      margin-bottom: 1.5rem;
+    /* Secondary-constitution indicator: the primary result is already the
+       hero right above it, so this is one quiet pointer down to its detail
+       card — not a second, equal-weight box repeating the same name. */
+    .cq-secondary-wrap { text-align: center; margin-bottom: 1.75rem; }
+    .cq-secondary-eyebrow {
+      font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--text-light); margin-bottom: .55rem;
     }
-    .cq-summary-item {
+    /* A short name only, so the pill never wraps into a stadium-shaped
+       blob the way a two-line label inside 999px radius would. */
+    .cq-secondary-chip {
+      display: inline-flex; align-items: center; gap: .55rem;
       background: #fff; border: 1.5px solid var(--border);
-      border-radius: var(--radius-lg); padding: 1.1rem 1.25rem;
-      border-top: 4px solid var(--c, var(--plum));
-      text-align: center;
+      border-radius: 999px; padding: .5rem .5rem .5rem 1.1rem;
+      font-family: var(--font-body); font-size: .92rem; white-space: nowrap;
+      cursor: pointer; transition: border-color .15s, transform .15s, box-shadow .15s;
     }
-    .cq-summary-role {
-      font-size: .72rem; letter-spacing: .08em; color: var(--text-light);
-      margin-bottom: .45rem;
+    .cq-secondary-chip:hover {
+      border-color: var(--c, var(--plum-light));
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
     }
-    .cq-summary-name {
-      font-family: var(--font-display); font-size: 1.25rem;
-      color: var(--plum); margin-bottom: .35rem;
+    .cq-secondary-chip:focus-visible { outline: 2px solid var(--dusty-rose); outline-offset: 2px; }
+    .cq-secondary-chip-name { font-weight: 600; color: var(--c, var(--plum)); }
+    .cq-secondary-chip-arrow {
+      display: flex; align-items: center; justify-content: center;
+      width: 24px; height: 24px; border-radius: 50%;
+      background: var(--blush); color: var(--plum); font-size: .8rem;
     }
-    .cq-summary-score {
-      font-size: 1.9rem; font-weight: 700; color: var(--c, var(--plum));
-      line-height: 1; font-family: var(--font-display);
-    }
-    .cq-summary-score span { font-size: .82rem; font-weight: 400; margin-left: .15rem; color: var(--text-light); }
-    .cq-summary-hint { font-size: .78rem; color: var(--text-light); }
-    .cq-summary-none { border-top-color: var(--border); background: var(--cream); }
+    .cq-secondary-note { font-size: .85rem; color: var(--text-light); }
 
     /* Content blocks */
     .cq-block {
@@ -579,14 +585,50 @@
     }
     .cq-block-sub { font-size: .82rem; color: var(--text-light); margin-bottom: 1rem; }
     .cq-block-text { line-height: 1.95; color: var(--text); margin-top: .75rem; }
+    /* The care-plan block is the actionable takeaway, so it sits one layer
+       up from the plain-white reading blocks around it — the same raised
+       treatment the secondary-constitution card already uses below. */
+    .cq-block-elevated {
+      background: linear-gradient(135deg, var(--cream) 0%, #fff 60%);
+      border-left: 4px solid var(--c, var(--plum));
+    }
 
     /* Diet grid */
-    .cq-diet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .cq-diet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 1.35rem; }
     .cq-diet-head {
       font-size: .85rem; font-weight: 600; margin-bottom: .6rem;
     }
     .cq-diet-good { color: var(--plum); }
     .cq-diet-avoid { color: var(--terracotta); }
+
+    /* Structured lists for recommendations, foods and things to skip —
+       these run to full sentences in English, and stretched into
+       multi-line pill "blobs" when they wore the rounded result-tag style. */
+    .cq-check-list, .cq-plan-list {
+      list-style: none; margin: .5rem 0 0; padding: 0;
+      display: flex; flex-direction: column; gap: .6rem;
+    }
+    .cq-plan-list { margin-bottom: 0; counter-reset: cqplan; }
+    .cq-check-list li, .cq-plan-list li {
+      display: flex; gap: .65rem; align-items: flex-start;
+      font-size: .87rem; line-height: 1.7; color: var(--text);
+    }
+    .cq-check-list li::before {
+      content: '✓'; flex-shrink: 0; margin-top: .15rem;
+      width: 20px; height: 20px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .65rem; font-weight: 700;
+      background: var(--sage-light); color: var(--plum);
+    }
+    .cq-check-list.is-avoid li::before { content: '✕'; background: #FDF0E8; color: var(--terracotta); }
+    .cq-plan-list li { counter-increment: cqplan; }
+    .cq-plan-list li::before {
+      content: counter(cqplan); flex-shrink: 0; margin-top: .1rem;
+      width: 21px; height: 21px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: .72rem; font-weight: 700;
+      background: var(--plum); color: #fff;
+    }
 
     /* Secondary card */
     .cq-sec-card {
@@ -616,7 +658,6 @@
     }
 
     @media (max-width: 600px) {
-      .cq-summary { grid-template-columns: 1fr; }
       .cq-diet-grid { grid-template-columns: 1fr; }
       .cq-result-name { font-size: 2.3rem; }
       .cq-result-portrait { width: 180px; height: 180px; }
