@@ -511,6 +511,7 @@ a { color: inherit; }
 .article-card[data-stage="menopause"] { --art-c: #9B7A92; }
 .article-card[data-stage="postmenopause"] { --art-c: #7C8CA0; }
 .article-card[data-stage="tcmBasics"] { --art-c: #6B8CAE; }
+.article-card[data-stage="mensHealth"] { --art-c: #4F8A82; }
 .article-card::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
   background: var(--art-c);

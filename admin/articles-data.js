@@ -33,6 +33,10 @@ window.ARTICLES_DATA = {
     {
       "key": "tcmBasics",
       "label": "中醫科普"
+    },
+    {
+      "key": "mensHealth",
+      "label": "男性健康"
     }
   ],
   "articles": [
@@ -12182,8 +12186,8 @@ window.ARTICLES_DATA = {
         {
           "type": "references",
           "items": [
-            "Jiang B, Liang X, Chen Y, et al. Integrating next-generation sequencing and traditional tongue diagnosis to determine tongue coating microbiome. Scientific Reports. 2012;2:936.（研究論文，白膩苔／黃膩苔分別對應中醫寒證、熱證的微生物組差異）https://doi.org/10.1038/srep00936",
-            "Wang ZC, Zhang SP, Yuen PC, et al. Intra-Rater and Inter-Rater Reliability of Tongue Coating Diagnosis in Traditional Chinese Medicine Using Smartphones: Quasi-Delphi Study. JMIR mHealth and uHealth. 2020;8(7):e16018.（研究論文，說明舌苔觀察容易受角度、光線等因素影響，需標準化評估）https://doi.org/10.2196/16018",
+            "Jiang B, Liang X, Chen Y, et al. Integrating next-generation sequencing and traditional tongue diagnosis to determine tongue coating microbiome. Scientific Reports. 2012;2:936. https://doi.org/10.1038/srep00936",
+            "Wang ZC, Zhang SP, Yuen PC, et al. Intra-Rater and Inter-Rater Reliability of Tongue Coating Diagnosis in Traditional Chinese Medicine Using Smartphones: Quasi-Delphi Study. JMIR mHealth and uHealth. 2020;8(7):e16018. https://doi.org/10.2196/16018",
             "台灣衛生福利部中醫藥司：〈望舌〉。https://dep.mohw.gov.tw/DOCMAP/cp-772-5723-108.html",
             "馬建中：《中醫診斷學（新編版）》。台北：正中書局，2017。第二篇．舌部：舌質與舌苔辨證分型。ISBN 978-957-09-1955-4"
           ]
@@ -12526,8 +12530,8 @@ window.ARTICLES_DATA = {
             {
               "type": "references",
               "items": [
-                "Jiang B, Liang X, Chen Y, et al. Integrating next-generation sequencing and traditional tongue diagnosis to determine tongue coating microbiome. Scientific Reports. 2012;2:936. (Research study; white-greasy vs yellow-dense tongue coating corresponds to distinct microbiome profiles associated with TCM Cold and Hot Syndromes.) https://doi.org/10.1038/srep00936",
-                "Wang ZC, Zhang SP, Yuen PC, et al. Intra-Rater and Inter-Rater Reliability of Tongue Coating Diagnosis in Traditional Chinese Medicine Using Smartphones: Quasi-Delphi Study. JMIR mHealth and uHealth. 2020;8(7):e16018. (Research study; shows tongue coating assessment can be affected by factors such as angle and lighting, underscoring the need for standardised evaluation.) https://doi.org/10.2196/16018",
+                "Jiang B, Liang X, Chen Y, et al. Integrating next-generation sequencing and traditional tongue diagnosis to determine tongue coating microbiome. Scientific Reports. 2012;2:936. https://doi.org/10.1038/srep00936",
+                "Wang ZC, Zhang SP, Yuen PC, et al. Intra-Rater and Inter-Rater Reliability of Tongue Coating Diagnosis in Traditional Chinese Medicine Using Smartphones: Quasi-Delphi Study. JMIR mHealth and uHealth. 2020;8(7):e16018. https://doi.org/10.2196/16018",
                 "Department of Chinese Medicine, Ministry of Health and Welfare, Taiwan: \"Tongue Observation\" (望舌). https://dep.mohw.gov.tw/DOCMAP/cp-772-5723-108.html",
                 "Ma, Chien-Chung (馬建中). Chinese Medicine Diagnostics (New Edition) (中醫診斷學（新編版）). Taipei: Cheng Chung Book Co., 2017. Part 2, Tongue Section: syndrome differentiation of tongue body and coating. ISBN 978-957-09-1955-4"
               ]
@@ -12535,6 +12539,246 @@ window.ARTICLES_DATA = {
           ]
         }
       }
+    },
+    {
+      "slug": "morning-erection-basics",
+      "stage": "mensHealth",
+      "tags": [
+        "勃起功能",
+        "腎陽"
+      ],
+      "title": "晨勃代表什麼？中醫與現代醫學怎麼看男性晨間勃起",
+      "excerpt": "晨勃代表什麼？現代醫學稱為「夜間陰莖勃起」，與快速動眼睡眠及睪固酮濃度有關；中醫則從肝經、宗筋與腎陽角度理解。香港註冊中醫師拆解晨勃的生理與中醫意義，附日常生活調整建議與何時應該求醫。",
+      "metaTitle": "晨勃代表什麼？中醫與現代醫學怎麼看男性晨間勃起｜香港中醫師",
+      "metaDescription": "晨勃代表什麼？現代醫學稱為「夜間陰莖勃起」，與快速動眼睡眠及睪固酮濃度有關；中醫則從肝經、宗筋與腎陽角度理解。香港註冊中醫師拆解晨勃的生理與中醫意義，附日常生活調整建議與何時應該求醫。",
+      "keywords": [
+        "晨勃",
+        "勃起功能",
+        "中醫男性健康",
+        "腎陽",
+        "宗筋",
+        "夜間陰莖勃起"
+      ],
+      "readTime": 6,
+      "heroEyebrow": "男性健康 · 晨勃",
+      "heroTags": [
+        "#晨勃",
+        "#勃起功能",
+        "#中醫男性健康",
+        "#腎陽",
+        "#宗筋"
+      ],
+      "publishDate": "2026-09-15",
+      "blocks": [
+        {
+          "type": "lead",
+          "text": "晨勃（醫學上稱「夜間陰莖勃起」）是男性在快速動眼睡眠期間自然出現的生理現象，與大腦神經活動及血液睪固酮濃度變化有關，也是臨床上判斷勃起功能屬於心理性還是器質性成因的參考指標之一。中醫則從肝經循行、宗筋理論與腎陽是否充足的角度理解晨勃。晨勃頻率隨年齡增長而自然下降屬正常現象，但研究顯示，長期明顯減少或消失有時較勃起功能障礙更早出現，並與心血管疾病、糖尿病等共病風險有關，建議及早求醫評估，而非單純視為體質問題自行調理。"
+        },
+        {
+          "type": "paragraph",
+          "text": "幾乎每位男性都經歷過晨勃，卻未必清楚這背後代表什麼。其實晨勃不只是單純的生理反應，在現代醫學與中醫理論中，都被視為評估身體狀態的其中一項參考指標。以下從現代醫學機制、中醫觀點，到日常生活調整，逐一拆解晨勃的意義。"
+        },
+        {
+          "type": "heading",
+          "text": "什麼是晨勃？現代醫學怎麼解釋"
+        },
+        {
+          "type": "info",
+          "title": "晨勃",
+          "text": "醫學上稱為「夜間陰莖勃起」（Nocturnal Penile Tumescence，NPT），是男性在睡眠中，尤其是快速動眼期（REM 睡眠）反覆自然出現的生理性勃起現象，並非源於性刺激或性幻想，健康男性一晚平均可出現數次。"
+        },
+        {
+          "type": "paragraph",
+          "text": "現代醫學認為，晨勃與兩個因素密切相關：一是快速動眼睡眠期間，大腦中原本抑制性活動的機制暫時減弱；二是血液中睪固酮濃度在清晨時段處於一天之中的高峰。兩者共同促成了這種睡眠中的自然勃起反應。"
+        },
+        {
+          "type": "paragraph",
+          "text": "由於晨勃的出現需要神經、血管與荷爾蒙系統同時運作正常，臨床上也曾被用作分辨勃起功能障礙屬於「心理性」還是「器質性」成因的參考方法之一——如果睡眠中仍能出現正常勃起，通常較傾向於心理因素所致；相關的夜間陰莖勃起監測，至今仍是醫學上評估勃起功能的其中一種方法。"
+        },
+        {
+          "type": "heading",
+          "text": "中醫怎麼看晨勃？與肝經、腎陽的關係"
+        },
+        {
+          "type": "info",
+          "title": "宗筋",
+          "text": "中醫理論中，陰莖屬經筋匯聚之處，《黃帝內經．素問》提到「前陰者，宗筋之所聚」，而肝經循行環繞陰器，因此男性勃起功能與肝、腎的關係最為密切。"
+        },
+        {
+          "type": "paragraph",
+          "text": "按中醫十二時辰氣血流注理論，凌晨一時至三時（丑時）為肝經當令，中醫理論認為此時肝血最為旺盛；隨後三時至五時（寅時）轉由肺經當令，氣血逐漸宣發於全身，這段時間也是不少人自然醒來前，晨勃出現機率較高的時段。中醫傳統上認為，肝主筋，肝血充足有助宗筋正常舒張收縮；而腎陽則被視為推動生殖與生長發育的原動力。因此，晨勃規律，傳統上會被視為肝血、腎陽相對充足的其中一種外在表現。"
+        },
+        {
+          "type": "paragraph",
+          "text": "**初步生活建議：**不過這只是傳統理論的參考角度，並非現代醫學的直接對應診斷，實際體質狀況仍需由中醫師結合整體問診、望聞問切一併評估，不宜單憑晨勃自行判斷。"
+        },
+        {
+          "type": "heading",
+          "text": "晨勃減少或消失，代表什麼？"
+        },
+        {
+          "type": "paragraph",
+          "text": "晨勃頻率會受年齡、睡眠與生活習慣等多重因素影響，以下從現代醫學與中醫角度分別說明常見成因。"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "角度",
+            "常見成因"
+          ],
+          "rows": [
+            [
+              "現代醫學",
+              "年齡增長、睡眠品質欠佳（如睡眠窒息症）、荷爾蒙變化（睪固酮下降）、心血管疾病、糖尿病、部分藥物副作用（如抗抑鬱藥、降血壓藥）、吸菸及過量飲酒、長期壓力、久坐少動"
+            ],
+            [
+              "中醫角度",
+              "腎陽虛、肝鬱氣滯、氣血不足，常伴隨腰膝痠軟、疲倦、情緒低落等表現"
+            ]
+          ]
+        },
+        {
+          "type": "subheading",
+          "text": "現代醫學角度：生理與生活習慣因素"
+        },
+        {
+          "type": "paragraph",
+          "text": "隨著年齡增長，睪固酮水平與睡眠中快速動眼期的比例都會自然下降，晨勃頻率減少屬常見現象。但如果同時合併睡眠窒息症、糖尿病、心血管疾病，或正服用會影響性功能的藥物，晨勃減少也可能是身體發出的其中一個訊號，值得留意。"
+        },
+        {
+          "type": "paragraph",
+          "text": "**初步生活建議：**若懷疑與服用中的藥物有關，應與處方醫師討論，切勿自行停藥或調整劑量。"
+        },
+        {
+          "type": "subheading",
+          "text": "中醫角度：腎陽虛與肝鬱氣滯的影響"
+        },
+        {
+          "type": "paragraph",
+          "text": "中醫認為，長期熬夜、勞累過度容易耗傷腎陽，令晨勃逐漸減少，並可能伴隨腰膝痠軟、畏寒、疲倦等表現；而長期精神壓力大、情緒鬱悶則容易導致肝鬱氣滯，影響氣血運行至宗筋，同樣可能反映在晨勃頻率的變化上。"
+        },
+        {
+          "type": "paragraph",
+          "text": "**初步生活建議：**留意作息是否規律、情緒是否長期緊繃，這些都是中醫問診時會一併考慮的因素。"
+        },
+        {
+          "type": "heading",
+          "text": "長期沒有晨勃，有什麼風險？"
+        },
+        {
+          "type": "info",
+          "title": "研究提醒",
+          "text": "夜間陰莖勃起減少或消失，有時比勃起功能障礙的其他症狀更早出現，值得作為身體發出的一個早期訊號留意。"
+        },
+        {
+          "type": "paragraph",
+          "text": "一篇回顧多項研究的醫學文獻指出，夜間陰莖勃起減少或消失，往往先於勃起功能障礙及一系列相關共病出現，當中包括心血管疾病、高血壓、糖尿病、肥胖及血脂異常等，建議臨床評估勃起相關症狀時，一併留意這些潛在風險，及早介入。"
+        },
+        {
+          "type": "paragraph",
+          "text": "另外一項追蹤逾九萬五千名四十五歲以上男性的大型前瞻性世代研究亦發現，勃起功能障礙的嚴重程度，與日後因心血管疾病住院及全因死亡的風險呈正相關——情況愈嚴重，相關風險亦愈高，反映勃起功能與整體血管健康之間存在密切關聯。"
+        },
+        {
+          "type": "paragraph",
+          "text": "**初步生活建議：**這類研究的重點在於「及早發現」，並非要求每次晨勃缺席都要恐慌。偶爾一兩天沒有晨勃，多數與睡眠不足、飲酒或壓力有關；但若長期（例如連續數星期至數月）明顯減少或消失，建議把它當作身體發出的訊號，趁機檢查血壓、血糖、血脂等心血管相關指標，而不是等到出現其他明顯不適才求醫。"
+        },
+        {
+          "type": "heading",
+          "text": "日常怎樣有助維持晨勃？生活調整建議"
+        },
+        {
+          "type": "paragraph",
+          "text": "以下生活習慣調整，有助支持整體血管、荷爾蒙與神經系統的健康，間接對晨勃頻率有正面幫助："
+        },
+        {
+          "type": "checklist",
+          "items": [
+            "維持規律優質睡眠，避免長期熬夜，因為熬夜會直接減少快速動眼睡眠的比例。",
+            "保持適量規律運動，有助血液循環及荷爾蒙水平的穩定。",
+            "戒菸，並將飲酒量控制在適量範圍內。",
+            "飲食均衡，避免長期高油、高糖飲食影響血管健康。",
+            "學習紓緩壓力的方法，避免長期處於精神緊張狀態。",
+            "留意體重、血壓及血糖等指標，並定期作基本身體檢查。"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "晨勃只是其中一項參考，什麼情況要留意"
+        },
+        {
+          "type": "paragraph",
+          "text": "晨勃頻率因人而異，也會隨年齡自然變化，不宜單憑晨勃自行判斷體質或服用來源不明的補品。以下情況建議及早求醫："
+        },
+        {
+          "type": "alert",
+          "title": "出現以下情況，建議盡快求醫",
+          "items": [
+            "晨勃長期明顯減少或消失，並已影響日常性生活或情緒狀態。",
+            "勃起持續超過四小時，且並非因性刺激所引起（醫學上稱為異常勃起），屬醫療緊急狀況，須立即求醫。",
+            "同時出現情緒持續低落、性慾明顯下降，建議一併考慮荷爾蒙或心理評估。",
+            "中年後晨勃頻率自然下降屬常見現象，但若合併疲倦、體重增加、性慾降低等表現，建議檢查睪固酮水平。",
+            "想根據體質作中藥調理，但自行判斷後仍感疑惑不確定。"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "常見問題"
+        },
+        {
+          "type": "faq",
+          "items": [
+            {
+              "q": "晨勃消失就代表有勃起功能障礙（ED）嗎？",
+              "a": "不一定。晨勃頻率本身就存在個體差異，也會隨年齡、睡眠狀況而波動。單一次或短時間內晨勃減少，未必等於勃起功能障礙；但如果長期明顯減少或消失，並影響實際性生活，建議求醫作進一步評估。"
+            },
+            {
+              "q": "晨勃多久出現一次才算正常？",
+              "a": "健康男性睡眠中平均每晚可出現數次夜間勃起，但實際頻率因人而異，也會隨年齡增長逐漸減少。與其糾結單一數字，不如留意自己整體趨勢是否有明顯轉變。"
+            },
+            {
+              "q": "晨勃會持續多久？多久算不正常？",
+              "a": "一項針對年輕男性的經典睡眠研究發現，健康男性平均每晚出現約四次夜間勃起，每次平均持續約三十分鐘左右，且大部分集中在快速動眼睡眠期間；醒來後的晨勃，通常會在數分鐘至半小時內自然消退。但若勃起並非由性刺激引起，卻持續超過四小時仍未消退（醫學上稱為異常勃起），則屬於醫療緊急狀況，須立即求醫，以免影響陰莖組織的長遠健康。"
+            },
+            {
+              "q": "晨勃跟膀胱脹尿有關嗎？",
+              "a": "兩者常常同時出現，但晨勃主要與睡眠週期及荷爾蒙變化有關，並非單純由膀胱脹尿引起；膀胱脹尿更多是巧合地與清晨醒來的時間重疊。"
+            },
+            {
+              "q": "中醫可以怎樣調理晨勃減少的情況？",
+              "a": "中醫會透過問診、望聞問切了解整體體質，例如是否偏向腎陽虛或肝鬱氣滯，再決定合適的調理方向，並非單一套通用方案。若有相關困擾，建議直接向註冊中醫師求診評估，而非自行判斷體質或購買成藥。"
+            },
+            {
+              "q": "年紀增長晨勃一定會消失嗎？",
+              "a": "不一定完全消失，但頻率隨年齡下降是普遍現象，與睪固酮水平及睡眠結構的自然變化有關。若同時伴隨其他不適，仍建議求醫了解成因，而非視為必然現象而忽略。"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "結語"
+        },
+        {
+          "type": "paragraph",
+          "text": "晨勃不只是單純的生理現象，從現代醫學的睡眠與荷爾蒙機制，到中醫的肝經、宗筋與腎陽理論，都可以從中窺見身體整體狀態的一些線索。與其只看單一天的變化，不如留意長期趨勢是否穩定。"
+        },
+        {
+          "type": "paragraph",
+          "text": "如果想更有系統地了解自己的體質，可以先完成[中醫體質問卷](../constitution.html)，再視乎需要預約醫師詳細問診評估。"
+        },
+        {
+          "type": "references",
+          "items": [
+            "Karacan I, Hursch CJ, Williams RL, Thornby JI. Some Characteristics of Nocturnal Penile Tumescence in Young Adults. Archives of General Psychiatry. 1972;26(4):351-356. https://doi.org/10.1001/archpsyc.1972.01750220061011",
+            "Wang X, Wang R, Zhang Y, et al. A wearable adaptive penile rigidity monitoring system for assessment of erectile dysfunction. Microsystems & Nanoengineering. 2024;10(1):131. https://doi.org/10.1038/s41378-024-00721-5",
+            "Diver MJ, Imtiaz KE, Ahmad AM, Vora JP, Fraser WD. Diurnal Rhythms of Serum Total, Free and Bioavailable Testosterone and of SHBG in Middle-Aged Men Compared with Those in Young Men. Clinical Endocrinology. 2003;58(6):710-717. https://doi.org/10.1046/j.1365-2265.2003.01772.x",
+            "Sandhu IMS, Singh NR. Absence of Nocturnal Penile Tumescence: An Earlier Sign of Erectile Dysfunction and Its Linked Comorbid Conditions. AMEI's Current Trends in Diagnosis & Treatment. 2019;3(2):72-76. https://doi.org/10.5005/jp-journals-10055-0074",
+            "Banks E, Joshy G, Abhayaratna WP, et al. Erectile Dysfunction Severity as a Risk Marker for Cardiovascular Disease Hospitalisation and All-Cause Mortality: A Prospective Cohort Study. PLoS Medicine. 2013;10(1):e1001372. https://doi.org/10.1371/journal.pmed.1001372",
+            "《黃帝內經．素問．痿論》：「陽明者，五藏六府之海，主潤宗筋，宗筋主束骨而利機關也」。https://yibian.hopto.org/tw/shu/?sid=4435",
+            "《黃帝內經．素問．厥論》：「前陰者，宗筋之所聚，太陰陽明之所合也」。https://yibian.hopto.org/tw/shu/?sid=4436",
+            "蕭聖揚教授：《中醫男科大全（上）》。台灣：元氣齋出版社，2009年5月。第二章：細說勃起功能障礙（情志、臟腑與外邪致病機理）。ISBN 978-986-6664-24-3"
+          ]
+        }
+      ]
     }
   ]
 };
