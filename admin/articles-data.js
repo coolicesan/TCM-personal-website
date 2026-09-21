@@ -13055,7 +13055,222 @@ window.ARTICLES_DATA = {
             "羅元愷主編：《中醫婦科學（承啟版）》。台灣：知音出版社，2003年12月。第八章：帶下病。ISBN 978-986-7825-17-9"
           ]
         }
-      ]
+      ],
+      "i18n": {
+        "en": {
+          "title": "How Does Cervical Mucus Change Across Your Cycle? A TCM and Modern Medicine Guide to the 5 Phases",
+          "excerpt": "Cervical mucus changes in a predictable pattern across your cycle — drier after your period, clear and stretchy near ovulation, then thicker and less noticeable afterwards. A Hong Kong registered Chinese medicine practitioner explains the modern-medicine science behind the 5-phase pattern, the TCM theory of vaginal discharge disorders and the five coloured discharges, plus when to see a doctor.",
+          "metaTitle": "How Does Cervical Mucus Change Across Your Cycle? A TCM and Modern Medicine Guide to the 5 Phases",
+          "metaDescription": "Cervical mucus changes in a predictable pattern across your cycle — drier after your period, clear and stretchy near ovulation, then thicker and less noticeable afterwards. A Hong Kong registered Chinese medicine practitioner explains the modern-medicine science behind the 5-phase pattern, the TCM theory of vaginal discharge disorders and the five coloured discharges, plus when to see a doctor.",
+          "keywords": [
+            "cervical mucus",
+            "ovulation discharge",
+            "fertile mucus",
+            "vaginal discharge colour",
+            "TCM discharge disorders",
+            "cervical mucus method"
+          ],
+          "heroEyebrow": "Reproductive Years · Cervical Mucus",
+          "tags": [
+            "Cervical Mucus",
+            "Ovulation"
+          ],
+          "heroTags": [
+            "#CervicalMucus",
+            "#OvulationDischarge",
+            "#FertileMucus",
+            "#DischargeDisorders",
+            "#CervicalMucusMethod"
+          ],
+          "blocks": [
+            {
+              "type": "lead",
+              "text": "Cervical mucus (vaginal discharge) follows a predictable hormonal pattern across your cycle: drier or scanter just after your period, then clear, wet and stretchy as ovulation approaches, before turning thicker and lighter afterwards, and drying up again before your next period. This cyclical pattern is one of the key ways modern medicine estimates fertility and ovulation timing. TCM, meanwhile, looks at abnormal discharge through the lens of \"vaginal discharge disorders\" and the five coloured discharges (white, yellow, blue-green, black and red), usually linked to spleen deficiency with dampness, insufficient kidney yang, or damp-heat. If the colour, texture or smell of your discharge changes noticeably, or you notice itching or a burning sensation, see a doctor early rather than guessing or buying over-the-counter treatments."
+            },
+            {
+              "type": "paragraph",
+              "text": "Vaginal discharge is something almost every woman notices day to day, but its colour and texture actually change in a fairly predictable pattern across the cycle — one you can even use to roughly estimate when you're ovulating. Here's a breakdown of what your discharge is telling you, from the modern-medicine view of cyclical change to the TCM theory behind it."
+            },
+            {
+              "type": "heading",
+              "text": "What Is Cervical Mucus? What Normal Discharge Looks Like"
+            },
+            {
+              "type": "info",
+              "title": "Cervical mucus",
+              "text": "Medically known as cervical mucus or vaginal discharge — a fluid produced by glands in the cervix, mixed with shed vaginal cells and other secretions. Normal discharge is white or clear with no noticeable smell, and its amount and texture shift with your cycle's oestrogen and progesterone levels."
+            },
+            {
+              "type": "paragraph",
+              "text": "The colour, texture and amount of normal (physiological) discharge change in a regular pattern across the cycle, driven mainly by the rise and fall of oestrogen and progesterone. Modern medicine has long established that tracking cervical mucus is one of the key ways to assess ovulation and fertility, and this pattern underpins several natural fertility-awareness methods, including the Billings ovulation method."
+            },
+            {
+              "type": "heading",
+              "text": "How Does Discharge Change Across the Cycle? The Modern-Medicine View"
+            },
+            {
+              "type": "paragraph",
+              "text": "Using a typical 28-day cycle as an example, here's how discharge tends to look at each stage — the actual day count will vary depending on how long your own cycle runs:"
+            },
+            {
+              "type": "table",
+              "headers": ["Cycle Phase", "Approximate Days", "Typical Discharge", "What's Happening"],
+              "rows": [
+                ["Menstruation", "Day 1–5", "Mostly menstrual blood — hard to assess discharge separately", "The uterine lining is shedding"],
+                ["Post-Period", "Day 6–9", "Little to no discharge; dry", "Oestrogen is still low"],
+                ["Pre-Ovulation", "Day 10–13", "Discharge increases and turns moist and creamy", "Oestrogen is rising, fertility is increasing"],
+                ["Ovulation", "Day 14–16", "Clear, slippery and stretchy (egg-white-like) — the most fertile type", "Oestrogen peaks"],
+                ["Post-Ovulation / Luteal Phase", "Day 17–28", "Discharge decreases, turns thick or sticky, and dries up before your period", "Progesterone rises"]
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "Ovulation Discharge: The Most Fertile Type"
+            },
+            {
+              "type": "paragraph",
+              "text": "A prospective study tracking 193 women across more than 2,700 menstrual cycles found that the chance of conception was clearly higher on days with clear, stretchy, egg-white-like discharge — up to around 30% — while days with no discharge at all carried close to zero chance. The same study found that this most-fertile discharge type became noticeably more common between day 10 and day 17 of the cycle, peaking around day 13 — right in line with typical ovulation timing."
+            },
+            {
+              "type": "paragraph",
+              "text": "**A practical tip:** if you're trying to conceive, checking your discharge at the same time each day (for example, after using the bathroom) and jotting down how it changes can help you get a rough sense of when you ovulate. Since this method alone has limited accuracy, it's worth pairing it with basal body temperature tracking or ovulation test strips."
+            },
+            {
+              "type": "heading",
+              "text": "How Does TCM View Discharge? Vaginal Discharge Disorders and the Five Colours"
+            },
+            {
+              "type": "info",
+              "title": "Vaginal discharge disorders (dai xia bing)",
+              "text": "In TCM theory, when the amount, colour, texture or smell of discharge becomes abnormal, or comes with discomfort, this is called a \"vaginal discharge disorder.\" It's named after the \"girdle vessel\" (dai mai), since the condition is linked to the chong, ren and girdle meridians along with spleen, kidney and liver function."
+            },
+            {
+              "type": "paragraph",
+              "text": "Fu Qingzhu, a physician working at the end of the Ming and start of the Qing dynasty, argued in his gynaecology text that \"all discharge disorders are, at root, dampness conditions,\" and classified them by colour into five types — white, blue-green, yellow, black and red — each pointing to a different underlying pattern:"
+            },
+            {
+              "type": "table",
+              "headers": ["Discharge Colour", "Common TCM Pattern"],
+              "rows": [
+                ["White", "Spleen deficiency with excess dampness, or liver-qi stagnation with weak qi letting dampness sink downward"],
+                ["Yellow", "Damp-heat in the ren meridian"],
+                ["Blue-green", "Damp-heat in the liver meridian"],
+                ["Black", "Intense ministerial fire, or long-standing damp-heat in the lower burner"],
+                ["Red", "Liver-qi stagnation turning to fire, with damp-heat mixed with blood"]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**A practical tip:** TCM theory is nuanced, and your actual constitution still needs to be assessed by a registered Chinese medicine practitioner through a full consultation, not just colour-matched from a chart — please don't self-diagnose or buy herbal remedies based on colour alone."
+            },
+            {
+              "type": "heading",
+              "text": "What Does Abnormal Discharge Mean? Common Causes and Features"
+            },
+            {
+              "type": "paragraph",
+              "text": "Normal discharge shouldn't have a noticeably unusual colour or smell. The features below are more likely linked to infection, though a doctor's examination is needed to confirm the actual cause:"
+            },
+            {
+              "type": "table",
+              "headers": ["Common Condition", "Discharge Features"],
+              "rows": [
+                ["Bacterial vaginosis", "Thin, uniform, greyish-white discharge with a fishy smell, often more noticeable after sex"],
+                ["Candidiasis (yeast infection)", "White, thick, cottage-cheese-like discharge, usually with noticeable vulval itching and redness"],
+                ["Trichomoniasis", "Yellow-green, frothy discharge, possibly with an odour and vaginal irritation"]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**A practical tip:** the features above are simplified for reference only — an actual diagnosis needs a gynaecological exam and lab tests. Please don't self-diagnose from appearance alone and buy vaginal pessaries or oral medication without seeing a doctor."
+            },
+            {
+              "type": "heading",
+              "text": "How to Observe and Track Discharge Day to Day"
+            },
+            {
+              "type": "checklist",
+              "items": [
+                "Try to check at a consistent time each day — for example, after using the bathroom.",
+                "Note the amount, colour and texture (dry, wet, sticky or stretchy), and whether there's any odour.",
+                "Avoid douching or scented products inside the vagina — they can disrupt normal flora and mask what your discharge actually looks like.",
+                "If you're trying to conceive, pair this with basal body temperature or ovulation test strips for better accuracy.",
+                "Wear breathable cotton underwear and avoid prolonged panty-liner use, to keep the area from getting too warm and damp."
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Abnormal Discharge: When to See a Doctor"
+            },
+            {
+              "type": "paragraph",
+              "text": "See a doctor promptly rather than self-treating if you notice any of the following:"
+            },
+            {
+              "type": "alert",
+              "title": "See a doctor promptly if you notice any of the following",
+              "items": [
+                "Discharge turns yellow, green or grey, or you notice spotting outside your period.",
+                "A noticeable odour develops (such as a fishy smell), or the texture changes markedly (cottage-cheese-like or frothy).",
+                "You have vulval itching, burning, pain, or discomfort during sex.",
+                "Discharge increases noticeably after menopause, especially with any spotting.",
+                "Symptoms persist or keep recurring despite trying over-the-counter treatment."
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Frequently Asked Questions"
+            },
+            {
+              "type": "faq",
+              "items": [
+                {
+                  "q": "Does stretchy discharge mean I'm about to ovulate?",
+                  "a": "Clear, stretchy, egg-white-like discharge is indeed one of the classic signs that ovulation is near, but the day it appears isn't necessarily your exact ovulation day — actual timing varies from person to person. If you're trying to conceive, pairing this with basal body temperature or ovulation test strips will give you a more accurate picture."
+                },
+                {
+                  "q": "Is it normal for discharge to suddenly increase?",
+                  "a": "The amount naturally rises and falls with your cycle, emotions, arousal and pregnancy. If it's just heavier in volume while colour, texture and smell stay normal, this is usually just a physiological change. But if it comes with a change in colour or smell, or any discomfort, it's worth getting checked."
+                },
+                {
+                  "q": "Can I use a vaginal douche to keep clean?",
+                  "a": "Generally, no. The vagina has its own self-cleaning mechanism and a natural balance of flora, and regularly using douches or scented products can actually disrupt that balance and raise your infection risk. Rinsing the outer vulva with plain water is enough for everyday hygiene."
+                },
+                {
+                  "q": "Will I still have discharge after menopause?",
+                  "a": "After menopause, falling oestrogen levels usually mean discharge drops off noticeably and the vagina becomes more prone to dryness. If discharge increases noticeably after menopause, especially with any spotting, see a doctor promptly to rule out other gynaecological issues."
+                },
+                {
+                  "q": "Does yellowish discharge always mean an infection?",
+                  "a": "Not necessarily. A very slight yellow tinge can sometimes just be discharge oxidising on contact with air, or a normal shift around your period. But if the yellow colour is pronounced, or comes with an odour or discomfort, it's more likely linked to infection — worth getting it checked to confirm."
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Conclusion"
+            },
+            {
+              "type": "paragraph",
+              "text": "The colour and texture of your discharge is really a mirror of your body's natural rhythm across the cycle — from the dryness after your period, to the wet, stretchy days around ovulation, to the thicker, drier days before your next one, all driven by the rise and fall of oestrogen and progesterone. TCM, meanwhile, reads these changes through the lens of discharge disorders and the five colours, as clues to an underlying constitutional tendency. Rather than fixating on any single day, it's more useful to build a habit of ongoing observation and watch whether the overall pattern stays stable."
+            },
+            {
+              "type": "paragraph",
+              "text": "If you'd like a more structured understanding of your own constitution, you can start with the [TCM constitution questionnaire](../constitution-en.html), then book a consultation as needed for a full assessment."
+            },
+            {
+              "type": "references",
+              "items": [
+                "Scarpa B, Dunson DB, Colombo B. Cervical Mucus Secretions on the Day of Intercourse: An Accurate Marker of Highly Fertile Days. European Journal of Obstetrics & Gynecology and Reproductive Biology. 2006;125(1):72-78. https://doi.org/10.1016/j.ejogrb.2005.07.024",
+                "Katz DF. Human Cervical Mucus: Research Update. American Journal of Obstetrics and Gynecology. 1991;165(6 Pt 2):1984-1986. https://doi.org/10.1016/S0002-9378(11)90559-6",
+                "Geer K, Klega A. Vaginitis: Diagnosis and Treatment. American Family Physician. 2025;112(5):504-512. https://www.aafp.org/pubs/afp/issues/2025/1100/vaginitis.html",
+                "Fu Shan (Fu Qingzhu). Fu Qingzhu's Gynaecology (傅青主女科), \"Vaginal Discharge\" chapter: \"All discharge disorders are, at root, dampness conditions.\" https://zh.wikisource.org/zh-hans/傅青主女科",
+                "Luo, Yuankai (ed.). TCM Gynaecology (Chengqi Edition) (中醫婦科學（承啟版）). Taiwan: Zhiyin Publishing, December 2003. Chapter 8: Vaginal Discharge Disorders. ISBN 978-986-7825-17-9"
+              ]
+            }
+          ]
+        }
+      }
     },
     {
       "slug": "heavy-menstrual-bleeding-basics",

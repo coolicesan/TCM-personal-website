@@ -228,7 +228,9 @@
     'constitution.html':    { zh: 'constitution.html',    en: 'constitution-en.html' },
     'constitution-en.html': { zh: 'constitution.html',    en: 'constitution-en.html' },
     'tongue-diagnosis-basics.html':    { zh: 'tongue-diagnosis-basics.html',    en: 'tongue-diagnosis-basics-en.html' },
-    'tongue-diagnosis-basics-en.html': { zh: 'tongue-diagnosis-basics.html',    en: 'tongue-diagnosis-basics-en.html' }
+    'tongue-diagnosis-basics-en.html': { zh: 'tongue-diagnosis-basics.html',    en: 'tongue-diagnosis-basics-en.html' },
+    'cervical-mucus-cycle-changes.html':    { zh: 'cervical-mucus-cycle-changes.html',    en: 'cervical-mucus-cycle-changes-en.html' },
+    'cervical-mucus-cycle-changes-en.html': { zh: 'cervical-mucus-cycle-changes.html',    en: 'cervical-mucus-cycle-changes-en.html' }
   };
 
   function currentFile() {
