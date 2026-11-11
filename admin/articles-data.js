@@ -1013,6 +1013,7 @@ window.ARTICLES_DATA = {
         "#產後調理"
       ],
       "publishDate": "2026-07-20",
+      "modifiedDate": "2026-11-11",
       "blocks": [
         {
           "type": "lead",
@@ -1213,7 +1214,7 @@ window.ARTICLES_DATA = {
         },
         {
           "type": "paragraph",
-          "text": "**在其他類型的脫髮上，已有一定研究基礎。** 一篇發表於 *Frontiers in Medicine* 的[綜述](https://www.frontiersin.org/journals/medicine/articles/10.3389/fmed.2022.868079/full)整理了針灸相關文獻，指出針灸單獨使用或配合其他療法，在圓禿、雄性禿、脂溢性脫髮中顯示出正面結果，並歸納了常用穴位與可能機理——包括調節免疫反應，以及影響與情緒認知相關的神經網絡。另有 meta 分析評估中醫藥作為頑固性雄性禿輔助治療的效果與安全性。"
+          "text": "**在其他類型的脫髮上，已有一定研究基礎。** 一篇發表於 Frontiers in Medicine 的[綜述](https://www.frontiersin.org/journals/medicine/articles/10.3389/fmed.2022.868079/full)整理了針灸相關文獻，指出針灸單獨使用或配合其他療法，在圓禿、雄性禿、脂溢性脫髮中顯示出正面結果，並歸納了常用穴位與可能機理——包括調節免疫反應，以及影響與情緒認知相關的神經網絡。另有 meta 分析評估中醫藥作為頑固性雄性禿輔助治療的效果與安全性。"
         },
         {
           "type": "paragraph",
@@ -4450,7 +4451,369 @@ window.ARTICLES_DATA = {
             "《傅青主女科》"
           ]
         }
-      ]
+      ],
+      "i18n": {
+        "en": {
+          "title": "Does a Low AMH Mean You Can't Get Pregnant? Symptoms, Diagnosis and TCM Care for Premature Ovarian Insufficiency (POI)",
+          "excerpt": "AMH reflects your ovarian reserve; it does not predict your chance of conceiving naturally. A Hong Kong registered Chinese medicine practitioner explains how to read an AMH result, why international guidelines advise against using AMH to predict fertility, how premature ovarian insufficiency (POI) is diagnosed and what it means for long-term health, and how TCM approaches it.",
+          "metaTitle": "Low AMH and Fertility: POI Symptoms and Diagnosis | Hong Kong TCM",
+          "metaDescription": "AMH reflects your ovarian reserve; it does not predict your chance of conceiving naturally. A Hong Kong registered Chinese medicine practitioner explains how to read an AMH result, why international guidelines advise against using AMH to predict fertility, how premature ovarian insufficiency (POI) is diagnosed and what it means for long-term health, and how TCM approaches it.",
+          "keywords": [
+            "AMH",
+            "low AMH",
+            "premature ovarian failure",
+            "premature ovarian insufficiency",
+            "POI",
+            "normal AMH level",
+            "ovarian reserve",
+            "AMH TCM"
+          ],
+          "heroEyebrow": "Fertility · Ovarian Function",
+          "tags": [
+            "Infertility",
+            "Endocrine"
+          ],
+          "heroTags": [
+            "#AMH",
+            "#OvarianReserve",
+            "#PrematureOvarianInsufficiency",
+            "#POI",
+            "#FertilityAfter35",
+            "#KidneyDeficiencyCare"
+          ],
+          "blocks": [
+            {
+              "type": "lead",
+              "text": "AMH reflects roughly how many follicles remain in the ovaries, and it **cannot predict your chance of conceiving naturally**. International guidelines are explicit that ovarian reserve markers should not be used to predict natural pregnancy, should not be used as a reason to refuse assisted reproduction, and cannot predict the age of menopause. A low AMH means you may respond less strongly to ovarian stimulation drugs, but it does not mean you can't get pregnant."
+            },
+            {
+              "type": "paragraph",
+              "text": "\"My doctor says my AMH is only 0.8 — does that mean I can't have a baby?\" This is the most common question after the blood test, and the one that most often floors people. But the number is routinely misread. It does carry clinical meaning, just not where most people think. Here is what it does and doesn't tell you."
+            },
+            {
+              "type": "heading",
+              "text": "What Is AMH, and What Does It Reflect?"
+            },
+            {
+              "type": "info",
+              "title": "Anti-Müllerian hormone (AMH)",
+              "text": "Secreted by the granulosa cells of the small follicles in the ovary. The level in the blood broadly reflects how many follicles remain. It can be checked with a blood test and is not affected by where you are in your menstrual cycle."
+            },
+            {
+              "type": "paragraph",
+              "text": "To understand AMH, start by separating two ideas:"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Concept",
+                "What it means",
+                "Is AMH related?"
+              ],
+              "rows": [
+                [
+                  "Egg **quantity**",
+                  "How many follicles are left in the ovaries",
+                  "Yes — this is exactly what AMH reflects"
+                ],
+                [
+                  "Egg **quality**",
+                  "Whether the eggs' chromosomes are normal",
+                  "No — quality is mainly tied to age"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "This distinction is the key to everything else. **Age determines quality; AMH reflects quantity**, and when it comes to whether you get pregnant, quality often matters more. It also explains why a 30-year-old with a low AMH can still have a better chance of conceiving naturally than a 42-year-old with a normal AMH."
+            },
+            {
+              "type": "heading",
+              "text": "Does a Low AMH Mean You Can't Conceive?"
+            },
+            {
+              "type": "paragraph",
+              "text": "No. This is the most widespread misunderstanding at present, and the position of the international professional bodies is clear."
+            },
+            {
+              "type": "paragraph",
+              "text": "In its [committee opinion](https://www.asrm.org/practice-guidance/practice-committee-documents/testing-and-interpreting-measures-of-ovarian-reserve-a-committee-opinion-2020/) on ovarian reserve testing, the American Society for Reproductive Medicine (ASRM) states that ovarian reserve markers **cannot predict the current reproductive potential of women with no established fertility problem**, and that their results should not be used to predict the chance of natural pregnancy."
+            },
+            {
+              "type": "paragraph",
+              "text": "Recent research supports this further. A study comparing women with \"unexplained infertility\" and women whose infertility was due to a male factor found **no difference** in AMH, antral follicle count or basal FSH between the two groups; if ovarian reserve really affected natural conception, the first group would be expected to score lower. The authors concluded that doctors and patients should both know this, to avoid inappropriate counselling and unnecessary clinical decisions."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Where AMH is genuinely useful** is in predicting how you will respond to ovarian stimulation drugs during in vitro fertilisation (IVF) — with a smaller reserve, fewer eggs are usually retrieved. That is information for planning treatment, not a verdict on your fertility."
+            },
+            {
+              "type": "heading",
+              "text": "Three Things AMH Should Not Be Used For"
+            },
+            {
+              "type": "paragraph",
+              "text": "Under the current international consensus:"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**It should not be used to predict natural fertility.** This is the most commonly misused application.",
+                "**It should not be used as a reason to refuse assisted reproduction.** ASRM states explicitly that a very low AMH should not be grounds for refusing IVF treatment.",
+                "**It should not be used to predict the age of menopause.** AMH falls with age, but it cannot accurately work out when an individual will reach menopause."
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "Nor is it recommended that women without symptoms use ovarian reserve testing as a routine screen — the result tends to cause anxiety without answering the question she actually wants answered."
+            },
+            {
+              "type": "heading",
+              "text": "What Is Premature Ovarian Insufficiency (POI)?"
+            },
+            {
+              "type": "info",
+              "title": "Premature ovarian insufficiency (POI)",
+              "text": "Also called primary ovarian insufficiency. It means the ovaries lose normal function before the age of 40, leading to periods stopping or becoming infrequent, falling oestrogen and reduced fertility."
+            },
+            {
+              "type": "paragraph",
+              "text": "Note the change in wording: the older term \"premature ovarian failure\" has gradually been replaced by POI, because \"failure\" is not accurate — **ovarian function in POI can return intermittently**, and some women still have occasional follicle development, and may even conceive naturally."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Common symptoms**"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Periods stopping or becoming markedly infrequent before 40",
+                "Hot flushes and night sweats",
+                "Vaginal dryness and discomfort during sex",
+                "Poorer sleep",
+                "Mood swings and difficulty concentrating",
+                "Difficulty conceiving"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**How it is diagnosed**"
+            },
+            {
+              "type": "paragraph",
+              "text": "Diagnosis rests mainly on periods that become infrequent or stop for several months before the age of 40, together with an **elevated FSH level confirmed on repeat testing some time apart**. The ASRM and ESHRE guideline states that **AMH should not be the main diagnostic test for POI**, although it can help confirm the diagnosis when it is in doubt."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Common causes**"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Chromosomal or genetic factors (for example Turner syndrome or fragile X premutation)",
+                "Autoimmune factors",
+                "Medical causes (chemotherapy, radiotherapy, ovarian surgery)",
+                "Infection",
+                "Most cases still have no known cause"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "If POI is confirmed, chromosome and related gene testing is generally recommended, as the results can affect risk assessment for other family members."
+            },
+            {
+              "type": "heading",
+              "text": "POI Is More Than a Fertility Issue"
+            },
+            {
+              "type": "paragraph",
+              "text": "This point is extremely important, yet often overlooked. Long-term oestrogen deficiency affects:"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Bone health:** faster bone loss and a higher risk of osteoporosis",
+                "**Cardiovascular health:** an increased risk of cardiovascular disease",
+                "**The urinary and genital tract:** vaginal dryness and recurrent urinary discomfort",
+                "**Cognition and mood:** sleep, concentration and emotional wellbeing",
+                "**Overall quality of life**"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "So even if you have no plans to conceive, women with POI should still discuss long-term hormone replacement with their doctor — the aim is not only to ease hot flushes but to protect the bones and the heart. This falls within Western medical care, and Chinese medicine should not replace it."
+            },
+            {
+              "type": "heading",
+              "text": "How Does Chinese Medicine View Low AMH and Premature Ovarian Insufficiency?"
+            },
+            {
+              "type": "paragraph",
+              "text": "Chinese medicine has no terms for AMH or POI. The related presentations are mostly classed under delayed menstruation, amenorrhoea, \"blood exhaustion\" and \"periods ending before old age\". The core of the pathology lies in the kidney, with links to the liver, spleen and heart."
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Pattern",
+                "Main features",
+                "Accompanying symptoms",
+                "Treatment"
+              ],
+              "rows": [
+                [
+                  "Kidney yin deficiency",
+                  "Scanty periods gradually stopping",
+                  "Hot flushes and night sweats, heat in the palms, soles and chest, dry mouth, insomnia",
+                  "Nourish kidney yin"
+                ],
+                [
+                  "Kidney yang deficiency",
+                  "Delayed periods, scanty and pale",
+                  "Aversion to cold and cold limbs, aching lower back and knees, frequent night-time urination, reduced libido",
+                  "Warm and tonify kidney yang"
+                ],
+                [
+                  "Kidney deficiency, liver constraint",
+                  "Irregular cycles, pre-period distension and pain",
+                  "Low mood or irritability, a tight, full feeling in the chest and ribs",
+                  "Tonify the kidney and soothe the liver"
+                ],
+                [
+                  "Heart–kidney disharmony",
+                  "Infrequent periods",
+                  "Insomnia with vivid dreams, palpitations, forgetfulness, restlessness",
+                  "Restore communication between the heart and kidney"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "In practice, patterns often overlap, and they frequently run alongside long-term stress, lack of sleep, extreme dieting or excessive exercise. These background factors are themselves recognised by modern medicine as affecting the hypothalamic–pituitary–ovarian axis."
+            },
+            {
+              "type": "paragraph",
+              "text": "The above is a general introduction to TCM theory, not a diagnosis or a prescription. Herbal treatment needs an in-person consultation and pattern differentiation by a registered Chinese medicine practitioner, and shouldn't be self-prescribed."
+            },
+            {
+              "type": "heading",
+              "text": "What Can Chinese Medicine Do, and What Can't It Do?"
+            },
+            {
+              "type": "paragraph",
+              "text": "**One point has to be made clear first:** at present no method — Chinese medicine, Western medicine or supplements — has been proven to increase the number of follicles in the ovaries. The number of follicles is set at birth and declines with age, an irreversible physiological process. Any claim that you can \"grow back more eggs\" or \"bring your AMH back up\" should be treated with great scepticism."
+            },
+            {
+              "type": "paragraph",
+              "text": "It's also worth noting that AMH values fluctuate to some degree, and different assay methods give different results, so a single higher reading doesn't necessarily mean that ovarian reserve has actually increased."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Where Chinese medicine can reasonably help:**"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Easing symptoms such as hot flushes, night sweats, insomnia and mood swings",
+                "Working on lifestyle factors linked to the hypothalamic–pituitary–ovarian axis: stress, sleep, extreme dieting or exercise",
+                "Regulating overall qi, blood and energy levels",
+                "For those diagnosed with POI, supporting long-term health management alongside Western medicine"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**On the existing research:** studies of Chinese medicine for POI or reduced ovarian reserve are currently mostly small trials, with no large randomised controlled trials using live birth rate as the main outcome, so the strength of the evidence is limited."
+            },
+            {
+              "type": "paragraph",
+              "text": "If you are trying to conceive and considering assisted reproduction, Chinese medicine care should not replace or delay the relevant assessment and treatment — especially with a low AMH, where time itself is a factor to consider."
+            },
+            {
+              "type": "heading",
+              "text": "When to See a Doctor"
+            },
+            {
+              "type": "list",
+              "items": [
+                "No period for four months or more before the age of 40",
+                "Markedly infrequent periods, with cycles getting longer and longer",
+                "Signs of low oestrogen such as hot flushes, night sweats or vaginal dryness",
+                "A family history of premature ovarian failure or early menopause",
+                "Previous chemotherapy, radiotherapy or ovarian surgery",
+                "Not pregnant after a year of trying (six months if you're over 35)",
+                "A confirmed diagnosis of POI without ever having discussed long-term hormone replacement"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "A particular reminder on the last point: after a diagnosis of POI, follow-up is not only about fertility but also about long-term protection of the bones and the heart."
+            },
+            {
+              "type": "heading",
+              "text": "Frequently Asked Questions"
+            },
+            {
+              "type": "faq",
+              "items": [
+                {
+                  "q": "What AMH level is normal?",
+                  "a": "Reference ranges differ between laboratories and assay methods, and the value also has to be read against age — the same number means something different at 35 than at 25. Looking at the figure without considering age and clinical context makes it easy to reach the wrong conclusion. Ask your doctor to interpret it in light of your overall situation."
+                },
+                {
+                  "q": "Can I conceive naturally with a low AMH?",
+                  "a": "Yes. The current evidence shows no clear link between ovarian reserve markers and the chance of natural conception. What AMH mainly predicts is the response to ovarian stimulation drugs, not whether you can get pregnant."
+                },
+                {
+                  "q": "Is there any way to raise my AMH?",
+                  "a": "No method has been proven to genuinely increase the number of follicles. AMH naturally fluctuates, and different assay methods give different results, so an occasional higher reading doesn't necessarily reflect a real change. Be cautious about treatments or supplements that claim to raise AMH."
+                },
+                {
+                  "q": "What's the difference between premature ovarian insufficiency and menopause?",
+                  "a": "Both the timing and the nature are different. POI occurs before the age of 40, and ovarian function can return intermittently, so ovulation is still possible; natural menopause is the permanent end of ovarian function. This is also why the name changed from \"ovarian failure\" to \"ovarian insufficiency\"."
+                },
+                {
+                  "q": "Can I still conceive naturally after a POI diagnosis?",
+                  "a": "Yes, but the chance is not high. Women with POI may have intermittent follicle development and ovulation, and natural pregnancies are reported in the literature. So if you aren't planning a pregnancy for now, you still need to think about contraception — a point that is often overlooked."
+                },
+                {
+                  "q": "Do I need to do IVF straight away if my AMH is low?",
+                  "a": "That needs to be assessed by a fertility specialist based on your age, overall health and plans for having a family. ASRM states clearly that a very low AMH should not be a reason to refuse IVF, but the actual chance of success and the treatment plan need to be discussed individually."
+                },
+                {
+                  "q": "How long does Chinese medicine care take?",
+                  "a": "Think in months, not weeks — you generally need to observe at least three menstrual cycles to judge the direction. But as explained above, the aim of Chinese medicine is to improve symptoms and overall condition, not to raise the number of eggs, so expectations need to be set accurately."
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Conclusion"
+            },
+            {
+              "type": "paragraph",
+              "text": "AMH is a useful but often misread marker. It reflects the number of eggs, not their quality, and it does not predict the chance of natural conception — that is the consistent position of the international professional bodies. When you receive a low number, what you need most is a full clinical assessment and a correct interpretation, not panic."
+            },
+            {
+              "type": "paragraph",
+              "text": "If premature ovarian insufficiency is confirmed, management should cover both fertility planning and long-term health protection, and the latter is often overlooked. Chinese medicine can differentiate patterns — kidney yin deficiency, kidney yang deficiency, kidney deficiency with liver constraint, heart–kidney disharmony — to work on hot flushes, insomnia, mood and energy, alongside adjustments to lifestyle factors; but it cannot increase the number of follicles, and it should not replace follow-up with a fertility or endocrine specialist."
+            },
+            {
+              "type": "paragraph",
+              "text": "Receiving a diagnosis like this often hits harder emotionally than physically. If it feels overwhelming, seeking psychological support and a community of people going through the same thing matters as much as looking after the body."
+            },
+            {
+              "type": "references",
+              "items": [
+                "Practice Committee of the American Society for Reproductive Medicine. Testing and interpreting measures of ovarian reserve: a committee opinion. Fertil Steril. 2020;114(6):1151–1157. https://www.asrm.org/practice-guidance/practice-committee-documents/testing-and-interpreting-measures-of-ovarian-reserve-a-committee-opinion-2020/ (accessed 21 July 2026)",
+                "ESHRE/ASRM. Evidence-based guideline: Premature Ovarian Insufficiency. https://www.asrm.org/practice-guidance/practice-committee-documents/evidence-based-guideline-premature-ovarian-insufficiency--2024/ (accessed 21 July 2026)",
+                "Ovarian reserve does not influence natural conception: insights from infertile women. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11485058/ (accessed 21 July 2026)",
+                "Ovarian Reserve Testing. In: Endotext. NCBI Bookshelf. https://www.ncbi.nlm.nih.gov/books/NBK279058/ (accessed 21 July 2026)",
+                "Gynaecology in Traditional Chinese Medicine (中醫婦科學). China Press of Traditional Chinese Medicine.",
+                "Fu Qingzhu's Gynaecology (傅青主女科)"
+              ]
+            }
+          ]
+        }
+      }
     },
     {
       "slug": "confirm-ovulation",
@@ -4485,6 +4848,7 @@ window.ARTICLES_DATA = {
         "#黃體功能"
       ],
       "publishDate": "2026-08-12",
+      "modifiedDate": "2026-11-11",
       "blocks": [
         {
           "type": "lead",
@@ -4713,7 +5077,7 @@ window.ARTICLES_DATA = {
         },
         {
           "type": "paragraph",
-          "text": "#### 一、有沒有分層（雙相）"
+          "text": "**一、有沒有分層（雙相）**"
         },
         {
           "type": "paragraph",
@@ -4721,7 +5085,7 @@ window.ARTICLES_DATA = {
         },
         {
           "type": "paragraph",
-          "text": "#### 二、高溫期有幾長"
+          "text": "**二、高溫期有幾長**"
         },
         {
           "type": "paragraph",
@@ -4733,7 +5097,7 @@ window.ARTICLES_DATA = {
         },
         {
           "type": "paragraph",
-          "text": "#### 三、爬升的型態"
+          "text": "**三、爬升的型態**"
         },
         {
           "type": "list",
@@ -4746,7 +5110,7 @@ window.ARTICLES_DATA = {
         },
         {
           "type": "paragraph",
-          "text": "#### 四、低溫期是否穩定"
+          "text": "**四、低溫期是否穩定**"
         },
         {
           "type": "paragraph",
@@ -4932,7 +5296,487 @@ window.ARTICLES_DATA = {
             "《中醫婦科學》，中國中醫藥出版社"
           ]
         }
-      ]
+      ],
+      "i18n": {
+        "en": {
+          "title": "How Do You Know If You're Ovulating? How to Use Basal Body Temperature, Ovulation Test Strips and Cervical Mucus",
+          "excerpt": "There are three ways to tell whether you're ovulating: basal body temperature, ovulation test strips and cervical mucus, and each answers a different question. A Hong Kong registered Chinese medicine practitioner explains how to use all three properly and where they trip people up, what a short high-temperature phase means, and how TCM reads a temperature chart for kidney yin and yang.",
+          "metaTitle": "How Do You Know If You're Ovulating? Temperature, Strips and Mucus | Hong Kong TCM",
+          "metaDescription": "There are three ways to tell whether you're ovulating: basal body temperature, ovulation test strips and cervical mucus, and each answers a different question. A Hong Kong registered Chinese medicine practitioner explains how to use all three properly and where they trip people up, what a short high-temperature phase means, and how TCM reads a temperature chart for kidney yin and yang.",
+          "keywords": [
+            "ovulation",
+            "am I ovulating",
+            "ovulation test strips",
+            "basal body temperature",
+            "BBT",
+            "cervical mucus",
+            "high-temperature phase",
+            "short luteal phase",
+            "confirm ovulation"
+          ],
+          "heroEyebrow": "Fertility · Ovulation Tracking",
+          "tags": [
+            "Ovulation",
+            "Periods"
+          ],
+          "heroTags": [
+            "#ConfirmOvulation",
+            "#BasalBodyTemperature",
+            "#OvulationTestStrips",
+            "#CervicalMucus",
+            "#HighTemperaturePhase",
+            "#LutealFunction"
+          ],
+          "blocks": [
+            {
+              "type": "lead",
+              "text": "There are three common ways to confirm ovulation, and each answers a different question. **Ovulation test strips** and **cervical mucus** can warn you a few days ahead that ovulation is coming; **basal body temperature** confirms after the event that ovulation really happened, and shows how long your luteal phase is. You get the full picture only when you use them together. If no signs of ovulation show up for several cycles in a row, you should have it checked."
+            },
+            {
+              "type": "paragraph",
+              "text": "\"My cycle is very regular, so I must be ovulating, right?\" Not necessarily. Some women have regular cycles but don't ovulate, and some have irregular cycles but still do. The only way to know what's really happening is to observe it."
+            },
+            {
+              "type": "paragraph",
+              "text": "We'll start with what each of the three methods can do, then go through how to use each one."
+            },
+            {
+              "type": "heading",
+              "text": "Three Methods, Each Answering a Different Question"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Method",
+                "Warns you in advance",
+                "Confirms afterwards",
+                "Main use"
+              ],
+              "rows": [
+                [
+                  "Ovulation test strips (measuring LH)",
+                  "✅ About 24 to 36 hours",
+                  "❌",
+                  "Timing intercourse"
+                ],
+                [
+                  "Cervical mucus observation",
+                  "✅ A few days",
+                  "❌",
+                  "Free; identifies the fertile window"
+                ],
+                [
+                  "Basal body temperature (BBT)",
+                  "❌",
+                  "✅",
+                  "Confirming whether you ovulated, and how long the luteal phase is"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**Each one used alone has blind spots.** A strip that catches an LH surge doesn't mean an egg has definitely been released; by the time your temperature rises, the best window has already passed. The more common combination in practice is: **strips or mucus to catch the timing, temperature to verify afterwards.**"
+            },
+            {
+              "type": "heading",
+              "text": "Method 1: Ovulation Test Strips (LH Strips)"
+            },
+            {
+              "type": "paragraph",
+              "text": "Before ovulation, luteinising hormone (LH) surges sharply, and ovulation generally follows about 24 to 36 hours after the peak. The strips measure LH in your urine."
+            },
+            {
+              "type": "paragraph",
+              "text": "**How to use them**"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Start testing a few days before you expect to ovulate — the longer your cycle, the later you start",
+                "**Don't use first-morning urine.** The LH surge usually starts in the morning and takes time to show up in urine, so the usual advice is to test between midday and evening, at the same time each day",
+                "Cut back on drinking large amounts of water for about two hours before testing, to avoid diluting the sample",
+                "The test line must be **as dark as or darker than** the control line to count as positive; a line fainter than the control doesn't count",
+                "After a positive result, the next one to two days are the most fertile"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**Two pitfalls**"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Women with PMOS (formerly PCOS) are prone to false positives**, because their baseline LH is already high, so they may get \"nearly positive\" results for a long time without actually ovulating (see [PMOS (Formerly PCOS)](pcos-pmos-en.html)).",
+                "**A positive result doesn't guarantee ovulation.** There is a condition called luteinised unruptured follicle, where LH rises but the egg isn't released. This is exactly why you need basal body temperature to verify."
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Method 2: Observing Cervical Mucus"
+            },
+            {
+              "type": "paragraph",
+              "text": "This method is free and needs no equipment, but it takes a little time to get familiar with."
+            },
+            {
+              "type": "paragraph",
+              "text": "As oestrogen rises, cervical mucus goes from scant and sticky to gradually clear, thin and stretchy — closest to ovulation it resembles raw egg white and can be stretched several centimetres without breaking."
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Stage",
+                "Mucus"
+              ],
+              "rows": [
+                [
+                  "After your period",
+                  "Dry, with almost no discharge"
+                ],
+                [
+                  "Mid follicular phase",
+                  "Sticky, white and cloudy, doesn't stretch easily"
+                ],
+                [
+                  "Approaching ovulation",
+                  "Gradually clearer, thinner and wetter"
+                ],
+                [
+                  "Most fertile",
+                  "Transparent, slippery, egg-white-like, stretchy"
+                ],
+                [
+                  "After ovulation",
+                  "Quickly turns sticky or dry"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**Key point:** the **last day** on which you see egg-white-like mucus (called the peak day) is usually the closest to ovulation. So when you see this kind of mucus you are in your fertile window — there's no need to wait for your temperature to rise."
+            },
+            {
+              "type": "paragraph",
+              "text": "Be aware that vaginal infections, douching, some medications and lubricants can all affect what you observe."
+            },
+            {
+              "type": "heading",
+              "text": "Method 3: Basal Body Temperature (BBT)"
+            },
+            {
+              "type": "subheading",
+              "text": "What is basal body temperature, and why does it rise?"
+            },
+            {
+              "type": "info",
+              "title": "Basal body temperature (BBT)",
+              "text": "The lowest temperature your body reaches at complete rest, usually measured first thing in the morning, as soon as you wake and before you get out of bed."
+            },
+            {
+              "type": "paragraph",
+              "text": "After ovulation, the follicle turns into the corpus luteum and begins to secrete **progesterone**. Progesterone has a warming effect, raising basal body temperature by about **0.3 to 0.5°C**, which lasts until just before your next period."
+            },
+            {
+              "type": "paragraph",
+              "text": "So in a cycle with ovulation, the temperature chart shows a **biphasic** pattern: low temperatures in the first half (the follicular phase) and high temperatures in the second half (the luteal phase). If your temperature stays flat for the whole cycle with no clear separation, that may suggest you haven't ovulated."
+            },
+            {
+              "type": "subheading",
+              "text": "The most important point: it looks backwards, not forwards"
+            },
+            {
+              "type": "paragraph",
+              "text": "**A rise in temperature is the result of ovulation that has already happened, not a warning that it is about to.** By the time you see your temperature go up, the days with the highest chance of conception have usually already passed."
+            },
+            {
+              "type": "paragraph",
+              "text": "So:"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "What you want to know",
+                "Can BBT tell you?"
+              ],
+              "rows": [
+                [
+                  "Whether you ovulated this cycle",
+                  "✅ Yes (confirmed in hindsight)"
+                ],
+                [
+                  "How long your luteal phase is",
+                  "✅ Yes"
+                ],
+                [
+                  "Whether your cycle pattern is stable",
+                  "✅ Yes (after a few months of records)"
+                ],
+                [
+                  "Whether today is ovulation day",
+                  "❌ No"
+                ],
+                [
+                  "When to have intercourse",
+                  "❌ Needs another method alongside"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "To **predict** ovulation you need to combine it with cervical mucus observation or ovulation test strips (which detect the LH surge). The role of BBT is verification afterwards — only used together are they complete."
+            },
+            {
+              "type": "subheading",
+              "text": "How to measure accurately"
+            },
+            {
+              "type": "paragraph",
+              "text": "If the method is wrong, the whole chart is meaningless. Each of the following affects the result:"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Measure as soon as you wake — before getting up, talking, drinking water or going to the toilet.** Any activity raises your temperature.",
+                "**Measure at the same time each day** as far as possible (within about half an hour). Body temperature has its own day-and-night rhythm.",
+                "**Measure only after at least 3 hours of continuous sleep**, otherwise the reading isn't reliable.",
+                "**Oral measurement is fine**: keep the thermometer in the same position under the tongue, for the length of time given in its instructions.",
+                "**Use the same thermometer** and don't switch part-way through, because the baselines of different devices can differ.",
+                "**Use a digital basal thermometer** (one that shows two decimal places). Ordinary ear and forehead thermometers aren't accurate enough to pick up a change as small as 0.3°C.",
+                "**Note down anything unusual** when you record: fever, a cold, poor sleep, alcohol, getting up late, shift work — data from those days needs to be flagged."
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**When to start:** begin on the first day of your period and keep going until your next period arrives, so you get a complete cycle."
+            },
+            {
+              "type": "subheading",
+              "text": "How to read a basal body temperature chart"
+            },
+            {
+              "type": "paragraph",
+              "text": "**1. Is there a clear separation (biphasic pattern)?**"
+            },
+            {
+              "type": "paragraph",
+              "text": "The most basic check: is there a clear step between the low-temperature phase and the high-temperature phase? A step that is then sustained means you very likely ovulated that cycle; a chart that is flat throughout suggests you may not have."
+            },
+            {
+              "type": "paragraph",
+              "text": "**2. How long is the high-temperature phase?**"
+            },
+            {
+              "type": "paragraph",
+              "text": "Count from the day the temperature rises to the day before your next period. **It is generally 12 to 16 days.**"
+            },
+            {
+              "type": "paragraph",
+              "text": "If the **high-temperature phase is shorter than 10 days**, it may point to luteal phase insufficiency and is worth discussing with your doctor. This is one of the most practically useful things BBT shows — because you can't tell it from cycle length alone."
+            },
+            {
+              "type": "paragraph",
+              "text": "**3. The shape of the rise**"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**A clear rise within one to two days:** ideal",
+                "**A slow climb over several days before reaching the high level:** a \"slow-rise\" pattern",
+                "**Rises, then falls back to low temperatures:** worth watching",
+                "**A marked dip in the middle of the high-temperature phase, then a rise again:** a \"jagged\" pattern"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**4. Is the low-temperature phase stable?**"
+            },
+            {
+              "type": "paragraph",
+              "text": "A low-temperature phase that bounces up and down is often related to sleep quality, an irregular routine or stress — sometimes what it reflects is not a reproductive problem but your way of life."
+            },
+            {
+              "type": "subheading",
+              "text": "When is BBT not suitable?"
+            },
+            {
+              "type": "paragraph",
+              "text": "In the situations below the data lose their value, and pushing on will only add to your anxiety:"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Shift work or an irregular routine** — with no stable waking time there is no comparable baseline",
+                "**Chronic lack of sleep or frequent night waking** (especially for mothers looking after a baby)",
+                "**Fever or infection**",
+                "**Alcohol the night before**",
+                "**Using an electric blanket, or big swings in air-conditioning temperature**",
+                "**Taking medication that affects hormones**"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "In these cases, switching to ovulation test strips or asking your doctor to arrange ultrasound monitoring is more practical than forcing BBT."
+            },
+            {
+              "type": "heading",
+              "text": "How Does Chinese Medicine Read a Temperature Chart?"
+            },
+            {
+              "type": "paragraph",
+              "text": "This is what is distinctive about how Chinese medicine uses BBT: **from the same chart, a practitioner reads the rhythm of yin and yang rising and falling.**"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Chart feature",
+                "How Chinese medicine interprets it"
+              ],
+              "rows": [
+                [
+                  "Long low-temperature phase, low temperatures",
+                  "Kidney yin insufficiency, slow follicle development"
+                ],
+                [
+                  "Short high-temperature phase (under 10 days)",
+                  "Kidney yang insufficiency, weak luteal function"
+                ],
+                [
+                  "Low temperatures in the high phase, with little rise",
+                  "Insufficient yang qi, weak warming"
+                ],
+                [
+                  "Slow climb, taking several days to rise",
+                  "Poor transformation from yin to yang, often with liver constraint or blood stasis"
+                ],
+                [
+                  "Jagged, unstable high-temperature phase",
+                  "Yin and yang out of harmony, often with emotional and sleep problems"
+                ],
+                [
+                  "Flat throughout, no biphasic pattern",
+                  "Kidney deficiency or phlegm-dampness; tests are needed to confirm whether you are ovulating"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "This is also the basis of the Chinese medicine \"cycle-regulating method\" — prescribing to the rhythm of nourishing kidney yin in the low-temperature phase, invigorating blood and unblocking the channels around ovulation, and warming kidney yang in the high-temperature phase. If you plan to see a Chinese medicine practitioner to prepare for conception, **bringing three months of temperature records greatly increases the information available at the first consultation.**"
+            },
+            {
+              "type": "paragraph",
+              "text": "A reminder: the chart is only one reference, and a conclusion can't be drawn from a single chart. It still has to be combined with your menstrual pattern, symptoms, tongue and pulse, and any necessary Western medical tests. The above is a general introduction to TCM theory, not a diagnosis or a prescription."
+            },
+            {
+              "type": "heading",
+              "text": "A Common Psychological Trap"
+            },
+            {
+              "type": "paragraph",
+              "text": "The biggest side effect of BBT is not inaccuracy but **anxiety**."
+            },
+            {
+              "type": "paragraph",
+              "text": "Taking your temperature the moment you open your eyes every day and then poring over the chart — for many people this turns trying to conceive into something that is scored every day, and their sleep and mood actually get worse, and both of those themselves affect ovulation."
+            },
+            {
+              "type": "paragraph",
+              "text": "Practical advice:"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Measure for three months to see the pattern; once you have the information, there's no need to keep going indefinitely",
+                "Don't draw conclusions from a single day's number — it's the trend that counts",
+                "If taking your temperature is itself causing marked stress, taking a break is a reasonable choice"
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "When to See a Doctor"
+            },
+            {
+              "type": "list",
+              "items": [
+                "No signs of ovulation for two to three cycles in a row (no biphasic pattern, no egg-white-like mucus, no peak on the strips)",
+                "No biphasic change on your chart for two to three cycles in a row",
+                "A high-temperature phase that stays shorter than 10 days",
+                "Cycles that are persistently shorter than 24 days or longer than 38 days (see [How Long Should a Normal Menstrual Cycle Be?](menstrual-cycle-en.html))",
+                "A high-temperature phase lasting more than 18 days with no period (take a pregnancy test first)",
+                "Not pregnant after a year of trying (six months if you're over 35) (see [Why Can't I Get Pregnant?](infertility-causes-tests-en.html))"
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Frequently Asked Questions"
+            },
+            {
+              "type": "faq",
+              "items": [
+                {
+                  "q": "If an ovulation strip is positive, am I ovulating right away?",
+                  "a": "Not immediately. Ovulation generally happens about 24 to 36 hours after the LH peak, so the one to two days after a positive result are the most fertile. But a positive result doesn't guarantee an egg has been released, so it needs confirming afterwards with basal body temperature or another method."
+                },
+                {
+                  "q": "Do I need to use all three methods?",
+                  "a": "No. The more common approach is to use cervical mucus or strips to catch the timing, then use basal body temperature to confirm in hindsight. If taking your temperature is causing marked stress, strips plus mucus observation alone is fine, though you then lose the information about the length of your luteal phase."
+                },
+                {
+                  "q": "Do I have to measure at exactly the same time every day?",
+                  "a": "As far as possible. A difference of half an hour makes little difference, but an hour or two makes the data hard to compare. If you were clearly late one day, note it down and treat that point as less reliable when you interpret the chart."
+                },
+                {
+                  "q": "Can I use an ordinary thermometer?",
+                  "a": "Not recommended. Most ordinary household digital thermometers show only one decimal place, while basal body temperature changes by only about 0.3 to 0.5°C, so without enough precision you can't see the step. Use a basal thermometer that shows two decimal places; they are sold in pharmacies and online and aren't expensive. Ear and forehead thermometers are not suitable at all."
+                },
+                {
+                  "q": "Is it too late to have sex once my temperature has risen?",
+                  "a": "Usually yes. By the time your temperature rises, ovulation has generally already happened, and the days with the highest chance of conception are the ones before ovulation. BBT is for confirming afterwards; to get the timing right, combine it with cervical mucus observation or ovulation strips."
+                },
+                {
+                  "q": "Is a 9-day high-temperature phase definitely a problem?",
+                  "a": "Not necessarily, but it's worth noting. An occasional shorter cycle may be linked to stress or sleep; if it stays under 10 days for several cycles in a row, discuss it with your doctor, as it may involve luteal phase insufficiency."
+                },
+                {
+                  "q": "Does a flat chart definitely mean I'm not ovulating?",
+                  "a": "Not necessarily. A measuring method that isn't rigorous enough (irregular timing, poor sleep, shift work) can also make the chart look flat. First check whether the method is right, then consider confirming with ovulation strips or an ultrasound."
+                },
+                {
+                  "q": "Can I use a phone app instead of taking my temperature?",
+                  "a": "An app's \"predicted ovulation day\" is only worked out from your past cycles, not actually measured, so its accuracy is limited and it is especially unreliable if your cycles are irregular. Apps are good for recording, not for replacing measurement."
+                },
+                {
+                  "q": "Should I bring my temperature records to a Chinese medicine appointment?",
+                  "a": "Yes, we recommend it. Three months of records give real data on your cycle rhythm, which is far more useful than saying \"it doesn't seem very regular\", and they help the practitioner decide the direction of treatment."
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Conclusion"
+            },
+            {
+              "type": "paragraph",
+              "text": "Each of the three methods has its own role: **strips and mucus help you catch the timing; temperature helps you confirm the result.** Any one alone has blind spots, but you don't need to do all of them either — choose according to your routine and what you can manage."
+            },
+            {
+              "type": "paragraph",
+              "text": "If you'd like to know roughly which day of your cycle ovulation falls on, see [How Do You Calculate Your Ovulation Window?](ovulation-calculator-en.html). If you can't find signs of ovulation for several cycles in a row, or your luteal phase stays short, don't keep feeling your way alone — have it checked."
+            },
+            {
+              "type": "paragraph",
+              "text": "One last point that still matters: if these measurements are themselves making you anxious every day, taking a break is a reasonable choice — stress and sleep affect ovulation too."
+            },
+            {
+              "type": "references",
+              "items": [
+                "Physiology, Menstrual Cycle. StatPearls. https://www.ncbi.nlm.nih.gov/books/NBK500020/ (accessed 21 July 2026)",
+                "Munro MG, Critchley HOD, Fraser IS, et al. The two FIGO systems for normal and abnormal uterine bleeding symptoms and classification of causes of abnormal uterine bleeding in the reproductive years: 2018 revisions. Int J Gynaecol Obstet. 2018;143(3):393–408.",
+                "Gynaecology in Traditional Chinese Medicine (中醫婦科學). China Press of Traditional Chinese Medicine."
+              ]
+            }
+          ]
+        }
+      }
     },
     {
       "slug": "endometriosis",
@@ -5304,7 +6148,377 @@ window.ARTICLES_DATA = {
             "《中醫婦科學》，中國中醫藥出版社"
           ]
         }
-      ]
+      ],
+      "i18n": {
+        "en": {
+          "title": "Chocolate Cysts and Endometriosis: Symptoms, Diagnosis and Treatment Options",
+          "excerpt": "Endometriosis affects about one in ten women of reproductive age, and diagnosis is delayed by an average of 4 to 11 years. Since 2022, laparoscopy is no longer the gold standard for diagnosis. A Hong Kong registered Chinese medicine practitioner explains the clues to look for, what a chocolate cyst is, the treatment options and the TCM approach.",
+          "metaTitle": "Endometriosis and Chocolate Cysts: Symptoms, Diagnosis, Treatment | Hong Kong TCM",
+          "metaDescription": "Endometriosis affects about one in ten women of reproductive age, and diagnosis is delayed by an average of 4 to 11 years. Since 2022, laparoscopy is no longer the gold standard for diagnosis. A Hong Kong registered Chinese medicine practitioner explains the clues to look for, what a chocolate cyst is, the treatment options and the TCM approach.",
+          "keywords": [
+            "endometriosis",
+            "chocolate cyst",
+            "chocolate cyst symptoms",
+            "endometriosis treatment",
+            "endometrioma",
+            "chocolate cyst surgery",
+            "endometriosis TCM"
+          ],
+          "heroEyebrow": "Fertility · Gynaecological Conditions",
+          "tags": [
+            "Gynaecological Conditions",
+            "Period Pain"
+          ],
+          "heroTags": [
+            "#Endometriosis",
+            "#ChocolateCyst",
+            "#PeriodPain",
+            "#Infertility",
+            "#Laparoscopy",
+            "#ResolvingBloodStasis"
+          ],
+          "blocks": [
+            {
+              "type": "lead",
+              "text": "Endometriosis is when tissue like the lining of the uterus grows outside the uterine cavity, bleeds with each cycle but has no way out, and causes inflammation and adhesions; when it grows on the ovary, the cyst it forms is what's commonly called a \"chocolate cyst\". It is estimated to affect about one in ten women of reproductive age, and **the average delay from first symptoms to diagnosis is 4 to 11 years**. The good news is that since 2022, international guidelines have moved to imaging first, so surgery is no longer needed before treatment can begin."
+            },
+            {
+              "type": "paragraph",
+              "text": "\"The scan shows a chocolate cyst\" — many women find out by chance while being checked for something else, and many others have had pain for ten years before they learn the cause. This article explains what it is, what the clues are, and how it is diagnosed and managed today."
+            },
+            {
+              "type": "heading",
+              "text": "What Is It?"
+            },
+            {
+              "type": "info",
+              "title": "Endometriosis",
+              "text": "Tissue resembling the lining of the uterus grows in places beyond the uterine cavity and muscle wall, such as the ovaries, the pelvic peritoneum, the bowel or the surface of the bladder, usually accompanied by chronic inflammation."
+            },
+            {
+              "type": "paragraph",
+              "text": "This tissue responds to the menstrual cycle and bleeds in the same way, but **unlike normal menstrual blood it cannot leave the body**, so it builds up where it is, causing inflammation, pain and adhesions."
+            },
+            {
+              "type": "paragraph",
+              "text": "A **chocolate cyst** (medically, an ovarian endometrioma) is the cyst that forms when this process happens in the ovary — it is named because the old blood that collects is dark brown and thick, like melted chocolate. It is not cancer, but it can affect ovarian tissue and fertility."
+            },
+            {
+              "type": "heading",
+              "text": "Common Symptoms"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Symptom",
+                "Features"
+              ],
+              "rows": [
+                [
+                  "Period pain",
+                  "Worsens year by year; painkillers work less and less"
+                ],
+                [
+                  "**Pain during sex**",
+                  "Especially deep pain; common, but few people bring it up"
+                ],
+                [
+                  "**Pain when opening your bowels or passing urine during your period**",
+                  "Suggests there may be deep lesions"
+                ],
+                [
+                  "Chronic pelvic pain",
+                  "Pain outside your period too"
+                ],
+                [
+                  "Heavier periods, large clots",
+                  "Not everyone has these"
+                ],
+                [
+                  "Infertility",
+                  "Markedly more common among women with infertility"
+                ],
+                [
+                  "Fatigue",
+                  "Linked to chronic inflammation; often overlooked"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**The two most telling clues are pain during sex and pain when opening your bowels during your period** — neither is typical of ordinary period pain, but many women don't mention them to their doctor, either from embarrassment or because they assume they have nothing to do with their period."
+            },
+            {
+              "type": "paragraph",
+              "text": "**An important point:** the severity of symptoms **doesn't necessarily match** the extent of the disease. Some women have widespread lesions and barely notice them, while others have mild-looking scans and are in too much pain to work. Your pain doesn't need \"imaging evidence\" before it counts."
+            },
+            {
+              "type": "heading",
+              "text": "Why Does It Take So Long to Be Diagnosed?"
+            },
+            {
+              "type": "paragraph",
+              "text": "An average delay of 4 to 11 years has several layers to it:"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Period pain is taken for granted** — \"period pain is normal for women\" is the biggest obstacle",
+                "**The symptoms vary** — they may be put down to a digestive problem, cystitis or stress",
+                "**Diagnosis used to depend on surgery** — if confirming it meant an operation, the threshold was naturally high"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "The third point has changed in recent years."
+            },
+            {
+              "type": "heading",
+              "text": "How It's Diagnosed: What Changed After 2022"
+            },
+            {
+              "type": "paragraph",
+              "text": "The European Society of Human Reproduction and Embryology (ESHRE) updated its guideline in 2022, and **laparoscopy is no longer the gold standard for diagnosis**. The order now is:"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Clinical assessment** — the pattern of symptoms and a pelvic examination",
+                "**Imaging** — mainly transvaginal ultrasound; MRI when deep lesions are suspected or the ultrasound is uncertain",
+                "**Laparoscopy** — recommended only when imaging is negative and empirical treatment hasn't worked or isn't suitable"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "Also, **the CA-125 blood test is not suitable as a screening test** — it has low sensitivity in the early stages and also rises in other conditions."
+            },
+            {
+              "type": "paragraph",
+              "text": "**What this means in practice:** if you have typical symptoms, you can start with an ultrasound and discuss a management plan with your doctor, and **you don't need to have surgery before treatment can begin**. This lowers the barrier to seeking help considerably."
+            },
+            {
+              "type": "heading",
+              "text": "Treatment Options"
+            },
+            {
+              "type": "paragraph",
+              "text": "The direction depends on three things: **how much the symptoms bother you, whether you plan to have a baby, and where the lesions are.**"
+            },
+            {
+              "type": "paragraph",
+              "text": "**Pain relief:** non-steroidal anti-inflammatory painkillers are the usual first line, and tend to work better if taken when the pain is just starting."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Hormonal treatment:** this includes the combined oral contraceptive pill, progestogens, the intrauterine system and GnRH analogues, working by suppressing the cyclical activity of the lesions. **Note: you cannot get pregnant while on hormonal treatment**, so anyone planning a pregnancy needs to work out a separate timetable."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Surgery:** used when medication hasn't worked, the lesions are affecting the function of an organ, or the chocolate cyst is large. Surgery may improve pain and some fertility outcomes, but **surgery on an ovarian cyst can affect ovarian reserve**, and this must be fully discussed with your doctor if you plan to conceive."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Assisted reproduction:** if infertility is also present, IUI or IVF may need to be considered (see [IVF Step by Step](ivf-process-en.html))."
+            },
+            {
+              "type": "paragraph",
+              "text": "**No single approach suits everyone** — with the same diagnosis, the direction for a 25-year-old who wants to regulate her periods and a 38-year-old who wants to conceive can be completely different."
+            },
+            {
+              "type": "heading",
+              "text": "The Link with Infertility"
+            },
+            {
+              "type": "paragraph",
+              "text": "Endometriosis is markedly more common among women with infertility. The possible mechanisms include pelvic adhesions affecting tubal function, effects on ovarian tissue, and a chronic inflammatory environment."
+            },
+            {
+              "type": "paragraph",
+              "text": "But to be clear: **a diagnosis doesn't mean you can't get pregnant.** Quite a few women conceive naturally. If you haven't conceived after a year of trying (six months if you're over 35), you should have a full assessment (see [Why Can't I Get Pregnant?](infertility-causes-tests-en.html))."
+            },
+            {
+              "type": "paragraph",
+              "text": "**A point about planning:** if you have a confirmed diagnosis and plan to have a baby, it's worth discussing the overall timetable with your doctor early — because you can't conceive while on hormonal treatment, and there is also a trade-off between surgery and ovarian reserve."
+            },
+            {
+              "type": "heading",
+              "text": "How Does Chinese Medicine View It?"
+            },
+            {
+              "type": "paragraph",
+              "text": "Chinese medicine has no term for this condition. The related presentations mostly fall under painful periods, abdominal masses (zheng jia) and infertility. The core of the pathology is **blood stasis**, though the reasons stasis forms differ."
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Pattern",
+                "Main features",
+                "Treatment direction"
+              ],
+              "rows": [
+                [
+                  "Qi stagnation with blood stasis",
+                  "Distending, stabbing pain before the period, worse with pressure, low mood",
+                  "Move qi and invigorate blood"
+                ],
+                [
+                  "Cold congealing with blood stasis",
+                  "Cold pain in the lower abdomen, eased by warmth, aversion to cold",
+                  "Warm the channels and disperse cold"
+                ],
+                [
+                  "Damp-heat with stasis obstruction",
+                  "Burning pain, thick yellow discharge, low-grade fever",
+                  "Clear heat and resolve dampness"
+                ],
+                [
+                  "Kidney deficiency with blood stasis",
+                  "Aching lower back and sacrum after the period, dizziness and tinnitus, longer history",
+                  "Tonify the kidney and invigorate blood"
+                ],
+                [
+                  "Qi deficiency with blood stasis",
+                  "Fatigue and weakness, dull ache after the period, pale complexion",
+                  "Boost qi and invigorate blood"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "In practice patterns often overlap, and in those with a longer history signs of deficiency usually appear on top of the original pattern."
+            },
+            {
+              "type": "paragraph",
+              "text": "The above is a general introduction to TCM theory, not a diagnosis or a prescription. Herbal treatment needs an in-person consultation and pattern differentiation by a registered Chinese medicine practitioner."
+            },
+            {
+              "type": "heading",
+              "text": "What Can Chinese Medicine Do?"
+            },
+            {
+              "type": "paragraph",
+              "text": "**What it can't do**"
+            },
+            {
+              "type": "list",
+              "items": [
+                "It can't remove lesions or cysts that have already formed",
+                "It can't replace necessary surgery or hormonal treatment",
+                "It can't clear fallopian tubes that have already adhered"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**Where there is room to help**"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Pain relief** and managing general discomfort",
+                "**Mood, sleep and fatigue** — the burden in these areas is generally heavy for people with chronic pain",
+                "**Regulating the menstrual cycle**",
+                "**Supporting your overall condition** during Western medical treatment"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**The state of the evidence needs to be stated honestly:** research on Chinese medicine for endometriosis is mostly small trials, with no large, high-quality randomised controlled studies, so the strength of the evidence is limited."
+            },
+            {
+              "type": "paragraph",
+              "text": "If you are diagnosed, Chinese medicine care should run **alongside gynaecological follow-up, not instead of it** — especially if you have a larger cyst, or plan to conceive and time is limited."
+            },
+            {
+              "type": "heading",
+              "text": "What You Can Do Day to Day"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Apply heat to your lower abdomen or lower back",
+                "Keep up regular but not excessive activity",
+                "Manage sleep and stress — both genuinely affect how pain feels",
+                "Keep a record of pain scores and medication, so you can give accurate information at follow-up",
+                "Take painkillers when you need them — there's no need to wait until the pain is severe"
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "When to See a Doctor"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Period pain that makes you take time off, is getting worse year by year, or that painkillers help less and less",
+                "Pain during sex",
+                "Pain when opening your bowels or passing urine during your period",
+                "Persistent pelvic pain outside your period",
+                "A known ovarian cyst that has never been followed up",
+                "Not pregnant after a year of trying (six months if you're over 35)",
+                "**Sudden severe abdominal pain, fever or vomiting** — seek care immediately to rule out a ruptured cyst or ovarian torsion"
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Frequently Asked Questions"
+            },
+            {
+              "type": "faq",
+              "items": [
+                {
+                  "q": "Can a chocolate cyst turn into cancer?",
+                  "a": "The vast majority are benign. Malignant change is rare, but once it is diagnosed you should still follow your doctor's advice on regular follow-up, especially if the cyst is large or its appearance on imaging changes."
+                },
+                {
+                  "q": "Do I definitely need surgery?",
+                  "a": "Not necessarily. Whether to operate depends on how severe the symptoms are, the size and features of the cyst, your plans for having a family and how you respond to medication. In particular, surgery on an ovarian cyst may affect ovarian reserve, so if you plan to conceive this must be fully discussed with your doctor."
+                },
+                {
+                  "q": "Will it clear up by itself after I've had a baby?",
+                  "a": "Not necessarily. Symptoms may ease temporarily during pregnancy and breastfeeding because of hormonal changes, but the condition can still flare up again before menopause. It is something to manage over the long term, not a problem solved once and for all."
+                },
+                {
+                  "q": "Does taking the contraceptive pill count as \"treatment\"?",
+                  "a": "Yes. Hormonal treatment is one of the standard approaches internationally; it works by suppressing the cyclical activity of the lesions and the pain that goes with it. But it can't remove lesions that already exist, symptoms may return when you stop, and you can't conceive while taking it."
+                },
+                {
+                  "q": "Can Chinese medicine shrink a chocolate cyst?",
+                  "a": "The current evidence doesn't support that claim. A more reasonable role for Chinese medicine is relieving pain, helping with mood and sleep, and general care, alongside gynaecological follow-up. Changes in a cyst should be followed up with imaging, not judged by how you feel."
+                },
+                {
+                  "q": "If the pain isn't severe, can I ignore it?",
+                  "a": "Mild symptoms don't mean follow-up isn't needed, because the severity of symptoms doesn't necessarily match the extent of the disease. If you have the typical clues (pain during sex, pain opening your bowels during your period, period pain that worsens year by year), it's worth having a check."
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Conclusion"
+            },
+            {
+              "type": "paragraph",
+              "text": "The biggest problem with endometriosis is not that it is hard to treat but that it is **found too late** — the average delay is measured in years, and the main reason is the idea that period pain is normal."
+            },
+            {
+              "type": "paragraph",
+              "text": "The way it's diagnosed has now changed: imaging first, with no need to operate first. If you have period pain that gets worse year by year, pain during sex or pain opening your bowels during your period, it's worth having a check."
+            },
+            {
+              "type": "paragraph",
+              "text": "There is no standard answer on management; it has to be decided individually, based on symptoms, plans for having a family and where the lesions are. Chinese medicine can support pain relief, mood and sleep and general care, but should run alongside gynaecological follow-up."
+            },
+            {
+              "type": "references",
+              "items": [
+                "Becker CM, Bokor A, Heikinheimo O, et al. ESHRE guideline: endometriosis. Hum Reprod Open. 2022;2022(2):hoac009. https://pmc.ncbi.nlm.nih.gov/articles/PMC8951218/ (accessed 21 July 2026)",
+                "European Society of Human Reproduction and Embryology. ESHRE updates guideline on endometriosis care (2 February 2022). https://www.eurekalert.org/news-releases/942048 (accessed 21 July 2026)",
+                "Agarwal SK, Chapron C, Giudice LC, et al. Clinical diagnosis of endometriosis: a call to action. Am J Obstet Gynecol. 2019;220(4):354.e1–354.e12.",
+                "Gynaecology in Traditional Chinese Medicine (中醫婦科學). China Press of Traditional Chinese Medicine."
+              ]
+            }
+          ]
+        }
+      }
     },
     {
       "slug": "infertility-causes-tests",
@@ -5828,7 +7042,529 @@ window.ARTICLES_DATA = {
             "《中醫婦科學》，中國中醫藥出版社"
           ]
         }
-      ]
+      ],
+      "i18n": {
+        "en": {
+          "title": "Why Can't I Get Pregnant? Common Causes, Which Tests to Have and How Chinese Medicine Can Help",
+          "excerpt": "If you haven't conceived after a year of trying (six months if you're 35 or over), you should be checked. A Hong Kong registered Chinese medicine practitioner explains the common causes of infertility in women and men, which tests to have, how to read a semen analysis report (WHO 2021 standards), and what Chinese medicine can and cannot do.",
+          "metaTitle": "Why Can't I Get Pregnant? Causes, Tests and the Role of TCM | Hong Kong",
+          "metaDescription": "If you haven't conceived after a year of trying (six months if you're 35 or over), you should be checked. A Hong Kong registered Chinese medicine practitioner explains the common causes of infertility in women and men, which tests to have, how to read a semen analysis report (WHO 2021 standards), and what Chinese medicine can and cannot do.",
+          "keywords": [
+            "infertility",
+            "can't get pregnant",
+            "causes of infertility",
+            "infertility tests",
+            "semen analysis",
+            "infertility TCM",
+            "fertility tests",
+            "unexplained infertility"
+          ],
+          "heroEyebrow": "Fertility · Infertility Tests",
+          "tags": [
+            "Infertility",
+            "Men's Health"
+          ],
+          "heroTags": [
+            "#CausesOfInfertility",
+            "#InfertilityTests",
+            "#SemenAnalysis",
+            "#TubalTesting",
+            "#OvulationAssessment",
+            "#TCMCare"
+          ],
+          "blocks": [
+            {
+              "type": "lead",
+              "text": "If you have had regular intercourse without contraception for a year and haven't conceived (six months if you are 35 or over), you should be checked. The causes are spread roughly evenly between the female partner, the male partner and both together, and a further group have no known cause — so **both partners must be tested at the same time**. Until the cause is clear, any treatment to build up your health is guesswork."
+            },
+            {
+              "type": "paragraph",
+              "text": "\"We've been trying for a whole year with no news\" — at this point the most common reaction is to start by looking after your health: drinking herbal soups, taking supplements, even seeing a Chinese medicine practitioner first. But that is actually the wrong order."
+            },
+            {
+              "type": "paragraph",
+              "text": "Blocked fallopian tubes won't open because you take herbs, and a serious sperm problem won't improve because the woman works on her health. **Find out the cause first, then decide what to do**, so that you don't waste time — and time is itself one of the most important variables here."
+            },
+            {
+              "type": "heading",
+              "text": "When Does It Count as Infertility?"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Situation",
+                "When to seek help"
+              ],
+              "rows": [
+                [
+                  "Woman under 35",
+                  "Not pregnant after trying for 12 months"
+                ],
+                [
+                  "Woman 35 or over",
+                  "Not pregnant after trying for 6 months"
+                ],
+                [
+                  "Woman 40 or over",
+                  "See a doctor straight away"
+                ],
+                [
+                  "Menstrual problems",
+                  "Don't wait — get checked early (infrequent periods, no periods for long stretches, or severe period pain)"
+                ],
+                [
+                  "Gynaecological history",
+                  "Don't wait — get checked early (past pelvic infection, pelvic surgery or endometriosis)"
+                ],
+                [
+                  "Male partner's history",
+                  "Don't wait — get checked early (testicular surgery, an undescended testicle, chemotherapy, or mumps with orchitis)"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**\"Let's try a bit longer first\" is the most common decision, and the most costly.** If any of the above applies to you, the tests themselves aren't painful, but the time lost to delay can't be made up."
+            },
+            {
+              "type": "heading",
+              "text": "Which Partner Is the Cause?"
+            },
+            {
+              "type": "paragraph",
+              "text": "The causes of infertility fall broadly into four groups, spread fairly evenly:"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Female factors:** problems with ovulation, the fallopian tubes, the uterus and so on",
+                "**Male factors:** sperm count, motility, shape or delivery problems",
+                "**Both partners:** a small problem on each side that together make conception difficult",
+                "**Unexplained:** all the standard tests are normal, yet pregnancy hasn't happened"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "A common mistake in practice is for **only the woman to be tested**. The male tests are the simplest, the cheapest and the quickest to give results — a single semen analysis rules out a large share of the possibilities, so there is no reason not to do it first."
+            },
+            {
+              "type": "heading",
+              "text": "Common Causes in Women"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Category",
+                "Common conditions"
+              ],
+              "rows": [
+                [
+                  "**Ovulation problems**",
+                  "PMOS (formerly PCOS), hypothalamic amenorrhoea (excessive exercise, low weight, stress), thyroid disorders, hyperprolactinaemia, premature ovarian insufficiency"
+                ],
+                [
+                  "**Tubal problems**",
+                  "Past pelvic inflammatory disease (chlamydia is a common culprit and may cause no symptoms at all), endometriosis, adhesions after pelvic surgery, a history of ectopic pregnancy"
+                ],
+                [
+                  "**Uterine problems**",
+                  "Fibroids (depending on their position), endometrial polyps, intrauterine adhesions, congenital uterine abnormalities"
+                ],
+                [
+                  "**Age**",
+                  "Egg quality declines with age — an irreversible physiological process"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "Two of these deserve particular attention:"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Ovulation problems often leave clues.** Persistently irregular cycles, cycles longer than 35 days, or fewer than 8 periods a year usually mean there is a problem with ovulation (see [PMOS (Formerly PCOS)](pcos-pmos-en.html)).",
+                "**Tubal problems often have no symptoms at all.** Many women only learn they once had an infection when they are tested."
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Common Causes in Men"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Category",
+                "Common conditions"
+              ],
+              "rows": [
+                [
+                  "**Problems making sperm**",
+                  "Varicocele, a history of undescended testicles, genetic or chromosomal factors, hormone imbalance, mumps with orchitis"
+                ],
+                [
+                  "**Blockage in transport**",
+                  "Blocked or absent vas deferens, a previous vasectomy, blockage after infection"
+                ],
+                [
+                  "**Ejaculation problems**",
+                  "Retrograde ejaculation, difficulty with erection or ejaculation"
+                ],
+                [
+                  "**Lifestyle and environment**",
+                  "Smoking, heavy drinking, obesity, prolonged exposure to heat (long periods of sitting, saunas, laptops on the lap), certain medications, anabolic steroids"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**Anabolic steroids (used for bodybuilding) deserve a mention of their own:** they suppress the body's own hormone production and can cause a large drop in sperm count, even complete absence of sperm, and recovery after stopping takes time. This isn't rare among people in gym culture, yet it is often overlooked."
+            },
+            {
+              "type": "heading",
+              "text": "Unexplained Infertility"
+            },
+            {
+              "type": "paragraph",
+              "text": "When both partners' standard tests are all normal and pregnancy still hasn't happened, it is classed as \"unexplained infertility\"."
+            },
+            {
+              "type": "paragraph",
+              "text": "The label is discouraging, but what it actually means is: **no problem has been found with the tests available, not that there is no problem.** It may involve egg quality, the fertilisation process or embryo implantation, none of which can currently be tested routinely."
+            },
+            {
+              "type": "paragraph",
+              "text": "The good news is that the direction of management is fairly clear for this group — international guidelines generally suggest starting with ovulation stimulation combined with intrauterine insemination (IUI), and only then considering IVF (see [IVF Step by Step](ivf-process-en.html))."
+            },
+            {
+              "type": "heading",
+              "text": "Which Tests Should the Woman Have?"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Test",
+                "What it checks",
+                "When"
+              ],
+              "rows": [
+                [
+                  "Detailed history and cycle records",
+                  "Cycle length and regularity, period pain, past surgery and infections",
+                  "First consultation"
+                ],
+                [
+                  "Hormone blood tests",
+                  "FSH, LH, oestrogen, prolactin, thyroid function",
+                  "Usually days 2 to 5 of the cycle"
+                ],
+                [
+                  "Mid-luteal progesterone",
+                  "Confirms whether you ovulated",
+                  "About 7 days before the expected period"
+                ],
+                [
+                  "AMH / antral follicle count",
+                  "Ovarian reserve",
+                  "Any time (AMH isn't affected by the cycle)"
+                ],
+                [
+                  "Pelvic ultrasound",
+                  "Uterine structure, fibroids, polyps, appearance of the ovaries",
+                  "Usually after your period has finished"
+                ],
+                [
+                  "Tubal testing",
+                  "Whether the fallopian tubes are open (hysterosalpingography or contrast ultrasound)",
+                  "After your period, before ovulation"
+                ],
+                [
+                  "Screening for sexually transmitted infections",
+                  "Chlamydia and other infections that can affect the tubes",
+                  "Any time"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**An important reminder about AMH:** AMH reflects the number of eggs, not their quality, and it **cannot predict the chance of natural conception.** A low value doesn't mean you can't get pregnant (see [Does a Low AMH Mean You Can't Get Pregnant?](amh-poi-en.html))."
+            },
+            {
+              "type": "heading",
+              "text": "Which Tests Should the Man Have?"
+            },
+            {
+              "type": "paragraph",
+              "text": "**There is only one core test: a semen analysis.** It's simple, cheap, quick, and carries a great deal of information."
+            },
+            {
+              "type": "subheading",
+              "text": "Preparing for the test"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Abstain from ejaculation for 2 to 7 days (too short or too long both affect the result)",
+                "Avoid testing straight after a fever, a cold or a period of severe stress",
+                "Collect and transport the sample as the laboratory instructs"
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "WHO 2021 reference values"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Parameter",
+                "Lower reference limit"
+              ],
+              "rows": [
+                [
+                  "Semen volume",
+                  "1.4 mL"
+                ],
+                [
+                  "Sperm concentration",
+                  "16 million per mL"
+                ],
+                [
+                  "Total sperm number per ejaculate",
+                  "39 million"
+                ],
+                [
+                  "Total motility",
+                  "42%"
+                ],
+                [
+                  "Progressive motility",
+                  "30%"
+                ],
+                [
+                  "Vitality (live sperm)",
+                  "54%"
+                ],
+                [
+                  "Normal forms",
+                  "4%"
+                ]
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "Three points you need to understand"
+            },
+            {
+              "type": "paragraph",
+              "text": "**1. These are statistical reference lines, not pass marks.** The values come from the 5th percentile of about 3,500 men whose partners conceived naturally within a year. In other words, 5% of men who can father a child naturally fall below this line. **Being below the reference value doesn't mean you can't father a child**, and being above it doesn't guarantee there is no problem."
+            },
+            {
+              "type": "paragraph",
+              "text": "**2. One result isn't enough to judge by.** Sperm take over seventy days to develop and mature, and any fever, stress or lack of sleep during that time can affect the result. If the first result is abnormal, it is generally recommended to repeat the test a few weeks later before drawing a conclusion."
+            },
+            {
+              "type": "paragraph",
+              "text": "**3. Morphology is the most easily misunderstood item.** \"Only 4% normal forms\" sounds alarming, but that is exactly the lower reference limit for men who can father a child naturally — it is normal for the great majority of sperm to be imperfect in shape. Shape alone isn't enough to judge fertility."
+            },
+            {
+              "type": "paragraph",
+              "text": "If the semen analysis is clearly abnormal, the next steps may include hormone blood tests, a scrotal ultrasound (to check for a varicocele) or, in severe cases, genetic testing, and a referral to a urologist or andrologist."
+            },
+            {
+              "type": "heading",
+              "text": "Reading Your Results: Three Common Misconceptions"
+            },
+            {
+              "type": "paragraph",
+              "text": "**Misconception 1: \"Everything's normal, so there's nothing wrong.\"** Normal standard tests can still mean unexplained infertility. Normal means the common problems have been ruled out; it doesn't mean you can wait indefinitely — especially as age is still ticking on."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Misconception 2: \"One bad number means there's no hope.\"** Whether it's AMH or a semen analysis, no single value decides the outcome. Look at the whole picture, and read it together with age and medical history."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Misconception 3: \"Once the tests are done, I'll get my body in shape first.\"** The direction is right, but don't forget the time. If your doctor has already advised starting treatment, don't postpone it for the sake of \"three months of preparation first\" — and this matters even more at an older age."
+            },
+            {
+              "type": "heading",
+              "text": "How Does Chinese Medicine View Infertility?"
+            },
+            {
+              "type": "paragraph",
+              "text": "There are many references to this in the classical Chinese medicine texts. The core of the pathology is usually in the kidney, with links to the liver, spleen and the flow of qi and blood. The following patterns are commonly seen in practice."
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Pattern",
+                "Main features",
+                "Accompanying symptoms",
+                "Treatment"
+              ],
+              "rows": [
+                [
+                  "Kidney yang deficiency",
+                  "Delayed periods, scanty and pale",
+                  "Aversion to cold and cold limbs, aching lower back and knees, frequent night-time urination, a cold feeling in the lower abdomen",
+                  "Warm and tonify kidney yang"
+                ],
+                [
+                  "Kidney yin deficiency",
+                  "Early periods or scanty flow",
+                  "Hot flushes, dry mouth, insomnia, heat in the palms and soles",
+                  "Nourish kidney yin"
+                ],
+                [
+                  "Liver constraint",
+                  "Irregular cycles, pre-period distension and pain",
+                  "Low mood or irritability, a tight, full chest and ribs, breast distension",
+                  "Soothe the liver and regulate qi"
+                ],
+                [
+                  "Phlegm-dampness",
+                  "Infrequent periods, abundant thick white discharge",
+                  "Heavier build, chest tightness, heavy head, fatigue",
+                  "Resolve phlegm and dispel dampness"
+                ],
+                [
+                  "Blood stasis",
+                  "Sluggish periods, dark with clots",
+                  "Stabbing lower abdominal pain that dislikes pressure, marked period pain",
+                  "Invigorate blood and resolve stasis"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "A single pattern is rarely seen in practice; they usually overlap. The above is a general introduction to TCM theory, not a diagnosis or a prescription, and herbal treatment needs an in-person consultation and pattern differentiation by a registered Chinese medicine practitioner."
+            },
+            {
+              "type": "heading",
+              "text": "What Can Chinese Medicine Do, and What Can't It Do?"
+            },
+            {
+              "type": "paragraph",
+              "text": "This section needs to be clear, because wrongly set expectations are the easiest way to waste time."
+            },
+            {
+              "type": "subheading",
+              "text": "What it can't do"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**It can't open blocked fallopian tubes.** Structural problems need surgery, or to be bypassed directly with IVF.",
+                "**It can't repair a serious problem with sperm production.** For example genetic causes or azoospermia.",
+                "**It can't increase the number of follicles in the ovaries.** The number of follicles is set at birth and declines with age, and that is irreversible.",
+                "**It can't replace tests.** This is the most important point — starting treatment without finding out the cause is working with a blindfold on."
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "Where there is room to help"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Regulating ovulation and the menstrual cycle:** irregular cycles and erratic ovulation are the area Chinese medicine more commonly works on.",
+                "**Mood, sleep and stress:** these genuinely affect the hypothalamic–pituitary–ovarian axis, and are the part patients feel most directly.",
+                "**Working alongside assisted reproduction:** meta-analyses of Chinese-language studies suggest that Chinese herbal medicine alongside IVF may reduce the incidence of ovarian hyperstimulation and improve the clinical pregnancy rate, though study quality has room to improve (see [How Does Chinese Medicine Work Alongside an IVF Cycle?](ivf-tcm-en.html)).",
+                "**Adjusting the man's lifestyle factors:** sleep, weight, hot environments, smoking and drinking — these have a real effect on sperm quality, and can be changed."
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "The state of the evidence, honestly stated"
+            },
+            {
+              "type": "paragraph",
+              "text": "High-quality studies using fertility outcomes as the measure are still limited. A Cochrane review of Chinese herbal medicine for subfertile women with PMOS (then called polycystic ovary syndrome) found that the existing evidence isn't sufficient to support that use, and none of the included studies reported the live birth rate. Results from Chinese-language studies on working alongside assisted reproduction are more positive, but study quality is low, as the authors themselves note."
+            },
+            {
+              "type": "paragraph",
+              "text": "So the reasonable way to position it is: **Chinese medicine is part of overall management, not a shortcut around tests and treatment.**"
+            },
+            {
+              "type": "heading",
+              "text": "When to See a Doctor Without Delay"
+            },
+            {
+              "type": "list",
+              "items": [
+                "You already meet the timing criteria above",
+                "No period for three months or more",
+                "Cycles persistently longer than 35 days, or fewer than 8 periods a year",
+                "Severe period pain or pain during sex (endometriosis needs to be ruled out)",
+                "A past history of pelvic inflammatory disease, a sexually transmitted infection, or pelvic or abdominal surgery",
+                "Two or more miscarriages",
+                "The male partner has had testicular surgery, an undescended testicle, chemotherapy, or marked testicular swelling or pain",
+                "The male partner is using, or has used, anabolic steroids"
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Frequently Asked Questions"
+            },
+            {
+              "type": "faq",
+              "items": [
+                {
+                  "q": "How long should we try before getting tested?",
+                  "a": "Generally one year if you're under 35, six months if you're 35 or over, and seeing a doctor straight away if you're 40 or over. If you already know of a menstrual problem, a history of pelvic surgery or a relevant history in the male partner, don't wait."
+                },
+                {
+                  "q": "Do both of us really have to be tested?",
+                  "a": "Yes. The causes are spread roughly evenly between the two partners, so testing only one means seeing only half the picture. The semen analysis is the simplest, cheapest and quickest of all the tests, so there is no reason to delay it."
+                },
+                {
+                  "q": "If a semen analysis is below the standard, does that mean he can't father a child?",
+                  "a": "No. The WHO reference values are the 5th percentile of men who can father a child naturally — a statistical benchmark, not a pass mark — and there are cases of natural conception below that line. A single result is also affected by fever, stress and sleep, so it generally needs repeating before a judgement is made."
+                },
+                {
+                  "q": "Does \"unexplained infertility\" mean it can't be treated?",
+                  "a": "No. It means no clear cause has been found with the tests available, not that there is no direction for management. International guidelines generally suggest starting with ovulation stimulation plus intrauterine insemination, and only then considering IVF."
+                },
+                {
+                  "q": "Should I see a Chinese medicine practitioner first, or get tested first?",
+                  "a": "Get tested first. Once the cause is clear, you know whether Chinese medicine care is appropriate and what it should address. If you already know there is a tubal blockage or a serious male factor, working on your health first will only waste time."
+                },
+                {
+                  "q": "How long does it take for Chinese medicine care to show whether it's working?",
+                  "a": "Generally you think in months, not weeks, and usually need to observe two to three menstrual cycles. But that timetable has to be considered alongside the overall treatment plan — if you're older or your doctor has advised starting treatment, don't postpone it for the sake of preparation."
+                },
+                {
+                  "q": "What can the man do to improve sperm quality?",
+                  "a": "Stop smoking, cut down on alcohol, control his weight, improve his sleep, avoid prolonged exposure to heat (long periods of sitting, saunas, a laptop on the lap) and avoid anabolic steroids. Sperm take over seventy days to develop, so after making changes it takes about three months before they may show up in a test."
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Conclusion"
+            },
+            {
+              "type": "paragraph",
+              "text": "When you haven't conceived for a long time, the most effective first step is not a tonic but **finding out the cause, with both partners tested together**. The tests themselves aren't complicated, but they decide whether every decision afterwards is well spent."
+            },
+            {
+              "type": "paragraph",
+              "text": "Chinese medicine has a place in regulating the cycle, mood and sleep, lifestyle factors and working alongside assisted reproduction, but it can't replace tests and it can't deal with structural problems. Putting it inside the overall plan, not ahead of it, is the sensible way to use it."
+            },
+            {
+              "type": "references",
+              "items": [
+                "World Health Organization. WHO laboratory manual for the examination and processing of human semen, 6th edition (2021).",
+                "Practice Committee of the American Society for Reproductive Medicine. Testing and interpreting measures of ovarian reserve: a committee opinion. Fertil Steril. 2020;114(6):1151–1157.",
+                "Practice Committee of the American Society for Reproductive Medicine. Evidence-based treatments for unexplained infertility: a guideline (2020).",
+                "Zhou K, Zhang J, Xu L, Lim CED. Chinese herbal medicine for subfertile women with polycystic ovarian syndrome. Cochrane Database Syst Rev. 2021;6(6):CD007535.",
+                "Ye JH, Lin X, Chen HY, Meng W. A meta-analysis of Chinese herbal medicine in assisted reproduction (IVF-ET) for the incidence of ovarian hyperstimulation syndrome and pregnancy outcomes (中藥在輔助生育技術 IVF-ET 中干預卵巢過度刺激綜合症發生及妊娠結局的 Meta 分析). Traditional Chinese Medicine (中醫學). 2022;11(5).",
+                "Gynaecology in Traditional Chinese Medicine (中醫婦科學). China Press of Traditional Chinese Medicine."
+              ]
+            }
+          ]
+        }
+      }
     },
     {
       "slug": "ivf-process",
@@ -5866,6 +7602,7 @@ window.ARTICLES_DATA = {
         "#促排卵"
       ],
       "publishDate": "2026-08-12",
+      "modifiedDate": "2026-11-11",
       "blocks": [
         {
           "type": "lead",
@@ -5878,10 +7615,6 @@ window.ARTICLES_DATA = {
         {
           "type": "paragraph",
           "text": "這篇按實際順序拆解整個過程：每一步做甚麼、需時多久、身體會有甚麼感覺、你要準備甚麼。看完應該能大致想像整個療程的樣子。"
-        },
-        {
-          "type": "heading",
-          "text": "流程圖：一張圖看清"
         },
         {
           "type": "heading",
@@ -5941,10 +7674,6 @@ window.ARTICLES_DATA = {
           "type": "info",
           "title": "注意",
           "text": "以上是「新鮮週期」的安排。若醫生建議先把胚胎全部冷凍，第 6 至 8 步會延後至另一個月份進行，稱為「解凍週期」。"
-        },
-        {
-          "type": "paragraph",
-          "text": "---"
         },
         {
           "type": "heading",
@@ -6081,10 +7810,6 @@ window.ARTICLES_DATA = {
           "text": "這是一個需要與醫生按你的年齡、診斷與卵巢狀況個別討論的決定，沒有劃一答案。"
         },
         {
-          "type": "paragraph",
-          "text": "---"
-        },
-        {
           "type": "heading",
           "text": "逐步拆解"
         },
@@ -6191,10 +7916,6 @@ window.ARTICLES_DATA = {
           ]
         },
         {
-          "type": "paragraph",
-          "text": "---"
-        },
-        {
           "type": "heading",
           "text": "關於 PGT：胚胎基因檢測需不需要做？"
         },
@@ -6292,10 +8013,6 @@ window.ARTICLES_DATA = {
           "text": "香港的輔助生育療程受《人類生殖科技條例》規管，PGT 的可用範圍與相關限制，應直接向持牌中心查詢。"
         },
         {
-          "type": "paragraph",
-          "text": "---"
-        },
-        {
           "type": "heading",
           "text": "卵巢過度刺激：一定要認識的警號"
         },
@@ -6321,10 +8038,6 @@ window.ARTICLES_DATA = {
         {
           "type": "paragraph",
           "text": "這些情況不應等到下一次覆診，也不應以食療或成藥自行處理。"
-        },
-        {
-          "type": "paragraph",
-          "text": "---"
         },
         {
           "type": "heading",
@@ -6372,10 +8085,6 @@ window.ARTICLES_DATA = {
           "text": "**一個實際考慮**：公立輪候期加起來可能超過一年，而年齡本身是影響結果的重要因素。是否等待公立服務，需要按個人年齡與情況權衡，值得與醫生詳細討論。"
         },
         {
-          "type": "paragraph",
-          "text": "---"
-        },
-        {
           "type": "heading",
           "text": "中醫可以在哪個位置配合？"
         },
@@ -6386,10 +8095,6 @@ window.ARTICLES_DATA = {
         {
           "type": "paragraph",
           "text": "詳細內容另文說明（詳見[中醫怎樣配合 IVF 週期](ivf-tcm.html)）。最重要的原則是：**讓生殖科醫生與中醫師互相知悉你的完整情況，並且不要因為調理而延誤療程。**"
-        },
-        {
-          "type": "paragraph",
-          "text": "---"
         },
         {
           "type": "heading",
@@ -6444,7 +8149,7 @@ window.ARTICLES_DATA = {
             },
             {
               "q": "男方需要做甚麼？",
-              "a": "除精液分析等檢查外，生活因素同樣重要——吸煙、飲酒、長期處於高溫環境與睡眠不足都可能影響精子質素。取卵當日通常需要男方到場提供樣本，宜事先確認安排。 ---"
+              "a": "除精液分析等檢查外，生活因素同樣重要——吸煙、飲酒、長期處於高溫環境與睡眠不足都可能影響精子質素。取卵當日通常需要男方到場提供樣本，宜事先確認安排。"
             }
           ]
         },
@@ -6471,7 +8176,615 @@ window.ARTICLES_DATA = {
             "香港人類生殖科技管理局"
           ]
         }
-      ]
+      ],
+      "i18n": {
+        "en": {
+          "title": "IVF Step by Step: What Happens at Each Stage, from Initial Tests to Your Pregnancy Test",
+          "excerpt": "Thinking about IVF but not sure what the process involves? This guide compares IUI with IVF and walks through each step — tests, ovarian stimulation, egg retrieval, embryo culture and the pregnancy test — and covers whether PGT is worth doing, public and private options in Hong Kong, and the warning signs that need urgent medical attention.",
+          "metaTitle": "IVF Process Step by Step, Plus IUI vs IVF | A Hong Kong Guide",
+          "metaDescription": "Thinking about IVF but not sure what the process involves? This guide compares IUI with IVF and walks through each step — tests, ovarian stimulation, egg retrieval, embryo culture and the pregnancy test — and covers whether PGT is worth doing, public and private options in Hong Kong, and the warning signs that need urgent medical attention.",
+          "keywords": [
+            "IVF process",
+            "IVF step by step",
+            "what happens in IVF",
+            "IUI",
+            "IUI vs IVF",
+            "egg retrieval",
+            "embryo transfer",
+            "IVF Hong Kong",
+            "PGT",
+            "PGT-A",
+            "embryo grading"
+          ],
+          "heroEyebrow": "Fertility · Assisted Reproduction",
+          "tags": [
+            "Assisted Reproduction",
+            "Infertility"
+          ],
+          "heroTags": [
+            "#IVFProcess",
+            "#IVF",
+            "#IUI",
+            "#EggRetrieval",
+            "#EmbryoTransfer",
+            "#OvarianStimulation"
+          ],
+          "blocks": [
+            {
+              "type": "lead",
+              "text": "An IVF cycle, counted from your first injection to the pregnancy test, usually takes about four to six weeks. It has eight steps: initial tests, ovarian stimulation, the trigger injection, egg retrieval, fertilisation and embryo culture in the lab, embryo transfer, luteal support, and finally the pregnancy test. The part that really needs frequent trips to the clinic is the 8 to 10 days of stimulation."
+            },
+            {
+              "type": "paragraph",
+              "text": "Once you've decided to go ahead with IVF, what's most unsettling is often not the treatment itself but the feeling of \"I have no idea what's going to happen\". A flood of drug names, appointments and jargon arrives, and hardly anyone walks you through it from start to finish."
+            },
+            {
+              "type": "paragraph",
+              "text": "This guide takes the whole process in the order it actually happens: what you do at each step, how long it takes, what your body feels like and what to prepare. By the end you should have a fair picture of what a full course of treatment looks like."
+            },
+            {
+              "type": "heading",
+              "text": "Timeline Overview"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Step",
+                "Timing",
+                "What you do"
+              ],
+              "rows": [
+                [
+                  "1. Initial tests",
+                  "Varies from person to person",
+                  "Blood tests and ultrasound for both partners, semen analysis, signing consent forms"
+                ],
+                [
+                  "2. Ovarian stimulation",
+                  "About 8–10 days",
+                  "Daily self-injections, plus 2–4 monitoring visits"
+                ],
+                [
+                  "3. Trigger injection",
+                  "About 36 hours before egg retrieval",
+                  "Inject at the exact time you're given"
+                ],
+                [
+                  "4. Egg retrieval",
+                  "Half a day",
+                  "Fast, attend the clinic, have the procedure under anaesthesia, rest, then go home"
+                ],
+                [
+                  "5. Lab culture",
+                  "3–5 days",
+                  "Wait — the clinic will update you on how the embryos are doing"
+                ],
+                [
+                  "6. Embryo transfer",
+                  "About 15 minutes",
+                  "Attend the clinic, have the transfer, go home the same day"
+                ],
+                [
+                  "7. Luteal support",
+                  "About 2 weeks",
+                  "Daily vaginal pessaries"
+                ],
+                [
+                  "8. Pregnancy test",
+                  "About 2 weeks after transfer",
+                  "Blood test for pregnancy"
+                ]
+              ]
+            },
+            {
+              "type": "info",
+              "title": "Note",
+              "text": "This timeline is for a \"fresh cycle\". If your doctor recommends freezing all the embryos first, steps 6 to 8 move to a later month, which is called a \"frozen embryo transfer cycle\"."
+            },
+            {
+              "type": "heading",
+              "text": "Will You Try IUI Before IVF?"
+            },
+            {
+              "type": "paragraph",
+              "text": "Many people find that at their first appointment the doctor suggests not IVF but IUI (intrauterine insemination). The two are often discussed together, but they are very different levels of treatment."
+            },
+            {
+              "type": "subheading",
+              "text": "What is IUI?"
+            },
+            {
+              "type": "info",
+              "title": "Intrauterine insemination (IUI)",
+              "text": "Around the time of ovulation, a sample of washed, concentrated, motile sperm is placed directly into the uterine cavity through a fine catheter, sparing the sperm the journey through the cervix."
+            },
+            {
+              "type": "paragraph",
+              "text": "**The process is much simpler than most people expect.** It is usually combined with oral ovulation-stimulating medication (such as letrozole or clomiphene) and ultrasound monitoring of the follicles. Once a follicle is mature, a trigger injection is given, and the insemination is carried out at the clinic at a set time. The insemination itself takes only a few minutes, needs no anaesthesia and feels similar to a gynaecological examination; after a short rest you can go home."
+            },
+            {
+              "type": "paragraph",
+              "text": "**An important precondition:** IUI needs at least one open fallopian tube, and the male partner's motile sperm count after washing has to reach a certain level. If the tubes are blocked, or there is a serious sperm problem, the chance of success with IUI is very low, and IVF is usually recommended straight away."
+            },
+            {
+              "type": "subheading",
+              "text": "IUI compared with IVF"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "",
+                "IUI",
+                "IVF"
+              ],
+              "rows": [
+                [
+                  "Where fertilisation happens",
+                  "Inside the body (fallopian tube)",
+                  "Outside the body (in the lab)"
+                ],
+                [
+                  "Egg retrieval needed?",
+                  "No",
+                  "Yes — a minor procedure"
+                ],
+                [
+                  "Anaesthesia needed?",
+                  "No",
+                  "Yes, for egg retrieval"
+                ],
+                [
+                  "Medication intensity",
+                  "Mostly oral tablets, or low-dose injections",
+                  "Daily injections for 8–10 days"
+                ],
+                [
+                  "Length of one course",
+                  "About one menstrual cycle",
+                  "About 4–6 weeks"
+                ],
+                [
+                  "Chance of success per cycle",
+                  "Lower, and drops markedly with age",
+                  "Considerably higher"
+                ],
+                [
+                  "Cost",
+                  "Much lower",
+                  "High"
+                ],
+                [
+                  "Burden on the body",
+                  "Light",
+                  "Heavier, with a risk of ovarian hyperstimulation"
+                ],
+                [
+                  "Main risk",
+                  "Multiple pregnancy from stimulation",
+                  "OHSS and egg-retrieval-related risks"
+                ],
+                [
+                  "Fallopian tubes need to be open?",
+                  "Yes",
+                  "No"
+                ]
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "When is it reasonable to try IUI first?"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Unexplained infertility",
+                "Mild male-factor infertility (the motile sperm count after washing is still adequate)",
+                "Ovulation problems (these respond well to ovulation-stimulating medication)",
+                "Cervical factors, or difficulty with intercourse",
+                "Use of donor sperm"
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "When do people usually go straight to IVF?"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Both fallopian tubes blocked or badly damaged",
+                "Severe male-factor infertility (ICSI needed)",
+                "Moderate to severe endometriosis",
+                "Older age with clearly reduced ovarian reserve",
+                "Several IUI cycles already tried without success",
+                "Genetic testing of embryos is needed (see the PGT section below)"
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "How many IUI cycles should you try before moving to IVF?"
+            },
+            {
+              "type": "paragraph",
+              "text": "The American Society for Reproductive Medicine's guideline on unexplained infertility recommends three to four cycles of \"oral ovulation-stimulating medication plus IUI\" as first-line treatment, and only then considering IVF. Clinical experience agrees: **most IUI successes happen in the first three or four cycles**, and each additional cycle adds only a limited amount of extra chance."
+            },
+            {
+              "type": "paragraph",
+              "text": "**But age changes the sums.** For people over 35, and especially those approaching 40, time itself is the critical variable. Many doctors will suggest fewer IUI cycles, or going straight to IVF, so that limited time isn't spent on a method with a lower success rate."
+            },
+            {
+              "type": "paragraph",
+              "text": "This is a decision to discuss with your doctor in light of your age, diagnosis and ovarian reserve. There is no single answer."
+            },
+            {
+              "type": "heading",
+              "text": "The Process Step by Step"
+            },
+            {
+              "type": "paragraph",
+              "text": "Each step below covers just three things: **what you do, how long it takes and what it feels like**."
+            },
+            {
+              "type": "subheading",
+              "text": "1. Initial tests"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**What you do:** the female partner has blood tests for hormones and an ultrasound of the ovaries and uterus; the male partner has a semen analysis; both are screened for infectious diseases.",
+                "**What it decides:** the stimulation protocol, the drug doses, and whether ICSI or PGT is needed.",
+                "**Key point:** the male partner's tests matter just as much. About a third of infertility is linked to the male partner, so it shouldn't fall to the woman alone to be tested."
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "2. Ovarian stimulation (8 to 10 days)"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**What you do:** inject yourself under the skin every day at a set time, and attend 2 to 4 monitoring visits for ultrasound and blood tests.",
+                "**Why it's needed:** in a normal cycle only one egg matures; stimulation brings a group of follicles along together.",
+                "**How it feels:** a full, bloated lower abdomen, tiredness, mood swings, breast tenderness and slight bruising at the injection sites.",
+                "**Be careful:** the ovaries are enlarged, so avoid vigorous exercise and sudden twisting movements to lower the risk of ovarian torsion."
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "3. Trigger injection (about 36 hours before egg retrieval)"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**What you do:** inject **on time**, at exactly the time the clinic gives you.",
+                "**Key point:** this is the step where timing matters most — too early and the eggs aren't mature, too late and they may be released on their own. Set an alarm."
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "4. Egg retrieval (half a day)"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Beforehand:** fast as instructed (generally no food or drink in the 6 hours before the procedure), remove jewellery, contact lenses, nail polish and make-up, and arrange for someone to take you home. The male partner usually provides a sample on the same day.",
+                "**The procedure:** under anaesthesia or sedation, follicular fluid is collected through the vagina under ultrasound guidance, taking about 15 to 30 minutes.",
+                "**How it feels:** afterwards, lower abdominal bloating and pain, light bleeding and tiredness, which mostly ease within a few days.",
+                "**Be prepared:** the number of eggs collected is usually lower than the number of follicles seen on ultrasound. This is normal."
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "5. Fertilisation and embryo culture (3 to 5 days)"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**What you do:** wait. The clinic will keep you updated.",
+                "**What happens:** egg and sperm are brought together (if sperm quality is poor, **ICSI** is used, where a single sperm is injected directly into the egg) → the embryos are cultured and graded → a decision is made on a day 3 or day 5 transfer → any remaining good-quality embryos are frozen.",
+                "**Key point 1:** **grading reflects how an embryo looks; it doesn't mean its genes are normal.**",
+                "**Key point 2:** the numbers shrink at every stage — not every egg collected is mature, not every mature egg fertilises, and not every fertilised egg becomes a usable embryo. This is the normal process and doesn't mean something has gone wrong."
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "6. Embryo transfer (about 15 minutes)"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**What you do:** attend the clinic, have the transfer and go home the same day. Some clinics ask you to arrive with a moderately full bladder to help the ultrasound guidance.",
+                "**The procedure:** a fine catheter places the embryo into the uterine cavity through the cervix. It usually needs no anaesthesia and feels similar to a gynaecological examination.",
+                "**Fresh versus frozen:** if hormone levels are too high or there is a risk of ovarian hyperstimulation, the doctor will often recommend freezing all the embryos and arranging a frozen transfer at a later date.",
+                "**Key point:** **you don't need ten days of bed rest.** Normal routines are fine; just avoid vigorous exercise and heavy lifting. Staying in bed for long periods actually raises the risk of blood clots."
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "7. Luteal support (about 2 weeks)"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**What you do:** use vaginal progesterone pessaries every day to support the uterine lining.",
+                "**Key point:** progesterone itself causes feelings similar to early pregnancy (breast tenderness, nausea, tiredness, discharge), so these feelings **can't be used to tell whether it has worked.** It's also best not to use a home pregnancy test early.",
+                "**This is the hardest stretch:** there's little for your body to do, but the psychological pressure is at its peak."
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "8. Pregnancy test"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**What you do:** a blood test for hCG; if it's positive, you repeat it a few days later to see how the level is rising, and an ultrasound is then arranged to confirm.",
+                "**If it doesn't work:** go through this cycle's data with your doctor — response to medication, number of eggs retrieved, fertilisation rate, embryo quality — all of which is valuable for adjusting the plan next time. Your body and emotions both need time to recover, and rushing to start again isn't necessarily best."
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "About PGT: Do You Need Genetic Testing of Embryos?"
+            },
+            {
+              "type": "paragraph",
+              "text": "PGT (preimplantation genetic testing) means taking a few cells from an embryo before transfer and analysing them genetically. It is the add-on most often recommended in recent years, and the one most worth getting clear on."
+            },
+            {
+              "type": "subheading",
+              "text": "Three kinds of PGT, with completely different uses"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Type",
+                "What it tests",
+                "When it's used"
+              ],
+              "rows": [
+                [
+                  "**PGT-M**",
+                  "Single-gene disorders",
+                  "Couples known to carry a gene for an inherited condition, such as thalassaemia or spinal muscular atrophy"
+                ],
+                [
+                  "**PGT-SR**",
+                  "Structural chromosome rearrangements",
+                  "One partner has a structural problem such as a translocation, often seen with recurrent miscarriage"
+                ],
+                [
+                  "**PGT-A**",
+                  "Abnormal chromosome numbers (aneuploidy)",
+                  "No known inherited condition; used to select embryos"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**The first two have clear medical indications.** They are used to avoid passing a known genetic problem to the next generation, and who they are for is well defined."
+            },
+            {
+              "type": "paragraph",
+              "text": "**The controversy centres on the third, PGT-A**, because it is the one marketed widely to ordinary patients."
+            },
+            {
+              "type": "subheading",
+              "text": "What the evidence says about PGT-A"
+            },
+            {
+              "type": "paragraph",
+              "text": "The position of the major international professional bodies is fairly consistent: **it is not recommended as routine testing for all IVF patients.**"
+            },
+            {
+              "type": "list",
+              "items": [
+                "The American Society for Reproductive Medicine (ASRM) committee opinion of 2024 states that [the value of PGT-A as routine screening for all IVF patients has not been proven](https://www.asrm.org/practice-guidance/practice-committee-documents/the-use-of-preimplantation-genetic-testing-for-aneuploidy-a-committee-opinion-2024/); recent multicentre randomised controlled trials show similar overall pregnancy outcomes for frozen embryo transfer with or without PGT-A.",
+                "A large randomised trial published in the New England Journal of Medicine (Yan et al., 2021) compared 1,212 women aged 20 to 37 who had three or more good-quality blastocysts. The cumulative live birth rate within one year was **77.2% in the PGT-A group and 81.8% in the conventional IVF group** — PGT-A brought no advantage.",
+                "The UK's HFEA rates PGT-A \"red\", meaning it **may reduce the chance of a successful treatment**."
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**The one fairly consistent positive signal is the miscarriage rate:** in that trial the PGT-A group had a lower miscarriage rate (8.7% versus 12.6%). This doesn't contradict the live birth results — PGT-A screens out more embryos, so those left have a higher chance of implanting, but the total number available to transfer is smaller."
+            },
+            {
+              "type": "subheading",
+              "text": "So when is it worth considering?"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**A clear genetic indication:** PGT-M and PGT-SR have well-defined uses.",
+                "**Recurrent miscarriage:** if you want to reduce the chance of another miscarriage, it's worth discussing with your doctor.",
+                "**Older age with a good ovarian response:** ASRM considers this group may benefit more, but the evidence is still uncertain."
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**Where it's less suitable:** people who have few embryos to begin with. If you only have one or two, the testing itself uses up embryos and adds a risk of damage, and an \"abnormal\" result may leave nothing to transfer — even though some embryos judged abnormal could in fact still lead to a pregnancy (mosaic embryos are a known problem)."
+            },
+            {
+              "type": "subheading",
+              "text": "Three practical questions to ask your doctor"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Is there a clear medical indication in my case?",
+                "With the number of embryos I have now, could testing leave me with fewer embryos to transfer?",
+                "If the result comes back \"mosaic\", how does this clinic handle it?"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "In Hong Kong, assisted reproduction is regulated by the Human Reproductive Technology Ordinance. The scope of PGT and any limits that apply should be checked directly with a licensed centre."
+            },
+            {
+              "type": "heading",
+              "text": "Ovarian Hyperstimulation: Warning Signs You Need to Know"
+            },
+            {
+              "type": "paragraph",
+              "text": "Ovarian hyperstimulation syndrome (OHSS) is a known risk of stimulation. Most cases are mild, but severe cases need immediate treatment."
+            },
+            {
+              "type": "paragraph",
+              "text": "**If any of the following happens, contact your clinic straight away or go to A&E:**"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Severe abdominal pain and bloating, or your abdomen getting noticeably bigger in a short time",
+                "Rapid weight gain over a short period",
+                "Passing urine noticeably less often or in smaller amounts",
+                "Shortness of breath, or difficulty breathing when lying flat",
+                "Persistent vomiting, with no food or drink staying down",
+                "Pain and swelling in one calf (a blood clot needs to be ruled out)"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "These shouldn't wait until your next appointment, and shouldn't be handled with home remedies or over-the-counter medicine."
+            },
+            {
+              "type": "heading",
+              "text": "Public and Private Options in Hong Kong"
+            },
+            {
+              "type": "paragraph",
+              "text": "According to a 2023 reply to the Legislative Council:"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Item",
+                "Public services"
+              ],
+              "rows": [
+                [
+                  "Provided by",
+                  "Nine Hospital Authority hospitals offer gynaecology specialist services; of these, Queen Mary Hospital, Prince of Wales Hospital and Kwong Wah Hospital provide IVF"
+                ],
+                [
+                  "Age limit",
+                  "Women under 40"
+                ],
+                [
+                  "Cycle limit",
+                  "Up to three ovarian stimulation cycles for those assessed as suitable"
+                ],
+                [
+                  "Waiting time: referral to fertility assessment",
+                  "About 7.5 to 12 months"
+                ],
+                [
+                  "Waiting time: first consultation to treatment",
+                  "About 4 to 7 months"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "In the private sector, Hong Kong has a number of licensed assisted reproduction centres. Waiting times are shorter but costs are higher, and fees vary considerably, so it's best to ask each centre directly."
+            },
+            {
+              "type": "paragraph",
+              "text": "**One practical consideration:** the public-sector waits can add up to more than a year, and age itself is an important factor in outcomes. Whether to wait for public services has to be weighed against your own age and circumstances, and is worth discussing in detail with your doctor."
+            },
+            {
+              "type": "heading",
+              "text": "Where Can Chinese Medicine Fit In?"
+            },
+            {
+              "type": "paragraph",
+              "text": "Many people see a Chinese medicine practitioner alongside IVF. There are a few practical considerations: preparation before a cycle, discomfort and emotions during treatment, and care with medication at each phase — for example, around egg retrieval there is a bleeding risk, so blood-invigorating herbs must be assessed by a practitioner."
+            },
+            {
+              "type": "paragraph",
+              "text": "The details are covered in a separate article (see [How Does Chinese Medicine Work Alongside an IVF Cycle?](ivf-tcm-en.html)). The most important principle is: **make sure your fertility specialist and your Chinese medicine practitioner both know your full situation, and don't let preparation delay your treatment.**"
+            },
+            {
+              "type": "heading",
+              "text": "Frequently Asked Questions"
+            },
+            {
+              "type": "faq",
+              "items": [
+                {
+                  "q": "How long does an IVF cycle take?",
+                  "a": "About four to six weeks from the first injection to the pregnancy test. But once you add the initial tests and any waiting time, the whole journey is much longer. With a frozen embryo transfer cycle, the transfer is arranged in a later month."
+                },
+                {
+                  "q": "Do the injections hurt? Can I give them myself?",
+                  "a": "The needles are very fine, and most people describe a slight sting. A nurse will show you how, and nearly everyone is confident within a few days. If you really can't inject yourself, a family member can help or you can go to the clinic."
+                },
+                {
+                  "q": "Does egg retrieval hurt?",
+                  "a": "It is done under anaesthesia or sedation, so you generally don't feel pain during it. Afterwards, lower abdominal bloating and pain and some light bleeding are common, and these mostly ease within a few days."
+                },
+                {
+                  "q": "How many eggs is a good number?",
+                  "a": "There's no \"the more the better\" answer. Too many actually raises the risk of ovarian hyperstimulation. Your doctor's aim is to collect a reasonable number of mature eggs, not to maximise the count."
+                },
+                {
+                  "q": "Do I need to rest in bed after the transfer?",
+                  "a": "No, not for long periods. Normal routines are fine, just avoid vigorous exercise and heavy lifting. Staying in bed for a long time does no good and raises the risk of blood clots."
+                },
+                {
+                  "q": "What does it feel like if the transfer has worked?",
+                  "a": "There's no reliable way to tell for yourself. Progesterone pessaries themselves cause feelings similar to early pregnancy, which makes it easy to misjudge. Go by the blood test result."
+                },
+                {
+                  "q": "What's the difference between IUI and IVF?",
+                  "a": "The biggest difference is where fertilisation happens: with IUI, prepared sperm are placed directly into the uterine cavity and fertilisation still takes place inside the body, in the fallopian tube; with IVF, eggs are collected, fertilised in the lab, and the embryo is then placed back in the uterus. IUI needs no egg retrieval or anaesthesia, costs much less and is lighter on the body, but each cycle has a lower chance of success and needs open fallopian tubes."
+                },
+                {
+                  "q": "How many IUI cycles should I do before moving to IVF?",
+                  "a": "For unexplained infertility, international guidelines generally suggest three to four cycles of ovulation-stimulating medication plus IUI before considering IVF, because most successes come in the first few cycles. But age is an important variable — if you're over 35, your doctor may suggest fewer cycles or going straight to IVF."
+                },
+                {
+                  "q": "Will PGT-A definitely improve my chance of success?",
+                  "a": "Not necessarily. Recent large randomised controlled trials show that among patients with several good-quality blastocysts, the cumulative live birth rate is similar with or without PGT-A. The major international professional bodies do not recommend it as routine testing for all patients. There is a more consistent positive signal for miscarriage rates. Whether it suits you should be discussed in light of your specific medical indications and your number of embryos."
+                },
+                {
+                  "q": "Does a high embryo grade mean the genes are normal?",
+                  "a": "No. The grade reflects how the embryo looks and how it is dividing, and doesn't necessarily say anything about whether its chromosomes are normal. An embryo that looks good can still have chromosome problems, and the reverse is also true."
+                },
+                {
+                  "q": "If a cycle fails, how long do I wait before the next one?",
+                  "a": "That needs to be decided with your doctor based on how this cycle went. If you already have frozen embryos, a frozen transfer can usually be arranged fairly quickly; if you need to stimulate again, your body is generally given time to recover first. The timing should take into account both your physical condition and your age."
+                },
+                {
+                  "q": "What does the male partner need to do?",
+                  "a": "Besides tests such as the semen analysis, lifestyle matters just as much — smoking, drinking, prolonged exposure to heat and lack of sleep can all affect sperm quality. The male partner usually needs to be there on the day of egg retrieval to give a sample, so it's best to confirm the arrangements beforehand."
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Conclusion"
+            },
+            {
+              "type": "paragraph",
+              "text": "The IVF process itself is quite regular: the busy part is concentrated in the 8 to 10 days of stimulation and the day of egg retrieval, and after that it is mostly waiting. What really wears people down is often not the body but the psychological pressure of the two weeks after transfer."
+            },
+            {
+              "type": "paragraph",
+              "text": "Knowing in advance what happens at each step, which sensations are normal and which are warning signs that need urgent care can remove a large share of unnecessary anxiety. When in doubt, ask your medical team directly — they have seen the same questions countless times."
+            },
+            {
+              "type": "references",
+              "items": [
+                "Hong Kong SAR Government press release: Legislative Council question on assisted reproductive services, 26 April 2023 (香港特別行政區政府新聞公報：立法會一題——輔助生育服務). https://www.info.gov.hk/gia/general/202304/26/P2023042600398.htm (accessed 21 July 2026)",
+                "Practice Committees of the American Society for Reproductive Medicine and the Society for Assisted Reproductive Technology. The use of preimplantation genetic testing for aneuploidy: a committee opinion (2024). https://www.asrm.org/practice-guidance/practice-committee-documents/the-use-of-preimplantation-genetic-testing-for-aneuploidy-a-committee-opinion-2024/ (accessed 21 July 2026)",
+                "Yan J, Qin Y, Zhao H, et al. Live Birth with or without Preimplantation Genetic Testing for Aneuploidy. N Engl J Med. 2021;385(22):2047–2058. doi:10.1056/NEJMoa2103613",
+                "Human Fertilisation and Embryology Authority (HFEA). Treatment add-ons ratings",
+                "Practice Committee of the American Society for Reproductive Medicine. Evidence-based treatments for unexplained infertility: a guideline (2020).",
+                "Council on Human Reproductive Technology, Hong Kong (香港人類生殖科技管理局)"
+              ]
+            }
+          ]
+        }
+      }
     },
     {
       "slug": "ivf-tcm",
@@ -6920,7 +9233,454 @@ window.ARTICLES_DATA = {
             "《中醫婦科學》，中國中醫藥出版社"
           ]
         }
-      ]
+      ],
+      "i18n": {
+        "en": {
+          "title": "How Does Chinese Medicine Work Alongside an IVF Cycle? A Phase-by-Phase Approach and What the Research Shows",
+          "excerpt": "Meta-analyses of Chinese-language studies suggest that Chinese herbal medicine alongside IVF may reduce ovarian hyperstimulation, improve endometrial receptivity and raise clinical pregnancy rates. A Hong Kong registered Chinese medicine practitioner explains the phase-by-phase approach — before the cycle, down-regulation, stimulation and after transfer — plus when to time acupuncture and what to watch out for in practice.",
+          "metaTitle": "TCM and IVF: Phase-by-Phase Treatment and What the Research Shows",
+          "metaDescription": "Meta-analyses of Chinese-language studies suggest that Chinese herbal medicine alongside IVF may reduce ovarian hyperstimulation, improve endometrial receptivity and raise clinical pregnancy rates. A Hong Kong registered Chinese medicine practitioner explains the phase-by-phase approach — before the cycle, down-regulation, stimulation and after transfer — plus when to time acupuncture and what to watch out for in practice.",
+          "keywords": [
+            "TCM and IVF",
+            "Chinese medicine IVF support",
+            "IVF herbal medicine",
+            "IVF acupuncture",
+            "pre-cycle preparation",
+            "herbs after embryo transfer",
+            "ovarian hyperstimulation"
+          ],
+          "heroEyebrow": "Fertility · Assisted Reproduction",
+          "tags": [
+            "Assisted Reproduction",
+            "Herbal Medicine"
+          ],
+          "heroTags": [
+            "#IVFAndTCM",
+            "#PreCycleCare",
+            "#AfterTransfer",
+            "#AcupunctureForFertility",
+            "#PhaseByPhaseTreatment",
+            "#HerbalSafety"
+          ],
+          "blocks": [
+            {
+              "type": "lead",
+              "text": "The core principle of combining Chinese medicine with IVF is **phase-by-phase treatment**: the herbal direction at each stage follows what the fertility treatment is trying to achieve at that stage, rather than one formula being used for the whole cycle. Meta-analyses of Chinese-language studies suggest that adding Chinese herbal medicine to IVF may reduce the risk of ovarian hyperstimulation syndrome (OHSS), improve endometrial receptivity and raise clinical pregnancy rates."
+            },
+            {
+              "type": "paragraph",
+              "text": "\"I'm in the middle of IVF — can I see a Chinese medicine practitioner at the same time?\" Yes, you can, but what matters is **how the two are coordinated**. If the herbal direction runs against what your fertility specialist is trying to do at that moment, it won't help and may even work against the treatment. We'll look at the research first, then go through what happens in practice at each phase."
+            },
+            {
+              "type": "paragraph",
+              "text": "If you'd like to understand the IVF process itself first, see our [step-by-step guide to IVF](ivf-process-en.html)."
+            },
+            {
+              "type": "heading",
+              "text": "What Does the Research Say?"
+            },
+            {
+              "type": "subheading",
+              "text": "Chinese herbal medicine alongside IVF: a meta-analysis of Chinese-language studies"
+            },
+            {
+              "type": "paragraph",
+              "text": "A 2022 meta-analysis by a team from the School of Chinese Medicine at the University of Hong Kong searched PubMed, the Cochrane Library, Web of Science, CNKI and Wanfang, and pooled 14 randomised controlled trials involving 1,854 women. The results:"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Outcome",
+                "Result"
+              ],
+              "rows": [
+                [
+                  "**Incidence of ovarian hyperstimulation syndrome (OHSS)**",
+                  "Significantly lower in the herbal medicine group (OR 0.32, 95% CI 0.24–0.42, P<0.00001)"
+                ],
+                [
+                  "Number of eggs retrieved",
+                  "More moderate in the herbal medicine group (MD −2.21)"
+                ],
+                [
+                  "**Clinical pregnancy rate**",
+                  "Higher in the herbal medicine group (OR 1.68, 95% CI 1.31–2.16, P<0.0001)"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "A second meta-analysis, published in the Chinese Journal of Modern Applied Pharmacy, pointed in the same direction: **kidney-tonifying herbs combined with conventional medication did better than conventional medication alone at improving ovarian reserve and endometrial receptivity.**"
+            },
+            {
+              "type": "subheading",
+              "text": "The most notable finding: fewer cases of OHSS"
+            },
+            {
+              "type": "paragraph",
+              "text": "Of the three outcomes, the effect on OHSS is the clearest (OR 0.32, meaning the odds of it occurring fell to roughly a third). It is also the easiest to make sense of:"
+            },
+            {
+              "type": "list",
+              "items": [
+                "It lines up directly with the prescribing principle described below — working with the goal of each phase and **not over-stimulating the ovaries**",
+                "It also helps explain the \"more moderate number of eggs retrieved\": more eggs is not always better, and retrieving too many is itself a risk factor for OHSS",
+                "It is a **safety benefit** — reducing complications is worthwhile in its own right"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "In other words, Chinese medicine's role here is less about helping things along and more about keeping them steady."
+            },
+            {
+              "type": "subheading",
+              "text": "The limitations, stated plainly"
+            },
+            {
+              "type": "paragraph",
+              "text": "The authors of both meta-analyses were explicit about the limits of their evidence. The first noted that the quality of the included studies was low and that the criteria for judging efficacy varied, and called for more high-quality, multicentre, randomised double-blind trials. The second noted that most of the included studies scored only 3 on the Jadad scale, so the evidence behind the conclusions is limited."
+            },
+            {
+              "type": "paragraph",
+              "text": "It is also worth being clear that the main outcome in these studies was the **clinical pregnancy rate** (a gestational sac seen on ultrasound), not the live birth rate. A large acupuncture trial that used live birth as its outcome came back negative, so there is currently not enough evidence to support a benefit for live births."
+            },
+            {
+              "type": "paragraph",
+              "text": "The honest summary is this: **the available Chinese-language studies suggest that herbal medicine alongside IVF may reduce OHSS and improve clinical pregnancy rates, but it is a supportive therapy that may help, not a guarantee of success.** Anyone who promises you a specific success rate is going beyond what the evidence can support."
+            },
+            {
+              "type": "heading",
+              "text": "Phase-by-Phase Treatment: How to Fit Chinese Medicine to Each Phase"
+            },
+            {
+              "type": "paragraph",
+              "text": "The framework below is drawn from the clinical approach used in Chinese medicine hospitals in mainland China for patients with diminished ovarian reserve (DOR). The core principle is that **the Chinese medicine strategy points the same way as the goal of the Western medication at that phase.**"
+            },
+            {
+              "type": "subheading",
+              "text": "Overview"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Phase",
+                "Fertility treatment",
+                "Chinese medicine",
+                "Principle"
+              ],
+              "rows": [
+                [
+                  "Before the cycle starts",
+                  "No medication yet",
+                  "Tonify the kidneys, replenish essence and regulate the menstrual cycle",
+                  "Regulate the cycle and build up reserves"
+                ],
+                [
+                  "Down-regulation",
+                  "GnRH analogues put the ovaries into a temporary \"rest\"",
+                  "Nourish kidney yin and clear deficiency heat",
+                  "**Keep things calm; don't stimulate**"
+                ],
+                [
+                  "Ovarian stimulation",
+                  "Exogenous gonadotropins (Gn) bring several follicles to maturity together",
+                  "Mainly tonify the kidneys and replenish essence, with some warming of kidney yang",
+                  "Balance yin and yang"
+                ],
+                [
+                  "Endometrial preparation",
+                  "Preparing the uterine lining",
+                  "Tonify the kidneys and invigorate blood",
+                  "Abundant essence and blood"
+                ],
+                [
+                  "After transfer",
+                  "Luteal support",
+                  "Support the kidneys and spleen; secure the chong vessel to protect the pregnancy",
+                  "Nourish and settle the pregnancy"
+                ],
+                [
+                  "Throughout",
+                  "—",
+                  "Soothe the liver, relieve constraint and calm the mind",
+                  "Ease emotional strain"
+                ]
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "Before the cycle starts: where Chinese medicine has the most room"
+            },
+            {
+              "type": "paragraph",
+              "text": "There is an old saying in Chinese medicine: \"to conceive, first regulate the menses\" — get the menstrual cycle regular first, then think about conception. That makes the preparation period before a cycle the time when Chinese medicine has the most scope in the whole treatment course."
+            },
+            {
+              "type": "paragraph",
+              "text": "The approach is **cycle-regulating herbal therapy**, which shifts the emphasis of the prescription across the four phases of the menstrual cycle:"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Phase",
+                "What the body is doing",
+                "Treatment direction"
+              ],
+              "rows": [
+                [
+                  "Menstruation",
+                  "Discharging rather than storing; extreme yang turning to yin",
+                  "Nourish and invigorate blood; clear stasis to make way for renewal"
+                ],
+                [
+                  "Follicular phase",
+                  "Yin growing",
+                  "Tonify the kidneys, replenish essence, nourish yin and blood"
+                ],
+                [
+                  "Ovulation",
+                  "Storing rather than discharging; extreme yin turning to yang",
+                  "Tonify the kidneys and support yang; invigorate blood and unblock the channels"
+                ],
+                [
+                  "Luteal phase",
+                  "Yang growing",
+                  "Tonify the kidneys and support yang; soothe the liver and strengthen the spleen"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**Timing:** the usual approach in mainland China is about three months of herbal pre-treatment before starting a cycle. A related retrospective observation also suggests that the improvement is more marked with early intervention (women whose cycles are still regular and who have had the problem for a shorter time), and that the trend levels off after about six months."
+            },
+            {
+              "type": "paragraph",
+              "text": "Two caveats are needed, though. That observation comes from a single-centre retrospective study with no control group, so the level of evidence is limited. And **you shouldn't delay your cycle just to finish three months of preparation** — the same source itself stresses \"keep actively trying to conceive while you regulate your body\", and age and time are important variables in their own right."
+            },
+            {
+              "type": "subheading",
+              "text": "Down-regulation: keep things calm"
+            },
+            {
+              "type": "paragraph",
+              "text": "In this phase, GnRH analogues put the pituitary and ovaries into something like a temporary shutdown. Common side effects are hot flushes and sweating, an aching lower back and knees, irritability and vaginal dryness — a picture that closely matches what Chinese medicine calls kidney yin deficiency."
+            },
+            {
+              "type": "paragraph",
+              "text": "**The treatment principle is to nourish kidney yin and clear deficiency heat**, while also strengthening the spleen, soothing the liver and calming the mind."
+            },
+            {
+              "type": "paragraph",
+              "text": "**What matters most in this phase is what you don't do:**"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Avoid warming, drying and \"moving\" herbs such as deer antler velvet (lu rong), curculigo (xian mao) and cinnamon bark (rou gui)",
+                "Avoid strong blood-invigorating herbs such as peach kernel (tao ren) and sparganium rhizome (san leng)",
+                "The principle is to **avoid stirring up ovarian function** — because your fertility doctor is deliberately suppressing it at this point"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "Worth remembering: if a practitioner offers you a \"tonic to build you up and produce more eggs\" during down-regulation, that runs against the aim of your fertility treatment."
+            },
+            {
+              "type": "subheading",
+              "text": "Ovarian stimulation: balance yin and yang"
+            },
+            {
+              "type": "paragraph",
+              "text": "Exogenous gonadotropins bring many follicles to rapid, simultaneous development over a short period, which Chinese medicine understands as using up a large amount of kidney essence and blood in a short time. Treatment therefore **centres on tonifying the kidneys and replenishing essence, with some warming of kidney yang**, and a small amount of blood-invigorating, channel-unblocking herbs may be added to help the follicles mature."
+            },
+            {
+              "type": "paragraph",
+              "text": "Interestingly, the yang-warming herbs that were to be avoided during down-regulation, such as epimedium (yin yang huo, also known as xian ling pi), become a common choice in the stimulation phase. This shows the internal logic of the framework: **the herbal direction follows the goal of each phase.**"
+            },
+            {
+              "type": "paragraph",
+              "text": "This phase is also the critical window for controlling OHSS risk, so the prescription has to balance helping the follicles mature against avoiding an over-response."
+            },
+            {
+              "type": "subheading",
+              "text": "Endometrial preparation: tonify the kidneys and invigorate blood"
+            },
+            {
+              "type": "paragraph",
+              "text": "Repeated egg retrievals are thought to deplete kidney yin and yang, leaving the vessels empty and sluggish so that stasis gradually forms and affects the lining's receptivity. This phase typically uses a kidney-tonifying, blood-invigorating approach, aiming to improve endometrial thickness and morphology and lower uterine artery resistance."
+            },
+            {
+              "type": "paragraph",
+              "text": "The Chinese Journal of Modern Applied Pharmacy meta-analysis mentioned earlier reached its conclusion — that kidney-tonifying herbs did better than conventional medication alone — at this very stage."
+            },
+            {
+              "type": "subheading",
+              "text": "After transfer: nurture and settle the pregnancy"
+            },
+            {
+              "type": "paragraph",
+              "text": "Because of the heavy medication used in down-regulation and stimulation, and the loss of granulosa cells during egg retrieval, luteal insufficiency is common at this stage. Chinese medicine's basic direction is to **support the kidneys and spleen and secure the chong vessel to protect the pregnancy**, working alongside the luteal support your fertility doctor prescribes."
+            },
+            {
+              "type": "paragraph",
+              "text": "**The prescribing principle is \"secure and nourish, never dry or heat\"**, and **pungent, hot, drying and strongly tonifying herbs such as aconite (fu zi) and cinnamon bark (rou gui) are expressly avoided.** What the body needs now is stability and nourishment, not stimulation."
+            },
+            {
+              "type": "subheading",
+              "text": "Throughout: emotions and sleep"
+            },
+            {
+              "type": "paragraph",
+              "text": "IVF brings financial, psychological and physical pressure all at once, and anxiety, tension and fear are very common — especially after repeated failed transfers."
+            },
+            {
+              "type": "paragraph",
+              "text": "Chinese medicine theory holds that for women, \"the liver is the root\": the liver governs the smooth flow of qi and is closely tied to emotions. The clinical caution is that when emotional strain is being treated, the approach should also **soften and nourish the liver and protect liver yin, rather than relying on dispersing alone** — people under prolonged pressure often have a yin-and-blood deficiency at the same time, and soothing alone can drain them further."
+            },
+            {
+              "type": "paragraph",
+              "text": "**A gentler day-to-day option** is herbal flower tea. Rose bud (mei gui hua), Chinese rose (yue ji hua), albizia flower (he huan hua) and white plum blossom (bai mei hua) are the usual choices for soothing the liver and relieving constraint. Albizia flower also helps calm the mind and sleep, and rose bud is the most effective for lifting low mood."
+            },
+            {
+              "type": "paragraph",
+              "text": "Even so, check with your doctor before drinking even a flower tea during an IVF cycle — Chinese rose, for example, has a fairly strong blood-invigorating action, and whether it is suitable after transfer has to be judged case by case. \"Gentle\" doesn't mean \"suitable at every phase\"."
+            },
+            {
+              "type": "heading",
+              "text": "When Should You Have Acupuncture, and How Should Sessions Be Planned?"
+            },
+            {
+              "type": "subheading",
+              "text": "A sensible way to schedule it"
+            },
+            {
+              "type": "paragraph",
+              "text": "**Best done in the gap between cycles.** This is the most suitable window: there is no medication in your system, the time pressure is lower, and there is room to work properly on sleep, digestion, emotions and energy. A typical schedule is one session a week, reviewed month by month — it usually takes two to three menstrual cycles to judge whether it is heading in the right direction."
+            },
+            {
+              "type": "paragraph",
+              "text": "**During stimulation: aim to ease discomfort.** Sessions can be arranged around whatever is bothering you, such as bloating, insomnia or tension. Once a week is enough. Your body is going through dramatic hormonal changes at this point, so it's best not to pile on too many interventions at the same time."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Around egg retrieval: extra caution.** Retrieval involves anaesthesia and a risk of bleeding. Strong stimulating techniques should be avoided before and after it, and any blood-invigorating herbs need a practitioner's assessment. If you do book acupuncture, keep it gentle and make sure your fertility doctor knows."
+            },
+            {
+              "type": "paragraph",
+              "text": "**After transfer: less is more.** Strong hands-on treatment is not recommended. If you have marked discomfort or anxiety, light treatment can be considered, but sessions shouldn't be packed close together."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Each session** usually lasts 20 to 30 minutes. IVF already involves a lot of appointments and injections, and adding too many sessions increases the load on both your body and your schedule — it's worth weighing that honestly."
+            },
+            {
+              "type": "heading",
+              "text": "Practical Precautions"
+            },
+            {
+              "type": "paragraph",
+              "text": "**1. Both practitioners need to know what the other is doing.** Your fertility doctor needs to know what you are taking, and your Chinese medicine practitioner needs to know which stimulation drugs and luteal support medication you are on. Keeping either one in the dark raises the risk."
+            },
+            {
+              "type": "paragraph",
+              "text": "**2. Take extra care around egg retrieval.** Herbs that invigorate blood and resolve stasis should only be used before and after retrieval on a practitioner's assessment. Don't take them on your own, and especially don't reuse an earlier prescription."
+            },
+            {
+              "type": "paragraph",
+              "text": "**3. Avoid strong stimulation after transfer.** And don't take so-called \"pregnancy-protecting\" formulas sold over the counter on your own. What you take at this stage has to be decided by a practitioner based on your actual situation."
+            },
+            {
+              "type": "paragraph",
+              "text": "**4. Don't add or change medications or supplements on your own.** During stimulation your hormones are changing dramatically, so taking products of unknown composition is especially risky."
+            },
+            {
+              "type": "paragraph",
+              "text": "**5. Don't let preparation delay your cycle.** Age is one of the most important factors in IVF outcomes. If your doctor advises starting soon, don't postpone it for the sake of \"three months of preparation first\"."
+            },
+            {
+              "type": "heading",
+              "text": "How to Tell Whether a Practitioner Knows Assisted Reproduction"
+            },
+            {
+              "type": "paragraph",
+              "text": "Even if you have no plans to take herbs, this framework has a practical use — it helps you judge whether a practitioner genuinely knows this area:"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**They ask which phase you're in and what medication you're on**, and adjust the herbal direction accordingly",
+                "**They don't prescribe the same formula for the whole cycle**",
+                "**They don't give you a \"big tonic to boost egg production\" during down-regulation**",
+                "**They don't use warming, drying, strongly tonifying herbs after transfer**",
+                "**They're willing to communicate with your fertility doctor**, rather than asking you to keep it quiet"
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Frequently Asked Questions"
+            },
+            {
+              "type": "faq",
+              "items": [
+                {
+                  "q": "Can Chinese medicine improve IVF success rates?",
+                  "a": "Meta-analyses of Chinese-language studies suggest that adding Chinese herbal medicine to IVF may reduce ovarian hyperstimulation, improve endometrial receptivity and raise clinical pregnancy rates. But the quality of the included studies was low, as the authors themselves note. A reasonable way to see it is as something that may help, not a guarantee. Treat any claim that promises a specific success rate with caution."
+                },
+                {
+                  "q": "When is the best time to start?",
+                  "a": "The preparation period before a cycle is generally seen as the phase where Chinese medicine has the most scope, and the usual approach in mainland China is around three months. But if your doctor advises starting treatment soon, don't postpone it to finish a course of preparation."
+                },
+                {
+                  "q": "Can I take the same herbal formula in every phase?",
+                  "a": "It isn't recommended. The aims of the Western medication differ a great deal between phases — suppressing the ovaries in down-regulation, stimulating follicles in stimulation, supporting implantation after transfer — and the Chinese medicine direction should change with them. If you are given the same formula for the whole cycle without any changes, ask why."
+                },
+                {
+                  "q": "Can I take herbal medicine during ovarian stimulation?",
+                  "a": "Yes, but a registered Chinese medicine practitioner needs to assess your situation, and your fertility doctor should know about it. Hormones are changing dramatically during stimulation, so take extra care — don't self-medicate or reuse an old prescription."
+                },
+                {
+                  "q": "Can I have acupuncture after embryo transfer?",
+                  "a": "That depends on your individual situation and needs a practitioner's judgement. In general, strongly stimulating techniques are not recommended after transfer, and any treatment should be given only with your fertility doctor's knowledge."
+                },
+                {
+                  "q": "How many acupuncture sessions do I need?",
+                  "a": "There is no set number. If the aim is to look after sleep, digestion, emotions and energy, a typical schedule is one session a week in the gap between cycles, reviewed over two to three menstrual cycles. Be cautious about \"package\" deals that sell a fixed number of sessions and tie them to success rates."
+                },
+                {
+                  "q": "My first cycle didn't work. How can Chinese medicine help?",
+                  "a": "The gap between cycles is when Chinese medicine has the most room: working on fatigue, sleep, emotions and overall recovery, and regulating your constitution. It is also a good time to go through the details of the last cycle with your fertility specialist."
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Conclusion"
+            },
+            {
+              "type": "paragraph",
+              "text": "What matters about combining Chinese medicine with IVF is not whether you take herbs, but **whether the treatment fits the phase**. Calm during down-regulation, supportive during stimulation, nourishing after transfer — the direction follows the Western treatment goal, and only then can it be called coordinated care."
+            },
+            {
+              "type": "paragraph",
+              "text": "On the evidence so far, the clearest signal for herbal medicine alongside IVF is in reducing ovarian hyperstimulation, with positive results for endometrial receptivity and clinical pregnancy rates too, though study quality still has room to improve. Add support for discomfort, sleep and emotions during treatment, and together these make up the role Chinese medicine can play in IVF."
+            },
+            {
+              "type": "paragraph",
+              "text": "The two most important practical points: make sure both practitioners know your full situation, and don't let preparation delay your treatment."
+            },
+            {
+              "type": "references",
+              "items": [
+                "Ye JH, Lin X, Chen HY, Meng W. A meta-analysis of Chinese herbal medicine in assisted reproduction (IVF-ET) for the incidence of ovarian hyperstimulation syndrome and pregnancy outcomes (中藥在輔助生育技術 IVF-ET 中干預卵巢過度刺激綜合症發生及妊娠結局的 Meta 分析). Traditional Chinese Medicine (中醫學). 2022;11(5). doi:10.12677/TCM.2022.115141",
+                "A meta-analysis of kidney-tonifying Chinese herbal medicine for improving ovarian reserve function and endometrial receptivity in IVF-ET cycles (補腎中藥改善 IVF-ET 週期卵巢儲備功能和子宮內膜容受性的 Meta 分析). Chinese Journal of Modern Applied Pharmacy (中國現代應用藥學). 2015;32(3).",
+                "Smith CA, de Lacey S, Chapman M, et al. Effect of Acupuncture vs Sham Acupuncture on Live Births Among Women Undergoing In Vitro Fertilization: A Randomized Clinical Trial. JAMA. 2018;319(19):1990–1998. https://pubmed.ncbi.nlm.nih.gov/29800212/ (accessed 21 July 2026)",
+                "Xiyuan Hospital, China Academy of Chinese Medical Sciences: The Application of Chinese Medicine in Assisted Reproduction for DOR — Adhering to the Pathogenesis, Treating by Phase (中醫藥在 DOR 輔助生殖中的應用——謹守病機，分期論治) (academic lecture material)",
+                "Gynaecology in Traditional Chinese Medicine (中醫婦科學). China Press of Traditional Chinese Medicine."
+              ]
+            }
+          ]
+        }
+      }
     },
     {
       "slug": "male-fertility",
@@ -7270,7 +10030,355 @@ window.ARTICLES_DATA = {
             "《中醫男科學》或相關教材"
           ]
         }
-      ]
+      ],
+      "i18n": {
+        "en": {
+          "title": "Male Fertility: What Affects Sperm Quality, and How Can You Improve It?",
+          "excerpt": "Sperm take about three months to develop and mature, so changes to your habits take about three months to show up in test results. A Hong Kong registered Chinese medicine practitioner explains what affects sperm quality, the effect of heat and steroids, whether supplements help, and the TCM approach.",
+          "metaTitle": "Male Fertility: What Affects Sperm Quality and How to Improve It | Hong Kong TCM",
+          "metaDescription": "Sperm take about three months to develop and mature, so changes to your habits take about three months to show up in test results. A Hong Kong registered Chinese medicine practitioner explains what affects sperm quality, the effect of heat and steroids, whether supplements help, and the TCM approach.",
+          "keywords": [
+            "sperm quality",
+            "male fertility",
+            "sperm motility",
+            "semen analysis",
+            "improve sperm",
+            "male infertility",
+            "trying to conceive male partner"
+          ],
+          "heroEyebrow": "Fertility · Male Fertility",
+          "tags": [
+            "Men's Health",
+            "Infertility"
+          ],
+          "heroTags": [
+            "#SpermQuality",
+            "#SemenAnalysis",
+            "#MaleFertility",
+            "#SpermMotility",
+            "#LifestyleChanges",
+            "#KidneyEssenceDeficiency"
+          ],
+          "blocks": [
+            {
+              "type": "lead",
+              "text": "Sperm take **over seventy days** to develop and mature, and with transit time on top, any change in lifestyle generally takes about **three months** to show up in a semen analysis. The main factors affecting sperm quality are smoking, drinking, weight, prolonged exposure to heat, sleep and stress, and some medications — and many of them can be changed."
+            },
+            {
+              "type": "paragraph",
+              "text": "Discussion of trying to conceive has long centred on the woman, yet about a third of infertility is linked to the male partner. And the male tests are the simplest, the cheapest and the quickest to give results — one semen analysis can rule out a large share of the possibilities."
+            },
+            {
+              "type": "paragraph",
+              "text": "This article covers what the man can do: first what affects sperm, then what can genuinely be changed."
+            },
+            {
+              "type": "heading",
+              "text": "Tests for the Man: Do Them First, Don't Wait"
+            },
+            {
+              "type": "paragraph",
+              "text": "**There is only one core test: a semen analysis.** No fasting, no blood draw, and results usually within one to two weeks."
+            },
+            {
+              "type": "paragraph",
+              "text": "If the first result is abnormal, **don't jump to a conclusion** — sperm take over seventy days to develop, and any fever, cold, stress or lack of sleep during that time can affect the result, so it's generally recommended to repeat the test a few weeks later."
+            },
+            {
+              "type": "paragraph",
+              "text": "For how to read the report and the common misunderstandings, see [Why Can't I Get Pregnant? Common Causes and Tests](infertility-causes-tests-en.html)."
+            },
+            {
+              "type": "heading",
+              "text": "What Affects Sperm Quality"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Factor",
+                "Effect",
+                "Can it be changed?"
+              ],
+              "rows": [
+                [
+                  "Smoking",
+                  "Affects count, motility and shape",
+                  "✅"
+                ],
+                [
+                  "Heavy drinking",
+                  "Affects hormones and sperm production",
+                  "✅"
+                ],
+                [
+                  "Obesity",
+                  "Affects hormone balance and scrotal temperature",
+                  "✅"
+                ],
+                [
+                  "Prolonged exposure to heat",
+                  "Suppresses sperm production",
+                  "✅"
+                ],
+                [
+                  "Anabolic steroids",
+                  "Can cause a large drop in sperm count, even complete absence of sperm",
+                  "✅"
+                ],
+                [
+                  "Lack of sleep, long-term stress",
+                  "Affects the hormone axis",
+                  "✅"
+                ],
+                [
+                  "Some medications",
+                  "Depends on the drug",
+                  "Needs a doctor's assessment"
+                ],
+                [
+                  "Varicocele",
+                  "Raises scrotal temperature, affects production",
+                  "Needs a doctor's assessment"
+                ],
+                [
+                  "Genetic and chromosomal factors",
+                  "Affect sperm production",
+                  "❌"
+                ],
+                [
+                  "Past undescended testicle, testicular surgery or chemotherapy",
+                  "Affect the ability to produce sperm",
+                  "❌"
+                ]
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Heat: The Easiest to Overlook and the Easiest to Change"
+            },
+            {
+              "type": "paragraph",
+              "text": "The testicles sit outside the body precisely because sperm production needs an environment slightly cooler than body temperature. So keeping the scrotum hot for long periods affects sperm production."
+            },
+            {
+              "type": "paragraph",
+              "text": "Everyday sources of heat:"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Long periods of sitting (drivers, office work, long-haul flights)",
+                "Putting a laptop directly on your lap",
+                "Frequent hot baths, saunas and hot tubs",
+                "Underwear or trousers that are too tight",
+                "Some work environments (kitchens, furnaces, outdoor work in high heat)"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**Practical advice:** if you sit a lot, get up and walk around every hour; avoid putting a laptop on your lap; cut down on long soaks in hot water; choose looser, breathable underwear."
+            },
+            {
+              "type": "paragraph",
+              "text": "It should be said that the research here is mostly observational and the effect varies from person to person, so don't expect a big improvement from changing clothing alone. But these changes cost almost nothing and are worth making."
+            },
+            {
+              "type": "heading",
+              "text": "Anabolic Steroids: Worth Singling Out"
+            },
+            {
+              "type": "paragraph",
+              "text": "Anabolic steroids used for bodybuilding suppress the body's own hormone production and can cause a large drop in sperm count, even complete absence of sperm, and **recovery after stopping takes time and in some cases is incomplete**."
+            },
+            {
+              "type": "paragraph",
+              "text": "This isn't rare among people in gym culture, but few bring it up at a fertility check. If you are using, or have used, them, **be sure to tell your doctor** — it directly affects how the results are read and the direction of management."
+            },
+            {
+              "type": "heading",
+              "text": "How to Improve It: A Practical List"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Stop smoking** — this is the factor with the clearest effect",
+                "**Drink less alcohol**",
+                "**Control your weight** — especially abdominal obesity",
+                "**Improve your sleep** — long-term lack of sleep affects the hormone axis",
+                "**Exercise regularly but not excessively** — too much endurance training may backfire",
+                "**Reduce scrotal heat exposure**",
+                "**Stop anabolic steroids** (under a doctor's guidance)",
+                "**Review your current medications** — some drugs may affect sperm; don't stop them yourself, ask your doctor first",
+                "**Deal with long-term stress**"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**The timetable:** because the sperm production cycle is over seventy days, a change generally takes about **three months** before it may show up in a test. That also means that **if you plan to improve things, the sooner you start the better** — don't wait until you're about to do IVF."
+            },
+            {
+              "type": "heading",
+              "text": "Do Supplements Help?"
+            },
+            {
+              "type": "paragraph",
+              "text": "There are many supplements on the market aimed at male fertility, mostly built around antioxidants. The current state of the research is that some trials suggest a possible positive effect on semen parameters, but study quality is generally low and results are inconsistent, and there isn't yet enough evidence to support routine use."
+            },
+            {
+              "type": "paragraph",
+              "text": "A more practical view:"
+            },
+            {
+              "type": "list",
+              "items": [
+                "If your diet is seriously unbalanced, topping up basic nutrients is reasonable",
+                "But supplements **can't replace stopping smoking, controlling weight and improving sleep**",
+                "Before taking any supplement, especially if you have a chronic illness or take medication, check with a healthcare professional"
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "How Does Chinese Medicine View Male Fertility?"
+            },
+            {
+              "type": "paragraph",
+              "text": "The related references in Chinese medicine are mostly classed under \"scanty semen\", \"cold semen\" and \"semen stasis\". The core of the pathology is in the kidney, with links to the spleen, the liver and damp-heat."
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Pattern",
+                "Common features",
+                "Treatment direction"
+              ],
+              "rows": [
+                [
+                  "Kidney yang deficiency",
+                  "Aversion to cold and cold limbs, aching lower back and knees, fatigue, reduced libido",
+                  "Warm and tonify kidney yang"
+                ],
+                [
+                  "Kidney yin deficiency",
+                  "Heat in the palms and soles, dry mouth, insomnia, backache",
+                  "Nourish kidney yin"
+                ],
+                [
+                  "Damp-heat pouring downward",
+                  "Damp scrotum, dark urine, bitter taste in the mouth, yellow greasy tongue coating",
+                  "Clear heat and drain dampness"
+                ],
+                [
+                  "Qi stagnation with blood stasis",
+                  "Distending pain in the lower abdomen or perineum, low mood",
+                  "Move qi and invigorate blood"
+                ],
+                [
+                  "Spleen and kidney deficiency",
+                  "Fatigue, poor appetite, loose stools",
+                  "Strengthen the spleen and tonify the kidney"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "Patterns often overlap in practice. The above is a general introduction to TCM theory, not a diagnosis or a prescription, and herbal treatment needs an in-person consultation and pattern differentiation by a registered Chinese medicine practitioner."
+            },
+            {
+              "type": "heading",
+              "text": "What Can Chinese Medicine Do?"
+            },
+            {
+              "type": "paragraph",
+              "text": "**It needs to be stated honestly:** high-quality studies of male-factor infertility using pregnancy as the outcome are still limited, mostly small trials, from which no firm conclusion can be drawn."
+            },
+            {
+              "type": "paragraph",
+              "text": "A more reasonable way to position it:"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Managing overall condition:** fatigue, sleep, stress and digestion — these genuinely affect the hormone axis",
+                "**Supporting lifestyle changes:** the daily-living guidance of Chinese medicine points in the same direction as the evidence-based advice above",
+                "**It can't replace necessary tests and treatment:** varicocele, hormonal abnormalities, genetic factors and the like need to be handled by a urologist or andrologist"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "If the semen analysis is clearly abnormal, you should have a full assessment first, rather than spending three months on preparation and seeing what happens — especially when the female partner is older, as time itself is a factor."
+            },
+            {
+              "type": "heading",
+              "text": "When to See a Doctor"
+            },
+            {
+              "type": "list",
+              "items": [
+                "An abnormal semen analysis (still abnormal when repeated)",
+                "A past undescended testicle, testicular surgery, hernia surgery, chemotherapy or radiotherapy",
+                "Mumps with orchitis in the past",
+                "Testicular pain or swelling, or a lump you can feel — get seen promptly",
+                "Enlarged veins in the scrotum that feel like a \"bag of worms\" (possibly a varicocele)",
+                "Difficulty with erection or ejaculation",
+                "Current or past use of anabolic steroids",
+                "Not pregnant after a year of trying (six months if the female partner is over 35)"
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Frequently Asked Questions"
+            },
+            {
+              "type": "faq",
+              "items": [
+                {
+                  "q": "How long should I abstain before a semen analysis?",
+                  "a": "Generally 2 to 7 days. Too short and the sperm count comes out low; too long and motility may be affected. Follow the laboratory's specific instructions."
+                },
+                {
+                  "q": "If one result isn't good, does that mean there's a problem?",
+                  "a": "Not necessarily. A single result is affected by fever, stress, sleep and the length of abstinence. It's generally recommended to repeat the test a few weeks later and let the doctor judge on the whole picture."
+                },
+                {
+                  "q": "How long after changing my habits will I see a difference?",
+                  "a": "About three months. Sperm take over seventy days to develop and mature, so a change today won't show up in a test until about three months later. That's also why it's best not to start too late."
+                },
+                {
+                  "q": "Does regular exercise affect sperm?",
+                  "a": "Regular, moderate exercise is generally beneficial. But extreme endurance training, together with the pressure and heat from long periods of cycling, may backfire. The key is intensity and recovery, not giving up exercise altogether."
+                },
+                {
+                  "q": "Do oysters and zinc tablets help?",
+                  "a": "If your nutrient intake is low to begin with, topping up makes sense; but when your diet is balanced, the evidence for any extra benefit from supplements is limited. They can't offset the effects of smoking, obesity or lack of sleep."
+                },
+                {
+                  "q": "Does the man need to see a Chinese medicine practitioner too?",
+                  "a": "If both partners want to work on their health, it makes sense to do so together — especially when the semen analysis is borderline, or there is marked fatigue, or problems with sleep and stress. But the same principle applies: get tested first, then work on your health."
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Conclusion"
+            },
+            {
+              "type": "paragraph",
+              "text": "The three most practical things for a man trying to conceive: **have a semen analysis early, stop smoking and control your weight, and reduce scrotal heat exposure.** All three cost very little, and they are among the few factors that are genuinely in your control."
+            },
+            {
+              "type": "paragraph",
+              "text": "Remember the time lag too — a change today won't be visible for about three months. So rather than waiting until the woman's tests are finished and you're about to start treatment, start together from the moment you decide to try for a baby."
+            },
+            {
+              "type": "references",
+              "items": [
+                "World Health Organization. WHO laboratory manual for the examination and processing of human semen, 6th edition (2021).",
+                "Andrology in Traditional Chinese Medicine (中醫男科學) or related textbooks"
+              ]
+            }
+          ]
+        }
+      }
     },
     {
       "slug": "menstrual-cycle",
@@ -7620,7 +10728,355 @@ window.ARTICLES_DATA = {
             "《中醫婦科學》，中國中醫藥出版社"
           ]
         }
-      ]
+      ],
+      "i18n": {
+        "en": {
+          "title": "How Long Should a Normal Menstrual Cycle Be? How to Count It, the Four Phases and Warning Signs",
+          "excerpt": "A normal menstrual cycle runs 24 to 38 days, with bleeding of no more than 8 days and a difference of about a week or less from one cycle to the next. A Hong Kong registered Chinese medicine practitioner explains how to count your cycle, what happens in your body in each of the four phases, which signs are abnormal, and how TCM views early, delayed and irregular cycles.",
+          "metaTitle": "How Long Is a Normal Menstrual Cycle? Period Length and Warning Signs | Hong Kong TCM",
+          "metaDescription": "A normal menstrual cycle runs 24 to 38 days, with bleeding of no more than 8 days and a difference of about a week or less from one cycle to the next. A Hong Kong registered Chinese medicine practitioner explains how to count your cycle, what happens in your body in each of the four phases, which signs are abnormal, and how TCM views early, delayed and irregular cycles.",
+          "keywords": [
+            "menstrual cycle",
+            "how long is a menstrual cycle",
+            "normal period length",
+            "irregular periods",
+            "irregular cycle",
+            "period TCM",
+            "how to calculate ovulation"
+          ],
+          "heroEyebrow": "Fertility · Menstrual Cycle",
+          "tags": [
+            "Periods",
+            "Ovulation"
+          ],
+          "heroTags": [
+            "#MenstrualCycle",
+            "#NormalPeriodLength",
+            "#LutealPhase",
+            "#IrregularCycle",
+            "#Ovulation",
+            "#PeriodsAndTCM"
+          ],
+          "blocks": [
+            {
+              "type": "lead",
+              "text": "The standard from the International Federation of Gynecology and Obstetrics (FIGO) is: a cycle length of 24 to 38 days, bleeding that lasts 8 days or less, and a difference between one cycle and the next of about a week or less. Falling outside these ranges doesn't necessarily mean illness, but it's worth recording and discussing with your doctor — because your cycle is the most direct signal of how your body is doing."
+            },
+            {
+              "type": "paragraph",
+              "text": "\"My period only comes every 32 days — is that abnormal?\" \"Last month it was 26 days, this month 34 — is that a big problem?\" Whether a period is normal actually has fairly clear criteria; it's just that few people explain them clearly. Below we'll start with how to count your cycle, then how to judge it."
+            },
+            {
+              "type": "heading",
+              "text": "How Do You Count Your Menstrual Cycle?"
+            },
+            {
+              "type": "info",
+              "title": "Cycle length",
+              "text": "Counted from the **first day of this period's bleeding** to the day **before the first day of the next period's bleeding**."
+            },
+            {
+              "type": "paragraph",
+              "text": "The two most common ways to get it wrong:"
+            },
+            {
+              "type": "list",
+              "items": [
+                "❌ Starting the count from the day the period ends",
+                "❌ Counting the day of a little brown spotting as day one"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**Day one = the first day of clear red bleeding.** Brown spotting a day or two before doesn't count and belongs to the previous cycle."
+            },
+            {
+              "type": "heading",
+              "text": "What Counts as Normal?"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Item",
+                "Normal range",
+                "Called when outside the range"
+              ],
+              "rows": [
+                [
+                  "Cycle length",
+                  "24 to 38 days",
+                  "Fewer than 24 days: frequent; more than 38 days: infrequent"
+                ],
+                [
+                  "Length of bleeding",
+                  "8 days or fewer",
+                  "More than 8 days: prolonged"
+                ],
+                [
+                  "Regularity",
+                  "Over a year, the longest and shortest cycles differ by about a week or less",
+                  "A difference of more than 20 days: irregular"
+                ],
+                [
+                  "Amount of bleeding",
+                  "Doesn't feel excessive and doesn't interfere with daily life",
+                  "Needing to change protection every hour, large clots, anaemia"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "It should be said that you may have seen \"21 to 35 days\" elsewhere — that is the range used in patient information from the American College of Obstetricians and Gynecologists (ACOG). Both are in use, and the difference comes from different statistical bases. **If your cycle falls between 21 and 24 days, there's no need to panic, but it's worth recording for a few months and then discussing with your doctor.**"
+            },
+            {
+              "type": "paragraph",
+              "text": "Another point that is often overlooked: **regularity matters more than length.** A steady 34-day cycle usually says more about normal ovulation than a cycle that jumps between 26 and 40 days."
+            },
+            {
+              "type": "heading",
+              "text": "The Four Phases of the Menstrual Cycle"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Phase",
+                "Approximate timing",
+                "What the body is doing",
+                "What you may feel"
+              ],
+              "rows": [
+                [
+                  "Menstruation",
+                  "Days 1 to 5",
+                  "The uterine lining sheds",
+                  "Cramps, tiredness, backache"
+                ],
+                [
+                  "Follicular phase",
+                  "From the end of the period until ovulation",
+                  "Follicles develop, oestrogen rises, the lining thickens",
+                  "Better energy, clearer skin"
+                ],
+                [
+                  "Ovulation",
+                  "Mid-cycle",
+                  "A mature egg is released",
+                  "More egg-white-like discharge, mild one-sided abdominal pain"
+                ],
+                [
+                  "Luteal phase",
+                  "From ovulation until the next period",
+                  "The corpus luteum secretes progesterone to maintain the lining",
+                  "Breast tenderness, mood swings, changes in appetite"
+                ]
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "When Does Ovulation Happen? A Key Fact"
+            },
+            {
+              "type": "paragraph",
+              "text": "Many people assume ovulation always happens on \"day 14\". **That is only true of a 28-day cycle.**"
+            },
+            {
+              "type": "paragraph",
+              "text": "What actually happens is that **the length of the luteal phase is relatively fixed, generally about 12 to 16 days**; differences in cycle length come mainly from differences in the follicular phase."
+            },
+            {
+              "type": "paragraph",
+              "text": "In other words:"
+            },
+            {
+              "type": "list",
+              "items": [
+                "28-day cycle → ovulation around day 14",
+                "35-day cycle → ovulation around day 21",
+                "24-day cycle → ovulation around day 10"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**So to estimate ovulation, count back about 14 days from your next period, rather than forward 14 days from this one.** This is also why many people \"get the dates wrong\"."
+            },
+            {
+              "type": "paragraph",
+              "text": "This is only an estimate, though. To confirm whether you actually ovulated, you need basal body temperature, ovulation test strips or ultrasound monitoring (see [How Do You Know If You're Ovulating?](confirm-ovulation-en.html) for how to take and read basal body temperature)."
+            },
+            {
+              "type": "heading",
+              "text": "What Counts as a Warning Sign?"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Cycles persistently shorter than 24 days or longer than 38 days",
+                "Fewer than 8 periods a year",
+                "Cycle length that swings widely from month to month",
+                "Bleeding that lasts more than 8 days",
+                "A sudden marked increase or decrease in flow",
+                "Bleeding between periods",
+                "Bleeding after sex",
+                "No period for three months or more (and not pregnant)",
+                "Period pain bad enough to take time off, or that painkillers don't touch"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "Of these, **bleeding between periods** and **bleeding after sex** deserve particular attention. Both should be checked and shouldn't be put down to \"irregular periods\"."
+            },
+            {
+              "type": "heading",
+              "text": "How Does Chinese Medicine View the Menstrual Cycle?"
+            },
+            {
+              "type": "paragraph",
+              "text": "Chinese medicine assesses a period on four aspects: **timing, volume, colour and texture.** As for the cycle itself, there are mainly three types:"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Type",
+                "Definition",
+                "Common patterns"
+              ],
+              "rows": [
+                [
+                  "Early menstruation",
+                  "A cycle seven or more days early",
+                  "Qi deficiency (qi failing to contain the blood), blood heat (heat forcing the blood to move recklessly)"
+                ],
+                [
+                  "Delayed menstruation",
+                  "A cycle seven or more days late",
+                  "Kidney deficiency, blood deficiency, blood cold, qi stagnation, phlegm-dampness"
+                ],
+                [
+                  "Irregular timing",
+                  "Sometimes early, sometimes late, with no fixed pattern",
+                  "Liver constraint, kidney deficiency"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "Besides the cycle, Chinese medicine also asks about:"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Volume:** heavy flow is mostly qi deficiency or blood heat; scanty flow is mostly blood deficiency, kidney deficiency or blood stasis",
+                "**Colour:** pale red is mostly deficiency; deep red is mostly heat; dark purple with clots is mostly stasis",
+                "**Texture:** thin and watery is mostly deficiency-cold; thick and sticky is mostly heat",
+                "**The character of period pain:** distending pain is mostly qi stagnation; stabbing pain is mostly blood stasis; dull pain that likes pressure is mostly deficiency"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "This is also why a Chinese medicine consultation asks so many detailed questions — it's the details taken together that form the basis of pattern differentiation."
+            },
+            {
+              "type": "paragraph",
+              "text": "The above is a general introduction to TCM theory, not a diagnosis or a prescription. Herbal treatment needs an in-person consultation and pattern differentiation by a registered Chinese medicine practitioner."
+            },
+            {
+              "type": "heading",
+              "text": "How to Keep a Record of Your Cycle"
+            },
+            {
+              "type": "paragraph",
+              "text": "Whether you use a phone app or paper, we suggest recording for at least three months, and including the following:"
+            },
+            {
+              "type": "list",
+              "items": [
+                "The first and last day of each bleed",
+                "Daily amount of bleeding (estimated by how often you change protection is fine)",
+                "Period pain level (0 to 10)",
+                "Changes in discharge",
+                "Any marked mood or physical symptoms"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**The value of a record lies in the quality of information at your follow-up.** \"It doesn't seem very regular\" and \"over the last six months it's been 27, 31, 26, 38, 29 and 33 days\" give the doctor completely different things to work with."
+            },
+            {
+              "type": "paragraph",
+              "text": "If you are trying to conceive, recording basal body temperature as well gives you more information (see [How Do You Know If You're Ovulating?](confirm-ovulation-en.html))."
+            },
+            {
+              "type": "heading",
+              "text": "When to See a Doctor"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Any of the warning signs above",
+                "No period for three months or more and not pregnant",
+                "Persistently irregular cycles, especially with excess hair growth, acne or weight gain (see [PMOS (Formerly PCOS)](pcos-pmos-en.html))",
+                "Hot flushes, night sweats or markedly lighter periods before the age of 40 (see [Does a Low AMH Mean You Can't Get Pregnant?](amh-poi-en.html))",
+                "Not pregnant after a year of trying (six months if you're over 35) (see [Why Can't I Get Pregnant?](infertility-causes-tests-en.html))",
+                "Period pain that gets worse over time, or pain during sex (endometriosis needs to be ruled out)"
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Frequently Asked Questions"
+            },
+            {
+              "type": "faq",
+              "items": [
+                {
+                  "q": "Is a 35-day cycle abnormal?",
+                  "a": "By the FIGO standard (24 to 38 days) it is within the normal range. What matters is whether it is stable — if it's about 35 days every month, that usually means a longer follicular phase but still regular ovulation. It's when the length keeps swinging that it needs more attention."
+                },
+                {
+                  "q": "Do irregular periods always mean a hormone problem?",
+                  "a": "Not necessarily. Stress, lack of sleep, a marked change in weight, excessive exercise, travel and changes of routine can all alter a cycle temporarily. But if it stays irregular for more than three months, you should be checked; common causes include PMOS (formerly known as PCOS), thyroid disorders and hyperprolactinaemia."
+                },
+                {
+                  "q": "How can I tell whether I'm ovulating?",
+                  "a": "The more reliable methods include a biphasic basal body temperature chart, an LH surge on ovulation test strips, ultrasound monitoring of the follicles, and a mid-luteal progesterone blood test. Inferring it from a regular cycle alone isn't enough — some women have regular cycles but still don't ovulate."
+                },
+                {
+                  "q": "Are clots in period blood normal?",
+                  "a": "Small clots (about the size of a coin or smaller) are common on heavier days. But if large clots keep appearing, or come with a marked increase in flow, dizziness and tiredness, you should be checked for fibroids, adenomyosis or anaemia."
+                },
+                {
+                  "q": "Does the \"period\" I get while on the contraceptive pill count?",
+                  "a": "The bleeding you get on the combined pill is a withdrawal bleed, which isn't the same as a natural period and doesn't reflect whether you are really ovulating. After stopping the pill, your own cycle takes a while to return, and only then can your original pattern be assessed."
+                },
+                {
+                  "q": "Can I see a Chinese medicine practitioner for irregular periods?",
+                  "a": "Yes, but we suggest having basic tests first to rule out thyroid problems, high prolactin and PMOS, and then deciding the direction of care. Treatment once the cause is clear is far more effective than treatment based on guesswork."
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Conclusion"
+            },
+            {
+              "type": "paragraph",
+              "text": "Your menstrual cycle is one of the easiest and most honest indicators of how your body is doing. The criteria aren't complicated: **24 to 38 days, bleeding within 8 days, and not much difference from month to month.**"
+            },
+            {
+              "type": "paragraph",
+              "text": "Rather than agonising over one month's number, build the habit of keeping a record. Three months of complete records beat ten descriptions of \"it doesn't seem very regular\" — whether you see a Western doctor or a Chinese medicine practitioner, it's the most useful piece of information you can bring."
+            },
+            {
+              "type": "references",
+              "items": [
+                "Munro MG, Critchley HOD, Fraser IS, et al. The two FIGO systems for normal and abnormal uterine bleeding symptoms and classification of causes of abnormal uterine bleeding in the reproductive years: 2018 revisions. Int J Gynaecol Obstet. 2018;143(3):393–408.",
+                "American College of Obstetricians and Gynecologists. Abnormal Uterine Bleeding (patient FAQ). https://www.acog.org/womens-health/faqs/abnormal-uterine-bleeding (accessed 21 July 2026)",
+                "Physiology, Menstrual Cycle. StatPearls. https://www.ncbi.nlm.nih.gov/books/NBK500020/ (accessed 21 July 2026)",
+                "Gynaecology in Traditional Chinese Medicine (中醫婦科學). China Press of Traditional Chinese Medicine."
+              ]
+            }
+          ]
+        }
+      }
     },
     {
       "slug": "ovulation-calculator",
@@ -7869,7 +11325,254 @@ window.ARTICLES_DATA = {
             "Physiology, Menstrual Cycle. StatPearls. https://www.ncbi.nlm.nih.gov/books/NBK500020/（擷取日期：2026 年 7 月 21 日）"
           ]
         }
-      ]
+      ],
+      "i18n": {
+        "en": {
+          "title": "How Do You Calculate Your Ovulation Window? Which Days Are You Fertile?",
+          "excerpt": "Ovulation happens about 14 days before your next period, not 14 days after your last one. A Hong Kong registered Chinese medicine practitioner shows you how to work out your ovulation day and fertile window correctly, and explains why calculators are inaccurate if your cycle is irregular and what to do instead.",
+          "metaTitle": "How to Calculate Ovulation: Which Days Are You Fertile? | Hong Kong TCM Guide",
+          "metaDescription": "Ovulation happens about 14 days before your next period, not 14 days after your last one. A Hong Kong registered Chinese medicine practitioner shows you how to work out your ovulation day and fertile window correctly, and explains why calculators are inaccurate if your cycle is irregular and what to do instead.",
+          "keywords": [
+            "ovulation window",
+            "how to calculate ovulation",
+            "fertile window",
+            "ovulation date calculator",
+            "safe period",
+            "ovulation calculation inaccurate"
+          ],
+          "heroEyebrow": "Fertility · Ovulation Tracking",
+          "tags": [
+            "Ovulation",
+            "Periods"
+          ],
+          "heroTags": [
+            "#OvulationCalculation",
+            "#FertileWindow",
+            "#SafePeriodMyth",
+            "#CycleLength",
+            "#TimingIntercourse",
+            "#OvulationDay"
+          ],
+          "blocks": [
+            {
+              "type": "lead",
+              "text": "Ovulation generally happens about **14 days before your next period**, not on day 14 after your last one. So the way to work it out is to take your cycle length and **subtract 14**. The fertile window is the roughly 5 days before ovulation plus the day of ovulation itself — about 6 days in all. If your cycle is irregular, this method isn't reliable, and you need to switch to ovulation test strips or observing cervical mucus."
+            },
+            {
+              "type": "heading",
+              "text": "Why Isn't It \"Day 14\"?"
+            },
+            {
+              "type": "paragraph",
+              "text": "The idea of \"ovulating on day 14\" **only holds for a 28-day cycle.**"
+            },
+            {
+              "type": "paragraph",
+              "text": "What actually happens is that the luteal phase — from ovulation to your next period — is relatively fixed in length, generally 12 to 16 days. Differences in cycle length come mainly from the follicular phase **before** ovulation."
+            },
+            {
+              "type": "paragraph",
+              "text": "So the right direction for working it out is to **count back from your next period**, not forward from this one."
+            },
+            {
+              "type": "heading",
+              "text": "How to Calculate It"
+            },
+            {
+              "type": "paragraph",
+              "text": "**The formula: cycle length − 14 = approximate ovulation day (counted from the first day of this period)**"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Your cycle length",
+                "Approximate ovulation day",
+                "Fertile window (approx.)"
+              ],
+              "rows": [
+                [
+                  "24 days",
+                  "Day 10",
+                  "Days 5 to 10"
+                ],
+                [
+                  "26 days",
+                  "Day 12",
+                  "Days 7 to 12"
+                ],
+                [
+                  "28 days",
+                  "Day 14",
+                  "Days 9 to 14"
+                ],
+                [
+                  "30 days",
+                  "Day 16",
+                  "Days 11 to 16"
+                ],
+                [
+                  "32 days",
+                  "Day 18",
+                  "Days 13 to 18"
+                ],
+                [
+                  "35 days",
+                  "Day 21",
+                  "Days 16 to 21"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**Where to start counting:** the **first day of bleeding** of this period is day 1. Brown spotting before your period doesn't count."
+            },
+            {
+              "type": "heading",
+              "text": "Why Is the Fertile Window 6 Days?"
+            },
+            {
+              "type": "paragraph",
+              "text": "Because sperm and egg survive for different lengths of time:"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Sperm** can survive for up to about 5 days in suitable cervical mucus",
+                "**An egg** survives for only about 12 to 24 hours after it is released"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "So the chance of conceiving is highest in the **few days before ovulation plus the day of ovulation itself** — by the time you have sex after ovulation, it is often already too late. This is one reason why many people \"get the dates right but still get nothing\"."
+            },
+            {
+              "type": "heading",
+              "text": "Are Calculators and Apps Accurate?"
+            },
+            {
+              "type": "paragraph",
+              "text": "What they do is really just the formula above, plus the average of your past cycles. So:"
+            },
+            {
+              "type": "paragraph",
+              "text": "**When they are more accurate**"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Your cycle is steady (varying by only a few days from month to month)",
+                "You've recorded the actual dates for at least three to six months"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**When they are unreliable**"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Your cycle is irregular, or varies by more than a week from month to month",
+                "You've just come off the contraceptive pill, are postpartum, are breastfeeding, or are around the menopause",
+                "You've recently been under a lot of stress, sleeping badly, had a marked change in weight or taken a long-haul trip",
+                "Conditions with unstable ovulation such as PMOS (see [PMOS (Formerly PCOS)](pcos-pmos-en.html))"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**The key limitation:** an app's \"ovulation day\" is a **calculated value, not a measured one.** It simply guesses from your earlier cycles and has no idea what is actually happening this month. The more irregular your cycle, the worse the guess."
+            },
+            {
+              "type": "heading",
+              "text": "What to Do If Your Cycle Is Irregular"
+            },
+            {
+              "type": "paragraph",
+              "text": "Drop pure calculation and use methods that reflect **what is happening now:**"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Observing cervical mucus:** near ovulation, discharge becomes clear, thin and stretchy, like raw egg white. It's free, and shows changes in real time.",
+                "**Ovulation test strips:** they detect the LH surge, and ovulation generally follows about 24 to 36 hours after the peak.",
+                "**Basal body temperature:** it can't predict, but it can confirm afterwards whether ovulation really happened, and how long your luteal phase is."
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "For how to use all three properly and where they trip people up, see [How Do You Know If You're Ovulating?](confirm-ovulation-en.html)"
+            },
+            {
+              "type": "heading",
+              "text": "Can the \"Safe Period\" Be Used for Contraception?"
+            },
+            {
+              "type": "paragraph",
+              "text": "Not recommended. Contraception by calculation has a fairly high failure rate, for exactly the reason given above — the timing of ovulation moves with stress, illness and changes of routine, and sperm can survive in the body for several days. **There is no such thing as an absolutely \"safe period\".** If you need contraception, discuss a reliable method with your doctor."
+            },
+            {
+              "type": "heading",
+              "text": "When to See a Doctor"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Cycles persistently shorter than 24 days or longer than 38 days (see [How Long Should a Normal Menstrual Cycle Be?](menstrual-cycle-en.html))",
+                "Fewer than 8 periods a year, or no period for more than three months",
+                "No signs of ovulation for several cycles in a row",
+                "Not pregnant after a year of trying (six months if you're 35 or over) (see [Why Can't I Get Pregnant?](infertility-causes-tests-en.html))"
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Frequently Asked Questions"
+            },
+            {
+              "type": "faq",
+              "items": [
+                {
+                  "q": "My cycle isn't fixed — which number should I use?",
+                  "a": "If you must calculate, take the **shortest** cycle length from the last three to six months minus 14 as the start of your fertile window, and the **longest** cycle length minus 14 as the end, which gives a wider range. A more practical approach, though, is to switch to ovulation test strips or observing cervical mucus."
+                },
+                {
+                  "q": "How often should we have sex during the fertile window?",
+                  "a": "Generally once every one to two days during the fertile window is enough. More often isn't necessarily better, while too much restraint may mean missing the timing. Rather than working out the dates exactly, keep up a regular pattern throughout the fertile window."
+                },
+                {
+                  "q": "Does ovulation pain mean I'm ovulating?",
+                  "a": "Some women feel a mild distension or twinge on one side of the lower abdomen around ovulation, which can be a guide, but not everyone has it and it isn't precise enough to rely on alone."
+                },
+                {
+                  "q": "Is a little bleeding around ovulation normal?",
+                  "a": "Some women get very light spotting around ovulation, usually linked to a brief drop in oestrogen at that time. But if it keeps happening, is heavier, or comes with abdominal pain, it should be checked."
+                },
+                {
+                  "q": "Can Chinese medicine help with ovulation problems?",
+                  "a": "If irregular ovulation comes from constitution, mood or sleep factors, Chinese medicine can work on it by regulating the menstrual cycle. But if PMOS, a thyroid problem or the like is involved, get tested and diagnosed first, then decide the direction of care — **find out the cause first, then work on your health**, and the order shouldn't be reversed."
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Conclusion"
+            },
+            {
+              "type": "paragraph",
+              "text": "The most common mistake in working out ovulation is counting forward 14 days from this period. The right way is to **subtract 14 from your cycle length**, and to understand the fertile window as the roughly 5 days before ovulation plus the day itself."
+            },
+            {
+              "type": "paragraph",
+              "text": "But calculation has its limits: it assumes your cycle will repeat past patterns. If your cycle isn't stable, no calculator can help — switching to ovulation test strips or observing cervical mucus will be far more practical than carrying on calculating."
+            },
+            {
+              "type": "references",
+              "items": [
+                "Munro MG, Critchley HOD, Fraser IS, et al. The two FIGO systems for normal and abnormal uterine bleeding symptoms and classification of causes of abnormal uterine bleeding in the reproductive years: 2018 revisions. Int J Gynaecol Obstet. 2018;143(3):393–408.",
+                "Physiology, Menstrual Cycle. StatPearls. https://www.ncbi.nlm.nih.gov/books/NBK500020/ (accessed 21 July 2026)"
+              ]
+            }
+          ]
+        }
+      }
     },
     {
       "slug": "pcos-pmos",
@@ -7903,6 +11606,7 @@ window.ARTICLES_DATA = {
         "#體質分型"
       ],
       "publishDate": "2026-08-12",
+      "modifiedDate": "2026-11-11",
       "blocks": [
         {
           "type": "lead",
@@ -7918,7 +11622,7 @@ window.ARTICLES_DATA = {
         },
         {
           "type": "paragraph",
-          "text": "2026 年 5 月 12 日，一份多步驟全球共識研究在《刺針》（*The Lancet*）發表，正式將 polycystic ovary syndrome 更名為 **polyendocrine metabolic ovarian syndrome（PMOS）**。"
+          "text": "2026 年 5 月 12 日，一份多步驟全球共識研究在《刺針》（The Lancet）發表，正式將 polycystic ovary syndrome 更名為 **polyendocrine metabolic ovarian syndrome（PMOS）**。"
         },
         {
           "type": "table",
@@ -8265,7 +11969,7 @@ window.ARTICLES_DATA = {
         },
         {
           "type": "paragraph",
-          "text": "2017 年在《美國醫學會雜誌》（*JAMA*）發表的 PCOSAct 研究，是這個領域規模最大的隨機對照試驗——在中國內地 21 個地點、27 間醫院招募了 1,000 名 PCOS 婦女，以活產率為主要指標。"
+          "text": "2017 年在《美國醫學會雜誌》（JAMA）發表的 PCOSAct 研究，是這個領域規模最大的隨機對照試驗——在中國內地 21 個地點、27 間醫院招募了 1,000 名 PCOS 婦女，以活產率為主要指標。"
         },
         {
           "type": "paragraph",
@@ -8449,7 +12153,585 @@ window.ARTICLES_DATA = {
             "《傅青主女科》"
           ]
         }
-      ]
+      ],
+      "i18n": {
+        "en": {
+          "title": "PMOS (Formerly PCOS): Symptoms, Diagnostic Criteria and TCM Patterns",
+          "excerpt": "In May 2026, PCOS was officially renamed PMOS (polyendocrine metabolic ovarian syndrome). A Hong Kong registered Chinese medicine practitioner explains why it was renamed, the common symptoms, the international diagnostic criteria, the long-term effects on metabolism and mood, and the TCM pattern types and direction of care.",
+          "metaTitle": "PMOS (Formerly PCOS): Symptoms, Diagnosis and TCM Patterns | Hong Kong TCM",
+          "metaDescription": "In May 2026, PCOS was officially renamed PMOS (polyendocrine metabolic ovarian syndrome). A Hong Kong registered Chinese medicine practitioner explains why it was renamed, the common symptoms, the international diagnostic criteria, the long-term effects on metabolism and mood, and the TCM pattern types and direction of care.",
+          "keywords": [
+            "PMOS",
+            "PMOS symptoms",
+            "PMOS TCM",
+            "PMOS diagnosis",
+            "polyendocrine metabolic ovarian syndrome",
+            "PCOS",
+            "polycystic ovary syndrome",
+            "PCOS renamed"
+          ],
+          "heroEyebrow": "Fertility · Endocrine",
+          "tags": [
+            "Endocrine",
+            "Periods"
+          ],
+          "heroTags": [
+            "#PMOS",
+            "#FormerlyPCOS",
+            "#PolycysticOvaries",
+            "#InsulinResistance",
+            "#InfrequentPeriods",
+            "#TCMPatterns"
+          ],
+          "blocks": [
+            {
+              "type": "lead",
+              "text": "In May 2026, polycystic ovary syndrome (PCOS) was officially renamed PMOS (polyendocrine metabolic ovarian syndrome). The change was made because the old name led people to think the problem was cysts on the ovaries, when in fact this is a multi-system condition involving the endocrine system, metabolism, reproduction, skin and mood. There is a three-year transition period during which both names will be used side by side."
+            },
+            {
+              "type": "paragraph",
+              "text": "\"The scan says my ovaries are full of little cysts\" — that sentence has left countless women believing their ovaries are covered in cysts. In fact this is the biggest misunderstanding the old name caused, and the direct reason for the international renaming. Below we start with the renaming, then cover symptoms, diagnosis and the direction of care."
+            },
+            {
+              "type": "heading",
+              "text": "The 2026 Renaming: From PCOS to PMOS"
+            },
+            {
+              "type": "paragraph",
+              "text": "On 12 May 2026, a multistep global consensus study published in The Lancet officially renamed polycystic ovary syndrome as **polyendocrine metabolic ovarian syndrome (PMOS)**."
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Item",
+                "Details"
+              ],
+              "rows": [
+                [
+                  "New name",
+                  "Polyendocrine Metabolic Ovarian Syndrome (PMOS)"
+                ],
+                [
+                  "Former name",
+                  "Polycystic ovary syndrome (PCOS)"
+                ],
+                [
+                  "Announced",
+                  "12 May 2026"
+                ],
+                [
+                  "Organisations involved",
+                  "More than 50 patient and professional organisations, including the Endocrine Society and the AE-PCOS Society"
+                ],
+                [
+                  "Participants",
+                  "More than 22,000 survey responses"
+                ],
+                [
+                  "Transition",
+                  "A three-year transition period, with full implementation expected when the international guideline is updated in 2028"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**Three reasons for the change**"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**\"Cyst\" is misleading.** What shows on the ultrasound is not a pathological cyst but small follicles whose development has stalled. Related research also indicates that this condition does not increase the rate of abnormal ovarian cysts.",
+                "**The old name hid the core problem.** This is a multi-system condition centred on the endocrine system and metabolism, and its effects go well beyond the ovaries.",
+                "**Delayed diagnosis and stigma.** The name led people to focus on gynaecology and fertility, so the metabolic and emotional problems of many patients were overlooked for years."
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**What it means for you in practice:** for now the two names will run in parallel. Your doctor may still say PCOS, and reports may still use the old name; this is a normal part of the transition. The diagnostic criteria and management **have not changed because of the rename**."
+            },
+            {
+              "type": "heading",
+              "text": "What Is PMOS?"
+            },
+            {
+              "type": "info",
+              "title": "PMOS (formerly PCOS)",
+              "text": "A long-term condition centred on endocrine and metabolic imbalance, characterised by disrupted ovulation, raised androgen levels, and ovaries with a multifollicular appearance on ultrasound. It affects about 1 in 8 women worldwide."
+            },
+            {
+              "type": "paragraph",
+              "text": "It is not a disease of a single organ but a set of interlinked problems: insulin resistance affects androgen levels, androgens affect ovulation, irregular ovulation affects the periods and the uterine lining, while weight, mood and sleep in turn affect overall metabolism."
+            },
+            {
+              "type": "heading",
+              "text": "Common Symptoms"
+            },
+            {
+              "type": "paragraph",
+              "text": "Not everyone gets every symptom, and the picture varies widely:"
+            },
+            {
+              "type": "paragraph",
+              "text": "**Periods and reproduction**"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Longer cycles, infrequent periods, or periods that stay away for a long time",
+                "Irregular or absent ovulation",
+                "Difficulty working out when you ovulate"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**Androgen-related**"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Excess hair growth on the face, chin, chest and abdomen",
+                "Persistent acne, especially on the chin and along the jawline",
+                "Thinning hair on the crown of the head"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**Metabolic**"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Weight gain, or difficulty losing weight",
+                "Darkened skin on the back of the neck, in the armpits and similar places (acanthosis nigricans)",
+                "Abnormal blood sugar or blood lipids"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**Mood and other**"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Higher rates of anxiety and low mood than in the general population",
+                "Poor sleep and daytime tiredness"
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "How Is It Diagnosed?"
+            },
+            {
+              "type": "paragraph",
+              "text": "Diagnosis can't rest on an ultrasound report alone. The approach generally used internationally is that, **after other possible causes have been ruled out**, two of the following three features are present:"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Diagnostic feature",
+                "Description"
+              ],
+              "rows": [
+                [
+                  "Disrupted ovulation",
+                  "Infrequent periods, irregular cycles or no ovulation"
+                ],
+                [
+                  "Signs of high androgens",
+                  "Clinical features (excess hair, acne, hair loss) or blood tests showing raised androgens"
+                ],
+                [
+                  "Ovarian morphology",
+                  "Ultrasound showing a multifollicular appearance, or a raised anti-Müllerian hormone (AMH) level"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "A few points are worth noting:"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**The criteria are different for teenagers**, because irregular periods and acne are common in adolescence anyway, and the label shouldn't be applied too early.",
+                "**Other conditions must be ruled out first**, including thyroid disorders, hyperprolactinaemia and congenital adrenal hyperplasia.",
+                "**Ultrasound alone can't confirm the diagnosis.** Many women without the condition also show a multifollicular appearance on ultrasound."
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "If all you've been told is \"you have lots of cysts on your ovaries\" and you haven't had any other tests, it's worth asking your doctor for a full assessment."
+            },
+            {
+              "type": "heading",
+              "text": "More Than a Fertility Issue"
+            },
+            {
+              "type": "paragraph",
+              "text": "This is the core message the renaming is meant to get across. The effects of PMOS are long-term and wide-ranging:"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Metabolism:** insulin resistance is common, and the risk of type 2 diabetes later in life is higher",
+                "**Cardiovascular:** blood lipids, blood pressure and long-term cardiovascular risk need monitoring",
+                "**The uterine lining:** long-term lack of ovulation means the lining doesn't shed cyclically, so the risk of endometrial hyperplasia needs watching",
+                "**Mood:** rates of anxiety and depression are markedly higher — the item most often overlooked",
+                "**Sleep:** rates of sleep-disordered breathing are higher"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "So even if you have no plans to conceive right now, regular monitoring of blood sugar, blood lipids, blood pressure and your periods still matters. **Going months without a period isn't a perk; it's a signal that needs attention.**"
+            },
+            {
+              "type": "heading",
+              "text": "How Does Chinese Medicine View PMOS?"
+            },
+            {
+              "type": "paragraph",
+              "text": "Chinese medicine has no disease name for PMOS (or for \"polycystic ovaries\"); the related presentations mostly fall under delayed menstruation, amenorrhoea, infertility and abdominal masses (zheng jia). The core of the pathology is usually linked to the kidney, spleen and liver, and the following patterns are commonly seen in practice."
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Pattern",
+                "Main features",
+                "Accompanying symptoms",
+                "Treatment"
+              ],
+              "rows": [
+                [
+                  "Kidney deficiency",
+                  "Delayed periods, scanty flow or amenorrhoea",
+                  "Aching lower back and knees, aversion to cold, frequent night-time urination, reduced libido",
+                  "Tonify the kidney and replenish essence"
+                ],
+                [
+                  "Phlegm-dampness",
+                  "Infrequent periods, sluggish flow",
+                  "Heavier build, chest tightness with phlegm, heavy head, abundant thick white discharge",
+                  "Resolve phlegm and dispel dampness"
+                ],
+                [
+                  "Liver constraint",
+                  "Irregular cycles, pre-period distension and pain",
+                  "Low mood or irritability, tight, full chest and ribs, insomnia",
+                  "Soothe the liver and regulate qi"
+                ],
+                [
+                  "Blood stasis",
+                  "Sluggish periods, dark with clots",
+                  "Stabbing lower abdominal pain that dislikes pressure, dark tongue with spots",
+                  "Invigorate blood and resolve stasis"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "A single pattern is rarely seen in practice; they usually overlap — for example kidney deficiency with phlegm-dampness, or liver constraint with blood stasis. This is also why two people with the same PMOS diagnosis may be treated in completely different directions by Chinese medicine."
+            },
+            {
+              "type": "paragraph",
+              "text": "The above is a general introduction to TCM theory, not a diagnosis or a prescription. Herbal treatment needs an in-person consultation and pattern differentiation by a registered Chinese medicine practitioner, and shouldn't be self-prescribed."
+            },
+            {
+              "type": "heading",
+              "text": "How Does Chinese Medicine Approach It?"
+            },
+            {
+              "type": "subheading",
+              "text": "Treating by phase of the cycle"
+            },
+            {
+              "type": "paragraph",
+              "text": "This is the most distinctive way Chinese medicine handles period-related problems: instead of using one formula for the whole course, the emphasis of the prescription shifts with the four phases of the menstrual cycle."
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Phase",
+                "Approximate timing",
+                "What the body is doing",
+                "Focus of treatment"
+              ],
+              "rows": [
+                [
+                  "Menstruation",
+                  "Days 1–5 of bleeding",
+                  "The uterus is open and the menstrual blood is discharged",
+                  "Invigorate blood and regulate menstruation, working with the body's natural flow"
+                ],
+                [
+                  "Follicular phase",
+                  "After the period until before ovulation",
+                  "Yin and blood gradually build, follicles develop",
+                  "Nourish the kidney and blood; replenish yin essence"
+                ],
+                [
+                  "Ovulation",
+                  "Mid-cycle",
+                  "The transition from yin to yang",
+                  "Invigorate blood and unblock the channels to promote the transition"
+                ],
+                [
+                  "Luteal phase",
+                  "After ovulation until before the period",
+                  "Yang growing",
+                  "Warm kidney yang, while also soothing the liver"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "The difficulty with this approach in PMOS is that many patients don't ovulate regularly at all, so the cycle is hard to divide into phases. In practice it is usually necessary to first establish what is actually happening with basal body temperature, ultrasound monitoring or hormone tests, and only then decide how to divide the phases — which is also why you can't copy somebody else's prescription."
+            },
+            {
+              "type": "subheading",
+              "text": "Herbal direction by pattern"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Kidney deficiency:** tonifying the kidney is the main thread, often further divided into the yang-deficient or yin-deficient type.",
+                "**Phlegm-dampness:** strengthen the spleen and resolve phlegm and dampness; this type often needs a longer course, closely tied to lifestyle management.",
+                "**Liver constraint:** soothing the liver and regulating qi comes first, and improvements in sleep and mood often show up before those in the periods.",
+                "**Blood stasis:** invigorate blood and resolve stasis; this usually appears together with other patterns."
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "Acupuncture"
+            },
+            {
+              "type": "paragraph",
+              "text": "Points are generally chosen from the Ren (conception) vessel and the kidney, spleen and stomach channels, and adjusted by pattern. In practice it is more often used to regulate the regularity of periods and to improve mood and sleep."
+            },
+            {
+              "type": "subheading",
+              "text": "Course of treatment and expectations"
+            },
+            {
+              "type": "paragraph",
+              "text": "PMOS is a long-term condition, and care is measured in months, not weeks. You generally need to observe at least three menstrual cycles to judge whether the direction is right; if you had no periods for a long time to begin with, the assessment may take longer."
+            },
+            {
+              "type": "paragraph",
+              "text": "Be sceptical of any claim to restore ovulation within a short time or to guarantee a particular result."
+            },
+            {
+              "type": "subheading",
+              "text": "Working with lifestyle"
+            },
+            {
+              "type": "paragraph",
+              "text": "This part isn't an extra but the core. International guidelines are unanimous in making lifestyle management first-line, and the daily-living guidance in Chinese medicine points the same way — regular routines, moderate exercise, less refined sugar and processed food, and attention to sleep and stress."
+            },
+            {
+              "type": "paragraph",
+              "text": "However appropriate the prescription, if sleep and diet aren't adjusted the effect is usually limited. That is worth saying frankly."
+            },
+            {
+              "type": "heading",
+              "text": "What Does the Research Say?"
+            },
+            {
+              "type": "paragraph",
+              "text": "PMOS is one of the areas with more evidence in Chinese medicine research, but the results are not uniformly positive. Presenting them honestly is worth more than citing them selectively."
+            },
+            {
+              "type": "subheading",
+              "text": "Acupuncture: the largest trial so far was negative"
+            },
+            {
+              "type": "paragraph",
+              "text": "The PCOSAct study, published in the Journal of the American Medical Association (JAMA) in 2017, is the largest randomised controlled trial in this area — it recruited 1,000 women with PMOS (then called PCOS) at 21 sites (27 hospitals) in mainland China, with live birth rate as the main outcome."
+            },
+            {
+              "type": "paragraph",
+              "text": "The results:"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Group",
+                "Live birth rate"
+              ],
+              "rows": [
+                [
+                  "Real acupuncture + clomiphene",
+                  "29.4%"
+                ],
+                [
+                  "Sham acupuncture + clomiphene",
+                  "28.0%"
+                ],
+                [
+                  "Real acupuncture + placebo",
+                  "13.9%"
+                ],
+                [
+                  "Sham acupuncture + placebo",
+                  "16.8%"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "In other words, **acupuncture did not raise the live birth rate**; what made the real difference was the drug. After publication the study prompted a good deal of discussion in the Chinese medicine community, and some scholars raised questions about the trial design and the needling protocol, but on the measure of live birth the conclusion is quite clear."
+            },
+            {
+              "type": "subheading",
+              "text": "Herbal medicine and berberine"
+            },
+            {
+              "type": "paragraph",
+              "text": "Berberine (huang lian su) is the main active compound of herbs such as coptis root (huang lian) and phellodendron bark (huang bai), and is the single compound most studied in this area."
+            },
+            {
+              "type": "list",
+              "items": [
+                "A [meta-analysis](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6261244/) of 9 randomised controlled trials (which also searched Chinese databases such as CNKI, Wanfang and VIP) showed that berberine was **not significantly different** from metformin in improving insulin resistance, glucose and lipid metabolism and reproductive endocrine markers; but the authors also noted that the existing data are not sufficient to draw firm conclusions.",
+                "Another [systematic review](https://pubmed.ncbi.nlm.nih.gov/31915452/) found that berberine's live birth rate was similar to that of placebo or metformin but **lower than that of letrozole** (RR 0.61, 95% CI 0.44–0.82), and concluded that there is no firm evidence that berberine improves live birth or other clinical outcomes."
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "As for compound herbal formulas, the Cochrane Collaboration has a dedicated review assessing the effect of Chinese herbal medicine in subfertile women with PMOS. The conclusion of the [2021 update](https://pubmed.ncbi.nlm.nih.gov/34085287/) is quite clear: **the existing evidence is not sufficient to support the use of Chinese herbal medicine for these women.** None of the included studies reported the live birth rate, and the data available for other outcomes were also very limited. The authors also pointed out that this area needs more rigorously designed, adequately followed-up, high-quality studies that use live birth rate as the outcome."
+            },
+            {
+              "type": "paragraph",
+              "text": "Note the scope of that review: it included only women hoping to conceive naturally and excluded cases receiving insemination or assisted reproductive technology, so its conclusions can't be applied directly to the situation of working alongside an IVF cycle."
+            },
+            {
+              "type": "paragraph",
+              "text": "A meta-analysis of animal experiments shows a positive effect of Chinese herbal medicine on ovarian weight, sex hormones and insulin resistance, but the authors state clearly that there is marked publication bias and that results from animal models can't be applied directly to the clinic."
+            },
+            {
+              "type": "paragraph",
+              "text": "**An important reminder:** berberine is a single compound and is not the same thing as a Chinese medicine prescription based on pattern differentiation. The studies above don't mean \"taking coptis will do the job\", and you shouldn't buy and take it on your own — it has its own indications and side effects, and may interact with other medicines."
+            },
+            {
+              "type": "subheading",
+              "text": "How should these results be understood?"
+            },
+            {
+              "type": "paragraph",
+              "text": "Taken together, the existing evidence points to a fairly clear positioning:"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**On directly raising the live birth rate:** there is currently no reliable evidence that acupuncture or herbal medicine can do this, and the largest trial was negative.",
+                "**On metabolic markers:** there are some positive signals, especially berberine performing similarly to metformin on insulin resistance.",
+                "**On regular periods, mood and sleep:** this is where Chinese medicine practitioners more often see improvement in practice, and the part patients feel most directly, but high-quality controlled studies are still lacking.",
+                "**Overall research quality:** there is a fair amount of Chinese-language literature, but sample size, blinding and the consistency of outcome measures still have room to improve."
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "So the more realistic understanding is: **the role of Chinese medicine in PMOS is as part of long-term management — working on metabolism, regular periods, sleep and mood — and not a shortcut to a higher pregnancy success rate.** If you are trying to conceive, ovulation-inducing drugs and assisted reproductive technology have clear evidence behind them, and shouldn't be replaced or delayed by Chinese medicine care."
+            },
+            {
+              "type": "subheading",
+              "text": "A word on expectations"
+            },
+            {
+              "type": "paragraph",
+              "text": "PMOS is a long-term condition, and at present there is no way to \"cure it for good\". Whether in Chinese or Western medicine, the aims of management are to improve symptoms, restore regular periods, control metabolic risk and improve quality of life."
+            },
+            {
+              "type": "paragraph",
+              "text": "Chinese medicine care shouldn't replace necessary endocrine or gynaecological follow-up either; the two can run side by side. If you are having any treatment or preparing for an assisted reproduction cycle, make sure both practitioners know about each other."
+            },
+            {
+              "type": "heading",
+              "text": "When to See a Doctor"
+            },
+            {
+              "type": "list",
+              "items": [
+                "No period for three months or more",
+                "Cycles persistently longer than 35 days, or fewer than 8 periods a year",
+                "Marked excess hair growth, severe acne or thinning hair on the crown",
+                "Darkened, thickened skin on the back of the neck or in the armpits",
+                "A marked rise in weight over a short time",
+                "A family history of diabetes, high blood pressure or cardiovascular disease",
+                "Persistently low mood or anxiety that affects daily life",
+                "Not pregnant after a year of trying (six months if you're over 35)"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "A particular reminder on the last point: even with a confirmed PMOS diagnosis, if you are having difficulty conceiving you should still have a full assessment, including tests for your partner — the problem isn't necessarily on one side only."
+            },
+            {
+              "type": "heading",
+              "text": "Frequently Asked Questions"
+            },
+            {
+              "type": "faq",
+              "items": [
+                {
+                  "q": "What's the difference between PCOS and PMOS?",
+                  "a": "There is none; they are the old and new names of the same condition. It was officially renamed in May 2026, with a three-year transition period during which both names will be used side by side. The diagnostic criteria and management haven't changed."
+                },
+                {
+                  "q": "Do cysts on the ovaries definitely mean PMOS?",
+                  "a": "No. The \"cysts\" seen on ultrasound are small follicles whose development has stalled, not pathological cysts, and many women without the condition see them too. Diagnosis needs two of the three criteria to be met, with other causes ruled out; ultrasound alone can't confirm it."
+                },
+                {
+                  "q": "Can PMOS be cured for good?",
+                  "a": "There is currently no cure. It is a long-term condition, and the aim of management is to control symptoms and long-term health risks. With lifestyle management and appropriate treatment, many women are able to restore regular periods and improve their metabolic markers."
+                },
+                {
+                  "q": "If my periods don't come, can I ignore it?",
+                  "a": "It needs attention. Long-term lack of ovulation means the uterine lining doesn't shed cyclically, which carries a long-term risk of endometrial hyperplasia. Also, missing periods often reflect an underlying endocrine and metabolic problem that hasn't been dealt with."
+                },
+                {
+                  "q": "Does losing weight really help?",
+                  "a": "International guidelines make lifestyle management first-line, and weight management helps improve ovulation and metabolic markers. But a caution: crash dieting or extreme weight loss can backfire and affect your periods and mood. We suggest making changes gradually, under professional guidance."
+                },
+                {
+                  "q": "Can Chinese medicine be combined with Western treatment?",
+                  "a": "Yes, but both practitioners must know about all the treatments you are having and every medication you take — especially while you are using ovulation-inducing drugs or preparing for an assisted reproduction cycle."
+                },
+                {
+                  "q": "Do I need to manage it even if I'm not planning a pregnancy?",
+                  "a": "Yes. The effects of PMOS aren't limited to fertility; they include blood sugar, blood lipids, blood pressure, the uterine lining and mental health. Even if you have no plans to conceive for now, you should still monitor the relevant markers regularly."
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Conclusion"
+            },
+            {
+              "type": "paragraph",
+              "text": "The point of this renaming is to pull the focus back from \"cysts on the ovaries\" to the real core — a long-term imbalance of the endocrine system and metabolism. For patients it means that management shouldn't stop at regulating periods or trying to conceive, but also take in blood sugar, blood lipids, weight, sleep and mood."
+            },
+            {
+              "type": "paragraph",
+              "text": "Chinese medicine can work on this by differentiating patterns — kidney deficiency, phlegm-dampness, liver constraint, blood stasis — and prescribing by phase of the cycle, while also addressing sleep and mood, the background factors that affect overall metabolism. But this is long-term management, not short-term treatment, and should run alongside follow-up with an endocrinologist or gynaecologist, not replace it."
+            },
+            {
+              "type": "references",
+              "items": [
+                "Teede HJ, Bahri Khomami M, Morman R, et al. Polyendocrine metabolic ovarian syndrome, the new name for polycystic ovary syndrome: a multistep global consensus process. Lancet. Published online May 12, 2026. doi:10.1016/S0140-6736(26)00717-8. https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(26)00717-8/fulltext (accessed 21 July 2026)",
+                "Endocrine Society. Polyendocrine Metabolic Ovarian Syndrome: New name to improve diagnosis and care. https://www.endocrine.org/news-and-advocacy/news-room/2026/pcos-name-change (accessed 21 July 2026)",
+                "American Society for Reproductive Medicine. PCOS is Now PMOS: Understanding the Name Change. https://www.asrm.org/news-and-events/asrm-news/latest-news/may-27-2026-pcos-is-now-pmos-understanding-the-name-change/ (accessed 21 July 2026)",
+                "Wu XK, Stener-Victorin E, Kuang HY, et al. Effect of Acupuncture and Clomiphene in Chinese Women With Polycystic Ovary Syndrome: A Randomized Clinical Trial (PCOSAct). JAMA. 2017;317(24):2502–2514. doi:10.1001/jama.2017.7217. https://pubmed.ncbi.nlm.nih.gov/28655015/ (accessed 21 July 2026)",
+                "Li MF, Zhou XM, Li XL. The Effect of Berberine on Polycystic Ovary Syndrome Patients with Insulin Resistance (PCOS-IR): A Meta-Analysis and Systematic Review. Evid Based Complement Alternat Med. 2018;2018:2532935. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6261244/ (accessed 21 July 2026)",
+                "The Effect of Berberine on Reproduction and Metabolism in Women with Polycystic Ovary Syndrome: A Systematic Review and Meta-Analysis of Randomized Control Trials. https://pubmed.ncbi.nlm.nih.gov/31915452/ (accessed 21 July 2026)",
+                "Zhou K, Zhang J, Xu L, Lim CED. Chinese herbal medicine for subfertile women with polycystic ovarian syndrome. Cochrane Database Syst Rev. 2021;6(6):CD007535. doi:10.1002/14651858.CD007535.pub4. https://pubmed.ncbi.nlm.nih.gov/34085287/ (accessed 21 July 2026)",
+                "Zhang J, Xin X, Zhang H, et al. The Efficacy of Chinese Herbal Medicine in Animal Models of Polycystic Ovary Syndrome: A Systematic Review and Meta-Analysis. Evid Based Complement Alternat Med. 2022;2022:4892215. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9392647/ (accessed 21 July 2026)",
+                "Gynaecology in Traditional Chinese Medicine (中醫婦科學). China Press of Traditional Chinese Medicine.",
+                "Fu Qingzhu's Gynaecology (傅青主女科)"
+              ]
+            }
+          ]
+        }
+      }
     },
     {
       "slug": "period-pain",
@@ -8812,7 +13094,368 @@ window.ARTICLES_DATA = {
             "《中醫婦科學》，中國中醫藥出版社"
           ]
         }
-      ]
+      ],
+      "i18n": {
+        "en": {
+          "title": "How Bad Does Period Pain Have to Be Before It's Not Normal? Causes, Tests and When to See a Doctor",
+          "excerpt": "Period pain that makes you take time off, that painkillers don't touch, or that gets worse year after year is not \"normal\". A Hong Kong registered Chinese medicine practitioner explains the difference between primary and secondary dysmenorrhoea, why endometriosis is so often diagnosed late, which tests to have, and how TCM approaches it.",
+          "metaTitle": "When Is Period Pain Not Normal? Causes and When to See a Doctor | Hong Kong TCM",
+          "metaDescription": "Period pain that makes you take time off, that painkillers don't touch, or that gets worse year after year is not \"normal\". A Hong Kong registered Chinese medicine practitioner explains the difference between primary and secondary dysmenorrhoea, why endometriosis is so often diagnosed late, which tests to have, and how TCM approaches it.",
+          "keywords": [
+            "period pain",
+            "severe period pain",
+            "dysmenorrhoea",
+            "endometriosis",
+            "chocolate cyst",
+            "adenomyosis",
+            "period pain TCM",
+            "period pain tests"
+          ],
+          "heroEyebrow": "Fertility · Period Pain",
+          "tags": [
+            "Period Pain",
+            "Periods"
+          ],
+          "heroTags": [
+            "#PeriodPain",
+            "#Dysmenorrhoea",
+            "#Endometriosis",
+            "#Adenomyosis",
+            "#Painkillers",
+            "#WarmingTheChannels"
+          ],
+          "blocks": [
+            {
+              "type": "lead",
+              "text": "Period pain is common in itself, but **pain bad enough to take time off, that painkillers don't touch, that gets worse year by year, or that happens outside your period** is no longer something to keep putting up with. These can point to endometriosis, adenomyosis or fibroids, and should be checked. The line \"period pain is normal for women\" has left a lot of women in pain for years for no good reason."
+            },
+            {
+              "type": "paragraph",
+              "text": "Period pain is the gynaecological symptom most often brushed aside — because it is so widespread that everyone takes it for granted. But \"common\" doesn't mean \"normal\", and it doesn't mean it needs no attention."
+            },
+            {
+              "type": "paragraph",
+              "text": "Below we start with how to tell the two kinds of period pain apart, then the possible causes behind it and the tests you should have."
+            },
+            {
+              "type": "heading",
+              "text": "Two Kinds of Period Pain, Managed Completely Differently"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "",
+                "Primary dysmenorrhoea",
+                "Secondary dysmenorrhoea"
+              ],
+              "rows": [
+                [
+                  "Definition",
+                  "No other underlying disease",
+                  "Caused by another gynaecological problem"
+                ],
+                [
+                  "When it usually starts",
+                  "Within a year or two of the first period",
+                  "Usually appears at a later age"
+                ],
+                [
+                  "When it hurts",
+                  "From a day or two before the period to the first two days",
+                  "May last the whole period, or even occur outside it"
+                ],
+                [
+                  "Change with age",
+                  "Mostly eases with age or after having children",
+                  "**Tends to get worse year by year**"
+                ],
+                [
+                  "Response to painkillers",
+                  "Usually works",
+                  "Works less and less, or not at all"
+                ],
+                [
+                  "Cause",
+                  "Prostaglandins making the uterus contract strongly",
+                  "Endometriosis, adenomyosis, fibroids, pelvic inflammatory disease and others"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**The key clue to telling them apart is the \"trend\":** primary dysmenorrhoea is usually steady or easing; if your pain is getting worse year on year, that is a signal to get checked."
+            },
+            {
+              "type": "heading",
+              "text": "When Is It Not Normal?"
+            },
+            {
+              "type": "paragraph",
+              "text": "If any one of the following applies, don't treat it as something you can just get through:"
+            },
+            {
+              "type": "list",
+              "items": [
+                "The pain is bad enough that you have to take time off, and can't work or go to school",
+                "Ordinary painkillers don't work, or you need more and more of them",
+                "The pain is getting worse year by year",
+                "The pain also happens outside your period",
+                "**Pain during sex**",
+                "**Pain when opening your bowels or passing urine during your period**",
+                "It comes with a marked increase in flow or large clots",
+                "It comes with difficulty conceiving"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "Of these, **pain during sex** and **pain opening your bowels during your period** are particularly important — they are classic clues to endometriosis, yet few people mention them to their doctor."
+            },
+            {
+              "type": "heading",
+              "text": "Common Secondary Causes"
+            },
+            {
+              "type": "paragraph",
+              "text": "**Endometriosis:** tissue like the lining of the uterus grows outside the uterine cavity, bleeds with each cycle but cannot escape, and causes inflammation and adhesions. A cyst that forms on the ovary is commonly called a \"chocolate cyst\"."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Adenomyosis:** tissue like the uterine lining grows into the muscle wall of the uterus. The typical picture is worsening period pain together with heavier flow."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Fibroids:** depending on their position and size, they can cause heavier flow, period pain and a sense of pressure."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Pelvic inflammatory disease:** a past or current infection causing adhesions and chronic pelvic pain."
+            },
+            {
+              "type": "paragraph",
+              "text": "**An intrauterine device (IUD):** some women have worse period pain in the early period after it is fitted."
+            },
+            {
+              "type": "heading",
+              "text": "Endometriosis: The One Most Often Diagnosed Late"
+            },
+            {
+              "type": "paragraph",
+              "text": "This section deserves special attention, because it is the most common cause behind period pain and the one most often left too long."
+            },
+            {
+              "type": "paragraph",
+              "text": "**How common it is:** it is estimated to affect about one in ten women of reproductive age, and the proportion is higher among women with infertility."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Why it's delayed:** from the first symptoms to a formal diagnosis, the literature generally records an average delay of about **4 to 11 years**. The reasons include varied symptoms, period pain being seen as normal, and the fact that diagnosis used to depend on surgery."
+            },
+            {
+              "type": "paragraph",
+              "text": "**The way it's diagnosed has changed** — and that is good news worth knowing. The European Society of Human Reproduction and Embryology (ESHRE) updated its guideline in 2022, and **laparoscopy is no longer the gold standard for diagnosis**; imaging (transvaginal ultrasound, and MRI where needed) now comes first, and laparoscopy is recommended only when imaging is negative, or when empirical treatment hasn't worked or isn't suitable."
+            },
+            {
+              "type": "paragraph",
+              "text": "What this means in practice: **you don't need to have surgery before management can begin.** If you have typical symptoms, you can start with an ultrasound and discuss a management plan with your doctor."
+            },
+            {
+              "type": "paragraph",
+              "text": "A reminder: **the severity of symptoms doesn't necessarily match the extent of the disease** — severe pain doesn't necessarily mean severe disease, and a mild-looking scan doesn't mean your pain isn't real."
+            },
+            {
+              "type": "heading",
+              "text": "Which Tests Should You Have?"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Test",
+                "What it checks"
+              ],
+              "rows": [
+                [
+                  "Detailed history",
+                  "When the pain comes, where it is, what it's like, how it's changing, and any pain during sex or when opening your bowels"
+                ],
+                [
+                  "Pelvic examination",
+                  "Mobility of the uterus, tender points, masses"
+                ],
+                [
+                  "Transvaginal ultrasound",
+                  "Fibroids, adenomyosis, ovarian cysts (including chocolate cysts)"
+                ],
+                [
+                  "MRI",
+                  "When the ultrasound is uncertain or deep lesions are suspected"
+                ],
+                [
+                  "Blood tests",
+                  "Anaemia, thyroid and so on, as appropriate"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**A record is the most valuable preparation:** going to the doctor with three months of pain records (a daily score from 0 to 10, painkiller use, and which activities were affected) is far more useful than describing it as \"really painful\"."
+            },
+            {
+              "type": "heading",
+              "text": "How Does Chinese Medicine View Period Pain?"
+            },
+            {
+              "type": "paragraph",
+              "text": "Chinese medicine calls it \"painful menstruation\" (tong jing), and pattern differentiation turns on **the character of the pain, its timing, and what makes it better or worse** — which is exactly why a Chinese medicine consultation asks such detailed questions."
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Pattern",
+                "Pain character",
+                "Accompanying features",
+                "Treatment"
+              ],
+              "rows": [
+                [
+                  "Qi stagnation with blood stasis",
+                  "Distending or stabbing pain before or at the start of the period, dislikes pressure",
+                  "Dark purple blood with clots, with relief once clots pass; low mood",
+                  "Move qi and invigorate blood"
+                ],
+                [
+                  "Cold congealing with blood stasis",
+                  "Cold pain in the lower abdomen, eased by warmth",
+                  "Aversion to cold, dark blood with clots",
+                  "Warm the channels and disperse cold"
+                ],
+                [
+                  "Damp-heat with stasis obstruction",
+                  "Burning pain, worse before the period",
+                  "Thick yellow discharge, sticky blood, low-grade fever",
+                  "Clear heat and dispel dampness"
+                ],
+                [
+                  "Qi and blood deficiency",
+                  "Dull aching pain after the period, likes pressure",
+                  "Pale, scanty blood, fatigue and dizziness",
+                  "Boost qi and nourish blood"
+                ],
+                [
+                  "Kidney qi depletion",
+                  "Aching lower back and sacrum after the period",
+                  "Dizziness and tinnitus, frequent night-time urination",
+                  "Tonify the kidney and nourish the liver"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "A practical rule of thumb: **pain that dislikes pressure is mostly an excess pattern (stasis, cold, damp-heat); pain that likes pressure and feels better for it is mostly a deficiency pattern.** Pain before the period is mostly excess; pain after the period is mostly deficiency."
+            },
+            {
+              "type": "paragraph",
+              "text": "The above is a general introduction to TCM theory, not a diagnosis or a prescription. Herbal treatment needs an in-person consultation and pattern differentiation by a registered Chinese medicine practitioner."
+            },
+            {
+              "type": "paragraph",
+              "text": "**It needs to be said:** if the pain comes from a structural problem such as endometriosis, adenomyosis or fibroids, Chinese medicine care can be part of the overall management (for example easing pain, mood and sleep), but it **can't replace necessary tests and treatment.** Find out the cause first, then decide the direction of care."
+            },
+            {
+              "type": "heading",
+              "text": "What You Can Do Day to Day"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Apply heat to your lower abdomen or lower back** — simple, and many women find it helps",
+                "**Exercise regularly** — moderate activity around your period helps circulation, but don't force it",
+                "**Manage sleep and stress** — both genuinely affect how pain feels",
+                "**Cut back on cold, raw foods and too much caffeine before your period**",
+                "**Keep a record of pain scores** — not only for your appointment but also so you can see the trend clearly"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**About painkillers:** using them when you need them isn't \"failure\", and it won't make your body \"get used to\" them. Taking them when the pain is just starting usually works better than waiting until it's severe. If you need more and more, or they work less well, that in itself is a sign to see a doctor, not a reason to raise the dose."
+            },
+            {
+              "type": "heading",
+              "text": "When to See a Doctor"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Period pain that makes you take time off or clearly affects daily life",
+                "Painkillers that don't work or work less and less",
+                "Period pain that gets worse year by year",
+                "Pain during sex, or pain opening your bowels or passing urine during your period",
+                "Pelvic pain outside your period",
+                "Markedly heavier flow, large clots, or symptoms of anaemia",
+                "Not pregnant after a year of trying (six months if you're over 35) (see [Why Can't I Get Pregnant?](infertility-causes-tests-en.html))",
+                "Sudden severe abdominal pain or fever — seek care immediately, to rule out emergencies such as ovarian torsion or infection"
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Frequently Asked Questions"
+            },
+            {
+              "type": "faq",
+              "items": [
+                {
+                  "q": "Will painkillers for period pain stop working the more I take them?",
+                  "a": "Ordinary painkillers don't make the body dependent. If you find they work less well or you need to keep increasing the dose, the more likely explanation is an underlying cause that hasn't been dealt with (such as endometriosis); you should be checked, rather than keep adding more medication."
+                },
+                {
+                  "q": "Will period pain get better after I've had a baby?",
+                  "a": "Primary dysmenorrhoea can indeed ease after childbirth. But if it is secondary — especially adenomyosis or endometriosis — having a baby is no guarantee of improvement, and for some women it becomes more noticeable after the birth."
+                },
+                {
+                  "q": "Do I definitely need surgery for a chocolate cyst?",
+                  "a": "Not necessarily. Whether to operate depends on the size of the cyst, the severity of symptoms, your plans for having a family and how you respond to medication, and needs to be assessed individually by a gynaecologist. Diagnosis and management today are more conservative than before, and surgery isn't needed as soon as one is found."
+                },
+                {
+                  "q": "Can I see a Chinese medicine practitioner for period pain?",
+                  "a": "Yes, but we suggest having basic tests first (at least one pelvic ultrasound) to rule out a structural problem before deciding the direction. If endometriosis or adenomyosis is already confirmed, Chinese medicine can be part of the overall management, but should run alongside gynaecological follow-up and not replace it."
+                },
+                {
+                  "q": "Does applying heat really help?",
+                  "a": "Many women find it helps, and the risk and cost are low, so it's worth trying. From a Chinese medicine angle, it fits the \"warm the channels and disperse cold\" direction for the cold-congealing-with-stasis pattern — which also explains why heat works especially well for some women and not much for others."
+                },
+                {
+                  "q": "Can I exercise during my period?",
+                  "a": "Yes — just adjust the intensity to how you feel. Moderate activity helps the period pain of many women, so there's no need to force yourself to stay in bed, but there's no need to push yourself to keep up your usual level either."
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Conclusion"
+            },
+            {
+              "type": "paragraph",
+              "text": "What decides whether period pain is normal isn't \"how bad it is\" but **the trend and the impact**: is it getting worse? Is it affecting your life? Do painkillers still work? Is there pain during sex or when opening your bowels?"
+            },
+            {
+              "type": "paragraph",
+              "text": "If the answers worry you, it's worth having a check. The average delay in diagnosing endometriosis is measured in years, and surgery is no longer needed before an assessment can begin."
+            },
+            {
+              "type": "paragraph",
+              "text": "Chinese medicine has a role in easing pain, improving mood and sleep, and general care, but it should rest on the cause already being known."
+            },
+            {
+              "type": "references",
+              "items": [
+                "Becker CM, Bokor A, Heikinheimo O, et al. ESHRE guideline: endometriosis. Hum Reprod Open. 2022;2022(2):hoac009. https://pmc.ncbi.nlm.nih.gov/articles/PMC8951218/ (accessed 21 July 2026)",
+                "European Society of Human Reproduction and Embryology. ESHRE updates guideline on endometriosis care (2 February 2022). https://www.eurekalert.org/news-releases/942048 (accessed 21 July 2026)",
+                "Agarwal SK, Chapron C, Giudice LC, et al. Clinical diagnosis of endometriosis: a call to action. Am J Obstet Gynecol. 2019;220(4):354.e1–354.e12.",
+                "Gynaecology in Traditional Chinese Medicine (中醫婦科學). China Press of Traditional Chinese Medicine."
+              ]
+            }
+          ]
+        }
+      }
     },
     {
       "slug": "preconception-care",
@@ -9339,7 +13982,532 @@ window.ARTICLES_DATA = {
             "《中醫婦科學》，中國中醫藥出版社"
           ]
         }
-      ]
+      ],
+      "i18n": {
+        "en": {
+          "title": "The Complete Guide to Trying for a Baby: From Preparing and Tracking Your Cycle to When You Should Get Tested",
+          "excerpt": "Where do you start when you're trying to conceive? This guide sets out in order what both partners should do beforehand, how to track your menstrual cycle and confirm ovulation, how long to wait before getting tested, the direction of management for common diagnoses, and what Chinese medicine can and cannot do at each stage.",
+          "metaTitle": "Trying for a Baby: Preparation, Cycle Tracking and Tests | Hong Kong TCM",
+          "metaDescription": "Where do you start when you're trying to conceive? This guide sets out in order what both partners should do beforehand, how to track your menstrual cycle and confirm ovulation, how long to wait before getting tested, the direction of management for common diagnoses, and what Chinese medicine can and cannot do at each stage.",
+          "keywords": [
+            "trying to conceive",
+            "preconception preparation",
+            "preconception check-up",
+            "how to get pregnant",
+            "TTC",
+            "folic acid",
+            "preconception TCM"
+          ],
+          "heroEyebrow": "Fertility · Preconception",
+          "tags": [
+            "Infertility",
+            "Ovulation"
+          ],
+          "heroTags": [
+            "#PreconceptionPreparation",
+            "#FolicAcid",
+            "#PreconceptionChecks",
+            "#OvulationTracking",
+            "#LifestyleChanges",
+            "#TCMCare"
+          ],
+          "blocks": [
+            {
+              "type": "lead",
+              "text": "Trying for a baby breaks down into five stages: **preparing beforehand** (both partners, about three months ahead), **getting to know your cycle**, **identifying your fertile window and trying**, **getting tested if it hasn't worked** (after a year if you're under 35, six months if you're over), and deciding the direction of management from the results. The most common mistake is putting \"building up your health\" ahead of \"getting tested\" — get the order wrong and you waste the time."
+            },
+            {
+              "type": "paragraph",
+              "text": "Once you decide to have a baby, information tends to arrive all at once: take folic acid, measure your temperature, work out your ovulation, test your AMH, build up your health... but few people explain clearly **what order to do these things in**."
+            },
+            {
+              "type": "paragraph",
+              "text": "This article sets out the whole process in actual time order, with a link under each stage to the detailed explanation."
+            },
+            {
+              "type": "heading",
+              "text": "The Five Stages of Trying for a Baby"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Stage",
+                "Approximate timing",
+                "Focus"
+              ],
+              "rows": [
+                [
+                  "1. Preparing beforehand",
+                  "About 3 months ahead",
+                  "Lifestyle changes for both partners, folic acid, basic checks"
+                ],
+                [
+                  "2. Getting to know your cycle",
+                  "At least 3 months",
+                  "Record your periods, confirm whether you are ovulating"
+                ],
+                [
+                  "3. Trying",
+                  "6 to 12 months",
+                  "Identify the fertile window, regular intercourse"
+                ],
+                [
+                  "4. Testing",
+                  "If it hasn't worked",
+                  "**Both partners tested together** — not just one"
+                ],
+                [
+                  "5. Management by diagnosis",
+                  "Varies from person to person",
+                  "From lifestyle changes to assisted reproduction"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**One variable runs through the whole process: age.** After 35, the time you can afford to wait at each stage shortens — this isn't scaremongering but a reality that has to be built into your planning."
+            },
+            {
+              "type": "heading",
+              "text": "Stage 1: Before You Start (About Three Months Ahead)"
+            },
+            {
+              "type": "subheading",
+              "text": "Why three months?"
+            },
+            {
+              "type": "list",
+              "items": [
+                "An egg takes about three months to develop from the start until it is released",
+                "Sperm take over seventy days to develop and mature, which with transit time also comes close to three months",
+                "Folic acid needs to be started in advance to protect during the critical period when the neural tube forms"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "In other words, **the changes you make now take about three months to show up in the body.**"
+            },
+            {
+              "type": "subheading",
+              "text": "For the woman"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Folic acid:** it's recommended to start before you plan to conceive and to continue into early pregnancy. Those with a particular history or risk factors (for example a previous baby with a neural tube defect, diabetes, or certain medications) may need a higher dose and should check with a doctor first.",
+                "**Basic health checks:** blood pressure, weight, blood sugar; whether your rubella (German measles) immunity and cervical screening are up to date.",
+                "**Review your current medications:** if you have a long-term condition or take any prescription drugs, ask your doctor first which need to be adjusted — **don't stop them yourself.**",
+                "**Stop smoking and limit alcohol**, control your weight and improve your sleep.",
+                "**A dental check-up:** dental problems are more awkward to treat during pregnancy, so it's best to deal with them beforehand."
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "For the man"
+            },
+            {
+              "type": "paragraph",
+              "text": "This part is often skipped, but the man's preparation also takes three months."
+            },
+            {
+              "type": "list",
+              "items": [
+                "Stop smoking, drink less, control weight and improve sleep",
+                "Reduce prolonged scrotal heat exposure (long periods of sitting, saunas, a laptop on the lap)",
+                "**Stop anabolic steroids** (under a doctor's guidance)",
+                "Review current medications"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "For details, see [Male Fertility: What Affects Sperm Quality, and How Can You Improve It?](male-fertility-en.html)"
+            },
+            {
+              "type": "heading",
+              "text": "Stage 2: Getting to Know Your Cycle"
+            },
+            {
+              "type": "subheading",
+              "text": "Record first, judge afterwards"
+            },
+            {
+              "type": "paragraph",
+              "text": "Record for at least three months: the first day of each bleed, how many days it lasts, the flow and how bad the period pain is."
+            },
+            {
+              "type": "paragraph",
+              "text": "The criteria are actually quite clear — **a cycle of 24 to 38 days, bleeding within 8 days, and not much difference from month to month.** Falling outside the range doesn't necessarily mean illness, but it's worth discussing with your doctor (see [How Long Should a Normal Menstrual Cycle Be?](menstrual-cycle-en.html))."
+            },
+            {
+              "type": "subheading",
+              "text": "Confirming whether you ovulate"
+            },
+            {
+              "type": "paragraph",
+              "text": "A regular cycle **doesn't** necessarily mean you are ovulating. There are three ways to confirm it, each answering a different question:"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Method",
+                "Warns you in advance",
+                "Confirms afterwards"
+              ],
+              "rows": [
+                [
+                  "Ovulation test strips (LH)",
+                  "✅",
+                  "❌"
+                ],
+                [
+                  "Cervical mucus observation",
+                  "✅",
+                  "❌"
+                ],
+                [
+                  "Basal body temperature",
+                  "❌",
+                  "✅"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "The usual combination in practice is: **strips or mucus to catch the timing, temperature to verify afterwards** (see [How Do You Know If You're Ovulating?](confirm-ovulation-en.html))."
+            },
+            {
+              "type": "subheading",
+              "text": "Don't take period pain for granted"
+            },
+            {
+              "type": "paragraph",
+              "text": "If period pain makes you take time off, painkillers work less and less, or it gets worse year by year, that isn't \"normal\" and should be checked — the average delay in diagnosing endometriosis is measured in years (see [How Bad Does Period Pain Have to Be Before It's Not Normal?](period-pain-en.html))."
+            },
+            {
+              "type": "heading",
+              "text": "Stage 3: The Trying Phase"
+            },
+            {
+              "type": "subheading",
+              "text": "The fertile window is the few days before ovulation"
+            },
+            {
+              "type": "paragraph",
+              "text": "Sperm can survive for up to about five days, and an egg lasts only about 12 to 24 hours after it is released. So the best chance is **the roughly five days before ovulation plus the day of ovulation** — **by the time you have sex after ovulation, it's often already too late.**"
+            },
+            {
+              "type": "paragraph",
+              "text": "The way to work it out is **cycle length minus 14**, not counting forward 14 days from this period (see [How Do You Calculate Your Ovulation Window?](ovulation-calculator-en.html))."
+            },
+            {
+              "type": "subheading",
+              "text": "No need to calculate the frequency"
+            },
+            {
+              "type": "paragraph",
+              "text": "Once every one to two days during the fertile window is enough. Calculating the dates too precisely tends to pile on stress for both partners, and stress itself affects ovulation and the quality of your sex life — a fairly common vicious circle in practice."
+            },
+            {
+              "type": "heading",
+              "text": "Stage 4: When Should You Get Tested?"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Situation",
+                "When to seek help"
+              ],
+              "rows": [
+                [
+                  "Woman under 35",
+                  "Not pregnant after trying for 12 months"
+                ],
+                [
+                  "Woman 35 or over",
+                  "Not pregnant after trying for 6 months"
+                ],
+                [
+                  "Woman 40 or over",
+                  "See a doctor straight away"
+                ],
+                [
+                  "Infrequent periods, no periods for long stretches, severe period pain",
+                  "Don't wait"
+                ],
+                [
+                  "Past pelvic infection, pelvic surgery or endometriosis",
+                  "Don't wait"
+                ],
+                [
+                  "Male partner has had testicular surgery, an undescended testicle or chemotherapy",
+                  "Don't wait"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**Two principles:**"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**\"Let's try a bit longer first\" is the most costly decision.** The tests themselves aren't painful, but the time lost by delay can't be made up.",
+                "**Both partners must be tested together.** The causes are spread roughly evenly between the two, so testing only one means seeing only half the picture. And the semen analysis is the simplest, cheapest and quickest of all the tests."
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "For the detailed tests and how to read the reports, see [Why Can't I Get Pregnant? Common Causes, Which Tests to Have and How Chinese Medicine Can Help](infertility-causes-tests-en.html)."
+            },
+            {
+              "type": "heading",
+              "text": "Stage 5: Deciding the Direction from the Results"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Common diagnosis",
+                "Main direction of management",
+                "More detail"
+              ],
+              "rows": [
+                [
+                  "Ovulation disorder (PMOS)",
+                  "Lifestyle management, ovulation-inducing drugs, metabolic monitoring",
+                  "(see [PMOS (Formerly PCOS)](pcos-pmos-en.html))"
+                ],
+                [
+                  "Reduced ovarian reserve / POI",
+                  "Family planning, long-term health protection",
+                  "(see [Does a Low AMH Mean You Can't Get Pregnant?](amh-poi-en.html))"
+                ],
+                [
+                  "Endometriosis",
+                  "Pain relief, medication, surgery where necessary",
+                  "(see [period pain](period-pain-en.html))"
+                ],
+                [
+                  "Blocked fallopian tubes",
+                  "Surgery or going straight to IVF",
+                  "(see [IVF Step by Step](ivf-process-en.html))"
+                ],
+                [
+                  "Male factor",
+                  "Lifestyle changes, urology / andrology assessment, ICSI",
+                  "(see [male fertility](male-fertility-en.html))"
+                ],
+                [
+                  "Unexplained infertility",
+                  "Usually IUI first, then IVF",
+                  "(see [IVF Step by Step](ivf-process-en.html))"
+                ]
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "About assisted reproduction"
+            },
+            {
+              "type": "paragraph",
+              "text": "IUI and IVF are two different levels of treatment. IUI is simpler, cheaper and lighter on the body, but needs open fallopian tubes and has a lower chance of success per cycle; IVF needs an egg retrieval procedure and more intensive medication, but can bypass some structural obstacles."
+            },
+            {
+              "type": "paragraph",
+              "text": "For the full process, public and private options in Hong Kong and the discussion of PGT, see [IVF Step by Step](ivf-process-en.html)."
+            },
+            {
+              "type": "heading",
+              "text": "The Role of Chinese Medicine in Trying for a Baby"
+            },
+            {
+              "type": "paragraph",
+              "text": "This section needs to be accurate, because wrongly set expectations are the easiest way to waste time."
+            },
+            {
+              "type": "subheading",
+              "text": "What it can't do"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**It can't open blocked fallopian tubes** — structural problems need surgery or to be bypassed with IVF",
+                "**It can't repair a serious problem with sperm production**",
+                "**It can't increase the number of follicles in the ovaries** — the number of follicles is set at birth",
+                "**It can't replace tests**"
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "Where there is room to help"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Regulating the menstrual cycle and ovulation:** irregular cycles and erratic ovulation are the area Chinese medicine more commonly works on",
+                "**Mood, sleep and stress:** these genuinely affect the hypothalamic–pituitary–ovarian axis, and are the part you feel most directly",
+                "**Easing period pain and related discomfort**",
+                "**Working alongside assisted reproduction:** meta-analyses of Chinese-language studies suggest that Chinese herbal medicine alongside IVF may reduce the incidence of ovarian hyperstimulation and improve the clinical pregnancy rate, though study quality has room to improve (see [How Does Chinese Medicine Work Alongside an IVF Cycle?](ivf-tcm-en.html))",
+                "**The man's overall condition and lifestyle factors**"
+              ]
+            },
+            {
+              "type": "subheading",
+              "text": "The order matters"
+            },
+            {
+              "type": "paragraph",
+              "text": "**Get tested first, then work on your health.** If you already know there is a tubal blockage or a serious male factor, working on your health first only wastes time; conversely, if the tests are normal but your cycles are erratic, your sleep is poor and your stress is high, that is exactly where Chinese medicine has room."
+            },
+            {
+              "type": "paragraph",
+              "text": "Just as important: **don't let preparation delay treatment.** If your doctor advises starting soon, don't postpone it for the sake of \"three months of preparation first\" — age is the most irreversible variable."
+            },
+            {
+              "type": "paragraph",
+              "text": "The above is a general introduction to TCM theory, not a diagnosis or a prescription. Herbal treatment needs an in-person consultation and pattern differentiation by a registered Chinese medicine practitioner."
+            },
+            {
+              "type": "heading",
+              "text": "Quick Index by Situation"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Your situation",
+                "Go to"
+              ],
+              "rows": [
+                [
+                  "Want to know whether your cycle is normal",
+                  "[How Long Should a Normal Menstrual Cycle Be?](menstrual-cycle-en.html)"
+                ],
+                [
+                  "Want to know whether you're ovulating",
+                  "[How Do You Know If You're Ovulating?](confirm-ovulation-en.html)"
+                ],
+                [
+                  "Want to work out your fertile window",
+                  "[How Do You Calculate Your Ovulation Window?](ovulation-calculator-en.html)"
+                ],
+                [
+                  "Very severe period pain",
+                  "[How Bad Does Period Pain Have to Be Before It's Not Normal?](period-pain-en.html)"
+                ],
+                [
+                  "Irregular cycles, excess hair or acne",
+                  "[PMOS (Formerly PCOS)](pcos-pmos-en.html)"
+                ],
+                [
+                  "Low AMH, worried about ovarian function",
+                  "[Does a Low AMH Mean You Can't Get Pregnant?](amh-poi-en.html)"
+                ],
+                [
+                  "Tried for a year without success",
+                  "[Why Can't I Get Pregnant?](infertility-causes-tests-en.html)"
+                ],
+                [
+                  "The man wants to prepare",
+                  "[Male Fertility](male-fertility-en.html)"
+                ],
+                [
+                  "Getting ready for IVF",
+                  "[IVF Step by Step](ivf-process-en.html)"
+                ],
+                [
+                  "In the middle of IVF and want Chinese medicine alongside",
+                  "[How Does Chinese Medicine Work Alongside an IVF Cycle?](ivf-tcm-en.html)"
+                ]
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "When to See a Doctor Without Delay"
+            },
+            {
+              "type": "list",
+              "items": [
+                "You already meet the timing criteria above",
+                "No period for three months or more (and not pregnant)",
+                "Cycles persistently longer than 38 days, or fewer than 8 periods a year",
+                "Period pain that makes you take time off, that painkillers don't touch, or that gets worse year by year",
+                "Pain during sex, or pain opening your bowels or passing urine during your period",
+                "Bleeding between periods, or after sex",
+                "Two or more miscarriages",
+                "Hot flushes, night sweats or markedly lighter periods before the age of 40",
+                "Testicular pain, swelling or a lump in the male partner — get seen promptly"
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Frequently Asked Questions"
+            },
+            {
+              "type": "faq",
+              "items": [
+                {
+                  "q": "How far ahead should I start preparing?",
+                  "a": "Generally about three months. That matches the time it takes for eggs to develop and sperm to be produced, and gives folic acid and lifestyle changes time to take effect."
+                },
+                {
+                  "q": "Does the man need to prepare too?",
+                  "a": "Yes. About a third of infertility is linked to the male partner, and sperm production also takes about three months. The man's preparation shouldn't wait until the woman's tests are done."
+                },
+                {
+                  "q": "How long should we try before getting tested?",
+                  "a": "A year if you're under 35, six months if you're 35 or over, and seeing a doctor straight away if you're 40 or over. If you already know of a menstrual problem, a history of pelvic surgery or a relevant history in the male partner, don't wait."
+                },
+                {
+                  "q": "Should I see a Chinese medicine practitioner first, or get tested first?",
+                  "a": "Get tested first. Once the cause is clear, you know whether Chinese medicine care is appropriate and what it should address."
+                },
+                {
+                  "q": "How long before Chinese medicine care makes a difference?",
+                  "a": "Generally you think in months, and usually need to observe two to three menstrual cycles to judge the direction. But that timetable has to be considered alongside the overall treatment plan, and you shouldn't postpone treatment that has already been advised for the sake of preparation."
+                },
+                {
+                  "q": "Does stress really affect getting pregnant?",
+                  "a": "Yes. Long-term stress and lack of sleep affect the hypothalamic–pituitary–ovarian axis and may make ovulation irregular, and they also affect your sex life and general state. Working out the dates too precisely is itself one of the common sources of stress."
+                },
+                {
+                  "q": "After what age should I stop waiting?",
+                  "a": "There's no absolute cut-off, but after 35 egg quality and numbers decline faster, so the time you can afford at each decision should be shortened. If you are near or past 35, we suggest swapping the thought of \"observing a few more months\" for \"get tested first, then decide\"."
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Conclusion"
+            },
+            {
+              "type": "paragraph",
+              "text": "The order for trying to conceive isn't complicated: **prepare three months ahead (both partners) → get to know your cycle → identify your fertile window → if it hasn't worked when the time is up, get tested together → decide the direction from the results.**"
+            },
+            {
+              "type": "paragraph",
+              "text": "There are only two common mistakes: **only the woman getting tested**, and **putting building up your health ahead of testing.** Avoid those two, and every decision after that will be well spent."
+            },
+            {
+              "type": "paragraph",
+              "text": "Chinese medicine has a place in regulating the cycle, mood and sleep, easing period pain and working alongside assisted reproduction, but it should sit **inside** the overall plan, not **ahead of** it."
+            },
+            {
+              "type": "paragraph",
+              "text": "If you'd like to go deeper on a particular question, use the quick index above to go to the relevant article."
+            },
+            {
+              "type": "references",
+              "items": [
+                "Family Health Service, Department of Health, Hong Kong: information on preparing for pregnancy (香港衞生署家庭健康服務：懷孕前準備相關資訊)",
+                "Practice Committee of the American Society for Reproductive Medicine. Evidence-based treatments for unexplained infertility: a guideline (2020).",
+                "World Health Organization. WHO laboratory manual for the examination and processing of human semen, 6th edition (2021).",
+                "Becker CM, Bokor A, Heikinheimo O, et al. ESHRE guideline: endometriosis. Hum Reprod Open. 2022;2022(2):hoac009.",
+                "Munro MG, Critchley HOD, Fraser IS, et al. The two FIGO systems for normal and abnormal uterine bleeding symptoms and classification of causes of abnormal uterine bleeding in the reproductive years: 2018 revisions. Int J Gynaecol Obstet. 2018;143(3):393–408.",
+                "Gynaecology in Traditional Chinese Medicine (中醫婦科學). China Press of Traditional Chinese Medicine."
+              ]
+            }
+          ]
+        }
+      }
     },
     {
       "slug": "uterine-fibroids",
@@ -9758,7 +14926,424 @@ window.ARTICLES_DATA = {
             "《中醫婦科學》，中國中醫藥出版社"
           ]
         }
-      ]
+      ],
+      "i18n": {
+        "en": {
+          "title": "Do Uterine Fibroids Need to Be Removed? Position Matters More Than Size",
+          "excerpt": "Uterine fibroids are very common, and most cause no symptoms and need no treatment. What matters is not size but position. A Hong Kong registered Chinese medicine practitioner explains the difference between the three positions, when treatment is needed, the real effect on fertility, and what Chinese medicine can and cannot do.",
+          "metaTitle": "Do Uterine Fibroids Need to Be Removed? Position Over Size | Hong Kong TCM",
+          "metaDescription": "Uterine fibroids are very common, and most cause no symptoms and need no treatment. What matters is not size but position. A Hong Kong registered Chinese medicine practitioner explains the difference between the three positions, when treatment is needed, the real effect on fertility, and what Chinese medicine can and cannot do.",
+          "keywords": [
+            "uterine fibroids",
+            "fibroid symptoms",
+            "do fibroids need removing",
+            "how big should fibroids be before treatment",
+            "fibroids and pregnancy",
+            "fibroids TCM",
+            "fibroid surgery"
+          ],
+          "heroEyebrow": "Fertility · Gynaecological Conditions",
+          "tags": [
+            "Gynaecological Conditions",
+            "Periods"
+          ],
+          "heroTags": [
+            "#UterineFibroids",
+            "#FibroidPosition",
+            "#HeavyPeriods",
+            "#FibroidsAndPregnancy",
+            "#SurgeryOptions",
+            "#TCMCare"
+          ],
+          "blocks": [
+            {
+              "type": "lead",
+              "text": "Uterine fibroids are the most common benign tumours in women of reproductive age — by the age of fifty, as many as seven or eight in ten women may have them — **but most cause no symptoms and need no treatment.** What really decides whether to act is not \"how many centimetres\" but **the position, the symptoms and your plans for having a family.** The chance of malignant change is less than one in a hundred."
+            },
+            {
+              "type": "paragraph",
+              "text": "\"The scan shows a 4 cm fibroid\" — after hearing that, the most common reaction is to search online for \"how big before surgery\". But that is the wrong question to ask."
+            },
+            {
+              "type": "paragraph",
+              "text": "Two fibroids of the same 4 cm can have completely different effects depending on where they sit: some cause heavy bleeding and anaemia every month, while others give no sign for ten years. Here is where the differences lie."
+            },
+            {
+              "type": "heading",
+              "text": "What Are Uterine Fibroids?"
+            },
+            {
+              "type": "info",
+              "title": "Uterine fibroids (leiomyomas)",
+              "text": "Benign tumours formed by the overgrowth of smooth muscle cells in the uterus. They respond to oestrogen, so they tend to grow during the reproductive years and shrink after the menopause."
+            },
+            {
+              "type": "paragraph",
+              "text": "A few basic facts:"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Very common:** by the age of fifty, statistics for different populations put the proportion at roughly seven to eight in ten",
+                "**Usually multiple:** there is generally more than one",
+                "**Usually no symptoms:** many women never know they have them",
+                "**Malignant change is rare:** less than one in a hundred",
+                "**Most shrink after the menopause**"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "In other words, \"having fibroids\" is not, in itself, a medical finding to panic about."
+            },
+            {
+              "type": "heading",
+              "text": "Position Matters More Than Size"
+            },
+            {
+              "type": "paragraph",
+              "text": "This is the one point from the whole article most worth remembering. The wall of the uterus has three layers, and fibroids fall into three main types according to where they grow:"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Type",
+                "Position",
+                "Typical effects",
+                "Effect on fertility"
+              ],
+              "rows": [
+                [
+                  "**Submucosal fibroid**",
+                  "Bulges into the uterine cavity",
+                  "Much heavier flow, prolonged periods, anaemia",
+                  "Clearest effect"
+                ],
+                [
+                  "**Intramural fibroid**",
+                  "Grows within the muscle layer of the uterus",
+                  "Depends on size and whether it presses on the cavity",
+                  "Affects fertility if it presses on and distorts the cavity; otherwise still debated"
+                ],
+                [
+                  "**Subserosal fibroid**",
+                  "Bulges out from the outer wall of the uterus",
+                  "Sense of pressure, frequent urination, constipation, lower back discomfort",
+                  "Generally little effect"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "There is also a more detailed FIGO classification internationally (types 0 to 8), which you may see on a doctor's report — the lower the number, the closer the fibroid is to or the further into the uterine cavity."
+            },
+            {
+              "type": "paragraph",
+              "text": "**What this means in practice:** a 2 cm submucosal fibroid can be far more troublesome than a 6 cm subserosal one. So when you read a report, **look at the position first, then the size.**"
+            },
+            {
+              "type": "heading",
+              "text": "Common Symptoms"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Markedly heavier flow, large clots, prolonged periods",
+                "Anaemia from heavy blood loss (dizziness, tiredness, pale complexion, breathlessness)",
+                "A sense of pressure in the lower abdomen, a swollen abdomen",
+                "Frequent urination, or a feeling of not emptying the bladder fully",
+                "Constipation, discomfort opening your bowels",
+                "Lower back ache",
+                "Discomfort during sex",
+                "Difficulty conceiving or recurrent miscarriage"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**Heavier flow is the most common reason for seeking help**, and also the one most easily overlooked — many women have spent years thinking \"my periods have always been heavy\"."
+            },
+            {
+              "type": "heading",
+              "text": "When Is Treatment Needed?"
+            },
+            {
+              "type": "paragraph",
+              "text": "**In most cases, it isn't.** If there are no symptoms, no effect on your plans for a family and no sign of rapid growth, regular follow-up and observation is enough."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Situations that do need attention:**"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Heavy flow leading to anaemia",
+                "Pressure symptoms affecting daily life (severe frequent urination, constipation, bloating)",
+                "Marked pain",
+                "An effect on fertility, or a link with recurrent miscarriage",
+                "Marked growth over a short time — needs further assessment",
+                "Continued growth after the menopause — this needs to be checked promptly"
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Diagnostic Tests"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Test",
+                "Purpose"
+              ],
+              "rows": [
+                [
+                  "Pelvic examination",
+                  "Initial assessment of the size and shape of the uterus"
+                ],
+                [
+                  "Transvaginal ultrasound",
+                  "The main tool; shows the number, size and position"
+                ],
+                [
+                  "Saline infusion sonography or hysteroscopy",
+                  "A clearer assessment of submucosal fibroids and the shape of the cavity"
+                ],
+                [
+                  "MRI",
+                  "When there are many fibroids, they are large, or surgical planning is needed"
+                ],
+                [
+                  "Blood tests",
+                  "To check whether anaemia has developed"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**If you have heavy periods, remember to ask for your haemoglobin to be checked** — anaemia from long-term blood loss is quite common, and it brings tiredness, hair loss and palpitations along with it."
+            },
+            {
+              "type": "heading",
+              "text": "Treatment Options"
+            },
+            {
+              "type": "paragraph",
+              "text": "The direction depends on symptoms, position, age and plans for a family."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Observation and follow-up:** the standard approach for those without symptoms, with a repeat ultrasound at regular intervals."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Medication:** mainly to control bleeding and symptoms, for example anti-bleeding (haemostatic) medicines, non-steroidal anti-inflammatory painkillers, and hormonal preparations (an intrauterine system containing progestogen, the oral contraceptive pill, GnRH analogues and so on). **Be aware: medication generally can't remove fibroids, symptoms may return when it is stopped, and some drugs are not suitable if you want to conceive while taking them.**"
+            },
+            {
+              "type": "paragraph",
+              "text": "**Surgery — myomectomy:** keeps the uterus, and suits those who plan to have children. Submucosal fibroids can often be dealt with through a hysteroscope. It's worth knowing that **fibroids can recur after surgery**: the literature records about 15% to a third, and some women need another operation later."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Surgery — hysterectomy:** the definitive approach, suited to those who have completed their family, have severe symptoms and for whom other methods have failed."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Uterine artery embolisation and focused ultrasound ablation:** minimally invasive alternatives; their suitability for those who plan to conceive is still debated and needs individual assessment with your doctor."
+            },
+            {
+              "type": "heading",
+              "text": "The Link with Fertility"
+            },
+            {
+              "type": "paragraph",
+              "text": "This section is worth setting out separately, because a common saying goes \"if you have fibroids you'd better have them cut out before you try to get pregnant\", and the reality is more complicated."
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Submucosal fibroids:** the negative effect on implantation and fertility is the clearest, and treatment is generally recommended.",
+                "**Intramural fibroids that press on the cavity:** most consider them worth treating.",
+                "**Intramural fibroids that don't press on the cavity:** **still debated** — especially smaller ones, there is no consistent conclusion on whether to remove them.",
+                "**Subserosal fibroids:** generally thought to have little effect on fertility."
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "It must be said honestly that even for submucosal fibroids, the research shows an improved chance of natural conception after removal, but **no statistically significant difference in ongoing pregnancy or live birth rate.** This means the benefit of surgery exists, but you shouldn't expect it to guarantee a result."
+            },
+            {
+              "type": "paragraph",
+              "text": "**If you are trying to conceive and have fibroids,** the most practical approach is to discuss the position, the size, your age and your overall test results together with your gynaecologist, rather than deciding on \"whether you have fibroids\" alone (see [Why Can't I Get Pregnant?](infertility-causes-tests-en.html))."
+            },
+            {
+              "type": "heading",
+              "text": "How Does Chinese Medicine View Uterine Fibroids?"
+            },
+            {
+              "type": "paragraph",
+              "text": "Chinese medicine classes them under \"zheng jia\" (abdominal masses) — \"zheng\" referring to a palpable mass that is fixed and doesn't move. The core of the pathology is **blood stasis binding internally**, though the reasons stasis forms differ."
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Pattern",
+                "Main features",
+                "Treatment direction"
+              ],
+              "rows": [
+                [
+                  "Qi stagnation with blood stasis",
+                  "Distending lower abdominal pain, dark purple blood with clots, low mood",
+                  "Move qi and invigorate blood"
+                ],
+                [
+                  "Phlegm-dampness with stasis binding",
+                  "Heavier build, abundant discharge, chest tightness, thick greasy tongue coating",
+                  "Resolve phlegm and dampness, dissolve masses"
+                ],
+                [
+                  "Damp-heat with stasis obstruction",
+                  "Thick yellow discharge, burning lower abdominal pain, bitter taste in the mouth",
+                  "Clear heat and dispel dampness"
+                ],
+                [
+                  "Kidney deficiency with blood stasis",
+                  "Aching lower back and knees, dizziness and tinnitus, longer history",
+                  "Tonify the kidney and invigorate blood"
+                ],
+                [
+                  "Qi deficiency with blood stasis",
+                  "Heavy, pale flow, fatigue and weakness, pale complexion",
+                  "Boost qi and invigorate blood"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "Patterns often overlap in practice. One thing to note in particular is that **where heavy flow has led to deficiency of qi and blood, the prescription needs to both hold the blood in and support the body's healthy qi, rather than relying on attacking and dispelling alone.**"
+            },
+            {
+              "type": "paragraph",
+              "text": "The above is a general introduction to TCM theory, not a diagnosis or a prescription. Herbal treatment needs an in-person consultation and pattern differentiation by a registered Chinese medicine practitioner."
+            },
+            {
+              "type": "heading",
+              "text": "What Can Chinese Medicine Do?"
+            },
+            {
+              "type": "paragraph",
+              "text": "**What it can't do**"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**It can't remove fibroids that have already formed.** Be highly sceptical of any claim to \"dissolve\" or \"shrink\" fibroids.",
+                "It can't replace necessary surgery.",
+                "It can't deal with severe anaemia that has already developed — that needs medical treatment such as iron replacement, or even a blood transfusion."
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**Where there is room to help**"
+            },
+            {
+              "type": "list",
+              "items": [
+                "**Regulating flow and period pain**",
+                "**Anaemia-related fatigue, dizziness and poor complexion** (alongside iron replacement from Western medicine)",
+                "**Mood, sleep and overall condition**",
+                "**Recovery of strength after surgery**"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**The state of the evidence:** research on Chinese medicine for uterine fibroids is mostly small trials, mostly using symptom improvement as the measure, with no large, high-quality randomised controlled studies."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Changes in the size of a fibroid should be followed up with ultrasound**, not judged by symptom improvement or by feel. If your symptoms improve during Chinese medicine care but you haven't been rescanned, you should still have regular ultrasounds as your doctor advises."
+            },
+            {
+              "type": "heading",
+              "text": "When to See a Doctor"
+            },
+            {
+              "type": "list",
+              "items": [
+                "Markedly heavier flow, prolonged periods, large clots",
+                "Symptoms of anaemia: dizziness, tiredness, breathlessness, palpitations, pale complexion",
+                "A sense of pressure in the lower abdomen, a growing waistline",
+                "Severe frequent urination, difficulty passing urine, or constipation",
+                "A fibroid that grows markedly in a short time",
+                "**A fibroid that keeps growing after the menopause** — get it checked promptly",
+                "Not pregnant after a year of trying (six months if you're over 35)",
+                "**Sudden severe abdominal pain** — seek care immediately, to rule out degeneration or torsion of a fibroid"
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Frequently Asked Questions"
+            },
+            {
+              "type": "faq",
+              "items": [
+                {
+                  "q": "How big does a fibroid have to be before surgery?",
+                  "a": "There is no absolute size cut-off. The deciding factors are how severe the symptoms are, the position, plans for a family and the rate of growth. A small submucosal fibroid may need treating, while a larger subserosal fibroid without symptoms may not."
+                },
+                {
+                  "q": "Can a fibroid turn into cancer?",
+                  "a": "The chance is less than one in a hundred. But if a fibroid grows rapidly over a short time, or keeps growing after the menopause, it should be checked promptly — both situations need further assessment."
+                },
+                {
+                  "q": "Can I get pregnant with fibroids?",
+                  "a": "In most cases, yes. The clearest effect is from submucosal fibroids; subserosal fibroids generally have little effect; and for intramural fibroids it depends on whether they press on the cavity. Your gynaecologist should assess this for your own situation."
+                },
+                {
+                  "q": "Will fibroids come back after they're removed?",
+                  "a": "They may. The recurrence rate after myomectomy is recorded in the literature at about 15% to a third, and some women need further treatment later. That is one of the factors to weigh when choosing the type of surgery."
+                },
+                {
+                  "q": "Can herbal medicine shrink fibroids?",
+                  "a": "The existing evidence doesn't support that claim. A more reasonable role for Chinese medicine is regulating flow and period pain, and helping with anaemia-related fatigue and your general state. Be highly sceptical of any course that promises to \"dissolve\" fibroids, and follow fibroid size with ultrasound."
+                },
+                {
+                  "q": "Will eating soy products or soya milk make fibroids grow?",
+                  "a": "This concern is common, but there is currently no sound evidence that soy products in ordinary dietary amounts make fibroids grow. If you have a specific worry, discuss it with your doctor or a registered dietitian; there's no need to cut them out altogether."
+                },
+                {
+                  "q": "Will they shrink by themselves after the menopause?",
+                  "a": "Most do. Fibroids respond to oestrogen, so when oestrogen falls after the menopause they tend to shrink and symptoms mostly improve. That is why, for women near the menopause with mild symptoms, observation is sometimes chosen."
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "text": "Conclusion"
+            },
+            {
+              "type": "paragraph",
+              "text": "When fibroids are found, the first thing to do isn't to work out the size but to ask three questions: **where is it? Is it causing symptoms? Do I plan to have a family?**"
+            },
+            {
+              "type": "paragraph",
+              "text": "Most fibroids need no treatment, only regular follow-up. For those that do need attention, there is a range of options from medication to surgery, and surgery isn't needed as soon as one is found."
+            },
+            {
+              "type": "paragraph",
+              "text": "Chinese medicine can help with flow, period pain, anaemia-related fatigue and your general state, but it can't remove fibroids — that has to be said clearly, because claims to the contrary are not uncommon on the market."
+            },
+            {
+              "type": "references",
+              "items": [
+                "Uterine Fibroids. Merck Manual Professional Edition. https://www.merckmanuals.com/professional/gynecology-and-obstetrics/uterine-fibroids/uterine-fibroids (accessed 21 July 2026)",
+                "De La Cruz MS, Buchanan EM. Uterine Fibroids: Diagnosis and Treatment. Am Fam Physician. 2017;95(2):100–107. https://www.aafp.org/pubs/afp/issues/2017/0115/p100.html (accessed 21 July 2026)",
+                "Munro MG, Critchley HOD, Fraser IS, et al. The two FIGO systems for normal and abnormal uterine bleeding symptoms and classification of causes of abnormal uterine bleeding in the reproductive years: 2018 revisions. Int J Gynaecol Obstet. 2018;143(3):393–408.",
+                "Gynaecology in Traditional Chinese Medicine (中醫婦科學). China Press of Traditional Chinese Medicine."
+              ]
+            }
+          ]
+        }
+      }
     },
     {
       "slug": "hong-kong-pregnancy-care-timeline",
